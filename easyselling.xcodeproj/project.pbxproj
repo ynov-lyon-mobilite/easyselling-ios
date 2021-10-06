@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		871A77AC270E3A5100E67124 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871A77AB270E3A5100E67124 /* NetworkService.swift */; };
+		871A77B0270E3A9300E67124 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871A77AF270E3A9300E67124 /* HTTPMethod.swift */; };
+		871A77B2270E3CE500E67124 /* NetworkService_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871A77B1270E3CE500E67124 /* NetworkService_Specs.swift */; };
 		873552B3270D847700F2DDBD /* easysellingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552B2270D847700F2DDBD /* easysellingApp.swift */; };
 		873552B5270D847700F2DDBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552B4270D847700F2DDBD /* ContentView.swift */; };
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
@@ -26,6 +29,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		871A77AB270E3A5100E67124 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		871A77AF270E3A9300E67124 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		871A77B1270E3CE500E67124 /* NetworkService_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService_Specs.swift; sourceTree = "<group>"; };
 		873552AF270D847700F2DDBD /* easyselling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = easyselling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873552B2270D847700F2DDBD /* easysellingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = easysellingApp.swift; sourceTree = "<group>"; };
 		873552B4270D847700F2DDBD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +62,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		871A77AA270E3A4200E67124 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				871A77AB270E3A5100E67124 /* NetworkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		871A77AD270E3A8200E67124 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				871A77AE270E3A8700E67124 /* Enums */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		871A77AE270E3A8700E67124 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				871A77AF270E3A9300E67124 /* HTTPMethod.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		873552A6270D847700F2DDBD = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				D00736552712D93800ED0F2C /* easyselling.entitlements */,
+				871A77AD270E3A8200E67124 /* Additions */,
+				871A77AA270E3A4200E67124 /* Services */,
 				873552B2270D847700F2DDBD /* easysellingApp.swift */,
 				873552B4270D847700F2DDBD /* ContentView.swift */,
 				873552B6270D847B00F2DDBD /* Assets.xcassets */,
@@ -98,7 +130,7 @@
 		873552C2270D847B00F2DDBD /* easysellingTests */ = {
 			isa = PBXGroup;
 			children = (
-				873552C3270D847B00F2DDBD /* easysellingTests.swift */,
+				871A77B1270E3CE500E67124 /* NetworkService_Specs.swift */,
 			);
 			path = easysellingTests;
 			sourceTree = "<group>";
@@ -211,7 +243,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				871A77B0270E3A9300E67124 /* HTTPMethod.swift in Sources */,
 				873552B5270D847700F2DDBD /* ContentView.swift in Sources */,
+				871A77AC270E3A5100E67124 /* NetworkService.swift in Sources */,
 				873552B3270D847700F2DDBD /* easysellingApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,7 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				873552C4270D847B00F2DDBD /* easysellingTests.swift in Sources */,
+				871A77B2270E3CE500E67124 /* NetworkService_Specs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
