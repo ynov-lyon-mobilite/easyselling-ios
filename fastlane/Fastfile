@@ -1,8 +1,14 @@
 projectName = "easyselling"
 projectScheme = projectName
 
-lane :deploy do |options|
-	match(type: 'appstore')
+lane :tests do
+  run_tests(scheme: projectName)
+end
+
+
+lane :deploy do
+	setup_ci if ENV['CI']
+	match(type: 'appstore', readonly: true)
 
 	update_code_signing_settings(
 	    use_automatic_signing: false,
@@ -19,7 +25,9 @@ lane :deploy do |options|
     )
 
 	upload_to_testflight(
+		username: ENV["FASTLANE_USERNAME"],
 		ipa: "fastlane/artefacts/#{projectName}.ipa",
-		skip_waiting_for_build_processing: true
+		skip_waiting_for_build_processing: true,
+		skip_submission: true
 	)
 end
