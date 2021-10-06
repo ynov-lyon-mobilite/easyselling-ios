@@ -12,19 +12,10 @@
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
 		873552C4270D847B00F2DDBD /* easysellingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552C3270D847B00F2DDBD /* easysellingTests.swift */; };
-		873552CE270D847B00F2DDBD /* easysellingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552CD270D847B00F2DDBD /* easysellingUITests.swift */; };
-		873552D0270D847B00F2DDBD /* easysellingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552CF270D847B00F2DDBD /* easysellingUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		873552C0270D847B00F2DDBD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 873552A7270D847700F2DDBD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 873552AE270D847700F2DDBD;
-			remoteInfo = easyselling;
-		};
-		873552CA270D847B00F2DDBD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 873552A7270D847700F2DDBD /* Project object */;
 			proxyType = 1;
@@ -41,9 +32,6 @@
 		873552B9270D847B00F2DDBD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		873552BF270D847B00F2DDBD /* easysellingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = easysellingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		873552C3270D847B00F2DDBD /* easysellingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = easysellingTests.swift; sourceTree = "<group>"; };
-		873552C9270D847B00F2DDBD /* easysellingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = easysellingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		873552CD270D847B00F2DDBD /* easysellingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = easysellingUITests.swift; sourceTree = "<group>"; };
-		873552CF270D847B00F2DDBD /* easysellingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = easysellingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,13 +49,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		873552C6270D847B00F2DDBD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -76,7 +57,6 @@
 			children = (
 				873552B1270D847700F2DDBD /* easyselling */,
 				873552C2270D847B00F2DDBD /* easysellingTests */,
-				873552CC270D847B00F2DDBD /* easysellingUITests */,
 				873552B0270D847700F2DDBD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,7 +66,6 @@
 			children = (
 				873552AF270D847700F2DDBD /* easyselling.app */,
 				873552BF270D847B00F2DDBD /* easysellingTests.xctest */,
-				873552C9270D847B00F2DDBD /* easysellingUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,15 +95,6 @@
 				873552C3270D847B00F2DDBD /* easysellingTests.swift */,
 			);
 			path = easysellingTests;
-			sourceTree = "<group>";
-		};
-		873552CC270D847B00F2DDBD /* easysellingUITests */ = {
-			isa = PBXGroup;
-			children = (
-				873552CD270D847B00F2DDBD /* easysellingUITests.swift */,
-				873552CF270D847B00F2DDBD /* easysellingUITestsLaunchTests.swift */,
-			);
-			path = easysellingUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,24 +135,6 @@
 			productReference = 873552BF270D847B00F2DDBD /* easysellingTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		873552C8270D847B00F2DDBD /* easysellingUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 873552D9270D847B00F2DDBD /* Build configuration list for PBXNativeTarget "easysellingUITests" */;
-			buildPhases = (
-				873552C5270D847B00F2DDBD /* Sources */,
-				873552C6270D847B00F2DDBD /* Frameworks */,
-				873552C7270D847B00F2DDBD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				873552CB270D847B00F2DDBD /* PBXTargetDependency */,
-			);
-			name = easysellingUITests;
-			productName = easysellingUITests;
-			productReference = 873552C9270D847B00F2DDBD /* easysellingUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,10 +149,6 @@
 						CreatedOnToolsVersion = 13.0;
 					};
 					873552BE270D847B00F2DDBD = {
-						CreatedOnToolsVersion = 13.0;
-						TestTargetID = 873552AE270D847700F2DDBD;
-					};
-					873552C8270D847B00F2DDBD = {
 						CreatedOnToolsVersion = 13.0;
 						TestTargetID = 873552AE270D847700F2DDBD;
 					};
@@ -221,7 +169,6 @@
 			targets = (
 				873552AE270D847700F2DDBD /* easyselling */,
 				873552BE270D847B00F2DDBD /* easysellingTests */,
-				873552C8270D847B00F2DDBD /* easysellingUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -237,13 +184,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		873552BD270D847B00F2DDBD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		873552C7270D847B00F2DDBD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -270,15 +210,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		873552C5270D847B00F2DDBD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				873552CE270D847B00F2DDBD /* easysellingUITests.swift in Sources */,
-				873552D0270D847B00F2DDBD /* easysellingUITestsLaunchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -286,11 +217,6 @@
 			isa = PBXTargetDependency;
 			target = 873552AE270D847700F2DDBD /* easyselling */;
 			targetProxy = 873552C0270D847B00F2DDBD /* PBXContainerItemProxy */;
-		};
-		873552CB270D847B00F2DDBD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 873552AE270D847700F2DDBD /* easyselling */;
-			targetProxy = 873552CA270D847B00F2DDBD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -521,52 +447,6 @@
 			};
 			name = Release;
 		};
-		873552DA270D847B00F2DDBD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 94FLWD5X32;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ydays.easysellingUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = easyselling;
-			};
-			name = Debug;
-		};
-		873552DB270D847B00F2DDBD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 94FLWD5X32;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ydays.easysellingUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = easyselling;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -593,15 +473,6 @@
 			buildConfigurations = (
 				873552D7270D847B00F2DDBD /* Debug */,
 				873552D8270D847B00F2DDBD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		873552D9270D847B00F2DDBD /* Build configuration list for PBXNativeTarget "easysellingUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				873552DA270D847B00F2DDBD /* Debug */,
-				873552DB270D847B00F2DDBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
