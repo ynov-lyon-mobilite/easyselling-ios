@@ -1,0 +1,25 @@
+projectName = "easyselling"
+projectScheme = projectName
+
+lane :deploy do |options|
+	match(type: 'appstore')
+
+	update_code_signing_settings(
+	    use_automatic_signing: false,
+	    path: "#{projectName}.xcodeproj"
+	)
+
+    build_app(
+        project: "#{projectName}.xcodeproj",
+        scheme: projectScheme,
+        clean: true,
+		export_method: "app-store",
+        output_directory: "fastlane/artefacts",
+        output_name: "#{projectName}.ipa"
+    )
+
+	upload_to_testflight(
+		ipa: "fastlane/artefacts/#{projectName}.ipa",
+		skip_waiting_for_build_processing: true
+	)
+end
