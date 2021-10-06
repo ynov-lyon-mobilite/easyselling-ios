@@ -1,8 +1,5 @@
 name: Unit Tests 
 on:
-  push:
-    branches-ignore:
-      - master
   pull_request:
 
   # Allows you to run this workflow manually from the Actions tab
