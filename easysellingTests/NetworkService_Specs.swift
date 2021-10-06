@@ -21,12 +21,15 @@ class NetworkService_Specs: XCTestCase {
     }
     
     func test_GenerateRequestFailed() {
-        var request = URLRequest(url: URL(string: "easyselling")!)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        var request = URLRequest(url: URL(string: "easyselling.maxencemottard.com/api/users/profile")!)
         request.httpMethod = HTTPMethod.POST.rawValue
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("With tested value", forHTTPHeaderField: "test-header")
         
-        givenService(baseUrl: "https://easyselling.maxencemottard.com/api/v1")
-        whenGenerateRequest(endpoint: "/users/profile", method: .POST, headers: [:])
+        givenService(baseUrl: "easyselling.maxencemottard.com/api")
+        whenGenerateRequest(endpoint: "/users/profile",
+                            method: .POST,
+                            headers: ["test-header": "With tested value"])
         thenRequest(is: request)
     }
 
