@@ -25,7 +25,10 @@ final class NetworkService {
         self.baseUrl = baseUrl
     }
     
-//    func call<T: Decodable>(_ urlRequest: URLRequest, decodeType: T.Type, executeBefore: BeforeRequestFunction = nil) -> DecodedResult<T> {
+//    func call<T: Decodable>(
+//        _ urlRequest: URLRequest,
+//        decodeType: T.Type,
+//        executeBefore: BeforeRequestFunction = nil) -> DecodedResult<T> {
 //        if let executeBefore = executeBefore {
 //            return executeBefore()
 //                .flatMap { _ in
@@ -77,7 +80,10 @@ final class NetworkService {
         return request
     }
     
-    func generateRequest(withoutBody endpoint: String, method: HTTPMethod = .GET, headers: [String: String] = [:]) -> URLRequest? {
+    func generateRequest(
+        withoutBody endpoint: String,
+        method: HTTPMethod = .GET,
+        headers: [String: String] = [:]) -> URLRequest? {
         return generateRequest(from: endpoint, method: method, headers: headers)
     }
     
