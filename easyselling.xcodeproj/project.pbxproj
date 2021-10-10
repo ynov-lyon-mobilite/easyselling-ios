@@ -12,6 +12,7 @@
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
 		873552C4270D847B00F2DDBD /* easysellingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552C3270D847B00F2DDBD /* easysellingTests.swift */; };
+		D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00736572712D93800ED0F2C /* AuthenticationServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,8 @@
 		873552B9270D847B00F2DDBD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		873552BF270D847B00F2DDBD /* easysellingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = easysellingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		873552C3270D847B00F2DDBD /* easysellingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = easysellingTests.swift; sourceTree = "<group>"; };
+		D00736552712D93800ED0F2C /* easyselling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = easyselling.entitlements; sourceTree = "<group>"; };
+		D00736572712D93800ED0F2C /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +62,7 @@
 				873552B1270D847700F2DDBD /* easyselling */,
 				873552C2270D847B00F2DDBD /* easysellingTests */,
 				873552B0270D847700F2DDBD /* Products */,
+				D00736562712D93800ED0F2C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +78,7 @@
 		873552B1270D847700F2DDBD /* easyselling */ = {
 			isa = PBXGroup;
 			children = (
+				D00736552712D93800ED0F2C /* easyselling.entitlements */,
 				873552B2270D847700F2DDBD /* easysellingApp.swift */,
 				873552B4270D847700F2DDBD /* ContentView.swift */,
 				873552B6270D847B00F2DDBD /* Assets.xcassets */,
@@ -95,6 +101,14 @@
 				873552C3270D847B00F2DDBD /* easysellingTests.swift */,
 			);
 			path = easysellingTests;
+			sourceTree = "<group>";
+		};
+		D00736562712D93800ED0F2C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D00736572712D93800ED0F2C /* AuthenticationServices.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,7 +356,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = easyselling/easyselling.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"easyselling/Preview Content\"";
@@ -362,7 +377,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ydays.easyselling;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.ydays.easyselling";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.ydays.easyselling";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -374,6 +389,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = easyselling/easyselling.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
