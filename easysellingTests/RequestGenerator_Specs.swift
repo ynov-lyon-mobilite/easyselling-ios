@@ -71,7 +71,7 @@ class RequestGenerator_Specs: XCTestCase {
 //    }
 
     private func givenService() {
-        requestGenerator = RequestGenerator()
+        requestGenerator = DefaultRequestGenerator()
     }
     
     private func whenGenerateRequest(endpoint: String, method: HTTPMethod, headers: [String: String]) {
@@ -104,7 +104,7 @@ class RequestGenerator_Specs: XCTestCase {
         XCTAssertEqual(String(data: request.httpBody!, encoding: .utf8), String(data: expectedRequest.httpBody!, encoding: .utf8))
     }
 
-    private var requestGenerator: RequestGenerator!
+    private var requestGenerator: DefaultRequestGenerator!
     private var request: URLRequest!
     private var expectedRequest: URLRequest!
 }

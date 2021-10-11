@@ -7,7 +7,13 @@
 
 import Foundation
 
-class RequestGenerator {
+protocol RequestGenerator {
+    func generateRequest<T: Encodable>(endpoint: String, method: HTTPMethod,
+                                       body: T?, headers: [String: String]) -> URLRequest?
+    func generateRequest(endpoint: String, method: HTTPMethod, headers: [String: String]) -> URLRequest?
+}
+
+class DefaultRequestGenerator: RequestGenerator {
     private var jsonEncoder = JSONEncoder()
     private var fixHeaders: [String: String] = ["Content-Type": "application/json"]
 
