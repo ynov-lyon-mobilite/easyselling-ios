@@ -34,9 +34,6 @@ jobs:
       run: |
         bundle exec fastlane deploy
       env:
-        #FASTLANE_USERNAME: '${{ secrets.FASTLANE_USERNAME }}'
-        #FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: '${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}'
-        #FASTLANE_PASSWORD: '${{ secrets.FASTLANE_PASSWORD }}'
         MATCH_PASSWORD: '${{ secrets.MATCH_PASSWORD }}'
         FASTLANE_KEY_ID: '${{ secrets.FASTLANE_KEY_ID }}'
         FASTLANE_ISSUER_ID: '${{ secrets.FASTLANE_ISSUER_ID }}'
