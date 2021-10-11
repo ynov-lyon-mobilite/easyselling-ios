@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		871A77AC270E3A5100E67124 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871A77AB270E3A5100E67124 /* NetworkService.swift */; };
 		871A77B0270E3A9300E67124 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871A77AF270E3A9300E67124 /* HTTPMethod.swift */; };
-		871A77B2270E3CE500E67124 /* NetworkService_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871A77B1270E3CE500E67124 /* NetworkService_Specs.swift */; };
+		871A77B2270E3CE500E67124 /* RequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871A77B1270E3CE500E67124 /* RequestGenerator_Specs.swift */; };
+		87342E482714B0A800FD1A47 /* RequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87342E472714B0A800FD1A47 /* RequestGenerator.swift */; };
 		873552B3270D847700F2DDBD /* easysellingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552B2270D847700F2DDBD /* easysellingApp.swift */; };
 		873552B5270D847700F2DDBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552B4270D847700F2DDBD /* ContentView.swift */; };
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
@@ -31,7 +32,8 @@
 /* Begin PBXFileReference section */
 		871A77AB270E3A5100E67124 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		871A77AF270E3A9300E67124 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		871A77B1270E3CE500E67124 /* NetworkService_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService_Specs.swift; sourceTree = "<group>"; };
+		871A77B1270E3CE500E67124 /* RequestGenerator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestGenerator_Specs.swift; sourceTree = "<group>"; };
+		87342E472714B0A800FD1A47 /* RequestGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestGenerator.swift; sourceTree = "<group>"; };
 		873552AF270D847700F2DDBD /* easyselling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = easyselling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873552B2270D847700F2DDBD /* easysellingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = easysellingApp.swift; sourceTree = "<group>"; };
 		873552B4270D847700F2DDBD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				871A77AB270E3A5100E67124 /* NetworkService.swift */,
+				87342E472714B0A800FD1A47 /* RequestGenerator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -130,7 +133,7 @@
 		873552C2270D847B00F2DDBD /* easysellingTests */ = {
 			isa = PBXGroup;
 			children = (
-				871A77B1270E3CE500E67124 /* NetworkService_Specs.swift */,
+				871A77B1270E3CE500E67124 /* RequestGenerator_Specs.swift */,
 			);
 			path = easysellingTests;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				873552B5270D847700F2DDBD /* ContentView.swift in Sources */,
 				871A77AC270E3A5100E67124 /* NetworkService.swift in Sources */,
 				873552B3270D847700F2DDBD /* easysellingApp.swift in Sources */,
+				87342E482714B0A800FD1A47 /* RequestGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				871A77B2270E3CE500E67124 /* NetworkService_Specs.swift in Sources */,
+				871A77B2270E3CE500E67124 /* RequestGenerator_Specs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
