@@ -10,13 +10,13 @@ import Combine
 @testable import easyselling
 
 class NetworkService_Tests: XCTestCase {
-    
+
     func test_Sends_data_to_back_end_successfully() {
         givenNetworkService(withReponseHTTPCode: 201)
         whenMakingAPICall(withUrlRequest: request)
         thenAPICallIsSucceding()
     }
-    
+
     func test_Sends_data_to_back_end_error() {
         givenNetworkService(withReponseHTTPCode: 402)
         whenMakingAPICall(withUrlRequest: request)
@@ -32,7 +32,7 @@ class NetworkService_Tests: XCTestCase {
         let urlSession = FakeUrlSession(expected: generateExtectedURLResponse(httpCode: httpCode), with: body)
         networkService = NetworkService(urlSession: urlSession)
     }
-    
+
     private func whenMakingAPICall(withUrlRequest request: URLRequest) {
         networkService.call(request)
             .sink {
@@ -47,7 +47,7 @@ class NetworkService_Tests: XCTestCase {
                 self.requestResult = $0
             }
             .store(in: &cancellables)
-        
+
         wait(for: [expectation], timeout: 1)
     }
 //            }
@@ -62,7 +62,7 @@ class NetworkService_Tests: XCTestCase {
         XCTAssertNil(self.requestResult)
         XCTAssertEqual(expected, (self.requestError as NSError?)?.code)
     }
-    
+
     private func thenAPICallIsSucceding() {
         XCTAssert(self.requestResult is Void)
         XCTAssertNil(self.requestError)
@@ -77,15 +77,15 @@ class NetworkService_Tests: XCTestCase {
     private func generateExtectedURLResponse(httpCode: Int) -> HTTPURLResponse {
         HTTPURLResponse(url: request.url!, statusCode: httpCode, httpVersion: nil, headerFields: nil)!
     }
-    
+
     private var request: URLRequest {
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/api/v1/users/profile")!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = HTTPMethod.POST.rawValue
-        
+
         return request
     }
-    
+
     private var cancellables = Set<AnyCancellable>()
     private var isCallSucceeded: Bool!
     private var requestResult: Any!
@@ -97,12 +97,12 @@ class NetworkService_Tests: XCTestCase {
 class FakeUrlSession: UrlSessionProtocol {
     private let data: Data
     private let response: URLResponse
-    
+
     init(expected response: URLResponse, with data: Data) {
         self.data = data
         self.response = response
     }
-    
+
     func dataTaskAnyPublisher(for request: URLRequest) -> AnyPublisherType {
         return Just((data: data, response: response))
             .setFailureType(to: URLError.self)

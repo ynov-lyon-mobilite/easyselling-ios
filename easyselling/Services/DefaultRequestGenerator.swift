@@ -25,25 +25,25 @@ class DefaultRequestGenerator: RequestGenerator {
         }
 
         request.httpBody = encodedBody
-        
+
         return request
     }
-    
+
     func generateRequest(endpoint: String, method: HTTPMethod, headers: [String: String]) -> URLRequest? {
         guard let url = URL(string: endpoint) else {
             return nil
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
-        
+
         fixHeaders
             .merging(headers) { _, dynamic in
                 return dynamic
             }.forEach {
                 request.addValue($1, forHTTPHeaderField: $0)
             }
-        
+
         return request
     }
 }

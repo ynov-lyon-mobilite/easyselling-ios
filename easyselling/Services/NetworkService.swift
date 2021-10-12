@@ -17,7 +17,7 @@ final class NetworkService {
     private var jsonDecoder = JSONDecoder()
     private var successStatusCodes = Set<Int>(200...209)
     private let urlSession: UrlSessionProtocol
-    
+
     init(urlSession: UrlSessionProtocol = URLSession.shared) {
         self.urlSession = urlSession
     }
@@ -48,7 +48,7 @@ final class NetworkService {
     
     func call(_ urlRequest: URLRequest) -> VoidResult {
         return urlSession.dataTaskAnyPublisher(for: urlRequest)
-            .tryMap { [successStatusCodes] (data, response) -> Void in
+            .tryMap { [successStatusCodes] (_, response) -> Void in
                 if let response = response as? HTTPURLResponse, !successStatusCodes.contains(response.statusCode) {
                     throw NSError(domain: "SERVICE_ERROR", code: response.statusCode, userInfo: nil)
                 }
@@ -57,7 +57,6 @@ final class NetworkService {
             .eraseToAnyPublisher()
     }
 }
-
 
 extension URLSession: UrlSessionProtocol {
     func dataTaskAnyPublisher(for request: URLRequest) -> AnyPublisherType {
@@ -68,7 +67,6 @@ extension URLSession: UrlSessionProtocol {
 
 protocol UrlSessionProtocol {
     typealias AnyPublisherType = AnyPublisher<(data: Data, response: URLResponse), URLError>
-    
+
     func dataTaskAnyPublisher(for request: URLRequest) -> AnyPublisherType
 }
-
