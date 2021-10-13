@@ -24,6 +24,14 @@ jobs:
         ruby-version: 2.7.2
         bundler-cache: true
             
+    - name: Install SwiftGen
+      run: |
+        brew install swiftgen
+            
+    - name: Run SwiftGen
+      run: |
+        swiftgen config run
+            
     - name: Run tests 
       run: |
         bundle exec fastlane tests
