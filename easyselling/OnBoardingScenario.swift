@@ -20,20 +20,12 @@ class OnBoardingScenario {
     func begin() {
         navigator.begin()
     }
-    
-    func navigateToScreen2() {
-        navigator.navigateToScreen2()
-    }
-    
-    func navigateToScreen3() {
-        navigator.navigateToScreen3()
-    }
+
 }
 
 protocol OnBoardingNavigator {
     func begin()
-    func navigateToScreen2()
-    func navigateToScreen3()
+
 }
 
 class DefaultOnBoardingNavigator: OnBoardingNavigator {
@@ -45,17 +37,11 @@ class DefaultOnBoardingNavigator: OnBoardingNavigator {
     private var navigationController: UINavigationController
 
     func begin() {
-        let onBoardingFirstPage = OnBoardingFirstPage()
+        let viewModel = OnBoardingViewModel()
+        let onBoardingFirstPage = OnBoardingFirstPage(viewModel: viewModel)
         let view: UIViewController = UIHostingController(rootView: onBoardingFirstPage)
         navigationController.pushViewController(view,
                                                 animated: true)
     }
-    
-    func navigateToScreen2() {
-        
-    }
-    
-    func navigateToScreen3() {
-        
-    }
+
 }

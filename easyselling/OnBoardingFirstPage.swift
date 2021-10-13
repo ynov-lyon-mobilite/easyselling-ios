@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct OnBoardingFirstPage: View {
+    
+    let viewModel: OnBoardingViewModel
+    
     var body: some View {
-        Text("Hello, World!")
+        Button("Go to second page") {
+            viewModel.navigateToScreen2 { }
+        }
     }
 }
 
 struct OnBoardingFirstPage_Previews: PreviewProvider {
     static var previews: some View {
-        OnBoardingFirstPage()
+        OnBoardingFirstPage(viewModel: OnBoardingViewModel())
     }
 }
