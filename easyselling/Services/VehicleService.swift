@@ -7,16 +7,17 @@
 
 class VehicleService {
     private var httpCode: Int
-    private var vehicle: Vehicle?
     
-    init(httpCode: Int, vehicle: Vehicle? = nil) {
+    init(httpCode: Int) {
         self.httpCode = httpCode
-        self.vehicle = vehicle
     }
     
-    func createNewVehicle(callBack: @escaping (_ succes: Bool,_ message: String) -> Void) {
+    func createNewVehicle(vehicle: Vehicle, callBack: @escaping (_ succes: Bool,_ message: String) -> Void) {
         // TODO: Do the right api call
-        guard checkingInformations() else { return }
+        guard checkingInformations(vehicle: vehicle) else { return
+            callBack(false, "Informations invalids")
+        }
+        
         switch(httpCode) {
         case 200:
             // TODO: Back to the vehicles list in the callback
@@ -27,11 +28,10 @@ class VehicleService {
         }
     }
     
-    func checkingInformations() -> Bool {
-        guard let vehicle = vehicle,
-                vehicle.immatriculation.count == 8,
-                vehicle.licenceNumber.count == 14,
-                vehicle.age < 100 else {
+    func checkingInformations(vehicle: Vehicle) -> Bool {
+        guard vehicle.immatriculation.count == 8,
+              vehicle.licenceNumber.count == 14,
+              vehicle.age < 100 else {
             return false
         }
         return true
