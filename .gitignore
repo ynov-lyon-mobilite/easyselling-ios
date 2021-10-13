@@ -97,3 +97,5 @@ build/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/swiftpackagemanager,xcode,macos,fastlane
+
+*+Generated.swift
