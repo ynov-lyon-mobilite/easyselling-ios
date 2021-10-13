@@ -242,6 +242,30 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2CAE03D127170F82008D7A68 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2CAE03C82716E143008D7A68 /* Vehicle.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2CAE03D227170F98008D7A68 /* Vehicle */ = {
+			isa = PBXGroup;
+			children = (
+				2CAE03C42716DD14008D7A68 /* createVehicle_Specs.swift */,
+			);
+			path = Vehicle;
+			sourceTree = "<group>";
+		};
+		2CAE03D327170FC0008D7A68 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2CAE03CE27170A67008D7A68 /* HTTPMessage.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		873552A6270D847700F2DDBD = {
 			isa = PBXGroup;
 			children = (

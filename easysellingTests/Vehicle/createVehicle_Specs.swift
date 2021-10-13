@@ -14,10 +14,11 @@ import XCTest
 
 class createVehicle_Specs: XCTestCase {
     private var success: Bool?
+    private var message: String?
     
     func test_creates_vehicle_with_successfully_response() {
         let vehicleService = VehicleService(httpCode: 200)
-        vehicleService.createNewVehicle { success in
+        vehicleService.createNewVehicle { success, _ in
             self.success = success
         }
         XCTAssertTrue(self.success ?? false)
@@ -25,13 +26,13 @@ class createVehicle_Specs: XCTestCase {
     
     func test_creates_car_with_error_response() {
         let vehicleService = VehicleService(httpCode: 400)
-        vehicleService.createNewVehicle { failure in
+        vehicleService.createNewVehicle { failure, _ in
             self.success = failure
         }
         XCTAssertTrue(!(self.success ?? false))
     }
     
-    func test_creation_car_failed_if_field_is_incorrect() {
+    func test_fails_if_field_is_incorrect() {
         let vehicle = Vehicle(licenceNumber: "XOXOXOXOXOXOXO", brand: "Audi", immatriculation: "XOXOXOXO", type: .car, age: 6)
         let vehicleService = VehicleService(httpCode: 400, vehicle: vehicle)
         vehicleService.checkingInformations() { isValid in
@@ -39,38 +40,12 @@ class createVehicle_Specs: XCTestCase {
         }
         XCTAssertTrue(self.success ?? false)
     }
-}
-
-class VehicleService {
-    private var httpCode: Int
-    private var vehicle: Vehicle?
     
-    init(httpCode: Int, vehicle: Vehicle? = nil) {
-        self.httpCode = httpCode
-        self.vehicle = vehicle
-    }
-    
-    func createNewVehicle(callBack: @escaping (Bool) -> Void) {
-        switch(httpCode) {
-        case 200:
-            // TODO: Back to the vehicles list in the callback
-            callBack(true)
-        default:
-            // TODO: Display a popup in the callback
-            callBack(false)
+    func test_checks_if_the_right_message_is_showing() {
+        let vehicleService = VehicleService(httpCode: 200)
+        vehicleService.createNewVehicle { _, message in
+            self.message = message
         }
-    }
-    
-    func checkingInformations(callBack: @escaping (Bool) -> Void) {
-        guard let vehicle = vehicle,
-                vehicle.immatriculation.count == 8,
-                vehicle.licenceNumber.count == 14,
-                vehicle.age < 100 else {
-            callBack(false)
-            return
-        }
-        callBack(true)
+        XCTAssertEqual(HTTPMessage.responseMessages[200], message)
     }
 }
-
-
