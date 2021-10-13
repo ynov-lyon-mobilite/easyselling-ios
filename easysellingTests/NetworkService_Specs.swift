@@ -10,17 +10,42 @@ import Combine
 @testable import easyselling
 
 class NetworkService_Specs: XCTestCase {
-
-    func test_Sends_data_to_back_end_successfully() {
-        givenNetworkService(withReponseHTTPCode: 201)
-        whenMakingAPICall(withUrlRequest: request)
-        thenAPICallIsSucceding()
+    
+    func test_Sends_request_to_back_succeeded_with_codes() {
+        assertRequestSucceded(200)
+        assertRequestSucceded(201)
+        assertRequestSucceded(202)
+        assertRequestSucceded(203)
+        assertRequestSucceded(204)
+        assertRequestSucceded(205)
+        assertRequestSucceded(206)
+        assertRequestSucceded(207)
+        assertRequestSucceded(208)
+        assertRequestSucceded(209)
     }
+    
+    func test_Sends_request_to_back_failed_with_codes() {
+        assertRequestFailed(401)
+        assertRequestFailed(402)
+        assertRequestFailed(403)
+        assertRequestFailed(404)
+        assertRequestFailed(405)
+        assertRequestFailed(406)
+        assertRequestFailed(407)
+        assertRequestFailed(408)
+        assertRequestFailed(409)
+        assertRequestFailed(410)
 
-    func test_Sends_data_to_back_end_error() {
-        givenNetworkService(withReponseHTTPCode: 402)
-        whenMakingAPICall(withUrlRequest: request)
-        thenResponseErrorCode(is: 402)
+        assertRequestFailed(501)
+        assertRequestFailed(502)
+        assertRequestFailed(503)
+        assertRequestFailed(504)
+        assertRequestFailed(505)
+        assertRequestFailed(506)
+        assertRequestFailed(507)
+        assertRequestFailed(508)
+        assertRequestFailed(509)
+        assertRequestFailed(510)
     }
 
     func test_Sends_data_to_back_end_with_response_body() {
@@ -38,34 +63,38 @@ class NetworkService_Specs: XCTestCase {
     }
 
     private func whenMakingAPICall(withUrlRequest request: URLRequest) {
+        let expectation = expectation(description: "Should finish request")
+        
         networkService.call(request)
             .sink {
                 switch $0 {
                 case .failure(let error):
-                    self.expectation.fulfill()
+                    expectation.fulfill()
                     self.requestError = error
                 case .finished: break
                 }
             } receiveValue: {
-                self.expectation.fulfill()
+                expectation.fulfill()
                 self.requestResult = $0
             }
             .store(in: &cancellables)
-
+        
         wait(for: [expectation], timeout: 1)
     }
 
     private func whenMakingAPICall<T: Decodable>(withUrlRequest request: URLRequest, decodeTo: T.Type) {
+        let expectation = expectation(description: "Should finish request")
+        
         networkService.call(request, decodeType: T.self)
             .sink {
                 switch $0 {
                 case .failure(let error):
-                    self.expectation.fulfill()
+                    expectation.fulfill()
                     self.requestError = error
                 case .finished: break
                 }
             } receiveValue: {
-                self.expectation.fulfill()
+                expectation.fulfill()
                 self.requestResult = $0
             }
             .store(in: &cancellables)
@@ -91,6 +120,18 @@ class NetworkService_Specs: XCTestCase {
     private func generateExtectedURLResponse(httpCode: Int) -> HTTPURLResponse {
         HTTPURLResponse(url: request.url!, statusCode: httpCode, httpVersion: nil, headerFields: nil)!
     }
+    
+    private func assertRequestSucceded(_ statusCode: Int) {
+        givenNetworkService(withReponseHTTPCode: statusCode)
+        whenMakingAPICall(withUrlRequest: request)
+        thenAPICallIsSucceding()
+    }
+    
+    private func assertRequestFailed(_ statusCode: Int) {
+        givenNetworkService(withReponseHTTPCode: statusCode)
+        whenMakingAPICall(withUrlRequest: request)
+        thenResponseErrorCode(is: statusCode)
+    }
 
     private var request: URLRequest {
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/api/v1/users/profile")!)
@@ -105,7 +146,6 @@ class NetworkService_Specs: XCTestCase {
     private var requestResult: Any!
     private var requestError: Error!
     private var networkService: NetworkService!
-    private lazy var expectation = expectation(description: "Should finish request")
 }
 
 struct TestDecodable: Decodable, Equatable {
