@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0382E29A27175FB700EB570E /* AccountCreationScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */; };
+		0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29C2717639A00EB570E /* TypesAlias.swift */; };
+		0382E29F2717647500EB570E /* AccountCreationScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29E2717647500EB570E /* AccountCreationScenario.swift */; };
+		0382E2A4271765B800EB570E /* AccountCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A3271765B800EB570E /* AccountCreationView.swift */; };
+		0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A52717664000EB570E /* AccountCreationViewModel.swift */; };
+		0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */; };
 		03F2097B2716E2B100E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F2097D2716E2B100E10F6C /* localizable.strings */; };
 		03F209802716E2CB00E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F209822716E2CB00E10F6C /* localizable.strings */; };
 		03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209842716EEC900E10F6C /* Strings+Generated.swift */; };
@@ -36,6 +42,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationScenario_Specs.swift; sourceTree = "<group>"; };
+		0382E29C2717639A00EB570E /* TypesAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesAlias.swift; sourceTree = "<group>"; };
+		0382E29E2717647500EB570E /* AccountCreationScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationScenario.swift; sourceTree = "<group>"; };
+		0382E2A3271765B800EB570E /* AccountCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationView.swift; sourceTree = "<group>"; };
+		0382E2A52717664000EB570E /* AccountCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationViewModel.swift; sourceTree = "<group>"; };
+		0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationViewModel_Specs.swift; sourceTree = "<group>"; };
 		03F2097C2716E2B100E10F6C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/localizable.strings; sourceTree = "<group>"; };
 		03F209812716E2CB00E10F6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/localizable.strings; sourceTree = "<group>"; };
 		03F209842716EEC900E10F6C /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
@@ -76,6 +88,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0382E29B2717638400EB570E /* TypeAlias */ = {
+			isa = PBXGroup;
+			children = (
+				0382E29C2717639A00EB570E /* TypesAlias.swift */,
+			);
+			path = TypeAlias;
+			sourceTree = "<group>";
+		};
+		0382E2A12717648000EB570E /* Scenario */ = {
+			isa = PBXGroup;
+			children = (
+				0382E2A22717648700EB570E /* AccountCreation */,
+			);
+			path = Scenario;
+			sourceTree = "<group>";
+		};
+		0382E2A22717648700EB570E /* AccountCreation */ = {
+			isa = PBXGroup;
+			children = (
+				0382E29E2717647500EB570E /* AccountCreationScenario.swift */,
+				0382E2A52717664000EB570E /* AccountCreationViewModel.swift */,
+			);
+			path = AccountCreation;
+			sourceTree = "<group>";
+		};
 		03F209762716E0AE00E10F6C /* Additions */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +170,8 @@
 				873552B2270D847700F2DDBD /* easysellingApp.swift */,
 				873552B4270D847700F2DDBD /* ContentView.swift */,
 				873552B8270D847B00F2DDBD /* Preview Content */,
+				0382E2A12717648000EB570E /* Scenario */,
+				0382E2A3271765B800EB570E /* AccountCreationView.swift */,
 			);
 			path = easyselling;
 			sourceTree = "<group>";
@@ -150,6 +189,8 @@
 			children = (
 				87780BA627172F780035AB13 /* NetworkService_Specs.swift */,
 				87780BA727172F780035AB13 /* RequestGenerator_Specs.swift */,
+				0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */,
+				0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */,
 			);
 			path = easysellingTests;
 			sourceTree = "<group>";
@@ -157,6 +198,7 @@
 		87780B9C27172F1C0035AB13 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				0382E29B2717638400EB570E /* TypeAlias */,
 				87780B9D27172F250035AB13 /* Enums */,
 				87780B9E27172F2C0035AB13 /* Extensions */,
 				87780B9F27172F380035AB13 /* Protocols */,
@@ -352,11 +394,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				873552B5270D847700F2DDBD /* ContentView.swift in Sources */,
+				0382E2A4271765B800EB570E /* AccountCreationView.swift in Sources */,
 				873552B3270D847700F2DDBD /* easysellingApp.swift in Sources */,
+				0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */,
 				87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */,
 				87780BA327172F5A0035AB13 /* URLSession+Extensions.swift in Sources */,
+				0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */,
 				87780BAE271730100035AB13 /* NetworkService.swift in Sources */,
 				03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */,
+				0382E29F2717647500EB570E /* AccountCreationScenario.swift in Sources */,
 				87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */,
 				03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */,
 				87780BA127172F520035AB13 /* UrlSessionProtocol.swift in Sources */,
@@ -367,8 +413,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0382E29A27175FB700EB570E /* AccountCreationScenario_Specs.swift in Sources */,
 				87780BA927172F780035AB13 /* RequestGenerator_Specs.swift in Sources */,
 				87780BA827172F780035AB13 /* NetworkService_Specs.swift in Sources */,
+				0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
