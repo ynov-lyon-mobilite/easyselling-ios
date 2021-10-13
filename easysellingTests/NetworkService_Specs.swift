@@ -9,7 +9,7 @@ import XCTest
 import Combine
 @testable import easyselling
 
-class NetworkService_Tests: XCTestCase {
+class NetworkService_Specs: XCTestCase {
 
     func test_Sends_data_to_back_end_successfully() {
         givenNetworkService(withReponseHTTPCode: 201)
@@ -22,12 +22,16 @@ class NetworkService_Tests: XCTestCase {
         whenMakingAPICall(withUrlRequest: request)
         thenResponseErrorCode(is: 402)
     }
-//
-//        resultPublisher.sink {
-//            switch $0 {
-//            case .failure(_): break
-//            case .finished: break
-    
+
+    func test_Sends_data_to_back_end_with_response_body() {
+        let body = "{ \"argument\": \"BODY\"  }"
+        let expectedBody = TestDecodable(argument: "BODY")
+
+        givenNetworkService(withReponseHTTPCode: 200, body: body.data(using: .utf8)!)
+        whenMakingAPICall(withUrlRequest: request, decodeTo: TestDecodable.self)
+        thenAPICallIsSucceding(with: expectedBody)
+    }
+
     private func givenNetworkService(withReponseHTTPCode httpCode: Int, body: Data = Data()) {
         let urlSession = FakeUrlSession(expected: generateExtectedURLResponse(httpCode: httpCode), with: body)
         networkService = NetworkService(urlSession: urlSession)
@@ -50,14 +54,25 @@ class NetworkService_Tests: XCTestCase {
 
         wait(for: [expectation], timeout: 1)
     }
-//            }
-//        } receiveValue: { _ in
-//            self.isCallSucceeded = true
-//        }.store(in: &cancellables)
-//
-//        XCTAssertTrue(isCallSucceeded)
-//    }
-    
+
+    private func whenMakingAPICall<T: Decodable>(withUrlRequest request: URLRequest, decodeTo: T.Type) {
+        networkService.call(request, decodeType: T.self)
+            .sink {
+                switch $0 {
+                case .failure(let error):
+                    self.expectation.fulfill()
+                    self.requestError = error
+                case .finished: break
+                }
+            } receiveValue: {
+                self.expectation.fulfill()
+                self.requestResult = $0
+            }
+            .store(in: &cancellables)
+
+        wait(for: [expectation], timeout: 3)
+    }
+
     private func thenResponseErrorCode(is expected: Int) {
         XCTAssertNil(self.requestResult)
         XCTAssertEqual(expected, (self.requestError as NSError?)?.code)
@@ -67,13 +82,12 @@ class NetworkService_Tests: XCTestCase {
         XCTAssert(self.requestResult is Void)
         XCTAssertNil(self.requestError)
     }
-    
-//    private let anyPublisher: AnyPublisherType
-//
-//    init(anyPublisher: AnyPublisherType) {
-//        self.anyPublisher = anyPublisher
-//    }
-    
+
+    private func thenAPICallIsSucceding(with expectedBody: TestDecodable) {
+        XCTAssertEqual(expectedBody, (self.requestResult as? TestDecodable))
+        XCTAssertNil(self.requestError)
+    }
+
     private func generateExtectedURLResponse(httpCode: Int) -> HTTPURLResponse {
         HTTPURLResponse(url: request.url!, statusCode: httpCode, httpVersion: nil, headerFields: nil)!
     }
@@ -92,6 +106,10 @@ class NetworkService_Tests: XCTestCase {
     private var requestError: Error!
     private var networkService: NetworkService!
     private lazy var expectation = expectation(description: "Should finish request")
+}
+
+struct TestDecodable: Decodable, Equatable {
+    let argument: String
 }
 
 class FakeUrlSession: UrlSessionProtocol {

@@ -11,11 +11,13 @@
 		871A77B0270E3A9300E67124 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871A77AF270E3A9300E67124 /* HTTPMethod.swift */; };
 		871A77B2270E3CE500E67124 /* RequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871A77B1270E3CE500E67124 /* RequestGenerator_Specs.swift */; };
 		87342E482714B0A800FD1A47 /* DefaultRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87342E472714B0A800FD1A47 /* DefaultRequestGenerator.swift */; };
-		87342E4A2714B1E800FD1A47 /* NetworkService_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87342E492714B1E800FD1A47 /* NetworkService_Tests.swift */; };
+		87342E4A2714B1E800FD1A47 /* NetworkService_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87342E492714B1E800FD1A47 /* NetworkService_Specs.swift */; };
 		873552B3270D847700F2DDBD /* easysellingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552B2270D847700F2DDBD /* easysellingApp.swift */; };
 		873552B5270D847700F2DDBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552B4270D847700F2DDBD /* ContentView.swift */; };
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
+		87780B912716E9F80035AB13 /* UrlSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780B902716E9F80035AB13 /* UrlSessionProtocol.swift */; };
+		87780B942716EB8D0035AB13 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780B932716EB8D0035AB13 /* URLSession+Extensions.swift */; };
 		D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00736572712D93800ED0F2C /* AuthenticationServices.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,13 +36,15 @@
 		871A77AF270E3A9300E67124 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		871A77B1270E3CE500E67124 /* RequestGenerator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestGenerator_Specs.swift; sourceTree = "<group>"; };
 		87342E472714B0A800FD1A47 /* DefaultRequestGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator.swift; sourceTree = "<group>"; };
-		87342E492714B1E800FD1A47 /* NetworkService_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService_Tests.swift; sourceTree = "<group>"; };
+		87342E492714B1E800FD1A47 /* NetworkService_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService_Specs.swift; sourceTree = "<group>"; };
 		873552AF270D847700F2DDBD /* easyselling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = easyselling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873552B2270D847700F2DDBD /* easysellingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = easysellingApp.swift; sourceTree = "<group>"; };
 		873552B4270D847700F2DDBD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		873552B6270D847B00F2DDBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		873552B9270D847B00F2DDBD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		873552BF270D847B00F2DDBD /* easysellingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = easysellingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		87780B902716E9F80035AB13 /* UrlSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionProtocol.swift; sourceTree = "<group>"; };
+		87780B932716EB8D0035AB13 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		D00736552712D93800ED0F2C /* easyselling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = easyselling.entitlements; sourceTree = "<group>"; };
 		D00736572712D93800ED0F2C /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -76,6 +80,8 @@
 		871A77AD270E3A8200E67124 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				87780B922716EA400035AB13 /* Extensions */,
+				87780B8F2716E9D80035AB13 /* Protocols */,
 				871A77AE270E3A8700E67124 /* Enums */,
 			);
 			path = Additions;
@@ -134,9 +140,25 @@
 			isa = PBXGroup;
 			children = (
 				871A77B1270E3CE500E67124 /* RequestGenerator_Specs.swift */,
-				87342E492714B1E800FD1A47 /* NetworkService_Tests.swift */,
+				87342E492714B1E800FD1A47 /* NetworkService_Specs.swift */,
 			);
 			path = easysellingTests;
+			sourceTree = "<group>";
+		};
+		87780B8F2716E9D80035AB13 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				87780B902716E9F80035AB13 /* UrlSessionProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		87780B922716EA400035AB13 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				87780B932716EB8D0035AB13 /* URLSession+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D00736562712D93800ED0F2C /* Frameworks */ = {
@@ -271,8 +293,10 @@
 			files = (
 				871A77B0270E3A9300E67124 /* HTTPMethod.swift in Sources */,
 				873552B5270D847700F2DDBD /* ContentView.swift in Sources */,
+				87780B912716E9F80035AB13 /* UrlSessionProtocol.swift in Sources */,
 				871A77AC270E3A5100E67124 /* NetworkService.swift in Sources */,
 				873552B3270D847700F2DDBD /* easysellingApp.swift in Sources */,
+				87780B942716EB8D0035AB13 /* URLSession+Extensions.swift in Sources */,
 				87342E482714B0A800FD1A47 /* DefaultRequestGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,7 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87342E4A2714B1E800FD1A47 /* NetworkService_Tests.swift in Sources */,
+				87342E4A2714B1E800FD1A47 /* NetworkService_Specs.swift in Sources */,
 				871A77B2270E3CE500E67124 /* RequestGenerator_Specs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
