@@ -35,10 +35,7 @@ class createVehicle_Specs: XCTestCase {
     func test_fails_if_field_is_incorrect() {
         let vehicle = Vehicle(licenceNumber: "XOXOXOXOXOXOXO", brand: "Audi", immatriculation: "XOXOXOXO", type: .car, age: 6)
         let vehicleService = VehicleService(httpCode: 400, vehicle: vehicle)
-        vehicleService.checkingInformations() { isValid in
-            self.success = isValid
-        }
-        XCTAssertTrue(self.success ?? false)
+        XCTAssertTrue(vehicleService.checkingInformations())
     }
     
     func test_checks_if_the_right_message_is_showing() {

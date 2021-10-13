@@ -16,6 +16,7 @@ class VehicleService {
     
     func createNewVehicle(callBack: @escaping (_ succes: Bool,_ message: String) -> Void) {
         // TODO: Do the right api call
+        guard checkingInformations() else { return }
         switch(httpCode) {
         case 200:
             // TODO: Back to the vehicles list in the callback
@@ -26,14 +27,13 @@ class VehicleService {
         }
     }
     
-    func checkingInformations(callBack: @escaping (_ succes: Bool) -> Void) {
+    func checkingInformations() -> Bool {
         guard let vehicle = vehicle,
                 vehicle.immatriculation.count == 8,
                 vehicle.licenceNumber.count == 14,
                 vehicle.age < 100 else {
-            callBack(false)
-            return
+            return false
         }
-        callBack(true)
+        return true
     }
 }

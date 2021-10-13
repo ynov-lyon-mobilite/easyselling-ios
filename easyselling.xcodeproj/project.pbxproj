@@ -266,6 +266,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		2CAE03D427171136008D7A68 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				873552B4270D847700F2DDBD /* ContentView.swift */,
+				2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		873552A6270D847700F2DDBD = {
 			isa = PBXGroup;
 			children = (
