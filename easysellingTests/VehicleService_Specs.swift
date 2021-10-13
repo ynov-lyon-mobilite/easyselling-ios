@@ -12,18 +12,18 @@ import XCTest
 class VehicleService_Specs: XCTestCase {
     
     func test_get_users_from_back() {
-        let users = getMockUsers(token: "dzbsudqkghhgcvdsbv")
+        let users = getMockVehicles(token: "dzbsudqkghhgcvdsbv")
         XCTAssertEqual(users.count, 2)
         XCTAssertEqual(users[0].id, "0bba811a-e7c4-4699-a22b-eafed317bf94")
         XCTAssertEqual(users[1].id, "c3f462e8-891e-46c4-8590-c4ad1d348421")
     }
     
     func test_invalid_file_name() {
-        let users = getMockUsers(token: "dzbsudqkghhgcvdsbv", name: "invalidFileName")
+        let users = getMockVehicles(token: "dzbsudqkghhgcvdsbv", name: "invalidFileName")
         XCTAssertEqual(users.count, 0)
     }
     
-    private func getMockUsers(token: String, name: String = "mockData") -> [Vehicle] {
+    private func getMockVehicles(token: String, name: String = "mockData") -> [Vehicle] {
         guard let serverResponse = self.readLocalFile(forName: name) else { return [] }
         
         return self.parseVehicles(json: serverResponse)
@@ -52,5 +52,4 @@ class VehicleService_Specs: XCTestCase {
             return []
         }
     }
-
 }
