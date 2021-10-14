@@ -35,12 +35,7 @@ final class DefaultAPICaller: APICaller {
                 }
                 .decode(type: T.self, decoder: jsonDecoder)
                 .receive(on: DispatchQueue.main)
-                .mapError { error in
-                    if let error = error as? HTTPError {
-                        return error
-                    }
-                    return HTTPError.unknow
-                }
+                .mapError { ($0 as? HTTPError) ?? HTTPError.internalServerError }
                 .eraseToAnyPublisher()
         }
 
@@ -52,12 +47,7 @@ final class DefaultAPICaller: APICaller {
                 }
             }
             .receive(on: DispatchQueue.main)
-            .mapError { error in
-                if let error = error as? HTTPError {
-                    return error
-                }
-                return HTTPError.unknow
-            }
+            .mapError { ($0 as? HTTPError) ?? HTTPError.internalServerError }
             .eraseToAnyPublisher()
     }
 }

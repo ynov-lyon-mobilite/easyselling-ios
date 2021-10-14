@@ -40,12 +40,6 @@ class DefaultAPICaller_Specs: XCTestCase {
         assertRequestFailed(502)
         assertRequestFailed(503)
         assertRequestFailed(504)
-        assertRequestFailed(505)
-        assertRequestFailed(506)
-        assertRequestFailed(507)
-        assertRequestFailed(508)
-        assertRequestFailed(509)
-        assertRequestFailed(510)
     }
 
     func test_Sends_data_to_back_end_with_response_body() {
