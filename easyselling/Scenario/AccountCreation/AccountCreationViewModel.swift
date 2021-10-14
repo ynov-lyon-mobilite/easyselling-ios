@@ -6,14 +6,18 @@
 //
 
 import Foundation
+import Combine
 
 class AccountCreationViewModel: ObservableObject {
     
-    init(verificator: InformationsVerificator) {
+    init(verificator: InformationsVerificator, accountCreator: AccountCreator = DefaultAccountCreator()) {
         self.verificator = verificator
+        self.accountCreator = accountCreator
     }
     
     private var verificator: InformationsVerificator
+    private var accountCreator: AccountCreator
+    private var cancellables = Set<AnyCancellable>()
     
     @Published var state: AccountCreationState = .initial
     @Published var email: String = ""
@@ -22,13 +26,23 @@ class AccountCreationViewModel: ObservableObject {
     @Published var error: AccountCreationError?
     
     func verifyInformations(email: String, password: String, passwordConfirmation: String) {
-        let accountInformations = AccountCreationInformations(email: email, password: password, passwordConfirmation: passwordConfirmation)
-        verificator.verify(accountInformations, onVerified: {
+        verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation, onVerified: {
             switch $0 {
             case .success: self.state = .loading
             case let .failure(error): self.setError(with: error)
             }
         })
+    }
+    
+    func createAccount(with informations: AccountCreationInformations , onFinish: @escaping (Result<Void, Error>) -> Void) {
+        accountCreator.createAccount(informations: informations).sink(receiveCompletion: {
+            if case let .failure(error) = $0 {
+                onFinish(.failure(error))
+            }
+        }, receiveValue: {
+            onFinish(.success(()))
+        })
+            .store(in: &cancellables)
     }
     
     private func setError(with error: AccountCreationError) {

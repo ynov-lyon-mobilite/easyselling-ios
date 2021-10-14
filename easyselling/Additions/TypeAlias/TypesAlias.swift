@@ -6,5 +6,8 @@
 //
 
 import Foundation
+import Combine
 
 typealias Action = () -> Void
+typealias VoidResult = AnyPublisher<Void, HTTPError>
+typealias DecodedResult<T: Decodable> = AnyPublisher<T, HTTPError>

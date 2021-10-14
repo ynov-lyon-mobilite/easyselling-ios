@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860327184EDC00684ED0 /* AppDelegate.swift */; };
+		035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860527188E9300684ED0 /* DefaultAccountCreator.swift */; };
+		035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */; };
+		035E860A2718982A00684ED0 /* HTTPEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E86092718982A00684ED0 /* HTTPEndpoint.swift */; };
+		035E860C2718A3AB00684ED0 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860B2718A3AB00684ED0 /* HTTPError.swift */; };
 		0382E29A27175FB700EB570E /* AccountCreationScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */; };
 		0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29C2717639A00EB570E /* TypesAlias.swift */; };
 		0382E29F2717647500EB570E /* AccountCreationScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29E2717647500EB570E /* AccountCreationScenario.swift */; };
@@ -25,10 +29,10 @@
 		87780BA127172F520035AB13 /* UrlSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA027172F520035AB13 /* UrlSessionProtocol.swift */; };
 		87780BA327172F5A0035AB13 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA227172F5A0035AB13 /* URLSession+Extensions.swift */; };
 		87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA427172F610035AB13 /* HTTPMethod.swift */; };
-		87780BA827172F780035AB13 /* NetworkService_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA627172F780035AB13 /* NetworkService_Specs.swift */; };
+		87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */; };
 		87780BA927172F780035AB13 /* RequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA727172F780035AB13 /* RequestGenerator_Specs.swift */; };
 		87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */; };
-		87780BAE271730100035AB13 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BAC271730100035AB13 /* NetworkService.swift */; };
+		87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BAC271730100035AB13 /* DefaultAPICaller.swift */; };
 		D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00736572712D93800ED0F2C /* AuthenticationServices.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +48,10 @@
 
 /* Begin PBXFileReference section */
 		035E860327184EDC00684ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		035E860527188E9300684ED0 /* DefaultAccountCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAccountCreator.swift; sourceTree = "<group>"; };
+		035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAccountCreator_Specs.swift; sourceTree = "<group>"; };
+		035E86092718982A00684ED0 /* HTTPEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPEndpoint.swift; sourceTree = "<group>"; };
+		035E860B2718A3AB00684ED0 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationScenario_Specs.swift; sourceTree = "<group>"; };
 		0382E29C2717639A00EB570E /* TypesAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesAlias.swift; sourceTree = "<group>"; };
 		0382E29E2717647500EB570E /* AccountCreationScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationScenario.swift; sourceTree = "<group>"; };
@@ -63,10 +71,10 @@
 		87780BA027172F520035AB13 /* UrlSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlSessionProtocol.swift; sourceTree = "<group>"; };
 		87780BA227172F5A0035AB13 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		87780BA427172F610035AB13 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		87780BA627172F780035AB13 /* NetworkService_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService_Specs.swift; sourceTree = "<group>"; };
+		87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPICaller_Specs.swift; sourceTree = "<group>"; };
 		87780BA727172F780035AB13 /* RequestGenerator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestGenerator_Specs.swift; sourceTree = "<group>"; };
 		87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator.swift; sourceTree = "<group>"; };
-		87780BAC271730100035AB13 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		87780BAC271730100035AB13 /* DefaultAPICaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPICaller.swift; sourceTree = "<group>"; };
 		D00736552712D93800ED0F2C /* easyselling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = easyselling.entitlements; sourceTree = "<group>"; };
 		D00736572712D93800ED0F2C /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -112,6 +120,7 @@
 				0382E29E2717647500EB570E /* AccountCreationScenario.swift */,
 				0382E2A52717664000EB570E /* AccountCreationViewModel.swift */,
 				0382E2AB2718190B00EB570E /* DefaultInformationsVerificator.swift */,
+				035E860527188E9300684ED0 /* DefaultAccountCreator.swift */,
 			);
 			path = AccountCreation;
 			sourceTree = "<group>";
@@ -189,11 +198,12 @@
 		873552C2270D847B00F2DDBD /* easysellingTests */ = {
 			isa = PBXGroup;
 			children = (
-				87780BA627172F780035AB13 /* NetworkService_Specs.swift */,
+				87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */,
 				87780BA727172F780035AB13 /* RequestGenerator_Specs.swift */,
 				0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */,
 				0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */,
 				0382E2A92718186100EB570E /* InformationsVerificator_Specs.swift */,
+				035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */,
 			);
 			path = easysellingTests;
 			sourceTree = "<group>";
@@ -213,6 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				87780BA427172F610035AB13 /* HTTPMethod.swift */,
+				035E86092718982A00684ED0 /* HTTPEndpoint.swift */,
+				035E860B2718A3AB00684ED0 /* HTTPError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -237,7 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */,
-				87780BAC271730100035AB13 /* NetworkService.swift */,
+				87780BAC271730100035AB13 /* DefaultAPICaller.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -400,15 +412,18 @@
 				035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */,
 				0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */,
 				87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */,
+				035E860C2718A3AB00684ED0 /* HTTPError.swift in Sources */,
+				035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */,
 				87780BA327172F5A0035AB13 /* URLSession+Extensions.swift in Sources */,
 				0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */,
 				0382E2AC2718190B00EB570E /* DefaultInformationsVerificator.swift in Sources */,
-				87780BAE271730100035AB13 /* NetworkService.swift in Sources */,
+				87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */,
 				03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */,
 				0382E29F2717647500EB570E /* AccountCreationScenario.swift in Sources */,
 				87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */,
 				03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */,
 				87780BA127172F520035AB13 /* UrlSessionProtocol.swift in Sources */,
+				035E860A2718982A00684ED0 /* HTTPEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,7 +433,8 @@
 			files = (
 				0382E29A27175FB700EB570E /* AccountCreationScenario_Specs.swift in Sources */,
 				87780BA927172F780035AB13 /* RequestGenerator_Specs.swift in Sources */,
-				87780BA827172F780035AB13 /* NetworkService_Specs.swift in Sources */,
+				87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */,
+				035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */,
 				0382E2AA2718186100EB570E /* InformationsVerificator_Specs.swift in Sources */,
 				0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */,
 			);

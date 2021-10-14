@@ -9,7 +9,7 @@ import XCTest
 import Combine
 @testable import easyselling
 
-class NetworkService_Specs: XCTestCase {
+class DefaultAPICaller_Specs: XCTestCase {
     
     func test_Sends_request_to_back_succeeded_with_codes() {
         assertRequestSucceded(200)
@@ -59,7 +59,7 @@ class NetworkService_Specs: XCTestCase {
 
     private func givenNetworkService(withReponseHTTPCode httpCode: Int, body: Data = Data()) {
         let urlSession = FakeUrlSession(expected: generateExtectedURLResponse(httpCode: httpCode), with: body)
-        networkService = NetworkService(urlSession: urlSession)
+        networkService = DefaultAPICaller(urlSession: urlSession)
     }
 
     private func whenMakingAPICall(withUrlRequest request: URLRequest) {
@@ -104,7 +104,7 @@ class NetworkService_Specs: XCTestCase {
 
     private func thenResponseErrorCode(is expected: Int) {
         XCTAssertNil(self.requestResult)
-        XCTAssertEqual(expected, (self.requestError as NSError?)?.code)
+        XCTAssertEqual(expected, self.requestError.rawValue)
     }
 
     private func thenAPICallIsSucceding() {
@@ -144,8 +144,8 @@ class NetworkService_Specs: XCTestCase {
     private var cancellables = Set<AnyCancellable>()
     private var isCallSucceeded: Bool!
     private var requestResult: Any!
-    private var requestError: Error!
-    private var networkService: NetworkService!
+    private var requestError: HTTPError!
+    private var networkService: DefaultAPICaller!
 }
 
 struct TestDecodable: Decodable, Equatable {

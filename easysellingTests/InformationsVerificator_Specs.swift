@@ -12,84 +12,79 @@ import XCTest
 class InformationsVerificator_Specs: XCTestCase {
     
     func test_Verifies_informations_are_good() {
-        let informations = AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password")
-        
         givenVerificator()
-        whenVerifying(informations)
-        thenInformationsAreCorrect()
+        whenVerifying(email: "test@test.com", password: "password", passwordConfirmation: "password")
+        thenInformations(are: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
     }
     
     func test_Shows_error_when_passwords_are_not_matching() {
-        let informations = AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "wrongPassword")
-
         givenVerificator()
-        whenVerifying(informations)
+        whenVerifying(email: "test@test.com", password: "password", passwordConfirmation: "wrongPassword")
         thenError(is: .wrongPassword)
     }
     
     func test_Shows_error_when_email_is_not_correct() {
-        let informations = AccountCreationInformations(email: "test", password: "password", passwordConfirmation: "password")
-        
         givenVerificator()
-        whenVerifying(informations)
+        whenVerifying(email: "test", password: "password", passwordConfirmation: "password")
         thenError(is: .wrongEmail)
     }
     
     func test_Shows_error_when_email_is_not_correct2() {
-        let informations = AccountCreationInformations(email: "test@test", password: "password", passwordConfirmation: "password")
-        
         givenVerificator()
-        whenVerifying(informations)
+        whenVerifying(email: "test@test", password: "password", passwordConfirmation: "password")
         thenError(is: .wrongEmail)
     }
     
     func test_Shows_error_when_email_is_not_correct3() {
-        let informations = AccountCreationInformations(email: "test.com", password: "password", passwordConfirmation: "password")
-        
         givenVerificator()
-        whenVerifying(informations)
+        whenVerifying(email: "test.com", password: "password", passwordConfirmation: "password")
         thenError(is: .wrongEmail)
     }
 
     func test_Shows_error_when_email_is_empty() {
-        let informations = AccountCreationInformations(email: "", password: "password", passwordConfirmation: "password")
-        
         givenVerificator()
-        whenVerifying(informations)
+        whenVerifying(email: "", password: "password", passwordConfirmation: "password")
         thenError(is: .emptyEmail)
     }
     
     func test_Shows_error_when_password_is_empty() {
-        let informations = AccountCreationInformations(email: "test@test.com", password: "", passwordConfirmation: "password")
-        
         givenVerificator()
-        whenVerifying(informations)
+        whenVerifying(email: "test@test.com", password: "", passwordConfirmation: "password")
         thenError(is: .emptyPassword)
     }
     
     func test_Shows_error_when_password_confirmation_is_empty() {
-        let informations = AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "")
-        
         givenVerificator()
-        whenVerifying(informations)
+        whenVerifying(email: "test@test.com", password: "password", passwordConfirmation: "")
         thenError(is: .emptyPasswordConfirmation)
+    }
+    
+    func test_Deinits_when_no_longer_interested() {
+        givenVerificator()
+        whenVerifying(email: "test@test.com", password: "password", passwordConfirmation: "")
+        whenNoLongerInterested()
+        XCTAssertNil(verificator)
     }
     
     private func givenVerificator() {
         verificator = DefaultInformationsVerificator()
     }
     
-    private func whenVerifying(_ informations: AccountCreationInformations) {
-        verificator.verify(informations, onVerified: {
+    private func whenVerifying(email: String, password: String, passwordConfirmation: String) {
+        verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation, onVerified: {
             switch $0 {
-            case .success(): self.isCorrectInformations = true
+            case let .success(informations): self.accountInformations = informations
             case let .failure(error): self.accountCreationError = error
             }
         })
     }
     
-    private func thenInformationsAreCorrect() {
-        XCTAssertTrue(isCorrectInformations)
+    private func whenNoLongerInterested() {
+        verificator = nil
+    }
+    
+    private func thenInformations(are expected: AccountCreationInformations) {
+        XCTAssertEqual(expected, accountInformations)
     }
     
     private func thenError(is expected: AccountCreationError) {
@@ -99,14 +94,20 @@ class InformationsVerificator_Specs: XCTestCase {
     
     private var verificator: DefaultInformationsVerificator!
     private var accountCreationError: AccountCreationError!
-    private var isCorrectInformations: Bool!
+    private var accountInformations: AccountCreationInformations!
 }
 
 
 class SucceedingInformationsVerificator: InformationsVerificator {
     
-    func verify(_ informations: AccountCreationInformations, onVerified: @escaping (Result<Void, AccountCreationError>) -> Void) {
-        onVerified(.success(()))
+    init(informations: AccountCreationInformations) {
+        self.informations = informations
+    }
+    
+    private(set) var informations: AccountCreationInformations
+    
+    func verify(email: String, password: String, passwordConfirmation: String, onVerified: @escaping (Result<AccountCreationInformations, AccountCreationError>) -> Void) {
+        onVerified(.success(informations))
     }
 }
 
@@ -118,7 +119,7 @@ class FailingInformationsVerificator: InformationsVerificator {
     
     private var error: AccountCreationError
     
-    func verify(_ informations: AccountCreationInformations, onVerified: @escaping (Result<Void, AccountCreationError>) -> Void) {
+    func verify(email: String, password: String, passwordConfirmation: String, onVerified: @escaping (Result<AccountCreationInformations, AccountCreationError>) -> Void) {
         onVerified(.failure(error))
     }
 }

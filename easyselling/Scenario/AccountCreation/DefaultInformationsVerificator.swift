@@ -8,38 +8,38 @@
 import Foundation
 
 protocol InformationsVerificator {
-    func verify(_ informations: AccountCreationInformations, onVerified: @escaping (Result<Void, AccountCreationError>) -> Void)
+    func verify(email: String, password: String, passwordConfirmation: String, onVerified: @escaping (Result<AccountCreationInformations, AccountCreationError>) -> Void)
 }
 
 class DefaultInformationsVerificator: InformationsVerificator {
     
-    func verify(_ informations: AccountCreationInformations, onVerified: @escaping (Result<Void, AccountCreationError>) -> Void) {
+    func verify(email: String, password: String, passwordConfirmation: String, onVerified: @escaping (Result<AccountCreationInformations, AccountCreationError>) -> Void) {
         
-        guard informations.password != "" else {
+        guard password != "" else {
             onVerified(.failure(.emptyPassword))
             return
         }
         
-        guard informations.passwordConfirmation != "" else {
+        guard passwordConfirmation != "" else {
             onVerified(.failure(.emptyPasswordConfirmation))
             return
         }
         
-        guard informations.password == informations.passwordConfirmation else {
+        guard password == passwordConfirmation else {
             onVerified(.failure(.wrongPassword))
             return
         }
         
-        guard informations.email != "" else {
+        guard email != "" else {
             onVerified(.failure(.emptyEmail))
             return
         }
         
-        self.verifyContent(of: informations.email, onChecked: {
+        self.verifyContent(of: email, onChecked: {
             onVerified(.failure(.wrongEmail))
         })
         
-        onVerified(.success(()))
+        onVerified(.success(AccountCreationInformations(email: email, password: password, passwordConfirmation: passwordConfirmation)))
     }
     
     private func verifyContent(of mail: String, onChecked: @escaping () -> Void) {
@@ -77,8 +77,13 @@ enum AccountCreationError: LocalizedError {
     }
 }
 
-struct AccountCreationInformations {
+struct AccountCreationInformations: Equatable, Encodable {
     var email: String
     var password: String
     var passwordConfirmation: String
+    
+    enum CodingKeys: String, CodingKey {
+        case email
+        case password
+    }
 }
