@@ -12,12 +12,14 @@ struct AccountCreationView: View {
     let viewModel: AccountCreationViewModel
     
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            
+        }
     }
 }
 
 struct AccountCreationView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountCreationView(viewModel: AccountCreationViewModel())
+        AccountCreationView(viewModel: AccountCreationViewModel(verificator: DefaultInformationsVerificator()))
     }
 }

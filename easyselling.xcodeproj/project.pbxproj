@@ -13,6 +13,8 @@
 		0382E2A4271765B800EB570E /* AccountCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A3271765B800EB570E /* AccountCreationView.swift */; };
 		0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A52717664000EB570E /* AccountCreationViewModel.swift */; };
 		0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */; };
+		0382E2AA2718186100EB570E /* InformationsVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A92718186100EB570E /* InformationsVerificator_Specs.swift */; };
+		0382E2AC2718190B00EB570E /* DefaultInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2AB2718190B00EB570E /* DefaultInformationsVerificator.swift */; };
 		03F2097B2716E2B100E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F2097D2716E2B100E10F6C /* localizable.strings */; };
 		03F209802716E2CB00E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F209822716E2CB00E10F6C /* localizable.strings */; };
 		03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209842716EEC900E10F6C /* Strings+Generated.swift */; };
@@ -48,6 +50,8 @@
 		0382E2A3271765B800EB570E /* AccountCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationView.swift; sourceTree = "<group>"; };
 		0382E2A52717664000EB570E /* AccountCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationViewModel.swift; sourceTree = "<group>"; };
 		0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationViewModel_Specs.swift; sourceTree = "<group>"; };
+		0382E2A92718186100EB570E /* InformationsVerificator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationsVerificator_Specs.swift; sourceTree = "<group>"; };
+		0382E2AB2718190B00EB570E /* DefaultInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInformationsVerificator.swift; sourceTree = "<group>"; };
 		03F2097C2716E2B100E10F6C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/localizable.strings; sourceTree = "<group>"; };
 		03F209812716E2CB00E10F6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/localizable.strings; sourceTree = "<group>"; };
 		03F209842716EEC900E10F6C /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 			children = (
 				0382E29E2717647500EB570E /* AccountCreationScenario.swift */,
 				0382E2A52717664000EB570E /* AccountCreationViewModel.swift */,
+				0382E2AB2718190B00EB570E /* DefaultInformationsVerificator.swift */,
 			);
 			path = AccountCreation;
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 				87780BA727172F780035AB13 /* RequestGenerator_Specs.swift */,
 				0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */,
 				0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */,
+				0382E2A92718186100EB570E /* InformationsVerificator_Specs.swift */,
 			);
 			path = easysellingTests;
 			sourceTree = "<group>";
@@ -400,6 +406,7 @@
 				87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */,
 				87780BA327172F5A0035AB13 /* URLSession+Extensions.swift in Sources */,
 				0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */,
+				0382E2AC2718190B00EB570E /* DefaultInformationsVerificator.swift in Sources */,
 				87780BAE271730100035AB13 /* NetworkService.swift in Sources */,
 				03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */,
 				0382E29F2717647500EB570E /* AccountCreationScenario.swift in Sources */,
@@ -416,6 +423,7 @@
 				0382E29A27175FB700EB570E /* AccountCreationScenario_Specs.swift in Sources */,
 				87780BA927172F780035AB13 /* RequestGenerator_Specs.swift in Sources */,
 				87780BA827172F780035AB13 /* NetworkService_Specs.swift in Sources */,
+				0382E2AA2718186100EB570E /* InformationsVerificator_Specs.swift in Sources */,
 				0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
