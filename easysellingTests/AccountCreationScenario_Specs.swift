@@ -12,21 +12,38 @@ import XCTest
 class AccountCreationScenario_Specs: XCTestCase {
     
     func test_Begins_scenario() {
-        let navigator = SpyAccountCreationNavigator()
-        let scenario = AccountCreationScenario(navigator: navigator)
-        scenario.begin(onFinish: {})
-        XCTAssertEqual(navigator.history, [.accountCreation])
+        givenScenario()
+        whenBeginning()
+        thenHistory(is: [.accountCreation])
     }
     
     func test_Leaves_scenario_when_account_is_created() {
-        let navigator = SpyAccountCreationNavigator()
-        let scenario = AccountCreationScenario(navigator: navigator)
+        givenScenario()
+        whenBeginning()
+        thenScenarioDidFinished()
+    }
+    
+    private func givenScenario() {
+        navigator = SpyAccountCreationNavigator()
+        scenario = AccountCreationScenario(navigator: navigator)
+    }
+    
+    private func whenBeginning() {
         scenario.begin(onFinish: {
             self.isScenarioDidFinished = true
         })
+    }
+    
+    private func thenScenarioDidFinished() {
         XCTAssertTrue(isScenarioDidFinished)
     }
     
+    private func thenHistory(is expected: [AccountCreationStates]) {
+        XCTAssertEqual(navigator.history, [.accountCreation])
+    }
+    
+    private var scenario: AccountCreationScenario!
+    private var navigator: SpyAccountCreationNavigator!
     private var isScenarioDidFinished: Bool!
 }
 

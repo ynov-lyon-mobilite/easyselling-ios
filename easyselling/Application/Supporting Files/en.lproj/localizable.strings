@@ -7,3 +7,7 @@
 */
 
 "helloWorld" = "Hello World ! ";
+"signUp.mail" = "Mail";
+"signUp.password" = "Password";
+"signUp.passwordConfirmation" = "Password confirmation";
+"signUp.CreateAccountButton" = "Create account";

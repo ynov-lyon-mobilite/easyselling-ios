@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860327184EDC00684ED0 /* AppDelegate.swift */; };
 		0382E29A27175FB700EB570E /* AccountCreationScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */; };
 		0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29C2717639A00EB570E /* TypesAlias.swift */; };
 		0382E29F2717647500EB570E /* AccountCreationScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29E2717647500EB570E /* AccountCreationScenario.swift */; };
@@ -19,8 +20,6 @@
 		03F209802716E2CB00E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F209822716E2CB00E10F6C /* localizable.strings */; };
 		03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209842716EEC900E10F6C /* Strings+Generated.swift */; };
 		03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209852716EECA00E10F6C /* XCAssets+Generated.swift */; };
-		873552B3270D847700F2DDBD /* easysellingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552B2270D847700F2DDBD /* easysellingApp.swift */; };
-		873552B5270D847700F2DDBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873552B4270D847700F2DDBD /* ContentView.swift */; };
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
 		87780BA127172F520035AB13 /* UrlSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA027172F520035AB13 /* UrlSessionProtocol.swift */; };
@@ -44,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		035E860327184EDC00684ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationScenario_Specs.swift; sourceTree = "<group>"; };
 		0382E29C2717639A00EB570E /* TypesAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesAlias.swift; sourceTree = "<group>"; };
 		0382E29E2717647500EB570E /* AccountCreationScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationScenario.swift; sourceTree = "<group>"; };
@@ -57,8 +57,6 @@
 		03F209842716EEC900E10F6C /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		03F209852716EECA00E10F6C /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		873552AF270D847700F2DDBD /* easyselling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = easyselling.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		873552B2270D847700F2DDBD /* easysellingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = easysellingApp.swift; sourceTree = "<group>"; };
-		873552B4270D847700F2DDBD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		873552B6270D847B00F2DDBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		873552B9270D847B00F2DDBD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		873552BF270D847B00F2DDBD /* easysellingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = easysellingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,11 +170,10 @@
 				87780B9C27172F1C0035AB13 /* Additions */,
 				03F209772716E1C500E10F6C /* Application */,
 				D00736552712D93800ED0F2C /* easyselling.entitlements */,
-				873552B2270D847700F2DDBD /* easysellingApp.swift */,
-				873552B4270D847700F2DDBD /* ContentView.swift */,
 				873552B8270D847B00F2DDBD /* Preview Content */,
 				0382E2A12717648000EB570E /* Scenario */,
 				0382E2A3271765B800EB570E /* AccountCreationView.swift */,
+				035E860327184EDC00684ED0 /* AppDelegate.swift */,
 			);
 			path = easyselling;
 			sourceTree = "<group>";
@@ -315,7 +312,7 @@
 			};
 			buildConfigurationList = 873552AA270D847700F2DDBD /* Build configuration list for PBXProject "easyselling" */;
 			compatibilityVersion = "Xcode 13.0";
-			developmentRegion = en;
+			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -399,9 +396,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				873552B5270D847700F2DDBD /* ContentView.swift in Sources */,
 				0382E2A4271765B800EB570E /* AccountCreationView.swift in Sources */,
-				873552B3270D847700F2DDBD /* easysellingApp.swift in Sources */,
+				035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */,
 				0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */,
 				87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */,
 				87780BA327172F5A0035AB13 /* URLSession+Extensions.swift in Sources */,
@@ -587,7 +583,6 @@
 				DEVELOPMENT_TEAM = 94FLWD5X32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -620,7 +615,6 @@
 				DEVELOPMENT_TEAM = 94FLWD5X32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

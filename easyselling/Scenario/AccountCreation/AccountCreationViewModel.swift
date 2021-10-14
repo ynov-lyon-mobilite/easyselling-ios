@@ -16,6 +16,10 @@ class AccountCreationViewModel: ObservableObject {
     private var verificator: InformationsVerificator
     
     @Published var state: AccountCreationState = .initial
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var passwordConfirmation: String = ""
+    @Published var error: AccountCreationError?
     
     func verifyInformations(email: String, password: String, passwordConfirmation: String) {
         let accountInformations = AccountCreationInformations(email: email, password: password, passwordConfirmation: passwordConfirmation)
@@ -28,13 +32,12 @@ class AccountCreationViewModel: ObservableObject {
     }
     
     private func setError(with error: AccountCreationError) {
-        guard let errorDescription = error.errorDescription else { return }
-        self.state = .alert(errorMessage: errorDescription)
+        self.error = error
+        self.state = .initial
     }
     
     enum AccountCreationState: Equatable {
         case initial
         case loading
-        case alert(errorMessage: String)
     }
 }

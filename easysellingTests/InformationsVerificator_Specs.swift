@@ -24,7 +24,7 @@ class InformationsVerificator_Specs: XCTestCase {
 
         givenVerificator()
         whenVerifying(informations)
-        thenErrorMessage(is: "Les mots de passes sont différents")
+        thenError(is: .wrongPassword)
     }
     
     func test_Shows_error_when_email_is_not_correct() {
@@ -32,7 +32,7 @@ class InformationsVerificator_Specs: XCTestCase {
         
         givenVerificator()
         whenVerifying(informations)
-        XCTAssertEqual("L'addresse email est incorrect", accountCreationError)
+        thenError(is: .wrongEmail)
     }
     
     func test_Shows_error_when_email_is_not_correct2() {
@@ -40,7 +40,7 @@ class InformationsVerificator_Specs: XCTestCase {
         
         givenVerificator()
         whenVerifying(informations)
-        XCTAssertEqual("L'addresse email est incorrect", accountCreationError)
+        thenError(is: .wrongEmail)
     }
     
     func test_Shows_error_when_email_is_not_correct3() {
@@ -48,7 +48,7 @@ class InformationsVerificator_Specs: XCTestCase {
         
         givenVerificator()
         whenVerifying(informations)
-        XCTAssertEqual("L'addresse email est incorrect", accountCreationError)
+        thenError(is: .wrongEmail)
     }
 
     func test_Shows_error_when_email_is_empty() {
@@ -56,7 +56,7 @@ class InformationsVerificator_Specs: XCTestCase {
         
         givenVerificator()
         whenVerifying(informations)
-        XCTAssertEqual("L'addresse email est vide", accountCreationError)
+        thenError(is: .emptyEmail)
     }
     
     func test_Shows_error_when_password_is_empty() {
@@ -64,7 +64,7 @@ class InformationsVerificator_Specs: XCTestCase {
         
         givenVerificator()
         whenVerifying(informations)
-        XCTAssertEqual("Le mot de passe est vide", accountCreationError)
+        thenError(is: .emptyPassword)
     }
     
     func test_Shows_error_when_password_confirmation_is_empty() {
@@ -72,7 +72,7 @@ class InformationsVerificator_Specs: XCTestCase {
         
         givenVerificator()
         whenVerifying(informations)
-        XCTAssertEqual("La confirmation du mot de passe est vide", accountCreationError)
+        thenError(is: .emptyPasswordConfirmation)
     }
     
     private func givenVerificator() {
@@ -83,7 +83,7 @@ class InformationsVerificator_Specs: XCTestCase {
         verificator.verify(informations, onVerified: {
             switch $0 {
             case .success(): self.isCorrectInformations = true
-            case let .failure(error): self.accountCreationError = error.errorDescription
+            case let .failure(error): self.accountCreationError = error
             }
         })
     }
@@ -92,11 +92,33 @@ class InformationsVerificator_Specs: XCTestCase {
         XCTAssertTrue(isCorrectInformations)
     }
     
-    private func thenErrorMessage(is expected: String) {
+    private func thenError(is expected: AccountCreationError) {
+        XCTAssertEqual(expected.errorDescription, accountCreationError.errorDescription)
         XCTAssertEqual(expected, accountCreationError)
     }
     
     private var verificator: DefaultInformationsVerificator!
-    private var accountCreationError: String!
+    private var accountCreationError: AccountCreationError!
     private var isCorrectInformations: Bool!
+}
+
+
+class SucceedingInformationsVerificator: InformationsVerificator {
+    
+    func verify(_ informations: AccountCreationInformations, onVerified: @escaping (Result<Void, AccountCreationError>) -> Void) {
+        onVerified(.success(()))
+    }
+}
+
+class FailingInformationsVerificator: InformationsVerificator {
+    
+    init(error: AccountCreationError) {
+        self.error = error
+    }
+    
+    private var error: AccountCreationError
+    
+    func verify(_ informations: AccountCreationInformations, onVerified: @escaping (Result<Void, AccountCreationError>) -> Void) {
+        onVerified(.failure(error))
+    }
 }

@@ -35,17 +35,23 @@ class DefaultInformationsVerificator: InformationsVerificator {
             return
         }
         
-        let emailPattern = #"^\S+@\S+\.\S+$"#
-        let range = NSRange(location: 0, length: informations.email.utf16.count)
-        
-        guard let regex = try? NSRegularExpression(pattern: emailPattern),
-              regex.firstMatch(in: informations.email, options: [], range: range) != nil else {
-                  
+        self.verifyContent(of: informations.email, onChecked: {
             onVerified(.failure(.wrongEmail))
-            return
-        }
+        })
         
         onVerified(.success(()))
+    }
+    
+    private func verifyContent(of mail: String, onChecked: @escaping () -> Void) {
+        let emailPattern = #"^\S+@\S+\.\S+$"#
+        let range = NSRange(location: 0, length: mail.utf16.count)
+        
+        guard let regex = try? NSRegularExpression(pattern: emailPattern),
+              regex.firstMatch(in: mail, options: [], range: range) != nil else {
+                  
+                  onChecked()
+                  return
+              }
     }
 }
 

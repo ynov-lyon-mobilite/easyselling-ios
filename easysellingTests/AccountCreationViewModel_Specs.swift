@@ -11,83 +11,64 @@ import XCTest
 
 class AccountCreationViewModel_Specs: XCTestCase {
     
-    func test_Shows_informations_inputs_when_arriving_on_account_creation_page() {
-        let informationsVerificator = SucceedingInformationsVerificator()
-        let viewModel = AccountCreationViewModel(verificator: informationsVerificator)
-        XCTAssertEqual(.initial, viewModel.state)
-    }
-
     func test_Shows_loader_when_informations_are_correct() {
-        let informationsVerificator = SucceedingInformationsVerificator()
-        let viewModel = AccountCreationViewModel(verificator: informationsVerificator)
-        viewModel.verifyInformations(email: "test@test.com",
-                                     password: "password",
-                                     passwordConfirmation: "password")
-        XCTAssertEqual(.loading, viewModel.state)
+        givenViewModel(with: SucceedingInformationsVerificator())
+        whenVerifyingInformations(email: "test@test.com", password: "password", passwordConfirmation: "passwordConfirmation")
+        thenViewModelState(is: .loading)
     }
     
     func test_Show_alert_when_informations_email_is_wrong() {
-        let informationsVerificator = FailingInformationsVerificator(error: .wrongEmail)
-        let viewModel = AccountCreationViewModel(verificator: informationsVerificator)
-        viewModel.verifyInformations(email: "test",
-                                     password: "password",
-                                     passwordConfirmation: "password")
-        XCTAssertEqual(.alert(errorMessage: "L'addresse email est incorrect"), viewModel.state)
+        givenViewModel(with: FailingInformationsVerificator(error: .wrongEmail))
+        whenVerifyingInformations(email: "test", password: "password", passwordConfirmation: "password")
+        thenViewModelState(is: .initial)
+        thenError(is: .wrongEmail)
     }
     
     func test_Show_alert_when_informations_email_is_empty() {
-        let informationsVerificator = FailingInformationsVerificator(error: .wrongEmail)
-        let viewModel = AccountCreationViewModel(verificator: informationsVerificator)
-        viewModel.verifyInformations(email: "",
-                                     password: "password",
-                                     passwordConfirmation: "password")
-        XCTAssertEqual(.alert(errorMessage: "L'addresse email est incorrect"), viewModel.state)
+        givenViewModel(with: FailingInformationsVerificator(error: .emptyEmail))
+        whenVerifyingInformations(email: "", password: "password", passwordConfirmation: "password")
+        thenViewModelState(is: .initial)
+        thenError(is: .emptyEmail)
     }
     
     func test_Show_alert_when_informations_password_is_incorrect() {
-        let informationsVerificator = FailingInformationsVerificator(error: .wrongPassword)
-        let viewModel = AccountCreationViewModel(verificator: informationsVerificator)
-        viewModel.verifyInformations(email: "test@test.com",
-                                     password: "password",
-                                     passwordConfirmation: "differentPassword")
-        XCTAssertEqual(.alert(errorMessage: "Les mots de passes sont différents"), viewModel.state)
+        givenViewModel(with: FailingInformationsVerificator(error: .wrongPassword))
+        whenVerifyingInformations(email: "test", password: "password", passwordConfirmation: "differentPassword")
+        thenViewModelState(is: .initial)
+        thenError(is: .wrongPassword)
     }
     
     func test_Show_alert_when_informations_password_is_empty() {
-        let informationsVerificator = FailingInformationsVerificator(error: .emptyPassword)
-        let viewModel = AccountCreationViewModel(verificator: informationsVerificator)
-        viewModel.verifyInformations(email: "test@test.com",
-                                     password: "",
-                                     passwordConfirmation: "password")
-        XCTAssertEqual(.alert(errorMessage: "Le mot de passe est vide"), viewModel.state)
+        givenViewModel(with: FailingInformationsVerificator(error: .emptyPassword))
+        whenVerifyingInformations(email: "test", password: "", passwordConfirmation: "password")
+        thenViewModelState(is: .initial)
+        thenError(is: .emptyPassword)
     }
     
     func test_Show_alert_when_informations_password_confirmation_is_empty() {
-        let informationsVerificator = FailingInformationsVerificator(error: .emptyPasswordConfirmation)
-        let viewModel = AccountCreationViewModel(verificator: informationsVerificator)
-        viewModel.verifyInformations(email: "test@test.com",
-                                     password: "password",
-                                     passwordConfirmation: "")
-        XCTAssertEqual(.alert(errorMessage: "La confirmation du mot de passe est vide"), viewModel.state)
-    }
-}
-
-class SucceedingInformationsVerificator: InformationsVerificator {
-    
-    func verify(_ informations: AccountCreationInformations, onVerified: @escaping (Result<Void, AccountCreationError>) -> Void) {
-        onVerified(.success(()))
-    }
-}
-
-class FailingInformationsVerificator: InformationsVerificator {
-    
-    init(error: AccountCreationError) {
-        self.error = error
+        givenViewModel(with: FailingInformationsVerificator(error: .emptyPasswordConfirmation))
+        whenVerifyingInformations(email: "test", password: "password", passwordConfirmation: "")
+        thenViewModelState(is: .initial)
+        thenError(is: .emptyPasswordConfirmation)
     }
     
-    private var error: AccountCreationError
-    
-    func verify(_ informations: AccountCreationInformations, onVerified: @escaping (Result<Void, AccountCreationError>) -> Void) {
-        onVerified(.failure(error))
+    private func givenViewModel(with verificator: InformationsVerificator) {
+        viewModel = AccountCreationViewModel(verificator: verificator)
     }
+    
+    private func whenVerifyingInformations(email: String, password: String, passwordConfirmation: String) {
+        viewModel.verifyInformations(email: email,
+                                     password: password,
+                                     passwordConfirmation: passwordConfirmation)
+    }
+    
+    private func thenViewModelState(is expected: AccountCreationViewModel.AccountCreationState) {
+        XCTAssertEqual(expected, viewModel.state)
+    }
+    
+    private func thenError(is expected: AccountCreationError) {
+        XCTAssertEqual(expected, viewModel.error)
+    }
+    
+    private var viewModel: AccountCreationViewModel!
 }
