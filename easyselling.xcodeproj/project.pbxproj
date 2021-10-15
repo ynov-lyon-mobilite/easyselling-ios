@@ -425,7 +425,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				$PROJECT_DIR/$TARGET_NAME/swiftgen.yml,
+				"$PROJECT_DIR/$TARGET_NAME/swiftgen.yml",
 			);
 			name = SwiftGen;
 			outputFileListPaths = (
