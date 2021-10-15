@@ -61,20 +61,27 @@ class DefaultAccountCreator_Specs: XCTestCase {
 
 class FakeRequestGenerator: RequestGenerator {
     
-    func generateRequest<T>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?, headers: [String : String]) -> URLRequest? where T : Encodable {
+    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?, headers: [String : String]) -> URLRequest? {
         return URLRequest(url: URL(string: "https://cuck.com")!)
     }
     
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String : String]) -> URLRequest? {
-        return nil
+        return URLRequest(url: URL(string: "https://cuck.com")!)
     }
 }
 
 class SucceedingAPICaller: APICaller {
+    private let data: Data?
+    
+    init(data: Data? = nil) {
+        self.data = data
+    }
     
     func call<T>(_ urlRequest: URLRequest, decodeType: T.Type) -> DecodedResult<T> where T : Decodable {
-        return Just("" as! T)
-            .setFailureType(to: HTTPError.self)
+        return Just(data!)
+            .decode(type: APIResponse<T>.self, decoder: JSONDecoder())
+            .map { $0.data }
+            .mapError { _ in HTTPError.internalServerError }
             .eraseToAnyPublisher()
     }
     
