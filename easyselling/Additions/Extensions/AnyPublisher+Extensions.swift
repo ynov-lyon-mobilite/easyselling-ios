@@ -9,6 +9,10 @@ import Combine
 
 extension AnyPublisher {
     static var empty: AnyPublisher {
-        return AnyPublisher(Empty())
+        AnyPublisher(Empty())
+    }
+    
+    static func error<Output, Failure: Error>(_ error: Failure) -> AnyPublisher<Output, Failure> {
+        AnyPublisher<Output, Failure>(Fail(error: error))
     }
 }

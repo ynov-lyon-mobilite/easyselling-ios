@@ -94,11 +94,11 @@ class SucceedingAPICaller: APICaller {
 
 class FailingAPICaller: APICaller {
     
-    func call<T>(_ urlRequest: URLRequest, decodeType: T.Type) -> DecodedResult<T> where T : Decodable {
-        AnyPublisher(Fail(error: HTTPError.from(statusCode: 404)))
+    func call<T: Decodable>(_ urlRequest: URLRequest, decodeType: T.Type) -> DecodedResult<T> {
+        .error(HTTPError.notFound)
     }
     
     func call(_ urlRequest: URLRequest) -> VoidResult {
-        AnyPublisher(Fail(error: HTTPError.from(statusCode: 404)))
+        .error(HTTPError.notFound)
     }
 }
