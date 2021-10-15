@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 protocol AccountCreator {
     func createAccount(informations: AccountCreationInformations) -> VoidResult
@@ -24,9 +23,8 @@ class DefaultAccountCreator: AccountCreator {
     
     func createAccount(informations: AccountCreationInformations) -> VoidResult {
         let urlRequest = requestGenerator.generateRequest(endpoint: .users, method: .POST, body: informations, headers: [:])
-        guard let urlRequest = urlRequest else {
-            return AnyPublisher(Empty())
-        }
+        guard let urlRequest = urlRequest else { return .empty }
+
         return apiCaller.call(urlRequest)
     }
 }
