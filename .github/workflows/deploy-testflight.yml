@@ -40,9 +40,10 @@ jobs:
             
     - name: Build & Deploy
       run: |
-        bundle exec fastlane deploy build_number:{{ github.run_id }}
+        bundle exec fastlane deploy build_number:$BUILD_NUMBER
       env:
         MATCH_PASSWORD: '${{ secrets.MATCH_PASSWORD }}'
         FASTLANE_KEY_ID: '${{ secrets.FASTLANE_KEY_ID }}'
         FASTLANE_ISSUER_ID: '${{ secrets.FASTLANE_ISSUER_ID }}'
         FASTLANE_API_KEY: '${{ secrets.FASTLANE_API_KEY }}'
+        BUILD_NUMBER: '${{ github.run_id }}'
