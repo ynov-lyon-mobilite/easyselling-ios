@@ -33,9 +33,10 @@ final class DefaultAPICaller: APICaller {
 
                     return data
                 }
-                .decode(type: T.self, decoder: jsonDecoder)
+                .decode(type: APIResponse<T>.self, decoder: jsonDecoder)
                 .receive(on: DispatchQueue.main)
                 .mapError { ($0 as? HTTPError) ?? HTTPError.internalServerError }
+                .map { $0.data }
                 .eraseToAnyPublisher()
         }
 

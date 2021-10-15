@@ -43,7 +43,7 @@ class DefaultAPICaller_Specs: XCTestCase {
     }
 
     func test_Sends_data_to_back_end_with_response_body() {
-        let body = "{ \"argument\": \"BODY\"  }"
+        let body = "{\"data\": {\"argument\": \"BODY\"}}"
         let expectedBody = TestDecodable(argument: "BODY")
 
         givenNetworkService(withReponseHTTPCode: 200, body: body.data(using: .utf8)!)
