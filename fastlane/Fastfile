@@ -1,11 +1,6 @@
 projectName = "easyselling"
 projectScheme = projectName
 
-lane :tests do
-  run_tests(scheme: projectName)
-end
-
-
 lane :deploy do |options|
 	setup_ci if ENV['CI']
 	match(type: 'appstore', readonly: true)
