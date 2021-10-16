@@ -8,54 +8,49 @@
 import Foundation
 
 protocol InformationsVerificator {
-    func verify(email: String, password: String, passwordConfirmation: String, onVerified: @escaping (Result<AccountCreationInformations, AccountCreationError>) -> Void)
+    func verify(email: String, password: String, passwordConfirmation: String) -> Result<AccountCreationInformations, AccountCreationError>?
 }
 
 class DefaultInformationsVerificator: InformationsVerificator {
     
-    func verify(email: String, password: String, passwordConfirmation: String, onVerified: @escaping (Result<AccountCreationInformations, AccountCreationError>) -> Void) {
+    func verify(email: String, password: String, passwordConfirmation: String) -> Result<AccountCreationInformations, AccountCreationError>? {
         
-        guard password != "" else {
-            onVerified(.failure(.emptyPassword))
-            return
+        guard !password.isEmpty else {
+            return .failure(.emptyPassword)
         }
         
-        guard passwordConfirmation != "" else {
-            onVerified(.failure(.emptyPasswordConfirmation))
-            return
+        guard !passwordConfirmation.isEmpty else {
+            return .failure(.emptyPasswordConfirmation)
         }
         
         guard password == passwordConfirmation else {
-            onVerified(.failure(.wrongPassword))
-            return
+            return .failure(.wrongPassword)
         }
         
-        guard email != "" else {
-            onVerified(.failure(.emptyEmail))
-            return
+        guard !email.isEmpty else {
+            return .failure(.emptyEmail)
         }
         
-        self.verifyContent(of: email, onChecked: {
-            onVerified(.failure(.wrongEmail))
-        })
+        guard self.verifyContent(of: email) else {
+            return .failure(.wrongEmail)
+        }
         
-        onVerified(.success(AccountCreationInformations(email: email, password: password, passwordConfirmation: passwordConfirmation)))
+        return .success(AccountCreationInformations(email: email, password: password, passwordConfirmation: passwordConfirmation))
     }
     
-    private func verifyContent(of mail: String, onChecked: @escaping () -> Void) {
+    private func verifyContent(of mail: String) -> Bool {
         let emailPattern = #"^\S+@\S+\.\S+$"#
         let range = NSRange(location: 0, length: mail.utf16.count)
         
         guard let regex = try? NSRegularExpression(pattern: emailPattern),
               regex.firstMatch(in: mail, options: [], range: range) != nil else {
-                  
-                  onChecked()
-                  return
+                  return false
               }
+        return true
     }
 }
 
-enum AccountCreationError: LocalizedError {
+enum AccountCreationError: LocalizedError, Equatable {
     case wrongEmail
     case emptyEmail
     case wrongPassword

@@ -24,34 +24,40 @@ class AccountCreationViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var passwordConfirmation: String = ""
     @Published var error: AccountCreationError?
+    @Published var alert: HTTPError?
+    @Published var showAlert: Bool = false
     
-    func verifyInformations(email: String, password: String, passwordConfirmation: String) {
-        verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation, onVerified: {
-            switch $0 {
-            case .success: self.state = .loading
-            case let .failure(error): self.setError(with: error)
-            }
-        })
+    func createAccount(email: String, password: String, passwordConfirmation: String) {
+        self.state = .loading
+        
+        switch verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation) {
+        case let .success(informations): self.createAccount(with: informations)
+        case let .failure(error): self.setError(with: error)
+            self.state = .initial
+        case .none: break
+        }
     }
     
-    func createAccount(with informations: AccountCreationInformations , onFinish: @escaping (Result<Void, Error>) -> Void) {
+    private func createAccount(with informations: AccountCreationInformations) {
         accountCreator.createAccount(informations: informations).sink(receiveCompletion: {
             if case let .failure(error) = $0 {
-                onFinish(.failure(error))
+                self.state = .initial
+                self.alert = error
+                self.showAlert = true
             }
         }, receiveValue: {
-            onFinish(.success(()))
+            self.state = .accountCreated
         })
             .store(in: &cancellables)
     }
     
     private func setError(with error: AccountCreationError) {
         self.error = error
-        self.state = .initial
     }
     
     enum AccountCreationState: Equatable {
         case initial
         case loading
+        case accountCreated
     }
 }

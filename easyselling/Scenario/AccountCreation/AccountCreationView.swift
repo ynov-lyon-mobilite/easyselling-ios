@@ -38,7 +38,7 @@ struct AccountCreationView: View {
                     }
                 
                 Button(L10n.SignUp.createAccountButton) {
-                    viewModel.verifyInformations(email: viewModel.email, password: viewModel.password, passwordConfirmation: viewModel.passwordConfirmation)
+                    viewModel.createAccount(email: viewModel.email, password: viewModel.password, passwordConfirmation: viewModel.passwordConfirmation)
                 }
                 .foregroundColor(Color.white)
                 .padding()
@@ -48,6 +48,11 @@ struct AccountCreationView: View {
             }
         }
         .padding(.horizontal, 50)
+        .alert(isPresented: $viewModel.showAlert, content: {
+            Alert(
+                title: Text(viewModel.alert?.errorDescription ?? ""),
+                dismissButton: Alert.Button.default(Text("Ok")))
+        })
     }
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HTTPError: Int, LocalizedError {
+enum HTTPError: Int, LocalizedError, Equatable {
     case badRequest = 400
     case unauthorized = 401
     case paymentRequired = 402

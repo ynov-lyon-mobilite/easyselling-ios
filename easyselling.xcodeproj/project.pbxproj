@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		033F4AF32718C8A800B79149 /* NetFox in Frameworks */ = {isa = PBXBuildFile; productRef = 033F4AF22718C8A800B79149 /* NetFox */; };
 		035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860327184EDC00684ED0 /* AppDelegate.swift */; };
 		035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860527188E9300684ED0 /* DefaultAccountCreator.swift */; };
 		035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */; };
@@ -18,8 +19,11 @@
 		0382E2A4271765B800EB570E /* AccountCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A3271765B800EB570E /* AccountCreationView.swift */; };
 		0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A52717664000EB570E /* AccountCreationViewModel.swift */; };
 		0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */; };
-		0382E2AA2718186100EB570E /* InformationsVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A92718186100EB570E /* InformationsVerificator_Specs.swift */; };
+		0382E2AA2718186100EB570E /* DefaultInformationsVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A92718186100EB570E /* DefaultInformationsVerificator_Specs.swift */; };
 		0382E2AC2718190B00EB570E /* DefaultInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2AB2718190B00EB570E /* DefaultInformationsVerificator.swift */; };
+		03F05431271B392300434706 /* SucceedingInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05430271B392300434706 /* SucceedingInformationsVerificator.swift */; };
+		03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05432271B393100434706 /* FailingInformationsVerificator.swift */; };
+		03F05435271B393B00434706 /* NeverFinishingInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05434271B393B00434706 /* NeverFinishingInformationsVerificator.swift */; };
 		03F2097B2716E2B100E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F2097D2716E2B100E10F6C /* localizable.strings */; };
 		03F209802716E2CB00E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F209822716E2CB00E10F6C /* localizable.strings */; };
 		03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209842716EEC900E10F6C /* Strings+Generated.swift */; };
@@ -58,8 +62,11 @@
 		0382E2A3271765B800EB570E /* AccountCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationView.swift; sourceTree = "<group>"; };
 		0382E2A52717664000EB570E /* AccountCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationViewModel.swift; sourceTree = "<group>"; };
 		0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationViewModel_Specs.swift; sourceTree = "<group>"; };
-		0382E2A92718186100EB570E /* InformationsVerificator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationsVerificator_Specs.swift; sourceTree = "<group>"; };
+		0382E2A92718186100EB570E /* DefaultInformationsVerificator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInformationsVerificator_Specs.swift; sourceTree = "<group>"; };
 		0382E2AB2718190B00EB570E /* DefaultInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInformationsVerificator.swift; sourceTree = "<group>"; };
+		03F05430271B392300434706 /* SucceedingInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingInformationsVerificator.swift; sourceTree = "<group>"; };
+		03F05432271B393100434706 /* FailingInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingInformationsVerificator.swift; sourceTree = "<group>"; };
+		03F05434271B393B00434706 /* NeverFinishingInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeverFinishingInformationsVerificator.swift; sourceTree = "<group>"; };
 		03F2097C2716E2B100E10F6C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/localizable.strings; sourceTree = "<group>"; };
 		03F209812716E2CB00E10F6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/localizable.strings; sourceTree = "<group>"; };
 		03F209842716EEC900E10F6C /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
@@ -84,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				033F4AF32718C8A800B79149 /* NetFox in Frameworks */,
 				D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,12 +125,24 @@
 		0382E2A22717648700EB570E /* AccountCreation */ = {
 			isa = PBXGroup;
 			children = (
+				0382E2A3271765B800EB570E /* AccountCreationView.swift */,
 				0382E29E2717647500EB570E /* AccountCreationScenario.swift */,
 				0382E2A52717664000EB570E /* AccountCreationViewModel.swift */,
 				0382E2AB2718190B00EB570E /* DefaultInformationsVerificator.swift */,
 				035E860527188E9300684ED0 /* DefaultAccountCreator.swift */,
 			);
 			path = AccountCreation;
+			sourceTree = "<group>";
+		};
+		03F0542F271B38EB00434706 /* DefaultInformationVerificator_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				0382E2A92718186100EB570E /* DefaultInformationsVerificator_Specs.swift */,
+				03F05430271B392300434706 /* SucceedingInformationsVerificator.swift */,
+				03F05432271B393100434706 /* FailingInformationsVerificator.swift */,
+				03F05434271B393B00434706 /* NeverFinishingInformationsVerificator.swift */,
+			);
+			path = DefaultInformationVerificator_Specs;
 			sourceTree = "<group>";
 		};
 		03F209762716E0AE00E10F6C /* Additions */ = {
@@ -181,7 +201,6 @@
 				D00736552712D93800ED0F2C /* easyselling.entitlements */,
 				873552B8270D847B00F2DDBD /* Preview Content */,
 				0382E2A12717648000EB570E /* Scenario */,
-				0382E2A3271765B800EB570E /* AccountCreationView.swift */,
 				035E860327184EDC00684ED0 /* AppDelegate.swift */,
 			);
 			path = easyselling;
@@ -202,7 +221,7 @@
 				87780BA727172F780035AB13 /* RequestGenerator_Specs.swift */,
 				0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */,
 				0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */,
-				0382E2A92718186100EB570E /* InformationsVerificator_Specs.swift */,
+				03F0542F271B38EB00434706 /* DefaultInformationVerificator_Specs */,
 				035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */,
 			);
 			path = easysellingTests;
@@ -280,6 +299,9 @@
 			dependencies = (
 			);
 			name = easyselling;
+			packageProductDependencies = (
+				033F4AF22718C8A800B79149 /* NetFox */,
+			);
 			productName = easyselling;
 			productReference = 873552AF270D847700F2DDBD /* easyselling.app */;
 			productType = "com.apple.product-type.application";
@@ -332,6 +354,9 @@
 				fr,
 			);
 			mainGroup = 873552A6270D847700F2DDBD;
+			packageReferences = (
+				033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */,
+			);
 			productRefGroup = 873552B0270D847700F2DDBD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -431,12 +456,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */,
 				0382E29A27175FB700EB570E /* AccountCreationScenario_Specs.swift in Sources */,
 				87780BA927172F780035AB13 /* RequestGenerator_Specs.swift in Sources */,
 				87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */,
 				035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */,
-				0382E2AA2718186100EB570E /* InformationsVerificator_Specs.swift in Sources */,
+				03F05435271B393B00434706 /* NeverFinishingInformationsVerificator.swift in Sources */,
+				0382E2AA2718186100EB570E /* DefaultInformationsVerificator_Specs.swift in Sources */,
 				0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */,
+				03F05431271B392300434706 /* SucceedingInformationsVerificator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,6 +762,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MaxenceMottard/netfox";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		033F4AF22718C8A800B79149 /* NetFox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */;
+			productName = NetFox;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 873552A7270D847700F2DDBD /* Project object */;
 }

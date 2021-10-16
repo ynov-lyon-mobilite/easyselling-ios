@@ -8,7 +8,7 @@
 import Foundation
 
 enum HTTPEndpoint: String {
-    var baseURL: String { "https://easyselling.maxencemottard.com/api/v1" }
+    var baseURL: String { "https://easyselling.maxencemottard.com" }
     
     case users = "/users"
     

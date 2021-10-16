@@ -11,7 +11,7 @@ import XCTest
 class RequestGenerator_Specs: XCTestCase {
 
     func test_Generates_Request() {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/api/v1/users")!)
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = HTTPMethod.POST.rawValue
 
@@ -23,7 +23,7 @@ class RequestGenerator_Specs: XCTestCase {
     }
 
     func test_Generates_Request_With_Headers() {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/api/v1/users")!)
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
         request.httpMethod = HTTPMethod.POST.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("With tested value", forHTTPHeaderField: "test-header")
@@ -40,7 +40,7 @@ class RequestGenerator_Specs: XCTestCase {
     func test_Generates_Request_With_Body() {
         let body = "BODY"
 
-        expectedRequest = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/api/v1/users")!)
+        expectedRequest = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
         expectedRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         expectedRequest.httpMethod = HTTPMethod.POST.rawValue
 

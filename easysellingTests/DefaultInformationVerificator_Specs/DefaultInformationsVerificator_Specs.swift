@@ -1,5 +1,5 @@
 //
-//  InformationsVerificator_Specs.swift
+//  DefaultInformationsVerificator_Specs.swift
 //  easysellingTests
 //
 //  Created by Nicolas Barbosa on 14/10/2021.
@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 @testable import easyselling
 
-class InformationsVerificator_Specs: XCTestCase {
+class DefaultInformationsVerificator_Specs: XCTestCase {
     
     func test_Verifies_informations_are_good() {
         givenVerificator()
@@ -71,12 +71,12 @@ class InformationsVerificator_Specs: XCTestCase {
     }
     
     private func whenVerifying(email: String, password: String, passwordConfirmation: String) {
-        verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation, onVerified: {
-            switch $0 {
-            case let .success(informations): self.accountInformations = informations
-            case let .failure(error): self.accountCreationError = error
-            }
-        })
+        let result = verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
+        switch result {
+        case let .success(informations): self.accountInformations = informations
+        case let .failure(error): self.accountCreationError = error
+        case .none: break
+        }
     }
     
     private func whenNoLongerInterested() {
@@ -95,31 +95,4 @@ class InformationsVerificator_Specs: XCTestCase {
     private var verificator: DefaultInformationsVerificator!
     private var accountCreationError: AccountCreationError!
     private var accountInformations: AccountCreationInformations!
-}
-
-
-class SucceedingInformationsVerificator: InformationsVerificator {
-    
-    init(informations: AccountCreationInformations) {
-        self.informations = informations
-    }
-    
-    private(set) var informations: AccountCreationInformations
-    
-    func verify(email: String, password: String, passwordConfirmation: String, onVerified: @escaping (Result<AccountCreationInformations, AccountCreationError>) -> Void) {
-        onVerified(.success(informations))
-    }
-}
-
-class FailingInformationsVerificator: InformationsVerificator {
-    
-    init(error: AccountCreationError) {
-        self.error = error
-    }
-    
-    private var error: AccountCreationError
-    
-    func verify(email: String, password: String, passwordConfirmation: String, onVerified: @escaping (Result<AccountCreationInformations, AccountCreationError>) -> Void) {
-        onVerified(.failure(error))
-    }
 }
