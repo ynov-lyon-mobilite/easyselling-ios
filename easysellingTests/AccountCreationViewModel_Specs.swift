@@ -128,25 +128,3 @@ class AccountCreationViewModel_Specs: XCTestCase {
     private var neverFinishingVerificator: NeverFinishingInformationsVerificator!
     private var verifiedInformations: AccountCreationInformations!
 }
-
-class SucceedingAccountCreator: AccountCreator {
-    
-    func createAccount(informations: AccountCreationInformations) -> VoidResult {
-        return Just(())
-            .setFailureType(to: HTTPError.self)
-            .eraseToAnyPublisher()
-    }
-}
-
-class FailingAccountCreator: AccountCreator {
-    
-    init(error: HTTPError) {
-        self.error = error
-    }
-    
-    private var error: HTTPError
-    
-    func createAccount(informations: AccountCreationInformations) -> VoidResult {
-        AnyPublisher(Fail(error: HTTPError.from(statusCode: error.rawValue)))
-    }
-}

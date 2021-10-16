@@ -24,6 +24,11 @@
 		03F05431271B392300434706 /* SucceedingInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05430271B392300434706 /* SucceedingInformationsVerificator.swift */; };
 		03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05432271B393100434706 /* FailingInformationsVerificator.swift */; };
 		03F05435271B393B00434706 /* NeverFinishingInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05434271B393B00434706 /* NeverFinishingInformationsVerificator.swift */; };
+		03F05439271B3E8300434706 /* SucceedingAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05438271B3E8300434706 /* SucceedingAPICaller.swift */; };
+		03F0543C271B3E9A00434706 /* FailingAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F0543B271B3E9A00434706 /* FailingAPICaller.swift */; };
+		03F0543F271B3F0A00434706 /* FakeRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F0543E271B3F0A00434706 /* FakeRequestGenerator.swift */; };
+		03F05441271B3F7700434706 /* SuccedingAccountCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05440271B3F7700434706 /* SuccedingAccountCreator.swift */; };
+		03F05443271B3F9D00434706 /* FailingAccountCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05442271B3F9D00434706 /* FailingAccountCreator.swift */; };
 		03F2097B2716E2B100E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F2097D2716E2B100E10F6C /* localizable.strings */; };
 		03F209802716E2CB00E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F209822716E2CB00E10F6C /* localizable.strings */; };
 		03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209842716EEC900E10F6C /* Strings+Generated.swift */; };
@@ -34,7 +39,7 @@
 		87780BA327172F5A0035AB13 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA227172F5A0035AB13 /* URLSession+Extensions.swift */; };
 		87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA427172F610035AB13 /* HTTPMethod.swift */; };
 		87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */; };
-		87780BA927172F780035AB13 /* RequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA727172F780035AB13 /* RequestGenerator_Specs.swift */; };
+		87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA727172F780035AB13 /* DefaultRequestGenerator_Specs.swift */; };
 		87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */; };
 		87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BAC271730100035AB13 /* DefaultAPICaller.swift */; };
 		D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00736572712D93800ED0F2C /* AuthenticationServices.framework */; };
@@ -67,6 +72,11 @@
 		03F05430271B392300434706 /* SucceedingInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingInformationsVerificator.swift; sourceTree = "<group>"; };
 		03F05432271B393100434706 /* FailingInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingInformationsVerificator.swift; sourceTree = "<group>"; };
 		03F05434271B393B00434706 /* NeverFinishingInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeverFinishingInformationsVerificator.swift; sourceTree = "<group>"; };
+		03F05438271B3E8300434706 /* SucceedingAPICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingAPICaller.swift; sourceTree = "<group>"; };
+		03F0543B271B3E9A00434706 /* FailingAPICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingAPICaller.swift; sourceTree = "<group>"; };
+		03F0543E271B3F0A00434706 /* FakeRequestGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRequestGenerator.swift; sourceTree = "<group>"; };
+		03F05440271B3F7700434706 /* SuccedingAccountCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccedingAccountCreator.swift; sourceTree = "<group>"; };
+		03F05442271B3F9D00434706 /* FailingAccountCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingAccountCreator.swift; sourceTree = "<group>"; };
 		03F2097C2716E2B100E10F6C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/localizable.strings; sourceTree = "<group>"; };
 		03F209812716E2CB00E10F6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/localizable.strings; sourceTree = "<group>"; };
 		03F209842716EEC900E10F6C /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
@@ -79,7 +89,7 @@
 		87780BA227172F5A0035AB13 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		87780BA427172F610035AB13 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPICaller_Specs.swift; sourceTree = "<group>"; };
-		87780BA727172F780035AB13 /* RequestGenerator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestGenerator_Specs.swift; sourceTree = "<group>"; };
+		87780BA727172F780035AB13 /* DefaultRequestGenerator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator_Specs.swift; sourceTree = "<group>"; };
 		87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator.swift; sourceTree = "<group>"; };
 		87780BAC271730100035AB13 /* DefaultAPICaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPICaller.swift; sourceTree = "<group>"; };
 		D00736552712D93800ED0F2C /* easyselling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = easyselling.entitlements; sourceTree = "<group>"; };
@@ -143,6 +153,35 @@
 				03F05434271B393B00434706 /* NeverFinishingInformationsVerificator.swift */,
 			);
 			path = DefaultInformationVerificator_Specs;
+			sourceTree = "<group>";
+		};
+		03F05436271B3E3900434706 /* DefaultAccountCreator_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */,
+				03F05440271B3F7700434706 /* SuccedingAccountCreator.swift */,
+				03F05442271B3F9D00434706 /* FailingAccountCreator.swift */,
+			);
+			path = DefaultAccountCreator_Specs;
+			sourceTree = "<group>";
+		};
+		03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */,
+				03F05438271B3E8300434706 /* SucceedingAPICaller.swift */,
+				03F0543B271B3E9A00434706 /* FailingAPICaller.swift */,
+			);
+			path = DefaultAPICaller_Specs;
+			sourceTree = "<group>";
+		};
+		03F0543D271B3EFB00434706 /* DefaultRequestGenerator_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				87780BA727172F780035AB13 /* DefaultRequestGenerator_Specs.swift */,
+				03F0543E271B3F0A00434706 /* FakeRequestGenerator.swift */,
+			);
+			path = DefaultRequestGenerator_Specs;
 			sourceTree = "<group>";
 		};
 		03F209762716E0AE00E10F6C /* Additions */ = {
@@ -217,12 +256,12 @@
 		873552C2270D847B00F2DDBD /* easysellingTests */ = {
 			isa = PBXGroup;
 			children = (
-				87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */,
-				87780BA727172F780035AB13 /* RequestGenerator_Specs.swift */,
+				03F05436271B3E3900434706 /* DefaultAccountCreator_Specs */,
+				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
+				03F0543D271B3EFB00434706 /* DefaultRequestGenerator_Specs */,
 				0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */,
 				0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */,
 				03F0542F271B38EB00434706 /* DefaultInformationVerificator_Specs */,
-				035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */,
 			);
 			path = easysellingTests;
 			sourceTree = "<group>";
@@ -456,15 +495,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03F05441271B3F7700434706 /* SuccedingAccountCreator.swift in Sources */,
+				03F0543F271B3F0A00434706 /* FakeRequestGenerator.swift in Sources */,
+				03F0543C271B3E9A00434706 /* FailingAPICaller.swift in Sources */,
 				03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */,
 				0382E29A27175FB700EB570E /* AccountCreationScenario_Specs.swift in Sources */,
-				87780BA927172F780035AB13 /* RequestGenerator_Specs.swift in Sources */,
+				87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */,
 				87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */,
 				035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */,
 				03F05435271B393B00434706 /* NeverFinishingInformationsVerificator.swift in Sources */,
 				0382E2AA2718186100EB570E /* DefaultInformationsVerificator_Specs.swift in Sources */,
 				0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */,
+				03F05443271B3F9D00434706 /* FailingAccountCreator.swift in Sources */,
 				03F05431271B392300434706 /* SucceedingInformationsVerificator.swift in Sources */,
+				03F05439271B3E8300434706 /* SucceedingAPICaller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

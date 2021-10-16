@@ -8,7 +8,7 @@
 import XCTest
 @testable import easyselling
 
-class RequestGenerator_Specs: XCTestCase {
+class DefaultRequestGenerator_Specs: XCTestCase {
 
     func test_Generates_Request() {
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
