@@ -13,13 +13,16 @@ struct OnBoardingFirstPage: View {
     
     var body: some View {
         Button("Go to second page") {
-            viewModel.navigateToScreen2 { }
+            
         }
     }
 }
 
-struct OnBoardingFirstPage_Previews: PreviewProvider {
-    static var previews: some View {
-        OnBoardingFirstPage(viewModel: OnBoardingViewModel())
-    }
-}
+//struct OnBoardingFirstPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        OnBoardingFirstPage(viewModel: OnBoardingViewModel(features: [
+//            Feature(title: "PageOne"),
+//            Feature(title: "PageTwo")
+//        ]))
+//    }
+//}

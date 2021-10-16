@@ -37,11 +37,14 @@ class DefaultOnBoardingNavigator: OnBoardingNavigator {
     private var navigationController: UINavigationController
 
     func begin() {
-        let viewModel = OnBoardingViewModel()
-        let onBoardingFirstPage = OnBoardingFirstPage(viewModel: viewModel)
-        let view: UIViewController = UIHostingController(rootView: onBoardingFirstPage)
-        navigationController.pushViewController(view,
-                                                animated: true)
+        do {
+            let viewModel = try OnBoardingViewModel(features: [Feature(title: "PageOne"), Feature(title: "PageTwo")])
+            let onBoardingFirstPage = OnBoardingFirstPage(viewModel: viewModel)
+            let view: UIViewController = UIHostingController(rootView: onBoardingFirstPage)
+            navigationController.pushViewController(view,
+                                                    animated: true)
+        } catch {
+           print("Enculé")
+        }
     }
-
 }

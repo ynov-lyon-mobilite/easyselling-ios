@@ -41,7 +41,6 @@ class SpyOnBoardingNavigator: OnBoardingNavigator {
     func begin() {
         history.append(.features)
     }
-
 }
 
 enum screens {
