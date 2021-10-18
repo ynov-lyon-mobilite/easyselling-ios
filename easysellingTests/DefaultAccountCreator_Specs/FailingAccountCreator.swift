@@ -17,7 +17,7 @@ class FailingAccountCreator: AccountCreator {
     
     private var error: HTTPError
     
-    func createAccount(informations: AccountCreationInformations) -> VoidResult {
-        AnyPublisher(Fail(error: HTTPError.from(statusCode: error.rawValue)))
+    func createAccount(informations: AccountCreationInformations) async throws {
+        throw HTTPError.from(statusCode: error.rawValue)
     }
 }

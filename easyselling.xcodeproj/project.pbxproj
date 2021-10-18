@@ -35,8 +35,7 @@
 		03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209852716EECA00E10F6C /* XCAssets+Generated.swift */; };
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
-		87780BA127172F520035AB13 /* UrlSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA027172F520035AB13 /* UrlSessionProtocol.swift */; };
-		87780BA327172F5A0035AB13 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA227172F5A0035AB13 /* URLSession+Extensions.swift */; };
+		87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA027172F520035AB13 /* URLSessionProtocol.swift */; };
 		87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA427172F610035AB13 /* HTTPMethod.swift */; };
 		87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */; };
 		87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA727172F780035AB13 /* DefaultRequestGenerator_Specs.swift */; };
@@ -85,8 +84,7 @@
 		873552B6270D847B00F2DDBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		873552B9270D847B00F2DDBD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		873552BF270D847B00F2DDBD /* easysellingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = easysellingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		87780BA027172F520035AB13 /* UrlSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlSessionProtocol.swift; sourceTree = "<group>"; };
-		87780BA227172F5A0035AB13 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
+		87780BA027172F520035AB13 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		87780BA427172F610035AB13 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPICaller_Specs.swift; sourceTree = "<group>"; };
 		87780BA727172F780035AB13 /* DefaultRequestGenerator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator_Specs.swift; sourceTree = "<group>"; };
@@ -271,7 +269,6 @@
 			children = (
 				0382E29B2717638400EB570E /* TypeAlias */,
 				87780B9D27172F250035AB13 /* Enums */,
-				87780B9E27172F2C0035AB13 /* Extensions */,
 				87780B9F27172F380035AB13 /* Protocols */,
 			);
 			path = Additions;
@@ -287,18 +284,10 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		87780B9E27172F2C0035AB13 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				87780BA227172F5A0035AB13 /* URLSession+Extensions.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		87780B9F27172F380035AB13 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				87780BA027172F520035AB13 /* UrlSessionProtocol.swift */,
+				87780BA027172F520035AB13 /* URLSessionProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -478,7 +467,6 @@
 				87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */,
 				035E860C2718A3AB00684ED0 /* HTTPError.swift in Sources */,
 				035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */,
-				87780BA327172F5A0035AB13 /* URLSession+Extensions.swift in Sources */,
 				0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */,
 				0382E2AC2718190B00EB570E /* DefaultInformationsVerificator.swift in Sources */,
 				87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */,
@@ -486,7 +474,7 @@
 				0382E29F2717647500EB570E /* AccountCreationScenario.swift in Sources */,
 				87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */,
 				03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */,
-				87780BA127172F520035AB13 /* UrlSessionProtocol.swift in Sources */,
+				87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */,
 				035E860A2718982A00684ED0 /* HTTPEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -675,7 +663,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -707,7 +695,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -732,7 +720,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 94FLWD5X32;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -759,7 +747,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 94FLWD5X32;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

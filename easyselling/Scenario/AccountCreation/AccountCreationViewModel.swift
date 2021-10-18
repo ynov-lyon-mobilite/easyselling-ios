@@ -31,24 +31,22 @@ class AccountCreationViewModel: ObservableObject {
         self.state = .loading
         
         switch verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation) {
-        case let .success(informations): self.createAccount(with: informations)
+        case let .success(informations): Task.init { await self.createAccount(with: informations) }
         case let .failure(error): self.setError(with: error)
             self.state = .initial
         case .none: break
         }
     }
     
-    private func createAccount(with informations: AccountCreationInformations) {
-        accountCreator.createAccount(informations: informations).sink(receiveCompletion: {
-            if case let .failure(error) = $0 {
-                self.state = .initial
-                self.alert = error
-                self.showAlert = true
-            }
-        }, receiveValue: {
+    private func createAccount(with informations: AccountCreationInformations) async {
+        do {
+            try await accountCreator.createAccount(informations: informations)
             self.state = .accountCreated
-        })
-            .store(in: &cancellables)
+        } catch(let error) {
+            self.state = .initial
+            self.alert = (error as? HTTPError) ?? HTTPError.internalServerError
+            self.showAlert = true
+        }
     }
     
     private func setError(with error: AccountCreationError) {

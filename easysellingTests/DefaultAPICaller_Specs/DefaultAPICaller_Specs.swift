@@ -59,19 +59,16 @@ class DefaultAPICaller_Specs: XCTestCase {
     private func whenMakingAPICall(withUrlRequest request: URLRequest) {
         let expectation = expectation(description: "Should finish request")
         
-        networkService.call(request)
-            .sink {
-                switch $0 {
-                case .failure(let error):
-                    expectation.fulfill()
-                    self.requestError = error
-                case .finished: break
-                }
-            } receiveValue: {
+        Task.init {
+            do {
+                try await networkService.call(request)
+
                 expectation.fulfill()
-                self.requestResult = $0
+            } catch (let error) {
+                expectation.fulfill()
+                self.requestError = (error as! HTTPError)
             }
-            .store(in: &cancellables)
+        }
         
         wait(for: [expectation], timeout: 1)
     }
@@ -79,19 +76,17 @@ class DefaultAPICaller_Specs: XCTestCase {
     private func whenMakingAPICall<T: Decodable>(withUrlRequest request: URLRequest, decodeTo: T.Type) {
         let expectation = expectation(description: "Should finish request")
         
-        networkService.call(request, decodeType: T.self)
-            .sink {
-                switch $0 {
-                case .failure(let error):
-                    expectation.fulfill()
-                    self.requestError = error
-                case .finished: break
-                }
-            } receiveValue: {
+        Task.init {
+            do {
+                let decodedResult = try await networkService.call(request, decodeType: T.self)
+
                 expectation.fulfill()
-                self.requestResult = $0
+                self.requestResult = decodedResult
+            } catch (let error) {
+                expectation.fulfill()
+                self.requestError = (error as! HTTPError)
             }
-            .store(in: &cancellables)
+        }
 
         wait(for: [expectation], timeout: 3)
     }
@@ -102,7 +97,6 @@ class DefaultAPICaller_Specs: XCTestCase {
     }
 
     private func thenAPICallIsSucceding() {
-        XCTAssert(self.requestResult is Void)
         XCTAssertNil(self.requestError)
     }
 
@@ -146,7 +140,8 @@ struct TestDecodable: Decodable, Equatable {
     let argument: String
 }
 
-class FakeUrlSession: UrlSessionProtocol {
+class FakeUrlSession: URLSessionProtocol {
+    
     private let data: Data
     private let response: URLResponse
 
@@ -155,9 +150,7 @@ class FakeUrlSession: UrlSessionProtocol {
         self.response = response
     }
 
-    func dataTaskAnyPublisher(for request: URLRequest) -> AnyPublisherType {
-        return Just((data: data, response: response))
-            .setFailureType(to: URLError.self)
-            .eraseToAnyPublisher()
+    func data(for request: URLRequest, delegate: URLSessionTaskDelegate? = nil) async throws -> (Data, URLResponse) {
+        return (data, response)
     }
 }

@@ -44,17 +44,17 @@ class DefaultAccountCreator_Specs: XCTestCase {
     }
     
     private func whenCreatingAccount() {
-        accountCreator.createAccount(informations: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
-            .sink {
-                if case let .failure(error) = $0 {
-                    self.expectation.fulfill()
-                    self.error = error
-                }
-            } receiveValue: {
+        Task.init {
+            do {
+                try await accountCreator.createAccount(informations: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
                 self.expectation.fulfill()
                 self.isRequestSucceed = true
+            } catch (let error) {
+                self.expectation.fulfill()
+                self.error = (error as! HTTPError)
             }
-            .store(in: &cancellables)
+        }
+
         wait(for: [expectation], timeout: 3)
     }
     

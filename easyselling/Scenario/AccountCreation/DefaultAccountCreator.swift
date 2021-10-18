@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol AccountCreator {
-    func createAccount(informations: AccountCreationInformations) -> VoidResult
+    func createAccount(informations: AccountCreationInformations) async throws 
 }
 
 class DefaultAccountCreator: AccountCreator {
@@ -22,11 +22,12 @@ class DefaultAccountCreator: AccountCreator {
     private var requestGenerator: RequestGenerator
     private var apiCaller: APICaller
     
-    func createAccount(informations: AccountCreationInformations) -> VoidResult {
+    func createAccount(informations: AccountCreationInformations) async throws {
         let urlRequest = requestGenerator.generateRequest(endpoint: .users, method: .POST, body: informations, headers: [:])
         guard let urlRequest = urlRequest else {
-            return AnyPublisher(Empty())
+            throw HTTPError.internalServerError
         }
-        return apiCaller.call(urlRequest)
+        
+        try await apiCaller.call(urlRequest)
     }
 }

@@ -11,15 +11,9 @@ import Combine
 
 class SucceedingAPICaller: APICaller {
     
-    func call<T>(_ urlRequest: URLRequest, decodeType: T.Type) -> DecodedResult<T> where T : Decodable {
-        return Just("" as! T)
-            .setFailureType(to: HTTPError.self)
-            .eraseToAnyPublisher()
+    func call<T: Decodable>(_ urlRequest: URLRequest, decodeType: T.Type) -> T {
+        return "" as! T
     }
     
-    func call(_ urlRequest: URLRequest) -> VoidResult {
-        return Just(())
-            .setFailureType(to: HTTPError.self)
-            .eraseToAnyPublisher()
-    }
+    func call(_ urlRequest: URLRequest) {}
 }
