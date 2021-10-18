@@ -31,6 +31,12 @@
 		03F209802716E2CB00E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F209822716E2CB00E10F6C /* localizable.strings */; };
 		03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209842716EEC900E10F6C /* Strings+Generated.swift */; };
 		03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209852716EECA00E10F6C /* XCAssets+Generated.swift */; };
+		2C4486B4271DF7E10021122F /* VehicleCreationScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4486B3271DF7E10021122F /* VehicleCreationScenario.swift */; };
+		2CAE03C52716DD14008D7A68 /* VehicleCreationViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE03C42716DD14008D7A68 /* VehicleCreationViewModel_Specs.swift */; };
+		2CAE03CD271709A1008D7A68 /* VehicleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE03CC271709A1008D7A68 /* VehicleCreator.swift */; };
+		2CAE03D82717118D008D7A68 /* VehicleCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */; };
+		2CD4B8C0271C625C002598A4 /* VehicleInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8BF271C625C002598A4 /* VehicleInformationsVerificator.swift */; };
+		2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */; };
 		8705B9A027207838004132CF /* UserAuthenticationViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */; };
 		8705B9A227207A39004132CF /* SucceedingUserAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */; };
 		8705B9A427207A8D004132CF /* UserAuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A327207A8D004132CF /* UserAuthenticationViewModel.swift */; };
@@ -90,6 +96,17 @@
 		03F209812716E2CB00E10F6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/localizable.strings; sourceTree = "<group>"; };
 		03F209842716EEC900E10F6C /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		03F209852716EECA00E10F6C /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
+		2C4486B3271DF7E10021122F /* VehicleCreationScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationScenario.swift; sourceTree = "<group>"; };
+		2CAE03C42716DD14008D7A68 /* VehicleCreationViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationViewModel_Specs.swift; sourceTree = "<group>"; };
+		2CAE03CC271709A1008D7A68 /* VehicleCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreator.swift; sourceTree = "<group>"; };
+		2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationView.swift; sourceTree = "<group>"; };
+		2CD4B8BF271C625C002598A4 /* VehicleInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInformationsVerificator.swift; sourceTree = "<group>"; };
+		2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationViewModel.swift; sourceTree = "<group>"; };
+		871A77AB270E3A5100E67124 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		871A77AF270E3A9300E67124 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		871A77B1270E3CE500E67124 /* RequestGenerator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestGenerator_Specs.swift; sourceTree = "<group>"; };
+		87342E472714B0A800FD1A47 /* DefaultRequestGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator.swift; sourceTree = "<group>"; };
+		87342E492714B1E800FD1A47 /* NetworkService_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService_Specs.swift; sourceTree = "<group>"; };
 		8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewModel_Specs.swift; sourceTree = "<group>"; };
 		8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingUserAuthenticator.swift; sourceTree = "<group>"; };
 		8705B9A327207A8D004132CF /* UserAuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewModel.swift; sourceTree = "<group>"; };
@@ -242,37 +259,59 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		2CAE03D127170F82008D7A68 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				2CAE03C82716E143008D7A68 /* Vehicle.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		2CAE03D227170F98008D7A68 /* Vehicle */ = {
 			isa = PBXGroup;
 			children = (
-				2CAE03C42716DD14008D7A68 /* createVehicle_Specs.swift */,
+				2CAE03C42716DD14008D7A68 /* VehicleCreationViewModel_Specs.swift */,
 			);
 			path = Vehicle;
 			sourceTree = "<group>";
 		};
-		2CAE03D327170FC0008D7A68 /* Utils */ = {
+		2CD4B8BD271C5F7A002598A4 /* Scenario */ = {
 			isa = PBXGroup;
 			children = (
-				2CAE03CE27170A67008D7A68 /* HTTPMessage.swift */,
+				2CD4B8BE271C5F82002598A4 /* VehicleCreation */,
 			);
-			path = Utils;
+			path = Scenario;
 			sourceTree = "<group>";
 		};
-		2CAE03D427171136008D7A68 /* Views */ = {
+		2CD4B8BE271C5F82002598A4 /* VehicleCreation */ = {
 			isa = PBXGroup;
 			children = (
-				873552B4270D847700F2DDBD /* ContentView.swift */,
+				2CAE03CC271709A1008D7A68 /* VehicleCreator.swift */,
 				2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */,
+				2CD4B8BF271C625C002598A4 /* VehicleInformationsVerificator.swift */,
+				2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */,
+				2C4486B3271DF7E10021122F /* VehicleCreationScenario.swift */,
 			);
-			path = Views;
+			path = VehicleCreation;
+			sourceTree = "<group>";
+		};
+		871A77AA270E3A4200E67124 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				871A77AB270E3A5100E67124 /* NetworkService.swift */,
+				87342E472714B0A800FD1A47 /* DefaultRequestGenerator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		871A77AD270E3A8200E67124 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				87780B922716EA400035AB13 /* Extensions */,
+				87780B8F2716E9D80035AB13 /* Protocols */,
+				871A77AE270E3A8700E67124 /* Enums */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		871A77AE270E3A8700E67124 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				871A77AF270E3A9300E67124 /* HTTPMethod.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		873552A6270D847700F2DDBD = {
@@ -297,6 +336,7 @@
 		873552B1270D847700F2DDBD /* easyselling */ = {
 			isa = PBXGroup;
 			children = (
+				2CD4B8BD271C5F7A002598A4 /* Scenario */,
 				87780BAA27172FB10035AB13 /* Services */,
 				87780B9C27172F1C0035AB13 /* Additions */,
 				03F209772716E1C500E10F6C /* Application */,
@@ -329,6 +369,7 @@
 				8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */,
 				8705B9B227208516004132CF /* TokenManager_Specs.swift */,
 				03F0542F271B38EB00434706 /* DefaultInformationVerificator_Specs */,
+				2CAE03D227170F98008D7A68 /* Vehicle */,
 			);
 			path = easysellingTests;
 			sourceTree = "<group>";
@@ -574,6 +615,9 @@
 				035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */,
 				87DC1D00271F60B9002DC193 /* AccountCreationView.swift in Sources */,
 				0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */,
+				2CAE03CD271709A1008D7A68 /* VehicleCreator.swift in Sources */,
+				2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */,
+				2CAE03D82717118D008D7A68 /* VehicleCreationView.swift in Sources */,
 				87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */,
 				035E860C2718A3AB00684ED0 /* APICallerError.swift in Sources */,
 				035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */,
@@ -593,6 +637,8 @@
 				87DC1D0C271FDF6B002DC193 /* Token.swift in Sources */,
 				87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */,
 				035E860A2718982A00684ED0 /* HTTPEndpoint.swift in Sources */,
+				2CD4B8C0271C625C002598A4 /* VehicleInformationsVerificator.swift in Sources */,
+				2C4486B4271DF7E10021122F /* VehicleCreationScenario.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +664,7 @@
 				03F05443271B3F9D00434706 /* FailingAccountCreator.swift in Sources */,
 				03F05431271B392300434706 /* SucceedingInformationsVerificator.swift in Sources */,
 				03F05439271B3E8300434706 /* SucceedingAPICaller.swift in Sources */,
+				2CAE03C52716DD14008D7A68 /* VehicleCreationViewModel_Specs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

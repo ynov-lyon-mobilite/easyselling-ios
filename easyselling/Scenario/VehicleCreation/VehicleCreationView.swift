@@ -11,9 +11,12 @@ struct VehicleCreationView: View {
     @State private var brand: String = ""
     @State private var model: String = ""
     @State private var immatriculation: String = ""
-    @State private var age: String = ""
-    @State private var type: String = ""
+    @State private var licenceNumber: String = ""
+    @State private var year: String = ""
+    @State private var type: VehicleType = .car
     
+    var viewModel: VehicleCreationViewModel
+
     var body: some View {
         VStack {
             VStack {
@@ -33,13 +36,16 @@ struct VehicleCreationView: View {
             TextField("Immatriculation", text: $immatriculation)
                 .padding(.top)
             
+            TextField("Numéro de licence", text: $licenceNumber)
+                .padding(.top)
+            
             HStack(alignment: .lastTextBaseline) {
                 Picker("Type", selection: $type) {
                     Text("Voiture").tag(VehicleType.car)
                     Text("Moto").tag(VehicleType.motorcycle)
                 }
                 Spacer(minLength: 50)
-                TextField("Age", text: $age)
+                TextField("Année", text: $year)
                     .padding(.top)
                     .keyboardType(.numberPad)
             }
@@ -50,20 +56,19 @@ struct VehicleCreationView: View {
                 }
             }
             .padding(.top)
-            
-            
             Spacer()
         }
         .padding()
     }
     
     func createNewVehicle() {
-        
+        let vehicle =  VehicleInformations(licenceNumber: licenceNumber, brand: brand, immatriculation: immatriculation, type: type, year: Int(year) ?? 0, model: model)
+        viewModel.createVehicle(with: vehicle)
     }
 }
 
 struct VehicleCreationView_Previews: PreviewProvider {
     static var previews: some View {
-        VehicleCreationView()
+        VehicleCreationView(viewModel: VehicleCreationViewModel())
     }
 }
