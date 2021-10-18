@@ -102,10 +102,7 @@
 		2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationView.swift; sourceTree = "<group>"; };
 		2CD4B8BF271C625C002598A4 /* VehicleInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInformationsVerificator.swift; sourceTree = "<group>"; };
 		2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationViewModel.swift; sourceTree = "<group>"; };
-		871A77AB270E3A5100E67124 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		871A77AF270E3A9300E67124 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		871A77B1270E3CE500E67124 /* RequestGenerator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestGenerator_Specs.swift; sourceTree = "<group>"; };
-		87342E472714B0A800FD1A47 /* DefaultRequestGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator.swift; sourceTree = "<group>"; };
 		87342E492714B1E800FD1A47 /* NetworkService_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService_Specs.swift; sourceTree = "<group>"; };
 		8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewModel_Specs.swift; sourceTree = "<group>"; };
 		8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingUserAuthenticator.swift; sourceTree = "<group>"; };
@@ -285,33 +282,6 @@
 				2C4486B3271DF7E10021122F /* VehicleCreationScenario.swift */,
 			);
 			path = VehicleCreation;
-			sourceTree = "<group>";
-		};
-		871A77AA270E3A4200E67124 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				871A77AB270E3A5100E67124 /* NetworkService.swift */,
-				87342E472714B0A800FD1A47 /* DefaultRequestGenerator.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		871A77AD270E3A8200E67124 /* Additions */ = {
-			isa = PBXGroup;
-			children = (
-				87780B922716EA400035AB13 /* Extensions */,
-				87780B8F2716E9D80035AB13 /* Protocols */,
-				871A77AE270E3A8700E67124 /* Enums */,
-			);
-			path = Additions;
-			sourceTree = "<group>";
-		};
-		871A77AE270E3A8700E67124 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				871A77AF270E3A9300E67124 /* HTTPMethod.swift */,
-			);
-			path = Enums;
 			sourceTree = "<group>";
 		};
 		873552A6270D847700F2DDBD = {
