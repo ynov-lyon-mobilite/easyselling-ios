@@ -10,7 +10,10 @@ import Foundation
 final class UserAuthenticationViewModel: ObservableObject {
     private let tokenManager: TokenManager
     private let userAuthenticator: UserAuthenticatior
-//    @Published var token: Token?
+
+    @Published var email: String = ""
+    @Published var password: String = ""
+
     @Published var error: APICallerError?
     
     init(userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(), tokenManager: TokenManager = .shared) {
