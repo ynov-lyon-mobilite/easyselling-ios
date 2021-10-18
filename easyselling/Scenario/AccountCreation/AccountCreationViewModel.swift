@@ -27,11 +27,11 @@ class AccountCreationViewModel: ObservableObject {
     @Published var alert: APICallerError?
     @Published var showAlert: Bool = false
     
-    func createAccount(email: String, password: String, passwordConfirmation: String) {
+    func createAccount(email: String, password: String, passwordConfirmation: String) async {
         self.state = .loading
         
         switch verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation) {
-        case let .success(informations): Task.init { await self.createAccount(with: informations) }
+        case let .success(informations): await self.createAccount(with: informations)
         case let .failure(error): self.setError(with: error)
             self.state = .initial
         case .none: break

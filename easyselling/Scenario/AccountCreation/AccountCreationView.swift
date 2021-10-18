@@ -38,7 +38,9 @@ struct AccountCreationView: View {
                     }
                 
                 Button(L10n.SignUp.createAccountButton) {
-                    viewModel.createAccount(email: viewModel.email, password: viewModel.password, passwordConfirmation: viewModel.passwordConfirmation)
+                    Task {
+                        await viewModel.createAccount(email: viewModel.email, password: viewModel.password, passwordConfirmation: viewModel.passwordConfirmation)
+                    }
                 }
                 .foregroundColor(Color.white)
                 .padding()

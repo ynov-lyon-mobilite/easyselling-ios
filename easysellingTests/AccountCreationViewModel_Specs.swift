@@ -104,7 +104,12 @@ class AccountCreationViewModel_Specs: XCTestCase {
     }
 
     private func whenCreatingAccount(email: String, password: String, passwordConfirmation: String) {
-        viewModel.createAccount(email: email, password: password, passwordConfirmation: passwordConfirmation)
+        Task {
+            await viewModel.createAccount(email: email, password: password, passwordConfirmation: passwordConfirmation)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
     }
     
     private func whenNoLongerInterested() {
@@ -127,4 +132,5 @@ class AccountCreationViewModel_Specs: XCTestCase {
     private var succeedingVerificator: SucceedingInformationsVerificator!
     private var neverFinishingVerificator: NeverFinishingInformationsVerificator!
     private var verifiedInformations: AccountCreationInformations!
+    private lazy var expectation = expectation(description: "Should finish request")
 }

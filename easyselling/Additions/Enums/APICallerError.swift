@@ -9,6 +9,7 @@ import Foundation
 
 enum APICallerError: Int, LocalizedError, Equatable {
     //  Application errors
+    case unknownError = 000
     case decodeError = 001
     case requestGenerationError = 002
     
@@ -39,6 +40,6 @@ enum APICallerError: Int, LocalizedError, Equatable {
     }
     
     static func from(statusCode: Int) -> Self {
-        return Self.init(rawValue: statusCode) ?? APICallerError.internalServerError
+        return .init(rawValue: statusCode) ?? .unknownError
     }
 }

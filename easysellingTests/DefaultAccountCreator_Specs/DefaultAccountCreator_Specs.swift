@@ -44,7 +44,7 @@ class DefaultAccountCreator_Specs: XCTestCase {
     }
     
     private func whenCreatingAccount() {
-        Task.init {
+        Task {
             do {
                 try await accountCreator.createAccount(informations: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
                 self.expectation.fulfill()

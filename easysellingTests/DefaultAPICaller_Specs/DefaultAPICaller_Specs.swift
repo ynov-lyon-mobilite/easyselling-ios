@@ -59,7 +59,7 @@ class DefaultAPICaller_Specs: XCTestCase {
     private func whenMakingAPICall(withUrlRequest request: URLRequest) {
         let expectation = expectation(description: "Should finish request")
         
-        Task.init {
+        Task {
             do {
                 try await networkService.call(request)
 
@@ -76,7 +76,7 @@ class DefaultAPICaller_Specs: XCTestCase {
     private func whenMakingAPICall<T: Decodable>(withUrlRequest request: URLRequest, decodeTo: T.Type) {
         let expectation = expectation(description: "Should finish request")
         
-        Task.init {
+        Task {
             do {
                 self.requestResult = try await networkService.call(request, decodeType: T.self)
                 expectation.fulfill()
