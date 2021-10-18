@@ -33,26 +33,6 @@ class DefaultAccountCreator_Specs: XCTestCase {
         XCTAssertTrue(isRequestSucceed)
     }
     
-//    func test_Creates_account_failed_with_error() {
-//        let requestGenerator = FakeRequestGenerator()
-//        let apiCaller = SucceedingAPICaller()
-//        let accountCreator = DefaultAccountCreator(requestGenerator: requestGenerator, apiCaller: apiCaller)
-//        
-//        accountCreator.createAccount(informations: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
-//            .sink {
-//                if case let .failure(error) = $0 {
-//                    self.expectation.fulfill()
-//                    self.error = error
-//                }
-//            } receiveValue: {
-//            }
-//            .store(in: &cancellables)
-//        wait(for: [expectation], timeout: 3)
-//        
-//        XCTAssertEqual(404, error.rawValue)
-//        XCTAssertEqual("Impossible de trouver ce que vous cherchez", error.errorDescription)
-//    }
-    
     private var cancellables = Set<AnyCancellable>()
     private lazy var expectation = expectation(description: "Should finish request")
     private var isRequestSucceed: Bool!
