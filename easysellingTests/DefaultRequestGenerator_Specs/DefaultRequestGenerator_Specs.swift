@@ -16,9 +16,7 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         request.httpMethod = HTTPMethod.POST.rawValue
 
         givenService()
-        whenGenerateRequest(
-            endpoint: .users,
-            method: .POST, headers: [:])
+        whenGenerateRequest(endpoint: .users, method: .POST, headers: [:])
         thenRequest(is: request)
     }
 
@@ -30,33 +28,27 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         request.addValue("With another value", forHTTPHeaderField: "sedond-header")
 
         givenService()
-        whenGenerateRequest(endpoint: .users,
-                            method: .POST,
-                            headers: ["test-header": "With tested value",
-                                      "sedond-header": "With another value"])
+        whenGenerateRequest(endpoint: .users, method: .POST,
+                            headers: ["test-header": "With tested value", "sedond-header": "With another value"])
         thenRequest(is: request)
     }
 
     func test_Generates_Request_With_Body() {
         let body = "BODY"
 
-        expectedRequest = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
-        expectedRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        expectedRequest.httpMethod = HTTPMethod.POST.rawValue
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = HTTPMethod.POST.rawValue
+        request.httpBody = try! JSONEncoder().encode(body)
 
         givenService()
-        whenGenerateRequestWithBody(
-            endpoint: .users,
-            method: .POST,
-                                    body: body, headers: [:])
-        thenRequestWithBody(is: expectedRequest)
+        whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body, headers: [:])
+        thenRequestWithBody(is: request)
     }
 
     func test_Deinit_when_no_longer_interested() {
         givenService()
-        whenGenerateRequest(
-            endpoint: .users,
-            method: .POST, headers: [:])
+        whenGenerateRequest(endpoint: .users, method: .POST, headers: [:])
         whenNoLongerInterested()
 
         XCTAssertNil(requestGenerator)
@@ -82,7 +74,10 @@ class DefaultRequestGenerator_Specs: XCTestCase {
     }
 
     private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) {
-        request = requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers)
+        if let request = try? requestGenerator
+            .generateRequest(endpoint: endpoint, method: method, headers: headers) {
+            self.request = request
+        }
     }
 
     private func whenGenerateRequestWithBody<T: Encodable>(
@@ -90,10 +85,11 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         method: HTTPMethod,
         body: T,
         headers: [String: String]) {
-        request = requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers)
-
-        expectedRequest.httpBody = request.httpBody
-    }
+            if let request = try? requestGenerator
+                .generateRequest(endpoint: endpoint, method: method, body: body, headers: headers) {
+                self.request = request
+            }
+        }
 
     private func whenNoLongerInterested() {
         requestGenerator = nil
@@ -118,5 +114,4 @@ class DefaultRequestGenerator_Specs: XCTestCase {
 
     private var requestGenerator: DefaultRequestGenerator!
     private var request: URLRequest!
-    private var expectedRequest: URLRequest!
 }

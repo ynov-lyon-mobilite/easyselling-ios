@@ -37,7 +37,7 @@ final class DefaultAPICaller: APICaller {
             }
             
             guard let decodedResult = try? jsonDecoder.decode(T.self, from: data) else {
-                throw HTTPError.internalServerError
+                throw HTTPError.decodeError
             }
             
             return decodedResult

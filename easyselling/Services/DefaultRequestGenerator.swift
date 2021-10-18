@@ -9,8 +9,8 @@ import Foundation
 
 protocol RequestGenerator {
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod,
-                                       body: T?, headers: [String: String]) -> URLRequest?
-    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) -> URLRequest?
+                                       body: T?, headers: [String: String]) throws -> URLRequest
+    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) throws -> URLRequest
 }
 
 class DefaultRequestGenerator: RequestGenerator {
@@ -18,20 +18,20 @@ class DefaultRequestGenerator: RequestGenerator {
     private var fixHeaders: [String: String] = ["Content-Type": "application/json"]
 
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod = .GET,
-                                       body: T?, headers: [String: String] = [:]) -> URLRequest? {
-        guard var request = generateRequest(endpoint: endpoint, method: method, headers: headers),
-              let encodedBody = try? jsonEncoder.encode(body) else {
-            return nil
+                                       body: T?, headers: [String: String]) throws -> URLRequest {
+        guard let encodedBody = try? jsonEncoder.encode(body) else {
+            throw HTTPError.requestGenerationError
         }
-
+        
+        var request = try generateRequest(endpoint: endpoint, method: method, headers: headers)
         request.httpBody = encodedBody
-
+        
         return request
     }
 
-    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) -> URLRequest? {
+    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) throws -> URLRequest {
         guard let url = URL(string: endpoint.urlString) else {
-            return nil
+            throw HTTPError.requestGenerationError
         }
 
         var request = URLRequest(url: url)

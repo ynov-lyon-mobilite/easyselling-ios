@@ -23,11 +23,8 @@ class DefaultAccountCreator: AccountCreator {
     private var apiCaller: APICaller
     
     func createAccount(informations: AccountCreationInformations) async throws {
-        let urlRequest = requestGenerator.generateRequest(endpoint: .users, method: .POST, body: informations, headers: [:])
-        guard let urlRequest = urlRequest else {
-            throw HTTPError.internalServerError
-        }
-        
+        let urlRequest = try requestGenerator
+            .generateRequest(endpoint: .users, method: .POST, body: informations, headers: [:])
         try await apiCaller.call(urlRequest)
     }
 }

@@ -8,6 +8,11 @@
 import Foundation
 
 enum HTTPError: Int, LocalizedError, Equatable {
+    //  Application errors
+    case decodeError = 001
+    case requestGenerationError = 002
+    
+    //  HTTP errors
     case badRequest = 400
     case unauthorized = 401
     case paymentRequired = 402

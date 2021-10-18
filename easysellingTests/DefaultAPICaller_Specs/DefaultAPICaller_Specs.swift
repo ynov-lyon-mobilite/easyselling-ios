@@ -78,13 +78,11 @@ class DefaultAPICaller_Specs: XCTestCase {
         
         Task.init {
             do {
-                let decodedResult = try await networkService.call(request, decodeType: T.self)
-
+                self.requestResult = try await networkService.call(request, decodeType: T.self)
                 expectation.fulfill()
-                self.requestResult = decodedResult
             } catch (let error) {
-                expectation.fulfill()
                 self.requestError = (error as! HTTPError)
+                expectation.fulfill()
             }
         }
 

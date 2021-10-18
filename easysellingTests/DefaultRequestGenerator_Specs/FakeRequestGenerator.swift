@@ -16,12 +16,13 @@ class FakeRequestGenerator: RequestGenerator {
     
     private var url: String
     
-    func generateRequest<T>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?, headers: [String : String]) -> URLRequest? where T : Encodable {
+    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod,
+                                       body: T?, headers: [String : String]) -> URLRequest {
         return URLRequest(url: URL(string: url)!)
     }
     
-    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String : String]) -> URLRequest? {
-        return nil
+    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String : String]) -> URLRequest {
+        return URLRequest(url: URL(string: url)!)
     }
 }
 
