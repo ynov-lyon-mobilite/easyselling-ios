@@ -65,7 +65,6 @@ class DefaultAccountCreator_Specs: XCTestCase {
     }
     
     private var accountCreator: DefaultAccountCreator!
-    private lazy var expectation = expectation(description: "Should finish request")
     private var isRequestSucceed: Bool!
     private var error: APICallerError!
 }
