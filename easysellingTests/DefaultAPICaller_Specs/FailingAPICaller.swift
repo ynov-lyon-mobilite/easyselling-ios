@@ -18,10 +18,10 @@ class FailingAPICaller: APICaller {
     private var error: Int
     
     func call<T: Decodable>(_ urlRequest: URLRequest, decodeType: T.Type) async throws -> T {
-        throw HTTPError.from(statusCode: error)
+        throw APICallerError.from(statusCode: error)
     }
     
     func call(_ urlRequest: URLRequest) async throws {
-        throw HTTPError.from(statusCode: error)
+        throw APICallerError.from(statusCode: error)
     }
 }

@@ -76,7 +76,7 @@ class AccountCreationViewModel_Specs: XCTestCase {
         XCTAssertTrue(viewModel.showAlert)
     }
     
-    private func thenAlert(is expected: HTTPError) {
+    private func thenAlert(is expected: APICallerError) {
         XCTAssertEqual(expected, viewModel.alert)
     }
 

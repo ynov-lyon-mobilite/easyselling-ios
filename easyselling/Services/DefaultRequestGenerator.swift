@@ -20,7 +20,7 @@ class DefaultRequestGenerator: RequestGenerator {
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod = .GET,
                                        body: T?, headers: [String: String]) throws -> URLRequest {
         guard let encodedBody = try? jsonEncoder.encode(body) else {
-            throw HTTPError.requestGenerationError
+            throw APICallerError.requestGenerationError
         }
         
         var request = try generateRequest(endpoint: endpoint, method: method, headers: headers)
@@ -31,7 +31,7 @@ class DefaultRequestGenerator: RequestGenerator {
 
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) throws -> URLRequest {
         guard let url = URL(string: endpoint.urlString) else {
-            throw HTTPError.requestGenerationError
+            throw APICallerError.requestGenerationError
         }
 
         var request = URLRequest(url: url)

@@ -29,15 +29,15 @@ final class DefaultAPICaller: APICaller {
             
             guard let (data, response) = result,
                   let strongResponse = response as? HTTPURLResponse else {
-                      throw HTTPError.internalServerError
+                      throw APICallerError.internalServerError
                   }
             
             if !successStatusCodes.contains(strongResponse.statusCode) {
-                throw HTTPError.from(statusCode: strongResponse.statusCode)
+                throw APICallerError.from(statusCode: strongResponse.statusCode)
             }
             
             guard let decodedResult = try? jsonDecoder.decode(T.self, from: data) else {
-                throw HTTPError.decodeError
+                throw APICallerError.decodeError
             }
             
             return decodedResult
@@ -48,11 +48,11 @@ final class DefaultAPICaller: APICaller {
         
         guard let (_, response) = result,
               let strongResponse = response as? HTTPURLResponse else {
-                  throw HTTPError.internalServerError
+                  throw APICallerError.internalServerError
               }
         
         if !successStatusCodes.contains(strongResponse.statusCode) {
-            throw HTTPError.from(statusCode: strongResponse.statusCode)
+            throw APICallerError.from(statusCode: strongResponse.statusCode)
         }
     }
 }

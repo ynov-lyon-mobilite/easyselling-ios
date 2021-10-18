@@ -51,7 +51,7 @@ class DefaultAccountCreator_Specs: XCTestCase {
                 self.isRequestSucceed = true
             } catch (let error) {
                 self.expectation.fulfill()
-                self.error = (error as! HTTPError)
+                self.error = (error as! APICallerError)
             }
         }
 
@@ -74,5 +74,5 @@ class DefaultAccountCreator_Specs: XCTestCase {
     private var cancellables = Set<AnyCancellable>()
     private lazy var expectation = expectation(description: "Should finish request")
     private var isRequestSucceed: Bool!
-    private var error: HTTPError!
+    private var error: APICallerError!
 }

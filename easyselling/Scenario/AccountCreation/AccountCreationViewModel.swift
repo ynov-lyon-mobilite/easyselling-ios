@@ -24,7 +24,7 @@ class AccountCreationViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var passwordConfirmation: String = ""
     @Published var error: AccountCreationError?
-    @Published var alert: HTTPError?
+    @Published var alert: APICallerError?
     @Published var showAlert: Bool = false
     
     func createAccount(email: String, password: String, passwordConfirmation: String) {
@@ -44,7 +44,7 @@ class AccountCreationViewModel: ObservableObject {
             self.state = .accountCreated
         } catch(let error) {
             self.state = .initial
-            self.alert = (error as? HTTPError) ?? HTTPError.internalServerError
+            self.alert = (error as? APICallerError) ?? APICallerError.internalServerError
             self.showAlert = true
         }
     }

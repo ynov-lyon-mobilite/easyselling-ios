@@ -11,13 +11,13 @@ import Combine
 
 class FailingAccountCreator: AccountCreator {
     
-    init(error: HTTPError) {
+    init(error: APICallerError) {
         self.error = error
     }
     
-    private var error: HTTPError
+    private var error: APICallerError
     
     func createAccount(informations: AccountCreationInformations) async throws {
-        throw HTTPError.from(statusCode: error.rawValue)
+        throw APICallerError.from(statusCode: error.rawValue)
     }
 }

@@ -66,7 +66,7 @@ class DefaultAPICaller_Specs: XCTestCase {
                 expectation.fulfill()
             } catch (let error) {
                 expectation.fulfill()
-                self.requestError = (error as! HTTPError)
+                self.requestError = (error as! APICallerError)
             }
         }
         
@@ -81,7 +81,7 @@ class DefaultAPICaller_Specs: XCTestCase {
                 self.requestResult = try await networkService.call(request, decodeType: T.self)
                 expectation.fulfill()
             } catch (let error) {
-                self.requestError = (error as! HTTPError)
+                self.requestError = (error as! APICallerError)
                 expectation.fulfill()
             }
         }
@@ -130,7 +130,7 @@ class DefaultAPICaller_Specs: XCTestCase {
     private var cancellables = Set<AnyCancellable>()
     private var isCallSucceeded: Bool!
     private var requestResult: Any!
-    private var requestError: HTTPError!
+    private var requestError: APICallerError!
     private var networkService: DefaultAPICaller!
 }
 
