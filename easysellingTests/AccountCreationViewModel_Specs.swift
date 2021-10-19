@@ -109,7 +109,7 @@ class AccountCreationViewModel_Specs: XCTestCase {
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 4)
+        wait(for: [expectation], timeout: 5)
     }
     
     private func whenNoLongerInterested() {

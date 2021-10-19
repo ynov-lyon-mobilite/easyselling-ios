@@ -15,5 +15,7 @@ class SucceedingAPICaller: APICaller {
         return "" as! T
     }
     
-    func call(_ urlRequest: URLRequest) {}
+    func call(_ urlRequest: URLRequest) {
+        return
+    }
 }

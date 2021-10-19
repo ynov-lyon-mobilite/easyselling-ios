@@ -25,7 +25,7 @@ class DefaultRequestGenerator: RequestGenerator {
         
         var request = try generateRequest(endpoint: endpoint, method: method, headers: headers)
         request.httpBody = encodedBody
-        
+
         return request
     }
 
