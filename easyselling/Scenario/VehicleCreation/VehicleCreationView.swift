@@ -8,14 +8,8 @@
 import SwiftUI
 
 struct VehicleCreationView: View {
-    @State private var brand: String = ""
-    @State private var model: String = ""
-    @State private var immatriculation: String = ""
-    @State private var licenceNumber: String = ""
-    @State private var year: String = ""
-    @State private var type: VehicleType = .car
-    
-    var viewModel: VehicleCreationViewModel
+   
+    @ObservedObject var viewModel: VehicleCreationViewModel
 
     var body: some View {
         VStack {
@@ -27,25 +21,25 @@ struct VehicleCreationView: View {
             
             Divider()
             
-            TextField("Marque", text: $brand)
+            TextField("Marque", text: $viewModel.brand)
                 .padding(.top)
             
-            TextField("Modèle", text: $model)
+            TextField("Modèle", text: $viewModel.model)
                 .padding(.top)
             
-            TextField("Immatriculation", text: $immatriculation)
+            TextField("Immatriculation", text: $viewModel.immatriculation)
                 .padding(.top)
             
-            TextField("Numéro de licence", text: $licenceNumber)
+            TextField("Numéro de licence", text: $viewModel.licenceNumber)
                 .padding(.top)
             
             HStack(alignment: .lastTextBaseline) {
-                Picker("Type", selection: $type) {
+                Picker("Type", selection: $viewModel.type) {
                     Text("Voiture").tag(VehicleType.car)
                     Text("Moto").tag(VehicleType.motorcycle)
                 }
                 Spacer(minLength: 50)
-                TextField("Année", text: $year)
+                TextField("Année", text: $viewModel.year)
                     .padding(.top)
                     .keyboardType(.numberPad)
             }
@@ -59,11 +53,18 @@ struct VehicleCreationView: View {
             Spacer()
         }
         .padding()
+        
+        .alert(isPresented: $viewModel.showAlert, content: {
+            Alert(
+                title: Text(viewModel.alertText.errorDescription ?? "Error"),
+                dismissButton: Alert.Button.default(Text("Ok")))
+        })
     }
     
     func createNewVehicle() {
-        let vehicle =  VehicleInformations(licenceNumber: licenceNumber, brand: brand, immatriculation: immatriculation, type: type, year: Int(year) ?? 0, model: model)
-        viewModel.createVehicle(with: vehicle)
+        // swiftlint:disable line_length
+        viewModel.createVehicle(with: VehicleInformations(licenceNumber: viewModel.licenceNumber, brand: viewModel.brand, immatriculation: viewModel.immatriculation, type: viewModel.type, year: Int(viewModel.year) ?? 0, model: viewModel.model))
+        // swiftlint:enable line_length
     }
 }
 

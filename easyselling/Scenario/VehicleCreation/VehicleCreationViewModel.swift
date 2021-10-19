@@ -8,14 +8,21 @@
 import Foundation
 import Combine
 
-class VehicleCreationViewModel {
+class VehicleCreationViewModel: ObservableObject {
     
     private var vehicleCreator: VehicleCreator
     private var vehicleInformationsVerificator: VehicleInformationsVerificator
     private var cancellables = Set<AnyCancellable>()
     
-    var alert: String = ""
+    var alertText: VehicleCreationError = .unknow
     var showAlert = false
+    
+    @Published var brand: String = ""
+    @Published var model: String = ""
+    @Published var immatriculation: String = ""
+    @Published var licenceNumber: String = ""
+    @Published var year: String = ""
+    @Published var type: VehicleType = .car
     
     init(vehicleCreator: VehicleCreator = VehicleCreator(), vehicleVerificator: VehicleInformationsVerificator = VehicleInformationsVerificator()) {
         self.vehicleCreator = vehicleCreator
@@ -23,10 +30,15 @@ class VehicleCreationViewModel {
     }
     
     func createVehicle(with informations: VehicleInformations) {
-        //guard vehicleInformationsVerificator.checkingInformations(vehicle: informations) else { return }
+        if let error = vehicleInformationsVerificator.checkingInformations(vehicle: informations) {
+            alertText = error
+            showAlert = true
+            return
+        }
+        
         vehicleCreator.createVehicle(informations: informations).sink(receiveCompletion: {
-            if case let .failure(error) = $0 {
-                self.alert = error.localizedDescription
+            if case .failure = $0 {
+                self.alertText = .unknow
                 self.showAlert = true
             }
         }, receiveValue: {
