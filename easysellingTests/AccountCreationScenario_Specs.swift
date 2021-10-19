@@ -66,5 +66,4 @@ enum AccountCreationStates: CustomDebugStringConvertible{
         case .accountCreation: return "Account creation"
         }
     }
-
 }

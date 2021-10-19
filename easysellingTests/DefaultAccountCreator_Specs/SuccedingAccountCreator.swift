@@ -11,9 +11,7 @@ import Combine
 
 class SucceedingAccountCreator: AccountCreator {
     
-    func createAccount(informations: AccountCreationInformations) -> VoidResult {
-        return Just(())
-            .setFailureType(to: HTTPError.self)
-            .eraseToAnyPublisher()
+    func createAccount(informations: AccountCreationInformations) async throws {
+        return
     }
 }

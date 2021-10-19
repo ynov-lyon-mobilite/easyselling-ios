@@ -17,38 +17,35 @@ class AccountCreationViewModel: ObservableObject {
     
     private var verificator: InformationsVerificator
     private var accountCreator: AccountCreator
-    private var cancellables = Set<AnyCancellable>()
     
     @Published var state: AccountCreationState = .initial
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var passwordConfirmation: String = ""
     @Published var error: AccountCreationError?
-    @Published var alert: HTTPError?
+    @Published var alert: APICallerError?
     @Published var showAlert: Bool = false
     
-    func createAccount(email: String, password: String, passwordConfirmation: String) {
+    func createAccount(email: String, password: String, passwordConfirmation: String) async {
         self.state = .loading
-        
-        switch verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation) {
-        case let .success(informations): self.createAccount(with: informations)
-        case let .failure(error): self.setError(with: error)
+        do {
+            let informationsVerified = try verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
+            await self.createAccount(with: informationsVerified)
+        } catch(let error) {
             self.state = .initial
-        case .none: break
+            self.setError(with: (error as? AccountCreationError) ?? .unknow)
         }
     }
     
-    private func createAccount(with informations: AccountCreationInformations) {
-        accountCreator.createAccount(informations: informations).sink(receiveCompletion: {
-            if case let .failure(error) = $0 {
-                self.state = .initial
-                self.alert = error
-                self.showAlert = true
-            }
-        }, receiveValue: {
+    private func createAccount(with informations: AccountCreationInformations) async {
+        do {
+            try await accountCreator.createAccount(informations: informations)
             self.state = .accountCreated
-        })
-            .store(in: &cancellables)
+        } catch(let error) {
+            self.state = .initial
+            self.alert = (error as? APICallerError) ?? APICallerError.internalServerError
+            self.showAlert = true
+        }
     }
     
     private func setError(with error: AccountCreationError) {

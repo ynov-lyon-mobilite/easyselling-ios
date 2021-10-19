@@ -12,8 +12,8 @@ class SucceedingInformationsVerificator: InformationsVerificator {
     
     private(set) var accountCreationInformation: AccountCreationInformations?
     
-    func verify(email: String, password: String, passwordConfirmation: String) -> Result<AccountCreationInformations, AccountCreationError>? {
+    func verify(email: String, password: String, passwordConfirmation: String) throws -> AccountCreationInformations {
         self.accountCreationInformation = AccountCreationInformations(email: email, password: password, passwordConfirmation: passwordConfirmation)
-        return .success(accountCreationInformation!)
+        return accountCreationInformation!
     }
 }

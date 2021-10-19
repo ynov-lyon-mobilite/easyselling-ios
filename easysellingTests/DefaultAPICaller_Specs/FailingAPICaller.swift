@@ -17,11 +17,11 @@ class FailingAPICaller: APICaller {
     
     private var error: Int
     
-    func call<T>(_ urlRequest: URLRequest, decodeType: T.Type) -> DecodedResult<T> where T : Decodable {
-        AnyPublisher(Fail(error: HTTPError.from(statusCode: error)))
+    func call<T: Decodable>(_ urlRequest: URLRequest, decodeType: T.Type) async throws -> T {
+        throw APICallerError.from(statusCode: error)
     }
     
-    func call(_ urlRequest: URLRequest) -> VoidResult {
-        AnyPublisher(Fail(error: HTTPError.from(statusCode: error)))
+    func call(_ urlRequest: URLRequest) async throws {
+        throw APICallerError.from(statusCode: error)
     }
 }

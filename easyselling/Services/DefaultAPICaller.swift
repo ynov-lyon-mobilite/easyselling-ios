@@ -9,45 +9,50 @@ import Foundation
 import Combine
 
 protocol APICaller {
-    func call<T: Decodable>(_ urlRequest: URLRequest, decodeType: T.Type) -> DecodedResult<T>
-    func call(_ urlRequest: URLRequest) -> VoidResult
+    func call<T: Decodable>(_ urlRequest: URLRequest, decodeType: T.Type) async throws -> T
+    func call(_ urlRequest: URLRequest) async throws
 }
 
 final class DefaultAPICaller: APICaller {
     private var jsonDecoder = JSONDecoder()
     private var successStatusCodes = Set<Int>(200...209)
-    private let urlSession: UrlSessionProtocol
+    private let urlSession: URLSessionProtocol
 
-    init(urlSession: UrlSessionProtocol = URLSession.shared) {
+    init(urlSession: URLSessionProtocol = URLSession.shared) {
         self.urlSession = urlSession
     }
 
     func call<T: Decodable>(
         _ urlRequest: URLRequest,
-        decodeType: T.Type) -> DecodedResult<T> {
-            return urlSession.dataTaskAnyPublisher(for: urlRequest)
-                .tryMap { [successStatusCodes] (data, response) -> Data in
-                    if let response = response as? HTTPURLResponse, !successStatusCodes.contains(response.statusCode) {
-                        throw HTTPError.from(statusCode: response.statusCode)
-                    }
-
-                    return data
-                }
-                .decode(type: T.self, decoder: jsonDecoder)
-                .receive(on: DispatchQueue.main)
-                .mapError { ($0 as? HTTPError) ?? HTTPError.internalServerError }
-                .eraseToAnyPublisher()
+        decodeType: T.Type) async throws -> T {
+            let result: (Data, URLResponse)? = try? await urlSession.data(for: urlRequest, delegate: nil)
+            
+            guard let (data, response) = result,
+                  let strongResponse = response as? HTTPURLResponse else {
+                      throw APICallerError.internalServerError
+                  }
+            
+            if !successStatusCodes.contains(strongResponse.statusCode) {
+                throw APICallerError.from(statusCode: strongResponse.statusCode)
+            }
+            
+            guard let decodedResult = try? jsonDecoder.decode(T.self, from: data) else {
+                throw APICallerError.decodeError
+            }
+            
+            return decodedResult
         }
 
-    func call(_ urlRequest: URLRequest) -> VoidResult {
-        return urlSession.dataTaskAnyPublisher(for: urlRequest)
-            .tryMap { [successStatusCodes] (_, response) -> Void in
-                if let response = response as? HTTPURLResponse, !successStatusCodes.contains(response.statusCode) {
-                    throw HTTPError.from(statusCode: response.statusCode)
-                }
-            }
-            .receive(on: DispatchQueue.main)
-            .mapError { ($0 as? HTTPError) ?? HTTPError.internalServerError }
-            .eraseToAnyPublisher()
+    func call(_ urlRequest: URLRequest) async throws {
+        let result: (Data, URLResponse)? = try? await urlSession.data(for: urlRequest, delegate: nil)
+        
+        guard let (_, response) = result,
+              let strongResponse = response as? HTTPURLResponse else {
+                  throw APICallerError.internalServerError
+              }
+        
+        if !successStatusCodes.contains(strongResponse.statusCode) {
+            throw APICallerError.from(statusCode: strongResponse.statusCode)
+        }
     }
 }

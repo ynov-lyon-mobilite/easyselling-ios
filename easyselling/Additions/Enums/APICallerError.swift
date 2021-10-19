@@ -1,5 +1,5 @@
 //
-//  HTTPError.swift
+//  APICallerError.swift
 //  easyselling
 //
 //  Created by Nicolas Barbosa on 14/10/2021.
@@ -7,7 +7,14 @@
 
 import Foundation
 
-enum HTTPError: Int, LocalizedError, Equatable {
+enum APICallerError: Int, LocalizedError, Equatable {
+    //  Application errors
+    case unknownError = 001
+    case encodeError = 002
+    case decodeError = 003
+    case requestGenerationError = 004
+    
+    //  HTTP errors
     case badRequest = 400
     case unauthorized = 401
     case paymentRequired = 402
@@ -34,6 +41,6 @@ enum HTTPError: Int, LocalizedError, Equatable {
     }
     
     static func from(statusCode: Int) -> Self {
-        return Self.init(rawValue: statusCode) ?? HTTPError.internalServerError
+        return .init(rawValue: statusCode) ?? .unknownError
     }
 }

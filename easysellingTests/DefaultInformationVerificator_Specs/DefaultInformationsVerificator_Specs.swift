@@ -71,12 +71,17 @@ class DefaultInformationsVerificator_Specs: XCTestCase {
     }
     
     private func whenVerifying(email: String, password: String, passwordConfirmation: String) {
-        let result = verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
-        switch result {
-        case let .success(informations): self.accountInformations = informations
-        case let .failure(error): self.accountCreationError = error
-        case .none: break
+        do {
+            self.accountInformations = try verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
+        } catch(let error) {
+            self.accountCreationError = (error as! AccountCreationError)
         }
+        
+//        switch result {
+//        case let .success(informations): self.accountInformations = informations
+//        case let .failure(error): self.accountCreationError = error
+//        case .none: break
+//        }
     }
     
     private func whenNoLongerInterested() {
