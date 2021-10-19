@@ -14,8 +14,8 @@ class VehicleCreationViewModel: ObservableObject {
     private var vehicleInformationsVerificator: VehicleInformationsVerificator
     private var cancellables = Set<AnyCancellable>()
     
-    var alertText: VehicleCreationError = .unknow
-    var showAlert = false
+    @Published var alertText: String = ""
+    @Published var showAlert = false
     
     @Published var brand: String = ""
     @Published var model: String = ""
@@ -29,20 +29,22 @@ class VehicleCreationViewModel: ObservableObject {
         self.vehicleInformationsVerificator = vehicleVerificator
     }
     
-    func createVehicle(with informations: VehicleInformations) {
+    func createVehicle(with informations: VehicleInformations) async {
         if let error = vehicleInformationsVerificator.checkingInformations(vehicle: informations) {
-            alertText = error
-            showAlert = true
+            DispatchQueue.main.async {
+                self.alertText = error.errorDescription ?? ""
+                self.showAlert = true
+            }
             return
         }
         
-        vehicleCreator.createVehicle(informations: informations).sink(receiveCompletion: {
-            if case .failure = $0 {
-                self.alertText = .unknow
+        do {
+            try await vehicleCreator.createVehicle(informations: informations)
+        } catch(let error) {
+            DispatchQueue.main.async {
+                self.alertText = (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
                 self.showAlert = true
             }
-        }, receiveValue: {
-            print("Done")
-        }).store(in: &cancellables)
+        }
     }
 }

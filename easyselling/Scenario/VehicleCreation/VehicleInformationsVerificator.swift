@@ -14,14 +14,14 @@ protocol VehicleInformationsProtocol {
 class VehicleInformationsVerificator: VehicleInformationsProtocol {
     func checkingInformations(vehicle: VehicleInformations) -> VehicleCreationError? {
         switch true {
+        case vehicle.licenceNumber.isEmpty
+            || vehicle.immatriculation.isEmpty
+            || vehicle.licenceNumber.isEmpty
+            || vehicle.brand.isEmpty
+            || vehicle.model.isEmpty: return .emptyField
             case vehicle.licenceNumber.count != 14: return .wrongLicenceNumber
             case vehicle.immatriculation.count != 8: return .wrongImmatriculation
             case vehicle.year > 100: return .wrongYear
-            case vehicle.licenceNumber.isEmpty
-                || vehicle.immatriculation.isEmpty
-                || vehicle.licenceNumber.isEmpty
-                || vehicle.brand.isEmpty
-                || vehicle.model.isEmpty: return .emptyField
             default: return nil
         }
     }

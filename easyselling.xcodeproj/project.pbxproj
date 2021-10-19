@@ -163,6 +163,7 @@
 		0382E2A12717648000EB570E /* Scenario */ = {
 			isa = PBXGroup;
 			children = (
+				2CD4B8BE271C5F82002598A4 /* VehicleCreation */,
 				0382E2A22717648700EB570E /* AccountCreation */,
 				87DC1D04271F6A1F002DC193 /* UserAuthentication */,
 			);
@@ -264,14 +265,6 @@
 			path = Vehicle;
 			sourceTree = "<group>";
 		};
-		2CD4B8BD271C5F7A002598A4 /* Scenario */ = {
-			isa = PBXGroup;
-			children = (
-				2CD4B8BE271C5F82002598A4 /* VehicleCreation */,
-			);
-			path = Scenario;
-			sourceTree = "<group>";
-		};
 		2CD4B8BE271C5F82002598A4 /* VehicleCreation */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,7 +299,6 @@
 		873552B1270D847700F2DDBD /* easyselling */ = {
 			isa = PBXGroup;
 			children = (
-				2CD4B8BD271C5F7A002598A4 /* Scenario */,
 				87780BAA27172FB10035AB13 /* Services */,
 				87780B9C27172F1C0035AB13 /* Additions */,
 				03F209772716E1C500E10F6C /* Application */,

@@ -45,8 +45,10 @@ struct VehicleCreationView: View {
             }
             
             VStack {
-                Button(action: createNewVehicle) {
-                    Text("Button")
+                Button("Button") {
+                    Task {
+                        await createNewVehicle()
+                    }
                 }
             }
             .padding(.top)
@@ -56,14 +58,14 @@ struct VehicleCreationView: View {
         
         .alert(isPresented: $viewModel.showAlert, content: {
             Alert(
-                title: Text(viewModel.alertText.errorDescription ?? "Error"),
+                title: Text(viewModel.alertText),
                 dismissButton: Alert.Button.default(Text("Ok")))
         })
     }
     
-    func createNewVehicle() {
+    func createNewVehicle() async {
         // swiftlint:disable line_length
-        viewModel.createVehicle(with: VehicleInformations(licenceNumber: viewModel.licenceNumber, brand: viewModel.brand, immatriculation: viewModel.immatriculation, type: viewModel.type, year: Int(viewModel.year) ?? 0, model: viewModel.model))
+        await viewModel.createVehicle(with: VehicleInformations(licenceNumber: viewModel.licenceNumber, brand: viewModel.brand, immatriculation: viewModel.immatriculation, type: viewModel.type, year: Int(viewModel.year) ?? 0, model: viewModel.model))
         // swiftlint:enable line_length
     }
 }
