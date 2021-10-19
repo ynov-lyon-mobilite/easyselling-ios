@@ -18,70 +18,70 @@ class AccountCreationViewModel_Specs: XCTestCase {
         thenVerifiedInformations(are: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
     }
     
-//    func test_Sends_back_account_informations_when_asking_for_account_creation2() {
-//        givenViewModel(verificator: SucceedingInformationsVerificator())
-//        thenViewModelState(is: .initial)
-//        whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
-//        thenVerifiedInformations(are: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
-//        thenViewModelState(is: .accountCreated)
-//    }
-//
-//    func test_Shows_loader_when_informations_are_being_compute() {
-//        givenViewModel(with: NeverFinishingInformationsVerificator())
-//        whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
-//        thenViewModelState(is: .loading)
-//    }
-//
-//    func test_Show_error_when_informations_email_is_wrong() {
-//        givenViewModel(with: FailingInformationsVerificator(error: .wrongEmail))
-//        whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "password")
-//        thenViewModelState(is: .initial)
-//        thenError(is: .wrongEmail)
-//    }
-//
-//
-//    func test_Show_error_when_informations_email_is_empty() {
-//        givenViewModel(with: FailingInformationsVerificator(error: .emptyEmail))
-//        whenCreatingAccount(email: "", password: "password", passwordConfirmation: "password")
-//        thenViewModelState(is: .initial)
-//        thenError(is: .emptyEmail)
-//    }
-//
-//    func test_Show_error_when_informations_password_is_incorrect() {
-//        givenViewModel(with: FailingInformationsVerificator(error: .wrongPassword))
-//        whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "differentPassword")
-//        thenViewModelState(is: .initial)
-//        thenError(is: .wrongPassword)
-//    }
-//
-//    func test_Show_error_when_informations_password_is_empty() {
-//        givenViewModel(with: FailingInformationsVerificator(error: .emptyPassword))
-//        whenCreatingAccount(email: "test", password: "", passwordConfirmation: "password")
-//        thenViewModelState(is: .initial)
-//        thenError(is: .emptyPassword)
-//    }
-//
-//    func test_Show_error_when_informations_password_confirmation_is_empty() {
-//        givenViewModel(with: FailingInformationsVerificator(error: .emptyPasswordConfirmation))
-//        whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "")
-//        thenViewModelState(is: .initial)
-//        thenError(is: .emptyPasswordConfirmation)
-//    }
-//
-//    func test_Shows_alert_when_an_error_occured_with_request() {
-//        givenViewModel(verificator: SucceedingInformationsVerificator(), accountCreator: FailingAccountCreator(error: .forbidden))
-//        whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "password")
-//        thenViewModelState(is: .initial)
-//        thenAlert(is: .forbidden)
-//        XCTAssertTrue(viewModel.showAlert)
-//    }
+    func test_Sends_back_account_informations_when_asking_for_account_creation2() async {
+        givenViewModel(verificator: SucceedingInformationsVerificator())
+        thenViewModelState(is: .initial)
+        await whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
+        thenVerifiedInformations(are: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
+        thenViewModelState(is: .accountCreated)
+    }
 
-//    func test_Deinits_when_no_longer_interest() {
-//        givenViewModel(with: SucceedingInformationsVerificator())
-//        whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
-//        whenNoLongerInterested()
-//        XCTAssertNil(viewModel)
-//    }
+    func test_Shows_loader_when_informations_are_being_compute() async {
+        givenViewModel(with: NeverFinishingInformationsVerificator())
+        await whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
+        thenViewModelState(is: .loading)
+    }
+
+    func test_Show_error_when_informations_email_is_wrong() async {
+        givenViewModel(with: FailingInformationsVerificator(error: .wrongEmail))
+        await whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "password")
+        thenViewModelState(is: .initial)
+        thenError(is: .wrongEmail)
+    }
+
+
+    func test_Show_error_when_informations_email_is_empty() async {
+        givenViewModel(with: FailingInformationsVerificator(error: .emptyEmail))
+        await whenCreatingAccount(email: "", password: "password", passwordConfirmation: "password")
+        thenViewModelState(is: .initial)
+        thenError(is: .emptyEmail)
+    }
+
+    func test_Show_error_when_informations_password_is_incorrect() async {
+        givenViewModel(with: FailingInformationsVerificator(error: .wrongPassword))
+        await whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "differentPassword")
+        thenViewModelState(is: .initial)
+        thenError(is: .wrongPassword)
+    }
+
+    func test_Show_error_when_informations_password_is_empty() async {
+        givenViewModel(with: FailingInformationsVerificator(error: .emptyPassword))
+        await whenCreatingAccount(email: "test", password: "", passwordConfirmation: "password")
+        thenViewModelState(is: .initial)
+        thenError(is: .emptyPassword)
+    }
+
+    func test_Show_error_when_informations_password_confirmation_is_empty() async {
+        givenViewModel(with: FailingInformationsVerificator(error: .emptyPasswordConfirmation))
+        await whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "")
+        thenViewModelState(is: .initial)
+        thenError(is: .emptyPasswordConfirmation)
+    }
+
+    func test_Shows_alert_when_an_error_occured_with_request() async {
+        givenViewModel(verificator: SucceedingInformationsVerificator(), accountCreator: FailingAccountCreator(error: .forbidden))
+        await whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "password")
+        thenViewModelState(is: .initial)
+        thenAlert(is: .forbidden)
+        XCTAssertTrue(viewModel.showAlert)
+    }
+
+    func test_Deinits_when_no_longer_interest() async {
+        givenViewModel(with: SucceedingInformationsVerificator())
+        await whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
+        whenNoLongerInterested()
+        XCTAssertNil(viewModel)
+    }
     
     private func givenViewModel(verificator: SucceedingInformationsVerificator, accountCreator: AccountCreator = SucceedingAccountCreator()) {
         self.succeedingVerificator = verificator
