@@ -8,55 +8,55 @@
 import XCTest
 @testable import easyselling
 
-class RequestGenerator_Specs: XCTestCase {
+class DefaultRequestGenerator_Specs: XCTestCase {
 
     func test_Generates_Request() {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/api/v1/users/profile")!)
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = HTTPMethod.POST.rawValue
 
         givenService()
-        whenGenerateRequest(
-            endpoint: "https://easyselling.maxencemottard.com/api/v1/users/profile",
-            method: .POST, headers: [:])
+        whenGenerateRequest(endpoint: .users, method: .POST, headers: [:])
         thenRequest(is: request)
     }
 
     func test_Generates_Request_With_Headers() {
-        var request = URLRequest(url: URL(string: "easyselling.maxencemottard.com/api/users/profile")!)
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
         request.httpMethod = HTTPMethod.POST.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("With tested value", forHTTPHeaderField: "test-header")
         request.addValue("With another value", forHTTPHeaderField: "sedond-header")
 
         givenService()
-        whenGenerateRequest(endpoint: "easyselling.maxencemottard.com/api/users/profile",
-                            method: .POST,
-                            headers: ["test-header": "With tested value",
-                                      "sedond-header": "With another value"])
+        whenGenerateRequest(endpoint: .users, method: .POST,
+                            headers: ["test-header": "With tested value", "sedond-header": "With another value"])
         thenRequest(is: request)
     }
 
     func test_Generates_Request_With_Body() {
         let body = "BODY"
 
-        expectedRequest = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/api/v1/users/profile")!)
-        expectedRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        expectedRequest.httpMethod = HTTPMethod.POST.rawValue
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = HTTPMethod.POST.rawValue
+        request.httpBody = try! JSONEncoder().encode(body)
 
         givenService()
-        whenGenerateRequestWithBody(
-            endpoint: "https://easyselling.maxencemottard.com/api/v1/users/profile",
-            method: .POST,
-                                    body: body, headers: [:])
-        thenRequestWithBody(is: expectedRequest)
+        whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body, headers: [:])
+        thenRequestWithBody(is: request)
+    }
+    
+    func test_JSON_encode_failure() {
+        let body = Double.infinity
+
+        givenService()
+        whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body, headers: [:])
+        XCTAssertEqual(APICallerError.encodeError, error)
     }
 
     func test_Deinit_when_no_longer_interested() {
         givenService()
-        whenGenerateRequest(
-            endpoint: "https://easyselling.maxencemottard.com/api/v1/users/profile",
-            method: .POST, headers: [:])
+        whenGenerateRequest(endpoint: .users, method: .POST, headers: [:])
         whenNoLongerInterested()
 
         XCTAssertNil(requestGenerator)
@@ -81,19 +81,25 @@ class RequestGenerator_Specs: XCTestCase {
         requestGenerator = DefaultRequestGenerator()
     }
 
-    private func whenGenerateRequest(endpoint: String, method: HTTPMethod, headers: [String: String]) {
-        request = requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers)
+    private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) {
+        do {
+            self.request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers)
+        } catch(let error) {
+            self.error = (error as! APICallerError)
+        }
     }
 
     private func whenGenerateRequestWithBody<T: Encodable>(
-        endpoint: String,
+        endpoint: HTTPEndpoint,
         method: HTTPMethod,
         body: T,
         headers: [String: String]) {
-        request = requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers)
-
-        expectedRequest.httpBody = request.httpBody
-    }
+            do {
+                self.request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers)
+            } catch(let error) {
+                self.error = (error as! APICallerError)
+            }
+        }
 
     private func whenNoLongerInterested() {
         requestGenerator = nil
@@ -118,5 +124,5 @@ class RequestGenerator_Specs: XCTestCase {
 
     private var requestGenerator: DefaultRequestGenerator!
     private var request: URLRequest!
-    private var expectedRequest: URLRequest!
+    private var error: APICallerError!
 }

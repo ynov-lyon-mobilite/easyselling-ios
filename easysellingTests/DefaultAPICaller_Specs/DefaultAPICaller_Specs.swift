@@ -9,7 +9,7 @@ import XCTest
 import Combine
 @testable import easyselling
 
-class NetworkService_Specs: XCTestCase {
+class DefaultAPICaller_Specs: XCTestCase {
     
     func test_Sends_request_to_back_succeeded_with_codes() {
         assertRequestSucceded(200)
@@ -40,12 +40,6 @@ class NetworkService_Specs: XCTestCase {
         assertRequestFailed(502)
         assertRequestFailed(503)
         assertRequestFailed(504)
-        assertRequestFailed(505)
-        assertRequestFailed(506)
-        assertRequestFailed(507)
-        assertRequestFailed(508)
-        assertRequestFailed(509)
-        assertRequestFailed(510)
     }
 
     func test_Sends_data_to_back_end_with_response_body() {
@@ -56,59 +50,59 @@ class NetworkService_Specs: XCTestCase {
         whenMakingAPICall(withUrlRequest: request, decodeTo: TestDecodable.self)
         thenAPICallIsSucceding(with: expectedBody)
     }
+    
+    func test_JSON_decode_failure() {
+        let body = "{ \"argument\": \"BODY\"  }"
+
+        givenNetworkService(withReponseHTTPCode: 200, body: body.data(using: .utf8)!)
+        whenMakingAPICall(withUrlRequest: request, decodeTo: String.self)
+        XCTAssertEqual(APICallerError.decodeError, requestError)
+    }
 
     private func givenNetworkService(withReponseHTTPCode httpCode: Int, body: Data = Data()) {
         let urlSession = FakeUrlSession(expected: generateExtectedURLResponse(httpCode: httpCode), with: body)
-        networkService = NetworkService(urlSession: urlSession)
+        networkService = DefaultAPICaller(urlSession: urlSession)
     }
 
     private func whenMakingAPICall(withUrlRequest request: URLRequest) {
         let expectation = expectation(description: "Should finish request")
         
-        networkService.call(request)
-            .sink {
-                switch $0 {
-                case .failure(let error):
-                    expectation.fulfill()
-                    self.requestError = error
-                case .finished: break
-                }
-            } receiveValue: {
+        Task {
+            do {
+                try await networkService.call(request)
+
                 expectation.fulfill()
-                self.requestResult = $0
+            } catch (let error) {
+                self.requestError = (error as! APICallerError)
+                expectation.fulfill()
             }
-            .store(in: &cancellables)
+        }
         
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 3)
     }
 
     private func whenMakingAPICall<T: Decodable>(withUrlRequest request: URLRequest, decodeTo: T.Type) {
         let expectation = expectation(description: "Should finish request")
         
-        networkService.call(request, decodeType: T.self)
-            .sink {
-                switch $0 {
-                case .failure(let error):
-                    expectation.fulfill()
-                    self.requestError = error
-                case .finished: break
-                }
-            } receiveValue: {
+        Task {
+            do {
+                self.requestResult = try await networkService.call(request, decodeType: T.self)
                 expectation.fulfill()
-                self.requestResult = $0
+            } catch (let error) {
+                self.requestError = (error as! APICallerError)
+                expectation.fulfill()
             }
-            .store(in: &cancellables)
+        }
 
         wait(for: [expectation], timeout: 3)
     }
 
     private func thenResponseErrorCode(is expected: Int) {
         XCTAssertNil(self.requestResult)
-        XCTAssertEqual(expected, (self.requestError as NSError?)?.code)
+        XCTAssertEqual(expected, self.requestError.rawValue)
     }
 
     private func thenAPICallIsSucceding() {
-        XCTAssert(self.requestResult is Void)
         XCTAssertNil(self.requestError)
     }
 
@@ -144,15 +138,16 @@ class NetworkService_Specs: XCTestCase {
     private var cancellables = Set<AnyCancellable>()
     private var isCallSucceeded: Bool!
     private var requestResult: Any!
-    private var requestError: Error!
-    private var networkService: NetworkService!
+    private var requestError: APICallerError!
+    private var networkService: DefaultAPICaller!
 }
 
 struct TestDecodable: Decodable, Equatable {
     let argument: String
 }
 
-class FakeUrlSession: UrlSessionProtocol {
+class FakeUrlSession: URLSessionProtocol {
+    
     private let data: Data
     private let response: URLResponse
 
@@ -161,9 +156,7 @@ class FakeUrlSession: UrlSessionProtocol {
         self.response = response
     }
 
-    func dataTaskAnyPublisher(for request: URLRequest) -> AnyPublisherType {
-        return Just((data: data, response: response))
-            .setFailureType(to: URLError.self)
-            .eraseToAnyPublisher()
+    func data(for request: URLRequest, delegate: URLSessionTaskDelegate? = nil) async throws -> (Data, URLResponse) {
+        return (data, response)
     }
 }
