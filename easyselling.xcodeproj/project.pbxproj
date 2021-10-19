@@ -23,7 +23,6 @@
 		0382E2AC2718190B00EB570E /* DefaultInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2AB2718190B00EB570E /* DefaultInformationsVerificator.swift */; };
 		03F05431271B392300434706 /* SucceedingInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05430271B392300434706 /* SucceedingInformationsVerificator.swift */; };
 		03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05432271B393100434706 /* FailingInformationsVerificator.swift */; };
-		03F05435271B393B00434706 /* NeverFinishingInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05434271B393B00434706 /* NeverFinishingInformationsVerificator.swift */; };
 		03F05439271B3E8300434706 /* SucceedingAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F05438271B3E8300434706 /* SucceedingAPICaller.swift */; };
 		03F0543C271B3E9A00434706 /* FailingAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F0543B271B3E9A00434706 /* FailingAPICaller.swift */; };
 		03F0543F271B3F0A00434706 /* FakeRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F0543E271B3F0A00434706 /* FakeRequestGenerator.swift */; };
@@ -70,7 +69,6 @@
 		0382E2AB2718190B00EB570E /* DefaultInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInformationsVerificator.swift; sourceTree = "<group>"; };
 		03F05430271B392300434706 /* SucceedingInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingInformationsVerificator.swift; sourceTree = "<group>"; };
 		03F05432271B393100434706 /* FailingInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingInformationsVerificator.swift; sourceTree = "<group>"; };
-		03F05434271B393B00434706 /* NeverFinishingInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeverFinishingInformationsVerificator.swift; sourceTree = "<group>"; };
 		03F05438271B3E8300434706 /* SucceedingAPICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingAPICaller.swift; sourceTree = "<group>"; };
 		03F0543B271B3E9A00434706 /* FailingAPICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingAPICaller.swift; sourceTree = "<group>"; };
 		03F0543E271B3F0A00434706 /* FakeRequestGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRequestGenerator.swift; sourceTree = "<group>"; };
@@ -148,7 +146,6 @@
 				0382E2A92718186100EB570E /* DefaultInformationsVerificator_Specs.swift */,
 				03F05430271B392300434706 /* SucceedingInformationsVerificator.swift */,
 				03F05432271B393100434706 /* FailingInformationsVerificator.swift */,
-				03F05434271B393B00434706 /* NeverFinishingInformationsVerificator.swift */,
 			);
 			path = DefaultInformationVerificator_Specs;
 			sourceTree = "<group>";
@@ -425,7 +422,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$PROJECT_DIR/$TARGET_NAME/swiftgen.yml",
+				$PROJECT_DIR/$TARGET_NAME/swiftgen.yml,
 			);
 			name = SwiftGen;
 			outputFileListPaths = (
@@ -491,7 +488,6 @@
 				87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */,
 				87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */,
 				035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */,
-				03F05435271B393B00434706 /* NeverFinishingInformationsVerificator.swift in Sources */,
 				0382E2AA2718186100EB570E /* DefaultInformationsVerificator_Specs.swift in Sources */,
 				0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */,
 				03F05443271B3F9D00434706 /* FailingAccountCreator.swift in Sources */,

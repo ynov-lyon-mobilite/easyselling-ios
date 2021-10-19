@@ -8,34 +8,34 @@
 import Foundation
 
 protocol InformationsVerificator {
-    func verify(email: String, password: String, passwordConfirmation: String) -> Result<AccountCreationInformations, AccountCreationError>?
+    func verify(email: String, password: String, passwordConfirmation: String) throws -> AccountCreationInformations
 }
 
 class DefaultInformationsVerificator: InformationsVerificator {
     
-    func verify(email: String, password: String, passwordConfirmation: String) -> Result<AccountCreationInformations, AccountCreationError>? {
+    func verify(email: String, password: String, passwordConfirmation: String) throws -> AccountCreationInformations {
         
         guard !password.isEmpty else {
-            return .failure(.emptyPassword)
+            throw AccountCreationError.emptyPassword
         }
         
         guard !passwordConfirmation.isEmpty else {
-            return .failure(.emptyPasswordConfirmation)
+            throw AccountCreationError.emptyPasswordConfirmation
         }
         
         guard password == passwordConfirmation else {
-            return .failure(.wrongPassword)
+            throw AccountCreationError.wrongPassword
         }
         
         guard !email.isEmpty else {
-            return .failure(.emptyEmail)
+            throw AccountCreationError.emptyEmail
         }
         
         guard self.verifyContent(of: email) else {
-            return .failure(.wrongEmail)
+            throw AccountCreationError.wrongEmail
         }
         
-        return .success(AccountCreationInformations(email: email, password: password, passwordConfirmation: passwordConfirmation))
+        return AccountCreationInformations(email: email, password: password, passwordConfirmation: passwordConfirmation)
     }
     
     private func verifyContent(of mail: String) -> Bool {
@@ -56,6 +56,7 @@ enum AccountCreationError: LocalizedError, Equatable {
     case wrongPassword
     case emptyPassword
     case emptyPasswordConfirmation
+    case unknow
     
     var errorDescription: String? {
         description
@@ -68,6 +69,7 @@ enum AccountCreationError: LocalizedError, Equatable {
         case .wrongPassword: return "Les mots de passes sont différents"
         case .emptyPassword: return "Le mot de passe est vide"
         case .emptyPasswordConfirmation: return "La confirmation du mot de passe est vide"
+        case .unknow: return "Une erreur est survenue"
         }
     }
 }

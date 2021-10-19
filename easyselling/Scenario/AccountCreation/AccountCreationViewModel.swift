@@ -17,7 +17,6 @@ class AccountCreationViewModel: ObservableObject {
     
     private var verificator: InformationsVerificator
     private var accountCreator: AccountCreator
-    private var cancellables = Set<AnyCancellable>()
     
     @Published var state: AccountCreationState = .initial
     @Published var email: String = ""
@@ -29,12 +28,12 @@ class AccountCreationViewModel: ObservableObject {
     
     func createAccount(email: String, password: String, passwordConfirmation: String) async {
         self.state = .loading
-        
-        switch verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation) {
-        case let .success(informations): await self.createAccount(with: informations)
-        case let .failure(error): self.setError(with: error)
+        do {
+            let informationsVerified = try verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
+            await self.createAccount(with: informationsVerified)
+        } catch(let error) {
             self.state = .initial
-        case .none: break
+            self.setError(with: (error as? AccountCreationError) ?? .unknow)
         }
     }
     

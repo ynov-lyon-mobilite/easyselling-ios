@@ -16,7 +16,7 @@ class FailingInformationsVerificator: InformationsVerificator {
     
     private var error: AccountCreationError
     
-    func verify(email: String, password: String, passwordConfirmation: String) -> Result<AccountCreationInformations, AccountCreationError>? {
-        return .failure(error)
+    func verify(email: String, password: String, passwordConfirmation: String) throws -> AccountCreationInformations {
+        throw error
     }
 }
