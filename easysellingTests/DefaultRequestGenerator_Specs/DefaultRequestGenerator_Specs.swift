@@ -45,6 +45,14 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body, headers: [:])
         thenRequestWithBody(is: request)
     }
+    
+    func test_JSON_encode_failure() {
+        let body = Double.infinity
+
+        givenService()
+        whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body, headers: [:])
+        XCTAssertEqual(APICallerError.encodeError, error)
+    }
 
     func test_Deinit_when_no_longer_interested() {
         givenService()
@@ -74,9 +82,10 @@ class DefaultRequestGenerator_Specs: XCTestCase {
     }
 
     private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) {
-        if let request = try? requestGenerator
-            .generateRequest(endpoint: endpoint, method: method, headers: headers) {
-            self.request = request
+        do {
+            self.request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers)
+        } catch(let error) {
+            self.error = (error as! APICallerError)
         }
     }
 
@@ -85,9 +94,10 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         method: HTTPMethod,
         body: T,
         headers: [String: String]) {
-            if let request = try? requestGenerator
-                .generateRequest(endpoint: endpoint, method: method, body: body, headers: headers) {
-                self.request = request
+            do {
+                self.request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers)
+            } catch(let error) {
+                self.error = (error as! APICallerError)
             }
         }
 
@@ -114,4 +124,5 @@ class DefaultRequestGenerator_Specs: XCTestCase {
 
     private var requestGenerator: DefaultRequestGenerator!
     private var request: URLRequest!
+    private var error: APICallerError!
 }

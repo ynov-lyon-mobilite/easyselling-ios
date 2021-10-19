@@ -50,6 +50,14 @@ class DefaultAPICaller_Specs: XCTestCase {
         whenMakingAPICall(withUrlRequest: request, decodeTo: TestDecodable.self)
         thenAPICallIsSucceding(with: expectedBody)
     }
+    
+    func test_JSON_decode_failure() {
+        let body = "{ \"argument\": \"BODY\"  }"
+
+        givenNetworkService(withReponseHTTPCode: 200, body: body.data(using: .utf8)!)
+        whenMakingAPICall(withUrlRequest: request, decodeTo: String.self)
+        XCTAssertEqual(APICallerError.decodeError, requestError)
+    }
 
     private func givenNetworkService(withReponseHTTPCode httpCode: Int, body: Data = Data()) {
         let urlSession = FakeUrlSession(expected: generateExtectedURLResponse(httpCode: httpCode), with: body)
@@ -65,12 +73,12 @@ class DefaultAPICaller_Specs: XCTestCase {
 
                 expectation.fulfill()
             } catch (let error) {
-                expectation.fulfill()
                 self.requestError = (error as! APICallerError)
+                expectation.fulfill()
             }
         }
         
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 3)
     }
 
     private func whenMakingAPICall<T: Decodable>(withUrlRequest request: URLRequest, decodeTo: T.Type) {

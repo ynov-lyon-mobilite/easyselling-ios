@@ -9,9 +9,10 @@ import Foundation
 
 enum APICallerError: Int, LocalizedError, Equatable {
     //  Application errors
-    case unknownError = 000
-    case decodeError = 001
-    case requestGenerationError = 002
+    case unknownError = 001
+    case encodeError = 002
+    case decodeError = 003
+    case requestGenerationError = 004
     
     //  HTTP errors
     case badRequest = 400
