@@ -31,7 +31,6 @@
 		03F209802716E2CB00E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F209822716E2CB00E10F6C /* localizable.strings */; };
 		03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209842716EEC900E10F6C /* Strings+Generated.swift */; };
 		03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209852716EECA00E10F6C /* XCAssets+Generated.swift */; };
-		8704D84B27193CE8000B24E2 /* UserAuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8704D84A27193CE8000B24E2 /* UserAuthenticationView.swift */; };
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
 		87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA027172F520035AB13 /* URLSessionProtocol.swift */; };
@@ -83,7 +82,6 @@
 		03F209812716E2CB00E10F6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/localizable.strings; sourceTree = "<group>"; };
 		03F209842716EEC900E10F6C /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		03F209852716EECA00E10F6C /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
-		8704D84A27193CE8000B24E2 /* UserAuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationView.swift; sourceTree = "<group>"; };
 		873552AF270D847700F2DDBD /* easyselling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = easyselling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873552B6270D847B00F2DDBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		873552B9270D847B00F2DDBD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -249,7 +247,6 @@
 				873552B8270D847B00F2DDBD /* Preview Content */,
 				0382E2A12717648000EB570E /* Scenario */,
 				D00736552712D93800ED0F2C /* easyselling.entitlements */,
-				8704D84A27193CE8000B24E2 /* UserAuthenticationView.swift */,
 				035E860327184EDC00684ED0 /* AppDelegate.swift */,
 			);
 			path = easyselling;
@@ -527,7 +524,6 @@
 				87DC1D0C271FDF6B002DC193 /* Token.swift in Sources */,
 				87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */,
 				035E860A2718982A00684ED0 /* HTTPEndpoint.swift in Sources */,
-				8704D84B27193CE8000B24E2 /* UserAuthenticationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
