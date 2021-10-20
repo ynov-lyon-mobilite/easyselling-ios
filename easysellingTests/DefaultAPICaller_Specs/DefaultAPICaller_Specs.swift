@@ -43,7 +43,7 @@ class DefaultAPICaller_Specs: XCTestCase {
     }
 
     func test_Sends_data_to_back_end_with_response_body() {
-        let body = "{ \"argument\": \"BODY\"  }"
+        let body = "{\"data\": {\"argument\": \"BODY\"}}"
         let expectedBody = TestDecodable(argument: "BODY")
 
         givenNetworkService(withReponseHTTPCode: 200, body: body.data(using: .utf8)!)
@@ -52,10 +52,10 @@ class DefaultAPICaller_Specs: XCTestCase {
     }
     
     func test_JSON_decode_failure() {
-        let body = "{ \"argument\": \"BODY\"  }"
+        let body = "{\"argument\": \"BODY\"}"
 
         givenNetworkService(withReponseHTTPCode: 200, body: body.data(using: .utf8)!)
-        whenMakingAPICall(withUrlRequest: request, decodeTo: String.self)
+        whenMakingAPICall(withUrlRequest: request, decodeTo: TestDecodable.self)
         XCTAssertEqual(APICallerError.decodeError, requestError)
     }
 
@@ -150,10 +150,16 @@ class FakeUrlSession: URLSessionProtocol {
     
     private let data: Data
     private let response: URLResponse
-
-    init(expected response: URLResponse, with data: Data) {
+    
+    init(expected response: URLResponse, with data: Data = Data()) {
         self.data = data
         self.response = response
+    }
+    
+    init(with data: Data) {
+        self.data = data
+        self.response = HTTPURLResponse(url: URL(string: "https://google.com/osef")!, statusCode: 200,
+                                        httpVersion: nil, headerFields: nil)!
     }
 
     func data(for request: URLRequest, delegate: URLSessionTaskDelegate? = nil) async throws -> (Data, URLResponse) {
