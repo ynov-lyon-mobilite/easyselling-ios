@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol UserAuthentication {
+protocol UserAuthenticatior {
     func login(mail: String, password: String) async throws -> Token
 }
 
-final class DefaultUserAuthenticator: UserAuthentication {
+final class DefaultUserAuthenticator: UserAuthenticatior {
     private var requestGenerator: RequestGenerator
     private var apiCaller: APICaller
     

@@ -17,7 +17,7 @@ class DefaultUserAuthenticator_Specs: XCTestCase {
 
         givenUserAuthenticator(data: httpResponse.data(using: .utf8)!)
         await whenLoginUser()
-        thenToken(expectedAccessToken: accessToken, expectedRefreshTOken: refreshToken)
+        thenToken(expectedAccessToken: accessToken, expectedRefreshToken: refreshToken)
     }
     
     func test_Login_user_failed_because_needed_otp() async {
@@ -45,9 +45,9 @@ class DefaultUserAuthenticator_Specs: XCTestCase {
         }
     }
     
-    private func thenToken(expectedAccessToken: String, expectedRefreshTOken: String) {
+    private func thenToken(expectedAccessToken: String, expectedRefreshToken: String) {
         XCTAssertNil(requestError)
-        XCTAssertEqual(expectedRefreshTOken, requestResult.refreshToken)
+        XCTAssertEqual(expectedRefreshToken, requestResult.refreshToken)
         XCTAssertEqual(expectedAccessToken, requestResult.accessToken)
     }
     
@@ -56,7 +56,7 @@ class DefaultUserAuthenticator_Specs: XCTestCase {
         XCTAssertEqual(expectedError, requestError)
     }
     
-    private var userAuthenticator: UserAuthentication!
+    private var userAuthenticator: UserAuthenticatior!
     private var requestResult: Token!
     private var requestError: APICallerError!
 }
