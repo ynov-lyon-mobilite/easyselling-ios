@@ -17,42 +17,20 @@ struct OnBoardingView: View {
     
     var body: some View {
         VStack {
-            Image(self.viewModel.features[self.viewModel.currentFeatureIndex].image)
-                .frame(width: 50, height: 50)
-            Text(self.viewModel.features[self.viewModel.currentFeatureIndex].title)
-            HStack {
-                if(!(self.viewModel.currentFeatureIndex == 0)) {
-                    Button(action: previousPage) {
-                        Text("Previous Page")
-                    }
-                }
-                if(!(self.viewModel.currentFeatureIndex == self.viewModel.features.count - 1)) {
-                    Button(action: nextPage) {
-                        Text("Next Page")
-                    }
-                }
+            Text(viewModel.feature?.title ?? "")
+            Text(viewModel.feature?.text ?? "")
+            Button(action: viewModel.nextFeature) {
+                Text("next")
             }
         }
     }
-    
-    func nextPage() {
-        print("Click on next button")
-        self.viewModel.nextFeature()
-        print("Page : " + String(self.viewModel.currentFeatureIndex + 1))
-    }
-    
-    func previousPage() {
-        print("Click on previous button")
-        self.viewModel.previousFeature()
-        print("Page : " + String(self.viewModel.currentFeatureIndex + 1))
-    }
 }
 
-struct OnBoardingPage_Previews: PreviewProvider {
+struct OnBoardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnBoardingView(viewModel: OnBoardingViewModel(features: [
-            Feature(title: "Page One", image: "Lucas"),
-            Feature(title: "Page Two", image: "Bafabière"),
-            Feature(title: "Page Three", image: "OhYeah")]))
+            OnBoardingView(viewModel: OnBoardingViewModel(features: [
+                Feature(title: "Page One", image: "Lucas", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
+                Feature(title: "Page Two", image: "Lucas", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
+                Feature(title: "Page Three", image: "Lucas", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi")]))
     }
 }

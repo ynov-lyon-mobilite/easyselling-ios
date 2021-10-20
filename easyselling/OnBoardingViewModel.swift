@@ -14,14 +14,22 @@ enum OnBoardingViewModelError : Error {
 
 class OnBoardingViewModel: ObservableObject {
 
-    private(set) var features: [Feature]
-    @Published private(set) var currentFeatureIndex: Int
+    var features: [Feature]
+    var feature: Feature? {
+        if featuresIsEmpty == "error" {
+            return nil
+        }
+        return features[currentFeatureIndex]
+    }
+    var featuresIsEmpty: String {
+        if features.isEmpty {
+            return "error"
+        }
+        return ""
+    }
+    var currentFeatureIndex: Int = 0
     
-    init(features: [Feature]) /*throws*/ {
-        /*if features.isEmpty {
-            throw OnBoardingViewModelError.mustHaveAtLeastOnFeature
-        }*/
-        self.currentFeatureIndex = 0
+    init(features: [Feature]) {
         self.features = features
     }
     
@@ -42,7 +50,8 @@ class OnBoardingViewModel: ObservableObject {
     }
 }
 
-struct Feature {
+struct Feature: Equatable {
     let title: String
     let image: String
+    let text: String
 }

@@ -37,17 +37,17 @@ class DefaultOnBoardingNavigator: OnBoardingNavigator {
     private var navigationController: UINavigationController
 
     func begin() {
-        /*do {*/
-            let viewModel = /*try*/ OnBoardingViewModel(features: [
-                Feature(title: "Page One", image: "Lucas"),
-                Feature(title: "Page Two", image: "Bafabière"),
-                Feature(title: "Page Three", image: "OhYeah")])
+        do {
+            let viewModel = try OnBoardingViewModel(features: [
+                Feature(title: "Page One", image: "Lucas", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
+                Feature(title: "Page Two", image: "Bafabière", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
+                Feature(title: "Page Three", image: "OhYeah", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi")])
             let onBoardingView = OnBoardingView(viewModel: viewModel)
             let view: UIViewController = UIHostingController(rootView: onBoardingView)
             navigationController.pushViewController(view,
                                                     animated: true)
-        /*} catch {
+        } catch {
            print("ERROR")
-        }*/
+        }
     }
 }
