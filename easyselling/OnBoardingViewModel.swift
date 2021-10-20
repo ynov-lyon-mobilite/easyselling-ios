@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum OnBoardingViewModelError : Error {
     case mustHaveAtLeastOnFeature
@@ -14,12 +15,12 @@ enum OnBoardingViewModelError : Error {
 class OnBoardingViewModel: ObservableObject {
 
     private(set) var features: [Feature]
-    private(set) var currentFeatureIndex: Int
+    @Published private(set) var currentFeatureIndex: Int
     
-    init(features: [Feature]) throws {
-        if features.isEmpty {
+    init(features: [Feature]) /*throws*/ {
+        /*if features.isEmpty {
             throw OnBoardingViewModelError.mustHaveAtLeastOnFeature
-        }
+        }*/
         self.currentFeatureIndex = 0
         self.features = features
     }
@@ -39,9 +40,9 @@ class OnBoardingViewModel: ObservableObject {
             currentFeatureIndex -= 1
         }
     }
-    
 }
 
 struct Feature {
-    var title: String
+    let title: String
+    let image: String
 }

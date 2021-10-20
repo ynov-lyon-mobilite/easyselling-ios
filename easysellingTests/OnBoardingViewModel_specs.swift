@@ -5,7 +5,7 @@
 //  Created by Pierre on 13/10/2021.
 //
 
-import XCTest
+/*import XCTest
 @testable import easyselling
 
 class OnBoardingViewModel_Specs: XCTestCase {
@@ -105,6 +105,4 @@ class OnBoardingViewModel_Specs: XCTestCase {
     }
     
     private var onBoardingViewModel: OnBoardingViewModel!
-}
-
-
+}*/
