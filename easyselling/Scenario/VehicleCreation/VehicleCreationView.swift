@@ -27,16 +27,13 @@ struct VehicleCreationView: View {
             TextField("Modèle", text: $viewModel.model)
                 .padding(.top)
             
-            TextField("Immatriculation", text: $viewModel.immatriculation)
-                .padding(.top)
-            
-            TextField("Numéro de licence", text: $viewModel.licenceNumber)
+            TextField("Numéro de licence", text: $viewModel.license)
                 .padding(.top)
             
             HStack(alignment: .lastTextBaseline) {
                 Picker("Type", selection: $viewModel.type) {
-                    Text("Voiture").tag(VehicleType.car)
-                    Text("Moto").tag(VehicleType.motorcycle)
+                    Text("Voiture").tag(VehicleType.carType)
+                    Text("Moto").tag(VehicleType.motoType)
                 }
                 Spacer(minLength: 50)
                 TextField("Année", text: $viewModel.year)
@@ -65,7 +62,7 @@ struct VehicleCreationView: View {
     
     func createNewVehicle() async {
         // swiftlint:disable line_length
-        await viewModel.createVehicle(with: VehicleInformations(licenceNumber: viewModel.licenceNumber, brand: viewModel.brand, immatriculation: viewModel.immatriculation, type: viewModel.type, year: Int(viewModel.year) ?? 0, model: viewModel.model))
+        await viewModel.createVehicle(with: VehicleInformations(license: viewModel.license, brand: viewModel.brand, type: viewModel.type.rawValue, year: viewModel.year, model: viewModel.model))
         // swiftlint:enable line_length
     }
 }

@@ -19,10 +19,9 @@ class VehicleCreationViewModel: ObservableObject {
     
     @Published var brand: String = ""
     @Published var model: String = ""
-    @Published var immatriculation: String = ""
-    @Published var licenceNumber: String = ""
+    @Published var license: String = ""
     @Published var year: String = ""
-    @Published var type: VehicleType = .car
+    @Published var type: VehicleType = .carType
     
     init(vehicleCreator: VehicleCreator = VehicleCreator(), vehicleVerificator: VehicleInformationsVerificator = VehicleInformationsVerificator()) {
         self.vehicleCreator = vehicleCreator
