@@ -25,9 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        let navigator = DefaultAccountCreationNavigator(navigationController: navigationController)
-        let scenario = AccountCreationScenario(navigator: navigator)
-        scenario.begin {}
+        let navigator = DefaultVehicleCreationNavigator(navigationController: navigationController)
+        let scenario = VehicleScenario(navigator: navigator)
+        scenario.begin()
         
         return true
     }
