@@ -11,7 +11,5 @@ import Combine
 
 class SucceedingAccountCreator: AccountCreator {
     
-    func createAccount(informations: AccountCreationInformations) async throws {
-        return
-    }
+    func createAccount(informations: AccountCreationInformations) async throws {}
 }

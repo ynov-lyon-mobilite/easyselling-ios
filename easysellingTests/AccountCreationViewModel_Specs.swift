@@ -124,5 +124,4 @@ class AccountCreationViewModel_Specs: XCTestCase {
     private var viewModel: AccountCreationViewModel!
     private var succeedingVerificator: SucceedingInformationsVerificator!
     private var verifiedInformations: AccountCreationInformations!
-    private lazy var requestExpectation = expectation(description: "Should finish request")
 }

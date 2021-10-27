@@ -9,15 +9,14 @@ import Foundation
 import Combine
 @testable import easyselling
 
-class FailingAccountCreator: AccountCreator {
-    
+class FailingAccountCreator: AccountCreator {    
+    private var error: APICallerError
+
     init(error: APICallerError) {
         self.error = error
     }
     
-    private var error: APICallerError
-    
     func createAccount(informations: AccountCreationInformations) async throws {
-        throw APICallerError.from(statusCode: error.rawValue)
+        throw error
     }
 }

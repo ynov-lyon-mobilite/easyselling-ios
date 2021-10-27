@@ -11,6 +11,7 @@ enum HTTPEndpoint: String {
     var baseURL: String { "https://easyselling.maxencemottard.com" }
     
     case users = "/users"
+    case authLogin = "/auth/login"
     
     var urlString: String {
         "\(baseURL)\(self.rawValue)"

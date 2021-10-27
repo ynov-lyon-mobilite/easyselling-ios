@@ -36,11 +36,13 @@ final class DefaultAPICaller: APICaller {
                 throw APICallerError.from(statusCode: strongResponse.statusCode)
             }
             
-            guard let decodedResult = try? jsonDecoder.decode(T.self, from: data) else {
+            do {
+                let decodedResult = try jsonDecoder.decode(APIResponse<T>.self, from: data)
+                return decodedResult.data
+            } catch (let error) {
+                print(error)
                 throw APICallerError.decodeError
             }
-            
-            return decodedResult
         }
 
     func call(_ urlRequest: URLRequest) async throws {
