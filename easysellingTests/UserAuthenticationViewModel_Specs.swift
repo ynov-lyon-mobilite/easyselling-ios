@@ -11,9 +11,12 @@ import XCTest
 class UserAuthenticationViewModel_Specs: XCTestCase {
     
     func test_Connects_user_successfully() async {
-        let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkMzEwYTUzLWZmZTYtNDY5YS05NWRmLWRlNGE4OGE1ZTU5ZiIsImlhdCI6MTYzNDY3NjQ1OSwiZXhwIjoxNjM0Njc3MzU5LCJpc3MiOiJkaXJlY3R1cyJ9.lsMJA8Dvbu3muCZ77gYPDqdIYELrWlJsPh4e0A6tJxI"
-        let refreshToken = "wcA0WsKCAIA8ywcGt8jlsWKn-1MGKyGZcembTHsWfgmoQ3aTUnsPHCU_MIveDsr5"
-        
+        givenViewModel(userAuthenticator: SucceedingUserAuthenticator())
+        await whenUserLogin()
+        thenToken(expectedAccessToken: accessToken, expectedRefreshToken: refreshToken)
+    }
+    
+    func test_Connects_user_successfully_and_state_updates() async {
         givenViewModel(userAuthenticator: SucceedingUserAuthenticator())
         await whenUserLogin()
         thenToken(expectedAccessToken: accessToken, expectedRefreshToken: refreshToken)
@@ -26,7 +29,8 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
     }
     
     private func givenViewModel(userAuthenticator: UserAuthenticatior) {
-        viewModel = UserAuthenticationViewModel(userAuthenticator: userAuthenticator)
+        tokenManager = TokenManager(keychain: .unitTestsKeychain)
+        viewModel = UserAuthenticationViewModel(userAuthenticator: userAuthenticator, tokenManager: tokenManager)
     }
     
     private func whenUserLogin() async {
@@ -34,16 +38,20 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
     }
     
     private func thenToken(expectedAccessToken: String, expectedRefreshToken: String) {
-        XCTAssertEqual(expectedRefreshToken, viewModel.token?.refreshToken)
-        XCTAssertEqual(expectedAccessToken, viewModel.token?.accessToken)
+        XCTAssertEqual(expectedRefreshToken, tokenManager.refreshToken)
+        XCTAssertEqual(expectedAccessToken, tokenManager.accessToken)
         XCTAssertNil(viewModel.error)
     }
     
     private func thenError(is expectedError: APICallerError) {
         XCTAssertEqual(expectedError, viewModel.error)
-        XCTAssertNil(viewModel.token)
     }
     
     private var viewModel: UserAuthenticationViewModel!
     private var requestResult: Token!
+    private var tokenManager: TokenManager!
+    
+    
+    private let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkMzEwYTUzLWZmZTYtNDY5YS05NWRmLWRlNGE4OGE1ZTU5ZiIsImlhdCI6MTYzNDY3NjQ1OSwiZXhwIjoxNjM0Njc3MzU5LCJpc3MiOiJkaXJlY3R1cyJ9.lsMJA8Dvbu3muCZ77gYPDqdIYELrWlJsPh4e0A6tJxI"
+    private let refreshToken = "wcA0WsKCAIA8ywcGt8jlsWKn-1MGKyGZcembTHsWfgmoQ3aTUnsPHCU_MIveDsr5"
 }

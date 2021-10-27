@@ -35,6 +35,10 @@
 		8705B9A227207A39004132CF /* SucceedingUserAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */; };
 		8705B9A427207A8D004132CF /* UserAuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A327207A8D004132CF /* UserAuthenticationViewModel.swift */; };
 		8705B9A627207D36004132CF /* FailingUserAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A527207D36004132CF /* FailingUserAuthenticator.swift */; };
+		8705B9A8272081E3004132CF /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A7272081E2004132CF /* TokenManager.swift */; };
+		8705B9AB27208249004132CF /* KeychainSwift+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */; };
+		8705B9B127208464004132CF /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8705B9B027208464004132CF /* KeychainSwift */; };
+		8705B9B327208516004132CF /* TokenManager_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9B227208516004132CF /* TokenManager_Specs.swift */; };
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
 		87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA027172F520035AB13 /* URLSessionProtocol.swift */; };
@@ -90,6 +94,9 @@
 		8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingUserAuthenticator.swift; sourceTree = "<group>"; };
 		8705B9A327207A8D004132CF /* UserAuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewModel.swift; sourceTree = "<group>"; };
 		8705B9A527207D36004132CF /* FailingUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingUserAuthenticator.swift; sourceTree = "<group>"; };
+		8705B9A7272081E2004132CF /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainSwift+Extensions.swift"; sourceTree = "<group>"; };
+		8705B9B227208516004132CF /* TokenManager_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager_Specs.swift; sourceTree = "<group>"; };
 		873552AF270D847700F2DDBD /* easyselling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = easyselling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873552B6270D847B00F2DDBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		873552B9270D847B00F2DDBD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -115,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8705B9B127208464004132CF /* KeychainSwift in Frameworks */,
 				033F4AF32718C8A800B79149 /* NetFox in Frameworks */,
 				D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */,
 			);
@@ -226,6 +234,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8705B9A927208233004132CF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		873552A6270D847700F2DDBD = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +294,7 @@
 				0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */,
 				0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */,
 				8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */,
+				8705B9B227208516004132CF /* TokenManager_Specs.swift */,
 				03F0542F271B38EB00434706 /* DefaultInformationVerificator_Specs */,
 			);
 			path = easysellingTests;
@@ -288,6 +305,7 @@
 			children = (
 				0382E29B2717638400EB570E /* TypeAlias */,
 				87780B9D27172F250035AB13 /* Enums */,
+				8705B9A927208233004132CF /* Extensions */,
 				87780B9F27172F380035AB13 /* Protocols */,
 			);
 			path = Additions;
@@ -316,6 +334,7 @@
 			children = (
 				87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */,
 				87780BAC271730100035AB13 /* DefaultAPICaller.swift */,
+				8705B9A7272081E2004132CF /* TokenManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -385,6 +404,7 @@
 			name = easyselling;
 			packageProductDependencies = (
 				033F4AF22718C8A800B79149 /* NetFox */,
+				8705B9B027208464004132CF /* KeychainSwift */,
 			);
 			productName = easyselling;
 			productReference = 873552AF270D847700F2DDBD /* easyselling.app */;
@@ -440,6 +460,7 @@
 			mainGroup = 873552A6270D847700F2DDBD;
 			packageReferences = (
 				033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */,
+				8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 873552B0270D847700F2DDBD /* Products */;
 			projectDirPath = "";
@@ -530,7 +551,9 @@
 				0382E2AC2718190B00EB570E /* DefaultInformationsVerificator.swift in Sources */,
 				87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */,
 				03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */,
+				8705B9A8272081E3004132CF /* TokenManager.swift in Sources */,
 				0382E29F2717647500EB570E /* AccountCreationScenario.swift in Sources */,
+				8705B9AB27208249004132CF /* KeychainSwift+Extensions.swift in Sources */,
 				87DC1D0E271FDF8D002DC193 /* APIResponse.swift in Sources */,
 				87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */,
 				03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */,
@@ -552,6 +575,7 @@
 				03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */,
 				0382E29A27175FB700EB570E /* AccountCreationScenario_Specs.swift in Sources */,
 				87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */,
+				8705B9B327208516004132CF /* TokenManager_Specs.swift in Sources */,
 				8705B9A027207838004132CF /* UserAuthenticationViewModel_Specs.swift in Sources */,
 				87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */,
 				035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */,
@@ -868,6 +892,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -875,6 +907,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */;
 			productName = NetFox;
+		};
+		8705B9B027208464004132CF /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
