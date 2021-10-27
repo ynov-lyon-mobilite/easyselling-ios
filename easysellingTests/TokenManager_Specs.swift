@@ -14,13 +14,13 @@ final class TokenManager_Specs: XCTestCase {
     
     func test_Saves_tokens_in_keychain() {
         givenTokenManager()
-        whenSetTokensWithTokenManager(accessToken: "JWTToken", refreshToken: "RefreshToken")
+        whenSaveToken(accessToken: "JWTToken", refreshToken: "RefreshToken")
         thenTokenAre(accessToken: "JWTToken", refreshToken: "RefreshToken")
     }
     
     func test_Removes_tokens_from_keychain() {
         givenTokenManager()
-        whenSetTokensWithTokenManager(accessToken: nil, refreshToken: nil)
+        whenSaveToken(accessToken: nil, refreshToken: nil)
         thenTokenAre(accessToken: nil, refreshToken: nil)
     }
     
@@ -28,7 +28,7 @@ final class TokenManager_Specs: XCTestCase {
         tokenManager = TokenManager(keychain: keychain)
     }
     
-    private func whenSetTokensWithTokenManager(accessToken: String?, refreshToken: String?) {
+    private func whenSaveToken(accessToken: String?, refreshToken: String?) {
         tokenManager.accessToken = accessToken
         tokenManager.refreshToken = refreshToken
     }

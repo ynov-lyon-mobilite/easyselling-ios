@@ -22,7 +22,7 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
         thenToken(expectedAccessToken: accessToken, expectedRefreshToken: refreshToken)
     }
     
-    func test_Connects_user_bad_credentials() async {
+    func test_Tries_login_user_with_bad_credentials() async {
         givenViewModel(userAuthenticator: FailingUserAuthenticator(error: .unauthorized))
         await whenUserLogin()
         thenError(is: .unauthorized)
