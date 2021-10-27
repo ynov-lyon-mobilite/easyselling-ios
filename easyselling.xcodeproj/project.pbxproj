@@ -16,7 +16,6 @@
 		0382E29A27175FB700EB570E /* AccountCreationScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */; };
 		0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29C2717639A00EB570E /* TypesAlias.swift */; };
 		0382E29F2717647500EB570E /* AccountCreationScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29E2717647500EB570E /* AccountCreationScenario.swift */; };
-		0382E2A4271765B800EB570E /* AccountCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A3271765B800EB570E /* AccountCreationView.swift */; };
 		0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A52717664000EB570E /* AccountCreationViewModel.swift */; };
 		0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */; };
 		0382E2AA2718186100EB570E /* DefaultInformationsVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A92718186100EB570E /* DefaultInformationsVerificator_Specs.swift */; };
@@ -32,6 +31,14 @@
 		03F209802716E2CB00E10F6C /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03F209822716E2CB00E10F6C /* localizable.strings */; };
 		03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209842716EEC900E10F6C /* Strings+Generated.swift */; };
 		03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209852716EECA00E10F6C /* XCAssets+Generated.swift */; };
+		8705B9A027207838004132CF /* UserAuthenticationViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */; };
+		8705B9A227207A39004132CF /* SucceedingUserAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */; };
+		8705B9A427207A8D004132CF /* UserAuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A327207A8D004132CF /* UserAuthenticationViewModel.swift */; };
+		8705B9A627207D36004132CF /* FailingUserAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A527207D36004132CF /* FailingUserAuthenticator.swift */; };
+		8705B9A8272081E3004132CF /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A7272081E2004132CF /* TokenManager.swift */; };
+		8705B9AB27208249004132CF /* KeychainSwift+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */; };
+		8705B9B127208464004132CF /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8705B9B027208464004132CF /* KeychainSwift */; };
+		8705B9B327208516004132CF /* TokenManager_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9B227208516004132CF /* TokenManager_Specs.swift */; };
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
 		87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA027172F520035AB13 /* URLSessionProtocol.swift */; };
@@ -40,6 +47,12 @@
 		87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA727172F780035AB13 /* DefaultRequestGenerator_Specs.swift */; };
 		87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */; };
 		87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BAC271730100035AB13 /* DefaultAPICaller.swift */; };
+		87DC1D00271F60B9002DC193 /* AccountCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1CFF271F60B9002DC193 /* AccountCreationView.swift */; };
+		87DC1D03271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D02271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift */; };
+		87DC1D06271F6A4C002DC193 /* DefaultUserAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D05271F6A4C002DC193 /* DefaultUserAuthenticator.swift */; };
+		87DC1D0A271FDF5C002DC193 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D09271FDF5C002DC193 /* LoginDTO.swift */; };
+		87DC1D0C271FDF6B002DC193 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D0B271FDF6B002DC193 /* Token.swift */; };
+		87DC1D0E271FDF8D002DC193 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D0D271FDF8D002DC193 /* APIResponse.swift */; };
 		D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00736572712D93800ED0F2C /* AuthenticationServices.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +75,6 @@
 		0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationScenario_Specs.swift; sourceTree = "<group>"; };
 		0382E29C2717639A00EB570E /* TypesAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesAlias.swift; sourceTree = "<group>"; };
 		0382E29E2717647500EB570E /* AccountCreationScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationScenario.swift; sourceTree = "<group>"; };
-		0382E2A3271765B800EB570E /* AccountCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationView.swift; sourceTree = "<group>"; };
 		0382E2A52717664000EB570E /* AccountCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationViewModel.swift; sourceTree = "<group>"; };
 		0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationViewModel_Specs.swift; sourceTree = "<group>"; };
 		0382E2A92718186100EB570E /* DefaultInformationsVerificator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInformationsVerificator_Specs.swift; sourceTree = "<group>"; };
@@ -78,6 +90,13 @@
 		03F209812716E2CB00E10F6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/localizable.strings; sourceTree = "<group>"; };
 		03F209842716EEC900E10F6C /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		03F209852716EECA00E10F6C /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
+		8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewModel_Specs.swift; sourceTree = "<group>"; };
+		8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingUserAuthenticator.swift; sourceTree = "<group>"; };
+		8705B9A327207A8D004132CF /* UserAuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewModel.swift; sourceTree = "<group>"; };
+		8705B9A527207D36004132CF /* FailingUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingUserAuthenticator.swift; sourceTree = "<group>"; };
+		8705B9A7272081E2004132CF /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainSwift+Extensions.swift"; sourceTree = "<group>"; };
+		8705B9B227208516004132CF /* TokenManager_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager_Specs.swift; sourceTree = "<group>"; };
 		873552AF270D847700F2DDBD /* easyselling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = easyselling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873552B6270D847B00F2DDBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		873552B9270D847B00F2DDBD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -88,6 +107,12 @@
 		87780BA727172F780035AB13 /* DefaultRequestGenerator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator_Specs.swift; sourceTree = "<group>"; };
 		87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator.swift; sourceTree = "<group>"; };
 		87780BAC271730100035AB13 /* DefaultAPICaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPICaller.swift; sourceTree = "<group>"; };
+		87DC1CFF271F60B9002DC193 /* AccountCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationView.swift; sourceTree = "<group>"; };
+		87DC1D02271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserAuthenticator_Specs.swift; sourceTree = "<group>"; };
+		87DC1D05271F6A4C002DC193 /* DefaultUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserAuthenticator.swift; sourceTree = "<group>"; };
+		87DC1D09271FDF5C002DC193 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
+		87DC1D0B271FDF6B002DC193 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		87DC1D0D271FDF8D002DC193 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		D00736552712D93800ED0F2C /* easyselling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = easyselling.entitlements; sourceTree = "<group>"; };
 		D00736572712D93800ED0F2C /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -97,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8705B9B127208464004132CF /* KeychainSwift in Frameworks */,
 				033F4AF32718C8A800B79149 /* NetFox in Frameworks */,
 				D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */,
 			);
@@ -124,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				0382E2A22717648700EB570E /* AccountCreation */,
+				87DC1D04271F6A1F002DC193 /* UserAuthentication */,
 			);
 			path = Scenario;
 			sourceTree = "<group>";
@@ -131,11 +158,11 @@
 		0382E2A22717648700EB570E /* AccountCreation */ = {
 			isa = PBXGroup;
 			children = (
-				0382E2A3271765B800EB570E /* AccountCreationView.swift */,
 				0382E29E2717647500EB570E /* AccountCreationScenario.swift */,
 				0382E2A52717664000EB570E /* AccountCreationViewModel.swift */,
 				0382E2AB2718190B00EB570E /* DefaultInformationsVerificator.swift */,
 				035E860527188E9300684ED0 /* DefaultAccountCreator.swift */,
+				87DC1CFF271F60B9002DC193 /* AccountCreationView.swift */,
 			);
 			path = AccountCreation;
 			sourceTree = "<group>";
@@ -207,6 +234,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8705B9A927208233004132CF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		873552A6270D847700F2DDBD = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +267,7 @@
 				87780BAA27172FB10035AB13 /* Services */,
 				87780B9C27172F1C0035AB13 /* Additions */,
 				03F209772716E1C500E10F6C /* Application */,
+				87DC1D07271FDF3F002DC193 /* Models */,
 				873552B8270D847B00F2DDBD /* Preview Content */,
 				0382E2A12717648000EB570E /* Scenario */,
 				D00736552712D93800ED0F2C /* easyselling.entitlements */,
@@ -251,11 +287,14 @@
 		873552C2270D847B00F2DDBD /* easysellingTests */ = {
 			isa = PBXGroup;
 			children = (
+				87DC1D01271F61E2002DC193 /* DefaultUserAuthenticator_Specs */,
 				03F05436271B3E3900434706 /* DefaultAccountCreator_Specs */,
 				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
 				03F0543D271B3EFB00434706 /* DefaultRequestGenerator_Specs */,
 				0382E29927175FB700EB570E /* AccountCreationScenario_Specs.swift */,
 				0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */,
+				8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */,
+				8705B9B227208516004132CF /* TokenManager_Specs.swift */,
 				03F0542F271B38EB00434706 /* DefaultInformationVerificator_Specs */,
 			);
 			path = easysellingTests;
@@ -266,6 +305,7 @@
 			children = (
 				0382E29B2717638400EB570E /* TypeAlias */,
 				87780B9D27172F250035AB13 /* Enums */,
+				8705B9A927208233004132CF /* Extensions */,
 				87780B9F27172F380035AB13 /* Protocols */,
 			);
 			path = Additions;
@@ -294,8 +334,46 @@
 			children = (
 				87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */,
 				87780BAC271730100035AB13 /* DefaultAPICaller.swift */,
+				8705B9A7272081E2004132CF /* TokenManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		87DC1D01271F61E2002DC193 /* DefaultUserAuthenticator_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				87DC1D02271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift */,
+				8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */,
+				8705B9A527207D36004132CF /* FailingUserAuthenticator.swift */,
+			);
+			path = DefaultUserAuthenticator_Specs;
+			sourceTree = "<group>";
+		};
+		87DC1D04271F6A1F002DC193 /* UserAuthentication */ = {
+			isa = PBXGroup;
+			children = (
+				87DC1D05271F6A4C002DC193 /* DefaultUserAuthenticator.swift */,
+				8705B9A327207A8D004132CF /* UserAuthenticationViewModel.swift */,
+			);
+			path = UserAuthentication;
+			sourceTree = "<group>";
+		};
+		87DC1D07271FDF3F002DC193 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				87DC1D08271FDF51002DC193 /* DTO */,
+				87DC1D0B271FDF6B002DC193 /* Token.swift */,
+				87DC1D0D271FDF8D002DC193 /* APIResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		87DC1D08271FDF51002DC193 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				87DC1D09271FDF5C002DC193 /* LoginDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		D00736562712D93800ED0F2C /* Frameworks */ = {
@@ -326,6 +404,7 @@
 			name = easyselling;
 			packageProductDependencies = (
 				033F4AF22718C8A800B79149 /* NetFox */,
+				8705B9B027208464004132CF /* KeychainSwift */,
 			);
 			productName = easyselling;
 			productReference = 873552AF270D847700F2DDBD /* easyselling.app */;
@@ -381,6 +460,7 @@
 			mainGroup = 873552A6270D847700F2DDBD;
 			packageReferences = (
 				033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */,
+				8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 873552B0270D847700F2DDBD /* Products */;
 			projectDirPath = "";
@@ -422,7 +502,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$PROJECT_DIR/$TARGET_NAME/swiftgen.yml",
+				$PROJECT_DIR/$TARGET_NAME/swiftgen.yml,
 			);
 			name = SwiftGen;
 			outputFileListPaths = (
@@ -431,7 +511,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftgen >/dev/null; then\n  swiftgen\nelse\n  echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
+			shellScript = "if which swiftgen >/dev/null; then\n  swiftgen\nelse\n  echo \"error: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
 		};
 		87780B9527172D500035AB13 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -458,19 +538,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0382E2A4271765B800EB570E /* AccountCreationView.swift in Sources */,
 				035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */,
+				87DC1D00271F60B9002DC193 /* AccountCreationView.swift in Sources */,
 				0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */,
 				87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */,
 				035E860C2718A3AB00684ED0 /* APICallerError.swift in Sources */,
 				035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */,
 				0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */,
+				87DC1D0A271FDF5C002DC193 /* LoginDTO.swift in Sources */,
+				87DC1D06271F6A4C002DC193 /* DefaultUserAuthenticator.swift in Sources */,
+				8705B9A427207A8D004132CF /* UserAuthenticationViewModel.swift in Sources */,
 				0382E2AC2718190B00EB570E /* DefaultInformationsVerificator.swift in Sources */,
 				87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */,
 				03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */,
+				8705B9A8272081E3004132CF /* TokenManager.swift in Sources */,
 				0382E29F2717647500EB570E /* AccountCreationScenario.swift in Sources */,
+				8705B9AB27208249004132CF /* KeychainSwift+Extensions.swift in Sources */,
+				87DC1D0E271FDF8D002DC193 /* APIResponse.swift in Sources */,
 				87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */,
 				03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */,
+				87DC1D0C271FDF6B002DC193 /* Token.swift in Sources */,
 				87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */,
 				035E860A2718982A00684ED0 /* HTTPEndpoint.swift in Sources */,
 			);
@@ -480,16 +567,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8705B9A227207A39004132CF /* SucceedingUserAuthenticator.swift in Sources */,
 				03F05441271B3F7700434706 /* SuccedingAccountCreator.swift in Sources */,
 				03F0543F271B3F0A00434706 /* FakeRequestGenerator.swift in Sources */,
 				03F0543C271B3E9A00434706 /* FailingAPICaller.swift in Sources */,
+				87DC1D03271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift in Sources */,
 				03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */,
 				0382E29A27175FB700EB570E /* AccountCreationScenario_Specs.swift in Sources */,
 				87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */,
+				8705B9B327208516004132CF /* TokenManager_Specs.swift in Sources */,
+				8705B9A027207838004132CF /* UserAuthenticationViewModel_Specs.swift in Sources */,
 				87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */,
 				035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */,
 				0382E2AA2718186100EB570E /* DefaultInformationsVerificator_Specs.swift in Sources */,
 				0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */,
+				8705B9A627207D36004132CF /* FailingUserAuthenticator.swift in Sources */,
 				03F05443271B3F9D00434706 /* FailingAccountCreator.swift in Sources */,
 				03F05431271B392300434706 /* SucceedingInformationsVerificator.swift in Sources */,
 				03F05439271B3E8300434706 /* SucceedingAPICaller.swift in Sources */,
@@ -800,6 +892,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -807,6 +907,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */;
 			productName = NetFox;
+		};
+		8705B9B027208464004132CF /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
