@@ -12,39 +12,25 @@ import XCTest
 class VehicleScenario_Spec: XCTestCase {
 
     func test_Begins_scenario() {
-        let scenario = VehiculeScenario()
-        
+        givenScenario()
+        whenBeginning()
+        thenHistory(is: [.myVehicles])
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    func test_Begins_scenario() {
-//        givenScenario()
-//        whenBeginning()
-//        thenHistory(is: [.myVehicles])
-//    }
-//
-//    func test_Navigates_to_vehicle_creation() {
-//        givenScenario()
-//        whenBeginning()
-//        whenNavigatingToVehicleCreation()
-//        thenHistory(is: [.myVehicles, .vehicleCreation])
-//    }
-//
-//    func test_Leaves_vehicle_creation() {
-//        givenScenario()
-//        whenBeginning()
-//        whenNavigatingToVehicleCreation()
-//        navigator.onFinish?()
-//        thenHistory(is: [.myVehicles, .vehicleCreation, .myVehicles])
-//    }
+
+    func test_Navigates_to_vehicle_creation() {
+        givenScenario()
+        whenBeginning()
+        whenNavigatingToVehicleCreation()
+        thenHistory(is: [.myVehicles, .vehicleCreation])
+    }
+
+    func test_Leaves_vehicle_creation() {
+        givenScenario()
+        whenBeginning()
+        whenNavigatingToVehicleCreation()
+        navigator.onFinish?()
+        thenHistory(is: [.myVehicles, .vehicleCreation, .myVehicles])
+    }
     
     private func givenScenario() {
         navigator = SpyVehicleCreationNavigator()
