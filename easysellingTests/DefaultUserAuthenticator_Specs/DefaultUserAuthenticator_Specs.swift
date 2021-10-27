@@ -17,10 +17,7 @@ class DefaultUserAuthenticator_Specs: XCTestCase {
     }
     
     func test_Login_user_failed_because_needed_otp() async {
-        let expectedResponse = HTTPURLResponse(url: URL(string: "https://easyselling.maxencemottard.com/auth/login")!,
-                                               statusCode: 401,httpVersion: nil, headerFields: nil)!
-        
-        givenUserAuthenticator(response: expectedResponse)
+        givenUserAuthenticator(error: .unauthorized)
         await whenLoginUser()
         thenError(is: .unauthorized)
     }
@@ -30,8 +27,8 @@ class DefaultUserAuthenticator_Specs: XCTestCase {
         userAuthenticator = DefaultUserAuthenticator(urlSession: FakeUrlSession(with: data))
     }
     
-    private func givenUserAuthenticator(response expectedResponse: HTTPURLResponse) {
-        userAuthenticator = DefaultUserAuthenticator(urlSession: FakeUrlSession(expected: expectedResponse))
+    private func givenUserAuthenticator(error: APICallerError) {
+        userAuthenticator = DefaultUserAuthenticator(urlSession: FakeUrlSession(error: error))
     }
     
     private func whenLoginUser() async {
