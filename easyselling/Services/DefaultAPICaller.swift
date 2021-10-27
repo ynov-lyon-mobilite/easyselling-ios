@@ -48,6 +48,12 @@ final class DefaultAPICaller: APICaller {
     func call(_ urlRequest: URLRequest) async throws {
         let result: (Data, URLResponse)? = try? await urlSession.data(for: urlRequest, delegate: nil)
         
+        // Logs
+        if let (data, response) = result, let dataJSON = try? JSONSerialization.jsonObject(with: data, options: []) {
+            print(response)
+            print(dataJSON)
+        }
+
         guard let (_, response) = result,
               let strongResponse = response as? HTTPURLResponse else {
                   throw APICallerError.internalServerError
