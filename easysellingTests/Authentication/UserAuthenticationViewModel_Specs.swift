@@ -29,16 +29,15 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
     }
     
     func test_Opens_account_creation_view() {
-        let viewModel = MyVehiclesViewModel {
-            self.viewIsOpen = true
-        }
-        viewModel.openVehicleCreation()
+        givenViewModel(userAuthenticator: SucceedingUserAuthenticator())
+        viewModel.navigateToAccountCreation()
         XCTAssertTrue(viewIsOpen)
     }
     
     private func givenViewModel(userAuthenticator: UserAuthenticatior) {
         tokenManager = TokenManager(keychain: .unitTestsKeychain)
-        viewModel = UserAuthenticationViewModel(navigateToAccountCreation: {}, userAuthenticator: userAuthenticator, tokenManager: tokenManager)
+        viewModel = UserAuthenticationViewModel(navigateToAccountCreation: { self.viewIsOpen = true },
+                                                userAuthenticator: userAuthenticator, tokenManager: tokenManager)
     }
     
     private func whenUserLogin() async {
