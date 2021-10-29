@@ -42,7 +42,7 @@ struct AccountCreationView: View {
                 
                 Button(L10n.SignUp.createAccountButton) {
                     Task {
-                        await viewModel.createAccount(email: viewModel.email, password: viewModel.password, passwordConfirmation: viewModel.passwordConfirmation)
+                        await viewModel.createAccount()
                     }
                 }
                 .foregroundColor(Color.white)
