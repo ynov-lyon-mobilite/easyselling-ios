@@ -34,7 +34,7 @@ struct UserAuthenticationView: View {
             
             Button(L10n.UserAuthentication.Button.login) {
                 Task {
-                    await viewModel.login(mail: viewModel.email, password: viewModel.password)
+                    await viewModel.login()
                 }
             }
             .foregroundColor(Color.white)

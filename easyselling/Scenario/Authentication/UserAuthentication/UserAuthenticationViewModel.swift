@@ -16,7 +16,7 @@ final class UserAuthenticationViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
 
-    @Published var error: APICallerError?
+    @Published var error: ViewModelError?
     
     init(navigateToAccountCreation: @escaping Action, userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(), tokenManager: TokenManager = .shared) {
         self.userAuthenticator = userAuthenticator
@@ -24,13 +24,46 @@ final class UserAuthenticationViewModel: ObservableObject {
         self.navigateToAccountCreation = navigateToAccountCreation
     }
     
-    func login(mail: String, password: String) async {
+    func verifyInformations() throws {
+        if email.isEmpty {
+            throw ViewModelError.emptyEmail
+        }
+
+        if password.isEmpty {
+            throw ViewModelError.emptyPassword
+        }
+    }
+    
+    func login() async {
         do {
-            let token = try await userAuthenticator.login(mail: mail, password: password)
+            try verifyInformations()
+            let token = try await userAuthenticator.login(mail: email, password: password)
             tokenManager.accessToken = token.accessToken
             tokenManager.refreshToken = token.refreshToken
         } catch(let error) {
-            self.error = (error as? APICallerError)
+            if let error = error as? ViewModelError {
+                self.error = error
+            } else if (error as? APICallerError) == .unauthorized {
+                self.error = .badCredentials
+            } else {
+                self.error = .unknow
+            }
+        }
+    }
+    
+    enum ViewModelError: LocalizedError, Equatable {
+        case emptyEmail
+        case emptyPassword
+        case badCredentials
+        case unknow
+        
+        var errorDescription: String? {
+            switch self {
+            case .emptyEmail: return "L'addresse email est vide"
+            case .emptyPassword: return "Le mot de passe est vide"
+            case .badCredentials: return "Le couple identifiant/mot de passe est incorrect. Veuillez réessayer."
+            case .unknow: return "Une erreur est survenue"
+            }
         }
     }
 }
