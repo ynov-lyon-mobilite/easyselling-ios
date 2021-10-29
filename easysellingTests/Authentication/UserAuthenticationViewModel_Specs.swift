@@ -30,7 +30,7 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
     
     private func givenViewModel(userAuthenticator: UserAuthenticatior) {
         tokenManager = TokenManager(keychain: .unitTestsKeychain)
-        viewModel = UserAuthenticationViewModel(userAuthenticator: userAuthenticator, tokenManager: tokenManager)
+        viewModel = UserAuthenticationViewModel(navigateToAccountCreation: {}, userAuthenticator: userAuthenticator, tokenManager: tokenManager)
     }
     
     private func whenUserLogin() async {

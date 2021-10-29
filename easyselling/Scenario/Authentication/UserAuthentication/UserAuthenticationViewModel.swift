@@ -10,15 +10,18 @@ import Foundation
 final class UserAuthenticationViewModel: ObservableObject {
     private let tokenManager: TokenManager
     private let userAuthenticator: UserAuthenticatior
+    
+    let navigateToAccountCreation: Action
 
     @Published var email: String = ""
     @Published var password: String = ""
 
     @Published var error: APICallerError?
     
-    init(userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(), tokenManager: TokenManager = .shared) {
+    init(navigateToAccountCreation: @escaping Action, userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(), tokenManager: TokenManager = .shared) {
         self.userAuthenticator = userAuthenticator
         self.tokenManager = tokenManager
+        self.navigateToAccountCreation = navigateToAccountCreation
     }
     
     func login(mail: String, password: String) async {

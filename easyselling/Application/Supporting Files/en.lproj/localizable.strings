@@ -10,3 +10,6 @@
 "signUp.password" = "Password";
 "signUp.passwordConfirmation" = "Password confirmation";
 "signUp.CreateAccountButton" = "Create account";
+
+"userAuthentication.button.login" = "Login";
+"userAuthentication.button.register" = "Don't have an account yet?\nClick here to register";
