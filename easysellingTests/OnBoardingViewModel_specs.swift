@@ -11,8 +11,9 @@ import XCTest
 class OnBoardingViewModel_Specs: XCTestCase {
     
     /*
-     Tester : En page 0 il se passe rien quand on revient en arrière
-              En en denière page il se passe rien quand on appuie sur next
+     Tester : En page 0 il se passe rien quand on revient en arrière = FAIT
+              En denière page il se passe rien quand on appuie sur next = FAIT
+     
               Qu'importe la page sauf la dernière on peut être renvoyé à la dernière page (bouton skip)
               Créer un page indicator (nombre de pages), qu'il indique la bonne page
      
@@ -78,14 +79,35 @@ class OnBoardingViewModel_Specs: XCTestCase {
         thenCurrentFeatureViewModel(is: 0)
     }
     
-    func test_Clicked_on_previous_in_the_first_feature(){
+    func test_Clicks_on_previous_in_the_first_feature(){
         givenOnBoardingViewModel(withFeatures: [
             Feature(title: "title 1", image: "image 1", text: "text 1"),
             Feature(title: "title 2", image: "image 2", text: "text 2"),
             Feature(title: "title 3", image: "image 3", text: "text 3")
         ])
         whenNavigatingAtThePreviousFeature()
-        XCTAssertEqual(0, onBoardingViewModel.currentFeatureIndex)
+        thenCurrentFeatureViewModel(is: 0)
+    }
+    
+    func test_Clicks_on_next_in_the_last_feature(){
+        givenOnBoardingViewModel(withFeatures: [
+            Feature(title: "title 1", image: "image 1", text: "text 1"),
+            Feature(title: "title 2", image: "image 2", text: "text 2"),
+            Feature(title: "title 3", image: "image 3", text: "text 3")
+        ])
+        whenNavigatingAtTheNextFeature()
+        whenNavigatingAtTheNextFeature()
+        thenCurrentFeatureViewModel(is: 2)
+    }
+    
+    func test_Clicks_on_skip_in_the_first_feature(){
+        givenOnBoardingViewModel(withFeatures: [
+            Feature(title: "title 1", image: "image 1", text: "text 1"),
+            Feature(title: "title 2", image: "image 2", text: "text 2"),
+            Feature(title: "title 3", image: "image 3", text: "text 3")
+        ])
+        wantToSkipTheOnBoarding()
+        thenCurrentFeatureViewModel(is: 2)
     }
 
 //    func test_Navigates_After_Last_Feature() {
@@ -110,8 +132,6 @@ class OnBoardingViewModel_Specs: XCTestCase {
 //        thenCurrentFeatureViewModel(is: 0)
 //    }
     
-    //lorsque l'on veut revenir lorsque l'on est sur la première page
-
     func givenOnBoardingViewModel(withFeatures features: [Feature]) {
         onBoardingViewModel = OnBoardingViewModel(features: features)
     }
@@ -122,6 +142,10 @@ class OnBoardingViewModel_Specs: XCTestCase {
     
     func whenNavigatingAtThePreviousFeature() {
         self.onBoardingViewModel.previousFeature()
+    }
+    
+    func wantToSkipTheOnBoarding(){
+        self.onBoardingViewModel.skipOnBoarding()
     }
     
     private func thenShowedFeature(is expected: Feature) {

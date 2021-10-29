@@ -48,6 +48,12 @@ class OnBoardingViewModel: ObservableObject {
             currentFeatureIndex -= 1
         }
     }
+    
+    func skipOnBoarding(){
+        if(!(currentFeatureIndex == features.count - 1)){
+            currentFeatureIndex = features.count - 1
+        }
+    }
 }
 
 struct Feature: Equatable {
