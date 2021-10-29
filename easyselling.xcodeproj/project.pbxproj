@@ -252,7 +252,6 @@
 			children = (
 				03F209842716EEC900E10F6C /* Strings+Generated.swift */,
 				03F209852716EECA00E10F6C /* XCAssets+Generated.swift */,
-				873552B6270D847B00F2DDBD /* Assets.xcassets */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -261,6 +260,8 @@
 			isa = PBXGroup;
 			children = (
 				03F209782716E21100E10F6C /* Supporting Files */,
+				035E860327184EDC00684ED0 /* AppDelegate.swift */,
+				D00736552712D93800ED0F2C /* easyselling.entitlements */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -269,8 +270,10 @@
 			isa = PBXGroup;
 			children = (
 				03F209762716E0AE00E10F6C /* Additions */,
-				03F2097D2716E2B100E10F6C /* localizable.strings */,
 				03F209822716E2CB00E10F6C /* localizable.strings */,
+				03F2097D2716E2B100E10F6C /* localizable.strings */,
+				873552B6270D847B00F2DDBD /* Assets.xcassets */,
+				873552B8270D847B00F2DDBD /* Preview Content */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -348,11 +351,8 @@
 				87780BAA27172FB10035AB13 /* Services */,
 				87780B9C27172F1C0035AB13 /* Additions */,
 				03F209772716E1C500E10F6C /* Application */,
-				035E860327184EDC00684ED0 /* AppDelegate.swift */,
 				87DC1D07271FDF3F002DC193 /* Models */,
-				873552B8270D847B00F2DDBD /* Preview Content */,
 				0382E2A12717648000EB570E /* Scenario */,
-				D00736552712D93800ED0F2C /* easyselling.entitlements */,
 			);
 			path = easyselling;
 			sourceTree = "<group>";
@@ -841,11 +841,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = easyselling/easyselling.entitlements;
+				CODE_SIGN_ENTITLEMENTS = easyselling/Application/easyselling.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"easyselling/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"easyselling/Application/Supporting Files/Preview Content\"";
 				DEVELOPMENT_TEAM = 94FLWD5X32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -873,11 +873,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = easyselling/easyselling.entitlements;
+				CODE_SIGN_ENTITLEMENTS = easyselling/Application/easyselling.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"easyselling/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"easyselling/Application/Supporting Files/Preview Content\"";
 				DEVELOPMENT_TEAM = 94FLWD5X32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
