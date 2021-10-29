@@ -33,7 +33,7 @@ class AuthenticationScenario_Specs: XCTestCase {
     }
     
     private func givenScenario() {
-        navigator = SpyAccountCreationNavigator()
+        navigator = SpyAuthenticationNavigator()
         scenario = AuthenticationScenario(navigator: navigator)
     }
     
@@ -45,16 +45,16 @@ class AuthenticationScenario_Specs: XCTestCase {
         scenario.navigatesToAccountCreation()
     }
     
-    private func thenHistory(is expected: [SpyAccountCreationNavigator.History]) {
+    private func thenHistory(is expected: [SpyAuthenticationNavigator.History]) {
         XCTAssertEqual(navigator.history, expected)
     }
     
     private var scenario: AuthenticationScenario!
-    private var navigator: SpyAccountCreationNavigator!
+    private var navigator: SpyAuthenticationNavigator!
     private var isScenarioDidFinished: Bool!
 }
 
-class SpyAccountCreationNavigator: AccountCreationNavigator {
+class SpyAuthenticationNavigator: AuthenticationNavigator {
     private(set) var history: [History] = []
     private(set) var onFinish: Action?
     

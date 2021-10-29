@@ -11,11 +11,11 @@ import SwiftUI
 
 class AuthenticationScenario {
     
-    init(navigator: AccountCreationNavigator) {
+    init(navigator: AuthenticationNavigator) {
         self.navigator = navigator
     }
     
-    private var navigator: AccountCreationNavigator
+    private var navigator: AuthenticationNavigator
     
     func begin() {
         navigator.begin(onVehicleCreationOpen: { self.navigatesToAccountCreation() })
@@ -30,13 +30,13 @@ class AuthenticationScenario {
     }
 }
 
-protocol AccountCreationNavigator {
+protocol AuthenticationNavigator {
     func begin(onVehicleCreationOpen: @escaping Action)
     func navigatesToAccountCreation(onFinish: @escaping Action)
     func goingBackToHomeView()
 }
 
-class DefaultAccountCreationNavigator: AccountCreationNavigator {
+class DefaultAuthenticationNavigator: AuthenticationNavigator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
