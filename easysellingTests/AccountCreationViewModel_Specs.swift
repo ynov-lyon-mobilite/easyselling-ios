@@ -98,7 +98,10 @@ class AccountCreationViewModel_Specs: XCTestCase {
     }
 
     private func whenCreatingAccount(email: String, password: String, passwordConfirmation: String) async {
-            await viewModel.createAccount(email: email, password: password, passwordConfirmation: passwordConfirmation)
+        viewModel.email = email
+        viewModel.password = password
+        viewModel.passwordConfirmation = passwordConfirmation
+        await viewModel.createAccount()
     }
     
     private func whenNoLongerInterested() {

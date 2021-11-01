@@ -26,7 +26,7 @@ class AccountCreationViewModel: ObservableObject {
     @Published var alert: APICallerError?
     @Published var showAlert: Bool = false
     
-    func createAccount(email: String, password: String, passwordConfirmation: String) async {
+    func createAccount() async {
         self.state = .loading
         do {
             let informationsVerified = try verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
