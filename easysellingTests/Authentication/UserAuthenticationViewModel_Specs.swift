@@ -10,14 +10,14 @@ import XCTest
 
 class UserAuthenticationViewModel_Specs: XCTestCase {
     
-    func test_Connects_with_empty_password_and_email() async {
-        givenViewModel(userAuthenticator: SucceedingUserAuthenticator())
+    func test_Shows_error_when_try_to_log_in_with_empty_credentials() async {
+        givenViewModel(userAuthenticator: FailingUserAuthenticator(error: .unauthorized))
         await whenUserLogin(email: "", password: "")
         thenError(is: .emptyEmail)
     }
     
-    func test_Connects_with_empty_password() async {
-        givenViewModel(userAuthenticator: SucceedingUserAuthenticator())
+    func Shows_error_when_try_to_log_in_with_empty_password() async {
+        givenViewModel(userAuthenticator: FailingUserAuthenticator(error: .unauthorized))
         await whenUserLogin(email: "user@domain.com", password: "")
         thenError(is: .emptyPassword)
     }
@@ -40,7 +40,7 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
         thenError(is: .badCredentials)
     }
     
-    func test_Fails_with_any_other_error() async {
+    func test_Shows_unknow_error_when_something_unknow_fail() async {
         givenViewModel(userAuthenticator: FailingUserAuthenticator(error: .badGateway))
         await whenUserLogin(email: "user@domain.com", password: "PA55W0RD")
         thenError(is: .unknow)
