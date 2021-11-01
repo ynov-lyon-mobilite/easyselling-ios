@@ -15,27 +15,16 @@ enum OnBoardingViewModelError : Error {
 class OnBoardingViewModel: ObservableObject {
 
     var features: [Feature]
-    var feature: Feature? {
-        if featuresIsEmpty == "error" {
-            return nil
-        }
-        return features[currentFeatureIndex]
-    }
-    var featuresIsEmpty: String {
-        if features.isEmpty {
-            return "error"
-        }
-        return ""
-    }
     var currentFeatureIndex: Int = 0
+    
+    @Published var feature: Feature? { featuresIsEmpty == "error" ? nil : features[currentFeatureIndex] }
+    var featuresIsEmpty: String { features.isEmpty ? "error" : "" }
+    var isShowingPreviousButton: Bool { currentFeatureIndex == 0 ? false : true }
+    var isShowingSkipButton: Bool { (currentFeatureIndex == features.count - 1) ? false : true }
     
     init(features: [Feature]) {
         self.features = features
     }
-    
-//    func readCurrentFeature() -> Feature {
-//        return features[currentFeatureIndex]
-//    }
     
     func nextFeature() {
         if(!(currentFeatureIndex == self.features.count - 1)) {
@@ -49,7 +38,7 @@ class OnBoardingViewModel: ObservableObject {
         }
     }
     
-    func skipOnBoarding(){
+    func skipFeatures(){
         if(!(currentFeatureIndex == features.count - 1)){
             currentFeatureIndex = features.count - 1
         }

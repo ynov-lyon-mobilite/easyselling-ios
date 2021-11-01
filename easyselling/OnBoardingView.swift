@@ -17,11 +17,22 @@ struct OnBoardingView: View {
     
     var body: some View {
         VStack {
+            
             Text(viewModel.feature?.title ?? "")
-            Text(viewModel.feature?.text ?? "")
+            
+            Spacer()
+            Button(action: viewModel.previousFeature) {
+                Text("previous")
+            }
+            
             Button(action: viewModel.nextFeature) {
                 Text("next")
             }
+            
+            Button(action: viewModel.skipFeatures) {
+                Text("skip")
+            }
+
         }
     }
 }

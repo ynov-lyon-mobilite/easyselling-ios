@@ -13,8 +13,8 @@ class OnBoardingViewModel_Specs: XCTestCase {
     /*
      Tester : En page 0 il se passe rien quand on revient en arrière = FAIT
               En denière page il se passe rien quand on appuie sur next = FAIT
+              Qu'importe la page sauf la dernière on peut être renvoyé à la dernière page (bouton skip) = FAIT
      
-              Qu'importe la page sauf la dernière on peut être renvoyé à la dernière page (bouton skip)
               Créer un page indicator (nombre de pages), qu'il indique la bonne page
      
      Design : Bouton next, previous et skip / dernière page next devient continuer et pas de bouton skip, première page pas de bouton previous
@@ -79,23 +79,43 @@ class OnBoardingViewModel_Specs: XCTestCase {
         thenCurrentFeatureViewModel(is: 0)
     }
     
-    func test_Clicks_on_previous_in_the_first_feature(){
+    func test_Disables_previous_button_when_on_first_feature() {
         givenOnBoardingViewModel(withFeatures: [
             Feature(title: "title 1", image: "image 1", text: "text 1"),
             Feature(title: "title 2", image: "image 2", text: "text 2"),
             Feature(title: "title 3", image: "image 3", text: "text 3")
         ])
-        whenNavigatingAtThePreviousFeature()
-        thenCurrentFeatureViewModel(is: 0)
+        whenCurrentFeatureShown(is: 0)
+        XCTAssertFalse(onBoardingViewModel.isShowingPreviousButton)
     }
     
-    func test_Clicks_on_next_in_the_last_feature(){
+    func test_Enables_previous_button_when_not_on_first_feature() {
         givenOnBoardingViewModel(withFeatures: [
             Feature(title: "title 1", image: "image 1", text: "text 1"),
             Feature(title: "title 2", image: "image 2", text: "text 2"),
             Feature(title: "title 3", image: "image 3", text: "text 3")
         ])
-        whenNavigatingAtTheNextFeature()
+        whenCurrentFeatureShown(is: 1)
+        XCTAssertTrue(onBoardingViewModel.isShowingPreviousButton)
+    }
+    
+    func test_Enables_previous_button_when_not_on_first_feature2() {
+        givenOnBoardingViewModel(withFeatures: [
+            Feature(title: "title 1", image: "image 1", text: "text 1"),
+            Feature(title: "title 2", image: "image 2", text: "text 2"),
+            Feature(title: "title 3", image: "image 3", text: "text 3")
+        ])
+        whenCurrentFeatureShown(is: 2)
+        XCTAssertTrue(onBoardingViewModel.isShowingPreviousButton)
+    }
+    
+    func test_Tries_to_go_to_next_feature_when_there_is_not_more() {
+        givenOnBoardingViewModel(withFeatures: [
+            Feature(title: "title 1", image: "image 1", text: "text 1"),
+            Feature(title: "title 2", image: "image 2", text: "text 2"),
+            Feature(title: "title 3", image: "image 3", text: "text 3")
+        ])
+        whenCurrentFeatureShown(is: 2)
         whenNavigatingAtTheNextFeature()
         thenCurrentFeatureViewModel(is: 2)
     }
@@ -106,9 +126,53 @@ class OnBoardingViewModel_Specs: XCTestCase {
             Feature(title: "title 2", image: "image 2", text: "text 2"),
             Feature(title: "title 3", image: "image 3", text: "text 3")
         ])
-        wantToSkipTheOnBoarding()
+        whenCurrentFeatureShown(is: 0)
+        whenSkippingFeatures()
         thenCurrentFeatureViewModel(is: 2)
     }
+    
+    func test_Enables_skip_button_when_not_on_last_feature(){
+        givenOnBoardingViewModel(withFeatures: [
+            Feature(title: "title 1", image: "image 1", text: "text 1"),
+            Feature(title: "title 2", image: "image 2", text: "text 2"),
+            Feature(title: "title 3", image: "image 3", text: "text 3")
+        ])
+        whenCurrentFeatureShown(is: 0)
+        XCTAssertTrue(onBoardingViewModel.isShowingSkipButton)
+    }
+    
+    func test_Clicks_on_skip_in_the_second_feature(){
+        givenOnBoardingViewModel(withFeatures: [
+            Feature(title: "title 1", image: "image 1", text: "text 1"),
+            Feature(title: "title 2", image: "image 2", text: "text 2"),
+            Feature(title: "title 3", image: "image 3", text: "text 3")
+        ])
+        whenCurrentFeatureShown(is: 1)
+        whenSkippingFeatures()
+        thenCurrentFeatureViewModel(is: 2)
+    }
+    
+    func test_Enables_skip_button_when_not_on_last_feature2(){
+        givenOnBoardingViewModel(withFeatures: [
+            Feature(title: "title 1", image: "image 1", text: "text 1"),
+            Feature(title: "title 2", image: "image 2", text: "text 2"),
+            Feature(title: "title 3", image: "image 3", text: "text 3")
+        ])
+        whenCurrentFeatureShown(is: 1)
+        XCTAssertTrue(onBoardingViewModel.isShowingSkipButton)
+    }
+    
+    func test_Disables_skip_button_when_on_last_feature(){
+        givenOnBoardingViewModel(withFeatures: [
+            Feature(title: "title 1", image: "image 1", text: "text 1"),
+            Feature(title: "title 2", image: "image 2", text: "text 2"),
+            Feature(title: "title 3", image: "image 3", text: "text 3")
+        ])
+        whenCurrentFeatureShown(is: 2)
+        XCTAssertFalse(onBoardingViewModel.isShowingSkipButton)
+    }
+    
+    
 
 //    func test_Navigates_After_Last_Feature() {
 //     givenOnBoardingViewModel(withFeatures: [
@@ -132,31 +196,35 @@ class OnBoardingViewModel_Specs: XCTestCase {
 //        thenCurrentFeatureViewModel(is: 0)
 //    }
     
-    func givenOnBoardingViewModel(withFeatures features: [Feature]) {
+    private func givenOnBoardingViewModel(withFeatures features: [Feature]) {
         onBoardingViewModel = OnBoardingViewModel(features: features)
     }
 
-    func whenNavigatingAtTheNextFeature() {
+    private func whenNavigatingAtTheNextFeature() {
         self.onBoardingViewModel.nextFeature()
     }
     
-    func whenNavigatingAtThePreviousFeature() {
+    private func whenNavigatingAtThePreviousFeature() {
         self.onBoardingViewModel.previousFeature()
     }
     
-    func wantToSkipTheOnBoarding(){
-        self.onBoardingViewModel.skipOnBoarding()
+    private func whenCurrentFeatureShown(is featureIndex: Int) {
+        onBoardingViewModel.currentFeatureIndex = featureIndex
+    }
+    
+    private func whenSkippingFeatures(){
+        self.onBoardingViewModel.skipFeatures()
     }
     
     private func thenShowedFeature(is expected: Feature) {
         XCTAssertEqual(expected, onBoardingViewModel.feature)
     }
     
-    func thenCurrentFeatureViewModel(is expected: Int) {
+    private func thenCurrentFeatureViewModel(is expected: Int) {
         XCTAssertTrue(self.onBoardingViewModel.currentFeatureIndex == expected)
     }
     
-    func thenFeatureCount(is expected: Int) {
+    private func thenFeatureCount(is expected: Int) {
         XCTAssertTrue(self.onBoardingViewModel.features.count == expected)
     }
     
