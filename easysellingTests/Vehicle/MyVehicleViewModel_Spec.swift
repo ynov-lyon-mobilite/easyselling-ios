@@ -32,30 +32,12 @@ class MyVehiclesViewModel_Spec: XCTestCase {
 
     
     private var isOpen: Bool!
-    private var expectedUrlResponse: Data? {
-        readLocalFile(forName: "succeededVehicles")
-    }
-    
-    
-    private func readLocalFile(forName name: String) -> Data? {
-        
-        var path: String?
-        do {
-            path = Bundle.main.path(forResource: name, ofType: "json")
-            print("path: \(path)")
-            let data = try String(contentsOfFile: path!).data(using: .utf8)
-        } catch(let error) {
-            print(error)
-        }
-        
-    //  guard let path = Bundle.main.path(forResource: name, ofType: "json"),
-    //        let data = try? String(contentsOfFile: path).data(using: .utf8) else { return nil }
-        
-        
-
-      return nil
-    }
+    private var expectedUrlResponse: Data? = readLocalFile(forName: "succeededVehicles")
 }
 
+private func readLocalFile(forName name: String) -> Data? {
+  guard let path = Bundle.main.path(forResource: name, ofType: "json"),
+        let data = try? String(contentsOfFile: path).data(using: .utf8) else { return nil }
 
-
+  return data
+}
