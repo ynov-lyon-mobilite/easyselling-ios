@@ -15,8 +15,13 @@ final class UserAuthenticationViewModel: ObservableObject {
 
     @Published var email: String = ""
     @Published var password: String = ""
-
-    @Published var error: ViewModelError?
+    
+    @Published var hasError = false
+    @Published var error: ViewModelError? {
+        didSet {
+            hasError = (error != nil)
+        }
+    }
     
     init(navigateToAccountCreation: @escaping Action, userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(), tokenManager: TokenManager = .shared) {
         self.userAuthenticator = userAuthenticator
@@ -25,16 +30,11 @@ final class UserAuthenticationViewModel: ObservableObject {
     }
     
     func verifyInformations() throws {
-        if email.isEmpty {
-            throw ViewModelError.emptyEmail
-        }
-
-        if password.isEmpty {
-            throw ViewModelError.emptyPassword
-        }
+        if email.isEmpty { throw ViewModelError.emptyEmail }
+        if password.isEmpty { throw ViewModelError.emptyPassword }
     }
     
-    func login() async {
+    @MainActor func login() async {
         do {
             try verifyInformations()
             let token = try await userAuthenticator.login(mail: email, password: password)
@@ -57,6 +57,8 @@ final class UserAuthenticationViewModel: ObservableObject {
         case badCredentials
         case unknow
         
+        var isAlertError: Bool { [.badCredentials, .unknow].contains(self) }
+
         var errorDescription: String? {
             switch self {
             case .emptyEmail: return "L'addresse email est vide"

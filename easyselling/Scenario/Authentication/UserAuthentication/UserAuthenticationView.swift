@@ -49,11 +49,11 @@ struct UserAuthenticationView: View {
             }
         }
         .padding(.horizontal, 50)
-//        .alert(isPresented: $viewModel.showAlert, content: {
-//            Alert(
-//                title: Text(viewModel.alert?.errorDescription ?? ""),
-//                dismissButton: Alert.Button.default(Text("Ok")))
-//        })
+        .alert(isPresented: $viewModel.hasError) {
+            Alert(
+                title: Text(viewModel.error?.errorDescription ?? ""),
+                dismissButton: Alert.Button.default(Text("Ok")))
+        }
     }
 }
 

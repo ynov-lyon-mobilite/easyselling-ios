@@ -68,10 +68,12 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
         XCTAssertEqual(expectedRefreshToken, tokenManager.refreshToken)
         XCTAssertEqual(expectedAccessToken, tokenManager.accessToken)
         XCTAssertNil(viewModel.error)
+        XCTAssertTrue(!viewModel.hasError)
     }
     
     private func thenError(is expectedError: UserAuthenticationViewModel.ViewModelError) {
         XCTAssertEqual(expectedError, viewModel.error)
+        XCTAssertTrue(viewModel.hasError)
     }
     
     private var viewModel: UserAuthenticationViewModel!
