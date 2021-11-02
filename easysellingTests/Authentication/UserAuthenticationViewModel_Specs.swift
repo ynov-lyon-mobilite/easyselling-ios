@@ -53,7 +53,6 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
     }
     
     private func givenViewModel(userAuthenticator: UserAuthenticatior) {
-        tokenManager = DefaultTokenManager(keychain: .unitTestsKeychain)
         viewModel = UserAuthenticationViewModel(navigateToAccountCreation: { self.viewIsOpen = true },
                                                 userAuthenticator: userAuthenticator, tokenManager: tokenManager)
     }
@@ -77,7 +76,7 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
     }
     
     private var viewModel: UserAuthenticationViewModel!
-    private var tokenManager: DefaultTokenManager!
+    private var tokenManager = FakeTokenManager()
     private var requestResult: Token!
     private var viewIsOpen: Bool!
     
