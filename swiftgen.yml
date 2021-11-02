@@ -23,7 +23,7 @@
 ##   - To know which params are supported for a template, use `swiftgen template doc xcassets swift5` to open the template documentation on GitHub.
  xcassets:
    inputs:
-     - easyselling/Application/Supporting Files/Additions/Assets.xcassets
+     - easyselling/Application/Supporting Files/Assets.xcassets
    outputs:
      - templateName: swift5
        params:

@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        let navigator = DefaultVehicleCreationNavigator(navigationController: navigationController)
-        let scenario = VehicleScenario(navigator: navigator)
+        let navigator = DefaultAuthenticationNavigator(navigationController: navigationController)
+        let scenario = AuthenticationScenario(navigator: navigator)
         scenario.begin()
         
         return true

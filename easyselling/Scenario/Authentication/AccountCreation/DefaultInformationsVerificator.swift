@@ -59,10 +59,6 @@ enum AccountCreationError: LocalizedError, Equatable {
     case unknow
     
     var errorDescription: String? {
-        description
-    }
-    
-    private var description: String {
         switch self {
         case .wrongEmail: return "L'addresse email est incorrect"
         case .emptyEmail: return "L'addresse email est vide"
