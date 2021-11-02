@@ -66,6 +66,7 @@
 		8798D14C2730FC1C00FF3AB4 /* FakeTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D14B2730FC1C00FF3AB4 /* FakeTokenManager.swift */; };
 		8798D14E2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D14D2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift */; };
 		8798D150273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D14F273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift */; };
+		8798D15327310BFC00FF3AB4 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 8798D15227310BFC00FF3AB4 /* JWTDecode */; };
 		87DC1D00271F60B9002DC193 /* AccountCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1CFF271F60B9002DC193 /* AccountCreationView.swift */; };
 		87DC1D03271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D02271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift */; };
 		87DC1D06271F6A4C002DC193 /* DefaultUserAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D05271F6A4C002DC193 /* DefaultUserAuthenticator.swift */; };
@@ -163,6 +164,7 @@
 			files = (
 				8705B9B127208464004132CF /* KeychainSwift in Frameworks */,
 				033F4AF32718C8A800B79149 /* NetFox in Frameworks */,
+				8798D15327310BFC00FF3AB4 /* JWTDecode in Frameworks */,
 				D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,6 +538,7 @@
 			packageProductDependencies = (
 				033F4AF22718C8A800B79149 /* NetFox */,
 				8705B9B027208464004132CF /* KeychainSwift */,
+				8798D15227310BFC00FF3AB4 /* JWTDecode */,
 			);
 			productName = easyselling;
 			productReference = 873552AF270D847700F2DDBD /* easyselling.app */;
@@ -592,6 +595,7 @@
 			packageReferences = (
 				033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */,
 				8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				8798D15127310BFC00FF3AB4 /* XCRemoteSwiftPackageReference "JWTDecode" */,
 			);
 			productRefGroup = 873552B0270D847700F2DDBD /* Products */;
 			projectDirPath = "";
@@ -1050,6 +1054,14 @@
 				minimumVersion = 19.0.0;
 			};
 		};
+		8798D15127310BFC00FF3AB4 /* XCRemoteSwiftPackageReference "JWTDecode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1062,6 +1074,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		8798D15227310BFC00FF3AB4 /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8798D15127310BFC00FF3AB4 /* XCRemoteSwiftPackageReference "JWTDecode" */;
+			productName = JWTDecode;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

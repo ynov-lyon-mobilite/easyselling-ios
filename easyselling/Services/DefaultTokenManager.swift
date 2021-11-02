@@ -7,10 +7,12 @@
 
 import Foundation
 import KeychainSwift
+import JWTDecode
 
 protocol TokenManager {
+    var accessTokenIsExpired: Bool { get }
     var refreshToken: String? { get set }
-        var accessToken: String? { get set }
+    var accessToken: String? { get set }
 }
 
 final class DefaultTokenManager: TokenManager, ObservableObject {
@@ -39,5 +41,16 @@ final class DefaultTokenManager: TokenManager, ObservableObject {
                 keychain.delete(.accessToken)
             }
         }
+    }
+    
+    private var decodedToken: JWT? {
+        guard let token = accessToken,
+              let decoded = try? decode(jwt: token) else { return nil }
+        
+        return decoded
+    }
+
+    var accessTokenIsExpired: Bool {
+        return decodedToken?.expired ?? true
     }
 }

@@ -11,4 +11,9 @@ import Foundation
 class FakeTokenManager: TokenManager {
     var refreshToken: String?
     var accessToken: String?
+    let accessTokenIsExpired: Bool
+    
+    init(accessTokenIsExpired: Bool = false) {
+        self.accessTokenIsExpired = accessTokenIsExpired
+    }
 }
