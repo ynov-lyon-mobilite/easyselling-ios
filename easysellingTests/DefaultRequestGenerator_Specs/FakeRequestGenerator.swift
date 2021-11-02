@@ -18,11 +18,26 @@ class FakeRequestGenerator: RequestGenerator {
     
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod,
                                        body: T?, headers: [String : String]) -> URLRequest {
-        return URLRequest(url: URL(string: url)!)
+        var request = URLRequest(url: URL(string: endpoint.urlString)!)
+        request.httpMethod = method.rawValue
+        request.httpBody = try! JSONEncoder().encode(body)
+        
+        headers.forEach { key, value in
+            request.addValue(value, forHTTPHeaderField: key)
+        }
+        
+        return request
     }
     
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String : String]) -> URLRequest {
-        return URLRequest(url: URL(string: url)!)
+        var request = URLRequest(url: URL(string: endpoint.urlString)!)
+        request.httpMethod = method.rawValue
+        
+        headers.forEach { key, value in
+            request.addValue(value, forHTTPHeaderField: key)
+        }
+        
+        return request
     }
 }
 

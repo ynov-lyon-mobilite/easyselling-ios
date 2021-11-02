@@ -1,5 +1,5 @@
 //
-//  TokenManager.swift
+//  DefaultTokenManager.swift
 //  easyselling
 //
 //  Created by Maxence on 20/10/2021.
@@ -8,8 +8,13 @@
 import Foundation
 import KeychainSwift
 
-final class TokenManager: ObservableObject {
-    static let shared = TokenManager()
+protocol TokenManager {
+    var refreshToken: String? { get set }
+        var accessToken: String? { get set }
+}
+
+final class DefaultTokenManager: TokenManager, ObservableObject {
+    static let shared = DefaultTokenManager()
     private let keychain: KeychainSwift
     
     init(keychain: KeychainSwift = .productionKeychain) {

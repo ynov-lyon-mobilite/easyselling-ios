@@ -8,7 +8,7 @@
 import Foundation
 
 final class UserAuthenticationViewModel: ObservableObject {
-    private let tokenManager: TokenManager
+    private let tokenManager: DefaultTokenManager
     private let userAuthenticator: UserAuthenticatior
     
     let navigateToAccountCreation: Action
@@ -23,7 +23,7 @@ final class UserAuthenticationViewModel: ObservableObject {
         }
     }
     
-    init(navigateToAccountCreation: @escaping Action, userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(), tokenManager: TokenManager = .shared) {
+    init(navigateToAccountCreation: @escaping Action, userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(), tokenManager: DefaultTokenManager = .shared) {
         self.userAuthenticator = userAuthenticator
         self.tokenManager = tokenManager
         self.navigateToAccountCreation = navigateToAccountCreation

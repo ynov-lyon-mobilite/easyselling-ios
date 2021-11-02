@@ -1,5 +1,5 @@
 //
-//  TokenManager_Specs.swift
+//  DefaultTokenManager_Specs.swift
 //  easysellingTests
 //
 //  Created by Maxence on 20/10/2021.
@@ -10,7 +10,7 @@ import XCTest
 import KeychainSwift
 @testable import easyselling
 
-final class TokenManager_Specs: XCTestCase {
+final class DefaultTokenManager_Specs: XCTestCase {
     
     func test_Saves_tokens_in_keychain() {
         givenTokenManager()
@@ -25,7 +25,7 @@ final class TokenManager_Specs: XCTestCase {
     }
     
     private func givenTokenManager() {
-        tokenManager = TokenManager(keychain: keychain)
+        tokenManager = DefaultTokenManager(keychain: keychain)
     }
     
     private func whenSaveToken(accessToken: String?, refreshToken: String?) {
