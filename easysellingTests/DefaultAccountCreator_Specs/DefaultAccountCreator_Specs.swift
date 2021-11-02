@@ -13,27 +13,27 @@ import XCTest
 class DefaultAccountCreator_Specs: XCTestCase {
     
     func test_Creates_account_successfully() async {
-        givenAccountCreator(requestGenerator: FakeRequestGenerator("https://www.google.com"), apiCaller: SucceedingAPICaller())
+        givenAccountCreator(requestGenerator: FakeRequestGenerator(), apiCaller: SucceedingAPICaller())
         await whenCreatingAccount()
         thenAccountIsCreated()
     }
     
     func test_Creates_account_failed_with_unfound_ressources() async {
-        givenAccountCreator(requestGenerator: FakeRequestGenerator("https://www.google.com"), apiCaller: FailingAPICaller(withError: 404))
+        givenAccountCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         await whenCreatingAccount()
         thenErrorCode(is: 404)
         thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
     }
     
     func test_Creates_account_failed_with_wrong_url() async {
-        givenAccountCreator(requestGenerator: FakeRequestGenerator("google.co"), apiCaller: FailingAPICaller(withError: 400))
+        givenAccountCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 400))
         await whenCreatingAccount()
         thenErrorCode(is: 400)
         thenErrorMessage(is: "Une erreur est survenue")
     }
     
     func test_Creates_account_failed_with_forbiden_access() async {
-        givenAccountCreator(requestGenerator: FakeRequestGenerator("google.co"), apiCaller: FailingAPICaller(withError: 404))
+        givenAccountCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         await whenCreatingAccount()
         thenErrorCode(is: 404)
         thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")

@@ -37,7 +37,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     }
     
     private func givenService() {
-        let requestGenerator = FakeRequestGenerator("https://google.com")
+        let requestGenerator = FakeRequestGenerator()
         self.requestGenerator = DefaultAutorizedRequestGenerator(requestGenerator: requestGenerator, tokenManager: tokenManager)
     }
     

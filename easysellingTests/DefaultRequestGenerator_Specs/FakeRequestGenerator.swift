@@ -10,12 +10,6 @@ import Foundation
 
 class FakeRequestGenerator: RequestGenerator {
     
-    init(_ url: String) {
-        self.url = url
-    }
-    
-    private var url: String
-    
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod,
                                        body: T?, headers: [String : String]) -> URLRequest {
         var request = URLRequest(url: URL(string: endpoint.urlString)!)
