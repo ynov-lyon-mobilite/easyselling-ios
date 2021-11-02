@@ -9,8 +9,8 @@ import SwiftUI
 
 struct OnBoardingView: View {
     
-   @ObservedObject var viewModel: OnBoardingViewModel
-
+    @ObservedObject var viewModel: OnBoardingViewModel
+    
     init(viewModel: OnBoardingViewModel) {
         self.viewModel = viewModel
     }
@@ -18,30 +18,60 @@ struct OnBoardingView: View {
     var body: some View {
         VStack {
             
-            Text(viewModel.feature?.title ?? "")
+            TabView(selection: $viewModel.currentFeatureIndex) {
+                ForEach(0..<viewModel.features.count) { index in
+                    VStack {
+                        Image(systemName: viewModel.features[index].image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        
+                        Text(viewModel.features[index].title)
+                    }
+                }
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             
             Spacer()
-            Button(action: viewModel.previousFeature) {
-                Text("previous")
+            HStack {
+                Button("Previous") {
+                    withAnimation {
+                        viewModel.previousFeature()
+                    }
+                }
+                .opacity(viewModel.isShowingPreviousButton ? 1 : 0)
+                .disabled(!viewModel.isShowingPreviousButton)
+                .frame(maxWidth: .infinity)
+                .background(Color.yellow)
+                
+                Spacer()
+                Button(action: viewModel.skipFeatures) {
+                    withAnimation {
+                        Text("skip")
+                    }
+                }
+                .opacity(viewModel.isShowingSkipButton ? 1 : 0)
+                .disabled(!viewModel.isShowingSkipButton)
+                .frame(maxWidth: .infinity)
+                .background(Color.red)
+                
+                Spacer()
+                Button("next") {
+                    withAnimation {
+                        viewModel.nextFeature()
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color.green)
             }
-            
-            Button(action: viewModel.nextFeature) {
-                Text("next")
-            }
-            
-            Button(action: viewModel.skipFeatures) {
-                Text("skip")
-            }
-
         }
     }
 }
 
 struct OnBoardingView_Previews: PreviewProvider {
     static var previews: some View {
-            OnBoardingView(viewModel: OnBoardingViewModel(features: [
-                Feature(title: "Page One", image: "Lucas", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
-                Feature(title: "Page Two", image: "Lucas", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
-                Feature(title: "Page Three", image: "Lucas", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi")]))
+        OnBoardingView(viewModel: OnBoardingViewModel(features: [
+            Feature(title: "Page One", image: "pencil", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
+            Feature(title: "Page Two", image: "scribble", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
+            Feature(title: "Page Three", image: "trash", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi")]))
     }
 }

@@ -15,10 +15,9 @@ enum OnBoardingViewModelError : Error {
 class OnBoardingViewModel: ObservableObject {
 
     var features: [Feature]
-    var currentFeatureIndex: Int = 0
+    @Published var currentFeatureIndex: Int = 0
     
-    @Published var feature: Feature? { featuresIsEmpty == "error" ? nil : features[currentFeatureIndex] }
-    var featuresIsEmpty: String { features.isEmpty ? "error" : "" }
+    var feature: Feature { features[currentFeatureIndex] }
     var isShowingPreviousButton: Bool { currentFeatureIndex == 0 ? false : true }
     var isShowingSkipButton: Bool { (currentFeatureIndex == features.count - 1) ? false : true }
     
@@ -45,7 +44,7 @@ class OnBoardingViewModel: ObservableObject {
     }
 }
 
-struct Feature: Equatable {
+struct Feature: Equatable, Hashable {
     let title: String
     let image: String
     let text: String

@@ -10,29 +10,6 @@ import XCTest
 
 class OnBoardingViewModel_Specs: XCTestCase {
     
-    /*
-     Tester : En page 0 il se passe rien quand on revient en arrière = FAIT
-              En denière page il se passe rien quand on appuie sur next = FAIT
-              Qu'importe la page sauf la dernière on peut être renvoyé à la dernière page (bouton skip) = FAIT
-     
-              Créer un page indicator (nombre de pages), qu'il indique la bonne page
-     
-     Design : Bouton next, previous et skip / dernière page next devient continuer et pas de bouton skip, première page pas de bouton previous
-              Page indicator (point nbr de pages - grisés le bon est coloré)
-              Pas de feature message d'error
-     */
-    
-        
-    func test_Asserts_that_empty_features_return_error() {
-        givenOnBoardingViewModel(withFeatures: [])
-        XCTAssertEqual("error", onBoardingViewModel.featuresIsEmpty)
-    }
-    
-    func test_Asserts_feature_is_not_show_when_features_are_empty() {
-        givenOnBoardingViewModel(withFeatures: [])
-        XCTAssertNil(onBoardingViewModel.feature)
-    }
-    
     func test_Checks_init_with_features() {
         givenOnBoardingViewModel(withFeatures: [
             Feature(title: "title 1", image: "image 1", text: "text 1"),
@@ -171,30 +148,6 @@ class OnBoardingViewModel_Specs: XCTestCase {
         whenCurrentFeatureShown(is: 2)
         XCTAssertFalse(onBoardingViewModel.isShowingSkipButton)
     }
-    
-    
-
-//    func test_Navigates_After_Last_Feature() {
-//     givenOnBoardingViewModel(withFeatures: [
-//         Feature(title: "title 1", image: "image 1", text: "text 1"),
-//         Feature(title: "title 2", image: "image 2", text: "text 2"),
-//         Feature(title: "title 3", image: "image 3", text: "text 3")
-//     ])
-//        whenNavigatingAtTheNextFeature()
-//        whenNavigatingAtTheNextFeature()
-//        whenNavigatingAtTheNextFeature()
-//        thenCurrentFeatureViewModel(is: 2)
-//    }
-//
-//    func test_Navigates_Before_First_Feature() {
-//        givenOnBoardingViewModel(withFeatures: [
-//            Feature(title: "title 1", image: "image 1", text: "text 1"),
-//            Feature(title: "title 2", image: "image 2", text: "text 2"),
-//            Feature(title: "title 3", image: "image 3", text: "text 3")
-//        ])
-//        whenNavigatingAtThePreviousFeature()
-//        thenCurrentFeatureViewModel(is: 0)
-//    }
     
     private func givenOnBoardingViewModel(withFeatures features: [Feature]) {
         onBoardingViewModel = OnBoardingViewModel(features: features)
