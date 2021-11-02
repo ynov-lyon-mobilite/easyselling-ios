@@ -15,10 +15,8 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         request.httpMethod = HTTPMethod.GET.rawValue
-        
-        tokenManager.accessToken = updatedAccessToken
 
-        givenService()
+        givenService(accessTokenIsExpired: false, accessToken: updatedAccessToken, refreshToken: "FAKE_REFRESH_TOKEN")
         await whenGenerateRequest(endpoint: .vehicles, method: .GET, headers: [:])
         thenRequest(is: request)
     }
@@ -29,16 +27,65 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         request.httpBody = try! JSONEncoder().encode(body)
         
-        tokenManager.accessToken = updatedAccessToken
-
-        givenService()
+        givenService(accessTokenIsExpired: false, accessToken: updatedAccessToken, refreshToken: "FAKE_REFRESH_TOKEN")
         await whenGenerateRequestWithBody(endpoint: .vehicles, method: .GET, body: body, headers: [:])
+        thenRequestWithBody(is: request)
+    }
+    
+    func test_Injects_successfully_after_refresh_token() async {
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
+        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
+        
+        givenService(accessTokenIsExpired: true, accessToken: outdatedAccessToken, refreshToken: "REFRESH_TOKEN")
+        await whenGenerateRequest(endpoint: .vehicles, method: .GET, headers: [:])
         thenRequest(is: request)
     }
     
-    private func givenService() {
+    func test_Injects_successfully_with_body_after_refresh_token() async {
+        let body = "BODY"
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
+        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
+        request.httpBody = try! JSONEncoder().encode(body)
+        
+        givenService(accessTokenIsExpired: true, accessToken: outdatedAccessToken, refreshToken: "REFRESH_TOKEN")
+        await whenGenerateRequestWithBody(endpoint: .vehicles, method: .GET, body: body, headers: [:])
+        thenRequestWithBody(is: request)
+    }
+    
+    func test_Injects_failed_after_refresh_token_failure() async {
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
+        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
+        
+        let tokenManager = FakeTokenManager(accessTokenIsExpired: true, accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN")
+        
+        givenService(tokenManager: tokenManager, tokenRefreshor: FailingTokenRefreshor(error: .badRequest))
+        await whenGenerateRequest(endpoint: .vehicles, method: .GET, headers: [:])
+        thenError(is: .badRequest)
+    }
+    
+    func test_Injects_failed_without_saved_token_in_manager() async {
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
+        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
+        
+        givenService(tokenManager: FakeTokenManager(), tokenRefreshor: FailingTokenRefreshor(error: .badRequest))
+        await whenGenerateRequest(endpoint: .vehicles, method: .GET, headers: [:])
+        thenError(is: .unauthorized)
+    }
+    
+    private func givenService(accessTokenIsExpired: Bool, accessToken: String?, refreshToken: String?) {
         let requestGenerator = FakeRequestGenerator()
-        self.requestGenerator = DefaultAutorizedRequestGenerator(requestGenerator: requestGenerator, tokenManager: tokenManager)
+        let tokenManager = FakeTokenManager(accessTokenIsExpired: accessTokenIsExpired,
+                                            accessToken: accessToken,
+                                            refreshToken: refreshToken)
+        self.requestGenerator = DefaultAutorizedRequestGenerator(
+            requestGenerator: requestGenerator, tokenManager: tokenManager,
+            tokenRefreshor: SucceedingTokenRefreshor(accessToken: updatedAccessToken))
+    }
+    
+    private func givenService(tokenManager: TokenManager, tokenRefreshor: TokenRefreshor) {
+        let requestGenerator = FakeRequestGenerator()
+        self.requestGenerator = DefaultAutorizedRequestGenerator(requestGenerator: requestGenerator, tokenManager: tokenManager,
+                                                                 tokenRefreshor: tokenRefreshor)
     }
     
     private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) async {
@@ -71,6 +118,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         XCTAssertEqual(request.httpMethod, expectedRequest.httpMethod)
         XCTAssertEqual(request.allHTTPHeaderFields, expectedRequest.allHTTPHeaderFields)
         XCTAssertEqual(request.httpBody, expectedRequest.httpBody)
+        XCTAssertNil(error)
     }
 
     private func thenRequestWithBody(is expectedRequest: URLRequest) {
@@ -80,12 +128,19 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         XCTAssertEqual(request.allHTTPHeaderFields, expectedRequest.allHTTPHeaderFields)
         XCTAssertEqual(String(data: request.httpBody!, encoding: .utf8),
                        String(data: expectedRequest.httpBody!, encoding: .utf8))
+        XCTAssertNil(error)
+    }
+    
+    private func thenError(is expected: APICallerError) {
+        XCTAssertEqual(expected, error)
+        XCTAssertNil(request)
     }
     
     private var requestGenerator: AutorizedRequestGenerator!
     private var request: URLRequest!
     private var error: APICallerError!
-    private var tokenManager = FakeTokenManager()
+    
+    private let outdatedAccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzU4MzMwOTAsImV4cCI6MTYwNDI5NzA5MCwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSJ9.E3KPcWx5_rzlyThc7s-EKFQPLu6xkXv7TX5RbpIHINY"
     
     private var updatedAccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjI1NTA5Nzc4NjIsImV4cCI6MjU1MDk3Nzg2MiwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSJ9.ENKI9xGTd8ytjIcR-WU4ew1OjosULqgzznYcwneY4_s"
 }

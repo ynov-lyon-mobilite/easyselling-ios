@@ -13,7 +13,9 @@ class FakeTokenManager: TokenManager {
     var accessToken: String?
     let accessTokenIsExpired: Bool
     
-    init(accessTokenIsExpired: Bool = false) {
+    init(accessTokenIsExpired: Bool = false, accessToken: String? = nil, refreshToken: String? = nil) {
         self.accessTokenIsExpired = accessTokenIsExpired
+        self.accessToken = accessToken
+        self.refreshToken = refreshToken
     }
 }
