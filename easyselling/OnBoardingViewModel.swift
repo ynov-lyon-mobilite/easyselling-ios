@@ -37,8 +37,8 @@ class OnBoardingViewModel: ObservableObject {
         }
     }
     
-    func skipFeatures(){
-        if(!(currentFeatureIndex == features.count - 1)){
+    func skipFeatures() {
+        if(!(currentFeatureIndex == features.count - 1)) {
             currentFeatureIndex = features.count - 1
         }
     }
