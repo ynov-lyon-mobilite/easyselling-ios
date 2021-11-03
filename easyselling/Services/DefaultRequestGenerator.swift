@@ -14,6 +14,12 @@ protocol RequestGenerator {
 }
 
 class DefaultRequestGenerator: RequestGenerator {
+    private var tokenManager: TokenManager
+
+    init(tokenManager: TokenManager = DefaultTokenManager.shared) {
+        self.tokenManager = tokenManager
+    }
+
     private var jsonEncoder = JSONEncoder()
     private var fixHeaders: [String: String] = ["Content-Type": "application/json"]
 
