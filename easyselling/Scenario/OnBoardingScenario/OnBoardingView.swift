@@ -15,14 +15,14 @@ struct OnBoardingView: View {
         self.viewModel = viewModel
     }
     
-    let basicWidth: CGFloat = 20
-    let animationWidth: CGFloat = 40
+    let basicWidth: CGFloat = 10
+    let animationWidth: CGFloat = 30
         
     var body: some View {
         VStack {
             TabView(selection: $viewModel.currentFeatureIndex) {
-                ForEach(0..<viewModel.features.count) { index in
-                    VStack() {
+                ForEach(0..<viewModel.features.count) { _ in
+                    VStack {
                         Image(systemName: viewModel.feature.image)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -49,7 +49,7 @@ struct OnBoardingView: View {
                               Asset.dotColorActive.swiftUIColor
                               : Asset.dotColorInactive.swiftUIColor)
                         .frame(width: index == viewModel.currentFeatureIndex ?
-                               animationWidth : basicWidth, height: 20)
+                               animationWidth : basicWidth, height: 10)
                         .animation(.easeIn, value: index == viewModel.currentFeatureIndex ? animationWidth: basicWidth)
                 }
             }
@@ -58,6 +58,7 @@ struct OnBoardingView: View {
             Spacer()
             
             HStack {
+
                 Button("Previous") {
                     withAnimation {
                         viewModel.previousFeature()
@@ -65,18 +66,16 @@ struct OnBoardingView: View {
                 }
                 .opacity(viewModel.isShowingPreviousButton ? 1 : 0)
                 .disabled(!viewModel.isShowingPreviousButton)
-                .frame(maxWidth: .infinity)
                 
                 Spacer()
-                
-                Button(action: viewModel.skipFeatures) {
+                                
+                Button("Skip") {
                     withAnimation {
-                        Text("Skip")
+                        viewModel.skipFeatures()
                     }
                 }
                 .opacity(viewModel.isShowingSkipButton ? 1 : 0)
                 .disabled(!viewModel.isShowingSkipButton)
-                .frame(maxWidth: .infinity)
                 
                 Spacer()
                 
@@ -85,8 +84,13 @@ struct OnBoardingView: View {
                         viewModel.nextFeature()
                     }
                 }
-                .frame(maxWidth: .infinity)
+                .padding([.trailing, .leading], 20)
+                .padding([.top, .bottom], 10)
+                .background(viewModel.currentFeatureIndex == viewModel.features.count-1 ? Color.red : nil)
+                .cornerRadius(100)
+                .foregroundColor(viewModel.currentFeatureIndex == viewModel.features.count-1 ? Color.white : Color.blue)
             }
+            .padding([.leading, .trailing], 10)
         }
     }
 }
@@ -96,6 +100,6 @@ struct OnBoardingView_Previews: PreviewProvider {
         OnBoardingView(viewModel: OnBoardingViewModel(features: [
             Feature(title: "Page One", image: "pencil", text: "1 - Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
             Feature(title: "Page Two", image: "scribble", text: "2 - Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
-            Feature(title: "Page Three", image: "trash", text: "3 - Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi")]))
+            Feature(title: "Page Three", image: "trash", text: "3 - Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi")], onFinish: {}))
     }
 }

@@ -1,5 +1,5 @@
 //
-//  onBoarding_Specs.swift
+//  OnBoardingScenario_Specs.swift
 //  easysellingTests
 //
 //  Created by Pierre on 13/10/2021.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import easyselling
 
-class OnBoarding_Specs: XCTestCase {
+class OnBoardingScenario_Specs: XCTestCase {
 
     func test_Starts_OnBoarding() {
         givenScenario()
@@ -16,6 +16,12 @@ class OnBoarding_Specs: XCTestCase {
         thenNavigationHistory(is: [.features])
     }
     
+    func test_Finish_scenario() {
+        givenScenario()
+        whenBeginning()
+        spyNavigator.onFinish?()
+        XCTAssertTrue(spyNavigator.scenarioDidFinished)
+    }
     
     private func givenScenario() {
         spyNavigator = SpyOnBoardingNavigator()
@@ -35,11 +41,18 @@ class OnBoarding_Specs: XCTestCase {
 }
 
 class SpyOnBoardingNavigator: OnBoardingNavigator {
-
+    
+    private(set) var scenarioDidFinished: Bool = false
     private(set) var history: [screens] = []
+    private(set) var onFinish: Action?
         
-    func begin() {
+    func navigatesToOnBoardingViewModel(onFinish: @escaping Action) {
         history.append(.features)
+        self.onFinish = onFinish
+    }
+    
+    func navigateToAuthenticationScenario() {
+        scenarioDidFinished = true
     }
 }
 
