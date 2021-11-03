@@ -8,7 +8,7 @@
 import XCTest
 @testable import easyselling
 
-class MyVehiclesViewModel_Spec: XCTestCase {
+class MyVehiclesViewModel_Specs: XCTestCase {
     
     func test_Shows_vehicles_when_request_is_success() async {
         let expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),

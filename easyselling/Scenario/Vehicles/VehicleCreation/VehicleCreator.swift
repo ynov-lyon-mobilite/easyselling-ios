@@ -13,10 +13,10 @@ protocol VehicleCreatorProtocol {
 }
 
 class VehicleCreator: VehicleCreatorProtocol {
-    private var requestGenerator: DefaultRequestGenerator
-    private var apiCaller: DefaultAPICaller
+    private var requestGenerator: RequestGenerator
+    private var apiCaller: APICaller
     
-    init(requestGenerator: DefaultRequestGenerator = DefaultRequestGenerator(), apiCaller: DefaultAPICaller = DefaultAPICaller()) {
+    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
         self.apiCaller = apiCaller
     }
