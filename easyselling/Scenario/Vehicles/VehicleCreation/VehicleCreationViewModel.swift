@@ -30,7 +30,7 @@ class VehicleCreationViewModel: ObservableObject {
         self.onFinish = onFinish
     }
 
-    func createVehicle() async {
+    @MainActor func createVehicle() async {
         let informations = VehicleInformations(license: license, brand: brand, type: type.rawValue, year: year, model: model)
         if let error = vehicleInformationsVerificator.verifyInformations(vehicle: informations) {
             self.alert = error.errorDescription ?? ""
