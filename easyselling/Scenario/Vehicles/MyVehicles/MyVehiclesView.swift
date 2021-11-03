@@ -34,6 +34,10 @@ struct MyVehiclesView: View {
                 
             }
         }
+        .alert(isPresented: $viewModel.isError, content: {
+            Alert(title: Text(viewModel.error?.errorDescription ?? ""), dismissButton: Alert.Button.default(Text("Ok"))
+            )
+        })
         .onAppear {
             Task {
                 await viewModel.getVehicles()

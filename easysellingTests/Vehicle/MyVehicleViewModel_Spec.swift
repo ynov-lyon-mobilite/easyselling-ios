@@ -20,9 +20,9 @@ class MyVehiclesViewModel_Spec: XCTestCase {
         givenViewModel(urlSession: FakeUrlSession(with: expectedUrlResponse!))
         thenViewModelIsLoading()
         await whenTryingToGetVehicles()
-        thenLoadVehicles(are: [Vehicle(id: UUID(), brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-                               Vehicle(id: UUID(), brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2"),
-                               Vehicle(id: UUID(), brand: "Citroen", model: "model3", license: "license3", type: .car, year: "year3")])
+        thenLoadVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
+                               Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2"),
+                               Vehicle(id: "3", brand: "Citroen", model: "model3", license: "license3", type: .car, year: "year3")])
         thenViewModelIsNotLoading()
     }
     

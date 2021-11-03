@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MyVehiclesViewModel: ObservableObject {
     
@@ -24,13 +25,14 @@ class MyVehiclesViewModel: ObservableObject {
     private var isOpenningVehicleCreation: Action
     @Published var isLoading: Bool = true
     @Published var vehicles: [Vehicle] = []
-    var error: APICallerError?
+    @Published var error: APICallerError?
+    @Published var isError: Bool = false
  
     func openVehicleCreation() {
         self.isOpenningVehicleCreation()
     }
     
-    func getVehicles() async {
+    @MainActor func getVehicles() async {
         // call api
         let request: URLRequest
         
@@ -39,6 +41,7 @@ class MyVehiclesViewModel: ObservableObject {
             vehicles = try await apiCaller.call(request, decodeType: [Vehicle].self)
         } catch (let error) {
             if let error = error as? APICallerError {
+                isError = true
                 self.error = error
             } else {
                 self.error = nil
@@ -51,7 +54,7 @@ class MyVehiclesViewModel: ObservableObject {
 }
 
 struct Vehicle: Equatable, Decodable, Identifiable {
-    var id: UUID
+    var id: String
     var brand: String
     var model: String
     var license: String
