@@ -31,6 +31,16 @@ struct OnBoardingView: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             
+            HStack {
+                ForEach(0..<viewModel.features.count) { index in
+                    RoundedRectangle(cornerRadius: 25, style: .continuous)
+                        .fill(index == viewModel.currentFeatureIndex ?
+                              Asset.dotColorActive.swiftUIColor
+                              : Color(red: 242 / 255, green: 242 / 255, blue: 242 / 255))
+                        .frame(width: index == viewModel.currentFeatureIndex ? 40 : 20, height: 20)
+                }
+            }
+                        
             Spacer()
             HStack {
                 Button("Previous") {

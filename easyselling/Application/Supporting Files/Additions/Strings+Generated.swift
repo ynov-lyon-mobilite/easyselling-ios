@@ -26,7 +26,8 @@ internal enum L10n {
     internal enum Button {
       /// Se connecter
       internal static let login = L10n.tr("localizable", "userAuthentication.button.login")
-      /// Vous n'avez pas encore de compte ?\nCliquez ici pour vous inscrire
+      /// Vous n'avez pas encore de compte ?
+      /// Cliquez ici pour vous inscrire
       internal static let register = L10n.tr("localizable", "userAuthentication.button.register")
     }
   }
