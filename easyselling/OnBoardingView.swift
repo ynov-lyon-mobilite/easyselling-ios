@@ -15,6 +15,9 @@ struct OnBoardingView: View {
         self.viewModel = viewModel
     }
     
+    let basicWidth: CGFloat = 20
+    let animationWidth: CGFloat = 40
+        
     var body: some View {
         VStack {
             TabView(selection: $viewModel.currentFeatureIndex) {
@@ -44,8 +47,10 @@ struct OnBoardingView: View {
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
                         .fill(index == viewModel.currentFeatureIndex ?
                               Asset.dotColorActive.swiftUIColor
-                              : Asset.dotColorInactive.swiftUIColor)
-                        .frame(width: index == viewModel.currentFeatureIndex ? 40 : 20, height: 20)
+                              : Color(red: 242 / 255, green: 242 / 255, blue: 242 / 255))
+                        .frame(width: index == viewModel.currentFeatureIndex ?
+                               animationWidth : basicWidth, height: 20)
+                        .animation(.easeIn, value: index == viewModel.currentFeatureIndex ? animationWidth: basicWidth)
                 }
             }
             .padding(25)
