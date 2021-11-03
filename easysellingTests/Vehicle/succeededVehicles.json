@@ -1,13 +1,25 @@
 {
     "data": [
         {
-            "brand": "Peugeot"
+            "brand": "Peugeot",
+            "model": "model1",
+            "license": "license1",
+            "type": "type1",
+            "year": "year1"
         },
         {
-            "brand": "Renault"
+            "brand": "Renault",
+            "model": "model2",
+            "license": "license2",
+            "type": "type2",
+            "year": "year2"
         },
         {
-            "brand": "Citroen"
+            "brand": "Citroen",
+            "model": "model3",
+            "license": "license3",
+            "type": "type3",
+            "year": "year3"
         },
     ]
 }

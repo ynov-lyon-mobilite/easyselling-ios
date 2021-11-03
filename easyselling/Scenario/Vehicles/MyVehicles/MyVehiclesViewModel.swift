@@ -22,8 +22,9 @@ class MyVehiclesViewModel {
     private var apiCaller: APICaller
     private var urlSession: URLSessionProtocol
     private var isOpenningVehicleCreation: Action
-    var loading: Bool = true
+    var isLoading: Bool = true
     var vehicles: [Vehicle] = []
+    var error: APICallerError?
  
     func openVehicleCreation() {
         self.isOpenningVehicleCreation()
@@ -36,13 +37,24 @@ class MyVehiclesViewModel {
         do {
             request = try requestGenerator.generateRequest(endpoint: .vehicles, method: .GET, headers: [:])
             vehicles = try await apiCaller.call(request, decodeType: [Vehicle].self)
-        } catch {}
+        } catch (let error) {
+            if let error = error as? APICallerError {
+                self.error = error
+            } else {
+                self.error = nil
+            }
+        }
         
         // fin du call
-        loading = false
+        isLoading = false
     }
 }
 
 struct Vehicle: Equatable, Decodable {
     var brand: String
+    var model: String
+    var license: String
+    var type: String
+    var year: String
+    
 }
