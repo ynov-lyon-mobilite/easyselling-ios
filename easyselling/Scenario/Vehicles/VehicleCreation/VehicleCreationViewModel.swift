@@ -10,53 +10,40 @@ import Combine
 
 class VehicleCreationViewModel: ObservableObject {
     
-    init(onFinish: @escaping Action) {
+    private var vehicleCreator: VehicleCreatorProtocol
+    private var vehicleInformationsVerificator: VehicleInformationsProtocol
+    private var onFinish: Action
+
+    @Published var alertText: String = ""
+    @Published var showAlert = false
+
+    @Published var brand: String = "Audi"
+    @Published var model: String = "A1"
+    @Published var license: String = "123456789"
+    @Published var year: String = "2005"
+    @Published var type: VehicleType = .carType
+
+    init(vehicleCreator: VehicleCreatorProtocol, vehicleVerificator: VehicleInformationsProtocol,
+         onFinish: @escaping Action) {
+        self.vehicleCreator = vehicleCreator
+        self.vehicleInformationsVerificator = vehicleVerificator
         self.onFinish = onFinish
     }
-    
-    private var onFinish: Action
-    
-    func createVehicle() {
-        self.onFinish()
+
+    func createVehicle() async {
+        let informations = VehicleInformations(license: license, brand: brand, type: type.rawValue, year: year, model: model)
+        if let error = vehicleInformationsVerificator.checkingInformations(vehicle: informations) {
+            self.alertText = error.errorDescription ?? ""
+            self.showAlert = true
+            return
+        }
+
+        do {
+            try await vehicleCreator.createVehicle(informations: informations)
+            self.onFinish()
+        } catch(let error) {
+            self.alertText = (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
+            self.showAlert = true
+        }
     }
-    
-    //    private var vehicleCreator: VehicleCreator
-//    private var vehicleInformationsVerificator: VehicleInformationsVerificator
-//    private var cancellables = Set<AnyCancellable>()
-//    private var onFinish: Action
-//
-//    @Published var alertText: String = ""
-//    @Published var showAlert = false
-//
-//    @Published var brand: String = ""
-//    @Published var model: String = ""
-//    @Published var license: String = ""
-//    @Published var year: String = ""
-//    @Published var type: VehicleType = .carType
-//
-//    init(vehicleCreator: VehicleCreator = VehicleCreator(), vehicleVerificator: VehicleInformationsVerificator = VehicleInformationsVerificator(),
-//         onFinish: @escaping Action) {
-//        self.vehicleCreator = vehicleCreator
-//        self.vehicleInformationsVerificator = vehicleVerificator
-//        self.onFinish = onFinish
-//    }
-//
-//    func createVehicle(with informations: VehicleInformations) async {
-//        if let error = vehicleInformationsVerificator.checkingInformations(vehicle: informations) {
-//            DispatchQueue.main.async {
-//                self.alertText = error.errorDescription ?? ""
-//                self.showAlert = true
-//            }
-//            return
-//        }
-//
-//        do {
-//            try await vehicleCreator.createVehicle(informations: informations)
-//        } catch(let error) {
-//            DispatchQueue.main.async {
-//                self.alertText = (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
-//                self.showAlert = true
-//            }
-//        }
-//    }
 }

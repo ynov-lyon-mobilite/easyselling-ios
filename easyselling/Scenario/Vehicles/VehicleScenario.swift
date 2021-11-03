@@ -51,12 +51,14 @@ class DefaultVehicleNavigator: VehicleNavigator {
     }
     
     func navigatesToVehicleCreation(onFinish: @escaping Action) {
-        let vm = VehicleCreationViewModel(onFinish: onFinish)
+        let vm = VehicleCreationViewModel(vehicleCreator: VehicleCreator(), vehicleVerificator: VehicleInformationsVerificator(), onFinish: onFinish)
         let vehicleCreationView = VehicleCreationView(viewModel: vm)
         navigationController.present(UIHostingController(rootView: vehicleCreationView), animated: true)
     }
     
     func goingBackToHomeView() {
-        navigationController.dismiss(animated: true)
+        DispatchQueue.main.async {
+            self.navigationController.dismiss(animated: true)
+        }
     }
 }
