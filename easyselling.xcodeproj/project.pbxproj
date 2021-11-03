@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		033F4AF32718C8A800B79149 /* NetFox in Frameworks */ = {isa = PBXBuildFile; productRef = 033F4AF22718C8A800B79149 /* NetFox */; };
+		034D04E32732976E00576D64 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 034D04E22732976E00576D64 /* GoogleService-Info.plist */; };
+		034D04E62732984400576D64 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 034D04E52732984400576D64 /* FirebaseAnalytics */; };
+		034D04E82732984400576D64 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 034D04E72732984400576D64 /* FirebaseCrashlytics */; };
 		035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860327184EDC00684ED0 /* AppDelegate.swift */; };
 		035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860527188E9300684ED0 /* DefaultAccountCreator.swift */; };
 		035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */; };
@@ -87,6 +90,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		034D04E22732976E00576D64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		035E860327184EDC00684ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		035E860527188E9300684ED0 /* DefaultAccountCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAccountCreator.swift; sourceTree = "<group>"; };
 		035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAccountCreator_Specs.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				8705B9B127208464004132CF /* KeychainSwift in Frameworks */,
 				033F4AF32718C8A800B79149 /* NetFox in Frameworks */,
 				8798D15327310BFC00FF3AB4 /* JWTDecode in Frameworks */,
+				034D04E82732984400576D64 /* FirebaseCrashlytics in Frameworks */,
+				034D04E62732984400576D64 /* FirebaseAnalytics in Frameworks */,
 				D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,6 +283,7 @@
 		03F209772716E1C500E10F6C /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				034D04E22732976E00576D64 /* GoogleService-Info.plist */,
 				03F209782716E21100E10F6C /* Supporting Files */,
 				035E860327184EDC00684ED0 /* AppDelegate.swift */,
 				D00736552712D93800ED0F2C /* easyselling.entitlements */,
@@ -538,6 +545,8 @@
 			packageProductDependencies = (
 				033F4AF22718C8A800B79149 /* NetFox */,
 				8705B9B027208464004132CF /* KeychainSwift */,
+				034D04E52732984400576D64 /* FirebaseAnalytics */,
+				034D04E72732984400576D64 /* FirebaseCrashlytics */,
 				8798D15227310BFC00FF3AB4 /* JWTDecode */,
 			);
 			productName = easyselling;
@@ -596,6 +605,7 @@
 				033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */,
 				8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				8798D15127310BFC00FF3AB4 /* XCRemoteSwiftPackageReference "JWTDecode" */,
+				034D04E42732984400576D64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 873552B0270D847700F2DDBD /* Products */;
 			projectDirPath = "";
@@ -614,6 +624,7 @@
 			files = (
 				03F2097B2716E2B100E10F6C /* localizable.strings in Resources */,
 				03F209802716E2CB00E10F6C /* localizable.strings in Resources */,
+				034D04E32732976E00576D64 /* GoogleService-Info.plist in Resources */,
 				873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */,
 				873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */,
 			);
@@ -1046,6 +1057,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		034D04E42732984400576D64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
@@ -1069,6 +1088,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */;
 			productName = NetFox;
+		};
+		034D04E52732984400576D64 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 034D04E42732984400576D64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		034D04E72732984400576D64 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 034D04E42732984400576D64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		8705B9B027208464004132CF /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
