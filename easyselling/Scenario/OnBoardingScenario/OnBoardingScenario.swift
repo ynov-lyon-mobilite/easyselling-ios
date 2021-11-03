@@ -11,6 +11,8 @@ import SwiftUI
 
 class OnBoardingScenario {
     
+    @AppStorage("onBoardingIsViewed") var onBoardingIsViewed: Bool = false
+    
     init(navigator: OnBoardingNavigator) {
         self.navigator = navigator
     }
@@ -19,11 +21,17 @@ class OnBoardingScenario {
     
     func begin() {
         // Vérifier si l'utilisateur à déjà vu un onboarding
-        navigator.navigatesToOnBoardingViewModel(onFinish: navigateToAuthenticationScenario)
+        if(!onBoardingIsViewed) {
+            navigator.navigatesToOnBoardingViewModel(onFinish: hasFinish)
+        } else {
+            navigator.navigateToAuthenticationScenario()
+        }
     }
     
     private func hasFinish() {
         // sauvegarder le fait que l'utilisateur à fait le onboarding pour la première fois
+        self.onBoardingIsViewed = true
+        navigator.navigateToAuthenticationScenario()
     }
     
     private func navigateToAuthenticationScenario() {
