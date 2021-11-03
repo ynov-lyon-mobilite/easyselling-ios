@@ -19,15 +19,15 @@ struct MyVehiclesView: View {
                 List(viewModel.vehicles) { vehicule in
                     VStack {
                         HStack {
-                            Text("\(vehicule.brand)")
-                            Text("\(vehicule.model)")
+                            Text(vehicule.brand)
+                            Text(vehicule.model)
                             Spacer()
-                            Text("\(vehicule.type.description)")
+                            Text(vehicule.type.description)
                         }
                         HStack {
-                            Text("\(vehicule.license)")
+                            Text(vehicule.license)
                             Spacer()
-                            Text("\(vehicule.year)")
+                            Text(vehicule.year)
                         }
                     }
                 }
