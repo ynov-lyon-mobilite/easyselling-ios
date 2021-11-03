@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MyVehiclesViewModel {
+class MyVehiclesViewModel: ObservableObject {
     
     init(isOpenningVehicleCreation: @escaping Action,
          requestGenerator: RequestGenerator = DefaultRequestGenerator(),
@@ -22,8 +22,8 @@ class MyVehiclesViewModel {
     private var apiCaller: APICaller
     private var urlSession: URLSessionProtocol
     private var isOpenningVehicleCreation: Action
-    var isLoading: Bool = true
-    var vehicles: [Vehicle] = []
+    @Published var isLoading: Bool = true
+    @Published var vehicles: [Vehicle] = []
     var error: APICallerError?
  
     func openVehicleCreation() {
@@ -50,11 +50,26 @@ class MyVehiclesViewModel {
     }
 }
 
-struct Vehicle: Equatable, Decodable {
+struct Vehicle: Equatable, Decodable, Identifiable {
+    var id: UUID
     var brand: String
     var model: String
     var license: String
-    var type: String
+    var type: VehicleTypeEnum
     var year: String
     
+}
+
+enum VehicleTypeEnum: String, Decodable {
+    case car, moto
+    
+    var description: String {
+        switch self {
+        case .car:
+            return "Voiture"
+        case .moto:
+            return "Moto"
+        }
+    }
+
 }
