@@ -14,35 +14,35 @@ struct VehicleCreationView: View {
     var body: some View {
         VStack {
             VStack {
-                Text("Marque Model")
+                Text(L10n.CreateVehicle.title)
                     .font(.title)
                     .fontWeight(.bold)
             }
 
             Divider()
 
-            TextField("Marque", text: $viewModel.brand)
+            TextField(L10n.CreateVehicle.brand, text: $viewModel.brand)
                 .padding(.top)
 
-            TextField("Modèle", text: $viewModel.model)
+            TextField(L10n.CreateVehicle.model, text: $viewModel.model)
                 .padding(.top)
 
-            TextField("Numéro de licence", text: $viewModel.license)
+            TextField(L10n.CreateVehicle.license, text: $viewModel.license)
                 .padding(.top)
 
             HStack(alignment: .lastTextBaseline) {
                 Picker("Type", selection: $viewModel.type) {
-                    Text("Voiture").tag(VehicleType.carType)
-                    Text("Moto").tag(VehicleType.motoType)
+                    Text(L10n.CreateVehicle.car).tag(VehicleType.carType)
+                    Text(L10n.CreateVehicle.moto).tag(VehicleType.motoType)
                 }
                 Spacer(minLength: 50)
-                TextField("Année", text: $viewModel.year)
+                TextField(L10n.CreateVehicle.year, text: $viewModel.year)
                     .padding(.top)
                     .keyboardType(.numberPad)
             }
 
             VStack {
-                Button("Button") {
+                Button(L10n.CreateVehicle.submit) {
                     Task {
                         await viewModel.createVehicle()
                     }

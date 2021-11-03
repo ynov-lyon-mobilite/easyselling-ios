@@ -26,15 +26,15 @@ class VehicleCreationViewModel_Spec: XCTestCase {
     }
     
     func test_Shows_alert_when_the_field_year_is_incorrect() async {
-        givenViewModel(exepected: .wrongYear)
+        givenViewModel(exepected: .incorrectYear)
         await whenCreating()
-        thenAlert(expected: .wrongYear)
+        thenAlert(expected: .incorrectYear)
     }
     
     func test_Shows_alert_when_the_field_license_is_incorrect() async {
-        givenViewModel(exepected: .wrongLicenseNumber)
+        givenViewModel(exepected: .incorrectLicense)
         await whenCreating()
-        thenAlert(expected: .wrongLicenseNumber)
+        thenAlert(expected: .incorrectLicense)
     }
     
     func test_Shows_alert_when_an_error_happens_after_a_call_api() async {

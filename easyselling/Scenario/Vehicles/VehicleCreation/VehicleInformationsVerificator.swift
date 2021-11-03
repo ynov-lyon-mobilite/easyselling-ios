@@ -14,12 +14,12 @@ protocol VehicleInformationsProtocol {
 class VehicleInformationsVerificator: VehicleInformationsProtocol {
     func verifyInformations(vehicle: VehicleInformations) -> VehicleCreationError? {
         switch true {
-        case vehicle.license.isEmpty
-            || vehicle.license.isEmpty
-            || vehicle.brand.isEmpty
-            || vehicle.model.isEmpty: return .emptyField
-            case vehicle.license.count != 9: return .wrongLicenseNumber
-            case vehicle.year.count != 4: return .wrongYear
+            case vehicle.license.isEmpty
+                || vehicle.license.isEmpty
+                || vehicle.brand.isEmpty
+                || vehicle.model.isEmpty: return .emptyField
+            case vehicle.license.count != 9: return .incorrectLicense
+            case vehicle.year.count != 4: return .incorrectYear
             default: return nil
         }
     }
@@ -35,14 +35,14 @@ struct VehicleInformations: Equatable, Encodable {
 
 enum VehicleCreationError: Equatable {
     case emptyField
-    case wrongYear
-    case wrongLicenseNumber
+    case incorrectYear
+    case incorrectLicense
 
     var errorDescription: String? {
         switch self {
-            case .emptyField: return "Un des champs est vide"
-            case .wrongYear: return "L'année renseignée est invalide"
-            case .wrongLicenseNumber: return "Le numéro de série est invalide"
+            case .emptyField: return L10n.CreateVehicle.Error.emptyField
+            case .incorrectYear: return L10n.CreateVehicle.Error.incorrectYear
+            case .incorrectLicense: return L10n.CreateVehicle.Error.incorrectLicense
         }
     }
 }
