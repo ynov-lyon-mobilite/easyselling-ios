@@ -47,7 +47,7 @@ struct OnBoardingView: View {
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
                         .fill(index == viewModel.currentFeatureIndex ?
                               Asset.dotColorActive.swiftUIColor
-                              : Color(red: 242 / 255, green: 242 / 255, blue: 242 / 255))
+                              : Asset.dotColorInactive.swiftUIColor)
                         .frame(width: index == viewModel.currentFeatureIndex ?
                                animationWidth : basicWidth, height: 20)
                         .animation(.easeIn, value: index == viewModel.currentFeatureIndex ? animationWidth: basicWidth)
