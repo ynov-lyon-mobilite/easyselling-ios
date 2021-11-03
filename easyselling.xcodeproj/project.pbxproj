@@ -236,8 +236,8 @@
 			isa = PBXGroup;
 			children = (
 				8FF010242732EDCE0022314B /* OnBoardingScenario */,
-				8798D070272BBD1A00FF3AB4 /* Authentication */,
-				03DAF9A3272731FB00FFED55 /* Vehicles */,
+				8798D070272BBD1A00FF3AB4 /* AuthenticationScenario */,
+				03DAF9A3272731FB00FFED55 /* VehiclesScenario */,
 			);
 			path = Scenario;
 			sourceTree = "<group>";
@@ -253,14 +253,14 @@
 			path = AccountCreation;
 			sourceTree = "<group>";
 		};
-		03DAF9A3272731FB00FFED55 /* Vehicles */ = {
+		03DAF9A3272731FB00FFED55 /* VehiclesScenario */ = {
 			isa = PBXGroup;
 			children = (
 				2C4486B3271DF7E10021122F /* VehicleScenario.swift */,
 				03DAF9A42727320600FFED55 /* MyVehicles */,
 				2CD4B8BE271C5F82002598A4 /* VehicleCreation */,
 			);
-			path = Vehicles;
+			path = VehiclesScenario;
 			sourceTree = "<group>";
 		};
 		03DAF9A42727320600FFED55 /* MyVehicles */ = {
@@ -344,7 +344,7 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2CAE03D227170F98008D7A68 /* Vehicle */ = {
+		2CAE03D227170F98008D7A68 /* VehicleScenario_Specs */ = {
 			isa = PBXGroup;
 			children = (
 				03DAF9A52727330300FFED55 /* MyVehicleViewModel_Spec.swift */,
@@ -352,7 +352,7 @@
 				03DAF99F27271C2D00FFED55 /* VehicleScenario_Specs.swift */,
 				03DAF9A92727448300FFED55 /* VehicleCreationViewModel_Specs.swift */,
 			);
-			path = Vehicle;
+			path = VehicleScenario_Specs;
 			sourceTree = "<group>";
 		};
 		2CD4B8BE271C5F82002598A4 /* VehicleCreation */ = {
@@ -383,14 +383,14 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		87184C882729DB65006586FD /* Authentication */ = {
+		87184C882729DB65006586FD /* AuthenticationScenario_Specs */ = {
 			isa = PBXGroup;
 			children = (
 				0382E29927175FB700EB570E /* AuthenticationScenario_Specs.swift */,
 				0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */,
 				8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */,
 			);
-			path = Authentication;
+			path = AuthenticationScenario_Specs;
 			sourceTree = "<group>";
 		};
 		873552A6270D847700F2DDBD = {
@@ -496,7 +496,7 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		8798D070272BBD1A00FF3AB4 /* Authentication */ = {
+		8798D070272BBD1A00FF3AB4 /* AuthenticationScenario */ = {
 			isa = PBXGroup;
 			children = (
 				0382E29E2717647500EB570E /* AuthenticationScenario.swift */,
@@ -504,7 +504,7 @@
 				0382E2A22717648700EB570E /* AccountCreation */,
 				87DC1D04271F6A1F002DC193 /* UserAuthentication */,
 			);
-			path = Authentication;
+			path = AuthenticationScenario;
 			sourceTree = "<group>";
 		};
 		8798D13D2730F2CE00FF3AB4 /* DefaultTokenRefreshor_Specs */ = {
