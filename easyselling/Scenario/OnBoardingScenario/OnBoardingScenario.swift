@@ -20,7 +20,6 @@ class OnBoardingScenario {
     private var navigator: OnBoardingNavigator
     
     func begin() {
-        // Vérifier si l'utilisateur à déjà vu un onboarding
         if(!onBoardingIsViewed) {
             navigator.navigatesToOnBoardingViewModel(onFinish: hasFinish)
         } else {
@@ -29,8 +28,8 @@ class OnBoardingScenario {
     }
     
     private func hasFinish() {
-        // sauvegarder le fait que l'utilisateur à fait le onboarding pour la première fois
         self.onBoardingIsViewed = true
+        navigator.deleteStack()
         navigator.navigateToAuthenticationScenario()
     }
     
@@ -42,6 +41,7 @@ class OnBoardingScenario {
 protocol OnBoardingNavigator {
     func navigatesToOnBoardingViewModel(onFinish: @escaping Action)
     func navigateToAuthenticationScenario()
+    func deleteStack()
 }
 
 class DefaultOnBoardingNavigator: OnBoardingNavigator {
@@ -67,5 +67,9 @@ class DefaultOnBoardingNavigator: OnBoardingNavigator {
         let navigator = DefaultAuthenticationNavigator(navigationController: navigationController)
         let scenario = AuthenticationScenario(navigator: navigator)
         scenario.begin()
+    }
+    
+    func deleteStack() {
+        self.navigationController.viewControllers.removeAll()
     }
 }
