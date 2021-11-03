@@ -16,7 +16,7 @@ class DefaultTokenRefreshor_Specs: XCTestCase {
         thenToken(expectedAccessToken: accessToken, expectedRefreshToken: refreshToken)
     }
     
-    func test_Refreshs_token_failed() async {
+    func test_Throws_error_when_token_refresh_failed() async {
         givenTokenRefreshor(error: .unauthorized)
         await whenRefreshToken(refreshToken: "ANY_REFRESH_TOKEN")
         thenError(is: .unauthorized)

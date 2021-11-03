@@ -11,7 +11,7 @@ import XCTest
 
 class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     
-    func test_Injects_successfully() async {
+    func test_Generates_request_with_token_in_header() async {
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         request.httpMethod = HTTPMethod.GET.rawValue
@@ -21,7 +21,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         thenRequest(is: request)
     }
     
-    func test_Injects_successfully_with_body() async {
+    func test_Generates_Request_With_Headers_and_token_in_header() async {
         let body = "BODY"
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
@@ -32,7 +32,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         thenRequestWithBody(is: request)
     }
     
-    func test_Injects_successfully_after_refresh_token() async {
+    func test_Generates_request_with_token_in_header_after_refresh_token() async {
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         
@@ -41,7 +41,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         thenRequest(is: request)
     }
     
-    func test_Injects_successfully_with_body_after_refresh_token() async {
+    func test_Generates_Request_With_Headers_and_token_in_header_after_refresh_token() async {
         let body = "BODY"
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
@@ -52,7 +52,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         thenRequestWithBody(is: request)
     }
     
-    func test_Injects_failed_after_refresh_token_failure() async {
+    func test_Throws_error_after_refresh_token_failure() async {
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         
@@ -63,7 +63,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         thenError(is: .badRequest)
     }
     
-    func test_Injects_failed_without_saved_token_in_manager() async {
+    func test_Throws_error_with_empty_access_and_refresh_token() async {
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         

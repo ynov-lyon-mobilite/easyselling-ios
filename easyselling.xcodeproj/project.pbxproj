@@ -391,9 +391,9 @@
 				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
 				03F0542F271B38EB00434706 /* DefaultInformationVerificator_Specs */,
 				03F0543D271B3EFB00434706 /* DefaultRequestGenerator_Specs */,
+				8798D14A2730FAEB00FF3AB4 /* DefaultTokenManager_Specs */,
 				8798D13D2730F2CE00FF3AB4 /* DefaultTokenRefreshor_Specs */,
 				87DC1D01271F61E2002DC193 /* DefaultUserAuthenticator_Specs */,
-				8798D14A2730FAEB00FF3AB4 /* DefaultTokenManager_Specs */,
 				87184C882729DB65006586FD /* Authentication */,
 				2CAE03D227170F98008D7A68 /* Vehicle */,
 			);
