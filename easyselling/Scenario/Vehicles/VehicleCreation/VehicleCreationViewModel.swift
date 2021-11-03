@@ -40,10 +40,15 @@ class VehicleCreationViewModel: ObservableObject {
 
         do {
             try await vehicleCreator.createVehicle(informations: informations)
-            self.onFinish()
+            self.alert = L10n.CreateVehicle.creationSuccessful
+            self.showAlert = true
         } catch(let error) {
             self.alert = (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
             self.showAlert = true
         }
+    }
+    
+    func dismissModal() {
+        self.onFinish()
     }
 }

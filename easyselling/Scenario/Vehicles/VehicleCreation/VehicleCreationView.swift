@@ -56,7 +56,9 @@ struct VehicleCreationView: View {
         .alert(isPresented: $viewModel.showAlert, content: {
             Alert(
                 title: Text(viewModel.alert),
-                dismissButton: Alert.Button.default(Text("Ok")))
+                dismissButton: Alert.Button.default(Text("Ok")) {
+                    viewModel.dismissModal()
+                })
         })
     }
 }

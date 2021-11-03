@@ -13,28 +13,28 @@ class VehicleCreationViewModel_Spec: XCTestCase {
     private var isCreated: Bool!
     private var viewModel: VehicleCreationViewModel!
     
-    func test_Leaves_vehicle_creation_on_vehicle_informations_submit() async {
+    func test_Leaves_vehicle_creation_on_vehicle_informations_submit() {
         givenViewModel()
-        await whenCreating()
+        whenCreationSuccessful()
         XCTAssertTrue(isCreated)
     }
     
     func test_Shows_alert_when_a_field_is_empty() async {
         givenViewModel(exepected: .emptyField)
         await whenCreating()
-        thenAlert(expected: .emptyField)
+        thenAlert(expected: VehicleCreationError.emptyField.errorDescription ?? "")
     }
     
     func test_Shows_alert_when_the_field_year_is_incorrect() async {
         givenViewModel(exepected: .incorrectYear)
         await whenCreating()
-        thenAlert(expected: .incorrectYear)
+        thenAlert(expected: VehicleCreationError.incorrectYear.errorDescription ?? "")
     }
     
     func test_Shows_alert_when_the_field_license_is_incorrect() async {
         givenViewModel(exepected: .incorrectLicense)
         await whenCreating()
-        thenAlert(expected: .incorrectLicense)
+        thenAlert(expected: VehicleCreationError.incorrectLicense.errorDescription ?? "")
     }
     
     func test_Shows_alert_when_an_error_happens_after_a_call_api() async {
@@ -43,10 +43,10 @@ class VehicleCreationViewModel_Spec: XCTestCase {
         XCTAssertTrue(viewModel.showAlert)
     }
     
-    func test_Verifies_if_alert_is_hidden() async {
+    func test_Shows_alert_when_the_creation_have_successful() async {
         givenViewModel()
         await whenCreating()
-        XCTAssertFalse(viewModel.showAlert)
+        thenAlert(expected: L10n.CreateVehicle.creationSuccessful)
     }
 
     private func givenViewModel(exepected: VehicleCreationError? = nil, throwError: Bool = false) {
@@ -58,10 +58,14 @@ class VehicleCreationViewModel_Spec: XCTestCase {
     private func whenCreating() async {
         await viewModel.createVehicle()
     }
+    
+    private func whenCreationSuccessful() {
+        viewModel.dismissModal()
+    }
 
-    private func thenAlert(expected: VehicleCreationError) {
+    private func thenAlert(expected: String) {
         XCTAssertTrue(viewModel.showAlert)
-        XCTAssertEqual(expected.errorDescription, viewModel.alert)
+        XCTAssertEqual(expected, viewModel.alert)
     }
 }
 

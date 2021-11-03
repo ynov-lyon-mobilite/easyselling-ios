@@ -26,3 +26,5 @@
 "createVehicle.error.emptyField" = "A field is empty";
 "createVehicle.error.incorrectYear" = "The year format is incorrect";
 "createVehicle.error.incorrectLicense" = "The license format is incorrect";
+
+"createVehicle.creationSuccessful" = "You created a new vehicle. Congratulation !";
