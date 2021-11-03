@@ -8,11 +8,11 @@
 import Foundation
 
 protocol VehicleInformationsProtocol {
-    func checkingInformations(vehicle: VehicleInformations) -> VehicleCreationError?
+    func verifyInformations(vehicle: VehicleInformations) -> VehicleCreationError?
 }
 
 class VehicleInformationsVerificator: VehicleInformationsProtocol {
-    func checkingInformations(vehicle: VehicleInformations) -> VehicleCreationError? {
+    func verifyInformations(vehicle: VehicleInformations) -> VehicleCreationError? {
         switch true {
         case vehicle.license.isEmpty
             || vehicle.license.isEmpty

@@ -14,13 +14,13 @@ class VehicleCreationViewModel: ObservableObject {
     private var vehicleInformationsVerificator: VehicleInformationsProtocol
     private var onFinish: Action
 
-    @Published var alertText: String = ""
+    @Published var alert: String = ""
     @Published var showAlert = false
 
-    @Published var brand: String = "Audi"
-    @Published var model: String = "A1"
-    @Published var license: String = "123456789"
-    @Published var year: String = "2005"
+    @Published var brand: String = ""
+    @Published var model: String = ""
+    @Published var license: String = ""
+    @Published var year: String = ""
     @Published var type: VehicleType = .carType
 
     init(vehicleCreator: VehicleCreatorProtocol, vehicleVerificator: VehicleInformationsProtocol,
@@ -32,8 +32,8 @@ class VehicleCreationViewModel: ObservableObject {
 
     func createVehicle() async {
         let informations = VehicleInformations(license: license, brand: brand, type: type.rawValue, year: year, model: model)
-        if let error = vehicleInformationsVerificator.checkingInformations(vehicle: informations) {
-            self.alertText = error.errorDescription ?? ""
+        if let error = vehicleInformationsVerificator.verifyInformations(vehicle: informations) {
+            self.alert = error.errorDescription ?? ""
             self.showAlert = true
             return
         }
@@ -42,7 +42,7 @@ class VehicleCreationViewModel: ObservableObject {
             try await vehicleCreator.createVehicle(informations: informations)
             self.onFinish()
         } catch(let error) {
-            self.alertText = (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
+            self.alert = (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
             self.showAlert = true
         }
     }

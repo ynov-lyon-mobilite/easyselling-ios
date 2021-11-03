@@ -15,7 +15,7 @@ class VehicleCreationViewModel_Spec: XCTestCase {
     
     func test_Leaves_vehicle_creation_on_vehicle_informations_submit() async {
         givenViewModel()
-        await viewModel.createVehicle()
+        await whenCreating()
         XCTAssertTrue(isCreated)
     }
     
@@ -43,14 +43,14 @@ class VehicleCreationViewModel_Spec: XCTestCase {
         XCTAssertTrue(viewModel.showAlert)
     }
     
-    func test_Verifies_alert_is_hide() async {
+    func test_Verifies_if_alert_is_hidden() async {
         givenViewModel()
         await whenCreating()
         XCTAssertFalse(viewModel.showAlert)
     }
 
     private func givenViewModel(exepected: VehicleCreationError? = nil, throwError: Bool = false) {
-        viewModel = VehicleCreationViewModel(vehicleCreator: SpyVehicleCreator(throwError: throwError), vehicleVerificator: SpyVehicleInformationsVerificator(status: exepected), onFinish: {
+        viewModel = VehicleCreationViewModel(vehicleCreator: SpyVehicleCreator(throwError: throwError), vehicleVerificator: SpyVehicleInformationsVerificator(error: exepected), onFinish: {
             self.isCreated = true
         })
     }
@@ -61,7 +61,7 @@ class VehicleCreationViewModel_Spec: XCTestCase {
 
     private func thenAlert(expected: VehicleCreationError) {
         XCTAssertTrue(viewModel.showAlert)
-        XCTAssertEqual(expected.errorDescription, viewModel.alertText)
+        XCTAssertEqual(expected.errorDescription, viewModel.alert)
     }
 }
 
@@ -82,13 +82,13 @@ class SpyVehicleCreator: VehicleCreatorProtocol {
 
 class SpyVehicleInformationsVerificator: VehicleInformationsProtocol {
     
-    private let status: VehicleCreationError?
+    private let error: VehicleCreationError?
     
-    init(status: VehicleCreationError?) {
-        self.status = status
+    init(error: VehicleCreationError?) {
+        self.error = error
     }
     
-    func checkingInformations(vehicle: VehicleInformations) -> VehicleCreationError? {
-        return status
+    func verifyInformations(vehicle: VehicleInformations) -> VehicleCreationError? {
+        return error
     }
 }

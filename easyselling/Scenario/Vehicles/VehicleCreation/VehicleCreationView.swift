@@ -55,7 +55,7 @@ struct VehicleCreationView: View {
 
         .alert(isPresented: $viewModel.showAlert, content: {
             Alert(
-                title: Text(viewModel.alertText),
+                title: Text(viewModel.alert),
                 dismissButton: Alert.Button.default(Text("Ok")))
         })
     }
