@@ -11,43 +11,45 @@ import XCTest
 class VehicleCreator_Specs: XCTestCase {
     
     private var vehicleCreator: VehicleCreator!
+    private var vehicle: VehicleInformations!
     private var isRequestSucceed: Bool!
     private var error: APICallerError!
     
     func test_Creates_vehicle_successful() async {
-        givenVehicleCreator(requestGenerator: FakeRequestGenerator("https://www.google.com"), apiCaller: SucceedingAPICaller())
-        await whenCreatingVehicle()
+        givenVehicleCreator(requestGenerator: FakeRequestGenerator(), apiCaller: SucceedingAPICaller())
+        await whenCreatingVehicle(informations: vehicle)
         thenAccountIsCreated()
     }
     
     func test_Creates_vehicle_failed_with_unfound_ressources() async {
-        givenVehicleCreator(requestGenerator: FakeRequestGenerator("https://www.google.com"), apiCaller: FailingAPICaller(withError: 404))
-        await whenCreatingVehicle()
+        givenVehicleCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
+        await whenCreatingVehicle(informations: vehicle)
         thenErrorCode(is: 404)
         thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
     }
     
     func test_Creates_vehicle_failed_with_wrong_url() async {
-        givenVehicleCreator(requestGenerator: FakeRequestGenerator("google.co"), apiCaller: FailingAPICaller(withError: 400))
-        await whenCreatingVehicle()
+        givenVehicleCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 400))
+        await whenCreatingVehicle(informations: vehicle)
         thenErrorCode(is: 400)
         thenErrorMessage(is: "Une erreur est survenue")
     }
     
     func test_Creates_vehicle_failed_with_forbidden_access() async {
-        givenVehicleCreator(requestGenerator: FakeRequestGenerator("https://www.google.com"), apiCaller: FailingAPICaller(withError: 403))
-        await whenCreatingVehicle()
+        givenVehicleCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 403))
+        await whenCreatingVehicle(informations: vehicle)
         thenErrorCode(is: 403)
         thenErrorMessage(is: "Une erreur est survenue")
     }
     
     private func givenVehicleCreator(requestGenerator: RequestGenerator, apiCaller: APICaller) {
         vehicleCreator = VehicleCreator(requestGenerator: requestGenerator, apiCaller: apiCaller)
+        vehicle = VehicleInformations(license: "123456789", brand: "Audi", type: "car", year: "2005", model: "A1")
     }
     
-    private func whenCreatingVehicle() async {
+    private func whenCreatingVehicle(informations: VehicleInformations) async {
         do {
-            try await vehicleCreator.createVehicle(informations: VehicleInformations(license: "123456789", brand: "Audi", type: "car", year: "2005", model: "A1"))
+            try await vehicleCreator.createVehicle(informations: informations)
             self.isRequestSucceed = true
         } catch (let error) {
             self.error = (error as! APICallerError)

@@ -38,7 +38,7 @@ enum VehicleCreationError: Equatable {
     case incorrectYear
     case incorrectLicense
 
-    var errorDescription: String? {
+    var errorDescription: String {
         switch self {
             case .emptyField: return L10n.CreateVehicle.Error.emptyField
             case .incorrectYear: return L10n.CreateVehicle.Error.incorrectYear

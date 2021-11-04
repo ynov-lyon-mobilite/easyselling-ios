@@ -33,7 +33,7 @@ class VehicleCreationViewModel: ObservableObject {
     @MainActor func createVehicle() async {
         let informations = VehicleInformations(license: license, brand: brand, type: type.rawValue, year: year, model: model)
         if let error = vehicleInformationsVerificator.verifyInformations(vehicle: informations) {
-            self.alert = error.errorDescription ?? ""
+            self.alert = error.errorDescription
             self.showAlert = true
             return
         }

@@ -55,7 +55,6 @@
 		8705B9A8272081E3004132CF /* DefaultTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A7272081E2004132CF /* DefaultTokenManager.swift */; };
 		8705B9AB27208249004132CF /* KeychainSwift+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */; };
 		8705B9B127208464004132CF /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8705B9B027208464004132CF /* KeychainSwift */; };
-		8705B9B327208516004132CF /* DefaultTokenManager_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9B227208516004132CF /* DefaultTokenManager_Specs.swift */; };
 		872B68A427290EB000FC3FDD /* UserAuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872B68A327290EB000FC3FDD /* UserAuthenticationView.swift */; };
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
@@ -156,7 +155,6 @@
 		8705B9A527207D36004132CF /* FailingUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingUserAuthenticator.swift; sourceTree = "<group>"; };
 		8705B9A7272081E2004132CF /* DefaultTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTokenManager.swift; sourceTree = "<group>"; };
 		8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainSwift+Extensions.swift"; sourceTree = "<group>"; };
-		8705B9B227208516004132CF /* DefaultTokenManager_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTokenManager_Specs.swift; sourceTree = "<group>"; };
 		872B68A327290EB000FC3FDD /* UserAuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationView.swift; sourceTree = "<group>"; };
 		873552AF270D847700F2DDBD /* easyselling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = easyselling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873552B6270D847B00F2DDBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -520,7 +518,6 @@
 		8798D14A2730FAEB00FF3AB4 /* DefaultTokenManager_Specs */ = {
 			isa = PBXGroup;
 			children = (
-				8705B9B227208516004132CF /* DefaultTokenManager_Specs.swift */,
 				8798D14B2730FC1C00FF3AB4 /* FakeTokenManager.swift */,
 			);
 			path = DefaultTokenManager_Specs;
@@ -830,7 +827,7 @@
 				8705B9A227207A39004132CF /* SucceedingUserAuthenticator.swift in Sources */,
 				03F05441271B3F7700434706 /* SuccedingAccountCreator.swift in Sources */,
 				87BE3098273B0B4400D49D08 /* DefaultFileUploader_Specs.swift in Sources */,
-				03DAF9AA2727448300FFED55 /* VehicleCreationViewModel_Spec.swift in Sources */,
+				03DAF9AA2727448300FFED55 /* VehicleCreationViewModel_Specs.swift in Sources */,
 				8798D14C2730FC1C00FF3AB4 /* FakeTokenManager.swift in Sources */,
 				03F0543F271B3F0A00434706 /* FakeRequestGenerator.swift in Sources */,
 				03DAF9A027271C2D00FFED55 /* VehicleScenario_Specs.swift in Sources */,
@@ -841,7 +838,6 @@
 				03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */,
 				0382E29A27175FB700EB570E /* AuthenticationScenario_Specs.swift in Sources */,
 				87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */,
-				8705B9B327208516004132CF /* DefaultTokenManager_Specs.swift in Sources */,
 				8798D150273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift in Sources */,
 				8798D1492730F8B700FF3AB4 /* SucceedingTokenRefreshor.swift in Sources */,
 				8705B9A027207838004132CF /* UserAuthenticationViewModel_Specs.swift in Sources */,
