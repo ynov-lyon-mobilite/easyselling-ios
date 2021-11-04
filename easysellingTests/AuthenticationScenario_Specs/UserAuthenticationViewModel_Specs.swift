@@ -13,13 +13,15 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
     func test_Shows_error_when_try_to_log_in_with_empty_credentials() async {
         givenViewModel(userAuthenticator: FailingUserAuthenticator(error: .unauthorized))
         await whenUserLogin(email: "", password: "")
-        thenError(is: .emptyEmail)
+        thenError(is: CredentialsError.emptyEmail)
+        thenAlertIsNotShown()
     }
     
     func Shows_error_when_try_to_log_in_with_empty_password() async {
         givenViewModel(userAuthenticator: FailingUserAuthenticator(error: .unauthorized))
         await whenUserLogin(email: "user@domain.com", password: "")
-        thenError(is: .emptyPassword)
+        thenError(is: CredentialsError.emptyPassword)
+        thenAlertIsNotShown()
     }
     
     func test_Connects_user_successfully() async {
@@ -37,13 +39,15 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
     func test_Tries_login_user_with_bad_credentials() async {
         givenViewModel(userAuthenticator: FailingUserAuthenticator(error: .unauthorized))
         await whenUserLogin(email: "user@domain.com", password: "PA55W0RD")
-        thenError(is: .badCredentials)
+        XCTAssertEqual(APICallerError.unauthorized, viewModel.alert)
+        thenAlertIsShown()
     }
     
     func test_Shows_unknow_error_when_something_unknow_fail() async {
         givenViewModel(userAuthenticator: FailingUserAuthenticator(error: .badGateway))
         await whenUserLogin(email: "user@domain.com", password: "PA55W0RD")
-        thenError(is: .unknow)
+        thenError(is: APICallerError.unknownError)
+        thenAlertIsShown()
     }
     
     func test_Opens_account_creation_view() {
@@ -82,12 +86,19 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
         XCTAssertEqual(expectedRefreshToken, tokenManager.refreshToken)
         XCTAssertEqual(expectedAccessToken, tokenManager.accessToken)
         XCTAssertNil(viewModel.error)
-        XCTAssertTrue(!viewModel.hasError)
+        XCTAssertTrue(!viewModel.showAlert)
     }
     
-    private func thenError(is expectedError: UserAuthenticationViewModel.ViewModelError) {
-        XCTAssertEqual(expectedError, viewModel.error)
-        XCTAssertTrue(viewModel.hasError)
+    private func thenError(is expectedError: LocalizedError) {
+        XCTAssertEqual(expectedError as? CredentialsError, viewModel.error)
+    }
+    
+    private func thenAlertIsShown() {
+        XCTAssertTrue(viewModel.showAlert)
+    }
+    
+    private func thenAlertIsNotShown() {
+        XCTAssertFalse(viewModel.showAlert)
     }
     
     private var viewModel: UserAuthenticationViewModel!

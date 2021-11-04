@@ -74,7 +74,7 @@ class DefaultInformationsVerificator_Specs: XCTestCase {
         do {
             self.accountInformations = try verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
         } catch(let error) {
-            self.accountCreationError = (error as! AccountCreationError)
+            self.accountCreationError = (error as! CredentialsError)
         }
         
 //        switch result {
@@ -92,12 +92,12 @@ class DefaultInformationsVerificator_Specs: XCTestCase {
         XCTAssertEqual(expected, accountInformations)
     }
     
-    private func thenError(is expected: AccountCreationError) {
+    private func thenError(is expected: CredentialsError) {
         XCTAssertEqual(expected.errorDescription, accountCreationError.errorDescription)
         XCTAssertEqual(expected, accountCreationError)
     }
     
     private var verificator: DefaultInformationsVerificator!
-    private var accountCreationError: AccountCreationError!
+    private var accountCreationError: CredentialsError!
     private var accountInformations: AccountCreationInformations!
 }

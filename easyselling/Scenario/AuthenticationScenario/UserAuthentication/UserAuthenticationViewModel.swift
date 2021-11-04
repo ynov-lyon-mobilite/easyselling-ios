@@ -18,25 +18,20 @@ final class UserAuthenticationViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     
-    @Published var hasError = false
-    @Published var error: ViewModelError? {
-        didSet {
-            hasError = (error != nil)
-        }
-    }
+    @Published var showAlert = false
+    @Published var error: CredentialsError?
+    @Published var alert: APICallerError?
     
-    init(userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(), tokenManager: TokenManager = DefaultTokenManager.shared, navigateToAccountCreation: @escaping Action, navigateToPasswordReset: @escaping Action,
-         onUserLogged: @escaping Action) {
+    init(userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(),
+         tokenManager: TokenManager = DefaultTokenManager.shared,
+         navigateToAccountCreation: @escaping Action,
+         navigateToPasswordReset: @escaping Action,
+		 onUserLogged: @escaping Action) {
         self.userAuthenticator = userAuthenticator
         self.tokenManager = tokenManager
         self.navigateToAccountCreation = navigateToAccountCreation
         self.navigateToPasswordReset = navigateToPasswordReset
  		self.onUserLogged = onUserLogged
-    }
-    
-    func verifyInformations() throws {
-        if email.isEmpty { throw ViewModelError.emptyEmail }
-        if password.isEmpty { throw ViewModelError.emptyPassword }
     }
     
     @MainActor func login() async {
@@ -47,31 +42,21 @@ final class UserAuthenticationViewModel: ObservableObject {
             tokenManager.refreshToken = token.refreshToken
             self.onUserLogged()
         } catch(let error) {
-            if let error = error as? ViewModelError {
-                self.error = error
-            } else if (error as? APICallerError) == .unauthorized {
-                self.error = .badCredentials
-            } else {
-                self.error = .unknow
+            if let credentialError = error as? CredentialsError {
+                self.setError(with: credentialError)
+            } else if let apiCallerError = error as? APICallerError {
+                self.alert = apiCallerError
+                showAlert = true
             }
         }
     }
     
-    enum ViewModelError: LocalizedError, Equatable {
-        case emptyEmail
-        case emptyPassword
-        case badCredentials
-        case unknow
-        
-        var isAlertError: Bool { [.badCredentials, .unknow].contains(self) }
-
-        var errorDescription: String? {
-            switch self {
-            case .emptyEmail: return "L'addresse email est vide"
-            case .emptyPassword: return "Le mot de passe est vide"
-            case .badCredentials: return "Le couple identifiant/mot de passe est incorrect. Veuillez réessayer."
-            case .unknow: return "Une erreur est survenue"
-            }
-        }
+    private func setError(with error: CredentialsError) {
+        self.error = error
+    }
+    
+    private func verifyInformations() throws {
+        if email.isEmpty { throw CredentialsError.emptyEmail }
+        if password.isEmpty { throw CredentialsError.emptyPassword }
     }
 }

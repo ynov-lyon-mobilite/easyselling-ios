@@ -10,11 +10,11 @@ import Foundation
 
 class FailingInformationsVerificator: InformationsVerificator {
     
-    init(error: AccountCreationError) {
+    init(error: CredentialsError) {
         self.error = error
     }
     
-    private var error: AccountCreationError
+    private var error: CredentialsError
     
     func verify(email: String, password: String, passwordConfirmation: String) throws -> AccountCreationInformations {
         throw error

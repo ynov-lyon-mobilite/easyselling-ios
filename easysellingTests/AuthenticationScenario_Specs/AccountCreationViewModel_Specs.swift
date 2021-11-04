@@ -110,7 +110,7 @@ class AccountCreationViewModel_Specs: XCTestCase {
         XCTAssertEqual(expected, viewModel.state)
     }
     
-    private func thenError(is expected: AccountCreationError) {
+    private func thenError(is expected: CredentialsError) {
         XCTAssertEqual(expected, viewModel.error)
     }
     

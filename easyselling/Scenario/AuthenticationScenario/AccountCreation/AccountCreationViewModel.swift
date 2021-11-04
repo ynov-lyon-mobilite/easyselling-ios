@@ -24,7 +24,7 @@ class AccountCreationViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var passwordConfirmation: String = ""
-    @Published var error: AccountCreationError?
+    @Published var error: CredentialsError?
     @Published var alert: APICallerError?
     @Published var showAlert: Bool = false
     
@@ -35,7 +35,7 @@ class AccountCreationViewModel: ObservableObject {
             await self.createAccount(with: informationsVerified)
         } catch(let error) {
             self.state = .initial
-            self.setError(with: (error as? AccountCreationError) ?? .unknow)
+            self.setError(with: (error as? CredentialsError) ?? .unknow)
         }
     }
     
@@ -51,7 +51,7 @@ class AccountCreationViewModel: ObservableObject {
         }
     }
     
-    private func setError(with error: AccountCreationError) {
+    private func setError(with error: CredentialsError) {
         self.error = error
     }
     

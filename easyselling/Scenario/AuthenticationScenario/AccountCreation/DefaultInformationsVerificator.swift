@@ -16,23 +16,23 @@ class DefaultInformationsVerificator: InformationsVerificator {
     func verify(email: String, password: String, passwordConfirmation: String) throws -> AccountCreationInformations {
         
         guard !password.isEmpty else {
-            throw AccountCreationError.emptyPassword
+            throw CredentialsError.emptyPassword
         }
         
         guard !passwordConfirmation.isEmpty else {
-            throw AccountCreationError.emptyPasswordConfirmation
+            throw CredentialsError.emptyPasswordConfirmation
         }
         
         guard password == passwordConfirmation else {
-            throw AccountCreationError.wrongPassword
+            throw CredentialsError.wrongPassword
         }
         
         guard !email.isEmpty else {
-            throw AccountCreationError.emptyEmail
+            throw CredentialsError.emptyEmail
         }
         
         guard self.verifyContent(of: email) else {
-            throw AccountCreationError.wrongEmail
+            throw CredentialsError.wrongEmail
         }
         
         return AccountCreationInformations(email: email, password: password, passwordConfirmation: passwordConfirmation)
@@ -50,7 +50,7 @@ class DefaultInformationsVerificator: InformationsVerificator {
     }
 }
 
-enum AccountCreationError: LocalizedError, Equatable {
+enum CredentialsError: LocalizedError, Equatable {
     case wrongEmail
     case emptyEmail
     case wrongPassword
