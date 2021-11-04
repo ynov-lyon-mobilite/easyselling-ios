@@ -26,16 +26,6 @@ class AccountCreationViewModel_Specs: XCTestCase {
         thenViewModelState(is: .accountCreated)
     }
 
-    // NEED TO THIS WITH CHRISTOPHE ROZ
-//    func test_Shows_loader_when_informations_are_being_compute() {
-//        givenViewModel(with: SucceedingInformationsVerificator())
-//        Task {
-//            await whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
-//        }
-//        thenViewModelState(is: .loading)
-//
-//    }
-
     func test_Show_error_when_informations_email_is_wrong() async {
         givenViewModel(with: FailingInformationsVerificator(error: .wrongEmail))
         await whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "password")
@@ -79,6 +69,12 @@ class AccountCreationViewModel_Specs: XCTestCase {
         thenAlert(is: .forbidden)
         XCTAssertTrue(viewModel.showAlert)
     }
+    
+    func test_Leaves_account_creation_when_account_is_created() async {
+        givenViewModel(verificator: SucceedingInformationsVerificator())
+        await whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
+        XCTAssertTrue(isAccountIsCreated)
+    }
 
     func test_Deinits_when_no_longer_interest() async {
         givenViewModel(with: SucceedingInformationsVerificator())
@@ -89,12 +85,14 @@ class AccountCreationViewModel_Specs: XCTestCase {
     
     private func givenViewModel(verificator: SucceedingInformationsVerificator, accountCreator: AccountCreator = SucceedingAccountCreator()) {
         self.succeedingVerificator = verificator
-        viewModel = AccountCreationViewModel(verificator: verificator, accountCreator: accountCreator)
+        viewModel = AccountCreationViewModel(verificator: verificator, accountCreator: accountCreator, onAccountCreated: {
+            self.isAccountIsCreated = true
+        })
     }
     
     private func givenViewModel(with verificator: InformationsVerificator) {
         let accountCreator = SucceedingAccountCreator()
-        viewModel = AccountCreationViewModel(verificator: verificator, accountCreator: accountCreator)
+        viewModel = AccountCreationViewModel(verificator: verificator, accountCreator: accountCreator, onAccountCreated: {})
     }
 
     private func whenCreatingAccount(email: String, password: String, passwordConfirmation: String) async {
@@ -127,4 +125,5 @@ class AccountCreationViewModel_Specs: XCTestCase {
     private var viewModel: AccountCreationViewModel!
     private var succeedingVerificator: SucceedingInformationsVerificator!
     private var verifiedInformations: AccountCreationInformations!
+    private var isAccountIsCreated: Bool!
 }

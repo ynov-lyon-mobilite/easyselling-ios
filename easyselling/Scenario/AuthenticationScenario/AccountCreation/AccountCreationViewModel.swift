@@ -10,13 +10,15 @@ import Combine
 
 class AccountCreationViewModel: ObservableObject {
     
-    init(verificator: InformationsVerificator, accountCreator: AccountCreator = DefaultAccountCreator()) {
+    init(verificator: InformationsVerificator, accountCreator: AccountCreator = DefaultAccountCreator(), onAccountCreated: @escaping Action) {
         self.verificator = verificator
         self.accountCreator = accountCreator
+        self.onAccountCreated = onAccountCreated
     }
     
     private var verificator: InformationsVerificator
     private var accountCreator: AccountCreator
+    private let onAccountCreated: Action
     
     @Published var state: AccountCreationState = .initial
     @Published var email: String = ""
@@ -41,6 +43,7 @@ class AccountCreationViewModel: ObservableObject {
         do {
             try await accountCreator.createAccount(informations: informations)
             self.state = .accountCreated
+            self.onAccountCreated()
         } catch(let error) {
             self.state = .initial
             self.alert = (error as? APICallerError) ?? APICallerError.internalServerError

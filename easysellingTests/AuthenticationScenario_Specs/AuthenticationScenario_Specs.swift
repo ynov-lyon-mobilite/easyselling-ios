@@ -37,6 +37,12 @@ class AuthenticationScenario_Specs: XCTestCase {
         whenBeginning()
         navigator.onUserLogged?()
         XCTAssertTrue(navigator.scenarioIsFinished)
+
+    func test_Navigates_to_password_reset() {
+        givenScenario()
+        whenBeginning()
+        whenNavigatingToPasswordReset()
+        thenHistory(is: [.login, .passwordReset])
     }
     
     private func givenScenario() {
@@ -52,6 +58,10 @@ class AuthenticationScenario_Specs: XCTestCase {
         scenario.navigatesToAccountCreation()
     }
     
+    private func whenNavigatingToPasswordReset() {
+        scenario.navigatesToPasswordReset()
+    }
+    
     private func thenHistory(is expected: [SpyAuthenticationNavigator.History]) {
         XCTAssertEqual(navigator.history, expected)
     }
@@ -62,6 +72,7 @@ class AuthenticationScenario_Specs: XCTestCase {
 }
 
 class SpyAuthenticationNavigator: AuthenticationNavigator {
+    
     private(set) var history: [History] = []
     private(set) var onFinish: Action?
     private(set) var onUserLogged: Action?
@@ -76,6 +87,10 @@ class SpyAuthenticationNavigator: AuthenticationNavigator {
         self.onFinish = onFinish
         history.append(.accountCreation)
     }
+    
+    func navigatesToPasswordReset() {
+        history.append(.passwordReset)
+    }
 
     func goingBackToHomeView() {
         history.append(.login)
@@ -89,11 +104,13 @@ class SpyAuthenticationNavigator: AuthenticationNavigator {
         
         case accountCreation
         case login
+        case passwordReset
         
         var debugDescription: String {
             switch self {
             case .accountCreation: return "Account creation"
             case .login: return "Login"
+            case .passwordReset: return "Password reset"
             }
         }
     }

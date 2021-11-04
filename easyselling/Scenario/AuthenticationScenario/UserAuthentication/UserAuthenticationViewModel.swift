@@ -13,6 +13,7 @@ final class UserAuthenticationViewModel: ObservableObject {
     
     let navigateToAccountCreation: Action
     private let onUserLogged: Action
+    let navigateToPasswordReset: Action
 
     @Published var email: String = ""
     @Published var password: String = ""
@@ -24,14 +25,13 @@ final class UserAuthenticationViewModel: ObservableObject {
         }
     }
     
-    init(userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(),
-         tokenManager: TokenManager = DefaultTokenManager.shared,
-         navigateToAccountCreation: @escaping Action,
+    init(userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(), tokenManager: TokenManager = DefaultTokenManager.shared, navigateToAccountCreation: @escaping Action, navigateToPasswordReset: @escaping Action,
          onUserLogged: @escaping Action) {
         self.userAuthenticator = userAuthenticator
         self.tokenManager = tokenManager
         self.navigateToAccountCreation = navigateToAccountCreation
-        self.onUserLogged = onUserLogged
+        self.navigateToPasswordReset = navigateToPasswordReset
+ 		self.onUserLogged = onUserLogged
     }
     
     func verifyInformations() throws {

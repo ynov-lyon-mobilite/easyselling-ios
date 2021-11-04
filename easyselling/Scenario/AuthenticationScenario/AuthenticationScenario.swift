@@ -24,6 +24,8 @@ class AuthenticationScenario {
         navigator.navigatesToAccountCreation(onFinish: { self.goingBackToHomeView() })
     }
     
+    func navigatesToPasswordReset() {
+        navigator.navigatesToPasswordReset()
     func navigatesToVehicles() {
         navigator.navigatesToVehicles()
     }
@@ -36,6 +38,7 @@ class AuthenticationScenario {
 protocol AuthenticationNavigator {
     func begin(onAccountCreation: @escaping Action, onUserLogged: @escaping Action)
     func navigatesToAccountCreation(onFinish: @escaping Action)
+    func navigatesToPasswordReset()
     func goingBackToHomeView()
     func navigatesToVehicles()
 }
@@ -52,15 +55,19 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
     func begin(onAccountCreation: @escaping Action, onUserLogged: @escaping Action) {
         window?.rootViewController = navigationController
         
-        let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: onAccountCreation, onUserLogged: onUserLogged)
+        let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: onAccountCreation, navigateToPasswordReset: { }, onUserLogged: onUserLogged)
         let userAuthenticationView = UserAuthenticationView(viewModel: viewModel)
         navigationController.pushViewController(UIHostingController(rootView: userAuthenticationView), animated: true)
     }
 
     func navigatesToAccountCreation(onFinish: @escaping Action) {
-        let accountCreationViewModel = AccountCreationViewModel(verificator: DefaultInformationsVerificator())
+        let accountCreationViewModel = AccountCreationViewModel(verificator: DefaultInformationsVerificator(), onAccountCreated: onFinish)
         let accountCreationView = AccountCreationView(viewModel: accountCreationViewModel)
         navigationController.pushViewController(UIHostingController(rootView: accountCreationView), animated: true)
+    }
+    
+    func navigatesToPasswordReset() {
+        
     }
     
     func goingBackToHomeView() {

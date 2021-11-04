@@ -59,7 +59,7 @@ struct UserAuthenticationView: View {
 
 struct UserAuthenticationView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: {}, onUserLogged: {})
+        let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: {}, navigateToPasswordReset: {}, onUserLogged: {})
         UserAuthenticationView(viewModel: viewModel)
     }
 }
