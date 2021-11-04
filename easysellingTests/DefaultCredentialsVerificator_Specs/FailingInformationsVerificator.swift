@@ -8,7 +8,7 @@
 import Foundation
 @testable import easyselling
 
-class FailingInformationsVerificator: InformationsVerificator {
+class FailingInformationsVerificator: CredentialsVerificator {
     
     init(error: CredentialsError) {
         self.error = error

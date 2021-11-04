@@ -78,7 +78,7 @@ class SpyAuthenticationNavigator: AuthenticationNavigator {
     private(set) var onUserLogged: Action?
     private(set) var scenarioIsFinished: Bool = false
     
-    func begin(onAccountCreation: @escaping Action, onUserLogged: @escaping Action) {
+    func begin(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
         self.onUserLogged = onUserLogged
         history.append(.login)
     }

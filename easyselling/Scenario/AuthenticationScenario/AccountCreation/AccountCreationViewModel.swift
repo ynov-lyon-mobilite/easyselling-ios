@@ -10,13 +10,13 @@ import Combine
 
 class AccountCreationViewModel: ObservableObject {
     
-    init(verificator: InformationsVerificator, accountCreator: AccountCreator = DefaultAccountCreator(), onAccountCreated: @escaping Action) {
+    init(verificator: CredentialsVerificator, accountCreator: AccountCreator = DefaultAccountCreator(), onAccountCreated: @escaping Action) {
         self.verificator = verificator
         self.accountCreator = accountCreator
         self.onAccountCreated = onAccountCreated
     }
     
-    private var verificator: InformationsVerificator
+    private var verificator: CredentialsVerificator
     private var accountCreator: AccountCreator
     private let onAccountCreated: Action
     

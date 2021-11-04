@@ -63,7 +63,7 @@ struct AccountCreationView: View {
 
 struct AccountCreationView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountCreationView(viewModel: AccountCreationViewModel(verificator: DefaultInformationsVerificator(), onAccountCreated: {}))
+        AccountCreationView(viewModel: AccountCreationViewModel(verificator: DefaultCredentialsVerificator(), onAccountCreated: {}))
             .environment(\.locale, .init(identifier: "fr"))
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 @testable import easyselling
 
-class SucceedingInformationsVerificator: InformationsVerificator {
+class SucceedingInformationsVerificator: CredentialsVerificator {
     
     private(set) var accountCreationInformation: AccountCreationInformations?
     

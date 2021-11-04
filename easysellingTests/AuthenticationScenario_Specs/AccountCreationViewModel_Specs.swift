@@ -90,7 +90,7 @@ class AccountCreationViewModel_Specs: XCTestCase {
         })
     }
     
-    private func givenViewModel(with verificator: InformationsVerificator) {
+    private func givenViewModel(with verificator: CredentialsVerificator) {
         let accountCreator = SucceedingAccountCreator()
         viewModel = AccountCreationViewModel(verificator: verificator, accountCreator: accountCreator, onAccountCreated: {})
     }

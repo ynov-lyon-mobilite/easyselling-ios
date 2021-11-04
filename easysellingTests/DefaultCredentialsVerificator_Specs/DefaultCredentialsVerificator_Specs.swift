@@ -1,5 +1,5 @@
 //
-//  DefaultInformationsVerificator_Specs.swift
+//  DefaultCredentialsVerificator_Specs.swift
 //  easysellingTests
 //
 //  Created by Nicolas Barbosa on 14/10/2021.
@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 @testable import easyselling
 
-class DefaultInformationsVerificator_Specs: XCTestCase {
+class DefaultCredentialsVerificator_Specs: XCTestCase {
     
     func test_Verifies_informations_are_good() {
         givenVerificator()
@@ -67,7 +67,7 @@ class DefaultInformationsVerificator_Specs: XCTestCase {
     }
     
     private func givenVerificator() {
-        verificator = DefaultInformationsVerificator()
+        verificator = DefaultCredentialsVerificator()
     }
     
     private func whenVerifying(email: String, password: String, passwordConfirmation: String) {
@@ -76,12 +76,6 @@ class DefaultInformationsVerificator_Specs: XCTestCase {
         } catch(let error) {
             self.accountCreationError = (error as! CredentialsError)
         }
-        
-//        switch result {
-//        case let .success(informations): self.accountInformations = informations
-//        case let .failure(error): self.accountCreationError = error
-//        case .none: break
-//        }
     }
     
     private func whenNoLongerInterested() {
@@ -97,7 +91,7 @@ class DefaultInformationsVerificator_Specs: XCTestCase {
         XCTAssertEqual(expected, accountCreationError)
     }
     
-    private var verificator: DefaultInformationsVerificator!
+    private var verificator: DefaultCredentialsVerificator!
     private var accountCreationError: CredentialsError!
     private var accountInformations: AccountCreationInformations!
 }
