@@ -12,12 +12,14 @@ class OnBoardingScenario_Specs: XCTestCase {
 
     func test_Starts_OnBoarding() {
         givenScenario()
+        setFalseValueOfOnboardingIsViewed()
         whenBeginning()
         thenNavigationHistory(is: [.features])
     }
     
     func test_Finish_scenario() {
         givenScenario()
+        setFalseValueOfOnboardingIsViewed()
         whenBeginning()
         spyNavigator.onFinish?()
         thenScenarioIsFinished()
@@ -25,6 +27,7 @@ class OnBoardingScenario_Specs: XCTestCase {
     
     func test_Checks_OnBoarding_is_already_viewed() {
         givenScenario()
+        setFalseValueOfOnboardingIsViewed()
         whenBeginning()
         spyNavigator.onFinish?()
         givenScenario()
@@ -39,6 +42,10 @@ class OnBoardingScenario_Specs: XCTestCase {
     
     private func whenBeginning() {
         scenario.begin()
+    }
+    
+    private func setFalseValueOfOnboardingIsViewed() {
+        scenario.onBoardingIsViewed = false
     }
     
     private func thenNavigationHistory(is expected: [screens]) {
