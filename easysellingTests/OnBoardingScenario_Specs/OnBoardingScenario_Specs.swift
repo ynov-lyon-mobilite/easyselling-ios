@@ -20,7 +20,16 @@ class OnBoardingScenario_Specs: XCTestCase {
         givenScenario()
         whenBeginning()
         spyNavigator.onFinish?()
-        XCTAssertTrue(spyNavigator.scenarioDidFinished)
+        thenScenarioIsFinished()
+    }
+    
+    func test_Checks_OnBoarding_is_already_viewed() {
+        givenScenario()
+        whenBeginning()
+        spyNavigator.onFinish?()
+        givenScenario()
+        whenBeginning()
+        thenOnboardingIsViewed()
     }
     
     private func givenScenario() {
@@ -36,12 +45,20 @@ class OnBoardingScenario_Specs: XCTestCase {
         XCTAssertEqual(expected, spyNavigator.history)
     }
     
+    private func thenScenarioIsFinished() {
+        XCTAssertTrue(spyNavigator.scenarioDidFinished)
+    }
+    
+    private func thenOnboardingIsViewed() {
+        XCTAssertTrue(scenario.onBoardingIsViewed)
+    }
+    
     private var spyNavigator: SpyOnBoardingNavigator!
     private var scenario: OnBoardingScenario!
 }
 
 class SpyOnBoardingNavigator: OnBoardingNavigator {
-    
+        
     private(set) var scenarioDidFinished: Bool = false
     private(set) var history: [screens] = []
     private(set) var onFinish: Action?
@@ -54,6 +71,8 @@ class SpyOnBoardingNavigator: OnBoardingNavigator {
     func navigateToAuthenticationScenario() {
         scenarioDidFinished = true
     }
+    
+    func deleteStack() {}
 }
 
 enum screens {
