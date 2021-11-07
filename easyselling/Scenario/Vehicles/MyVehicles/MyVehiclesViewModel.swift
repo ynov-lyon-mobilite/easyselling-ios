@@ -53,16 +53,6 @@ class MyVehiclesViewModel: ObservableObject {
     }
 }
 
-struct Vehicle: Equatable, Decodable, Identifiable {
-    var id: String
-    var brand: String
-    var model: String
-    var license: String
-    var type: VehicleTypeEnum
-    var year: String
-    
-}
-
 enum VehicleTypeEnum: String, Decodable {
     case car, moto
     
