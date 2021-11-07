@@ -69,9 +69,9 @@ enum VehicleTypeEnum: String, Decodable {
     var description: String {
         switch self {
         case .car:
-            return L10n.Vehicles.car
+            return "Voiture"
         case .moto:
-            return L10n.Vehicles.moto
+            return "Moto"
         }
     }
 
