@@ -38,7 +38,7 @@ class MyVehiclesViewModel_Spec: XCTestCase {
         viewModel = MyVehiclesViewModel(isOpenningVehicleCreation: {
                                                 self.isOpen = true
                                             },
-                                            requestGenerator: FakeRequestGenerator("https://www.getvehicles.fr"),
+                                            requestGenerator: FakeRequestGenerator("https://www.jetestcommeundieu.com"),
                                             urlSession: urlSession)
     }
     
