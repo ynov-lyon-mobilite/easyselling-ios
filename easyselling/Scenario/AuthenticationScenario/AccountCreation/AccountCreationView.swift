@@ -56,7 +56,7 @@ struct AccountCreationView: View {
         .alert(isPresented: $viewModel.showAlert, content: {
             Alert(
                 title: Text(viewModel.alert?.errorDescription ?? ""),
-                dismissButton: Alert.Button.default(Text("Ok")))
+                dismissButton: Alert.Button.default(Text(L10n.Button.ok)))
         })
     }
 }

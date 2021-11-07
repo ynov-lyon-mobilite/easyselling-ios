@@ -37,7 +37,7 @@ struct UserAuthenticationView: View {
                     .font(.headline)
                     .opacity(viewModel.error != nil ? 1 : 0)
                 
-                Button("Mot de passe oublié") {
+                Button(L10n.Button.forgottenPassword) {
                     viewModel.navigateToPasswordReset()
                 }
             }
@@ -67,7 +67,7 @@ struct UserAuthenticationView: View {
         .alert(isPresented: $viewModel.showAlert) {
             Alert(
                 title: Text(viewModel.alert?.errorDescription ?? ""),
-                dismissButton: Alert.Button.default(Text("Ok")))
+                dismissButton: Alert.Button.default(Text(L10n.Button.ok)))
         }
     }
 }

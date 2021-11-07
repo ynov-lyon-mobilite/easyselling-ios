@@ -20,7 +20,7 @@ class PasswordResetViewModel: ObservableObject {
     @Published var error: CredentialsError?
     @Published var alert: APICallerError?
     @Published var state: PasswordResetState = .initial
-    var resetRequestSuccessfullySent: String = "Un mail vous à été envoyé à l'adresse mail pour réinitialiser votre mot de passe"
+    var resetRequestSuccessfullySent: String = L10n.PasswordReset.mailSentSuccessfully
     
     @MainActor
     func requestPasswordReset() async {

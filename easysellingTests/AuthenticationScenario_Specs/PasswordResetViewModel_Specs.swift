@@ -26,7 +26,7 @@ class PasswordResetViewModel_Specs: XCTestCase {
     
     func test_Shows_succeed_message_when_password_reset_request_has_sent_mail() async {
         givenViewModel()
-        XCTAssertEqual("Un mail vous à été envoyé à l'adresse mail pour réinitialiser votre mot de passe", viewModel.resetRequestSuccessfullySent)
+        XCTAssertEqual("An email has been sent to you to reset your password", viewModel.resetRequestSuccessfullySent)
         await whenRequestingPasswordReset(of: "test@test.com")
         thenViewModelState(is: .requestSent)
     }

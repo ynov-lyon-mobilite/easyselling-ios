@@ -33,7 +33,7 @@ struct PasswordResetView: View {
                     .font(.headline)
                     .opacity(viewModel.error != nil ? 1 : 0)
                 
-                Button(L10n.SignUp.createAccountButton) {
+                Button(L10n.PasswordReset.sendMailButton) {
                     Task {
                         await viewModel.requestPasswordReset()
                     }

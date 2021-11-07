@@ -6,6 +6,9 @@
   
 */
 
+"button.ok" = "Ok";
+"button.forgottenPassword" = "Mot de passe oublié";
+
 "signUp.mail" = "Email";
 "signUp.password" = "Mot de passe";
 "signUp.passwordConfirmation" = "Confirmation de mot de passe";
@@ -14,6 +17,8 @@
 "userAuthentication.button.login" = "Se connecter";
 "userAuthentication.button.register" = "Vous n'avez pas encore de compte ?\nCliquez ici pour vous inscrire";
 
+"passwordReset.mailSentSuccessfully" = "Un mail vous à été envoyé pour réinitialiser votre mot de passe";
+"passwordReset.sendMailButton" = "Envoyer un mail de réinitialisation.";
 "vehicles.car" = "Voiture";
 "vehicles.moto" = "Moto";
 
