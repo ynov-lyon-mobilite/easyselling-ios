@@ -35,15 +35,8 @@ class VehicleCreationViewModel_Specs: XCTestCase {
     }
     
     func test_Shows_alert_when_an_error_happens_after_an_api_call() async {
-        givenViewModel(throwError: true)
-        await whenCreating()
-        thenAlertIsShowing()
-    }
-    
-    func test_Shows_alert_when_the_creation_have_successful() async {
         givenViewModel()
         await whenCreating()
-        thenAlertMessage(expected: L10n.CreateVehicle.creationSuccessful)
         thenAlertIsShowing()
     }
     
@@ -53,8 +46,8 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         thenModalIsDismissed()
     }
 
-    private func givenViewModel(exepected: VehicleCreationError? = nil, throwError: Bool = false) {
-        viewModel = VehicleCreationViewModel(vehicleCreator: SpyVehicleCreator(throwError: throwError), vehicleVerificator: SpyVehicleInformationsVerificator(error: exepected), onFinish: {
+    private func givenViewModel(exepected: VehicleCreationError? = nil) {
+        viewModel = VehicleCreationViewModel(vehicleCreator: SpyVehicleCreator(), vehicleVerificator: SpyVehicleInformationsVerificator(error: exepected), onFinish: {
             self.isDismissed = true
         })
     }
@@ -82,16 +75,8 @@ class VehicleCreationViewModel_Specs: XCTestCase {
 
 class SpyVehicleCreator: VehicleCreatorProtocol {
     
-    private var throwError: Bool
-    
-    init(throwError: Bool) {
-        self.throwError = throwError
-    }
-    
     func createVehicle(informations: VehicleInformations) async throws {
-        if throwError {
-            throw APICallerError.internalServerError
-        }
+        throw APICallerError.internalServerError
     }
 }
 

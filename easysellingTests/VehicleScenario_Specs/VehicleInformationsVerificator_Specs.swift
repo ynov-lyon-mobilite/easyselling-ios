@@ -30,13 +30,13 @@ class VehicleInformationsVerificator_Specs: XCTestCase {
         thenMessage(expected: .emptyField, message: message)
     }
     
-    func test_Verifies_if_license_has_an_icorrect_format() {
+    func test_Verifies_message_if_license_has_an_icorrect_format() {
         givenVerificator()
         let message = whenChecking(vehicle: VehicleInformations(license: "12345678", brand: "brand", type: "type", year: "2005", model: "model"))
         thenMessage(expected: .incorrectLicense, message: message)
     }
     
-    func test_Verifies_if_year_has_an_icorrect_format() {
+    func test_Verifies_message_if_year_has_an_icorrect_format() {
         givenVerificator()
         let message = whenChecking(vehicle: VehicleInformations(license: "123456789", brand: "brand", type: "type", year: "200", model: "model"))
         thenMessage(expected: .incorrectYear, message: message)
