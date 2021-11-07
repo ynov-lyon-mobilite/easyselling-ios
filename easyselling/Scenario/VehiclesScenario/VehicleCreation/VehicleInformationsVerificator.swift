@@ -15,7 +15,6 @@ class VehicleInformationsVerificator: VehicleInformationsProtocol {
     func verifyInformations(vehicle: VehicleInformations) -> VehicleCreationError? {
         switch true {
             case vehicle.license.isEmpty
-                || vehicle.license.isEmpty
                 || vehicle.brand.isEmpty
                 || vehicle.model.isEmpty: return .emptyField
             case vehicle.license.count != 9: return .incorrectLicense
