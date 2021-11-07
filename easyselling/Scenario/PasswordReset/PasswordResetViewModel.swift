@@ -9,22 +9,33 @@ import Foundation
 
 class PasswordResetViewModel: ObservableObject {
     
-    init(verificator: EmailVerificator = DefaultEmailVerificator()) {
+    init(verificator: EmailVerificator = DefaultEmailVerificator(), passwordRequester: PasswordResetRequester = DefaultPasswordResetRequester()) {
         self.verificator = verificator
+        self.passwordRequester = passwordRequester
     }
     
     private let verificator: EmailVerificator
+    private let passwordRequester: PasswordResetRequester
     @Published var email: String = ""
     @Published var error: CredentialsError?
+    @Published var alert: APICallerError?
     @Published var state: PasswordResetState = .initial
+    var resetRequestSuccessfullySent: String = "Un mail vous à été envoyé à l'adresse mail pour réinitialiser votre mot de passe"
     
-    func requestPasswordReset() {
+    @MainActor
+    func requestPasswordReset() async {
         state = .loading
         do {
             _ = try verificator.verify(email)
+            try await passwordRequester.askForPasswordReset(of: email)
+            state = .requestSent
         } catch(let error) {
+            state = .initial
             if let error = error as? CredentialsError {
                 self.setError(with: error)
+            }
+            if let error = error as? APICallerError {
+                self.alert = error
             }
         }
     }
@@ -36,5 +47,10 @@ class PasswordResetViewModel: ObservableObject {
     enum PasswordResetState: Equatable {
         case initial
         case loading
+        case requestSent
     }
+}
+
+struct EmailDTO: Encodable {
+    var email: String
 }

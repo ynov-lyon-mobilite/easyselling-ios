@@ -16,7 +16,35 @@ struct PasswordResetView: View {
     }
     
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            TextField(L10n.SignUp.mail, text: $viewModel.email)
+                .padding(6)
+                .background(Color.gray.opacity(0.5))
+                .cornerRadius(10)
+                .textContentType(.emailAddress)
+            
+            if viewModel.state == .loading {
+                ProgressView()
+            } else if viewModel.state == .requestSent {
+                Text(viewModel.resetRequestSuccessfullySent)
+            } else {
+                Text(viewModel.error?.errorDescription ?? "")
+                    .foregroundColor(.red)
+                    .font(.headline)
+                    .opacity(viewModel.error != nil ? 1 : 0)
+                
+                Button(L10n.SignUp.createAccountButton) {
+                    Task {
+                        await viewModel.requestPasswordReset()
+                    }
+                }
+                .foregroundColor(Color.white)
+                .padding()
+                .background(Color.black)
+                .cornerRadius(30)
+            }
+        }
+        .padding(.horizontal)
     }
 }
 

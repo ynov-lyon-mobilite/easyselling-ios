@@ -54,20 +54,3 @@ class DefaultPasswordResetRequester_Specs: XCTestCase {
     private var isRequestSucceed: Bool = false
     private var thrownError: APICallerError!
 }
-
-class DefaultPasswordResetRequester {
-    
-    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
-        self.requestGenerator = requestGenerator
-        self.apiCaller = apiCaller
-    }
-    
-    private var requestGenerator: RequestGenerator
-    private var apiCaller: APICaller
-    
-    func askForPasswordReset(of email: String) async throws {
-        let urlRequest = try requestGenerator
-            .generateRequest(endpoint: .passwordRequest, method: .POST, body: email, headers: [:])
-        try await apiCaller.call(urlRequest)
-    }
-}

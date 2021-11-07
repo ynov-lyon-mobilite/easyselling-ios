@@ -10,30 +10,43 @@ import XCTest
 
 class PasswordResetViewModel_Specs: XCTestCase {
     
-    func test_Shows_error_if_mail_is_not_valid() {
+    func test_Shows_error_if_mail_is_not_valid() async {
         givenViewModel(verificator: FailingEmailVerificator(error: .emptyEmail))
-        whenRequestingPasswordReset(of: "")
+        await whenRequestingPasswordReset(of: "")
         thenError(is: .emptyEmail)
     }
     
-    func test_Shows_loading_when_requesting_password_reset() {
+    // need to find a way to test loading state during asynchronous process
+//    func test_Shows_loading_when_requesting_password_reset() async {
+//        givenViewModel()
+//        thenViewModelState(is: .initial)
+//        await whenRequestingPasswordReset(of: "test@test.com")
+//        thenViewModelState(is: .loading)
+//    }
+    
+    func test_Shows_succeed_message_when_password_reset_request_has_sent_mail() async {
         givenViewModel()
+        XCTAssertEqual("Un mail vous à été envoyé à l'adresse mail pour réinitialiser votre mot de passe", viewModel.resetRequestSuccessfullySent)
+        await whenRequestingPasswordReset(of: "test@test.com")
+        thenViewModelState(is: .requestSent)
+    }
+    
+    func test_Shows_alert_if_something_went_wrong_with_password_reset_request() async {
+        givenViewModel(passwordRequester: FailingPasswordResetRequester(withError: 404))
+        await whenRequestingPasswordReset(of: "test@test.com")
+        XCTAssertEqual(.notFound, viewModel.alert)
         thenViewModelState(is: .initial)
-        whenRequestingPasswordReset(of: "test@test.com")
-        thenViewModelState(is: .loading)
     }
     
-    func test_Shows_succeed_message_when_password_reset_request_has_sent_mail() {
-        
+    private func givenViewModel(verificator: EmailVerificator = SucceedingEmailVerificator(),
+                                passwordRequester: PasswordResetRequester = SucceedingPasswordResetRequester()) {
+        viewModel = PasswordResetViewModel(verificator: verificator,
+                                           passwordRequester: passwordRequester)
     }
     
-    private func givenViewModel(verificator: EmailVerificator = SucceedingEmailVerificator()) {
-        viewModel = PasswordResetViewModel(verificator: verificator)
-    }
-    
-    private func whenRequestingPasswordReset(of email: String) {
+    private func whenRequestingPasswordReset(of email: String) async {
         viewModel.email = email
-        viewModel.requestPasswordReset()
+        await viewModel.requestPasswordReset()
     }
     
     private func thenError(is expected: CredentialsError) {
@@ -45,24 +58,4 @@ class PasswordResetViewModel_Specs: XCTestCase {
     }
     
     private var viewModel: PasswordResetViewModel!
-}
-
-class FailingEmailVerificator: EmailVerificator {
-    
-    init(error: CredentialsError) {
-        self.error = error
-    }
-    
-    private let error: CredentialsError
-    
-    func verify(_ email: String) throws -> String {
-        throw error
-    }
-}
-
-class SucceedingEmailVerificator: EmailVerificator {
-    
-    func verify(_ email: String) throws -> String {
-        email
-    }
 }
