@@ -15,6 +15,7 @@ enum HTTPEndpoint: String {
     case authLogin = "/auth/login"
     case authRefresh = "/auth/refresh"
     case files = "/files"
+    case passwordRequest = "/auth/password/request"
     
     var urlString: String {
         "\(baseURL)\(self.rawValue)"
