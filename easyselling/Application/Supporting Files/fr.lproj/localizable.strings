@@ -13,6 +13,3 @@
 
 "userAuthentication.button.login" = "Se connecter";
 "userAuthentication.button.register" = "Vous n'avez pas encore de compte ?\nCliquez ici pour vous inscrire";
-
-"vehicles.car" = "Voiture";
-"vehicles.moto" = "Moto";
