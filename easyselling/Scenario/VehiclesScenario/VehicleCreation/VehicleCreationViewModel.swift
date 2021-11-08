@@ -32,15 +32,17 @@ class VehicleCreationViewModel: ObservableObject {
 
     @MainActor func createVehicle() async {
         let informations = VehicleInformations(license: license, brand: brand, type: type.rawValue, year: year, model: model)
-        if let error = vehicleInformationsVerificator.verifyInformations(vehicle: informations) {
-            self.alert = error.errorDescription
+        let status = vehicleInformationsVerificator.verifyInformations(vehicle: informations)
+        
+        if status != .success {
+            self.alert = status.description
             self.showAlert = true
             return
         }
 
         do {
             try await vehicleCreator.createVehicle(informations: informations)
-            self.alert = L10n.CreateVehicle.creationSuccessful
+            self.alert = status.description
             self.showAlert = true
         } catch(let error) {
             self.alert = (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""

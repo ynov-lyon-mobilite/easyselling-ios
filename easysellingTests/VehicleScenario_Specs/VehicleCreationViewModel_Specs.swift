@@ -16,21 +16,21 @@ class VehicleCreationViewModel_Specs: XCTestCase {
     func test_Shows_alert_when_a_field_is_empty() async {
         givenViewModel(exepected: .emptyField)
         await whenCreating()
-        thenAlertMessage(expected: VehicleCreationError.emptyField.errorDescription)
+        thenAlertMessage(expected: VehicleCreationStatus.emptyField.description)
         thenAlertIsShowing()
     }
     
     func test_Shows_alert_when_the_field_year_is_incorrect() async {
         givenViewModel(exepected: .incorrectYear)
         await whenCreating()
-        thenAlertMessage(expected: VehicleCreationError.incorrectYear.errorDescription)
+        thenAlertMessage(expected: VehicleCreationStatus.incorrectYear.description)
         thenAlertIsShowing()
     }
     
     func test_Shows_alert_when_the_field_license_is_incorrect() async {
         givenViewModel(exepected: .incorrectLicense)
         await whenCreating()
-        thenAlertMessage(expected: VehicleCreationError.incorrectLicense.errorDescription)
+        thenAlertMessage(expected: VehicleCreationStatus.incorrectLicense.description)
         thenAlertIsShowing()
     }
     
@@ -46,7 +46,7 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         thenModalIsDismissed()
     }
 
-    private func givenViewModel(exepected: VehicleCreationError? = nil) {
+    private func givenViewModel(exepected: VehicleCreationStatus = .emptyField) {
         viewModel = VehicleCreationViewModel(vehicleCreator: SpyVehicleCreator(), vehicleVerificator: SpyVehicleInformationsVerificator(error: exepected), onFinish: {
             self.isDismissed = true
         })
@@ -82,13 +82,13 @@ class SpyVehicleCreator: VehicleCreatorProtocol {
 
 class SpyVehicleInformationsVerificator: VehicleInformationsProtocol {
     
-    private let error: VehicleCreationError?
+    private let error: VehicleCreationStatus
     
-    init(error: VehicleCreationError?) {
+    init(error: VehicleCreationStatus) {
         self.error = error
     }
     
-    func verifyInformations(vehicle: VehicleInformations) -> VehicleCreationError? {
+    func verifyInformations(vehicle: VehicleInformations) -> VehicleCreationStatus {
         return error
     }
 }

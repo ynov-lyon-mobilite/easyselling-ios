@@ -42,15 +42,21 @@ class VehicleInformationsVerificator_Specs: XCTestCase {
         thenMessage(expected: .incorrectYear, message: message)
     }
     
+    func test_Verifies_if_cheking_has_successful() {
+        givenVerificator()
+        let message = whenChecking(vehicle: VehicleInformations(license: "123456789", brand: "brand", type: "type", year: "2005", model: "model"))
+        thenMessage(expected: .success, message: message)
+    }
+    
     private func givenVerificator() {
         verificator = VehicleInformationsVerificator()
     }
     
-    private func whenChecking(vehicle: VehicleInformations) -> VehicleCreationError? {
-        return verificator.verifyInformations(vehicle: vehicle) ?? nil
+    private func whenChecking(vehicle: VehicleInformations) -> VehicleCreationStatus {
+        return verificator.verifyInformations(vehicle: vehicle)
     }
     
-    private func thenMessage(expected: VehicleCreationError, message: VehicleCreationError?) {
+    private func thenMessage(expected: VehicleCreationStatus, message: VehicleCreationStatus) {
         XCTAssertEqual(expected, message)
     }
 }
