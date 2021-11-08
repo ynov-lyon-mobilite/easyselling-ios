@@ -12,6 +12,19 @@ struct Vehicle: Equatable, Decodable, Identifiable {
     var brand: String
     var model: String
     var license: String
-    var type: VehicleTypeEnum
+    var type: Category
     var year: String
+    
+    enum Category: String, Codable {
+      case car, moto
+
+      var description: String {
+        switch self {
+        case .car:
+            return L10n.Vehicles.car
+        case .moto:
+            return L10n.Vehicles.moto
+        }
+      }
+    }
 }

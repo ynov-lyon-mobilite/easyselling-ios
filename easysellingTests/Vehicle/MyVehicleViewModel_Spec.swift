@@ -10,14 +10,8 @@ import XCTest
 
 class MyVehiclesViewModel_Spec: XCTestCase {
     
-    func test_Opens_vehicle_creation_modal() {
-        givenViewModel(urlSession: FakeUrlSession(with: expectedUrlResponse!))
-        whenOpeningVehiculeCreationModal()
-        thenVehicleCreationModalIsOpen()
-    }
-    
-    func test_Shows_vehicle_when_request_is_success2() async {
-        givenViewModel(urlSession: FakeUrlSession(with: expectedUrlResponse!))
+    func test_Shows_vehicles_when_request_is_success() async {
+        givenViewModel(apiCaller: SucceedingAPICaller())
         thenViewModelIsLoading()
         await whenTryingToGetVehicles()
         thenLoadVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
@@ -27,19 +21,19 @@ class MyVehiclesViewModel_Spec: XCTestCase {
     }
     
     func test_Shows_error_when_request_is_failing() async {
-        givenViewModel(urlSession: FakeUrlSession(error: .badRequest))
+        givenViewModel(apiCaller: FailingAPICaller(withError: 400))
         thenViewModelIsLoading()
         await whenTryingToGetVehicles()
         thenGetError()
         thenViewModelIsNotLoading()
     }
     
-    private func givenViewModel(urlSession: FakeUrlSession) {
-        viewModel = MyVehiclesViewModel(isOpenningVehicleCreation: {
+    private func givenViewModel(apiCaller: APICaller) {
+        viewModel = MyVehiclesViewModel(requestGenerator: FakeRequestGenerator(),
+                                        apiCaller: apiCaller,
+                                        isOpenningVehicleCreation: {
                                                 self.isOpen = true
-                                            },
-                                            requestGenerator: FakeRequestGenerator(),
-                                            urlSession: urlSession)
+                                            })
     }
     
     private func whenTryingToGetVehicles() async {
@@ -55,7 +49,7 @@ class MyVehiclesViewModel_Spec: XCTestCase {
     }
     
     private func thenGetError() {
-        XCTAssertEqual(.badRequest, viewModel.error)
+        XCTAssertEqual(.badRequest, viewModel.alert)
     }
     
     private func thenViewModelIsLoading() {

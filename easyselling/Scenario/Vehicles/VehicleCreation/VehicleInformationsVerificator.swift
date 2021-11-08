@@ -33,11 +33,6 @@ struct VehicleInformations: Equatable, Encodable {
     var model: String
 }
 
-enum VehicleType: String, Encodable {
-    case carType = "car"
-    case motoType = "moto"
-}
-
 enum VehicleCreationError: Equatable {
     case emptyField
     case wrongYear

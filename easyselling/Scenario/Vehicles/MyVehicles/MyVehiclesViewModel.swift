@@ -10,22 +10,20 @@ import UIKit
 
 class MyVehiclesViewModel: ObservableObject {
     
-    init(isOpenningVehicleCreation: @escaping Action,
-         requestGenerator: RequestGenerator = DefaultRequestGenerator(),
-         urlSession: URLSessionProtocol = URLSession.shared) {
-        self.isOpenningVehicleCreation = isOpenningVehicleCreation
+    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(),
+         apiCaller: APICaller = DefaultAPICaller(),
+         isOpenningVehicleCreation: @escaping Action) {
         self.requestGenerator = requestGenerator
-        self.urlSession = urlSession
-        self.apiCaller = DefaultAPICaller(urlSession: urlSession)
+        self.apiCaller = apiCaller
+        self.isOpenningVehicleCreation = isOpenningVehicleCreation
     }
     
     private var requestGenerator: RequestGenerator
     private var apiCaller: APICaller
-    private var urlSession: URLSessionProtocol
     private var isOpenningVehicleCreation: Action
     @Published var isLoading: Bool = true
     @Published var vehicles: [Vehicle] = []
-    @Published var error: APICallerError?
+    @Published var alert: APICallerError?
     @Published var isError: Bool = false
  
     func openVehicleCreation() {
@@ -33,7 +31,6 @@ class MyVehiclesViewModel: ObservableObject {
     }
     
     @MainActor func getVehicles() async {
-        // call api
         let request: URLRequest
         
         do {
@@ -42,27 +39,12 @@ class MyVehiclesViewModel: ObservableObject {
         } catch (let error) {
             if let error = error as? APICallerError {
                 isError = true
-                self.error = error
+                self.alert = error
             } else {
-                self.error = nil
+                self.alert = nil
             }
         }
         
-        // fin du call
         isLoading = false
     }
-}
-
-enum VehicleTypeEnum: String, Decodable {
-    case car, moto
-    
-    var description: String {
-        switch self {
-        case .car:
-            return L10n.Vehicles.car
-        case .moto:
-            return L10n.Vehicles.moto
-        }
-    }
-
 }
