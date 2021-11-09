@@ -21,9 +21,19 @@ final class DefaultFileUploader: FileUploader {
     }
     
     func upload(filename: String, filetype: String, data: Data) async throws -> UploadedFile {
+        let (body, contentType) = try generateBody(filename: filename, filetype: filetype, data: data)
+
+        var urlRequest = try requestGenerator
+            .generateRequest(endpoint: .files, method: .POST, headers: ["Content-Type": contentType])
+        urlRequest.httpBody = body
+
+        return try await apiCaller.call(urlRequest, decodeType: UploadedFile.self)
+    }
+    
+    func generateBody(filename: String, filetype: String, data: Data) throws -> (Data, String) {
         let boundaryConstant = UUID().uuidString
         let contentType = "multipart/form-data; boundary=" + boundaryConstant
-        
+
         guard let boundaryStart = "--\(boundaryConstant)\r\n".data(using: .utf8),
               let boundaryEnd = "--\(boundaryConstant)--\r\n".data(using: .utf8),
               let contentDispositionString = "Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8),
@@ -39,12 +49,7 @@ final class DefaultFileUploader: FileUploader {
         body.append(data)
         body.append(separator)
         body.append(boundaryEnd)
-        
-        var urlRequest = try requestGenerator.generateRequest(endpoint: .files, method: .POST, headers: [
-            "Content-Type": contentType
-        ])
-        urlRequest.httpBody = body
-        
-        return try await apiCaller.call(urlRequest, decodeType: UploadedFile.self)
+
+        return (body, contentType)
     }
 }
