@@ -9,6 +9,25 @@ import XCTest
 @testable import easyselling
 
 class DefaultFileUploader_Specs: XCTestCase {
+
+    func test_Generates_multipart_data_body() {
+        let boundaryConstant = UUID().uuidString
+        let filename = "sample.pdf"
+        let filetype = "application/pdf"
+        let fileData = "EMPTY_DATA".data(using: .utf8)!
+        
+        var expectedData = Data()
+        expectedData.append("--\(boundaryConstant)\r\n".data(using: .utf8)!)
+        expectedData.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
+        expectedData.append("Content-Type: \(filetype)\r\n\r\n".data(using: .utf8)!)
+        expectedData.append(fileData)
+        expectedData.append("\r\n".data(using: .utf8)!)
+        expectedData.append("--\(boundaryConstant)--\r\n".data(using: .utf8)!)
+        
+        givenAccountCreator()
+        whenGenerateBody(filename: filename, filetype: filetype, data: fileData, boundary: boundaryConstant)
+        thenBody(is: expectedData, contentType: "multipart/form-data; boundary=\(boundaryConstant)")
+    }
     
     func test_Creates_account_successfully() async {
         givenAccountCreator(body: "{ \"data\": { \"id\": \"AZ90JAPNDAIUBOAN\" } }")
@@ -30,7 +49,7 @@ class DefaultFileUploader_Specs: XCTestCase {
         thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
     }
     
-    private func givenAccountCreator(body: String) {
+    private func givenAccountCreator(body: String = "") {
         let urlSession = FakeUrlSession(with: body.data(using: .utf8)!)
         fileUploader = DefaultFileUploader(requestGenerator: FakeRequestGenerator(), urlSession: urlSession)
     }
@@ -47,8 +66,21 @@ class DefaultFileUploader_Specs: XCTestCase {
         }
     }
     
+    private func whenGenerateBody(filename: String, filetype: String, data: Data, boundary: String) {
+        do {
+            generatedBody = try fileUploader.generateBody(filename: filename, filetype: filetype, data: data, boundary: boundary)
+        } catch (let error) {
+            self.error = (error as! APICallerError)
+        }
+    }
+    
     private func thenFile(is expected: UploadedFile) {
         XCTAssertEqual(expected, uploadedFile)
+    }
+    
+    private func thenBody(is expected: Data, contentType: String) {
+        XCTAssertEqual(expected, generatedBody.data)
+        XCTAssertEqual(contentType, generatedBody.contentType)
     }
     
     private func thenErrorCode(is expected: Int) {
@@ -61,5 +93,6 @@ class DefaultFileUploader_Specs: XCTestCase {
     
     private var fileUploader: DefaultFileUploader!
     private var uploadedFile: UploadedFile!
+    private var generatedBody: (data: Data, contentType: String)!
     private var error: APICallerError!
 }

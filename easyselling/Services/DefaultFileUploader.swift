@@ -30,12 +30,11 @@ final class DefaultFileUploader: FileUploader {
         return try await apiCaller.call(urlRequest, decodeType: UploadedFile.self)
     }
     
-    func generateBody(filename: String, filetype: String, data: Data) throws -> (Data, String) {
-        let boundaryConstant = UUID().uuidString
-        let contentType = "multipart/form-data; boundary=" + boundaryConstant
+    func generateBody(filename: String, filetype: String, data: Data, boundary: String = UUID().uuidString) throws -> (Data, String) {
+        let contentType = "multipart/form-data; boundary=" + boundary
 
-        guard let boundaryStart = "--\(boundaryConstant)\r\n".data(using: .utf8),
-              let boundaryEnd = "--\(boundaryConstant)--\r\n".data(using: .utf8),
+        guard let boundaryStart = "--\(boundary)\r\n".data(using: .utf8),
+              let boundaryEnd = "--\(boundary)--\r\n".data(using: .utf8),
               let contentDispositionString = "Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8),
               let contentTypeString = "Content-Type: \(filetype)\r\n\r\n".data(using: .utf8),
               let separator = "\r\n".data(using: .utf8) else {
