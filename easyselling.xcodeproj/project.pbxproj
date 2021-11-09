@@ -74,6 +74,7 @@
 		8798D14E2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D14D2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift */; };
 		8798D150273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D14F273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift */; };
 		8798D15327310BFC00FF3AB4 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 8798D15227310BFC00FF3AB4 /* JWTDecode */; };
+		87BE3098273B0B4400D49D08 /* DefaultFileUploader_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BE3097273B0B4400D49D08 /* DefaultFileUploader_Specs.swift */; };
 		87DC1D00271F60B9002DC193 /* AccountCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1CFF271F60B9002DC193 /* AccountCreationView.swift */; };
 		87DC1D03271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D02271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift */; };
 		87DC1D06271F6A4C002DC193 /* DefaultUserAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D05271F6A4C002DC193 /* DefaultUserAuthenticator.swift */; };
@@ -163,6 +164,7 @@
 		8798D14B2730FC1C00FF3AB4 /* FakeTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTokenManager.swift; sourceTree = "<group>"; };
 		8798D14D2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAutorizedRequestGenerator.swift; sourceTree = "<group>"; };
 		8798D14F273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthorizedRequestGenerator_Specs.swift; sourceTree = "<group>"; };
+		87BE3097273B0B4400D49D08 /* DefaultFileUploader_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFileUploader_Specs.swift; sourceTree = "<group>"; };
 		87DC1CFF271F60B9002DC193 /* AccountCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationView.swift; sourceTree = "<group>"; };
 		87DC1D02271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserAuthenticator_Specs.swift; sourceTree = "<group>"; };
 		87DC1D05271F6A4C002DC193 /* DefaultUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserAuthenticator.swift; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 				03F05436271B3E3900434706 /* DefaultAccountCreator_Specs */,
 				8798D14F273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift */,
 				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
+				87BE3096273B0AED00D49D08 /* DefaultFileUploader_Specs */,
 				03F0542F271B38EB00434706 /* DefaultInformationVerificator_Specs */,
 				03F0543D271B3EFB00434706 /* DefaultRequestGenerator_Specs */,
 				8798D14A2730FAEB00FF3AB4 /* DefaultTokenManager_Specs */,
@@ -495,6 +498,14 @@
 				8798D14B2730FC1C00FF3AB4 /* FakeTokenManager.swift */,
 			);
 			path = DefaultTokenManager_Specs;
+			sourceTree = "<group>";
+		};
+		87BE3096273B0AED00D49D08 /* DefaultFileUploader_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				87BE3097273B0B4400D49D08 /* DefaultFileUploader_Specs.swift */,
+			);
+			path = DefaultFileUploader_Specs;
 			sourceTree = "<group>";
 		};
 		87DC1D01271F61E2002DC193 /* DefaultUserAuthenticator_Specs */ = {
@@ -772,6 +783,7 @@
 			files = (
 				8705B9A227207A39004132CF /* SucceedingUserAuthenticator.swift in Sources */,
 				03F05441271B3F7700434706 /* SuccedingAccountCreator.swift in Sources */,
+				87BE3098273B0B4400D49D08 /* DefaultFileUploader_Specs.swift in Sources */,
 				03DAF9AA2727448300FFED55 /* VehicleCreationViewModel_Spec.swift in Sources */,
 				8798D14C2730FC1C00FF3AB4 /* FakeTokenManager.swift in Sources */,
 				03F0543F271B3F0A00434706 /* FakeRequestGenerator.swift in Sources */,

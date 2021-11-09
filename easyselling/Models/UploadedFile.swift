@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct UploadedFile: Decodable {
+struct UploadedFile: Decodable, Equatable {
     let id: String
 }
