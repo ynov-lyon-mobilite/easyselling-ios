@@ -86,7 +86,7 @@ class OnBoardingViewModel_Specs: XCTestCase {
         thenPreviousButtonIsShown()
     }
     
-    func Does_nothing_when_trying_to_go_to_next_feature_when_on_the_last_feature() {
+    func test_Does_nothing_when_trying_to_go_to_next_feature_when_on_the_last_feature() {
         givenOnBoardingViewModel(withFeatures: [
             Feature(title: "title 1", image: "image 1", text: "text 1"),
             Feature(title: "title 2", image: "image 2", text: "text 2"),
