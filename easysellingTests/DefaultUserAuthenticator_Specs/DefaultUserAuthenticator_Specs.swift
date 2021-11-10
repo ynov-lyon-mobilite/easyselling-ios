@@ -11,19 +11,21 @@ import XCTest
 class DefaultUserAuthenticator_Specs: XCTestCase {
     
     func test_Login_user_succesfully() async {
-        givenUserAuthenticator(urlSession: FakeUrlSession(localFile: .userAuthenticatorResponse))
+        let apiCaller = DefaultAPICaller(urlSession: FakeUrlSession(localFile: .userAuthenticatorResponse))
+        
+        givenUserAuthenticator(apiCaller: apiCaller)
         await whenLoginUser(mail: "user@domain.com", password: "password")
         thenToken(expectedAccessToken: expectedAccessToken, expectedRefreshToken: expectedRefreshToken)
     }
     
     func test_Login_user_failed_because_needed_otp() async {
-        givenUserAuthenticator(urlSession: FakeUrlSession(error: .unauthorized))
+        givenUserAuthenticator(apiCaller: FailingAPICaller(withError: 401))
         await whenLoginUser(mail: "user@domain.com", password: "password")
         thenError(is: .unauthorized)
     }
     
-    private func givenUserAuthenticator(urlSession: URLSessionProtocol) {
-        userAuthenticator = DefaultUserAuthenticator(apiCaller: DefaultAPICaller(urlSession: urlSession))
+    private func givenUserAuthenticator(apiCaller: APICaller) {
+        userAuthenticator = DefaultUserAuthenticator(apiCaller: apiCaller)
     }
     
     private func whenLoginUser(mail: String, password: String) async {

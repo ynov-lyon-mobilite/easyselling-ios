@@ -11,19 +11,21 @@ import XCTest
 class DefaultTokenRefreshor_Specs: XCTestCase {
 
     func test_Refreshs_token_succesfully() async {
-        givenTokenRefreshor(urlSession: FakeUrlSession(localFile: .userAuthenticatorResponse))
+        let apiCaller = DefaultAPICaller(urlSession: FakeUrlSession(localFile: .userAuthenticatorResponse))
+
+        givenTokenRefreshor(apiCaller: apiCaller)
         await whenRefreshToken(refreshToken: "ANY_REFRESH_TOKEN")
         thenToken(expectedAccessToken: expectedAccessToken, expectedRefreshToken: expectedRefreshToken)
     }
     
     func test_Throws_error_when_token_refresh_failed() async {
-        givenTokenRefreshor(urlSession: FakeUrlSession(error: .unauthorized))
+        givenTokenRefreshor(apiCaller: FailingAPICaller(withError: 401))
         await whenRefreshToken(refreshToken: "ANY_REFRESH_TOKEN")
         thenError(is: .unauthorized)
     }
     
-    private func givenTokenRefreshor(urlSession: URLSessionProtocol) {
-        tokenRefreshor = DefaultTokenRefreshor(apiCaller: DefaultAPICaller(urlSession: urlSession))
+    private func givenTokenRefreshor(apiCaller: APICaller) {
+        tokenRefreshor = DefaultTokenRefreshor(apiCaller: apiCaller)
     }
     
     private func whenRefreshToken(refreshToken: String) async {

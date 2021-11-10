@@ -24,33 +24,35 @@ class DefaultFileUploader_Specs: XCTestCase {
         expectedData.append("\r\n".data(using: .utf8)!)
         expectedData.append("--\(boundaryConstant)--\r\n".data(using: .utf8)!)
         
-        givenFileUploader(urlSession: FakeUrlSession(localFile: .fileUploaderResponse))
+        givenFileUploader(apiCaller: SucceedingAPICaller())
         whenGenerateBody(filename: filename, filetype: filetype, data: fileData, boundary: boundaryConstant)
         thenBody(is: expectedData, contentType: "multipart/form-data; boundary=\(boundaryConstant)")
     }
     
     func test_Uploads_file_successfully() async {
-        givenFileUploader(urlSession: FakeUrlSession(localFile: .fileUploaderResponse))
+        let apiCaller = DefaultAPICaller(urlSession: FakeUrlSession(localFile: .fileUploaderResponse))
+
+        givenFileUploader(apiCaller: apiCaller)
         await whenUploadFile(filename: "sample.pdf", filetype: "application/pdf", data: Data())
         thenFile(is: UploadedFile(id: "AZ90JAPNDAIUBOAN"))
     }
     
     func test_Uploads_file_failed_with_bad_request() async {
-        givenFileUploader(urlSession: FakeUrlSession(error: .badRequest))
+        givenFileUploader(apiCaller: FailingAPICaller(withError: 400))
         await whenUploadFile(filename: "sample.pdf", filetype: "application/pdf", data: Data())
         thenErrorCode(is: 400)
         thenErrorMessage(is: "Une erreur est survenue")
     }
     
     func test_Uploads_file_failed_with_not_found() async {
-        givenFileUploader(urlSession: FakeUrlSession(error: .notFound))
+        givenFileUploader(apiCaller: FailingAPICaller(withError: 404))
         await whenUploadFile(filename: "sample.pdf", filetype: "application/pdf", data: Data())
         thenErrorCode(is: 404)
         thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
     }
     
-    private func givenFileUploader(urlSession: URLSessionProtocol) {
-        fileUploader = DefaultFileUploader(requestGenerator: FakeRequestGenerator(), apiCaller: DefaultAPICaller(urlSession: urlSession))
+    private func givenFileUploader(apiCaller: APICaller) {
+        fileUploader = DefaultFileUploader(requestGenerator: FakeRequestGenerator(), apiCaller: apiCaller)
     }
     
     private func whenUploadFile(filename: String, filetype: String, data: Data) async {
