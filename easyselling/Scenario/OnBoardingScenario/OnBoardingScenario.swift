@@ -29,7 +29,6 @@ class OnBoardingScenario {
     
     private func hasFinish() {
         self.onBoardingIsViewed = true
-        navigator.deleteStack()
         navigator.navigateToAuthenticationScenario()
     }
     
@@ -41,16 +40,17 @@ class OnBoardingScenario {
 protocol OnBoardingNavigator {
     func navigatesToOnBoardingViewModel(onFinish: @escaping Action)
     func navigateToAuthenticationScenario()
-    func deleteStack()
 }
 
 class DefaultOnBoardingNavigator: OnBoardingNavigator {
   
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, window: UIWindow?) {
         self.navigationController = navigationController
+        self.window = window
     }
     
     private var navigationController: UINavigationController
+    private var window: UIWindow?
 
     func navigatesToOnBoardingViewModel(onFinish: @escaping Action) {
             let viewModel = OnBoardingViewModel(features: [
@@ -64,12 +64,8 @@ class DefaultOnBoardingNavigator: OnBoardingNavigator {
     }
     
     func navigateToAuthenticationScenario() {
-        let navigator = DefaultAuthenticationNavigator(navigationController: navigationController)
+        let navigator = DefaultAuthenticationNavigator(window: window)
         let scenario = AuthenticationScenario(navigator: navigator)
         scenario.begin()
-    }
-    
-    func deleteStack() {
-        self.navigationController.viewControllers.removeAll()
     }
 }

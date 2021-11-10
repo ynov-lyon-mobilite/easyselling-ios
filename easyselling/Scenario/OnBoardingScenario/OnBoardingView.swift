@@ -26,7 +26,6 @@ struct OnBoardingView: View {
                         Image(systemName: viewModel.feature.image)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 300, height: 200, alignment: .center)
                             .padding(.bottom, 75)
                         
                         Text(viewModel.feature.title)
@@ -54,11 +53,8 @@ struct OnBoardingView: View {
                 }
             }
             .padding(25)
-            
             Spacer()
-            
             HStack {
-
                 Button("Previous") {
                     withAnimation {
                         viewModel.previousFeature()
@@ -70,9 +66,7 @@ struct OnBoardingView: View {
                 Spacer()
                                 
                 Button("Skip") {
-                    withAnimation {
-                        viewModel.skipFeatures()
-                    }
+                    viewModel.skipFeatures()
                 }
                 .opacity(viewModel.isShowingSkipButton ? 1 : 0)
                 .disabled(!viewModel.isShowingSkipButton)
@@ -92,6 +86,7 @@ struct OnBoardingView: View {
             }
             .padding([.leading, .trailing], 10)
         }
+        .padding(.bottom)
     }
 }
 

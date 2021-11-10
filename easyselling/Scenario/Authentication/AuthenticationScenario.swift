@@ -36,13 +36,17 @@ protocol AuthenticationNavigator {
 }
 
 class DefaultAuthenticationNavigator: AuthenticationNavigator {
-    private let navigationController: UINavigationController
     
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(window: UIWindow?) {
+        self.window = window
     }
     
+    private var window: UIWindow?
+    private var navigationController = UINavigationController()
+    
     func begin(onVehicleCreationOpen: @escaping Action) {
+        window?.rootViewController = navigationController
+        
         let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: { onVehicleCreationOpen() })
         let userAuthenticationView = UserAuthenticationView(viewModel: viewModel)
         navigationController.pushViewController(UIHostingController(rootView: userAuthenticationView), animated: true)
