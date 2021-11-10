@@ -86,7 +86,7 @@ class OnBoardingViewModel_Specs: XCTestCase {
         thenPreviousButtonIsShown()
     }
     
-    func test_Tries_to_go_to_next_feature_when_there_is_not_more() {
+    func Does_nothing_when_trying_to_go_to_next_feature_when_on_the_last_feature() {
         givenOnBoardingViewModel(withFeatures: [
             Feature(title: "title 1", image: "image 1", text: "text 1"),
             Feature(title: "title 2", image: "image 2", text: "text 2"),
@@ -97,7 +97,7 @@ class OnBoardingViewModel_Specs: XCTestCase {
         thenCurrentFeatureViewModel(is: 2)
     }
     
-    func test_Clicks_on_skip_in_the_first_feature(){
+    func test_Finished_Onboarding_scenario_when_clicking_on_skip_button(){
         givenOnBoardingViewModel(withFeatures: [
             Feature(title: "title 1", image: "image 1", text: "text 1"),
             Feature(title: "title 2", image: "image 2", text: "text 2"),
@@ -105,8 +105,19 @@ class OnBoardingViewModel_Specs: XCTestCase {
         ])
         whenCurrentFeatureShown(is: 0)
         whenSkippingFeatures()
-        thenCurrentFeatureViewModel(is: 2)
+        thenOnBoardingIsFinished()
     }
+    
+    func test_Finished_Onboarding_scenario_when_clicking_on_skip_button_on_the_second_feature(){
+        givenOnBoardingViewModel(withFeatures: [
+            Feature(title: "title 1", image: "image 1", text: "text 1"),
+            Feature(title: "title 2", image: "image 2", text: "text 2"),
+            Feature(title: "title 3", image: "image 3", text: "text 3")
+        ])
+        whenCurrentFeatureShown(is: 1)
+        whenSkippingFeatures()
+        thenOnBoardingIsFinished()
+}
     
     func test_Enables_skip_button_when_not_on_last_feature(){
         givenOnBoardingViewModel(withFeatures: [
@@ -116,17 +127,6 @@ class OnBoardingViewModel_Specs: XCTestCase {
         ])
         whenCurrentFeatureShown(is: 0)
         thenSkipButtonIsShown()
-    }
-    
-    func test_Clicks_on_skip_in_the_second_feature(){
-        givenOnBoardingViewModel(withFeatures: [
-            Feature(title: "title 1", image: "image 1", text: "text 1"),
-            Feature(title: "title 2", image: "image 2", text: "text 2"),
-            Feature(title: "title 3", image: "image 3", text: "text 3")
-        ])
-        whenCurrentFeatureShown(is: 1)
-        whenSkippingFeatures()
-        thenCurrentFeatureViewModel(is: 2)
     }
     
     func test_Enables_skip_button_when_not_on_last_feature2(){

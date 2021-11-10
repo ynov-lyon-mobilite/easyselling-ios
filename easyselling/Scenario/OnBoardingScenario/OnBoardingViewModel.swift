@@ -8,10 +8,6 @@
 import Foundation
 import SwiftUI
 
-enum OnBoardingViewModelError : Error {
-    case mustHaveAtLeastOnFeature
-}
-
 class OnBoardingViewModel: ObservableObject {
 
     var features: [Feature]
@@ -43,7 +39,7 @@ class OnBoardingViewModel: ObservableObject {
     
     func skipFeatures() {
         if(!(currentFeatureIndex == features.count - 1)) {
-            currentFeatureIndex = features.count - 1
+            self.onFinish()
         }
     }
 }
