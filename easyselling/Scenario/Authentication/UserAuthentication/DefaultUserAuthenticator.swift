@@ -15,9 +15,9 @@ final class DefaultUserAuthenticator: UserAuthenticatior {
     private var requestGenerator: RequestGenerator
     private var apiCaller: APICaller
     
-    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), urlSession: URLSessionProtocol = URLSession.shared) {
+    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
-        self.apiCaller = DefaultAPICaller(urlSession: urlSession)
+        self.apiCaller = apiCaller
     }
     
     func login(mail: String, password: String) async throws -> Token {

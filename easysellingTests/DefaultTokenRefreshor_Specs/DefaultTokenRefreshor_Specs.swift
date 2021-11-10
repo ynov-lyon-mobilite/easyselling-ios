@@ -11,24 +11,21 @@ import XCTest
 class DefaultTokenRefreshor_Specs: XCTestCase {
 
     func test_Refreshs_token_succesfully() async {
-        givenTokenRefreshor()
+        let apiCaller = DefaultAPICaller(urlSession: FakeUrlSession(localFile: .userAuthenticatorResponse))
+
+        givenTokenRefreshor(apiCaller: apiCaller)
         await whenRefreshToken(refreshToken: "ANY_REFRESH_TOKEN")
-        thenToken(expectedAccessToken: accessToken, expectedRefreshToken: refreshToken)
+        thenToken(expectedAccessToken: expectedAccessToken, expectedRefreshToken: expectedRefreshToken)
     }
     
     func test_Throws_error_when_token_refresh_failed() async {
-        givenTokenRefreshor(error: .unauthorized)
+        givenTokenRefreshor(apiCaller: FailingAPICaller(withError: 401))
         await whenRefreshToken(refreshToken: "ANY_REFRESH_TOKEN")
         thenError(is: .unauthorized)
     }
     
-    private func givenTokenRefreshor() {
-        let data = httpResponse.data(using: .utf8)!
-        tokenRefreshor = DefaultTokenRefreshor(urlSession: FakeUrlSession(with: data))
-    }
-    
-    private func givenTokenRefreshor(error: APICallerError) {
-        tokenRefreshor = DefaultTokenRefreshor(urlSession: FakeUrlSession(error: error))
+    private func givenTokenRefreshor(apiCaller: APICaller) {
+        tokenRefreshor = DefaultTokenRefreshor(apiCaller: apiCaller)
     }
     
     private func whenRefreshToken(refreshToken: String) async {
@@ -53,10 +50,7 @@ class DefaultTokenRefreshor_Specs: XCTestCase {
     private var tokenRefreshor: TokenRefreshor!
     private var requestResult: Token!
     private var requestError: APICallerError!
-    
-    private let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkMzEwYTUzLWZmZTYtNDY5YS05NWRmLWRlNGE4OGE1ZTU5ZiIsImlhdCI6MTYzNDY3NjQ1OSwiZXhwIjoxNjM0Njc3MzU5LCJpc3MiOiJkaXJlY3R1cyJ9.lsMJA8Dvbu3muCZ77gYPDqdIYELrWlJsPh4e0A6tJxI"
-    private let refreshToken = "wcA0WsKCAIA8ywcGt8jlsWKn-1MGKyGZcembTHsWfgmoQ3aTUnsPHCU_MIveDsr5"
-    private var httpResponse: String {
-        return "{\"data\":{\"access_token\": \"\(accessToken)\", \"expires\": 900000, \"refresh_token\": \"\(refreshToken)\"}}"
-    }
+
+    private let expectedAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkMzEwYTUzLWZmZTYtNDY5YS05NWRmLWRlNGE4OGE1ZTU5ZiIsImlhdCI6MTYzNDY3NjQ1OSwiZXhwIjoxNjM0Njc3MzU5LCJpc3MiOiJkaXJlY3R1cyJ9.lsMJA8Dvbu3muCZ77gYPDqdIYELrWlJsPh4e0A6tJxI"
+    private let expectedRefreshToken = "wcA0WsKCAIA8ywcGt8jlsWKn-1MGKyGZcembTHsWfgmoQ3aTUnsPHCU_MIveDsr5"
 }
