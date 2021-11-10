@@ -62,6 +62,8 @@
 		875E47AE273C6AD90019FC83 /* LocalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875E47AD273C6AD90019FC83 /* LocalFile.swift */; };
 		875E47B0273C6B200019FC83 /* FileUploaderResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 875E47AF273C6B200019FC83 /* FileUploaderResponse.json */; };
 		875E47B1273C6B320019FC83 /* FileUploaderResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 875E47AF273C6B200019FC83 /* FileUploaderResponse.json */; };
+		875E47B5273C6B9F0019FC83 /* UserAuthenticatorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 875E47B4273C6B9F0019FC83 /* UserAuthenticatorResponse.json */; };
+		875E47B6273C6CBD0019FC83 /* UserAuthenticatorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 875E47B4273C6B9F0019FC83 /* UserAuthenticatorResponse.json */; };
 		87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA027172F520035AB13 /* URLSessionProtocol.swift */; };
 		87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA427172F610035AB13 /* HTTPMethod.swift */; };
 		87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */; };
@@ -155,6 +157,7 @@
 		874975FA273A3CA3000A1289 /* UploadedFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadedFile.swift; sourceTree = "<group>"; };
 		875E47AD273C6AD90019FC83 /* LocalFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalFile.swift; sourceTree = "<group>"; };
 		875E47AF273C6B200019FC83 /* FileUploaderResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FileUploaderResponse.json; sourceTree = "<group>"; };
+		875E47B4273C6B9F0019FC83 /* UserAuthenticatorResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserAuthenticatorResponse.json; sourceTree = "<group>"; };
 		87780BA027172F520035AB13 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		87780BA427172F610035AB13 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPICaller_Specs.swift; sourceTree = "<group>"; };
@@ -418,7 +421,6 @@
 		873552C2270D847B00F2DDBD /* easysellingTests */ = {
 			isa = PBXGroup;
 			children = (
-				875E47AD273C6AD90019FC83 /* LocalFile.swift */,
 				03F05436271B3E3900434706 /* DefaultAccountCreator_Specs */,
 				8798D14F273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift */,
 				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
@@ -431,6 +433,7 @@
 				87184C882729DB65006586FD /* Authentication */,
 				2CAE03D227170F98008D7A68 /* Vehicle */,
 				8FF010252732EDEC0022314B /* OnBoardingScenario_Specs */,
+				875E47AD273C6AD90019FC83 /* LocalFile.swift */,
 			);
 			path = easysellingTests;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 		87DC1D01271F61E2002DC193 /* DefaultUserAuthenticator_Specs */ = {
 			isa = PBXGroup;
 			children = (
+				875E47B4273C6B9F0019FC83 /* UserAuthenticatorResponse.json */,
 				87DC1D02271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift */,
 				8705B9A527207D36004132CF /* FailingUserAuthenticator.swift */,
 				8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */,
@@ -682,6 +686,7 @@
 			files = (
 				03F2097B2716E2B100E10F6C /* localizable.strings in Resources */,
 				03F209802716E2CB00E10F6C /* localizable.strings in Resources */,
+				875E47B6273C6CBD0019FC83 /* UserAuthenticatorResponse.json in Resources */,
 				034D04E32732976E00576D64 /* GoogleService-Info.plist in Resources */,
 				873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */,
 				875E47B1273C6B320019FC83 /* FileUploaderResponse.json in Resources */,
@@ -694,6 +699,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				875E47B0273C6B200019FC83 /* FileUploaderResponse.json in Resources */,
+				875E47B5273C6B9F0019FC83 /* UserAuthenticatorResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,11 +9,11 @@ import Foundation
 
 enum LocalFile: String {
     case fileUploaderResponse = "FileUploaderResponse"
+    case userAuthenticatorResponse = "UserAuthenticatorResponse"
     
-    var data: Data? {
-        guard let path = Bundle.main.path(forResource: rawValue, ofType: "json"),
-              let data = try? String(contentsOfFile: path).data(using: .utf8) else { return nil }
-        
-        return data
+    var data: Data {
+        //  If you have crash because path is nil. Don't forget to add the JSON file in both targets (easyselling & easysellingTests)
+        let path = Bundle.main.path(forResource: rawValue, ofType: "json")!
+        return try! String(contentsOfFile: path).data(using: .utf8)!
     }
 }

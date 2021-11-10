@@ -163,7 +163,7 @@ class FakeUrlSession: URLSessionProtocol {
     }
     
     init(localFile: LocalFile) {
-        self.data = localFile.data!
+        self.data = localFile.data
         self.response = HTTPURLResponse(url: URL(string: "https://google.com/osef")!, statusCode: 200,
                                         httpVersion: nil, headerFields: nil)!
     }

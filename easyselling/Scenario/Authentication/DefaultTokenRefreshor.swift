@@ -15,9 +15,9 @@ final class DefaultTokenRefreshor: TokenRefreshor {
     private var requestGenerator: RequestGenerator
     private var apiCaller: APICaller
     
-    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), urlSession: URLSessionProtocol = URLSession.shared) {
+    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
-        self.apiCaller = DefaultAPICaller(urlSession: urlSession)
+        self.apiCaller = apiCaller
     }
     
     func refresh(refreshToken: String) async throws -> Token {
