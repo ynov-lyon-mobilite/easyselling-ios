@@ -26,8 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        let navigator = DefaultAuthenticationNavigator(navigationController: navigationController)
-        let scenario = AuthenticationScenario(navigator: navigator)
+        let navigator = DefaultOnBoardingNavigator(navigationController: navigationController, window: window)
+        let scenario = OnBoardingScenario(navigator: navigator)
         scenario.begin()
         
         return true
