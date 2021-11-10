@@ -11,24 +11,21 @@ import XCTest
 class DefaultUserAuthenticator_Specs: XCTestCase {
     
     func test_Login_user_succesfully() async {
-        givenUserAuthenticator()
+        let apiCaller = DefaultAPICaller(urlSession: FakeUrlSession(localFile: .userAuthenticatorResponse))
+        
+        givenUserAuthenticator(apiCaller: apiCaller)
         await whenLoginUser(mail: "user@domain.com", password: "password")
-        thenToken(expectedAccessToken: accessToken, expectedRefreshToken: refreshToken)
+        thenToken(expectedAccessToken: expectedAccessToken, expectedRefreshToken: expectedRefreshToken)
     }
     
     func test_Login_user_failed_because_needed_otp() async {
-        givenUserAuthenticator(error: .unauthorized)
+        givenUserAuthenticator(apiCaller: FailingAPICaller(withError: 401))
         await whenLoginUser(mail: "user@domain.com", password: "password")
         thenError(is: .unauthorized)
     }
     
-    private func givenUserAuthenticator() {
-        let data = httpResponse.data(using: .utf8)!
-        userAuthenticator = DefaultUserAuthenticator(urlSession: FakeUrlSession(with: data))
-    }
-    
-    private func givenUserAuthenticator(error: APICallerError) {
-        userAuthenticator = DefaultUserAuthenticator(urlSession: FakeUrlSession(error: error))
+    private func givenUserAuthenticator(apiCaller: APICaller) {
+        userAuthenticator = DefaultUserAuthenticator(apiCaller: apiCaller)
     }
     
     private func whenLoginUser(mail: String, password: String) async {
@@ -54,9 +51,6 @@ class DefaultUserAuthenticator_Specs: XCTestCase {
     private var requestResult: Token!
     private var requestError: APICallerError!
     
-    private let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkMzEwYTUzLWZmZTYtNDY5YS05NWRmLWRlNGE4OGE1ZTU5ZiIsImlhdCI6MTYzNDY3NjQ1OSwiZXhwIjoxNjM0Njc3MzU5LCJpc3MiOiJkaXJlY3R1cyJ9.lsMJA8Dvbu3muCZ77gYPDqdIYELrWlJsPh4e0A6tJxI"
-    private let refreshToken = "wcA0WsKCAIA8ywcGt8jlsWKn-1MGKyGZcembTHsWfgmoQ3aTUnsPHCU_MIveDsr5"
-    private var httpResponse: String {
-        return "{\"data\":{\"access_token\": \"\(accessToken)\", \"expires\": 900000, \"refresh_token\": \"\(refreshToken)\"}}"
-    }
+    private let expectedAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkMzEwYTUzLWZmZTYtNDY5YS05NWRmLWRlNGE4OGE1ZTU5ZiIsImlhdCI6MTYzNDY3NjQ1OSwiZXhwIjoxNjM0Njc3MzU5LCJpc3MiOiJkaXJlY3R1cyJ9.lsMJA8Dvbu3muCZ77gYPDqdIYELrWlJsPh4e0A6tJxI"
+    private let expectedRefreshToken = "wcA0WsKCAIA8ywcGt8jlsWKn-1MGKyGZcembTHsWfgmoQ3aTUnsPHCU_MIveDsr5"
 }
