@@ -15,9 +15,9 @@ final class DefaultFileUploader: FileUploader {
     private var requestGenerator: RequestGenerator
     private var apiCaller: APICaller
     
-    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), urlSession: URLSessionProtocol = URLSession.shared) {
+    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
-        self.apiCaller = DefaultAPICaller(urlSession: urlSession)
+        self.apiCaller = apiCaller
     }
     
     func upload(filename: String, filetype: String, data: Data) async throws -> UploadedFile {

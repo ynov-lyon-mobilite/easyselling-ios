@@ -24,38 +24,33 @@ class DefaultFileUploader_Specs: XCTestCase {
         expectedData.append("\r\n".data(using: .utf8)!)
         expectedData.append("--\(boundaryConstant)--\r\n".data(using: .utf8)!)
         
-        givenAccountCreator()
+        givenFileUploader(urlSession: FakeUrlSession(localFile: .fileUploaderResponse))
         whenGenerateBody(filename: filename, filetype: filetype, data: fileData, boundary: boundaryConstant)
         thenBody(is: expectedData, contentType: "multipart/form-data; boundary=\(boundaryConstant)")
     }
     
-    func test_Creates_account_successfully() async {
-        givenAccountCreator(body: "{ \"data\": { \"id\": \"AZ90JAPNDAIUBOAN\" } }")
+    func test_Uploads_file_successfully() async {
+        givenFileUploader(urlSession: FakeUrlSession(localFile: .fileUploaderResponse))
         await whenUploadFile(filename: "sample.pdf", filetype: "application/pdf", data: Data())
         thenFile(is: UploadedFile(id: "AZ90JAPNDAIUBOAN"))
     }
     
-    func test_Creates_account_failed_with_wrong_url() async {
-        givenAccountCreator(error: .badRequest)
+    func test_Uploads_file_failed_with_bad_request() async {
+        givenFileUploader(urlSession: FakeUrlSession(error: .badRequest))
         await whenUploadFile(filename: "sample.pdf", filetype: "application/pdf", data: Data())
         thenErrorCode(is: 400)
         thenErrorMessage(is: "Une erreur est survenue")
     }
     
-    func test_Creates_account_failed_with_forbiden_access() async {
-        givenAccountCreator(error: .notFound)
+    func test_Uploads_file_failed_with_not_found() async {
+        givenFileUploader(urlSession: FakeUrlSession(error: .notFound))
         await whenUploadFile(filename: "sample.pdf", filetype: "application/pdf", data: Data())
         thenErrorCode(is: 404)
         thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
     }
     
-    private func givenAccountCreator(body: String = "") {
-        let urlSession = FakeUrlSession(with: body.data(using: .utf8)!)
-        fileUploader = DefaultFileUploader(requestGenerator: FakeRequestGenerator(), urlSession: urlSession)
-    }
-    
-    private func givenAccountCreator(error: APICallerError) {
-        fileUploader = DefaultFileUploader(requestGenerator: FakeRequestGenerator(), urlSession: FakeUrlSession(error: error))
+    private func givenFileUploader(urlSession: URLSessionProtocol) {
+        fileUploader = DefaultFileUploader(requestGenerator: FakeRequestGenerator(), apiCaller: DefaultAPICaller(urlSession: urlSession))
     }
     
     private func whenUploadFile(filename: String, filetype: String, data: Data) async {

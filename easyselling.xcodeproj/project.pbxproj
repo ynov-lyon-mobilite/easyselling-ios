@@ -59,6 +59,9 @@
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
 		874975F9273A3AB1000A1289 /* DefaultFileUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874975F8273A3AB1000A1289 /* DefaultFileUploader.swift */; };
 		874975FB273A3CA3000A1289 /* UploadedFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874975FA273A3CA3000A1289 /* UploadedFile.swift */; };
+		875E47AE273C6AD90019FC83 /* LocalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875E47AD273C6AD90019FC83 /* LocalFile.swift */; };
+		875E47B0273C6B200019FC83 /* FileUploaderResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 875E47AF273C6B200019FC83 /* FileUploaderResponse.json */; };
+		875E47B1273C6B320019FC83 /* FileUploaderResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 875E47AF273C6B200019FC83 /* FileUploaderResponse.json */; };
 		87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA027172F520035AB13 /* URLSessionProtocol.swift */; };
 		87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA427172F610035AB13 /* HTTPMethod.swift */; };
 		87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */; };
@@ -150,6 +153,8 @@
 		873552BF270D847B00F2DDBD /* easysellingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = easysellingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		874975F8273A3AB1000A1289 /* DefaultFileUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFileUploader.swift; sourceTree = "<group>"; };
 		874975FA273A3CA3000A1289 /* UploadedFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadedFile.swift; sourceTree = "<group>"; };
+		875E47AD273C6AD90019FC83 /* LocalFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalFile.swift; sourceTree = "<group>"; };
+		875E47AF273C6B200019FC83 /* FileUploaderResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FileUploaderResponse.json; sourceTree = "<group>"; };
 		87780BA027172F520035AB13 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		87780BA427172F610035AB13 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPICaller_Specs.swift; sourceTree = "<group>"; };
@@ -413,6 +418,7 @@
 		873552C2270D847B00F2DDBD /* easysellingTests */ = {
 			isa = PBXGroup;
 			children = (
+				875E47AD273C6AD90019FC83 /* LocalFile.swift */,
 				03F05436271B3E3900434706 /* DefaultAccountCreator_Specs */,
 				8798D14F273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift */,
 				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
@@ -503,6 +509,7 @@
 		87BE3096273B0AED00D49D08 /* DefaultFileUploader_Specs */ = {
 			isa = PBXGroup;
 			children = (
+				875E47AF273C6B200019FC83 /* FileUploaderResponse.json */,
 				87BE3097273B0B4400D49D08 /* DefaultFileUploader_Specs.swift */,
 			);
 			path = DefaultFileUploader_Specs;
@@ -677,6 +684,7 @@
 				03F209802716E2CB00E10F6C /* localizable.strings in Resources */,
 				034D04E32732976E00576D64 /* GoogleService-Info.plist in Resources */,
 				873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */,
+				875E47B1273C6B320019FC83 /* FileUploaderResponse.json in Resources */,
 				873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -685,6 +693,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				875E47B0273C6B200019FC83 /* FileUploaderResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,6 +807,7 @@
 				8798D150273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift in Sources */,
 				8798D1492730F8B700FF3AB4 /* SucceedingTokenRefreshor.swift in Sources */,
 				8705B9A027207838004132CF /* UserAuthenticationViewModel_Specs.swift in Sources */,
+				875E47AE273C6AD90019FC83 /* LocalFile.swift in Sources */,
 				87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */,
 				035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */,
 				8798D1412730F35000FF3AB4 /* DefaultTokenRefreshor_Specs.swift in Sources */,

@@ -162,6 +162,12 @@ class FakeUrlSession: URLSessionProtocol {
                                         httpVersion: nil, headerFields: nil)!
     }
     
+    init(localFile: LocalFile) {
+        self.data = localFile.data!
+        self.response = HTTPURLResponse(url: URL(string: "https://google.com/osef")!, statusCode: 200,
+                                        httpVersion: nil, headerFields: nil)!
+    }
+    
     init(error: APICallerError) {
         self.data = Data()
         self.response = HTTPURLResponse(url: URL(string: "https://google.com/osef")!, statusCode: error.rawValue,
