@@ -28,7 +28,7 @@ class OnBoardingScenario_Specs: XCTestCase {
         whenBeginning()
         whenOnBoardingIsFinished()
         thenScenarioIsFinished()
-        XCTAssertTrue(scenario.onBoardingIsViewed)
+        thenOnboardingIsViewed()
         whenBeginning()
         thenScenarioIsFinished()
     }
