@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03004DBE273DB9E800188983 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03004DBD273DB9E800188983 /* SceneDelegate.swift */; };
 		033F4AF32718C8A800B79149 /* NetFox in Frameworks */ = {isa = PBXBuildFile; productRef = 033F4AF22718C8A800B79149 /* NetFox */; };
 		034D04E32732976E00576D64 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 034D04E22732976E00576D64 /* GoogleService-Info.plist */; };
 		034D04E62732984400576D64 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 034D04E52732984400576D64 /* FirebaseAnalytics */; };
@@ -125,6 +126,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03004DBC273DB7CA00188983 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		03004DBD273DB9E800188983 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		034D04E22732976E00576D64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		034D04EA2733FE0800576D64 /* PasswordResetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewModel.swift; sourceTree = "<group>"; };
 		034D04EC2733FE1A00576D64 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
@@ -387,6 +390,7 @@
 				03F209782716E21100E10F6C /* Supporting Files */,
 				035E860327184EDC00684ED0 /* AppDelegate.swift */,
 				D00736552712D93800ED0F2C /* easyselling.entitlements */,
+				03004DBD273DB9E800188983 /* SceneDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -478,6 +482,7 @@
 		873552B1270D847700F2DDBD /* easyselling */ = {
 			isa = PBXGroup;
 			children = (
+				03004DBC273DB7CA00188983 /* Info.plist */,
 				87780BAA27172FB10035AB13 /* Services */,
 				87780B9C27172F1C0035AB13 /* Additions */,
 				03F209772716E1C500E10F6C /* Application */,
@@ -874,6 +879,7 @@
 				0382E29F2717647500EB570E /* AuthenticationScenario.swift in Sources */,
 				8705B9AB27208249004132CF /* KeychainSwift+Extensions.swift in Sources */,
 				8798D14E2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift in Sources */,
+				03004DBE273DB9E800188983 /* SceneDelegate.swift in Sources */,
 				87DC1D0E271FDF8D002DC193 /* APIResponse.swift in Sources */,
 				9B5C547D27387E59005CFD24 /* Vehicle.swift in Sources */,
 				87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */,
@@ -1103,6 +1109,7 @@
 				DEVELOPMENT_TEAM = 94FLWD5X32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = easyselling/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1128,13 +1135,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = easyselling/Application/easyselling.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"easyselling/Application/Supporting Files/Preview Content\"";
 				DEVELOPMENT_TEAM = 94FLWD5X32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = easyselling/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1147,7 +1155,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ydays.easyselling;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.ydays.easyselling";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.ydays.easyselling";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

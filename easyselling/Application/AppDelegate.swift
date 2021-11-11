@@ -5,31 +5,19 @@
 //  Created by Nicolas Barbosa on 14/10/2021.
 //
 
-import Foundation
 import UIKit
-import NetFox
-import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    var window: UIWindow?
-    
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
-        #if DEBUG
-            NFX.sharedInstance().start()
-        #endif
-        
-        let navigationController = UINavigationController()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
-        
-        let navigator = DefaultOnBoardingNavigator(navigationController: navigationController, window: window)
-        let scenario = OnBoardingScenario(navigator: navigator)
-        scenario.begin()
         
         return true
     }
 }
+
+func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        // Called when a new scene session is being created.
+        // Use this method to select a configuration to create the new scene with.
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
