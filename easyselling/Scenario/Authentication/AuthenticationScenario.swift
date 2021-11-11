@@ -17,11 +17,15 @@ class AuthenticationScenario {
     }
     
     func begin() {
-        navigator.begin(onVehicleCreationOpen: { self.navigatesToAccountCreation() })
+        navigator.begin(onAccountCreation: { self.navigatesToAccountCreation() }, onUserLogged: { self.navigatesToVehicles() })
     }
     
     func navigatesToAccountCreation() {
         navigator.navigatesToAccountCreation(onFinish: { self.goingBackToHomeView() })
+    }
+    
+    func navigatesToVehicles() {
+        navigator.navigatesToVehicles()
     }
     
     private func goingBackToHomeView() {
@@ -30,9 +34,10 @@ class AuthenticationScenario {
 }
 
 protocol AuthenticationNavigator {
-    func begin(onVehicleCreationOpen: @escaping Action)
+    func begin(onAccountCreation: @escaping Action, onUserLogged: @escaping Action)
     func navigatesToAccountCreation(onFinish: @escaping Action)
     func goingBackToHomeView()
+    func navigatesToVehicles()
 }
 
 class DefaultAuthenticationNavigator: AuthenticationNavigator {
@@ -44,10 +49,10 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
     private var window: UIWindow?
     private var navigationController = UINavigationController()
     
-    func begin(onVehicleCreationOpen: @escaping Action) {
+    func begin(onAccountCreation: @escaping Action, onUserLogged: @escaping Action) {
         window?.rootViewController = navigationController
         
-        let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: { onVehicleCreationOpen() })
+        let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: onAccountCreation, onUserLogged: onUserLogged)
         let userAuthenticationView = UserAuthenticationView(viewModel: viewModel)
         navigationController.pushViewController(UIHostingController(rootView: userAuthenticationView), animated: true)
     }
@@ -60,5 +65,11 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
     
     func goingBackToHomeView() {
         navigationController.dismiss(animated: true)
+    }
+    
+    func navigatesToVehicles() {
+        let vehicleNavigator = DefaultVehicleNavigator(navigationController: navigationController)
+        let vehicleScenario = VehicleScenario(navigator: vehicleNavigator)
+        vehicleScenario.begin()
     }
 }

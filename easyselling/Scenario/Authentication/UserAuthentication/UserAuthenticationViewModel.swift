@@ -12,6 +12,7 @@ final class UserAuthenticationViewModel: ObservableObject {
     private let userAuthenticator: UserAuthenticatior
     
     let navigateToAccountCreation: Action
+    private let onUserLogged: Action
 
     @Published var email: String = ""
     @Published var password: String = ""
@@ -23,10 +24,14 @@ final class UserAuthenticationViewModel: ObservableObject {
         }
     }
     
-    init(navigateToAccountCreation: @escaping Action, userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(), tokenManager: TokenManager = DefaultTokenManager.shared) {
+    init(userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(),
+         tokenManager: TokenManager = DefaultTokenManager.shared,
+         navigateToAccountCreation: @escaping Action,
+         onUserLogged: @escaping Action) {
         self.userAuthenticator = userAuthenticator
         self.tokenManager = tokenManager
         self.navigateToAccountCreation = navigateToAccountCreation
+        self.onUserLogged = onUserLogged
     }
     
     func verifyInformations() throws {
@@ -40,6 +45,7 @@ final class UserAuthenticationViewModel: ObservableObject {
             let token = try await userAuthenticator.login(mail: email, password: password)
             tokenManager.accessToken = token.accessToken
             tokenManager.refreshToken = token.refreshToken
+            self.onUserLogged()
         } catch(let error) {
             if let error = error as? ViewModelError {
                 self.error = error
