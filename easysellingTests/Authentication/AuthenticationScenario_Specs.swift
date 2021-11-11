@@ -32,6 +32,13 @@ class AuthenticationScenario_Specs: XCTestCase {
         thenHistory(is: [.login, .accountCreation, .login])
     }
     
+    func test_Finishes_Scenario_when_user_is_logged() {
+        givenScenario()
+        whenBeginning()
+        navigator.onUserLogged?()
+        XCTAssertTrue(navigator.scenarioIsFinished)
+    }
+    
     private func givenScenario() {
         navigator = SpyAuthenticationNavigator()
         scenario = AuthenticationScenario(navigator: navigator)
@@ -57,8 +64,11 @@ class AuthenticationScenario_Specs: XCTestCase {
 class SpyAuthenticationNavigator: AuthenticationNavigator {
     private(set) var history: [History] = []
     private(set) var onFinish: Action?
+    private(set) var onUserLogged: Action?
+    private(set) var scenarioIsFinished: Bool = false
     
-    func begin(onVehicleCreationOpen: @escaping Action) {
+    func begin(onAccountCreation: @escaping Action, onUserLogged: @escaping Action) {
+        self.onUserLogged = onUserLogged
         history.append(.login)
     }
 
@@ -69,6 +79,10 @@ class SpyAuthenticationNavigator: AuthenticationNavigator {
 
     func goingBackToHomeView() {
         history.append(.login)
+    }
+    
+    func navigatesToVehicles() {
+        scenarioIsFinished = true
     }
     
     enum History: CustomDebugStringConvertible{

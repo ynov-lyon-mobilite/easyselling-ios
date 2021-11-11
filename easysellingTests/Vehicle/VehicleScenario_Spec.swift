@@ -10,20 +10,20 @@ import XCTest
 @testable import easyselling
 
 class VehicleScenario_Spec: XCTestCase {
-    
+
     func test_Begins_scenario() {
         givenScenario()
         whenBeginning()
         thenHistory(is: [.myVehicles])
     }
-    
+
     func test_Navigates_to_vehicle_creation() {
         givenScenario()
         whenBeginning()
         whenNavigatingToVehicleCreation()
         thenHistory(is: [.myVehicles, .vehicleCreation])
     }
-    
+
     func test_Leaves_vehicle_creation() {
         givenScenario()
         whenBeginning()
@@ -58,7 +58,7 @@ class VehicleScenario_Spec: XCTestCase {
     private var isVehicleCreationFinished: Bool!
 }
 
-class SpyVehicleCreationNavigator: VehicleCreationNavigator {
+class SpyVehicleCreationNavigator: VehicleNavigator {
     
     private(set) var history: [History] = []
     private(set) var onFinish: Action?
@@ -86,6 +86,5 @@ class SpyVehicleCreationNavigator: VehicleCreationNavigator {
             case .vehicleCreation: return "vehicle creation"
             }
         }
-
     }
 }
