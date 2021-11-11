@@ -10,11 +10,11 @@ import SwiftUI
 
 class VehicleScenario {
     
-    init(navigator: VehicleCreationNavigator) {
+    init(navigator: VehicleNavigator) {
         self.navigator = navigator
     }
     
-    private var navigator: VehicleCreationNavigator
+    private var navigator: VehicleNavigator
     
     func begin() {
         navigator.navigatesToHomeView(onVehicleCreationOpen: navigatesToVehicleCreation)
@@ -29,14 +29,14 @@ class VehicleScenario {
     }
 }
 
-protocol VehicleCreationNavigator {
+protocol VehicleNavigator {
     
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action)
     func navigatesToVehicleCreation(onFinish: @escaping Action)
     func goingBackToHomeView()
 }
 
-class DefaultVehicleCreationNavigator: VehicleCreationNavigator {
+class DefaultVehicleNavigator: VehicleNavigator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

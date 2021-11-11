@@ -52,9 +52,16 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
         XCTAssertTrue(viewIsOpen)
     }
     
+    func test_Opens_Vehicles() async {
+        givenViewModel(userAuthenticator: SucceedingUserAuthenticator())
+        await whenUserLogin(email: "user@domain.com", password: "PA55W0RD")
+        XCTAssertTrue(userIsLogged)
+    }
+    
     private func givenViewModel(userAuthenticator: UserAuthenticatior) {
-        viewModel = UserAuthenticationViewModel(navigateToAccountCreation: { self.viewIsOpen = true },
-                                                userAuthenticator: userAuthenticator, tokenManager: tokenManager)
+        viewModel = UserAuthenticationViewModel(userAuthenticator: userAuthenticator, tokenManager: tokenManager,
+                                                navigateToAccountCreation: { self.viewIsOpen = true },
+                                                onUserLogged: { self.userIsLogged = true })
     }
     
     private func whenUserLogin(email: String, password: String) async {
@@ -78,7 +85,8 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
     private var viewModel: UserAuthenticationViewModel!
     private var tokenManager = FakeTokenManager()
     private var requestResult: Token!
-    private var viewIsOpen: Bool!
+    private var viewIsOpen: Bool = false
+    private var userIsLogged: Bool = false
     
     private let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkMzEwYTUzLWZmZTYtNDY5YS05NWRmLWRlNGE4OGE1ZTU5ZiIsImlhdCI6MTYzNDY3NjQ1OSwiZXhwIjoxNjM0Njc3MzU5LCJpc3MiOiJkaXJlY3R1cyJ9.lsMJA8Dvbu3muCZ77gYPDqdIYELrWlJsPh4e0A6tJxI"
     private let refreshToken = "wcA0WsKCAIA8ywcGt8jlsWKn-1MGKyGZcembTHsWfgmoQ3aTUnsPHCU_MIveDsr5"

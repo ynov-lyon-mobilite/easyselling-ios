@@ -58,7 +58,7 @@ class VehicleScenario_Spec: XCTestCase {
     private var isVehicleCreationFinished: Bool!
 }
 
-class SpyVehicleCreationNavigator: VehicleCreationNavigator {
+class SpyVehicleCreationNavigator: VehicleNavigator {
     
     private(set) var history: [History] = []
     private(set) var onFinish: Action?
