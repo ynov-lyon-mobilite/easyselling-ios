@@ -37,7 +37,8 @@ class AuthenticationScenario_Specs: XCTestCase {
         whenBeginning()
         navigator.onUserLogged?()
         XCTAssertTrue(navigator.scenarioIsFinished)
-
+    }
+        
     func test_Navigates_to_password_reset() {
         givenScenario()
         whenBeginning()

@@ -27,6 +27,8 @@ class AuthenticationScenario {
     
     func navigatesToPasswordReset() {
         navigator.navigatesToPasswordReset()
+    }
+    
     func navigatesToVehicles() {
         navigator.navigatesToVehicles()
     }
@@ -53,10 +55,10 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
     private var window: UIWindow?
     private var navigationController = UINavigationController()
     
-    func begin(onVehicleCreationOpen: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
+    func begin(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
         window?.rootViewController = navigationController
         
-        let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: { onVehicleCreationOpen() }, navigateToPasswordReset: onPasswordReset, onUserLogged: onUserLogged)
+        let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: onAccountCreation, navigateToPasswordReset: onPasswordReset, onUserLogged: onUserLogged)
         let userAuthenticationView = UserAuthenticationView(viewModel: viewModel)
         navigationController.pushViewController(UIHostingController(rootView: userAuthenticationView), animated: true)
     }
