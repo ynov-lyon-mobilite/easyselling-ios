@@ -10,16 +10,13 @@ import UIKit
 
 class MyVehiclesViewModel: ObservableObject {
     
-    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(),
-         apiCaller: APICaller = DefaultAPICaller(),
+    init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
          isOpenningVehicleCreation: @escaping Action) {
-        self.requestGenerator = requestGenerator
-        self.apiCaller = apiCaller
+        self.vehiclesGetter = vehiclesGetter
         self.isOpenningVehicleCreation = isOpenningVehicleCreation
     }
     
-    private var requestGenerator: RequestGenerator
-    private var apiCaller: APICaller
+    private var vehiclesGetter: VehiclesGetter
     private var isOpenningVehicleCreation: Action
     @Published var isLoading: Bool = true
     @Published var vehicles: [Vehicle] = []
@@ -31,11 +28,8 @@ class MyVehiclesViewModel: ObservableObject {
     }
     
     @MainActor func getVehicles() async {
-        let request: URLRequest
-        
         do {
-            request = try requestGenerator.generateRequest(endpoint: .vehicles, method: .GET, headers: [:])
-            vehicles = try await apiCaller.call(request, decodeType: [Vehicle].self)
+            vehicles = try await vehiclesGetter.getVehicles()
         } catch (let error) {
             if let error = error as? APICallerError {
                 isError = true
