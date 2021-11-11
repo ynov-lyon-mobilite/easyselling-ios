@@ -20,7 +20,7 @@ class MyVehiclesViewModel: ObservableObject {
     private var isOpenningVehicleCreation: Action
     @Published var isLoading: Bool = true
     @Published var vehicles: [Vehicle] = []
-    @Published var alert: APICallerError?
+    @Published var error: APICallerError?
     @Published var isError: Bool = false
  
     func openVehicleCreation() {
@@ -33,9 +33,9 @@ class MyVehiclesViewModel: ObservableObject {
         } catch (let error) {
             if let error = error as? APICallerError {
                 isError = true
-                self.alert = error
+                self.error = error
             } else {
-                self.alert = nil
+                self.error = nil
             }
         }
         
