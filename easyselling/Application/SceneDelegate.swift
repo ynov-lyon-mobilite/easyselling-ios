@@ -45,6 +45,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let token = tokenQueryItem?.value else { return }
             
             let navigator = DefaultAuthenticationNavigator(window: window)
+            window?.makeKeyAndVisible()
+            window?.rootViewController = navigator.navigationController
             let scenario = AuthenticationScenario(navigator: navigator)
             scenario.navigatesToPasswordReset(withToken: token)
         }
