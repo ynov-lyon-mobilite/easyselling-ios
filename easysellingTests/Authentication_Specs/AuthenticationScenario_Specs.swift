@@ -23,6 +23,13 @@ class AuthenticationScenario_Specs: XCTestCase {
         thenHistory(is: [.passwordReset])
     }
     
+    func test_Navigates_back_to_login_page_when_password_is_reset() {
+        givenScenario()
+        whenBeginning(from: .resetPassword(token: ""))
+        navigator.onPasswordReset?()
+        thenHistory(is: [.passwordReset, .login])
+    }
+    
     func test_Navigates_to_account_creation() {
         givenScenario()
         whenBeginning()
@@ -83,6 +90,7 @@ class SpyAuthenticationNavigator: AuthenticationNavigator {
     private(set) var history: [History] = []
     private(set) var onFinish: Action?
     private(set) var onUserLogged: Action?
+    private(set) var onPasswordReset: Action?
     private(set) var scenarioIsFinished: Bool = false
     
     func begin(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
@@ -99,7 +107,8 @@ class SpyAuthenticationNavigator: AuthenticationNavigator {
         history.append(.passwordResetRequest)
     }
     
-    func navigatesToPasswordReset() {
+    func navigatesToPasswordReset(withToken token: String, onPasswordReset: @escaping Action) {
+        self.onPasswordReset = onPasswordReset
         history.append(.passwordReset)
     }
 

@@ -26,7 +26,7 @@ class AuthenticationScenario {
         switch beginType {
         case .`default`: navigator.begin(onAccountCreation: self.navigatesToAccountCreation,
                                     onPasswordReset: self.navigatesToPasswordResetRequest, onUserLogged: { self.navigatesToVehicles() })
-        case let .resetPassword(token): navigator.navigatesToPasswordReset()
+        case let .resetPassword(token): navigator.navigatesToPasswordReset(withToken: token, onPasswordReset: goingBackToHomeView)
         }
         
     }
@@ -52,7 +52,7 @@ protocol AuthenticationNavigator {
     func begin(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action)
     func navigatesToAccountCreation(onFinish: @escaping Action)
     func navigatesToPasswordResetRequest()
-    func navigatesToPasswordReset()
+    func navigatesToPasswordReset(withToken token: String, onPasswordReset: @escaping Action)
     func goingBackToHomeView()
     func navigatesToVehicles()
 }
@@ -87,8 +87,8 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
         navigationController.pushViewController(UIHostingController(rootView: passwordResetRequestView), animated: true)
     }
     
-    func navigatesToPasswordReset() {
-        let passwordResetViewModel = PasswordResetViewModel()
+    func navigatesToPasswordReset(withToken token: String, onPasswordReset: @escaping Action) {
+        let passwordResetViewModel = PasswordResetViewModel(token: token, onPasswordReset: onPasswordReset)
         let passwordResetView = PasswordResetView(viewModel: passwordResetViewModel)
         
         navigationController.pushViewController(UIHostingController(rootView: passwordResetView), animated: true)

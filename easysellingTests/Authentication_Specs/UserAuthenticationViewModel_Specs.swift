@@ -72,7 +72,7 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
         viewModel = UserAuthenticationViewModel(userAuthenticator: userAuthenticator,
                                                 tokenManager: tokenManager,
                                                 navigateToAccountCreation: { self.isOpeningAccountCreation = true },
-                                                navigateToPasswordReset: { self.isOpeningPasswordReset = true },
+                                                navigateToPasswordReset: { self.isOpeningPasswordReset = true },
                                                 onUserLogged: { self.userIsLogged = true })
     }
     

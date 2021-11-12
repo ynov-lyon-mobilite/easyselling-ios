@@ -8,5 +8,6 @@
 import Foundation
 
 struct PasswordResetDTO: Encodable {
-    
+    var password: String
+    var token: String
 }

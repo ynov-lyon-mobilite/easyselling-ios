@@ -18,6 +18,6 @@ struct PasswordResetView: View {
 
 struct PasswordResetView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordResetView(viewModel: PasswordResetViewModel())
+        PasswordResetView(viewModel: PasswordResetViewModel(token: "", onPasswordReset: {}))
     }
 }

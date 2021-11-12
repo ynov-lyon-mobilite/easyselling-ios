@@ -14,6 +14,8 @@
 		03004DCB273E739300188983 /* DefaultPasswordReseter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03004DCA273E739300188983 /* DefaultPasswordReseter.swift */; };
 		03004DCE273E73FB00188983 /* DefaultPasswordReseter_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03004DCD273E73FB00188983 /* DefaultPasswordReseter_Specs.swift */; };
 		03004DD0273E79D700188983 /* PasswordResetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03004DCF273E79D700188983 /* PasswordResetDTO.swift */; };
+		03004DD2273EA62500188983 /* DefaultPasswordVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03004DD1273EA62500188983 /* DefaultPasswordVerificator.swift */; };
+		03004DD5273EA69800188983 /* DefaultPasswordVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03004DD4273EA69800188983 /* DefaultPasswordVerificator_Specs.swift */; };
 		033F4AF32718C8A800B79149 /* NetFox in Frameworks */ = {isa = PBXBuildFile; productRef = 033F4AF22718C8A800B79149 /* NetFox */; };
 		034D04E32732976E00576D64 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 034D04E22732976E00576D64 /* GoogleService-Info.plist */; };
 		034D04E62732984400576D64 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 034D04E52732984400576D64 /* FirebaseAnalytics */; };
@@ -140,6 +142,8 @@
 		03004DCA273E739300188983 /* DefaultPasswordReseter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPasswordReseter.swift; sourceTree = "<group>"; };
 		03004DCD273E73FB00188983 /* DefaultPasswordReseter_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPasswordReseter_Specs.swift; sourceTree = "<group>"; };
 		03004DCF273E79D700188983 /* PasswordResetDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetDTO.swift; sourceTree = "<group>"; };
+		03004DD1273EA62500188983 /* DefaultPasswordVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPasswordVerificator.swift; sourceTree = "<group>"; };
+		03004DD4273EA69800188983 /* DefaultPasswordVerificator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPasswordVerificator_Specs.swift; sourceTree = "<group>"; };
 		034D04E22732976E00576D64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		034D04EA2733FE0800576D64 /* PasswordResetRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestViewModel.swift; sourceTree = "<group>"; };
 		034D04EC2733FE1A00576D64 /* PasswordResetRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestView.swift; sourceTree = "<group>"; };
@@ -304,12 +308,21 @@
 			path = DefaultPasswordReseter_Specs;
 			sourceTree = "<group>";
 		};
+		03004DD3273EA67D00188983 /* DefaultPasswordVerificator_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				03004DD4273EA69800188983 /* DefaultPasswordVerificator_Specs.swift */,
+			);
+			path = DefaultPasswordVerificator_Specs;
+			sourceTree = "<group>";
+		};
 		034D04E92733FDEF00576D64 /* PasswordReset */ = {
 			isa = PBXGroup;
 			children = (
 				03004DC2273E709200188983 /* Reset */,
 				03004DC1273E708600188983 /* Request */,
 				03C18F0727341AAA00C754E8 /* DefaultEmailVerificator.swift */,
+				03004DD1273EA62500188983 /* DefaultPasswordVerificator.swift */,
 			);
 			path = PasswordReset;
 			sourceTree = "<group>";
@@ -386,6 +399,8 @@
 		03F0542F271B38EB00434706 /* DefaultCredentialsVerificator_Specs */ = {
 			isa = PBXGroup;
 			children = (
+				03004DD3273EA67D00188983 /* DefaultPasswordVerificator_Specs */,
+				03C18F0927341AD900C754E8 /* DefaultEmailVerificator_Specs */,
 				0382E2A92718186100EB570E /* DefaultCredentialsVerificator_Specs.swift */,
 				03F05430271B392300434706 /* SucceedingInformationsVerificator.swift */,
 				03F05432271B393100434706 /* FailingInformationsVerificator.swift */,
@@ -926,6 +941,7 @@
 				03004DD0273E79D700188983 /* PasswordResetDTO.swift in Sources */,
 				0382E2AC2718190B00EB570E /* DefaultCredentialsVerificator.swift in Sources */,
 				87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */,
+				03004DD2273EA62500188983 /* DefaultPasswordVerificator.swift in Sources */,
 				03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */,
 				03DAF9A2272730D500FFED55 /* MyVehiclesView.swift in Sources */,
 				8705B9A8272081E3004132CF /* DefaultTokenManager.swift in Sources */,
@@ -979,6 +995,7 @@
 				2CD8639D2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift in Sources */,
 				03004DCE273E73FB00188983 /* DefaultPasswordReseter_Specs.swift in Sources */,
 				03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */,
+				03004DD5273EA69800188983 /* DefaultPasswordVerificator_Specs.swift in Sources */,
 				0382E29A27175FB700EB570E /* AuthenticationScenario_Specs.swift in Sources */,
 				87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */,
 				8798D150273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift in Sources */,
