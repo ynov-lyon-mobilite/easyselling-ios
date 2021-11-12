@@ -9,7 +9,10 @@ import Foundation
 
 class PasswordResetViewModel: ObservableObject {
     
-    init(token: String, passwordVerificator: PasswordVerificator = DefaultPasswordVerificator(), passwordReseter: PasswordReseter = DefaultPasswordReseter(), onPasswordReset: @escaping Action) {
+    init(token: String,
+         passwordVerificator: PasswordVerificator = DefaultPasswordVerificator(),
+         passwordReseter: PasswordReseter = DefaultPasswordReseter(),
+         onPasswordReset: @escaping Action) {
         self.token = token
         self.passwordVerificator = passwordVerificator
         self.passwordReseter = passwordReseter

@@ -18,7 +18,8 @@
 "userAuthentication.button.register" = "Vous n'avez pas encore de compte ?\nCliquez ici pour vous inscrire";
 
 "passwordReset.mailSentSuccessfully" = "Un mail vous à été envoyé pour réinitialiser votre mot de passe";
-"passwordReset.sendMailButton" = "Envoyer un mail de réinitialisation.";
+"passwordReset.sendMailButton" = "Envoyer un mail de réinitialisation";
+"passwordReset.resetPasswordButton" = "Réinitialiser le mot de passe";
 "vehicles.car" = "Voiture";
 "vehicles.moto" = "Moto";
 
