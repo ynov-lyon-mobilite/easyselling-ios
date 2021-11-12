@@ -22,17 +22,18 @@ final class UserAuthenticationViewModel: ObservableObject {
     @Published var error: CredentialsError?
     @Published var alert: APICallerError?
     
-    init(userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(),
-         tokenManager: TokenManager = DefaultTokenManager.shared,
-         navigateToAccountCreation: @escaping Action,
-         navigateToPasswordReset: @escaping Action,
-		 onUserLogged: @escaping Action) {
-        self.userAuthenticator = userAuthenticator
-        self.tokenManager = tokenManager
-        self.navigateToAccountCreation = navigateToAccountCreation
-        self.navigateToPasswordReset = navigateToPasswordReset
- 		self.onUserLogged = onUserLogged
-    }
+    init(
+        userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(),
+        tokenManager: TokenManager = DefaultTokenManager.shared,
+        navigateToAccountCreation: @escaping Action,
+        navigateToPasswordReset: @escaping Action,
+        onUserLogged: @escaping Action) {
+            self.userAuthenticator = userAuthenticator
+            self.tokenManager = tokenManager
+            self.navigateToAccountCreation = navigateToAccountCreation
+            self.navigateToPasswordReset = navigateToPasswordReset
+            self.onUserLogged = onUserLogged
+        }
     
     @MainActor func login() async {
         do {

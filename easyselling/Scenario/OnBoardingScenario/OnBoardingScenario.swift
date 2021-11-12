@@ -66,6 +66,6 @@ class DefaultOnBoardingNavigator: OnBoardingNavigator {
     func navigateToAuthenticationScenario() {
         let navigator = DefaultAuthenticationNavigator(window: window)
         let scenario = AuthenticationScenario(navigator: navigator)
-        scenario.begin()
+        scenario.begin(from: .default)
     }
 }

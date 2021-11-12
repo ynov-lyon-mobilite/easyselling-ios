@@ -40,8 +40,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        guard let url = userActivity.webpageURL else { return }
-
+        guard let universalLinkUrl = userActivity.webpageURL else { return }
+        if universalLinkUrl.path == "/admin/reset-password" {
+            
+            guard let url = URLComponents(string: universalLinkUrl.absoluteString) else { return }
+              url.queryItems?.first(where: { $0.name == "token" })
+                    
+            let navigator = DefaultAuthenticationNavigator(window: window)
+            let scenario = AuthenticationScenario(navigator: navigator)
+            scenario.navigatesToPasswordResetRequest()
+//                    let activationVC = UserActivationViewController(viewModel: UserActivationViewModel(
+//                        key: key,
+//                        userId: userId)
+//                    )
+//
+//                    window?.rootViewController = TabBarService.shared.tabBarController
+//                    window?.rootViewController?.present(activationVC, animated: true)
+//                    window?.makeKeyAndVisible()
+                }
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -71,6 +87,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }

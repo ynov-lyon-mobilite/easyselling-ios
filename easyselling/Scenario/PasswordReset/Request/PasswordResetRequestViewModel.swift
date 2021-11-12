@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PasswordResetViewModel: ObservableObject {
+class PasswordResetRequestViewModel: ObservableObject {
     
     init(verificator: EmailVerificator = DefaultEmailVerificator(), passwordRequester: PasswordResetRequester = DefaultPasswordResetRequester()) {
         self.verificator = verificator

@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct PasswordResetView: View {
+struct PasswordResetRequestView: View {
     
-    @ObservedObject private var viewModel: PasswordResetViewModel
+    @ObservedObject private var viewModel: PasswordResetRequestViewModel
     
-    init(viewModel: PasswordResetViewModel) {
+    init(viewModel: PasswordResetRequestViewModel) {
         self.viewModel = viewModel
     }
     
@@ -48,8 +48,8 @@ struct PasswordResetView: View {
     }
 }
 
-struct PasswordResetView_Previews: PreviewProvider {
+struct PasswordResetRequestView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordResetView(viewModel: PasswordResetViewModel())
+        PasswordResetRequestView(viewModel: PasswordResetRequestViewModel())
     }
 }

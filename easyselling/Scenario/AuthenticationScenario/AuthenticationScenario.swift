@@ -10,23 +10,33 @@ import UIKit
 import SwiftUI
 
 class AuthenticationScenario {
+    
+    enum BeginType {
+        case `default`
+        case resetPassword(token: String)
+    }
+    
     private var navigator: AuthenticationNavigator
     
     init(navigator: AuthenticationNavigator) {
         self.navigator = navigator
     }
     
-    func begin() {
-        navigator.begin(onAccountCreation: self.navigatesToAccountCreation,
-                        onPasswordReset: self.navigatesToPasswordReset, onUserLogged: { self.navigatesToVehicles() })
+    func begin(from beginType: BeginType) {
+        switch beginType {
+        case .`default`: navigator.begin(onAccountCreation: self.navigatesToAccountCreation,
+                                    onPasswordReset: self.navigatesToPasswordResetRequest, onUserLogged: { self.navigatesToVehicles() })
+        case let .resetPassword(token): navigator.navigatesToPasswordReset()
+        }
+        
     }
     
     func navigatesToAccountCreation() {
         navigator.navigatesToAccountCreation(onFinish: self.goingBackToHomeView)
     }
     
-    func navigatesToPasswordReset() {
-        navigator.navigatesToPasswordReset()
+    func navigatesToPasswordResetRequest() {
+        navigator.navigatesToPasswordResetRequest()
     }
     
     func navigatesToVehicles() {
@@ -41,13 +51,14 @@ class AuthenticationScenario {
 protocol AuthenticationNavigator {
     func begin(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action)
     func navigatesToAccountCreation(onFinish: @escaping Action)
+    func navigatesToPasswordResetRequest()
     func navigatesToPasswordReset()
     func goingBackToHomeView()
     func navigatesToVehicles()
 }
 
 class DefaultAuthenticationNavigator: AuthenticationNavigator {
-    
+
     init(window: UIWindow?) {
         self.window = window
     }
@@ -67,6 +78,13 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
         let accountCreationViewModel = AccountCreationViewModel(verificator: DefaultCredentialsVerificator(), onAccountCreated: onFinish)
         let accountCreationView = AccountCreationView(viewModel: accountCreationViewModel)
         navigationController.pushViewController(UIHostingController(rootView: accountCreationView), animated: true)
+    }
+    
+    func navigatesToPasswordResetRequest() {
+        let passwordResetRequestViewModel = PasswordResetRequestViewModel()
+        let passwordResetRequestView = PasswordResetRequestView(viewModel: passwordResetRequestViewModel)
+        
+        navigationController.pushViewController(UIHostingController(rootView: passwordResetRequestView), animated: true)
     }
     
     func navigatesToPasswordReset() {

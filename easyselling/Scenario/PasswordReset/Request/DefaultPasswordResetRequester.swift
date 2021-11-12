@@ -23,7 +23,7 @@ class DefaultPasswordResetRequester: PasswordResetRequester {
     
     func askForPasswordReset(of email: String) async throws {
         let urlRequest = try requestGenerator
-            .generateRequest(endpoint: .passwordRequest, method: .POST, body: EmailDTO(email: email), headers: [:])
+            .generateRequest(endpoint: .passwordResetRequest, method: .POST, body: EmailDTO(email: email), headers: [:])
         try await apiCaller.call(urlRequest)
     }
 }
