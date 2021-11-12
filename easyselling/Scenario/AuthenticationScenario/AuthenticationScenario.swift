@@ -92,6 +92,8 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
     }
     
     func navigatesToPasswordReset(withToken token: String, onPasswordReset: @escaping Action) {
+        window?.rootViewController = navigationController
+
         let passwordResetViewModel = PasswordResetViewModel(token: token, onPasswordReset: onPasswordReset)
         let passwordResetView = PasswordResetView(viewModel: passwordResetViewModel)
         
