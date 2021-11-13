@@ -12,7 +12,7 @@ class VehicleCreationViewModel: ObservableObject {
     
     private var vehicleCreator: VehicleCreator
     private var vehicleInformationsVerificator: VehicleInformationsProtocol
-    private var onFinish: Action
+    private var onFinish: () async -> Void
 
     @Published var alert: String = ""
     @Published var showAlert = false
@@ -24,7 +24,7 @@ class VehicleCreationViewModel: ObservableObject {
     @Published var type: VehicleInformations.Category = .car
 
     init(vehicleCreator: VehicleCreator, vehicleVerificator: VehicleInformationsProtocol,
-         onFinish: @escaping Action) {
+         onFinish: @escaping () async -> Void) {
         self.vehicleCreator = vehicleCreator
         self.vehicleInformationsVerificator = vehicleVerificator
         self.onFinish = onFinish
@@ -36,14 +36,14 @@ class VehicleCreationViewModel: ObservableObject {
         do {
             let informationsVerified = try vehicleInformationsVerificator.verifyInformations(vehicle: informations)
             try await vehicleCreator.createVehicle(informations: informationsVerified)
-            dismissModal()
+            await dismissModal()
         } catch (let error) {
             self.alert = (error as? VehicleCreationError)?.description ?? (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
             self.showAlert = true
         }
     }
     
-    func dismissModal() {
-        self.onFinish()
+    func dismissModal() async {
+        await self.onFinish()
     }
 }

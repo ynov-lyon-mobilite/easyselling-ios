@@ -7,9 +7,14 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
-class MyVehiclesViewModel: ObservableObject {
-    
+protocol MyVehiclesDelegate: AnyObject {
+    func updateVehiclesList() async
+}
+
+class MyVehiclesViewModel: ObservableObject, MyVehiclesDelegate {
+   
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
          isOpenningVehicleCreation: @escaping Action) {
         self.vehiclesGetter = vehiclesGetter
@@ -40,5 +45,9 @@ class MyVehiclesViewModel: ObservableObject {
         }
         
         isLoading = false
+    }
+    
+    func updateVehiclesList() async {
+       await getVehicles()
     }
 }

@@ -13,11 +13,10 @@ struct VehicleCreationView: View {
 
     var body: some View {
         VStack {
-            VStack {
-                Text(L10n.CreateVehicle.title)
-                    .font(.title)
-                    .fontWeight(.bold)
-            }
+
+            Text(L10n.CreateVehicle.title)
+                .font(.title)
+                .fontWeight(.bold)
 
             Divider()
 
@@ -41,11 +40,9 @@ struct VehicleCreationView: View {
                     .keyboardType(.numberPad)
             }
 
-            VStack {
-                Button(L10n.CreateVehicle.submit) {
-                    Task {
-                        await viewModel.createVehicle()
-                    }
+            Button(L10n.CreateVehicle.submit) {
+                Task {
+                    await viewModel.createVehicle()
                 }
             }
             .padding(.top)

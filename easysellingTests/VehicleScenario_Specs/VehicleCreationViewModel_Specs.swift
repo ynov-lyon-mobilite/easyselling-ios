@@ -40,9 +40,9 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         thenAlertIsShowing()
     }
     
-    func test_Dismisses_modal_when_the_creation_have_successful() {
+    func test_Dismisses_modal_when_the_creation_have_successful() async {
         givenViewModel()
-        whenCreationSuccessful()
+        await whenCreationSuccessful()
         thenModalIsDismissed()
     }
 
@@ -56,8 +56,8 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         await viewModel.createVehicle()
     }
     
-    private func whenCreationSuccessful() {
-        viewModel.dismissModal()
+    private func whenCreationSuccessful() async {
+        await viewModel.dismissModal()
     }
 
     private func thenAlertIsShowing() {
