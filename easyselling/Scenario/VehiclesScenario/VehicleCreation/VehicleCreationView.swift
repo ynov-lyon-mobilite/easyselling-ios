@@ -55,16 +55,13 @@ struct VehicleCreationView: View {
 
         .alert(isPresented: $viewModel.showAlert, content: {
             Alert(
-                title: Text(viewModel.alert),
-                dismissButton: Alert.Button.default(Text("Ok")) {
-                    viewModel.dismissModal()
-                })
-        })
+                title: Text(viewModel.alert)
+        )})
     }
 }
 
 struct VehicleCreationView_Previews: PreviewProvider {
     static var previews: some View {
-        VehicleCreationView(viewModel: VehicleCreationViewModel(vehicleCreator: VehicleCreator(), vehicleVerificator: VehicleInformationsVerificator(), onFinish: {}))
+        VehicleCreationView(viewModel: VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: VehicleInformationsVerificator(), onFinish: {}))
     }
 }

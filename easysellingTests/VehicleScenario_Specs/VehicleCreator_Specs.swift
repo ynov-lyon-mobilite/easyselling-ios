@@ -43,7 +43,7 @@ class VehicleCreator_Specs: XCTestCase {
     }
     
     private func givenVehicleCreator(requestGenerator: RequestGenerator, apiCaller: APICaller) {
-        vehicleCreator = VehicleCreator(requestGenerator: requestGenerator, apiCaller: apiCaller)
+        vehicleCreator = DefaultVehicleCreator(requestGenerator: requestGenerator, apiCaller: apiCaller)
         vehicle = VehicleInformations(license: "123456789", brand: "Audi", type: "car", year: "2005", model: "A1")
     }
     

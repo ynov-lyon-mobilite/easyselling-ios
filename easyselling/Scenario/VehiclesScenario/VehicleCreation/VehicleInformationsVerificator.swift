@@ -8,18 +8,18 @@
 import Foundation
 
 protocol VehicleInformationsProtocol {
-    func verifyInformations(vehicle: VehicleInformations) -> VehicleCreationStatus
+    func verifyInformations(vehicle: VehicleInformations) throws -> VehicleInformations
 }
 
 class VehicleInformationsVerificator: VehicleInformationsProtocol {
-    func verifyInformations(vehicle: VehicleInformations) -> VehicleCreationStatus {
+    func verifyInformations(vehicle: VehicleInformations) throws -> VehicleInformations {
         switch true {
             case vehicle.license.isEmpty
                 || vehicle.brand.isEmpty
-                || vehicle.model.isEmpty: return .emptyField
-            case vehicle.license.count != 9: return .incorrectLicense
-            case vehicle.year.count != 4: return .incorrectYear
-            default: return .success
+                || vehicle.model.isEmpty: throw VehicleCreationError.emptyField
+            case vehicle.license.count != 9: throw VehicleCreationError.incorrectLicense
+            case vehicle.year.count != 4: throw VehicleCreationError.incorrectYear
+            default: return vehicle
         }
     }
 }
@@ -37,18 +37,16 @@ enum VehicleType: String, Encodable {
     case motoType = "moto"
 }
 
-enum VehicleCreationStatus: Equatable {
+enum VehicleCreationError: Equatable, LocalizedError {
     case emptyField
     case incorrectYear
     case incorrectLicense
-    case success
 
     var description: String {
         switch self {
             case .emptyField: return L10n.CreateVehicle.Error.emptyField
             case .incorrectYear: return L10n.CreateVehicle.Error.incorrectYear
             case .incorrectLicense: return L10n.CreateVehicle.Error.incorrectLicense
-            case .success: return L10n.CreateVehicle.creationSuccessful
         }
     }
 }

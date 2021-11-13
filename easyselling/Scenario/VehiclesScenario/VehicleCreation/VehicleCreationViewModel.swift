@@ -10,7 +10,7 @@ import Combine
 
 class VehicleCreationViewModel: ObservableObject {
     
-    private var vehicleCreator: VehicleCreatorProtocol
+    private var vehicleCreator: VehicleCreator
     private var vehicleInformationsVerificator: VehicleInformationsProtocol
     private var onFinish: Action
 
@@ -23,7 +23,7 @@ class VehicleCreationViewModel: ObservableObject {
     @Published var year: String = ""
     @Published var type: VehicleType = .carType
 
-    init(vehicleCreator: VehicleCreatorProtocol, vehicleVerificator: VehicleInformationsProtocol,
+    init(vehicleCreator: VehicleCreator, vehicleVerificator: VehicleInformationsProtocol,
          onFinish: @escaping Action) {
         self.vehicleCreator = vehicleCreator
         self.vehicleInformationsVerificator = vehicleVerificator
@@ -32,20 +32,13 @@ class VehicleCreationViewModel: ObservableObject {
 
     @MainActor func createVehicle() async {
         let informations = VehicleInformations(license: license, brand: brand, type: type.rawValue, year: year, model: model)
-        let status = vehicleInformationsVerificator.verifyInformations(vehicle: informations)
         
-        if status != .success {
-            self.alert = status.description
-            self.showAlert = true
-            return
-        }
-
         do {
-            try await vehicleCreator.createVehicle(informations: informations)
-            self.alert = status.description
-            self.showAlert = true
-        } catch(let error) {
-            self.alert = (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
+            let informationsVerified = try vehicleInformationsVerificator.verifyInformations(vehicle: informations)
+            try await vehicleCreator.createVehicle(informations: informationsVerified)
+            dismissModal()
+        } catch (let error) {
+            self.alert = (error as? VehicleCreationError)?.description ?? (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
             self.showAlert = true
         }
     }

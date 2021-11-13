@@ -8,11 +8,11 @@
 import Foundation
 import Combine
 
-protocol VehicleCreatorProtocol {
+protocol VehicleCreator {
     func createVehicle(informations: VehicleInformations) async throws
 }
 
-class VehicleCreator: VehicleCreatorProtocol {
+class DefaultVehicleCreator: VehicleCreator {
     private var requestGenerator: RequestGenerator
     private var apiCaller: APICaller
     
