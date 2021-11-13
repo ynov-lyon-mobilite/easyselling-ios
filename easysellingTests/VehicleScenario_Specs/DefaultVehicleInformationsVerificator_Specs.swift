@@ -51,7 +51,7 @@ class VehicleInformationsVerificator_Specs: XCTestCase {
     }
     
     private func givenVerificator() {
-        verificator = VehicleInformationsVerificator()
+        verificator = DefaultVehicleInformationsVerificator()
     }
     
     private func whenChecking(vehicle: VehicleInformations) {

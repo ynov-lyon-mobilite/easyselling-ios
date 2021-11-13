@@ -11,7 +11,7 @@ import Combine
 class VehicleCreationViewModel: ObservableObject {
     
     private var vehicleCreator: VehicleCreator
-    private var vehicleInformationsVerificator: VehicleInformationsProtocol
+    private var vehicleInformationsVerificator: VehicleInformationsVerificator
     private var onFinish: () async -> Void
 
     @Published var alert: String = ""
@@ -23,7 +23,7 @@ class VehicleCreationViewModel: ObservableObject {
     @Published var year: String = ""
     @Published var type: VehicleInformations.Category = .car
 
-    init(vehicleCreator: VehicleCreator, vehicleVerificator: VehicleInformationsProtocol,
+    init(vehicleCreator: VehicleCreator, vehicleVerificator: VehicleInformationsVerificator,
          onFinish: @escaping () async -> Void) {
         self.vehicleCreator = vehicleCreator
         self.vehicleInformationsVerificator = vehicleVerificator

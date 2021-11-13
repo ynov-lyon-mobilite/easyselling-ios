@@ -59,6 +59,6 @@ struct VehicleCreationView: View {
 
 struct VehicleCreationView_Previews: PreviewProvider {
     static var previews: some View {
-        VehicleCreationView(viewModel: VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: VehicleInformationsVerificator(), onFinish: {}))
+        VehicleCreationView(viewModel: VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: DefaultVehicleInformationsVerificator(), onFinish: {}))
     }
 }

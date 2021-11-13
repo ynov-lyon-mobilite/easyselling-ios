@@ -42,15 +42,15 @@
 		03F2098B27170F2E00E10F6C /* OnBoardingScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F2098A27170F2E00E10F6C /* OnBoardingScenario.swift */; };
 		03F2098D271711CE00E10F6C /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F2098C271711CE00E10F6C /* OnBoardingView.swift */; };
 		2C4486B4271DF7E10021122F /* VehicleScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4486B3271DF7E10021122F /* VehicleScenario.swift */; };
-		2C6D0F2B2732D9B600A86349 /* VehicleCreator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D0F2A2732D9B500A86349 /* VehicleCreator_Specs.swift */; };
+		2C6D0F2B2732D9B600A86349 /* DefaultVehicleCreator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D0F2A2732D9B500A86349 /* DefaultVehicleCreator_Specs.swift */; };
 		2C863378273FB4040049C186 /* DefaultVehiclesGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C863377273FB4040049C186 /* DefaultVehiclesGetter.swift */; };
 		2C86337C273FB7B10049C186 /* succeededVehicles.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C86337B273FB7B10049C186 /* succeededVehicles.json */; };
 		2C86337D273FBA630049C186 /* succeededVehicles.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C86337B273FB7B10049C186 /* succeededVehicles.json */; };
 		2CAE03CD271709A1008D7A68 /* DefaultVehicleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE03CC271709A1008D7A68 /* DefaultVehicleCreator.swift */; };
 		2CAE03D82717118D008D7A68 /* VehicleCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */; };
-		2CD4B8C0271C625C002598A4 /* VehicleInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8BF271C625C002598A4 /* VehicleInformationsVerificator.swift */; };
+		2CD4B8C0271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */; };
 		2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */; };
-		2CD8639D2737F65C00C18EC5 /* VehicleInformationsVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8639C2737F65C00C18EC5 /* VehicleInformationsVerificator_Specs.swift */; };
+		2CD8639D2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8639C2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift */; };
 		8705B9A027207838004132CF /* UserAuthenticationViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */; };
 		8705B9A227207A39004132CF /* SucceedingUserAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */; };
 		8705B9A427207A8D004132CF /* UserAuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A327207A8D004132CF /* UserAuthenticationViewModel.swift */; };
@@ -143,14 +143,14 @@
 		03F2098A27170F2E00E10F6C /* OnBoardingScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScenario.swift; sourceTree = "<group>"; };
 		03F2098C271711CE00E10F6C /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		2C4486B3271DF7E10021122F /* VehicleScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleScenario.swift; sourceTree = "<group>"; };
-		2C6D0F2A2732D9B500A86349 /* VehicleCreator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreator_Specs.swift; sourceTree = "<group>"; };
+		2C6D0F2A2732D9B500A86349 /* DefaultVehicleCreator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleCreator_Specs.swift; sourceTree = "<group>"; };
 		2C863377273FB4040049C186 /* DefaultVehiclesGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehiclesGetter.swift; sourceTree = "<group>"; };
 		2C86337B273FB7B10049C186 /* succeededVehicles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = succeededVehicles.json; sourceTree = "<group>"; };
 		2CAE03CC271709A1008D7A68 /* DefaultVehicleCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleCreator.swift; sourceTree = "<group>"; };
 		2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationView.swift; sourceTree = "<group>"; };
-		2CD4B8BF271C625C002598A4 /* VehicleInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInformationsVerificator.swift; sourceTree = "<group>"; };
+		2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleInformationsVerificator.swift; sourceTree = "<group>"; };
 		2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationViewModel.swift; sourceTree = "<group>"; };
-		2CD8639C2737F65C00C18EC5 /* VehicleInformationsVerificator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInformationsVerificator_Specs.swift; sourceTree = "<group>"; };
+		2CD8639C2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleInformationsVerificator_Specs.swift; sourceTree = "<group>"; };
 		8704D84A27193CE8000B24E2 /* UserAuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationView.swift; sourceTree = "<group>"; };
 		8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewModel_Specs.swift; sourceTree = "<group>"; };
 		8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingUserAuthenticator.swift; sourceTree = "<group>"; };
@@ -350,8 +350,8 @@
 				03DAF9A52727330300FFED55 /* MyVehicleViewModel_Specs.swift */,
 				03DAF99F27271C2D00FFED55 /* VehicleScenario_Specs.swift */,
 				03DAF9A92727448300FFED55 /* VehicleCreationViewModel_Specs.swift */,
-				2C6D0F2A2732D9B500A86349 /* VehicleCreator_Specs.swift */,
-				2CD8639C2737F65C00C18EC5 /* VehicleInformationsVerificator_Specs.swift */,
+				2C6D0F2A2732D9B500A86349 /* DefaultVehicleCreator_Specs.swift */,
+				2CD8639C2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift */,
 				2C86337B273FB7B10049C186 /* succeededVehicles.json */,
 			);
 			path = VehicleScenario_Specs;
@@ -362,7 +362,7 @@
 			children = (
 				2CAE03CC271709A1008D7A68 /* DefaultVehicleCreator.swift */,
 				2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */,
-				2CD4B8BF271C625C002598A4 /* VehicleInformationsVerificator.swift */,
+				2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */,
 				2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */,
 			);
 			path = VehicleCreation;
@@ -815,7 +815,7 @@
 				872B68A427290EB000FC3FDD /* UserAuthenticationView.swift in Sources */,
 				035E860A2718982A00684ED0 /* HTTPEndpoint.swift in Sources */,
 				03DAF9A8272733D600FFED55 /* MyVehiclesViewModel.swift in Sources */,
-				2CD4B8C0271C625C002598A4 /* VehicleInformationsVerificator.swift in Sources */,
+				2CD4B8C0271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift in Sources */,
 				2C4486B4271DF7E10021122F /* VehicleScenario.swift in Sources */,
 				03F2098B27170F2E00E10F6C /* OnBoardingScenario.swift in Sources */,
 				03F2098D271711CE00E10F6C /* OnBoardingView.swift in Sources */,
@@ -839,7 +839,7 @@
 				9BB4F7AD273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift in Sources */,
 				03DAF9A62727330300FFED55 /* MyVehicleViewModel_Specs.swift in Sources */,
 				87DC1D03271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift in Sources */,
-				2CD8639D2737F65C00C18EC5 /* VehicleInformationsVerificator_Specs.swift in Sources */,
+				2CD8639D2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift in Sources */,
 				03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */,
 				0382E29A27175FB700EB570E /* AuthenticationScenario_Specs.swift in Sources */,
 				87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */,
@@ -856,7 +856,7 @@
 				8798D1472730F88200FF3AB4 /* FailingTokenRefreshor.swift in Sources */,
 				03F05443271B3F9D00434706 /* FailingAccountCreator.swift in Sources */,
 				03F05431271B392300434706 /* SucceedingInformationsVerificator.swift in Sources */,
-				2C6D0F2B2732D9B600A86349 /* VehicleCreator_Specs.swift in Sources */,
+				2C6D0F2B2732D9B600A86349 /* DefaultVehicleCreator_Specs.swift in Sources */,
 				03F05439271B3E8300434706 /* SucceedingAPICaller.swift in Sources */,
 				8F86D42C27172BC900D143D8 /* OnBoardingViewModel_Specs.swift in Sources */,
 				8F86D4222716E4A000D143D8 /* OnBoardingScenario_Specs.swift in Sources */,

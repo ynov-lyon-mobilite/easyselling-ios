@@ -53,7 +53,7 @@ class DefaultVehicleNavigator: VehicleNavigator {
     }
     
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void) {
-        let vm = VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: VehicleInformationsVerificator(), onFinish: onFinish)
+        let vm = VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: DefaultVehicleInformationsVerificator(), onFinish: onFinish)
         let vehicleCreationView = VehicleCreationView(viewModel: vm)
         navigationController.present(UIHostingController(rootView: vehicleCreationView), animated: true)
     }

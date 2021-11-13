@@ -80,7 +80,7 @@ class SpyVehicleCreator: VehicleCreator {
     }
 }
 
-class SpyVehicleInformationsVerificator: VehicleInformationsProtocol {
+class SpyVehicleInformationsVerificator: VehicleInformationsVerificator {
     
     private let error: VehicleCreationError
     

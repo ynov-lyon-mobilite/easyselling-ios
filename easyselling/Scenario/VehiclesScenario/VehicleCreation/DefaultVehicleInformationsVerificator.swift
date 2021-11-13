@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol VehicleInformationsProtocol {
+protocol VehicleInformationsVerificator {
     func verifyInformations(vehicle: VehicleInformations) throws -> VehicleInformations
 }
 
-class VehicleInformationsVerificator: VehicleInformationsProtocol {
+class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
     func verifyInformations(vehicle: VehicleInformations) throws -> VehicleInformations {
         switch true {
             case vehicle.license.isEmpty
