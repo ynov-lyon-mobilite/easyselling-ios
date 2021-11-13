@@ -48,6 +48,9 @@ struct MyVehiclesView: View {
                                         await viewModel.deleteVehicle(idVehicle: vehicle.id)
                                     }
                                 }.tint(Asset.onBoardingDotActive.swiftUIColor)
+								Button("Update") {
+                            
+                        		}.tint(Asset.onBoardingDotActive.swiftUIColor)
                             }
                             .padding(.vertical, 15)
                             .padding(.horizontal, 20)
