@@ -24,19 +24,6 @@ class VehicleInformationsVerificator: VehicleInformationsProtocol {
     }
 }
 
-struct VehicleInformations: Equatable, Encodable {
-    var license: String
-    var brand: String
-    var type: String
-    var year: String
-    var model: String
-}
-
-enum VehicleType: String, Encodable {
-    case carType = "car"
-    case motoType = "moto"
-}
-
 enum VehicleCreationError: Equatable, LocalizedError {
     case emptyField
     case incorrectYear

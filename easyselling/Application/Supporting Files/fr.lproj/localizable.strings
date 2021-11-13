@@ -14,12 +14,13 @@
 "userAuthentication.button.login" = "Se connecter";
 "userAuthentication.button.register" = "Vous n'avez pas encore de compte ?\nCliquez ici pour vous inscrire";
 
+"vehicles.car" = "Voiture";
+"vehicles.moto" = "Moto";
+
 "createVehicle.title" = "Ajouter un véhicule";
 "createVehicle.brand" = "Marque";
 "createVehicle.model" = "Modèle";
 "createVehicle.license" = "Licence";
-"createVehicle.moto" = "Moto";
-"createVehicle.car" = "Voiture";
 "createVehicle.year" = "Année";
 "createVehicle.submit" = "Ajouter";
 

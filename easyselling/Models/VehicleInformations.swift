@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Vehicle: Equatable, Decodable, Identifiable {
-    var id: String
+struct VehicleInformations: Codable, Equatable, Identifiable {
+    var id: String = ""
     var brand: String
     var model: String
     var license: String

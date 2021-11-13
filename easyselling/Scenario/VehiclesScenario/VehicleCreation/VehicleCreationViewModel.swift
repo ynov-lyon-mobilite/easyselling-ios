@@ -21,7 +21,7 @@ class VehicleCreationViewModel: ObservableObject {
     @Published var model: String = ""
     @Published var license: String = ""
     @Published var year: String = ""
-    @Published var type: VehicleType = .carType
+    @Published var type: VehicleInformations.Category = .car
 
     init(vehicleCreator: VehicleCreator, vehicleVerificator: VehicleInformationsProtocol,
          onFinish: @escaping Action) {
@@ -31,7 +31,7 @@ class VehicleCreationViewModel: ObservableObject {
     }
 
     @MainActor func createVehicle() async {
-        let informations = VehicleInformations(license: license, brand: brand, type: type.rawValue, year: year, model: model)
+        let informations = VehicleInformations(brand: brand, model: model, license: license, type: type, year: year)
         
         do {
             let informationsVerified = try vehicleInformationsVerificator.verifyInformations(vehicle: informations)

@@ -27,27 +27,27 @@ class DefaultVehiclesGetter_Specs: XCTestCase {
             self.error = (error as! APICallerError)
         }
         
-        let expected = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year:          "year1"),
-                        Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2"),
-                        Vehicle(id: "3", brand: "Citroen", model: "model3", license: "license3", type: .car, year: "year3")]
+        let expected = [VehicleInformations(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year:          "year1"),
+                        VehicleInformations(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2"),
+                        VehicleInformations(id: "3", brand: "Citroen", model: "model3", license: "license3", type: .car, year: "year3")]
         
         XCTAssertEqual(expected, vehicles)
 
     }
     
-    private var vehicles: [Vehicle]!
+    private var vehicles: [VehicleInformations]!
     private var error: APICallerError!
 }
 
 class SucceedingVehiclesGetter: VehiclesGetter {
     
-    init(_ vehicles: [Vehicle]) {
+    init(_ vehicles: [VehicleInformations]) {
         self.vehicles = vehicles
     }
     
-    private var vehicles: [Vehicle]
+    private var vehicles: [VehicleInformations]
     
-    func getVehicles() async throws -> [Vehicle] {
+    func getVehicles() async throws -> [VehicleInformations] {
         return vehicles
     }
 }
@@ -60,7 +60,7 @@ class FailingVehiclesGetter: VehiclesGetter {
     
     private var error: APICallerError
     
-    func getVehicles() async throws -> [Vehicle] {
+    func getVehicles() async throws -> [VehicleInformations] {
         throw error
     }
 }

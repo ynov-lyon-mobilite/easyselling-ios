@@ -19,7 +19,7 @@ class MyVehiclesViewModel: ObservableObject {
     private var vehiclesGetter: VehiclesGetter
     private var isOpenningVehicleCreation: Action
     @Published var isLoading: Bool = true
-    @Published var vehicles: [Vehicle] = []
+    @Published var vehicles: [VehicleInformations] = []
     @Published var error: APICallerError?
     @Published var isError: Bool = false
  
