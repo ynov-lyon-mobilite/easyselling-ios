@@ -8,7 +8,7 @@
 import XCTest
 @testable import easyselling
 
-class VehicleInformationsVerificator_Specs: XCTestCase {
+class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
     
     private var verificator: VehicleInformationsVerificator!
     private var vehicleCreationError: VehicleCreationError!

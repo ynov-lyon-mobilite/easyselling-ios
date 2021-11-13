@@ -14,8 +14,8 @@
 "userAuthentication.button.login" = "Login";
 "userAuthentication.button.register" = "Don't have an account yet?\nClick here to register";
 
-"vehicle.moto" = "Moto";
-"vehicle.car" = "Car";
+"vehicles.car" = "Car";
+"vehicles.moto" = "Motorcycle";
 
 "createVehicle.title" = "Add a vehicle";
 "createVehicle.brand" = "Brand";
