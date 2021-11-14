@@ -15,12 +15,12 @@ protocol OnBoardingNavigator {
 }
 
 class DefaultOnBoardingNavigator: OnBoardingNavigator {
-  
+
     init(navigationController: UINavigationController, window: UIWindow?) {
         self.navigationController = navigationController
         self.window = window
     }
-    
+
     private var navigationController: UINavigationController
     private var window: UIWindow?
 
@@ -34,7 +34,7 @@ class DefaultOnBoardingNavigator: OnBoardingNavigator {
             navigationController.pushViewController(view,
                                                     animated: true)
     }
-    
+
     func navigateToAuthenticationScenario() {
         let navigator = DefaultAuthenticationNavigator(window: window)
         let scenario = AuthenticationScenario(navigator: navigator)

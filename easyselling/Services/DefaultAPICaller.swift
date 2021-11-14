@@ -26,16 +26,16 @@ final class DefaultAPICaller: APICaller {
         _ urlRequest: URLRequest,
         decodeType: T.Type) async throws -> T {
             let result: (Data, URLResponse)? = try? await urlSession.data(for: urlRequest, delegate: nil)
-            
+
             guard let (data, response) = result,
                   let strongResponse = response as? HTTPURLResponse else {
                       throw APICallerError.internalServerError
                   }
-            
+
             if !successStatusCodes.contains(strongResponse.statusCode) {
                 throw APICallerError.from(statusCode: strongResponse.statusCode)
             }
-            
+
             do {
                 let decodedResult = try jsonDecoder.decode(APIResponse<T>.self, from: data)
                 return decodedResult.data
@@ -52,7 +52,7 @@ final class DefaultAPICaller: APICaller {
               let strongResponse = response as? HTTPURLResponse else {
                   throw APICallerError.internalServerError
               }
-        
+
         if !successStatusCodes.contains(strongResponse.statusCode) {
             throw APICallerError.from(statusCode: strongResponse.statusCode)
         }

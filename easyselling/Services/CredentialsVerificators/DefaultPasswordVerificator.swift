@@ -12,17 +12,17 @@ protocol PasswordVerificator {
 }
 
 class DefaultPasswordVerificator: PasswordVerificator {
-    
+
     func verify(password: String, passwordConfirmation: String) throws {
-        
+
         guard !password.isEmpty else {
             throw CredentialsError.emptyPassword
         }
-        
+
         guard !passwordConfirmation.isEmpty else {
             throw CredentialsError.emptyPasswordConfirmation
         }
-        
+
         guard password == passwordConfirmation else {
             throw CredentialsError.wrongPassword
         }

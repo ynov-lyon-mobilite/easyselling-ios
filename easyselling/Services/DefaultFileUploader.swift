@@ -14,12 +14,12 @@ protocol FileUploader {
 final class DefaultFileUploader: FileUploader {
     private var requestGenerator: RequestGenerator
     private var apiCaller: APICaller
-    
+
     init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
         self.apiCaller = apiCaller
     }
-    
+
     func upload(filename: String, filetype: String, data: Data) async throws -> UploadedFile {
         let (body, contentType) = try generateBody(filename: filename, filetype: filetype, data: data)
 
@@ -29,7 +29,7 @@ final class DefaultFileUploader: FileUploader {
 
         return try await apiCaller.call(urlRequest, decodeType: UploadedFile.self)
     }
-    
+
     func generateBody(filename: String, filetype: String, data: Data, boundary: String = UUID().uuidString) throws -> (Data, String) {
         let contentType = "multipart/form-data; boundary=" + boundary
 

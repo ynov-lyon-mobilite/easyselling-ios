@@ -38,7 +38,7 @@ enum VehicleCreationError: Equatable {
     case wrongYear
     case wrongLicenseNumber
     case unknow
-    
+
     var errorDescription: String? {
         switch self {
             case .emptyField: return "Un des champs est vide"

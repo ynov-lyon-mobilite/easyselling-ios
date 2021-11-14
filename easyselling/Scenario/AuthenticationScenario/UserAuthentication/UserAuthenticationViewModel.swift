@@ -10,18 +10,18 @@ import Foundation
 final class UserAuthenticationViewModel: ObservableObject {
     private var tokenManager: TokenManager
     private let userAuthenticator: UserAuthenticatior
-    
+
     let navigateToAccountCreation: Action
     private let onUserLogged: Action
     let navigateToPasswordReset: Action
 
     @Published var email: String = ""
     @Published var password: String = ""
-    
+
     @Published var showAlert = false
     @Published var error: CredentialsError?
     @Published var alert: APICallerError?
-    
+
     init(
         userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(),
         tokenManager: TokenManager = DefaultTokenManager.shared,
@@ -34,7 +34,7 @@ final class UserAuthenticationViewModel: ObservableObject {
             self.navigateToPasswordReset = navigateToPasswordReset
             self.onUserLogged = onUserLogged
         }
-    
+
     @MainActor func login() async {
         do {
             try verifyInformations()
@@ -51,11 +51,11 @@ final class UserAuthenticationViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func setError(with error: CredentialsError) {
         self.error = error
     }
-    
+
     private func verifyInformations() throws {
         if email.isEmpty { throw CredentialsError.emptyEmail }
         if password.isEmpty { throw CredentialsError.emptyPassword }

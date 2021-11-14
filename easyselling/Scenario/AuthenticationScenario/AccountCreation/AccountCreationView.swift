@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct AccountCreationView: View {
-    
+
     @ObservedObject var viewModel: AccountCreationViewModel
-    
+
     var body: some View {
         VStack(spacing: 30) {
             if viewModel.state == .loading {
                 ProgressView()
             } else {
-                
+
                 TextField(L10n.SignUp.mail, text: $viewModel.email)
                     .padding(6)
                     .background(Color.gray.opacity(0.5))
                     .cornerRadius(10)
                     .textContentType(.emailAddress)
-                
+
                 VStack {
                     SecureField(L10n.SignUp.password, text: $viewModel.password)
                         .padding(6)
@@ -39,7 +39,7 @@ struct AccountCreationView: View {
                         .font(.headline)
                         .opacity(viewModel.error != nil ? 1 : 0)
                     }
-                
+
                 Button(L10n.SignUp.createAccountButton) {
                     Task {
                         await viewModel.createAccount()
@@ -49,7 +49,7 @@ struct AccountCreationView: View {
                 .padding()
                 .background(Color.black)
                 .cornerRadius(30)
-                
+
             }
         }
         .padding(.horizontal, 50)

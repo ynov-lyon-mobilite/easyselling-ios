@@ -28,7 +28,7 @@ class DefaultRequestGenerator: RequestGenerator {
         guard let encodedBody = try? jsonEncoder.encode(body) else {
             throw APICallerError.encodeError
         }
-        
+
         var request = try generateRequest(endpoint: endpoint, method: method, headers: headers)
         request.httpBody = encodedBody
 
