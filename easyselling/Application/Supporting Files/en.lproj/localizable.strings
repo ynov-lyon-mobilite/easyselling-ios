@@ -16,3 +16,14 @@
 
 "vehicles.car" = "Car";
 "vehicles.moto" = "Motorcycle";
+
+"createVehicle.title" = "Add a vehicle";
+"createVehicle.brand" = "Brand";
+"createVehicle.model" = "Model";
+"createVehicle.license" = "License";
+"createVehicle.year" = "Year";
+"createVehicle.submit" = "Add";
+
+"createVehicle.error.emptyField" = "A field is empty";
+"createVehicle.error.incorrectYear" = "The year format is incorrect";
+"createVehicle.error.incorrectLicense" = "The license format is incorrect";

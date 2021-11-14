@@ -9,26 +9,26 @@ import UIKit
 import XCTest
 @testable import easyselling
 
-class VehicleScenario_Spec: XCTestCase {
-
+class VehicleScenario_Specs: XCTestCase {
+    
     func test_Begins_scenario() {
         givenScenario()
         whenBeginning()
         thenHistory(is: [.myVehicles])
     }
-
+    
     func test_Navigates_to_vehicle_creation() {
         givenScenario()
         whenBeginning()
         whenNavigatingToVehicleCreation()
         thenHistory(is: [.myVehicles, .vehicleCreation])
     }
-
-    func test_Leaves_vehicle_creation() {
+    
+    func test_Leaves_vehicle_creation() async {
         givenScenario()
         whenBeginning()
         whenNavigatingToVehicleCreation()
-        navigator.onFinish?()
+        await navigator.onFinish?()
         thenHistory(is: [.myVehicles, .vehicleCreation, .myVehicles])
     }
     
@@ -45,8 +45,8 @@ class VehicleScenario_Spec: XCTestCase {
         scenario.navigatesToVehicleCreation()
     }
     
-    private func whenleavingVehicleCreation() {
-        navigator.onFinish?()
+    private func whenleavingVehicleCreation() async {
+        await navigator.onFinish?()
     }
 
     private func thenHistory(is expected: [SpyVehicleCreationNavigator.History]) {
@@ -59,15 +59,15 @@ class VehicleScenario_Spec: XCTestCase {
 }
 
 class SpyVehicleCreationNavigator: VehicleNavigator {
-    
+   
     private(set) var history: [History] = []
-    private(set) var onFinish: Action?
+    private(set) var onFinish: (() async -> Void)?
     
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action) {
         history.append(.myVehicles)
     }
     
-    func navigatesToVehicleCreation(onFinish: @escaping Action) {
+    func navigatesToVehicleCreation(onFinish: @escaping () async -> Void) {
         self.onFinish = onFinish
         history.append(.vehicleCreation)
     }
@@ -86,5 +86,6 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
             case .vehicleCreation: return "vehicle creation"
             }
         }
+
     }
 }

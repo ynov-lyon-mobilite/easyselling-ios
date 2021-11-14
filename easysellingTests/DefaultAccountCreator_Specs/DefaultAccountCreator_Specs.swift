@@ -25,7 +25,7 @@ class DefaultAccountCreator_Specs: XCTestCase {
         thenErrorMessage(is: "Une erreur est survenue")
     }
     
-    func test_Creates_account_failed_with_forbiden_access() async {
+    func test_Creates_account_failed_with_forbidden_access() async {
         givenAccountCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         await whenCreatingAccount()
         thenErrorCode(is: 404)

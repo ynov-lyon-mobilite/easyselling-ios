@@ -16,3 +16,14 @@
 
 "vehicles.car" = "Voiture";
 "vehicles.moto" = "Moto";
+
+"createVehicle.title" = "Ajouter un véhicule";
+"createVehicle.brand" = "Marque";
+"createVehicle.model" = "Modèle";
+"createVehicle.license" = "Licence";
+"createVehicle.year" = "Année";
+"createVehicle.submit" = "Ajouter";
+
+"createVehicle.error.emptyField" = "Un des champs est vide";
+"createVehicle.error.incorrectYear" = "L'année renseignée est invalide";
+"createVehicle.error.incorrectLicense" = "Le numéro de licence est invalide";

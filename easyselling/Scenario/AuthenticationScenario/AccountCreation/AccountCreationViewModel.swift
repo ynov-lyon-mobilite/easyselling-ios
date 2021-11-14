@@ -37,7 +37,7 @@ class AccountCreationViewModel: ObservableObject {
         }
     }
     
-    private func createAccount(with informations: AccountCreationInformations) async {
+    @MainActor private func createAccount(with informations: AccountCreationInformations) async {
         do {
             try await accountCreator.createAccount(informations: informations)
             self.state = .accountCreated
