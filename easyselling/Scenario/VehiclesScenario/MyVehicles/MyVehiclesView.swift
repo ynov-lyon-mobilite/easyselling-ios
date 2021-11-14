@@ -10,12 +10,16 @@ import SwiftUI
 struct MyVehiclesView: View {
     
     @ObservedObject var viewModel: MyVehiclesViewModel
-    
+
     var body: some View {
         VStack {
             if viewModel.isLoading {
                 ProgressView()
             } else {
+                Button(action: viewModel.openVehicleCreation) {
+                    Text(L10n.CreateVehicle.title)
+                }
+                
                 List(viewModel.vehicles) { vehicule in
                     VStack {
                         HStack {
@@ -30,8 +34,9 @@ struct MyVehiclesView: View {
                             Text(vehicule.year)
                         }
                     }
+                }.refreshable {
+                    await viewModel.getVehicles()
                 }
-                
             }
         }
         .alert(isPresented: $viewModel.isError, content: {
@@ -43,7 +48,6 @@ struct MyVehiclesView: View {
                 await viewModel.getVehicles()
             }
         }
-        
     }
 }
 
