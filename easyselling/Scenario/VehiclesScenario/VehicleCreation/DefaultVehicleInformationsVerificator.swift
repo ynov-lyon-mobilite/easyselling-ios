@@ -8,11 +8,11 @@
 import Foundation
 
 protocol VehicleInformationsVerificator {
-    func verifyInformations(vehicle: VehicleInformations) throws -> VehicleInformations
+    func verifyInformations(vehicle: Vehicle) throws -> Vehicle
 }
 
 class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
-    func verifyInformations(vehicle: VehicleInformations) throws -> VehicleInformations {
+    func verifyInformations(vehicle: Vehicle) throws -> Vehicle {
         switch true {
             case vehicle.license.isEmpty
                 || vehicle.brand.isEmpty

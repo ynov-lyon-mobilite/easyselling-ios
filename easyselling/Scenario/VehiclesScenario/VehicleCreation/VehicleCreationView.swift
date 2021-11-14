@@ -31,8 +31,8 @@ struct VehicleCreationView: View {
 
             HStack(alignment: .lastTextBaseline) {
                 Picker("Type", selection: $viewModel.type) {
-                    Text(L10n.Vehicles.car).tag(VehicleInformations.Category.car)
-                    Text(L10n.Vehicles.moto).tag(VehicleInformations.Category.moto)
+                    Text(L10n.Vehicles.car).tag(Vehicle.Category.car)
+                    Text(L10n.Vehicles.moto).tag(Vehicle.Category.moto)
                 }
                 Spacer(minLength: 50)
                 TextField(L10n.CreateVehicle.year, text: $viewModel.year)

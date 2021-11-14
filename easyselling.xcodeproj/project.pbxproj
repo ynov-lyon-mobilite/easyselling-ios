@@ -95,7 +95,7 @@
 		8F86D42C27172BC900D143D8 /* OnBoardingViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D42B27172BC900D143D8 /* OnBoardingViewModel_Specs.swift */; };
 		8F86D42E27172F3B00D143D8 /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D42D27172F3B00D143D8 /* OnBoardingViewModel.swift */; };
 		8FF0102327329DDE0022314B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF0102227329DDE0022314B /* Color+Extensions.swift */; };
-		9B5C547D27387E59005CFD24 /* VehicleInformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5C547C27387E59005CFD24 /* VehicleInformations.swift */; };
+		9B5C547D27387E59005CFD24 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5C547C27387E59005CFD24 /* Vehicle.swift */; };
 		9BB4F7AD273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4F7AC273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift */; };
 		D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00736572712D93800ED0F2C /* AuthenticationServices.framework */; };
 /* End PBXBuildFile section */
@@ -194,7 +194,7 @@
 		8F86D42B27172BC900D143D8 /* OnBoardingViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel_Specs.swift; sourceTree = "<group>"; };
 		8F86D42D27172F3B00D143D8 /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
 		8FF0102227329DDE0022314B /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
-		9B5C547C27387E59005CFD24 /* VehicleInformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInformations.swift; sourceTree = "<group>"; };
+		9B5C547C27387E59005CFD24 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		9BB4F7AC273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehiclesGetter_Specs.swift; sourceTree = "<group>"; };
 		D00736552712D93800ED0F2C /* easyselling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = easyselling.entitlements; sourceTree = "<group>"; };
 		D00736572712D93800ED0F2C /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
@@ -564,7 +564,7 @@
 				87DC1D0B271FDF6B002DC193 /* Token.swift */,
 				87DC1D0D271FDF8D002DC193 /* APIResponse.swift */,
 				874975FA273A3CA3000A1289 /* UploadedFile.swift */,
-				9B5C547C27387E59005CFD24 /* VehicleInformations.swift */,
+				9B5C547C27387E59005CFD24 /* Vehicle.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -807,7 +807,7 @@
 				8705B9AB27208249004132CF /* KeychainSwift+Extensions.swift in Sources */,
 				8798D14E2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift in Sources */,
 				87DC1D0E271FDF8D002DC193 /* APIResponse.swift in Sources */,
-				9B5C547D27387E59005CFD24 /* VehicleInformations.swift in Sources */,
+				9B5C547D27387E59005CFD24 /* Vehicle.swift in Sources */,
 				87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */,
 				03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */,
 				87DC1D0C271FDF6B002DC193 /* Token.swift in Sources */,

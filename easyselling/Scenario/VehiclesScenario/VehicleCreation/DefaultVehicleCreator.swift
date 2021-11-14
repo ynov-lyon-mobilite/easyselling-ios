@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol VehicleCreator {
-    func createVehicle(informations: VehicleInformations) async throws
+    func createVehicle(informations: Vehicle) async throws
 }
 
 class DefaultVehicleCreator: VehicleCreator {
@@ -21,7 +21,7 @@ class DefaultVehicleCreator: VehicleCreator {
         self.apiCaller = apiCaller
     }
     
-    func createVehicle(informations: VehicleInformations) async throws {
+    func createVehicle(informations: Vehicle) async throws {
         let urlRequest = try requestGenerator.generateRequest(endpoint: .vehicles, method: .POST, body: informations, headers: [:])
         try await apiCaller.call(urlRequest)
     }

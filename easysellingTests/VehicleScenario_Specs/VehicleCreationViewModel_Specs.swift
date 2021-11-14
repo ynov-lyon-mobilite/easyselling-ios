@@ -75,7 +75,7 @@ class VehicleCreationViewModel_Specs: XCTestCase {
 
 class SpyVehicleCreator: VehicleCreator {
     
-    func createVehicle(informations: VehicleInformations) async throws {
+    func createVehicle(informations: Vehicle) async throws {
         throw APICallerError.internalServerError
     }
 }
@@ -88,7 +88,7 @@ class SpyVehicleInformationsVerificator: VehicleInformationsVerificator {
         self.error = error
     }
     
-    func verifyInformations(vehicle: VehicleInformations) throws -> VehicleInformations {
+    func verifyInformations(vehicle: Vehicle) throws -> Vehicle {
         throw error
     }
 }
