@@ -8,18 +8,18 @@
 import Foundation
 
 protocol VehicleInformationsVerificator {
-    func verifyInformations(vehicle: Vehicle) throws -> Vehicle
+    func verifyInformations(vehicle: Vehicle) throws
 }
 
 class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
-    func verifyInformations(vehicle: Vehicle) throws -> Vehicle {
+    func verifyInformations(vehicle: Vehicle) throws {
         switch true {
             case vehicle.license.isEmpty
                 || vehicle.brand.isEmpty
                 || vehicle.model.isEmpty: throw VehicleCreationError.emptyField
             case vehicle.license.count != 9: throw VehicleCreationError.incorrectLicense
             case vehicle.year.count != 4: throw VehicleCreationError.incorrectYear
-            default: return vehicle
+            default: break
         }
     }
 }

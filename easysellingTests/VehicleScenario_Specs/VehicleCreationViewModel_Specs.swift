@@ -87,8 +87,8 @@ class SpyVehicleInformationsVerificator: VehicleInformationsVerificator {
     init(error: VehicleCreationError) {
         self.error = error
     }
-    
-    func verifyInformations(vehicle: Vehicle) throws -> Vehicle {
+
+    func verifyInformations(vehicle: Vehicle) throws {
         throw error
     }
 }

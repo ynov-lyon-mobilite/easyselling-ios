@@ -34,8 +34,8 @@ class VehicleCreationViewModel: ObservableObject {
         let informations = Vehicle(brand: brand, model: model, license: license, type: type, year: year)
         
         do {
-            let informationsVerified = try vehicleInformationsVerificator.verifyInformations(vehicle: informations)
-            try await vehicleCreator.createVehicle(informations: informationsVerified)
+            try vehicleInformationsVerificator.verifyInformations(vehicle: informations)
+            try await vehicleCreator.createVehicle(informations: informations)
             await dismissModal()
         } catch (let error) {
             self.alert = (error as? VehicleCreationError)?.description ?? (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""

@@ -10,10 +10,6 @@ import XCTest
 
 class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
     
-    private var verificator: VehicleInformationsVerificator!
-    private var vehicleCreationError: VehicleCreationError!
-    private var vehicleInformations: Vehicle!
-    
     func test_Verfies_message_when_license_is_empty() {
         givenVerificator()
         whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "", type: Vehicle.Category.car, year: "year"))
@@ -42,12 +38,12 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
         givenVerificator()
         whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "license", type: Vehicle.Category.car, year: "222"))
         thenError(is: vehicleCreationError)
-    }
+    } 
     
     func test_Verifies_if_cheking_has_successful() {
         givenVerificator()
         whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "123456789", type: Vehicle.Category.car, year: "year"))
-        thenInformations(are: vehicleInformations)
+        thenNoErrorThrows()
     }
     
     private func givenVerificator() {
@@ -56,18 +52,21 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
     
     private func whenChecking(vehicle: Vehicle) {
         do {
-            self.vehicleInformations = try verificator.verifyInformations(vehicle: vehicle)
+            try verificator.verifyInformations(vehicle: vehicle)
         } catch (let error) {
             self.vehicleCreationError = (error as! VehicleCreationError)
         }
     }
-    
-    private func thenInformations(are expected: Vehicle) {
-        XCTAssertEqual(expected, vehicleInformations)
+
+    private func thenNoErrorThrows() {
+        XCTAssertNil(vehicleCreationError)
     }
     
     private func thenError(is expected: VehicleCreationError) {
         XCTAssertEqual(expected.description, vehicleCreationError.description)
         XCTAssertEqual(expected, vehicleCreationError)
     }
+    
+    private var verificator: VehicleInformationsVerificator!
+    private var vehicleCreationError: VehicleCreationError!
 }
