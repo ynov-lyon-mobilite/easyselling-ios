@@ -65,6 +65,10 @@
 
 "invoice.deleteButton" = "Supprimer la facture";
 
+"invoiceCreation.label.addFile" = "Ajouter un document";
+"invoiceCreation.button.scan" = "Scanner un document";
+"invoiceCreation.button.upload" = "Importer un document";
+
 "serverError.forbidden" = "Vous n'êtes pas autorisé à effectuer cette action";
 "serverError.serviceUnavailable" = "Le service externe ne peut être utilisé";
 "serverError.invalidCredentials" = "Vos informations sont incorrectes";

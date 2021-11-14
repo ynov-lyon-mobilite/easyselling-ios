@@ -13,11 +13,22 @@ class InvoicesScenario {
 
     private var navigator: InvoiceNavigator
 
-    func begin(withVehicleId vehicleId: String) {
-        navigator.navigatesToInvoicesView(of: vehicleId, onNavigatingToInvoice: navigateToInvoice)
+    func begin(vehicle: Vehicle) {
+        navigator.navigatesToInvoicesView(of: vehicle, onNavigatingToInvoice: navigatesToInvoice, onNavigatingToInvoiceCreation: navigatesToInvoiceCreation)
     }
 
-    private func navigateToInvoice(_ file: File) {
-        navigator.navigateToInvoice(file)
+    private func navigatesToInvoice(_ file: File) {
+        navigator.navigatesToInvoice(file)
+    }
+
+    private func navigatesToInvoiceCreation(vehicle: Vehicle, onDismiss: @escaping () async -> Void) {
+        navigator.navigatesToInvoiceCreation(vehicle: vehicle, onFinish: { [weak self] in
+            self?.goingBackToVehicleInvoicesView()
+            await onDismiss()
+        })
+    }
+
+    private func goingBackToVehicleInvoicesView() {
+        navigator.goingBackToVehicleInvoicesView()
     }
 }

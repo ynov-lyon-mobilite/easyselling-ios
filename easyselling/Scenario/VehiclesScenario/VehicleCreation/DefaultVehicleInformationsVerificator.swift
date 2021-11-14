@@ -8,11 +8,11 @@
 import Foundation
 
 protocol VehicleInformationsVerificator {
-    func verifyInformations(vehicle: Vehicle) throws
+    func verifyInformations(vehicle: VehicleDTO) throws
 }
 
 class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
-    func verifyInformations(vehicle: Vehicle) throws {
+    func verifyInformations(vehicle: VehicleDTO) throws {
         let vehicleVerificator = DefaultVehicleVerificator()
 
         switch true {

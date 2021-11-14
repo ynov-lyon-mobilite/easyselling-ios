@@ -40,13 +40,11 @@ class VehicleUpdateViewModel: ObservableObject {
 
     @MainActor
     func updateVehicle() async {
-        guard let id = vehicle.id else { return }
-
-        let newInformations = Vehicle(brand: brand, model: model, license: license, type: type, year: year)
+        let newInformations = VehicleDTO(brand: brand, model: model, license: license, type: type, year: year)
 
         do {
             try vehicleInformationsVerificator.verifyInformations(vehicle: newInformations)
-            try await vehicleUpdater.updateVehicle(id: id, informations: newInformations)
+            try await vehicleUpdater.updateVehicle(id: vehicle.id, informations: newInformations)
             await onFinish()
         } catch (let error) {
             self.alert = (error as? VehicleCreationError)?.description ?? (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""

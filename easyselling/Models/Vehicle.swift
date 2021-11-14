@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 struct Vehicle: Codable, Equatable, Identifiable {
-    var id: String?
+    var id: String
     var brand: String
     var model: String
     var license: String

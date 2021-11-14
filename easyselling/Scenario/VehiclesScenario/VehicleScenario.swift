@@ -32,8 +32,8 @@ class VehicleScenario {
         navigator.navigatesToProfile()
     }
 
-    private func navigatesToInvoices(ofVehicleId vehicleId: String) {
-        navigator.navigatesToInvoices(ofVehicleId: vehicleId)
+    private func navigatesToInvoices(vehicle: Vehicle) {
+        navigator.navigatesToInvoices(vehicle: vehicle)
     }
 
     func navigatesToVehicleUpdate(vehicle: Vehicle, refreshVehicles: @escaping AsyncableAction) {

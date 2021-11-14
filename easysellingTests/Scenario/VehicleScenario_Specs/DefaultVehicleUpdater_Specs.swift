@@ -10,11 +10,6 @@ import XCTest
 
 class DefaultVehicleUpdater_Specs: XCTestCase {
 
-    private var vehicleUpdater: VehicleUpdater!
-    private var vehicle: Vehicle!
-    private var isRequestSucceed: Bool!
-    private var error: APICallerError!
-
     func test_Updates_vehicle_is_successful() async {
         givenVehicleUpdater(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
         await whenUpdatingVehicle(informations: vehicle)
@@ -44,10 +39,10 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
 
     private func givenVehicleUpdater(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
         vehicleUpdater =  DefaultVehicleUpdater(requestGenerator: requestGenerator, apiCaller: apiCaller)
-        vehicle = Vehicle(brand: "Audi", model: "A1", license: "123456789", type: Vehicle.Category.car, year: "2005")
+        vehicle = VehicleDTO(brand: "Audi", model: "A1", license: "123456789", type: Vehicle.Category.car, year: "2005")
     }
 
-    private func whenUpdatingVehicle(informations: Vehicle) async {
+    private func whenUpdatingVehicle(informations: VehicleDTO) async {
         do {
             try await vehicleUpdater.updateVehicle(id: "", informations: informations)
             self.isRequestSucceed = true
@@ -68,4 +63,8 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
         XCTAssertEqual(expected, error.errorDescription)
     }
 
+    private var vehicleUpdater: VehicleUpdater!
+    private var vehicle: VehicleDTO!
+    private var isRequestSucceed: Bool!
+    private var error: APICallerError!
 }

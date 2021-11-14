@@ -53,7 +53,7 @@ struct VehicleUpdateView: View {
 
 struct VehicleUpdateView_Previews: PreviewProvider {
     static var previews: some View {
-        let vehicle = Vehicle(brand: "", model: "", license: "", type: .car, year: "")
+        let vehicle = Vehicle(id: "AZ98EHA09AZ", brand: "Yamaha", model: "XJ7", license: "11AA-123-BB", type: .moto, year: "2015")
 
         VehicleUpdateView(
             viewModel: VehicleUpdateViewModel(

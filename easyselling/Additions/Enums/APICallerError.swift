@@ -13,6 +13,7 @@ enum APICallerError: Int, LocalizedError, Equatable {
     case encodeError = 002
     case decodeError = 003
     case requestGenerationError = 004
+    case mimeTypeError = 005
 
     //  HTTP errors
     case badRequest = 400
