@@ -19,7 +19,7 @@ struct PasswordResetView: View {
                 .cornerRadius(10)
                 .textContentType(.emailAddress)
             
-            SecureField(L10n.SignUp.passwordConfirmation, text: $viewModel.newPassword)
+            SecureField(L10n.SignUp.passwordConfirmation, text: $viewModel.newPasswordConfirmation)
                 .padding(6)
                 .background(Color.gray.opacity(0.5))
                 .cornerRadius(10)

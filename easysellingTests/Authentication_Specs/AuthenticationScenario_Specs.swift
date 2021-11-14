@@ -20,14 +20,14 @@ class AuthenticationScenario_Specs: XCTestCase {
     func test_Begins_scenario_from_reset_password_universal_links() {
         givenScenario()
         whenBeginning(from: .resetPassword(token: ""))
-        thenHistory(is: [.passwordReset])
+        thenHistory(is: [.login, .passwordReset])
     }
     
     func test_Navigates_back_to_login_page_when_password_is_reset() {
         givenScenario()
         whenBeginning(from: .resetPassword(token: ""))
         navigator.onPasswordReset?()
-        thenHistory(is: [.passwordReset, .login])
+        thenHistory(is: [.login, .passwordReset, .login])
     }
     
     func test_Navigates_to_account_creation() {
