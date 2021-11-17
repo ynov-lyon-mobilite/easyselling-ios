@@ -32,7 +32,13 @@ class MyVehiclesViewModel: ObservableObject {
     func openVehicleCreation() {
         self.isOpenningVehicleCreation()
     }
+    
+    func navigateToUpdatingModal(vehicule: Vehicle) {
 
+        let updateVehiculeView = VehicleUpdateView(viewModel: VehiculeUpdateViewModel(vehicule: vehicule))
+        navigationController.present(UIHostingController(rootView: updateVehiculeView), animated: true, completion: nil)
+    }
+    
     @MainActor func getVehicles() async {
         state = .loading
         do {

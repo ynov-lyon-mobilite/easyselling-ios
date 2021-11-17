@@ -49,7 +49,7 @@ struct MyVehiclesView: View {
                                     }
                                 }.tint(Asset.onBoardingDotActive.swiftUIColor)
 								Button("Update") {
-                            
+                            			      viewModel.navigateToUpdatingModal(vehicule: vehicule)
                         		}.tint(Asset.onBoardingDotActive.swiftUIColor)
                             }
                             .padding(.vertical, 15)
