@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PasswordResetDTO: Encodable {
+struct PasswordResetDTO: Encodable, Equatable {
     var password: String
     var token: String
 }

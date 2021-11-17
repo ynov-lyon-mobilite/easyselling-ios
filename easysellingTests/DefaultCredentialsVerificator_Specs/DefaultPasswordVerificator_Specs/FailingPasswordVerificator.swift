@@ -15,7 +15,7 @@ class FailingPasswordVerificator: PasswordVerificator {
     
     private let error: CredentialsError
     
-    func verify(password: String, passwordConfirmation: String) throws -> PasswordResetDTO {
+    func verify(password: String, passwordConfirmation: String) throws {
         throw error
     }
 }

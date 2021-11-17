@@ -52,7 +52,7 @@ class PasswordResetViewModel_Specs: XCTestCase {
     }
     
     private func givenViewModel(withToken token: String, passwordVerificator: PasswordVerificator = SucceedingPasswordVerificator(), passwordReseter: PasswordReseter) {
-        viewModel = PasswordResetViewModel(token: token, passwordVerificator: passwordVerificator, passwordReseter: passwordReseter, onPasswordReset: { self.didResetPassword = true })
+        viewModel = PasswordResetViewModel(token: token, preparator: DefaultPasswordResetPreparator(verificator: passwordVerificator), passwordReseter: passwordReseter, onPasswordReset: { self.didResetPassword = true })
     }
     
     private func whenResetingPassword() async {

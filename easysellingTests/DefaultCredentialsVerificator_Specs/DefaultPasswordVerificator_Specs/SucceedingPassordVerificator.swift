@@ -8,7 +8,7 @@
 @testable import easyselling
 
 class SucceedingPasswordVerificator: PasswordVerificator {
-    func verify(password: String, passwordConfirmation: String) throws -> PasswordResetDTO {
-        PasswordResetDTO(password: password, token: "")
+    func verify(password: String, passwordConfirmation: String) throws {
+        return
     }
 }

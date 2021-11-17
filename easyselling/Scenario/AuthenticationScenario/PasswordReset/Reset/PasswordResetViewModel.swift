@@ -10,17 +10,17 @@ import Foundation
 class PasswordResetViewModel: ObservableObject {
     
     init(token: String,
-         passwordVerificator: PasswordVerificator = DefaultPasswordVerificator(),
+         preparator: DefaultPasswordResetPreparator = DefaultPasswordResetPreparator(),
          passwordReseter: PasswordReseter = DefaultPasswordReseter(),
          onPasswordReset: @escaping Action) {
         self.token = token
-        self.passwordVerificator = passwordVerificator
+        self.preparator = preparator
         self.passwordReseter = passwordReseter
         self.onPasswordReset = onPasswordReset
     }
     
     private var token: String
-    private var passwordVerificator: PasswordVerificator
+    private var preparator: DefaultPasswordResetPreparator
     private var passwordReseter: PasswordReseter
     private var onPasswordReset: Action
     
@@ -33,7 +33,7 @@ class PasswordResetViewModel: ObservableObject {
     
     func resetPassword() async {
         do {
-            var passwordResetDto: PasswordResetDTO = try passwordVerificator.verify(password: newPassword, passwordConfirmation: newPasswordConfirmation)
+            var passwordResetDto = try preparator.prepare(newPassword, passwordConfirmation: newPasswordConfirmation)
             passwordResetDto.token = token
             try await passwordReseter.resetPassword(with: passwordResetDto)
             self.onPasswordReset()

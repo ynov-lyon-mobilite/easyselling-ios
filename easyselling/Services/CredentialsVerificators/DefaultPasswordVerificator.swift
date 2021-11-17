@@ -8,12 +8,12 @@
 import Foundation
 
 protocol PasswordVerificator {
-    func verify(password: String, passwordConfirmation: String) throws -> PasswordResetDTO
+    func verify(password: String, passwordConfirmation: String) throws
 }
 
 class DefaultPasswordVerificator: PasswordVerificator {
     
-    func verify(password: String, passwordConfirmation: String) throws -> PasswordResetDTO {
+    func verify(password: String, passwordConfirmation: String) throws {
         
         guard !password.isEmpty else {
             throw CredentialsError.emptyPassword
@@ -26,7 +26,5 @@ class DefaultPasswordVerificator: PasswordVerificator {
         guard password == passwordConfirmation else {
             throw CredentialsError.wrongPassword
         }
-        
-        return PasswordResetDTO(password: password, token: "")
     }
 }

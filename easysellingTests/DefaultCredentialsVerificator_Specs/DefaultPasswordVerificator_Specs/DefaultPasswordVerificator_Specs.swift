@@ -40,7 +40,8 @@ class DefaultPasswordVerificator_Specs: XCTestCase {
     
     private func whenVerifying(password: String, passwordConfirmation: String) {
         do {
-            self.verifyiedPassword = try verificator.verify(password: password, passwordConfirmation: passwordConfirmation)
+            try verificator.verify(password: password, passwordConfirmation: passwordConfirmation)
+            self.verifyingHasSucceed = true
         } catch(let error) {
             self.error = error as? CredentialsError
         }
@@ -56,5 +57,5 @@ class DefaultPasswordVerificator_Specs: XCTestCase {
     
     private var verificator: DefaultPasswordVerificator!
     private var error: CredentialsError!
-    private var verifyiedPassword: PasswordResetDTO!
+    private var verifyingHasSucceed: Bool = false
 }
