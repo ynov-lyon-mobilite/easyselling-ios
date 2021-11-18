@@ -751,7 +751,7 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
-		8FF010242732EDCE0022314B /* OnBoarding */ = {
+		8FF010242732EDCE0022314B /* OnBoardingScenario */ = {
 			isa = PBXGroup;
 			children = (
 				03F2098A27170F2E00E10F6C /* OnBoardingScenario.swift */,
@@ -759,7 +759,7 @@
 				8F86D42D27172F3B00D143D8 /* OnBoardingViewModel.swift */,
 				03B80F9B27416CC000E1BF47 /* DefaultOnBoardingNavigator.swift */,
 			);
-			path = OnBoarding;
+			path = OnBoardingScenario;
 			sourceTree = "<group>";
 		};
 		8FF010252732EDEC0022314B /* OnBoardingScenario_Specs */ = {
