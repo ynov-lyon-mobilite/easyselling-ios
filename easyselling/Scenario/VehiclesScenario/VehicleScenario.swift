@@ -24,11 +24,12 @@ class VehicleScenario {
         navigator.navigatesToVehicleCreation(onFinish: goingBackToHomeView)
     }
     
-    private func goingBackToHomeView() async {
-        await navigator.goingBackToHomeView()
+    private func goingBackToHomeView() {
+        navigator.goingBackToHomeView()
 	}
-    func navigatesToVehicleUpdate(vehicule: Vehicle) {
-        navigator.navigatesToVehicleUpdate(onFinish: goingBackToHomeView, vehicule: vehicule)
+    
+    func navigatesToVehicleUpdate(vehicle: Vehicle) {
+        navigator.navigatesToVehicleUpdate(onFinish: goingBackToHomeView, vehicle: vehicle)
     }
 
 }
@@ -37,8 +38,8 @@ protocol VehicleNavigator {
     
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
-    func goingBackToHomeView() async
-    func navigatesToVehicleUpdate(onFinish: @escaping Action, vehicule: Vehicle)
+    func goingBackToHomeView()
+    func navigatesToVehicleUpdate(onFinish: @escaping Action, vehicle: Vehicle)
 }
 
 class DefaultVehicleNavigator: VehicleNavigator {

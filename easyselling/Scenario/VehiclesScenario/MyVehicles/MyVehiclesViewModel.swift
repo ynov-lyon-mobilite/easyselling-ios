@@ -36,8 +36,8 @@ class MyVehiclesViewModel: ObservableObject {
         self.isOpenningVehicleCreation()
     }
     
-    func openVehicleUpdate(vehicule: Vehicle) {
-        self.isOpeningVehicleUpdate(vehicule) 
+    func openVehicleUpdate(vehicle: Vehicle) {
+        self.isOpeningVehicleUpdate(vehicle) 
     }
 
     @MainActor func getVehicles() async {

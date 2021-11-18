@@ -68,7 +68,7 @@ class VehicleScenario_Specs: XCTestCase {
 	}
 
     private func whenNavigatingToVehcileUpdate() {
-        scenario.navigatesToVehicleUpdate(vehicule: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+        scenario.navigatesToVehicleUpdate(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
     }
  
     private func thenHistory(is expected: [SpyVehicleCreationNavigator.History]) {
@@ -102,7 +102,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
         history.append(.profile)
     }
     
-    func navigatesToVehicleUpdate(onFinish: @escaping Action, vehicule: Vehicle) {
+    func navigatesToVehicleUpdate(onFinish: @escaping Action, vehicle: Vehicle) {
         self.onFinish = onFinish
         history.append(.vehicleUpdate)
     }
