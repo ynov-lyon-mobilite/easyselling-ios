@@ -48,7 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.makeKeyAndVisible()
             window?.rootViewController = navigator.navigationController
             let scenario = AuthenticationScenario(navigator: navigator)
-            scenario.navigatesToPasswordReset(withToken: token)
+            scenario.begin(from: .resetPassword(token: token))
         }
     }
     
