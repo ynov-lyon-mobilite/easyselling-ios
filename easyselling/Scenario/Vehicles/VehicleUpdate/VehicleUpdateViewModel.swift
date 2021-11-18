@@ -7,7 +7,7 @@
 
 import Foundation
 
-class VehiculeUpdateViewModel: ObservableObject {
+class VehicleUpdateViewModel: ObservableObject {
     let vehicule: Vehicle
     
     init(vehicule: Vehicle) {

@@ -97,7 +97,7 @@ struct MyVehiclesView: View {
 struct MyVehiclesView_Previews: PreviewProvider {
 
     static var previews: some View {
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {}, isNavigatingToProfile: {})
+        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {}, isOpeningVehicleUpdate: { _ in }, isNavigatingToProfile: {}))
         vm.vehicles = [.init(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
                        .init(brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
                        .init(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]

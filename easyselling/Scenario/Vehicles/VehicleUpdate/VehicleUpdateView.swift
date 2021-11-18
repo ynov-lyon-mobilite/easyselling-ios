@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VehicleUpdateView: View {
-    let viewModel: VehiculeUpdateViewModel
+    let viewModel: VehicleUpdateViewModel
     
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
@@ -17,6 +17,6 @@ struct VehicleUpdateView: View {
 
 struct VehicleUpdateView_Previews: PreviewProvider {
     static var previews: some View {
-        VehicleUpdateView(viewModel: VehiculeUpdateViewModel(vehicule: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")))
+        VehicleUpdateView(viewModel: VehicleUpdateViewModel(vehicule: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")))
     }
 }

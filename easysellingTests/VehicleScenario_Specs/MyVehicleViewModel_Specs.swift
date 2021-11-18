@@ -67,7 +67,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
                                                 self.isOpen = true
         }, isNavigatingToProfile: {
             self.onNavigateToProfile = true
-        })
+        }, isOpeningVehicleUpdate: {_ in})
     }
     
     private func givenViewModelDeletor(vehiclesGetter: VehiclesGetter, vehicleDeletor: VehicleDeletor) {

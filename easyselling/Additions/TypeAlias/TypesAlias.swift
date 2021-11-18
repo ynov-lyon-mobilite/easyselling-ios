@@ -9,3 +9,4 @@ import Foundation
 import Combine
 
 typealias Action = () -> Void
+typealias OnUpdatingVehicle = (Vehicle) -> Void
