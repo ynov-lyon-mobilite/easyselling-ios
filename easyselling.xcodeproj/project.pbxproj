@@ -39,6 +39,10 @@
 		0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */; };
 		0382E2AA2718186100EB570E /* DefaultCredentialsVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A92718186100EB570E /* DefaultCredentialsVerificator_Specs.swift */; };
 		0382E2AC2718190B00EB570E /* DefaultCredentialsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2AB2718190B00EB570E /* DefaultCredentialsVerificator.swift */; };
+		038862852749379D001D7E36 /* DefaultCredentialsPreparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038862842749379D001D7E36 /* DefaultCredentialsPreparator.swift */; };
+		038862882749382B001D7E36 /* DefaultCredentialsPreparator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038862872749382B001D7E36 /* DefaultCredentialsPreparator_Specs.swift */; };
+		0388628A27494130001D7E36 /* SucceedingCredentialsPreparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0388628927494130001D7E36 /* SucceedingCredentialsPreparator.swift */; };
+		0388628C2749414F001D7E36 /* FailingCredentialsPreparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0388628B2749414F001D7E36 /* FailingCredentialsPreparator.swift */; };
 		03B80F9A27416C8B00E1BF47 /* DefaultAuthenticationNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B80F9927416C8B00E1BF47 /* DefaultAuthenticationNavigator.swift */; };
 		03B80F9C27416CC000E1BF47 /* DefaultOnBoardingNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B80F9B27416CC000E1BF47 /* DefaultOnBoardingNavigator.swift */; };
 		03B80F9E27416D0B00E1BF47 /* DefaultVehicleNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B80F9D27416D0B00E1BF47 /* DefaultVehicleNavigator.swift */; };
@@ -172,6 +176,10 @@
 		0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationViewModel_Specs.swift; sourceTree = "<group>"; };
 		0382E2A92718186100EB570E /* DefaultCredentialsVerificator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCredentialsVerificator_Specs.swift; sourceTree = "<group>"; };
 		0382E2AB2718190B00EB570E /* DefaultCredentialsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCredentialsVerificator.swift; sourceTree = "<group>"; };
+		038862842749379D001D7E36 /* DefaultCredentialsPreparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCredentialsPreparator.swift; sourceTree = "<group>"; };
+		038862872749382B001D7E36 /* DefaultCredentialsPreparator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCredentialsPreparator_Specs.swift; sourceTree = "<group>"; };
+		0388628927494130001D7E36 /* SucceedingCredentialsPreparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingCredentialsPreparator.swift; sourceTree = "<group>"; };
+		0388628B2749414F001D7E36 /* FailingCredentialsPreparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingCredentialsPreparator.swift; sourceTree = "<group>"; };
 		03B80F9927416C8B00E1BF47 /* DefaultAuthenticationNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthenticationNavigator.swift; sourceTree = "<group>"; };
 		03B80F9B27416CC000E1BF47 /* DefaultOnBoardingNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultOnBoardingNavigator.swift; sourceTree = "<group>"; };
 		03B80F9D27416D0B00E1BF47 /* DefaultVehicleNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleNavigator.swift; sourceTree = "<group>"; };
@@ -382,8 +390,19 @@
 				0382E2A52717664000EB570E /* AccountCreationViewModel.swift */,
 				035E860527188E9300684ED0 /* DefaultAccountCreator.swift */,
 				87DC1CFF271F60B9002DC193 /* AccountCreationView.swift */,
+				038862842749379D001D7E36 /* DefaultCredentialsPreparator.swift */,
 			);
 			path = AccountCreation;
+			sourceTree = "<group>";
+		};
+		038862862749380C001D7E36 /* DefaultCredentialsPreparator_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				038862872749382B001D7E36 /* DefaultCredentialsPreparator_Specs.swift */,
+				0388628927494130001D7E36 /* SucceedingCredentialsPreparator.swift */,
+				0388628B2749414F001D7E36 /* FailingCredentialsPreparator.swift */,
+			);
+			path = DefaultCredentialsPreparator_Specs;
 			sourceTree = "<group>";
 		};
 		03B80FAE274717E500E1BF47 /* DefaultEmailVerificator_Specs */ = {
@@ -596,6 +615,7 @@
 		873552C2270D847B00F2DDBD /* easysellingTests */ = {
 			isa = PBXGroup;
 			children = (
+				038862862749380C001D7E36 /* DefaultCredentialsPreparator_Specs */,
 				03004DCC273E73DB00188983 /* DefaultPasswordReseter_Specs */,
 				9BB4F7AB273D48A700340BD3 /* DefaultVehiclesGetter_Specs */,
 				03C18F0E2737D26B00C754E8 /* DefaultPasswordResetRequestor_Specs */,
@@ -970,6 +990,7 @@
 				87DC1D0A271FDF5C002DC193 /* LoginDTO.swift in Sources */,
 				87DC1D06271F6A4C002DC193 /* DefaultUserAuthenticator.swift in Sources */,
 				8705B9A427207A8D004132CF /* UserAuthenticationViewModel.swift in Sources */,
+				038862852749379D001D7E36 /* DefaultCredentialsPreparator.swift in Sources */,
 				8FF0102327329DDE0022314B /* Color+Extensions.swift in Sources */,
 				03C18F0827341AAA00C754E8 /* DefaultEmailVerificator.swift in Sources */,
 				03004DD0273E79D700188983 /* PasswordResetDTO.swift in Sources */,
@@ -1011,6 +1032,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0388628A27494130001D7E36 /* SucceedingCredentialsPreparator.swift in Sources */,
 				875E47B8273C6ECC0019FC83 /* FakeURLSession.swift in Sources */,
 				03004DD7273EAFA500188983 /* SucceedingPasswordReseter.swift in Sources */,
 				8705B9A227207A39004132CF /* SucceedingUserAuthenticator.swift in Sources */,
@@ -1026,6 +1048,7 @@
 				8798D14C2730FC1C00FF3AB4 /* FakeTokenManager.swift in Sources */,
 				03F0543F271B3F0A00434706 /* FakeRequestGenerator.swift in Sources */,
 				03DAF9A027271C2D00FFED55 /* VehicleScenario_Specs.swift in Sources */,
+				038862882749382B001D7E36 /* DefaultCredentialsPreparator_Specs.swift in Sources */,
 				03F0543C271B3E9A00434706 /* FailingAPICaller.swift in Sources */,
 				9BB4F7AD273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift in Sources */,
 				03B80FA22745B04B00E1BF47 /* DefaultPasswordResetPreparator_Specs.swift in Sources */,
@@ -1042,6 +1065,7 @@
 				8798D150273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift in Sources */,
 				8798D1492730F8B700FF3AB4 /* SucceedingTokenRefreshor.swift in Sources */,
 				8705B9A027207838004132CF /* UserAuthenticationViewModel_Specs.swift in Sources */,
+				0388628C2749414F001D7E36 /* FailingCredentialsPreparator.swift in Sources */,
 				03B80FB3274717E500E1BF47 /* FailingEmailVerificator.swift in Sources */,
 				875E47AE273C6AD90019FC83 /* LocalFile.swift in Sources */,
 				87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */,

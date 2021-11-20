@@ -12,22 +12,14 @@ import XCTest
 
 class AccountCreationViewModel_Specs: XCTestCase {
 
-    func test_Sends_back_account_informations_when_asking_for_account_creation() async {
-        givenViewModel(verificator: SucceedingInformationsVerificator())
+    func test_Leaves_account_creation_when_account_is_created() async {
+        givenViewModel(with: SucceedingCredentialsPreparator())
         await whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
-        thenVerifiedInformations(are: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
-    }
-    
-    func test_Sends_back_account_informations_when_asking_for_account_creation2() async {
-        givenViewModel(verificator: SucceedingInformationsVerificator())
-        thenViewModelState(is: .initial)
-        await whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
-        thenVerifiedInformations(are: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
-        thenViewModelState(is: .accountCreated)
+        XCTAssertTrue(isAccountIsCreated)
     }
 
     func test_Show_error_when_informations_email_is_wrong() async {
-        givenViewModel(with: FailingInformationsVerificator(error: .wrongEmail))
+        givenViewModel(with: FailingCredentialsPreparator(withError: .wrongEmail))
         await whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "password")
         thenViewModelState(is: .initial)
         thenError(is: .wrongEmail)
@@ -35,64 +27,53 @@ class AccountCreationViewModel_Specs: XCTestCase {
 
 
     func test_Show_error_when_informations_email_is_empty() async {
-        givenViewModel(with: FailingInformationsVerificator(error: .emptyEmail))
+        givenViewModel(with: FailingCredentialsPreparator(withError: .emptyEmail))
         await whenCreatingAccount(email: "", password: "password", passwordConfirmation: "password")
         thenViewModelState(is: .initial)
         thenError(is: .emptyEmail)
     }
 
     func test_Show_error_when_informations_password_is_incorrect() async {
-        givenViewModel(with: FailingInformationsVerificator(error: .wrongPassword))
+        givenViewModel(with: FailingCredentialsPreparator(withError: .wrongPassword))
         await whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "differentPassword")
         thenViewModelState(is: .initial)
         thenError(is: .wrongPassword)
     }
 
     func test_Show_error_when_informations_password_is_empty() async {
-        givenViewModel(with: FailingInformationsVerificator(error: .emptyPassword))
+        givenViewModel(with: FailingCredentialsPreparator(withError: .emptyPassword))
         await whenCreatingAccount(email: "test", password: "", passwordConfirmation: "password")
         thenViewModelState(is: .initial)
         thenError(is: .emptyPassword)
     }
 
     func test_Show_error_when_informations_password_confirmation_is_empty() async {
-        givenViewModel(with: FailingInformationsVerificator(error: .emptyPasswordConfirmation))
+        givenViewModel(with: FailingCredentialsPreparator(withError: .emptyPasswordConfirmation))
         await whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "")
         thenViewModelState(is: .initial)
         thenError(is: .emptyPasswordConfirmation)
     }
 
     func test_Shows_alert_when_an_error_occured_with_request() async {
-        givenViewModel(verificator: SucceedingInformationsVerificator(), accountCreator: FailingAccountCreator(error: .forbidden))
+        givenViewModel(with: SucceedingCredentialsPreparator(), accountCreator: FailingAccountCreator(error: .forbidden))
         await whenCreatingAccount(email: "test", password: "password", passwordConfirmation: "password")
         thenViewModelState(is: .initial)
         thenAlert(is: .forbidden)
         XCTAssertTrue(viewModel.showAlert)
     }
-    
-    func test_Leaves_account_creation_when_account_is_created() async {
-        givenViewModel(verificator: SucceedingInformationsVerificator())
-        await whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
-        XCTAssertTrue(isAccountIsCreated)
-    }
 
     func test_Deinits_when_no_longer_interest() async {
-        givenViewModel(with: SucceedingInformationsVerificator())
+        givenViewModel(with: SucceedingCredentialsPreparator())
         await whenCreatingAccount(email: "test@test.com", password: "password", passwordConfirmation: "password")
         whenNoLongerInterested()
         XCTAssertNil(viewModel)
     }
     
-    private func givenViewModel(verificator: SucceedingInformationsVerificator, accountCreator: AccountCreator = SucceedingAccountCreator()) {
-        self.succeedingVerificator = verificator
-        viewModel = AccountCreationViewModel(verificator: verificator, accountCreator: accountCreator, onAccountCreated: {
+    private func givenViewModel(with preparator: CredentialsPreparator = SucceedingCredentialsPreparator(), accountCreator: AccountCreator = SucceedingAccountCreator()) {
+        self.preparator = preparator
+        viewModel = AccountCreationViewModel(preparator: preparator, accountCreator: accountCreator, onAccountCreated: {
             self.isAccountIsCreated = true
         })
-    }
-    
-    private func givenViewModel(with verificator: CredentialsVerificator) {
-        let accountCreator = SucceedingAccountCreator()
-        viewModel = AccountCreationViewModel(verificator: verificator, accountCreator: accountCreator, onAccountCreated: {})
     }
 
     private func whenCreatingAccount(email: String, password: String, passwordConfirmation: String) async {
@@ -114,16 +95,12 @@ class AccountCreationViewModel_Specs: XCTestCase {
         XCTAssertEqual(expected, viewModel.error)
     }
     
-    private func thenVerifiedInformations(are expected: AccountCreationInformations) {
-        XCTAssertEqual(expected, succeedingVerificator.accountCreationInformation)
-    }
-    
     private func thenAlert(is expected: APICallerError) {
         XCTAssertEqual(expected, viewModel.alert)
     }
     
     private var viewModel: AccountCreationViewModel!
-    private var succeedingVerificator: SucceedingInformationsVerificator!
     private var verifiedInformations: AccountCreationInformations!
+    private var preparator: CredentialsPreparator!
     private var isAccountIsCreated: Bool!
 }

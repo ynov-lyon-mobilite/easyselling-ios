@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CredentialsVerificator {
-    func verify(email: String, password: String, passwordConfirmation: String) throws -> AccountCreationInformations
+    func verify(email: String, password: String, passwordConfirmation: String) throws
 }
 
 class DefaultCredentialsVerificator: CredentialsVerificator {
@@ -21,13 +21,11 @@ class DefaultCredentialsVerificator: CredentialsVerificator {
     private var emailVerificator: EmailVerificator
     private var passwordVerificator: PasswordVerificator
     
-    func verify(email: String, password: String, passwordConfirmation: String) throws -> AccountCreationInformations {
+    func verify(email: String, password: String, passwordConfirmation: String) throws {
         
         _ = try passwordVerificator.verify(password: password, passwordConfirmation: passwordConfirmation)
-        
-        let verifiedEmail = try emailVerificator.verify(email)
-        
-        return AccountCreationInformations(email: verifiedEmail, password: password, passwordConfirmation: passwordConfirmation)
+        try emailVerificator.verify(email)
+        return
     }
     
     private func verifyContent(of mail: String) -> Bool {

@@ -10,13 +10,13 @@ import Combine
 
 class AccountCreationViewModel: ObservableObject {
     
-    init(verificator: CredentialsVerificator, accountCreator: AccountCreator = DefaultAccountCreator(), onAccountCreated: @escaping Action) {
-        self.verificator = verificator
+    init(preparator: CredentialsPreparator = DefaultCredentialsPreparator(), accountCreator: AccountCreator = DefaultAccountCreator(), onAccountCreated: @escaping Action) {
+        self.preparator = preparator
         self.accountCreator = accountCreator
         self.onAccountCreated = onAccountCreated
     }
     
-    private var verificator: CredentialsVerificator
+    private var preparator: CredentialsPreparator
     private var accountCreator: AccountCreator
     private let onAccountCreated: Action
     
@@ -31,8 +31,8 @@ class AccountCreationViewModel: ObservableObject {
     func createAccount() async {
         self.state = .loading
         do {
-            let informationsVerified = try verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
-            await self.createAccount(with: informationsVerified)
+            let informations = try preparator.prepare(email: email, password: password, passwordConfirmation: passwordConfirmation)
+            await self.createAccount(with: informations)
         } catch(let error) {
             self.state = .initial
             self.setError(with: (error as? CredentialsError) ?? .unknow)
@@ -59,5 +59,16 @@ class AccountCreationViewModel: ObservableObject {
         case initial
         case loading
         case accountCreated
+    }
+}
+
+protocol CredentialsTransformator {
+    func transform(email: String, password: String, passwordConfirmation: String) -> AccountCreationInformations
+}
+
+class DefaultCredentialsTransformator: CredentialsTransformator {
+    
+    func transform(email: String, password: String, passwordConfirmation: String) -> AccountCreationInformations {
+        AccountCreationInformations(email: email, password: password, passwordConfirmation: passwordConfirmation)
     }
 }

@@ -40,9 +40,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let universalLinkUrl = userActivity.webpageURL else { return }
         if universalLinkUrl.path == "/admin/reset-password" {
             
-            guard let url = URLComponents(string: universalLinkUrl.absoluteString) else { return }
-            let tokenQueryItem = url.queryItems?.first(where: { $0.name == "token" })
-            guard let token = tokenQueryItem?.value else { return }
+            guard let url = URLComponents(string: universalLinkUrl.absoluteString),
+                  let tokenQueryItem = url.queryItems?.first(where: { $0.name == "token" }),
+                  let token = tokenQueryItem.value else { return }
             
             let navigator = DefaultAuthenticationNavigator(window: window)
             window?.makeKeyAndVisible()

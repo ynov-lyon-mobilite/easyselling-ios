@@ -28,10 +28,10 @@ class DefaultPasswordVerificator_Specs: XCTestCase {
         thenError(is: .emptyPasswordConfirmation)
     }
     
-    func test_Returns_PasswordResetDTO_when_verification_is_ok() {
+    func test_Verify_passwords() {
         givenVerificator()
         whenVerifying(password: "password", passwordConfirmation: "password")
-        thenReturn(is: PasswordResetDTO(password: "password", token: ""))
+        thenPasswordHasBeenVerified()
     }
     
     private func givenVerificator() {
@@ -47,12 +47,12 @@ class DefaultPasswordVerificator_Specs: XCTestCase {
         }
     }
     
-    private func thenError(is expected: CredentialsError) {
-        XCTAssertEqual(expected, error)
+    private func thenPasswordHasBeenVerified() {
+        XCTAssertTrue(verifyingHasSucceed)
     }
     
-    private func thenReturn(is expected: PasswordResetDTO) {
-        
+    private func thenError(is expected: CredentialsError) {
+        XCTAssertEqual(expected, error)
     }
     
     private var verificator: DefaultPasswordVerificator!

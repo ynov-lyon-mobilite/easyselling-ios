@@ -11,19 +11,19 @@ import XCTest
 class DefaultPasswordResetPreparator_Specs: XCTestCase {
     
     func test_Prepares_password_into_DTO() {
-        givenPreparator()
+        givenPreparator(verificator: SucceedingPasswordVerificator())
         whenPreparingToDTO("password", and: "password")
         thenPreparedDTO(is: PasswordResetDTO(password: "password", token: ""))
     }
     
     func test_Throws_error_when_verifies_password_failed() {
-        givenPreparator()
+        givenPreparator(verificator: FailingPasswordVerificator(withError: .wrongPassword))
         whenPreparingToDTO("password", and: "wrongPasswordConfirmation")
         XCTAssertEqual(.wrongPassword, error)
     }
     
-    private func givenPreparator() {
-        preparator = DefaultPasswordResetPreparator(verificator: DefaultPasswordVerificator(), transformator: DefaultPasswordResetTransformator())
+    private func givenPreparator(verificator: PasswordVerificator = SucceedingPasswordVerificator()) {
+        preparator = DefaultPasswordResetPreparator(verificator: verificator, transformator: DefaultPasswordResetTransformator())
     }
     
     private func whenPreparingToDTO(_ password: String, and passwordConfirmation: String) {

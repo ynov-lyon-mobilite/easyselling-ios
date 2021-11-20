@@ -14,7 +14,7 @@ class DefaultCredentialsVerificator_Specs: XCTestCase {
     func test_Verifies_informations_are_good() {
         givenVerificator()
         whenVerifying(email: "test@test.com", password: "password", passwordConfirmation: "password")
-        thenInformations(are: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
+        thenInformationsVerified()
     }
     
     func test_Shows_error_when_passwords_are_not_matching() {
@@ -72,7 +72,8 @@ class DefaultCredentialsVerificator_Specs: XCTestCase {
     
     private func whenVerifying(email: String, password: String, passwordConfirmation: String) {
         do {
-            self.accountInformations = try verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
+            try verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
+            self.isVerified = true
         } catch(let error) {
             self.accountCreationError = (error as! CredentialsError)
         }
@@ -82,8 +83,8 @@ class DefaultCredentialsVerificator_Specs: XCTestCase {
         verificator = nil
     }
     
-    private func thenInformations(are expected: AccountCreationInformations) {
-        XCTAssertEqual(expected, accountInformations)
+    private func thenInformationsVerified() {
+        XCTAssertTrue(isVerified)
     }
     
     private func thenError(is expected: CredentialsError) {
@@ -93,5 +94,5 @@ class DefaultCredentialsVerificator_Specs: XCTestCase {
     
     private var verificator: DefaultCredentialsVerificator!
     private var accountCreationError: CredentialsError!
-    private var accountInformations: AccountCreationInformations!
+    private var isVerified: Bool = false
 }

@@ -16,7 +16,7 @@ class FailingInformationsVerificator: CredentialsVerificator {
     
     private var error: CredentialsError
     
-    func verify(email: String, password: String, passwordConfirmation: String) throws -> AccountCreationInformations {
+    func verify(email: String, password: String, passwordConfirmation: String) throws {
         throw error
     }
 }

@@ -36,7 +36,7 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
     }
 
     func navigatesToAccountCreation(onFinish: @escaping Action) {
-        let accountCreationViewModel = AccountCreationViewModel(verificator: DefaultCredentialsVerificator(), onAccountCreated: onFinish)
+        let accountCreationViewModel = AccountCreationViewModel(preparator: DefaultCredentialsPreparator(), onAccountCreated: onFinish)
         let accountCreationView = AccountCreationView(viewModel: accountCreationViewModel)
         navigationController.pushViewController(UIHostingController(rootView: accountCreationView), animated: true)
     }
