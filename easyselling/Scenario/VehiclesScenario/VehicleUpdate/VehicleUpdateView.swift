@@ -9,15 +9,21 @@ import SwiftUI
 
 struct VehicleUpdateView: View {
     
-    var viewModel: VehicleUpdateViewModel
+    @ObservedObject var viewModel: VehicleUpdateViewModel
     
     var body: some View {
-        Text(viewModel.vehicle.id)
+        VStack {
+            Button("Delete") {
+                Task {
+                    await viewModel.onFinish()
+                }
+            }
+        }
     }
 }
 
 struct VehicleUpdateView_Previews: PreviewProvider {
     static var previews: some View {
-        VehicleUpdateView(viewModel: VehicleUpdateViewModel(vehicle: Vehicle(brand: "", model: "", license: "", type: .car, year: "")))
+        VehicleUpdateView(viewModel: VehicleUpdateViewModel(vehicle: Vehicle(brand: "", model: "", license: "", type: .car, year: ""), onFinish: {}))
     }
 }

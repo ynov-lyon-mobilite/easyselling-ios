@@ -39,7 +39,7 @@ protocol VehicleNavigator {
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
     func goingBackToHomeView()
-    func navigatesToVehicleUpdate(onFinish: @escaping Action, vehicle: Vehicle)
+    func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
 }
 
 class DefaultVehicleNavigator: VehicleNavigator {
@@ -51,8 +51,9 @@ class DefaultVehicleNavigator: VehicleNavigator {
     private func navigatesToProfile() {
         navigator.navigatesToProfile()
     }
-
-    private func goingBackToHomeView() {
-        navigator.goingBackToHomeView()
+    func goingBackToHomeView() {
+        DispatchQueue.main.async {
+            self.navigationController.dismiss(animated: true)
+        }
     }
 }
