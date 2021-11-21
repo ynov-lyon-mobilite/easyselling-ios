@@ -50,6 +50,13 @@ struct MyVehiclesView: View {
                                         .background(vehicle.color)
                                         .cornerRadius(22)
                                         .padding(.horizontal, 25)
+.swipeActions {
+                        Button("Delete") {
+                            Task {
+                                await viewModel.deleteVehicle(idVehicle: vehicule.id)
+                            }
+                        }.tint(Asset.onBoardingDotActive.swiftUIColor)
+}
                                     }
                                 }
                             }

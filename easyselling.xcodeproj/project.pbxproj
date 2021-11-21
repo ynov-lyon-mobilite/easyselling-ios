@@ -89,6 +89,7 @@
 		2CD4B8C0271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */; };
 		2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */; };
 		2CD8639D2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8639C2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift */; };
+		3952D50E27470623008A02FB /* DefaultVehicleDeletor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952D50D27470623008A02FB /* DefaultVehicleDeletor.swift */; };
 		8705B9A027207838004132CF /* UserAuthenticationViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */; };
 		8705B9A227207A39004132CF /* SucceedingUserAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */; };
 		8705B9A427207A8D004132CF /* UserAuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A327207A8D004132CF /* UserAuthenticationViewModel.swift */; };
@@ -232,6 +233,7 @@
 		2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleInformationsVerificator.swift; sourceTree = "<group>"; };
 		2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationViewModel.swift; sourceTree = "<group>"; };
 		2CD8639C2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleInformationsVerificator_Specs.swift; sourceTree = "<group>"; };
+		3952D50D27470623008A02FB /* DefaultVehicleDeletor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleDeletor.swift; sourceTree = "<group>"; };
 		8704D84A27193CE8000B24E2 /* UserAuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationView.swift; sourceTree = "<group>"; };
 		8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationViewModel_Specs.swift; sourceTree = "<group>"; };
 		8705B9A127207A39004132CF /* SucceedingUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingUserAuthenticator.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 				03DAF9A1272730D500FFED55 /* MyVehiclesView.swift */,
 				03DAF9A7272733D600FFED55 /* MyVehiclesViewModel.swift */,
 				2C863377273FB4040049C186 /* DefaultVehiclesGetter.swift */,
+				3952D50D27470623008A02FB /* DefaultVehicleDeletor.swift */,
 			);
 			path = MyVehicles;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 		03F209772716E1C500E10F6C /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				87DC1D07271FDF3F002DC193 /* Models */,
 				034D04E22732976E00576D64 /* GoogleService-Info.plist */,
 				03F209782716E21100E10F6C /* Supporting Files */,
 				035E860327184EDC00684ED0 /* AppDelegate.swift */,
@@ -632,7 +636,6 @@
 				87780BAA27172FB10035AB13 /* Services */,
 				87780B9C27172F1C0035AB13 /* Additions */,
 				03F209772716E1C500E10F6C /* Application */,
-				87DC1D07271FDF3F002DC193 /* Models */,
 				0382E2A12717648000EB570E /* Scenario */,
 			);
 			path = easyselling;
@@ -1031,6 +1034,7 @@
 				87DC1D0A271FDF5C002DC193 /* LoginDTO.swift in Sources */,
 				87DC1D06271F6A4C002DC193 /* DefaultUserAuthenticator.swift in Sources */,
 				8705B9A427207A8D004132CF /* UserAuthenticationViewModel.swift in Sources */,
+				3952D50E27470623008A02FB /* DefaultVehicleDeletor.swift in Sources */,
 				0317EE3A27519DF100A6AE0D /* ProfileView.swift in Sources */,
 				038862852749379D001D7E36 /* DefaultCredentialsPreparator.swift in Sources */,
 				8FF0102327329DDE0022314B /* Color+Extensions.swift in Sources */,

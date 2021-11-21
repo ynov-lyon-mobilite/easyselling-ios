@@ -12,14 +12,17 @@ import SwiftUI
 class MyVehiclesViewModel: ObservableObject {
 
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
+vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
          isOpenningVehicleCreation: @escaping Action,
          isNavigatingToProfile: @escaping Action) {
         self.vehiclesGetter = vehiclesGetter
+        self.vehicleDeletor = vehicleDeletor
         self.isOpenningVehicleCreation = isOpenningVehicleCreation
         self.isNavigatingToProfile = isNavigatingToProfile
     }
 
     private var vehiclesGetter: VehiclesGetter
+    private var vehicleDeletor: VehicleDeletor
     private var isOpenningVehicleCreation: Action
     private var isNavigatingToProfile: Action
     @Published var vehicles: [Vehicle] = []
@@ -46,7 +49,24 @@ class MyVehiclesViewModel: ObservableObject {
     func navigateToProfile() {
         self.isNavigatingToProfile()
     }
-
+    
+    @MainActor func deleteVehicle(idVehicle: String) async {
+        print("JE DELETE")
+        do {
+            try await vehicleDeletor.deleteVehicle(id: idVehicle)
+            print("OUAIS OUAIS OUAIS")
+        } catch (let error) {
+            if let error = error as? APICallerError {
+                isError = true
+                self.error = error
+            } else {
+                self.error = nil
+            }
+        }
+        
+        isLoading = false
+    }
+    
     func updateVehiclesList() async {
        await getVehicles()
     }

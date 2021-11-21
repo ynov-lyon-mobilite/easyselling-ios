@@ -43,6 +43,22 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         XCTAssertTrue(onNavigateToProfile)
     }
     
+    func test_Clicks_on_delete_button() async {
+        let expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
+                                Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")]
+        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter(expectedVehicles))
+        thenViewModelIsLoading()
+        await whenTryingToGetVehicles()
+        whenDeleting(vehicle: Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2"))
+        thenViewModelIsLoading()
+        await whenTryingToGetVehicles()
+        thenLoadVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
+    }
+    
+    func whenDeleting(vehicle: Vehicle) {
+        viewModel.deleteVehicle(vehicle: vehicle)
+    }
+    
     private func givenViewModel(vehiclesGetter: VehiclesGetter) {
         viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter,
                                         isOpenningVehicleCreation: {
