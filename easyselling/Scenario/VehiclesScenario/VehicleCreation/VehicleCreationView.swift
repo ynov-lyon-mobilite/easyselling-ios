@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VehicleCreationView: View {
-   
+
     @ObservedObject var viewModel: VehicleCreationViewModel
 
     var body: some View {

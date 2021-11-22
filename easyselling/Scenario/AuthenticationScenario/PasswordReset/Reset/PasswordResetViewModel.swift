@@ -8,7 +8,7 @@
 import Foundation
 
 class PasswordResetViewModel: ObservableObject {
-    
+
     init(token: String,
          preparator: DefaultPasswordResetPreparator = DefaultPasswordResetPreparator(),
          passwordReseter: PasswordReseter = DefaultPasswordReseter(),
@@ -18,19 +18,19 @@ class PasswordResetViewModel: ObservableObject {
         self.passwordReseter = passwordReseter
         self.onPasswordReset = onPasswordReset
     }
-    
+
     private var token: String
     private var preparator: DefaultPasswordResetPreparator
     private var passwordReseter: PasswordReseter
     private var onPasswordReset: Action
-    
+
     @Published var error: CredentialsError?
     @Published var alert: APICallerError?
     @Published var showAlert: Bool = false
     @Published var showError: Bool = false
     @Published var newPassword: String = ""
     @Published var newPasswordConfirmation: String = ""
-    
+
     func resetPassword() async {
         do {
             var passwordResetDto = try preparator.prepare(newPassword, passwordConfirmation: newPasswordConfirmation)
@@ -48,7 +48,7 @@ class PasswordResetViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func setError(with error: CredentialsError) {
         self.error = error
     }

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct UserAuthenticationView: View {
     @ObservedObject private var viewModel: UserAuthenticationViewModel
-    
+
     init(viewModel: UserAuthenticationViewModel) {
         self.viewModel = viewModel
     }
-    
+
     var body: some View {
         VStack(spacing: 30) {
             Spacer()
@@ -31,12 +31,12 @@ struct UserAuthenticationView: View {
                     .background(Color.gray.opacity(0.5))
                     .cornerRadius(10)
                     .textContentType(.password)
-                
+
                 Text(viewModel.error?.errorDescription ?? "")
                     .foregroundColor(.red)
                     .font(.headline)
                     .opacity(viewModel.error != nil ? 1 : 0)
-                
+
                 Button(L10n.Button.forgottenPassword) {
                     viewModel.navigateToPasswordReset()
                 }
@@ -56,9 +56,9 @@ struct UserAuthenticationView: View {
                                 lineWidth: 4)
                 )
             .padding(.horizontal)
-            
+
             Spacer()
-            
+
             Button(L10n.UserAuthentication.Button.register) {
                 viewModel.navigateToAccountCreation()
             }

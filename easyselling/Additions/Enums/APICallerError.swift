@@ -13,7 +13,7 @@ enum APICallerError: Int, LocalizedError, Equatable {
     case encodeError = 002
     case decodeError = 003
     case requestGenerationError = 004
-    
+
     //  HTTP errors
     case badRequest = 400
     case unauthorized = 401
@@ -31,7 +31,7 @@ enum APICallerError: Int, LocalizedError, Equatable {
     case badGateway = 502
     case serviceUnavailable = 503
     case gatewayTimeout = 504
-    
+
     var errorDescription: String? {
         switch self {
         case .notFound: return "Impossible de trouver ce que vous cherchez"
@@ -39,7 +39,7 @@ enum APICallerError: Int, LocalizedError, Equatable {
         default: return "Une erreur est survenue"
         }
     }
-    
+
     static func from(statusCode: Int) -> Self {
         return .init(rawValue: statusCode) ?? .unknownError
     }

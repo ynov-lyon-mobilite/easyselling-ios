@@ -9,17 +9,17 @@ import Foundation
 import Combine
 
 class AccountCreationViewModel: ObservableObject {
-    
+
     init(preparator: CredentialsPreparator = DefaultCredentialsPreparator(), accountCreator: AccountCreator = DefaultAccountCreator(), onAccountCreated: @escaping Action) {
         self.preparator = preparator
         self.accountCreator = accountCreator
         self.onAccountCreated = onAccountCreated
     }
-    
+
     private var preparator: CredentialsPreparator
     private var accountCreator: AccountCreator
     private let onAccountCreated: Action
-    
+
     @Published var state: AccountCreationState = .initial
     @Published var email: String = ""
     @Published var password: String = ""
@@ -27,7 +27,7 @@ class AccountCreationViewModel: ObservableObject {
     @Published var error: CredentialsError?
     @Published var alert: APICallerError?
     @Published var showAlert: Bool = false
-    
+
     func createAccount() async {
         self.state = .loading
         do {
@@ -38,7 +38,7 @@ class AccountCreationViewModel: ObservableObject {
             self.setError(with: (error as? CredentialsError) ?? .unknow)
         }
     }
-    
+
     @MainActor private func createAccount(with informations: AccountCreationInformations) async {
         do {
             try await accountCreator.createAccount(informations: informations)
@@ -50,11 +50,11 @@ class AccountCreationViewModel: ObservableObject {
             self.showAlert = true
         }
     }
-    
+
     private func setError(with error: CredentialsError) {
         self.error = error
     }
-    
+
     enum AccountCreationState: Equatable {
         case initial
         case loading
@@ -67,7 +67,7 @@ protocol CredentialsTransformator {
 }
 
 class DefaultCredentialsTransformator: CredentialsTransformator {
-    
+
     func transform(email: String, password: String, passwordConfirmation: String) -> AccountCreationInformations {
         AccountCreationInformations(email: email, password: password, passwordConfirmation: passwordConfirmation)
     }

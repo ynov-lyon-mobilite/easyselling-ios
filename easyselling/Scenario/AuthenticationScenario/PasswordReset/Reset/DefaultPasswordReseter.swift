@@ -12,16 +12,16 @@ protocol PasswordReseter {
 }
 
 class DefaultPasswordReseter: PasswordReseter {
-    
+
     init(requestGenerator: RequestGenerator = DefaultRequestGenerator(),
          apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
         self.apiCaller = apiCaller
     }
-    
+
     private var requestGenerator: RequestGenerator
     private var apiCaller: APICaller
-    
+
     func resetPassword(with passwordResetInformations: PasswordResetDTO) async throws {
         let request = try requestGenerator.generateRequest(endpoint: .passwordReset, method: .POST, body: passwordResetInformations, headers: [:])
         try await apiCaller.call(request)

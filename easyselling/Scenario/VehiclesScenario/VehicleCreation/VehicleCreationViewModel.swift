@@ -8,7 +8,7 @@ import Foundation
 import Combine
 
 class VehicleCreationViewModel: ObservableObject {
-    
+
     private var vehicleCreator: VehicleCreator
     private var vehicleInformationsVerificator: VehicleInformationsVerificator
     private var onFinish: () async -> Void
@@ -31,7 +31,7 @@ class VehicleCreationViewModel: ObservableObject {
 
     @MainActor func createVehicle() async {
         let informations = Vehicle(brand: brand, model: model, license: license, type: type, year: year)
-        
+
         do {
             try vehicleInformationsVerificator.verifyInformations(vehicle: informations)
             try await vehicleCreator.createVehicle(informations: informations)
@@ -41,7 +41,7 @@ class VehicleCreationViewModel: ObservableObject {
             self.showAlert = true
         }
     }
-    
+
     func dismissModal() async {
         await self.onFinish()
     }

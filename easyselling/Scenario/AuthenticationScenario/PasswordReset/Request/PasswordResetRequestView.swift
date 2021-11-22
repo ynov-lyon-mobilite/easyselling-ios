@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct PasswordResetRequestView: View {
-    
+
     @ObservedObject private var viewModel: PasswordResetRequestViewModel
-    
+
     init(viewModel: PasswordResetRequestViewModel) {
         self.viewModel = viewModel
     }
-    
+
     var body: some View {
         VStack {
             TextField(L10n.SignUp.mail, text: $viewModel.email)
@@ -22,7 +22,7 @@ struct PasswordResetRequestView: View {
                 .background(Color.gray.opacity(0.5))
                 .cornerRadius(10)
                 .textContentType(.emailAddress)
-            
+
             if viewModel.state == .loading {
                 ProgressView()
             } else if viewModel.state == .requestSent {
@@ -32,7 +32,7 @@ struct PasswordResetRequestView: View {
                     .foregroundColor(.red)
                     .font(.headline)
                     .opacity(viewModel.error != nil ? 1 : 0)
-                
+
                 Button(L10n.PasswordReset.sendMailButton) {
                     Task {
                         await viewModel.requestPasswordReset()

@@ -14,7 +14,7 @@ struct Vehicle: Codable, Equatable, Identifiable {
     var license: String
     var type: Category
     var year: String
-    
+
     enum Category: String, Codable {
       case car, moto
 

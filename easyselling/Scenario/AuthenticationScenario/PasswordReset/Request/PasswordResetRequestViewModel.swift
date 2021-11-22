@@ -8,12 +8,12 @@
 import Foundation
 
 class PasswordResetRequestViewModel: ObservableObject {
-    
+
     init(verificator: EmailVerificator = DefaultEmailVerificator(), passwordRequester: PasswordResetRequester = DefaultPasswordResetRequester()) {
         self.verificator = verificator
         self.passwordRequester = passwordRequester
     }
-    
+
     private let verificator: EmailVerificator
     private let passwordRequester: PasswordResetRequester
     @Published var email: String = ""
@@ -21,7 +21,7 @@ class PasswordResetRequestViewModel: ObservableObject {
     @Published var alert: APICallerError?
     @Published var state: PasswordResetState = .initial
     var resetRequestSuccessfullySent: String = L10n.PasswordReset.mailSentSuccessfully
-    
+
     @MainActor
     func requestPasswordReset() async {
         state = .loading
@@ -39,11 +39,11 @@ class PasswordResetRequestViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func setError(with error: CredentialsError) {
         self.error = error
     }
-    
+
     enum PasswordResetState: Equatable {
         case initial
         case loading
