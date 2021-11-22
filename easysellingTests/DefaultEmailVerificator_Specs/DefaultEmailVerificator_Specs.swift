@@ -34,13 +34,21 @@ class DefaultEmailVerificator_Specs: XCTestCase {
         thenError(is: .wrongEmail)
     }
     
+    func test_Does_nothing_when_email_is_ok() {
+        givenVerificator()
+        whenVerifying(email: "test@test.com")
+        thenEmailIsVerifiedSuccessfully()
+    }
+    
     private func givenVerificator() {
         verificator = DefaultEmailVerificator()
     }
     
     private func whenVerifying(email: String) {
         do {
-            _ = try verificator.verify(email)
+            try verificator.verify(email)
+            self.isVerifiedSuccessfully = true
+            
         } catch(let error) {
             self.error = (error as! CredentialsError)
         }
@@ -50,6 +58,11 @@ class DefaultEmailVerificator_Specs: XCTestCase {
         XCTAssertEqual(expected, error)
     }
     
+    private func thenEmailIsVerifiedSuccessfully() {
+        XCTAssertTrue(isVerifiedSuccessfully)
+    }
+    
     private var verificator: DefaultEmailVerificator!
     private var error: CredentialsError!
+    private var isVerifiedSuccessfully: Bool = false
 }

@@ -23,7 +23,7 @@ class DefaultCredentialsVerificator: CredentialsVerificator {
     
     func verify(email: String, password: String, passwordConfirmation: String) throws {
         
-        _ = try passwordVerificator.verify(password: password, passwordConfirmation: passwordConfirmation)
+        try passwordVerificator.verify(password: password, passwordConfirmation: passwordConfirmation)
         try emailVerificator.verify(email)
         return
     }

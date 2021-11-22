@@ -8,12 +8,12 @@
 import Foundation
 
 protocol EmailVerificator {
-    func verify(_ email: String) throws -> String
+    func verify(_ email: String) throws
 }
 
 class DefaultEmailVerificator: EmailVerificator {
     
-    func verify(_ email: String) throws -> String {
+    func verify(_ email: String) throws {
         guard !email.isEmpty else {
             throw CredentialsError.emptyEmail
         }
@@ -22,7 +22,7 @@ class DefaultEmailVerificator: EmailVerificator {
             throw CredentialsError.wrongEmail
         }
         
-        return email
+        return
     }
     
     private func verifyContent(of mail: String) -> Bool {

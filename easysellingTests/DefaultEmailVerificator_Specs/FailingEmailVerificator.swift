@@ -15,7 +15,7 @@ class FailingEmailVerificator: EmailVerificator {
     
     private let error: CredentialsError
     
-    func verify(_ email: String) throws -> String {
+    func verify(_ email: String) throws {
         throw error
     }
 }

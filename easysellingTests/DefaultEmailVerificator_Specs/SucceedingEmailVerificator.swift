@@ -9,7 +9,7 @@
 
 class SucceedingEmailVerificator: EmailVerificator {
     
-    func verify(_ email: String) throws -> String {
-        email
+    func verify(_ email: String) throws {
+        return
     }
 }
