@@ -135,6 +135,7 @@
 		87DC1D0A271FDF5C002DC193 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D09271FDF5C002DC193 /* LoginDTO.swift */; };
 		87DC1D0C271FDF6B002DC193 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D0B271FDF6B002DC193 /* Token.swift */; };
 		87DC1D0E271FDF8D002DC193 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D0D271FDF8D002DC193 /* APIResponse.swift */; };
+		8F38D78E274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D78D274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift */; };
 		8F86D4222716E4A000D143D8 /* OnBoardingScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D4212716E4A000D143D8 /* OnBoardingScenario_Specs.swift */; };
 		8F86D42C27172BC900D143D8 /* OnBoardingViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D42B27172BC900D143D8 /* OnBoardingViewModel_Specs.swift */; };
 		8F86D42E27172F3B00D143D8 /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D42D27172F3B00D143D8 /* OnBoardingViewModel.swift */; };
@@ -285,6 +286,7 @@
 		87DC1D09271FDF5C002DC193 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		87DC1D0B271FDF6B002DC193 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		87DC1D0D271FDF8D002DC193 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		8F38D78D274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleUpdateViewModel_specs.swift; sourceTree = "<group>"; };
 		8F86D4212716E4A000D143D8 /* OnBoardingScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScenario_Specs.swift; sourceTree = "<group>"; };
 		8F86D42B27172BC900D143D8 /* OnBoardingViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel_Specs.swift; sourceTree = "<group>"; };
 		8F86D42D27172F3B00D143D8 /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
@@ -582,6 +584,7 @@
 				2C6D0F2A2732D9B500A86349 /* DefaultVehicleCreator_Specs.swift */,
 				2CD8639C2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift */,
 				2C86337B273FB7B10049C186 /* succeededVehicles.json */,
+				8F38D78D274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift */,
 			);
 			path = VehicleScenario_Specs;
 			sourceTree = "<group>";
@@ -1151,6 +1154,7 @@
 				9BB84D72274E361E00D88B03 /* FakeAuthorizedRequestGenerator.swift in Sources */,
 				8798D14C2730FC1C00FF3AB4 /* FakeTokenManager.swift in Sources */,
 				03F0543F271B3F0A00434706 /* FakeRequestGenerator.swift in Sources */,
+				8F38D78E274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift in Sources */,
 				03DAF9A027271C2D00FFED55 /* VehicleScenario_Specs.swift in Sources */,
 				038862882749382B001D7E36 /* DefaultCredentialsPreparator_Specs.swift in Sources */,
 				03F0543C271B3E9A00434706 /* FailingAPICaller.swift in Sources */,
