@@ -482,11 +482,11 @@
 		03DAF9A3272731FB00FFED55 /* VehiclesScenario */ = {
 			isa = PBXGroup;
 			children = (
-				8FA938C6274708FF00B1FA96 /* VehicleUpdate */,
+				03B80F9D27416D0B00E1BF47 /* DefaultVehicleNavigator.swift */,
 				2C4486B3271DF7E10021122F /* VehicleScenario.swift */,
+				8FA938C6274708FF00B1FA96 /* VehicleUpdate */,
 				03DAF9A42727320600FFED55 /* MyVehicles */,
 				2CD4B8BE271C5F82002598A4 /* VehicleCreation */,
-				03B80F9D27416D0B00E1BF47 /* DefaultVehicleNavigator.swift */,
 			);
 			path = VehiclesScenario;
 			sourceTree = "<group>";

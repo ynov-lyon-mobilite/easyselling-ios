@@ -6,6 +6,7 @@
 //
 import UIKit
 import SwiftUI
+
 class VehicleScenario {
 
     init(navigator: VehicleNavigator) {
@@ -32,28 +33,4 @@ class VehicleScenario {
         navigator.navigatesToVehicleUpdate(onFinish: goingBackToHomeView, vehicle: vehicle)
     }
 
-}
-
-protocol VehicleNavigator {
-    
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle)
-    func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
-    func goingBackToHomeView()
-    func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
-}
-
-class DefaultVehicleNavigator: VehicleNavigator {
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-
-    private func navigatesToProfile() {
-        navigator.navigatesToProfile()
-    }
-    func goingBackToHomeView() {
-        DispatchQueue.main.async {
-            self.navigationController.dismiss(animated: true)
-        }
-    }
 }
