@@ -1,5 +1,5 @@
 //
-//  DefaultInformationsVerificator_Specs.swift
+//  DefaultCredentialsVerificator_Specs.swift
 //  easysellingTests
 //
 //  Created by Nicolas Barbosa on 14/10/2021.
@@ -9,12 +9,12 @@ import Foundation
 import XCTest
 @testable import easyselling
 
-class DefaultInformationsVerificator_Specs: XCTestCase {
+class DefaultCredentialsVerificator_Specs: XCTestCase {
     
     func test_Verifies_informations_are_good() {
         givenVerificator()
         whenVerifying(email: "test@test.com", password: "password", passwordConfirmation: "password")
-        thenInformations(are: AccountCreationInformations(email: "test@test.com", password: "password", passwordConfirmation: "password"))
+        thenInformationsVerified()
     }
     
     func test_Shows_error_when_passwords_are_not_matching() {
@@ -67,37 +67,32 @@ class DefaultInformationsVerificator_Specs: XCTestCase {
     }
     
     private func givenVerificator() {
-        verificator = DefaultInformationsVerificator()
+        verificator = DefaultCredentialsVerificator()
     }
     
     private func whenVerifying(email: String, password: String, passwordConfirmation: String) {
         do {
-            self.accountInformations = try verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
+            try verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
+            self.isVerified = true
         } catch(let error) {
-            self.accountCreationError = (error as! AccountCreationError)
+            self.accountCreationError = (error as! CredentialsError)
         }
-        
-//        switch result {
-//        case let .success(informations): self.accountInformations = informations
-//        case let .failure(error): self.accountCreationError = error
-//        case .none: break
-//        }
     }
     
     private func whenNoLongerInterested() {
         verificator = nil
     }
     
-    private func thenInformations(are expected: AccountCreationInformations) {
-        XCTAssertEqual(expected, accountInformations)
+    private func thenInformationsVerified() {
+        XCTAssertTrue(isVerified)
     }
     
-    private func thenError(is expected: AccountCreationError) {
+    private func thenError(is expected: CredentialsError) {
         XCTAssertEqual(expected.errorDescription, accountCreationError.errorDescription)
         XCTAssertEqual(expected, accountCreationError)
     }
     
-    private var verificator: DefaultInformationsVerificator!
-    private var accountCreationError: AccountCreationError!
-    private var accountInformations: AccountCreationInformations!
+    private var verificator: DefaultCredentialsVerificator!
+    private var accountCreationError: CredentialsError!
+    private var isVerified: Bool = false
 }

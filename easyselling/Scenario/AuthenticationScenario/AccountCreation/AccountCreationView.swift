@@ -56,14 +56,14 @@ struct AccountCreationView: View {
         .alert(isPresented: $viewModel.showAlert, content: {
             Alert(
                 title: Text(viewModel.alert?.errorDescription ?? ""),
-                dismissButton: Alert.Button.default(Text("Ok")))
+                dismissButton: Alert.Button.default(Text(L10n.Button.ok)))
         })
     }
 }
 
 struct AccountCreationView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountCreationView(viewModel: AccountCreationViewModel(verificator: DefaultInformationsVerificator()))
+        AccountCreationView(viewModel: AccountCreationViewModel(preparator: DefaultCredentialsPreparator(), onAccountCreated: {}))
             .environment(\.locale, .init(identifier: "fr"))
     }
 }

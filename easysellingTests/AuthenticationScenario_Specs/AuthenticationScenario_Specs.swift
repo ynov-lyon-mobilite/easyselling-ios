@@ -17,6 +17,19 @@ class AuthenticationScenario_Specs: XCTestCase {
         thenHistory(is: [.login])
     }
     
+    func test_Begins_scenario_from_reset_password_universal_links() {
+        givenScenario()
+        whenBeginning(from: .resetPassword(token: ""))
+        thenHistory(is: [.login, .passwordReset])
+    }
+    
+    func test_Navigates_back_to_login_page_when_password_is_reset() {
+        givenScenario()
+        whenBeginning(from: .resetPassword(token: ""))
+        navigator.onPasswordReset?()
+        thenHistory(is: [.login, .passwordReset, .login])
+    }
+    
     func test_Navigates_to_account_creation() {
         givenScenario()
         whenBeginning()
@@ -38,18 +51,29 @@ class AuthenticationScenario_Specs: XCTestCase {
         navigator.onUserLogged?()
         XCTAssertTrue(navigator.scenarioIsFinished)
     }
+        
+    func test_Navigates_to_password_reset() {
+        givenScenario()
+        whenBeginning()
+        whenNavigatingToPasswordReset()
+        thenHistory(is: [.login, .passwordResetRequest])
+    }
     
     private func givenScenario() {
         navigator = SpyAuthenticationNavigator()
         scenario = AuthenticationScenario(navigator: navigator)
     }
     
-    private func whenBeginning() {
-        scenario.begin()
+    private func whenBeginning(from beginType: AuthenticationScenario.BeginType = .default) {
+        scenario.begin(from: beginType)
     }
     
     private func whenNavigatingToAccountCreation() {
         scenario.navigatesToAccountCreation()
+    }
+    
+    private func whenNavigatingToPasswordReset() {
+        scenario.navigatesToPasswordResetRequest()
     }
     
     private func thenHistory(is expected: [SpyAuthenticationNavigator.History]) {
@@ -62,12 +86,14 @@ class AuthenticationScenario_Specs: XCTestCase {
 }
 
 class SpyAuthenticationNavigator: AuthenticationNavigator {
+    
     private(set) var history: [History] = []
     private(set) var onFinish: Action?
     private(set) var onUserLogged: Action?
+    private(set) var onPasswordReset: Action?
     private(set) var scenarioIsFinished: Bool = false
     
-    func begin(onAccountCreation: @escaping Action, onUserLogged: @escaping Action) {
+    func begin(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
         self.onUserLogged = onUserLogged
         history.append(.login)
     }
@@ -75,6 +101,15 @@ class SpyAuthenticationNavigator: AuthenticationNavigator {
     func navigatesToAccountCreation(onFinish: @escaping Action) {
         self.onFinish = onFinish
         history.append(.accountCreation)
+    }
+    
+    func navigatesToPasswordResetRequest() {
+        history.append(.passwordResetRequest)
+    }
+    
+    func navigatesToPasswordReset(withToken token: String, onPasswordReset: @escaping Action) {
+        self.onPasswordReset = onPasswordReset
+        history.append(.passwordReset)
     }
 
     func goingBackToHomeView() {
@@ -89,11 +124,15 @@ class SpyAuthenticationNavigator: AuthenticationNavigator {
         
         case accountCreation
         case login
+        case passwordResetRequest
+        case passwordReset
         
         var debugDescription: String {
             switch self {
             case .accountCreation: return "Account creation"
             case .login: return "Login"
+            case .passwordResetRequest: return "Password reset request"
+            case .passwordReset: return "Password reset"
             }
         }
     }
