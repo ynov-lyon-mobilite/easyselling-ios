@@ -18,11 +18,11 @@ protocol TokenManager {
 final class DefaultTokenManager: TokenManager, ObservableObject {
     static let shared = DefaultTokenManager()
     private let keychain: KeychainSwift
-    
+
     init(keychain: KeychainSwift = .productionKeychain) {
         self.keychain = keychain
     }
-    
+
     var refreshToken: String? {
         didSet {
             if let token = self.refreshToken {
@@ -32,7 +32,7 @@ final class DefaultTokenManager: TokenManager, ObservableObject {
             }
         }
     }
-    
+
     var accessToken: String? {
         didSet {
             if let token = self.accessToken {
@@ -42,11 +42,11 @@ final class DefaultTokenManager: TokenManager, ObservableObject {
             }
         }
     }
-    
+
     private var decodedToken: JWT? {
         guard let token = accessToken,
               let decoded = try? decode(jwt: token) else { return nil }
-        
+
         return decoded
     }
 

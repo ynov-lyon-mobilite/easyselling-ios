@@ -12,16 +12,16 @@ protocol CredentialsPreparator {
 }
 
 class DefaultCredentialsPreparator: CredentialsPreparator {
-    
+
     init(verificator: CredentialsVerificator = DefaultCredentialsVerificator(), transformator: CredentialsTransformator = DefaultCredentialsTransformator()) {
-        
+
         self.verificator = verificator
         self.transformator = transformator
     }
-    
+
     private var verificator: CredentialsVerificator
     private var transformator: CredentialsTransformator
-    
+
     func prepare(email: String, password: String, passwordConfirmation: String) throws -> AccountCreationInformations {
         try verificator.verify(email: email, password: password, passwordConfirmation: passwordConfirmation)
         return transformator.transform(email: email, password: password, passwordConfirmation: passwordConfirmation)

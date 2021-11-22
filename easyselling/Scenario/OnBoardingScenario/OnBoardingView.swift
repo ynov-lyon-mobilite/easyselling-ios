@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct OnBoardingView: View {
-    
+
     @ObservedObject var viewModel: OnBoardingViewModel
-    
+
     init(viewModel: OnBoardingViewModel) {
         self.viewModel = viewModel
     }
-    
+
     let basicWidth: CGFloat = 10
     let animationWidth: CGFloat = 30
-        
+
     var body: some View {
         VStack {
             TabView(selection: $viewModel.currentFeatureIndex) {
@@ -27,11 +27,11 @@ struct OnBoardingView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .padding(.bottom, 75)
-                        
+
                         Text(viewModel.feature.title)
                             .font(.largeTitle)
                             .padding(.bottom, 30)
-                        
+
                         Text(viewModel.feature.text)
                             .font(.body)
                             .multilineTextAlignment(.center)
@@ -40,7 +40,7 @@ struct OnBoardingView: View {
                 }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            
+
             HStack {
                 ForEach(0..<viewModel.features.count) { index in
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
@@ -62,17 +62,17 @@ struct OnBoardingView: View {
                 }
                 .opacity(viewModel.isShowingPreviousButton ? 1 : 0)
                 .disabled(!viewModel.isShowingPreviousButton)
-                
+
                 Spacer()
-                                
+
                 Button("Skip") {
                     viewModel.skipFeatures()
                 }
                 .opacity(viewModel.isShowingSkipButton ? 1 : 0)
                 .disabled(!viewModel.isShowingSkipButton)
-                
+
                 Spacer()
-                
+
                 Button("Next") {
                     withAnimation {
                         viewModel.nextFeature()

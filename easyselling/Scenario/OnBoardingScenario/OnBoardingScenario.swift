@@ -10,15 +10,15 @@ import UIKit
 import SwiftUI
 
 class OnBoardingScenario {
-    
+
     @AppStorage("onBoardingIsViewed") var onBoardingIsViewed: Bool = false
-    
+
     init(navigator: OnBoardingNavigator) {
         self.navigator = navigator
     }
-    
+
     private var navigator: OnBoardingNavigator
-    
+
     func begin() {
         if(!onBoardingIsViewed) {
             navigator.navigatesToOnBoardingViewModel(onFinish: hasFinish)
@@ -26,12 +26,12 @@ class OnBoardingScenario {
             navigator.navigateToAuthenticationScenario()
         }
     }
-    
+
     private func hasFinish() {
         self.onBoardingIsViewed = true
         navigator.navigateToAuthenticationScenario()
     }
-    
+
     private func navigateToAuthenticationScenario() {
         navigator.navigateToAuthenticationScenario()
     }
