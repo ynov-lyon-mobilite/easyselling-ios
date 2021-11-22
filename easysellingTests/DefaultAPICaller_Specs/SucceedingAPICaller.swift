@@ -11,11 +11,14 @@ import Combine
 
 class SucceedingAPICaller: APICaller {
     
+    private(set) var isCallSucceed: Bool = false
+    
     func call<T: Decodable>(_ urlRequest: URLRequest, decodeType: T.Type) -> T {
         return "" as! T
     }
     
     func call(_ urlRequest: URLRequest) {
+        isCallSucceed = true
         return
     }
 }

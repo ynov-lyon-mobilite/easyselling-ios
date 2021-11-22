@@ -17,30 +17,45 @@ struct UserAuthenticationView: View {
     var body: some View {
         VStack(spacing: 30) {
             Spacer()
-            
+            Circle()
+            Spacer()
             VStack {
                 TextField(L10n.SignUp.mail, text: $viewModel.email)
-                    .padding(6)
+                    .padding(10)
                     .background(Color.gray.opacity(0.5))
                     .cornerRadius(10)
                     .textContentType(.emailAddress)
 
                 SecureField(L10n.SignUp.password, text: $viewModel.password)
-                    .padding(6)
+                    .padding(10)
                     .background(Color.gray.opacity(0.5))
                     .cornerRadius(10)
                     .textContentType(.password)
+                
+                Text(viewModel.error?.errorDescription ?? "")
+                    .foregroundColor(.red)
+                    .font(.headline)
+                    .opacity(viewModel.error != nil ? 1 : 0)
+                
+                Button(L10n.Button.forgottenPassword) {
+                    viewModel.navigateToPasswordReset()
+                }
             }
-            
+            Spacer()
             Button(L10n.UserAuthentication.Button.login) {
                 Task {
                     await viewModel.login()
                 }
             }
-            .foregroundColor(Color.white)
-            .padding()
-            .background(Color.black)
-            .cornerRadius(30)
+            .frame(maxWidth: .infinity)
+            .foregroundColor(Color.black)
+            .padding(.vertical, 8)
+            .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(Color.gray.opacity(0.5),
+                                lineWidth: 4)
+                )
+            .padding(.horizontal)
             
             Spacer()
             
@@ -48,18 +63,18 @@ struct UserAuthenticationView: View {
                 viewModel.navigateToAccountCreation()
             }
         }
-        .padding(.horizontal, 50)
-        .alert(isPresented: $viewModel.hasError) {
+        .padding()
+        .alert(isPresented: $viewModel.showAlert) {
             Alert(
-                title: Text(viewModel.error?.errorDescription ?? ""),
-                dismissButton: Alert.Button.default(Text("Ok")))
+                title: Text(viewModel.alert?.errorDescription ?? ""),
+                dismissButton: Alert.Button.default(Text(L10n.Button.ok)))
         }
     }
 }
 
 struct UserAuthenticationView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: {}, onUserLogged: {})
+        let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: {}, navigateToPasswordReset: {}, onUserLogged: {})
         UserAuthenticationView(viewModel: viewModel)
     }
 }
