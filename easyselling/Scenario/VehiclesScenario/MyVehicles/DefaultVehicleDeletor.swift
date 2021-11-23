@@ -12,19 +12,20 @@ protocol VehicleDeletor {
 }
 
 class DefaultVehicleDeletor: VehicleDeletor {
-    private var requestGenerator: RequestGenerator
-    private var apiCaller: APICaller
     
     init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
         self.apiCaller = apiCaller
     }
     
+    private var requestGenerator: RequestGenerator
+    private var apiCaller: APICaller
+    
     func deleteVehicle(id: String) async throws {
-        let urlRequest = try requestGenerator.generateRequest(endpoint: .updateVehicle, method: .DELETE, headers: [:])
-        print("REQUETE")
+        let urlRequest = try requestGenerator.generateRequest(endpoint: .deleteVehicle, method: .DELETE, headers: [:])
+        /*print("REQUETE")
         print(id)
-        print(urlRequest)
+        print(urlRequest)*/
         try await apiCaller.call(urlRequest)
     }
 }

@@ -43,20 +43,12 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         XCTAssertTrue(onNavigateToProfile)
     }
     
-    func test_Clicks_on_delete_button() async {
-        let expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-                                Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")]
-        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter(expectedVehicles))
-        thenViewModelIsLoading()
-        await whenTryingToGetVehicles()
-        whenDeleting(vehicle: Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2"))
-        thenViewModelIsLoading()
-        await whenTryingToGetVehicles()
-        thenLoadVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
-    }
-    
-    func whenDeleting(vehicle: Vehicle) {
-        viewModel.deleteVehicle(vehicle: vehicle)
+    func test_Deletes_vehicle_when_request_is_success() async {
+        givenListOfVehicle(is: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
+                            Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")])
+        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter(listOfVehicle), vehicleDeletor: SucceedingVehicleDeletor(listOfVehicle))
+        await whenDeletingVehicle(withId: "2")
+        thenListOfVehicleAfterDelete(is: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
     }
     
     private func givenViewModel(vehiclesGetter: VehiclesGetter) {
@@ -68,8 +60,21 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         })
     }
     
+    private func givenViewModelDeletor(vehiclesGetter: VehiclesGetter, vehicleDeletor: VehicleDeletor) {
+        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpenningVehicleCreation: {self.isOpen = true})
+    }
+    
+    private func givenListOfVehicle(is list: [Vehicle]) {
+        self.listOfVehicle = list
+    }
+    
     private func whenTryingToGetVehicles() async {
         await viewModel.getVehicles()
+    }
+    
+    private func whenDeletingVehicle(withId: String) async {
+        await viewModel.deleteVehicle(id: id)
+        self.listOfVehicle = viewModel.vehicleDeletor.vehicles
     }
     
     private func whenOpeningVehiculeCreationModal() {
@@ -91,11 +96,16 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     private func thenVehicleCreationModalIsOpen() {
         XCTAssertTrue(isOpen)
     }
+    
+    private func thenListOfVehicleAfterDelete(is expected: [Vehicle]) {
+        XCTAssertEqual(expected, self.listOfVehicle)
+    }
  
     private var viewModel: MyVehiclesViewModel!
     private var isOpen: Bool!
     private var expectedUrlResponse: Data? = readLocalFile(forName: "succeededVehicles")
     private var onNavigateToProfile: Bool = false
+    private var listOfVehicle: [Vehicle]!
 }
 
 private func readLocalFile(forName name: String) -> Data? {

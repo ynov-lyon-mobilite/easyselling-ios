@@ -49,12 +49,12 @@ vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
     func navigateToProfile() {
         self.isNavigatingToProfile()
     }
-    
+
     @MainActor func deleteVehicle(idVehicle: String) async {
         print("JE DELETE")
         do {
             try await vehicleDeletor.deleteVehicle(id: idVehicle)
-            print("OUAIS OUAIS OUAIS")
+            await updateVehiclesList()
         } catch (let error) {
             if let error = error as? APICallerError {
                 isError = true
@@ -66,7 +66,7 @@ vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
         
         isLoading = false
     }
-    
+
     func updateVehiclesList() async {
        await getVehicles()
     }
