@@ -24,6 +24,6 @@ struct VehicleUpdateView: View {
 
 struct VehicleUpdateView_Previews: PreviewProvider {
     static var previews: some View {
-        VehicleUpdateView(viewModel: VehicleUpdateViewModel(vehicle: Vehicle(brand: "", model: "", license: "", type: .car, year: ""), onFinish: {}))
+        VehicleUpdateView(viewModel: VehicleUpdateViewModel(vehicle: Vehicle(brand: "", model: "", license: "", type: .car, year: ""), onFinish: {}, vehicleVerificator: DefaultVehicleInformationsVerificator()))
     }
 }

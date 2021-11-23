@@ -11,7 +11,8 @@ class VehicleUpdateViewModel: ObservableObject {
     
     private(set) var vehicle: Vehicle
     private(set) var onFinish: () async -> Void
-    
+    private var vehicleInformationsVerificator: VehicleInformationsVerificator
+
     var id: String = ""
     var brand: String = ""
     var model: String = ""
@@ -19,9 +20,14 @@ class VehicleUpdateViewModel: ObservableObject {
     var type: Vehicle.Category = .car
     var year: String = ""
     
-    init(vehicle: Vehicle, onFinish: @escaping () async -> Void) {
+    init(vehicle: Vehicle, onFinish: @escaping () async -> Void, vehicleVerificator: VehicleInformationsVerificator) {
         self.vehicle = vehicle
         self.onFinish = onFinish
+        self.vehicleInformationsVerificator = vehicleVerificator
+    }
+    
+    func verifyVehiculeModification() {
+        
     }
     
     func delete() async {

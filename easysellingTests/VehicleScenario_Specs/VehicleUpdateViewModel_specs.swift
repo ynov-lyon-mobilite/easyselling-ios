@@ -14,10 +14,19 @@ class VehicleUpdateViewModel_specs: XCTestCase {
     
     func test_modifies_the_existing_vehicle() {
         givenViewModel()
-        
+        modifyBrand("Renault")
+        verifyModification()
     }
     
     private func givenViewModel() {
-        viewModel = VehicleUpdateViewModel(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"), onFinish: {})
+        viewModel = VehicleUpdateViewModel(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"), onFinish: {}, vehicleVerificator: DefaultVehicleInformationsVerificator())
+    }
+    
+    private func modifyBrand(_ value: String) {
+        viewModel.brand = value
+    }
+    
+    private func verifyModification() {
+        viewModel.verifyVehiculeModification()
     }
 }
