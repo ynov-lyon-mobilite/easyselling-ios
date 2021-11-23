@@ -539,7 +539,6 @@
 		03F209772716E1C500E10F6C /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				87DC1D07271FDF3F002DC193 /* Models */,
 				034D04E22732976E00576D64 /* GoogleService-Info.plist */,
 				03F209782716E21100E10F6C /* Supporting Files */,
 				035E860327184EDC00684ED0 /* AppDelegate.swift */,
@@ -645,6 +644,7 @@
 		873552B1270D847700F2DDBD /* easyselling */ = {
 			isa = PBXGroup;
 			children = (
+				87DC1D07271FDF3F002DC193 /* Models */,
 				03004DBC273DB7CA00188983 /* Info.plist */,
 				87780BAA27172FB10035AB13 /* Services */,
 				87780B9C27172F1C0035AB13 /* Additions */,
