@@ -16,7 +16,7 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         request.httpMethod = HTTPMethod.POST.rawValue
 
         givenService()
-        whenGenerateRequest(endpoint: .users, method: .POST, headers: [:])
+        whenGenerateRequest(endpoint: .users, method: .POST)
         thenRequest(is: request)
     }
 
@@ -33,6 +33,29 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         thenRequest(is: request)
     }
 
+    func test_Generates_Request_and_override_content_type_set_to_JSON() {
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
+        request.httpMethod = HTTPMethod.POST.rawValue
+        request.addValue("application/xml", forHTTPHeaderField: "Content-Type")
+
+        givenService()
+        whenGenerateRequest(endpoint: .users, method: .POST, headers: ["Content-Type": "application/xml"])
+        thenRequest(is: request)
+    }
+
+    func test_Generates_Request_With_Path_keys_values() {
+        let body = "BODY"
+
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles/ABCD")!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = HTTPMethod.POST.rawValue
+        request.httpBody = try! JSONEncoder().encode(body)
+
+        givenService()
+        whenGenerateRequestWithBody(endpoint: .vehicleId, method: .POST, body: body, pathKeysValues: ["vehicleId": "ABCD"])
+        thenRequestWithBody(is: request)
+    }
+
     func test_Generates_Request_With_Body() {
         let body = "BODY"
 
@@ -42,7 +65,7 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         request.httpBody = try! JSONEncoder().encode(body)
 
         givenService()
-        whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body, headers: [:])
+        whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body)
         thenRequestWithBody(is: request)
     }
     
@@ -50,13 +73,13 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         let body = Double.infinity
 
         givenService()
-        whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body, headers: [:])
+        whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body)
         XCTAssertEqual(APICallerError.encodeError, error)
     }
 
     func test_Deinit_when_no_longer_interested() {
         givenService()
-        whenGenerateRequest(endpoint: .users, method: .POST, headers: [:])
+        whenGenerateRequest(endpoint: .users, method: .POST)
         whenNoLongerInterested()
 
         XCTAssertNil(requestGenerator)
@@ -81,9 +104,11 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         requestGenerator = DefaultRequestGenerator()
     }
 
-    private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) {
+    private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod,
+                                     headers: [String: String] = [:], pathKeysValues: [String: String] = [:]) {
         do {
-            self.request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers)
+            self.request = try requestGenerator.generateRequest(endpoint: endpoint, method: method,
+                                                                headers: headers, pathKeysValues: pathKeysValues)
         } catch(let error) {
             self.error = (error as! APICallerError)
         }
@@ -93,9 +118,11 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         endpoint: HTTPEndpoint,
         method: HTTPMethod,
         body: T,
-        headers: [String: String]) {
+        headers: [String: String] = [:],
+        pathKeysValues: [String: String] = [:]) {
             do {
-                self.request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers)
+                self.request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body,
+                                                                    headers: headers,                                        pathKeysValues: pathKeysValues)
             } catch(let error) {
                 self.error = (error as! APICallerError)
             }

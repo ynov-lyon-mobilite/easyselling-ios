@@ -22,7 +22,7 @@ final class DefaultUserAuthenticator: UserAuthenticatior {
 
     func login(mail: String, password: String) async throws -> Token {
         let dto = LoginDTO(email: mail, password: password)
-        let urlRequest = try requestGenerator.generateRequest(endpoint: .authLogin, method: .POST, body: dto, headers: [:])
+        let urlRequest = try requestGenerator.generateRequest(endpoint: .authLogin, method: .POST, body: dto, headers: [:], pathKeysValues: [:])
         return try await apiCaller.call(urlRequest, decodeType: Token.self)
     }
 }

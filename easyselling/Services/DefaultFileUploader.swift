@@ -24,7 +24,7 @@ final class DefaultFileUploader: FileUploader {
         let (body, contentType) = try generateBody(filename: filename, filetype: filetype, data: data)
 
         var urlRequest = try requestGenerator
-            .generateRequest(endpoint: .files, method: .POST, headers: ["Content-Type": contentType])
+            .generateRequest(endpoint: .files, method: .POST, headers: ["Content-Type": contentType], pathKeysValues: [:])
         urlRequest.httpBody = body
 
         return try await apiCaller.call(urlRequest, decodeType: UploadedFile.self)
