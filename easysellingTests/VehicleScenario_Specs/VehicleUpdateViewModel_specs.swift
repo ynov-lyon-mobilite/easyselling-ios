@@ -34,6 +34,12 @@ class VehicleUpdateViewModel_specs: XCTestCase {
         thenAlertIsShowing()
     }
 
+    func test_Shows_alert_when_an_error_happens_after_an_api_call() async {
+        givenViewModel()
+        await whenUpdating()
+        thenAlertIsShowing()
+    }
+
     func test_modifies_the_existing_vehicle() async {
         givenViewModel()
         await whenUpdateSuccesfull()

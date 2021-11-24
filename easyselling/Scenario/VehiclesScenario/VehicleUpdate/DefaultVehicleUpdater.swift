@@ -12,10 +12,10 @@ protocol VehicleUpdater {
 }
 
 class DefaultVehicleUpdater: VehicleUpdater {
-    private var requestGenerator: AutorizedRequestGenerator
+    private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
 
-    init(requestGenerator: AutorizedRequestGenerator = DefaultAutorizedRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
+    init(requestGenerator: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
         self.apiCaller = apiCaller
     }
