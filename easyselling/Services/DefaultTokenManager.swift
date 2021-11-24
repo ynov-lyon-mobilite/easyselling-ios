@@ -24,8 +24,11 @@ final class DefaultTokenManager: TokenManager, ObservableObject {
     }
 
     var refreshToken: String? {
-        didSet {
-            if let token = self.refreshToken {
+        get {
+            keychain.get(.refreshToken)
+        }
+        set {
+            if let token = newValue {
                 keychain.set(token, forKey: .refreshToken)
             } else {
                 keychain.delete(.refreshToken)
@@ -34,8 +37,11 @@ final class DefaultTokenManager: TokenManager, ObservableObject {
     }
 
     var accessToken: String? {
-        didSet {
-            if let token = self.accessToken {
+        get {
+            keychain.get(.accessToken)
+        }
+        set {
+            if let token = newValue {
                 keychain.set(token, forKey: .accessToken)
             } else {
                 keychain.delete(.accessToken)
@@ -52,5 +58,9 @@ final class DefaultTokenManager: TokenManager, ObservableObject {
 
     var accessTokenIsExpired: Bool {
         return decodedToken?.expired ?? true
+    }
+
+    func flush() {
+        keychain.clear()
     }
 }
