@@ -9,20 +9,20 @@ import Foundation
 
 protocol AuthorizedRequestGenerator {
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String],
-                         queryParameters: [String: Any]) async throws -> URLRequest
+                         pathKeysValues: [String: Any]) async throws -> URLRequest
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?, headers: [String: String],
-                                       queryParameters: [String: Any]) async throws -> URLRequest
+                                                                              pathKeysValues: [String: Any]) async throws -> URLRequest
 }
 
 extension AuthorizedRequestGenerator {
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String] = [:],
-                         queryParameters: [String: Any] = [:]) async throws -> URLRequest {
-        return try await generateRequest(endpoint: endpoint, method: method, headers: headers, queryParameters: queryParameters)
+                         pathKeysValues: [String: Any] = [:]) async throws -> URLRequest {
+        return try await generateRequest(endpoint: endpoint, method: method, headers: headers, pathKeysValues: pathKeysValues)
     }
 
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?,
-                                       headers: [String: String] = [:], queryParameters: [String: Any] = [:]) async throws -> URLRequest {
-        return try await generateRequest(endpoint: endpoint, method: method, body: body, headers: headers, queryParameters: queryParameters)
+                                       headers: [String: String] = [:],                                        pathKeysValues: [String: Any] = [:]) async throws -> URLRequest {
+        return try await generateRequest(endpoint: endpoint, method: method, body: body, headers: headers,                                        pathKeysValues:                                        pathKeysValues)
     }
 }
 
