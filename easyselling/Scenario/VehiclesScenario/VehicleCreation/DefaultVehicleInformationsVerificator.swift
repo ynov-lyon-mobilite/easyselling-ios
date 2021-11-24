@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol VehicleInformationsVerificator {
     func verifyInformations(vehicle: Vehicle) throws
@@ -58,7 +57,7 @@ class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
                 if (!isNumber && isNewLicense) || (isNumber && !isNewLicense) {
                     return true
                 }
-            case index < (isNewLicense ? 7 : 9):
+            case index < (isNewLicense ? 7 : 8):
                 if (isNumber && isNewLicense) || (!isNumber && !isNewLicense) {
                     return true
                 }
