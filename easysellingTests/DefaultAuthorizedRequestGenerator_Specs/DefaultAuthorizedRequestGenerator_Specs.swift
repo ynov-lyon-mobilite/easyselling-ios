@@ -20,16 +20,26 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         await whenGenerateRequest(endpoint: .vehicles, method: .GET, headers: [:])
         thenRequest(is: request)
     }
-    
+
     func test_Generates_Request_With_Headers_and_token_in_header() async {
         let body = "BODY"
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
+        request.addValue("value", forHTTPHeaderField: "teast-haeder")
         request.httpBody = try! JSONEncoder().encode(body)
-        
+
         givenService(accessTokenIsExpired: false, accessToken: updatedAccessToken, refreshToken: "FAKE_REFRESH_TOKEN")
-        await whenGenerateRequestWithBody(endpoint: .vehicles, method: .GET, body: body, headers: [:])
+        await whenGenerateRequestWithBody(endpoint: .vehicles, method: .GET, body: body, headers: ["teast-haeder": "value"])
         thenRequestWithBody(is: request)
+    }
+
+    func test_Generates_Request_With_Path_keys_values_and_token_in_header() async {
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles/myVehicle")!)
+        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
+
+        givenService(accessTokenIsExpired: false, accessToken: updatedAccessToken, refreshToken: "FAKE_REFRESH_TOKEN")
+        await whenGenerateRequest(endpoint: .vehicleId, method: .GET, headers: [:], pathKeysValues: ["vehicleId": "myVehicle"])
+        thenRequest(is: request)
     }
     
     func test_Generates_request_with_token_in_header_after_refresh_token() async {
@@ -88,9 +98,10 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
                                                                  tokenRefreshor: tokenRefreshor)
     }
     
-    private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) async {
+    private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod,
+                                     headers: [String: String] = [:], pathKeysValues: [String: String] = [:]) async {
         do {
-            self.request = try await requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers)
+            self.request = try await requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers, pathKeysValues: pathKeysValues)
         } catch(let error) {
             self.error = (error as! APICallerError)
         }
@@ -100,9 +111,10 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         endpoint: HTTPEndpoint,
         method: HTTPMethod,
         body: T,
-        headers: [String: String]) async {
+        headers: [String: String],
+        pathKeysValues: [String: String] = [:]) async {
             do {
-                self.request = try await requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers)
+                self.request = try await requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers, pathKeysValues: pathKeysValues)
             } catch(let error) {
                 self.error = (error as! APICallerError)
             }

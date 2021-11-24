@@ -16,8 +16,8 @@ class FakeAuthorizedRequestGenerator: AuthorizedRequestGenerator {
         self.requestGenerator = requestGenerator
     }
     
-    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String : String]) async throws -> URLRequest {
-        var request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers)
+    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String : String], pathKeysValues: [String: String]) async throws -> URLRequest {
+        var request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers, pathKeysValues: pathKeysValues)
 
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
 
@@ -25,8 +25,9 @@ class FakeAuthorizedRequestGenerator: AuthorizedRequestGenerator {
     }
 
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod,
-                                       body: T?,headers: [String : String]) async throws -> URLRequest {
-        var request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers)
+                                       body: T?,headers: [String : String],
+                                       pathKeysValues: [String: String]) async throws -> URLRequest {
+        var request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers, pathKeysValues: pathKeysValues)
 
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
 

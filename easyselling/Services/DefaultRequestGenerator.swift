@@ -15,19 +15,6 @@ protocol RequestGenerator {
                          headers: [String: String], pathKeysValues: [String: String]) throws -> URLRequest
 }
 
-extension RequestGenerator {
-    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod,
-                                       body: T?, headers: [String: String] = [:],
-                                                                              pathKeysValues: [String: String] = [:]) throws -> URLRequest {
-        return try generateRequest(endpoint: endpoint, method: method, body: body, headers: headers,                                        pathKeysValues:                                        pathKeysValues)
-    }
-
-    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod,
-                         headers: [String: String] = [:], pathKeysValues: [String: String] = [:]) throws -> URLRequest {
-        return try generateRequest(endpoint: endpoint, method: method, headers: headers, pathKeysValues: pathKeysValues)
-    }
-}
-
 class DefaultRequestGenerator: RequestGenerator {
     private var tokenManager: TokenManager
 
@@ -40,7 +27,7 @@ class DefaultRequestGenerator: RequestGenerator {
 
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod = .GET,
                                        body: T?, headers: [String: String],
-                                                                              pathKeysValues: [String: String]) throws -> URLRequest {
+                                       pathKeysValues: [String: String]) throws -> URLRequest {
         guard let encodedBody = try? jsonEncoder.encode(body) else {
             throw APICallerError.encodeError
         }
