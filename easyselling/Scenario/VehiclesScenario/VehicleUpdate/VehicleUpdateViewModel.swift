@@ -12,6 +12,7 @@ class VehicleUpdateViewModel: ObservableObject {
     private(set) var vehicle: Vehicle
     private(set) var onFinish: () async -> Void
     private var vehicleInformationsVerificator: VehicleInformationsVerificator
+    private var vehicleUpdater: VehicleUpdater
 
     @Published var alert: String = ""
     @Published var showAlert = false
@@ -22,10 +23,11 @@ class VehicleUpdateViewModel: ObservableObject {
     @Published var type: Vehicle.Category = .car
     @Published var year: String = ""
 
-    init(vehicle: Vehicle, onFinish: @escaping () async -> Void, vehicleVerificator: VehicleInformationsVerificator) {
+    init(vehicle: Vehicle, onFinish: @escaping () async -> Void, vehicleVerificator: VehicleInformationsVerificator, vehicleUpdater: VehicleUpdater) {
         self.vehicle = vehicle
         self.onFinish = onFinish
         self.vehicleInformationsVerificator = vehicleVerificator
+        self.vehicleUpdater = vehicleUpdater
 
         self.brand = vehicle.brand
         self.model = vehicle.model
@@ -34,18 +36,20 @@ class VehicleUpdateViewModel: ObservableObject {
         self.year = vehicle.year
     }
 
-    func updateVehicle() {
+    func updateVehicle() async {
         let newInformations = Vehicle(brand: brand, model: model, license: license, type: type, year: year)
 
         do {
             try vehicleInformationsVerificator.verifyInformations(vehicle: newInformations)
+            try await vehicleUpdater.updateVehicle(informations: newInformations)
+            await deleteModal()
         } catch (let error) {
             self.alert = (error as? VehicleCreationError)?.description ?? (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
             self.showAlert =  true
         }
     }
 
-    func delete() async {
+    func deleteModal() async {
         await self.onFinish()
     }
 }

@@ -41,7 +41,9 @@ struct VehicleUpdateView: View {
                 )})
 
             Button("Update Vehicle") {
-                viewModel.updateVehicle()
+                Task {
+                    await viewModel.updateVehicle()
+                }
             }
 
             Button("Delete") {
@@ -55,6 +57,15 @@ struct VehicleUpdateView: View {
 
 struct VehicleUpdateView_Previews: PreviewProvider {
     static var previews: some View {
-        VehicleUpdateView(viewModel: VehicleUpdateViewModel(vehicle: Vehicle(brand: "", model: "", license: "", type: .car, year: ""), onFinish: {}, vehicleVerificator: DefaultVehicleInformationsVerificator()))
+        let vehicle = Vehicle(brand: "", model: "", license: "", type: .car, year: "")
+
+        VehicleUpdateView(
+            viewModel: VehicleUpdateViewModel(
+                vehicle: vehicle,
+                onFinish: {},
+                vehicleVerificator: DefaultVehicleInformationsVerificator(),
+                vehicleUpdater: DefaultVehicleUpdater()
+            )
+        )
     }
 }

@@ -9,28 +9,59 @@ import XCTest
 @testable import easyselling
 
 class VehicleUpdateViewModel_specs: XCTestCase {
-    
+
+    private var isDelete: Bool!
     private var viewModel: VehicleUpdateViewModel!
 
-    func test_modifies_the_existing_vehicle() {
-        givenViewModel()
-        updateInformations(Vehicle(brand: "Peugeot", model: "model1", license: "license2", type: .car, year: "2021"))
-        updateVehicle()
-    }
-    
-    private func givenViewModel() {
-        viewModel = VehicleUpdateViewModel(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"), onFinish: {}, vehicleVerificator: DefaultVehicleInformationsVerificator())
-    }
-    
-    private func updateInformations(_ newInformations: Vehicle) {
-        viewModel.brand = newInformations.brand
-        viewModel.model = newInformations.model
-        viewModel.license = newInformations.license
-        viewModel.type = newInformations.type
-        viewModel.year = newInformations.year
+    func test_Shows_alert_when_brand_is_Empty() async {
+        givenViewModel(expected: .emptyField)
+        await whenUpdating()
+        thenAlertMessage(expected: VehicleCreationError.emptyField.description)
+        thenAlertIsShowing()
     }
 
-    private func updateVehicle() {
-        viewModel.updateVehicle()
+    func test_Shows_alert_when_year_is_incorrect() async {
+        givenViewModel(expected: .incorrectYear)
+        await whenUpdating()
+        thenAlertMessage(expected: VehicleCreationError.incorrectYear.description)
+        thenAlertIsShowing()
+    }
+
+    func test_Shows_alert_when_license_is_incorrect() async {
+        givenViewModel(expected: .incorrectLicense)
+        await whenUpdating()
+        thenAlertMessage(expected: VehicleCreationError.incorrectLicense.description)
+        thenAlertIsShowing()
+    }
+
+    func test_modifies_the_existing_vehicle() async {
+        givenViewModel()
+        await whenUpdateSuccesfull()
+        thenModalIsDelete()
+    }
+    
+    private func givenViewModel(expected: VehicleCreationError = .emptyField) {
+        viewModel = VehicleUpdateViewModel(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"), onFinish: {
+            self.isDelete = true
+        }, vehicleVerificator: SpyVehicleInformationsVerificator(error: expected), vehicleUpdater: DefaultVehicleUpdater())
+    }
+
+    private func whenUpdating() async{
+        await viewModel.updateVehicle()
+    }
+
+    private func whenUpdateSuccesfull() async {
+        await viewModel.deleteModal()
+    }
+
+    private func thenAlertMessage(expected: String) {
+        XCTAssertEqual(expected, viewModel.alert)
+    }
+    private func thenAlertIsShowing() {
+        XCTAssertTrue(viewModel.showAlert)
+    }
+
+    private func thenModalIsDelete() {
+        XCTAssertTrue(isDelete)
     }
 }
