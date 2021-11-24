@@ -36,7 +36,7 @@
 
 "createVehicle.error.emptyField" = "A field is empty";
 "createVehicle.error.incorrectYear" = "The year format is incorrect";
-"createVehicle.error.incorrectLicense" = "The license format is incorrect";
+"createVehicle.error.incorrectLicenseFormat" = "The license format is incorrect";
 "createVehicle.error.incorrectLicenseSize" = "The length of the license is incorrect";
 
 "error.occured" = "An error occured";

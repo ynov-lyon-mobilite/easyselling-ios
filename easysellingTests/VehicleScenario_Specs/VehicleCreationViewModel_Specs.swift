@@ -28,9 +28,9 @@ class VehicleCreationViewModel_Specs: XCTestCase {
     }
     
     func test_Shows_alert_when_the_field_license_is_incorrect() async {
-        givenViewModel(expected: .incorrectLicense)
+        givenViewModel(expected: .incorrectLicenseFormat)
         await whenCreating()
-        thenAlertMessage(expected: VehicleCreationError.incorrectLicense.description)
+        thenAlertMessage(expected: VehicleCreationError.incorrectLicenseFormat.description)
         thenAlertIsShowing()
     }
     

@@ -36,7 +36,7 @@
 
 "createVehicle.error.emptyField" = "Un des champs est vide";
 "createVehicle.error.incorrectYear" = "L'année renseignée est invalide";
-"createVehicle.error.incorrectLicense" = "Le numéro de licence est invalide";
+"createVehicle.error.incorrectLicenseFormat" = "Le numéro de licence est invalide";
 "createVehicle.error.incorrectLicenseSize" = "La longueur de la licence est invalide";
 
 "error.occured" = "Une erreur c'est produite";

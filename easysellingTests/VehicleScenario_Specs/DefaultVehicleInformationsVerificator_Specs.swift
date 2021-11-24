@@ -43,13 +43,13 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
     func test_Verifies_if_license_has_an_incorrect_format_for_new_license() {
         givenVerificator()
         whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "A2222AA", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .incorrectLicense)
+        thenError(is: .incorrectLicenseFormat)
     }
 
     func test_Verifies_if_license_has_an_incorrect_format_for_old_license() {
         givenVerificator()
         whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "524WAL7A", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .incorrectLicense)
+        thenError(is: .incorrectLicenseFormat)
     }
 
     func test_Verifies_if_license_has_an_incorrect_size_for_new_license() {

@@ -19,7 +19,7 @@ class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
                 || vehicle.brand.isEmpty
                 || vehicle.model.isEmpty: throw VehicleCreationError.emptyField
             case verifyLicenseSize(vehicle: vehicle): throw VehicleCreationError.incorrectLicenseSize
-            case verifyLicenseFormat(vehicle: vehicle): throw VehicleCreationError.incorrectLicense
+            case verifyLicenseFormat(vehicle: vehicle): throw VehicleCreationError.incorrectLicenseFormat
             case vehicle.year.count != 4: throw VehicleCreationError.incorrectYear
             default: break
         }
@@ -39,10 +39,8 @@ class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
             return true
         case vehicle.license.count != 8 && !isNewLicense:
             return true
-        default: break
+        default: return true
         }
-
-        return true
     }
 
     func verifyLicenseFormat(vehicle: Vehicle) -> Bool {
@@ -74,14 +72,14 @@ class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
 enum VehicleCreationError: Equatable, LocalizedError {
     case emptyField
     case incorrectYear
-    case incorrectLicense
+    case incorrectLicenseFormat
     case incorrectLicenseSize
 
     var description: String {
         switch self {
             case .emptyField: return L10n.CreateVehicle.Error.emptyField
             case .incorrectYear: return L10n.CreateVehicle.Error.incorrectYear
-            case .incorrectLicense: return L10n.CreateVehicle.Error.incorrectLicense
+            case .incorrectLicenseFormat: return L10n.CreateVehicle.Error.incorrectLicenseFormat
             case .incorrectLicenseSize: return L10n.CreateVehicle.Error.incorrectLicenseSize
         }
     }
