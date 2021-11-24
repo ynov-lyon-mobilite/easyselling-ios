@@ -116,7 +116,7 @@
 		8798D1472730F88200FF3AB4 /* FailingTokenRefreshor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D1462730F88200FF3AB4 /* FailingTokenRefreshor.swift */; };
 		8798D1492730F8B700FF3AB4 /* SucceedingTokenRefreshor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D1482730F8B700FF3AB4 /* SucceedingTokenRefreshor.swift */; };
 		8798D14C2730FC1C00FF3AB4 /* FakeTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D14B2730FC1C00FF3AB4 /* FakeTokenManager.swift */; };
-		8798D14E2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D14D2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift */; };
+		8798D14E2730FE7D00FF3AB4 /* DefaultAuthorizedRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D14D2730FE7D00FF3AB4 /* DefaultAuthorizedRequestGenerator.swift */; };
 		8798D150273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D14F273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift */; };
 		8798D15327310BFC00FF3AB4 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 8798D15227310BFC00FF3AB4 /* JWTDecode */; };
 		87BE3098273B0B4400D49D08 /* DefaultFileUploader_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BE3097273B0B4400D49D08 /* DefaultFileUploader_Specs.swift */; };
@@ -132,6 +132,7 @@
 		8FF0102327329DDE0022314B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF0102227329DDE0022314B /* Color+Extensions.swift */; };
 		9B5C547D27387E59005CFD24 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5C547C27387E59005CFD24 /* Vehicle.swift */; };
 		9BB4F7AD273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4F7AC273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift */; };
+		9BB84D72274E361E00D88B03 /* FakeAuthorizedRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB84D71274E361E00D88B03 /* FakeAuthorizedRequestGenerator.swift */; };
 		D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00736572712D93800ED0F2C /* AuthenticationServices.framework */; };
 /* End PBXBuildFile section */
 
@@ -252,7 +253,7 @@
 		8798D1462730F88200FF3AB4 /* FailingTokenRefreshor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingTokenRefreshor.swift; sourceTree = "<group>"; };
 		8798D1482730F8B700FF3AB4 /* SucceedingTokenRefreshor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingTokenRefreshor.swift; sourceTree = "<group>"; };
 		8798D14B2730FC1C00FF3AB4 /* FakeTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTokenManager.swift; sourceTree = "<group>"; };
-		8798D14D2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAutorizedRequestGenerator.swift; sourceTree = "<group>"; };
+		8798D14D2730FE7D00FF3AB4 /* DefaultAuthorizedRequestGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthorizedRequestGenerator.swift; sourceTree = "<group>"; };
 		8798D14F273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthorizedRequestGenerator_Specs.swift; sourceTree = "<group>"; };
 		87BE3097273B0B4400D49D08 /* DefaultFileUploader_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFileUploader_Specs.swift; sourceTree = "<group>"; };
 		87DC1CFF271F60B9002DC193 /* AccountCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationView.swift; sourceTree = "<group>"; };
@@ -267,6 +268,7 @@
 		8FF0102227329DDE0022314B /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		9B5C547C27387E59005CFD24 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		9BB4F7AC273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehiclesGetter_Specs.swift; sourceTree = "<group>"; };
+		9BB84D71274E361E00D88B03 /* FakeAuthorizedRequestGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAuthorizedRequestGenerator.swift; sourceTree = "<group>"; };
 		D00736552712D93800ED0F2C /* easyselling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = easyselling.entitlements; sourceTree = "<group>"; };
 		D00736572712D93800ED0F2C /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -615,12 +617,12 @@
 		873552C2270D847B00F2DDBD /* easysellingTests */ = {
 			isa = PBXGroup;
 			children = (
+				9BB84D70274E35C800D88B03 /* DefaultAuthorizedRequestGenerator_Specs */,
 				038862862749380C001D7E36 /* DefaultCredentialsPreparator_Specs */,
 				03004DCC273E73DB00188983 /* DefaultPasswordReseter_Specs */,
 				9BB4F7AB273D48A700340BD3 /* DefaultVehiclesGetter_Specs */,
 				03C18F0E2737D26B00C754E8 /* DefaultPasswordResetRequestor_Specs */,
 				03F05436271B3E3900434706 /* DefaultAccountCreator_Specs */,
-				8798D14F273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift */,
 				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
 				87BE3096273B0AED00D49D08 /* DefaultFileUploader_Specs */,
 				03F0543D271B3EFB00434706 /* DefaultRequestGenerator_Specs */,
@@ -671,7 +673,7 @@
 			isa = PBXGroup;
 			children = (
 				03004DDE273EB10D00188983 /* CredentialsVerificators */,
-				8798D14D2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift */,
+				8798D14D2730FE7D00FF3AB4 /* DefaultAuthorizedRequestGenerator.swift */,
 				87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */,
 				87780BAC271730100035AB13 /* DefaultAPICaller.swift */,
 				8705B9A7272081E2004132CF /* DefaultTokenManager.swift */,
@@ -790,6 +792,15 @@
 				9BB4F7AC273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift */,
 			);
 			name = DefaultVehiclesGetter_Specs;
+			sourceTree = "<group>";
+		};
+		9BB84D70274E35C800D88B03 /* DefaultAuthorizedRequestGenerator_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				8798D14F273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift */,
+				9BB84D71274E361E00D88B03 /* FakeAuthorizedRequestGenerator.swift */,
+			);
+			path = DefaultAuthorizedRequestGenerator_Specs;
 			sourceTree = "<group>";
 		};
 		D00736562712D93800ED0F2C /* Frameworks */ = {
@@ -1004,7 +1015,7 @@
 				0382E29F2717647500EB570E /* AuthenticationScenario.swift in Sources */,
 				03004DC4273E70D700188983 /* PasswordResetViewModel.swift in Sources */,
 				8705B9AB27208249004132CF /* KeychainSwift+Extensions.swift in Sources */,
-				8798D14E2730FE7D00FF3AB4 /* DefaultAutorizedRequestGenerator.swift in Sources */,
+				8798D14E2730FE7D00FF3AB4 /* DefaultAuthorizedRequestGenerator.swift in Sources */,
 				03004DBE273DB9E800188983 /* SceneDelegate.swift in Sources */,
 				87DC1D0E271FDF8D002DC193 /* APIResponse.swift in Sources */,
 				9B5C547D27387E59005CFD24 /* Vehicle.swift in Sources */,
@@ -1045,6 +1056,7 @@
 				03004DDD273EB02C00188983 /* FailingPasswordVerificator.swift in Sources */,
 				03DAF9AA2727448300FFED55 /* VehicleCreationViewModel_Specs.swift in Sources */,
 				03C18F162737FF8400C754E8 /* SucceedingPasswordResetRequester.swift in Sources */,
+				9BB84D72274E361E00D88B03 /* FakeAuthorizedRequestGenerator.swift in Sources */,
 				8798D14C2730FC1C00FF3AB4 /* FakeTokenManager.swift in Sources */,
 				03F0543F271B3F0A00434706 /* FakeRequestGenerator.swift in Sources */,
 				03DAF9A027271C2D00FFED55 /* VehicleScenario_Specs.swift in Sources */,

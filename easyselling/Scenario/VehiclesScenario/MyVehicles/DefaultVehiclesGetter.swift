@@ -13,16 +13,16 @@ protocol VehiclesGetter {
 
 class DefaultVehiclesGetter : VehiclesGetter {
 
-    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
+    init(requestGenerator: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
         self.apiCaller = apiCaller
     }
 
-    private var requestGenerator: RequestGenerator
+    private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
 
     func getVehicles() async throws -> [Vehicle] {
-        let urlRequest = try requestGenerator.generateRequest(endpoint: .vehicles, method: .GET, headers: [:])
+        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .GET, headers: [:])
         return try await apiCaller.call(urlRequest, decodeType: [Vehicle].self)
     }
 }
