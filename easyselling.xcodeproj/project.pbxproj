@@ -59,6 +59,8 @@
 		03C18F162737FF8400C754E8 /* SucceedingPasswordResetRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C18F152737FF8400C754E8 /* SucceedingPasswordResetRequester.swift */; };
 		03C18F182737FFC600C754E8 /* DefaultPasswordResetRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C18F172737FFC600C754E8 /* DefaultPasswordResetRequester.swift */; };
 		03C18F1A27380DF700C754E8 /* FailingPasswordResetRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C18F1927380DF700C754E8 /* FailingPasswordResetRequester.swift */; };
+		03C8BB4B274E3F9400169725 /* VehicleInvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8BB4A274E3F9400169725 /* VehicleInvoiceViewModel.swift */; };
+		03C8BB4D274E3FBB00169725 /* VehicleInvoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8BB4C274E3FBB00169725 /* VehicleInvoiceView.swift */; };
 		03DAF9A027271C2D00FFED55 /* VehicleScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DAF99F27271C2D00FFED55 /* VehicleScenario_Specs.swift */; };
 		03DAF9A2272730D500FFED55 /* MyVehiclesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DAF9A1272730D500FFED55 /* MyVehiclesView.swift */; };
 		03DAF9A62727330300FFED55 /* MyVehicleViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DAF9A52727330300FFED55 /* MyVehicleViewModel_Specs.swift */; };
@@ -220,6 +222,8 @@
 		03C18F152737FF8400C754E8 /* SucceedingPasswordResetRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingPasswordResetRequester.swift; sourceTree = "<group>"; };
 		03C18F172737FFC600C754E8 /* DefaultPasswordResetRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPasswordResetRequester.swift; sourceTree = "<group>"; };
 		03C18F1927380DF700C754E8 /* FailingPasswordResetRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingPasswordResetRequester.swift; sourceTree = "<group>"; };
+		03C8BB4A274E3F9400169725 /* VehicleInvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInvoiceViewModel.swift; sourceTree = "<group>"; };
+		03C8BB4C274E3FBB00169725 /* VehicleInvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInvoiceView.swift; sourceTree = "<group>"; };
 		03DAF99F27271C2D00FFED55 /* VehicleScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleScenario_Specs.swift; sourceTree = "<group>"; };
 		03DAF9A1272730D500FFED55 /* MyVehiclesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVehiclesView.swift; sourceTree = "<group>"; };
 		03DAF9A52727330300FFED55 /* MyVehicleViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVehicleViewModel_Specs.swift; sourceTree = "<group>"; };
@@ -449,6 +453,7 @@
 				8FF010242732EDCE0022314B /* OnBoardingScenario */,
 				8798D070272BBD1A00FF3AB4 /* AuthenticationScenario */,
 				03DAF9A3272731FB00FFED55 /* VehiclesScenario */,
+				03C8BB49274E3F7400169725 /* InvoicesScenario */,
 			);
 			path = Scenario;
 			sourceTree = "<group>";
@@ -492,6 +497,15 @@
 				03C18F1927380DF700C754E8 /* FailingPasswordResetRequester.swift */,
 			);
 			path = DefaultPasswordResetRequestor_Specs;
+			sourceTree = "<group>";
+		};
+		03C8BB49274E3F7400169725 /* InvoicesScenario */ = {
+			isa = PBXGroup;
+			children = (
+				03C8BB4A274E3F9400169725 /* VehicleInvoiceViewModel.swift */,
+				03C8BB4C274E3FBB00169725 /* VehicleInvoiceView.swift */,
+			);
+			path = InvoicesScenario;
 			sourceTree = "<group>";
 		};
 		03DAF9A3272731FB00FFED55 /* VehiclesScenario */ = {
@@ -1098,6 +1112,7 @@
 				2C863378273FB4040049C186 /* DefaultVehiclesGetter.swift in Sources */,
 				035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */,
 				87204D92274E51A200374957 /* PasswordResetRequestView.swift in Sources */,
+				03C8BB4B274E3F9400169725 /* VehicleInvoiceViewModel.swift in Sources */,
 				87DC1D00271F60B9002DC193 /* AccountCreationView.swift in Sources */,
 				03004DC6273E70F600188983 /* PasswordResetView.swift in Sources */,
 				0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */,
@@ -1131,6 +1146,7 @@
 				2C2DA388275280330085988B /* DefaultVehicleVerificator.swift in Sources */,
 				03DAF9A2272730D500FFED55 /* MyVehiclesView.swift in Sources */,
 				8705B9A8272081E3004132CF /* DefaultTokenManager.swift in Sources */,
+				03C8BB4D274E3FBB00169725 /* VehicleInvoiceView.swift in Sources */,
 				03B80F9E27416D0B00E1BF47 /* DefaultVehicleNavigator.swift in Sources */,
 				0382E29F2717647500EB570E /* AuthenticationScenario.swift in Sources */,
 				87204D94274E51D100374957 /* DefaultVehicleCreator.swift in Sources */,

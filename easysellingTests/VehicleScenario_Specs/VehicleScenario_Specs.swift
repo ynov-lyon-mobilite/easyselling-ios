@@ -63,6 +63,12 @@ class VehicleScenario_Specs: XCTestCase {
         whenNavigatingToVehicleUpdate(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
         await whenLeavingVehicleUpdate()
         XCTAssertTrue(isRefresh)
+    func test_Navigates_to_vehicule_invoices() {
+        givenScenario()
+        whenBeginning()
+        navigator.onNavigatingToInvoices?("VehicleID")
+        XCTAssertEqual("VehicleID", navigator.vehicleID)
+        thenHistory(is: [.myVehicles, .vehicleInvoices])
     }
     
     private func givenScenario() {
@@ -108,10 +114,14 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     private(set) var onFinish: (() async -> Void)?
     private(set) var onNavigateToVehicleCreation: Action?
     private(set) var onNavigateToProfile: Action?
+    private(set) var onNavigatingToInvoices: ((String) -> Void)?
+    private(set) var vehicleID: String = ""
     
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action) {
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action,
+                             onNavigatingToInvoices: @escaping (String) -> Void) {
         self.onNavigateToVehicleCreation = onVehicleCreationOpen
         self.onNavigateToProfile = onNavigateToProfile
+        self.onNavigatingToInvoices = onNavigatingToInvoices
         history.append(.myVehicles)
     }
     
@@ -127,6 +137,9 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle) {
         self.onFinish = onFinish
         history.append(.vehicleUpdate)
+    func navigatesToInvoices(ofVehicleId vehicleId: String) {
+        self.vehicleID = vehicleId
+        history.append(.vehicleInvoices)
     }
     
     func goingBackToHomeView() {
@@ -138,6 +151,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
         case vehicleCreation
         case profile
         case vehicleUpdate
+        case vehicleInvoices
         
         var debugDescription: String {
             switch self {
@@ -145,6 +159,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
             case .vehicleCreation: return "vehicle creation"
             case .profile: return "profile"
             case .vehicleUpdate: return "vehicle update"
+            case .vehicleInvoices: return "vehicle invoices"
             }
         }
     }

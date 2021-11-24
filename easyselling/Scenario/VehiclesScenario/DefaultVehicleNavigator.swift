@@ -10,8 +10,10 @@ import SwiftUI
 
 protocol VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action)
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action,
+                             onNavigatingToInvoices: @escaping (String) -> Void)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
+    func navigatesToInvoices(ofVehicleId vehicleId: String)
     func navigatesToProfile()
     func goingBackToHomeView()
 }
@@ -25,10 +27,11 @@ class DefaultVehicleNavigator: VehicleNavigator {
     private var navigationController: UINavigationController = UINavigationController()
     private var window: UIWindow?
 
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action) {
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action,
+                             onNavigatingToInvoices: @escaping (String) -> Void) {
         window?.rootViewController = navigationController
 
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen, isOpeningVehicleUpdate:  onVehicleUpdateOpen, isNavigatingToProfile: onNavigateToProfile)
+        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen, isNavigatingToProfile: onNavigateToProfile, isNavigatingToInvoices: onNavigatingToInvoices)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
         navigationController.pushViewController(UIHostingController(rootView: myVehiclesView), animated: true)
     }
@@ -43,6 +46,10 @@ class DefaultVehicleNavigator: VehicleNavigator {
         let navigator = DefaultProfileNavigator(navigationController: navigationController, window: window)
         let scenario = ProfileScenario(navigator: navigator)
         scenario.begin()
+    func navigatesToInvoices(ofVehicleId vehicleId: String) {
+        let navigator = DefaultInvoicesNavigator(navigationController: navigationController)
+        let scenario = InvoicesScenario(navigator: navigator)
+        scenario.begin(withVehicleId: vehicleId)
     }
 
     func navigatesToVehicleUpdate(onFinish: @escaping AsyncableAction, vehicle: Vehicle) {

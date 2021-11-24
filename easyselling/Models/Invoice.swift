@@ -10,7 +10,7 @@ import Foundation
 class Invoice {
     var idInvoice : String
     var idVehicule : String
-    
+
     init(idInvoice: String, idVehicule: String) {
         self.idInvoice = idInvoice
         self.idVehicule = idVehicule
