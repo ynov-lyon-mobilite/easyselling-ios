@@ -25,7 +25,6 @@
 		034D04E62732984400576D64 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 034D04E52732984400576D64 /* FirebaseAnalytics */; };
 		034D04E82732984400576D64 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 034D04E72732984400576D64 /* FirebaseCrashlytics */; };
 		034D04EB2733FE0800576D64 /* PasswordResetRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D04EA2733FE0800576D64 /* PasswordResetRequestViewModel.swift */; };
-		034D04ED2733FE1A00576D64 /* PasswordResetRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D04EC2733FE1A00576D64 /* PasswordResetRequestView.swift */; };
 		034D04F02733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D04EF2733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift */; };
 		035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860327184EDC00684ED0 /* AppDelegate.swift */; };
 		035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860527188E9300684ED0 /* DefaultAccountCreator.swift */; };
@@ -37,7 +36,6 @@
 		0382E29F2717647500EB570E /* AuthenticationScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29E2717647500EB570E /* AuthenticationScenario.swift */; };
 		0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A52717664000EB570E /* AccountCreationViewModel.swift */; };
 		0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */; };
-		0382E2AA2718186100EB570E /* DefaultCredentialsVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2A92718186100EB570E /* DefaultCredentialsVerificator_Specs.swift */; };
 		0382E2AC2718190B00EB570E /* DefaultCredentialsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E2AB2718190B00EB570E /* DefaultCredentialsVerificator.swift */; };
 		038862852749379D001D7E36 /* DefaultCredentialsPreparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038862842749379D001D7E36 /* DefaultCredentialsPreparator.swift */; };
 		038862882749382B001D7E36 /* DefaultCredentialsPreparator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038862872749382B001D7E36 /* DefaultCredentialsPreparator_Specs.swift */; };
@@ -81,7 +79,6 @@
 		2C863378273FB4040049C186 /* DefaultVehiclesGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C863377273FB4040049C186 /* DefaultVehiclesGetter.swift */; };
 		2C86337C273FB7B10049C186 /* succeededVehicles.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C86337B273FB7B10049C186 /* succeededVehicles.json */; };
 		2C86337D273FBA630049C186 /* succeededVehicles.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C86337B273FB7B10049C186 /* succeededVehicles.json */; };
-		2CAE03CD271709A1008D7A68 /* DefaultVehicleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE03CC271709A1008D7A68 /* DefaultVehicleCreator.swift */; };
 		2CAE03D82717118D008D7A68 /* VehicleCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */; };
 		2CD4B8C0271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */; };
 		2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */; };
@@ -93,6 +90,8 @@
 		8705B9A8272081E3004132CF /* DefaultTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9A7272081E2004132CF /* DefaultTokenManager.swift */; };
 		8705B9AB27208249004132CF /* KeychainSwift+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */; };
 		8705B9B127208464004132CF /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8705B9B027208464004132CF /* KeychainSwift */; };
+		87204D92274E51A200374957 /* PasswordResetRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87204D91274E51A200374957 /* PasswordResetRequestView.swift */; };
+		87204D94274E51D100374957 /* DefaultVehicleCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87204D93274E51D100374957 /* DefaultVehicleCreator.swift */; };
 		872B68A427290EB000FC3FDD /* UserAuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872B68A327290EB000FC3FDD /* UserAuthenticationView.swift */; };
 		873552B7270D847B00F2DDBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B6270D847B00F2DDBD /* Assets.xcassets */; };
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
@@ -163,7 +162,6 @@
 		03004DDC273EB02C00188983 /* FailingPasswordVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingPasswordVerificator.swift; sourceTree = "<group>"; };
 		034D04E22732976E00576D64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		034D04EA2733FE0800576D64 /* PasswordResetRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestViewModel.swift; sourceTree = "<group>"; };
-		034D04EC2733FE1A00576D64 /* PasswordResetRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestView.swift; sourceTree = "<group>"; };
 		034D04EF2733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestViewModel_Specs.swift; sourceTree = "<group>"; };
 		035E860327184EDC00684ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		035E860527188E9300684ED0 /* DefaultAccountCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAccountCreator.swift; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 		2C6D0F2A2732D9B500A86349 /* DefaultVehicleCreator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleCreator_Specs.swift; sourceTree = "<group>"; };
 		2C863377273FB4040049C186 /* DefaultVehiclesGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehiclesGetter.swift; sourceTree = "<group>"; };
 		2C86337B273FB7B10049C186 /* succeededVehicles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = succeededVehicles.json; sourceTree = "<group>"; };
-		2CAE03CC271709A1008D7A68 /* DefaultVehicleCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleCreator.swift; sourceTree = "<group>"; };
 		2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationView.swift; sourceTree = "<group>"; };
 		2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleInformationsVerificator.swift; sourceTree = "<group>"; };
 		2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationViewModel.swift; sourceTree = "<group>"; };
@@ -230,6 +227,8 @@
 		8705B9A527207D36004132CF /* FailingUserAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingUserAuthenticator.swift; sourceTree = "<group>"; };
 		8705B9A7272081E2004132CF /* DefaultTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTokenManager.swift; sourceTree = "<group>"; };
 		8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainSwift+Extensions.swift"; sourceTree = "<group>"; };
+		87204D91274E51A200374957 /* PasswordResetRequestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestView.swift; sourceTree = "<group>"; };
+		87204D93274E51D100374957 /* DefaultVehicleCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultVehicleCreator.swift; sourceTree = "<group>"; };
 		872B68A327290EB000FC3FDD /* UserAuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationView.swift; sourceTree = "<group>"; };
 		873552AF270D847700F2DDBD /* easyselling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = easyselling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873552B6270D847B00F2DDBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -301,7 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				034D04EA2733FE0800576D64 /* PasswordResetRequestViewModel.swift */,
-				034D04EC2733FE1A00576D64 /* PasswordResetRequestView.swift */,
+				87204D91274E51A200374957 /* PasswordResetRequestView.swift */,
 				03C18F172737FFC600C754E8 /* DefaultPasswordResetRequester.swift */,
 			);
 			path = Request;
@@ -537,7 +536,7 @@
 		2CD4B8BE271C5F82002598A4 /* VehicleCreation */ = {
 			isa = PBXGroup;
 			children = (
-				2CAE03CC271709A1008D7A68 /* DefaultVehicleCreator.swift */,
+				87204D93274E51D100374957 /* DefaultVehicleCreator.swift */,
 				2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */,
 				2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */,
 				2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */,
@@ -980,16 +979,13 @@
 				8798D1452730F67A00FF3AB4 /* DefaultTokenRefreshor.swift in Sources */,
 				2C863378273FB4040049C186 /* DefaultVehiclesGetter.swift in Sources */,
 				035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */,
+				87204D92274E51A200374957 /* PasswordResetRequestView.swift in Sources */,
 				87DC1D00271F60B9002DC193 /* AccountCreationView.swift in Sources */,
 				03004DC6273E70F600188983 /* PasswordResetView.swift in Sources */,
 				0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */,
 				874975FB273A3CA3000A1289 /* UploadedFile.swift in Sources */,
-				034D04ED2733FE1A00576D64 /* PasswordResetRequestView.swift in Sources */,
 				03B80F9A27416C8B00E1BF47 /* DefaultAuthenticationNavigator.swift in Sources */,
 				03B80FA02745B01F00E1BF47 /* DefaultPasswordResetTransformator.swift in Sources */,
-				2CAE03CD271709A1008D7A68 /* DefaultVehicleCreator.swift in Sources */,
-				034D04ED2733FE1A00576D64 /* PasswordResetRequestView.swift in Sources */,
-				2CAE03CD271709A1008D7A68 /* DefaultVehicleCreator.swift in Sources */,
 				2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */,
 				874975F9273A3AB1000A1289 /* DefaultFileUploader.swift in Sources */,
 				2CAE03D82717118D008D7A68 /* VehicleCreationView.swift in Sources */,
@@ -1013,6 +1009,7 @@
 				8705B9A8272081E3004132CF /* DefaultTokenManager.swift in Sources */,
 				03B80F9E27416D0B00E1BF47 /* DefaultVehicleNavigator.swift in Sources */,
 				0382E29F2717647500EB570E /* AuthenticationScenario.swift in Sources */,
+				87204D94274E51D100374957 /* DefaultVehicleCreator.swift in Sources */,
 				03004DC4273E70D700188983 /* PasswordResetViewModel.swift in Sources */,
 				8705B9AB27208249004132CF /* KeychainSwift+Extensions.swift in Sources */,
 				8798D14E2730FE7D00FF3AB4 /* DefaultAuthorizedRequestGenerator.swift in Sources */,
@@ -1083,8 +1080,6 @@
 				87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */,
 				035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */,
 				8798D1412730F35000FF3AB4 /* DefaultTokenRefreshor_Specs.swift in Sources */,
-				0382E2AA2718186100EB570E /* DefaultCredentialsVerificator_Specs.swift in Sources */,
-				0382E2AA2718186100EB570E /* DefaultCredentialsVerificator_Specs.swift in Sources */,
 				03004DD9273EAFD000188983 /* FailingPasswordReseter.swift in Sources */,
 				0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */,
 				8705B9A627207D36004132CF /* FailingUserAuthenticator.swift in Sources */,
