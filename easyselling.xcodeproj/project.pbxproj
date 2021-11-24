@@ -729,6 +729,7 @@
 				87780BAC271730100035AB13 /* DefaultAPICaller.swift */,
 				8705B9A7272081E2004132CF /* DefaultTokenManager.swift */,
 				874975F8273A3AB1000A1289 /* DefaultFileUploader.swift */,
+				9BB84D73274E4A1C00D88B03 /* DefaultPersistantLogin.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1087,6 +1088,7 @@
 				03004DBE273DB9E800188983 /* SceneDelegate.swift in Sources */,
 				87DC1D0E271FDF8D002DC193 /* APIResponse.swift in Sources */,
 				9B5C547D27387E59005CFD24 /* Vehicle.swift in Sources */,
+				9BB84D74274E4A1C00D88B03 /* DefaultPersistantLogin.swift in Sources */,
 				87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */,
 				03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */,
 				03B80F9C27416CC000E1BF47 /* DefaultOnBoardingNavigator.swift in Sources */,
