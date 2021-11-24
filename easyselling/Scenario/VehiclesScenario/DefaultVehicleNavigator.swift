@@ -49,6 +49,10 @@ class DefaultVehicleNavigator: VehicleNavigator {
         let navigator = DefaultProfileNavigator(navigationController: navigationController, window: window)
         let scenario = ProfileScenario(navigator: navigator)
         scenario.begin()
+    func navigatesToInvoices(ofVehicleId vehicleId: String) {
+        let navigator = DefaultInvoicesNavigator(navigationController: navigationController)
+        let scenario = InvoicesScenario(navigator: navigator)
+        scenario.begin(withVehicleId: vehicleId)
     }
 
     func navigatesToInvoices(ofVehicleId vehicleId: String) {
