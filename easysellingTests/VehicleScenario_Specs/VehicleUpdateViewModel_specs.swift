@@ -11,22 +11,26 @@ import XCTest
 class VehicleUpdateViewModel_specs: XCTestCase {
     
     private var viewModel: VehicleUpdateViewModel!
-    
+
     func test_modifies_the_existing_vehicle() {
         givenViewModel()
-        modifyBrand("Renault")
-        verifyModification()
+        updateInformations(Vehicle(brand: "Peugeot", model: "model1", license: "license2", type: .car, year: "2021"))
+        updateVehicle()
     }
     
     private func givenViewModel() {
         viewModel = VehicleUpdateViewModel(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"), onFinish: {}, vehicleVerificator: DefaultVehicleInformationsVerificator())
     }
     
-    private func modifyBrand(_ value: String) {
-        viewModel.brand = value
+    private func updateInformations(_ newInformations: Vehicle) {
+        viewModel.brand = newInformations.brand
+        viewModel.model = newInformations.model
+        viewModel.license = newInformations.license
+        viewModel.type = newInformations.type
+        viewModel.year = newInformations.year
     }
-    
-    private func verifyModification() {
-        viewModel.verifyVehiculeModification()
+
+    private func updateVehicle() {
+        viewModel.updateVehicle()
     }
 }
