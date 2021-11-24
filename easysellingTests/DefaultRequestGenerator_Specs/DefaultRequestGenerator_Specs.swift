@@ -33,14 +33,27 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         thenRequest(is: request)
     }
 
-    func test_Generates_Request_With_Query_Parameters() {
+    func test_Generates_Request_and_override_content_type_set_to_JSON() {
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
+        request.httpMethod = HTTPMethod.POST.rawValue
+        request.addValue("application/xml", forHTTPHeaderField: "Content-Type")
+
+        givenService()
+        whenGenerateRequest(endpoint: .users, method: .POST, headers: ["Content-Type": "application/xml"])
+        thenRequest(is: request)
+    }
+
+    func test_Generates_Request_With_Path_keys_values() {
+        let body = "BODY"
+
         var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles/ABCD")!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = HTTPMethod.POST.rawValue
+        request.httpBody = try! JSONEncoder().encode(body)
 
         givenService()
-        whenGenerateRequest(endpoint: .vehicleId, method: .POST, pathKeysValues: ["vehicleId": "ABCD"])
-        thenRequest(is: request)
+        whenGenerateRequestWithBody(endpoint: .vehicleId, method: .POST, body: body, pathKeysValues: ["vehicleId": "ABCD"])
+        thenRequestWithBody(is: request)
     }
 
     func test_Generates_Request_With_Body() {

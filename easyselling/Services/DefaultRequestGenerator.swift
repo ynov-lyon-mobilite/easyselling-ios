@@ -33,7 +33,7 @@ class DefaultRequestGenerator: RequestGenerator {
         }
 
         var request = try generateRequest(endpoint: endpoint, method: method,
-                                          headers: headers, pathKeysValues:                                        pathKeysValues)
+                                          headers: headers, pathKeysValues: pathKeysValues)
         request.httpBody = encodedBody
 
         return request
