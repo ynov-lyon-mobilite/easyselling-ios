@@ -32,12 +32,6 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
         givenVerificator()
         whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "AA222AA", type: Vehicle.Category.car, year: "222"))
         thenError(is: .incorrectYear)
-    } 
-    
-    func test_Verifies_if_cheking_has_successful() {
-        givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "AA222AA", type: Vehicle.Category.car, year: "year"))
-        thenNoErrorThrows()
     }
     
     func test_Verifies_if_license_has_an_incorrect_format_for_new_license() {
