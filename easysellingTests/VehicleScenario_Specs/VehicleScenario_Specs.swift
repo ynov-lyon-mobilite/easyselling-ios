@@ -152,7 +152,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
         case profile
         case vehicleUpdate
         case vehicleInvoices
-        
+
         var debugDescription: String {
             switch self {
             case .myVehicles: return "My vehicles"
