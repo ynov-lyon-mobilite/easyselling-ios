@@ -54,6 +54,7 @@ vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
         print("JE DELETE")
         do {
             try await vehicleDeletor.deleteVehicle(id: idVehicle)
+            isLoading = true
             await updateVehiclesList()
         } catch (let error) {
             if let error = error as? APICallerError {
@@ -63,8 +64,6 @@ vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
                 self.error = nil
             }
         }
-        
-        isLoading = false
     }
 
     func updateVehiclesList() async {
