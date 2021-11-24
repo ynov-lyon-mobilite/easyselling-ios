@@ -24,11 +24,11 @@ class VehicleScenario {
     private func navigatesToVehicleCreation() {
         navigator.navigatesToVehicleCreation(onFinish: goingBackToHomeView)
     }
-    
+
     private func goingBackToHomeView() {
         navigator.goingBackToHomeView()
 	}
-    
+
     func navigatesToVehicleUpdate(vehicle: Vehicle) {
         navigator.navigatesToVehicleUpdate(onFinish: goingBackToHomeView, vehicle: vehicle)
     }

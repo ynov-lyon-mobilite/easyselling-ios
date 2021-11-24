@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct VehicleUpdateView: View {
-    
+
     @ObservedObject var viewModel: VehicleUpdateViewModel
-    
+
     var body: some View {
         VStack {
             Button("Delete") {

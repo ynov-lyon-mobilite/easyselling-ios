@@ -10,7 +10,7 @@ import SwiftUI
 struct MyVehiclesView: View {
 
     @ObservedObject var viewModel: MyVehiclesViewModel
-    
+
     var body: some View {
         NavigationView {
             VStack {

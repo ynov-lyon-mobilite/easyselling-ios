@@ -51,7 +51,7 @@ class DefaultVehicleNavigator: VehicleNavigator {
         let view = VehicleUpdateView(viewModel: vm)
         navigationController.present(UIHostingController(rootView: view), animated: true)
     }
-    
+
     func goingBackToHomeView() {
         DispatchQueue.main.async {
             self.navigationController.dismiss(animated: true)
