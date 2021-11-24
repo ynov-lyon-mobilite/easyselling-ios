@@ -29,8 +29,11 @@ class VehicleScenario {
         navigator.goingBackToHomeView()
 	}
 
-    func navigatesToVehicleUpdate(vehicle: Vehicle) {
-        navigator.navigatesToVehicleUpdate(onFinish: goingBackToHomeView, vehicle: vehicle)
+    func navigatesToVehicleUpdate(vehicle: Vehicle, refreshVehicles: @escaping AsyncableAction) {
+        navigator.navigatesToVehicleUpdate(onFinish: { [goingBackToHomeView] in
+            goingBackToHomeView()
+            await refreshVehicles()
+        }, vehicle: vehicle)
     }
 
 }

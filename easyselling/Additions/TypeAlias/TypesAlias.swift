@@ -9,4 +9,5 @@ import Foundation
 import Combine
 
 typealias Action = () -> Void
-typealias OnUpdatingVehicle = (Vehicle) -> Void
+typealias AsyncableAction = () async -> Void
+typealias OnUpdatingVehicle = (Vehicle, @escaping AsyncableAction) -> Void
