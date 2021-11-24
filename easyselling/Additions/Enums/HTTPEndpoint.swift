@@ -12,6 +12,7 @@ enum HTTPEndpoint: String {
 
     case users = "/users"
     case vehicles = "/items/vehicles"
+    case vehicleId = "/items/vehicles/:id"
     case authLogin = "/auth/login"
     case authRefresh = "/auth/refresh"
     case files = "/files"

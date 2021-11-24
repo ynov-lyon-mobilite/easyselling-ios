@@ -33,6 +33,17 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         thenRequest(is: request)
     }
 
+    func test_Generates_Request_With_Query_Parameters() {
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users/vehicles/ABCD")!)
+        request.httpMethod = HTTPMethod.POST.rawValue
+
+        givenService()
+        whenGenerateRequest(endpoint: .users, method: .POST, headers: [:], queryParameteers: [
+
+        ])
+        thenRequest(is: request)
+    }
+
     func test_Generates_Request_With_Body() {
         let body = "BODY"
 

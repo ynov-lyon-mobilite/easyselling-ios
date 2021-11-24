@@ -22,7 +22,7 @@ class DefaultVehicleCreator: VehicleCreator {
     }
 
     func createVehicle(informations: Vehicle) async throws {
-        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .POST, body: informations, headers: [:])
+        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .POST, body: informations)
         try await apiCaller.call(urlRequest)
     }
 }

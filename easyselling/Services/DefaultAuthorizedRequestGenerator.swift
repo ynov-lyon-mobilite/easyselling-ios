@@ -8,9 +8,22 @@
 import Foundation
 
 protocol AuthorizedRequestGenerator {
-    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) async throws -> URLRequest
-    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod,
-                                       body: T?, headers: [String: String]) async throws -> URLRequest
+    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String],
+                         queryParameters: [String: Any]) async throws -> URLRequest
+    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?, headers: [String: String],
+                                       queryParameters: [String: Any]) async throws -> URLRequest
+}
+
+extension AuthorizedRequestGenerator {
+    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String] = [:],
+                         queryParameters: [String: Any] = [:]) async throws -> URLRequest {
+        return try await generateRequest(endpoint: endpoint, method: method, headers: headers, queryParameters: queryParameters)
+    }
+
+    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?,
+                                       headers: [String: String] = [:], queryParameters: [String: Any] = [:]) async throws -> URLRequest {
+        return try await generateRequest(endpoint: endpoint, method: method, body: body, headers: headers, queryParameters: queryParameters)
+    }
 }
 
 class DefaultAuthorizedRequestGenerator: AuthorizedRequestGenerator {
@@ -48,8 +61,8 @@ class DefaultAuthorizedRequestGenerator: AuthorizedRequestGenerator {
     private func refreshToken() async throws -> String {
         guard let token = tokenManager.accessToken,
               let refreshToken = tokenManager.refreshToken else {
-            throw APICallerError.unauthorized
-        }
+                  throw APICallerError.unauthorized
+              }
 
         if !tokenManager.accessTokenIsExpired {
             return token
