@@ -10,7 +10,7 @@ import XCTest
 
 class DefaultVehiclesGetter_Specs: XCTestCase {
     func test_Throws_error_when_request_failed() async {
-        let vehicleGetter = DefaultVehiclesGetter(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
+        let vehicleGetter = DefaultVehiclesGetter(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         do {
             _ = try  await vehicleGetter.getVehicles()
         } catch(let error) {
@@ -20,7 +20,7 @@ class DefaultVehiclesGetter_Specs: XCTestCase {
     }
     
     func test_Shows_vehicles_when_request_succeeded() async {
-        let vehicleGetter = DefaultVehiclesGetter(requestGenerator: FakeRequestGenerator(), apiCaller: DefaultAPICaller(urlSession: FakeUrlSession(localFile: .succeededVehicles)))
+        let vehicleGetter = DefaultVehiclesGetter(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: DefaultAPICaller(urlSession: FakeUrlSession(localFile: .succeededVehicles)))
         do {
             vehicles = try await vehicleGetter.getVehicles()
         } catch(let error) {

@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol AutorizedRequestGenerator {
+protocol AuthorizedRequestGenerator {
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String]) async throws -> URLRequest
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod,
                                        body: T?, headers: [String: String]) async throws -> URLRequest
 }
 
-class DefaultAutorizedRequestGenerator: AutorizedRequestGenerator {
+class DefaultAuthorizedRequestGenerator: AuthorizedRequestGenerator {
     private let requestGenerator: RequestGenerator
     private var tokenManager: TokenManager
     private let tokenRefreshor: TokenRefreshor
@@ -29,7 +29,7 @@ class DefaultAutorizedRequestGenerator: AutorizedRequestGenerator {
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String : String]) async throws -> URLRequest {
         var request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers)
 
-        let token = try await resfreshToken()
+        let token = try await refreshToken()
         request.addValue("Bearer \(token)", forHTTPHeaderField: "authorization")
 
         return request
@@ -39,13 +39,13 @@ class DefaultAutorizedRequestGenerator: AutorizedRequestGenerator {
                                        body: T?,headers: [String : String]) async throws -> URLRequest {
         var request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers)
 
-        let token = try await resfreshToken()
+        let token = try await refreshToken()
         request.addValue("Bearer \(token)", forHTTPHeaderField: "authorization")
 
         return request
     }
 
-    private func resfreshToken() async throws -> String {
+    private func refreshToken() async throws -> String {
         guard let token = tokenManager.accessToken,
               let refreshToken = tokenManager.refreshToken else {
             throw APICallerError.unauthorized

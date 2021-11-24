@@ -13,16 +13,16 @@ protocol VehicleCreator {
 }
 
 class DefaultVehicleCreator: VehicleCreator {
-    private var requestGenerator: RequestGenerator
+    private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
 
-    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
+    init(requestGenerator: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
         self.apiCaller = apiCaller
     }
 
     func createVehicle(informations: Vehicle) async throws {
-        let urlRequest = try requestGenerator.generateRequest(endpoint: .vehicles, method: .POST, body: informations, headers: [:])
+        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .POST, body: informations, headers: [:])
         try await apiCaller.call(urlRequest)
     }
 }

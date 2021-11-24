@@ -77,14 +77,14 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         let tokenManager = FakeTokenManager(accessTokenIsExpired: accessTokenIsExpired,
                                             accessToken: accessToken,
                                             refreshToken: refreshToken)
-        self.requestGenerator = DefaultAutorizedRequestGenerator(
+        self.requestGenerator = DefaultAuthorizedRequestGenerator(
             requestGenerator: requestGenerator, tokenManager: tokenManager,
             tokenRefreshor: SucceedingTokenRefreshor(accessToken: updatedAccessToken))
     }
     
     private func givenService(tokenManager: TokenManager, tokenRefreshor: TokenRefreshor) {
         let requestGenerator = FakeRequestGenerator()
-        self.requestGenerator = DefaultAutorizedRequestGenerator(requestGenerator: requestGenerator, tokenManager: tokenManager,
+        self.requestGenerator = DefaultAuthorizedRequestGenerator(requestGenerator: requestGenerator, tokenManager: tokenManager,
                                                                  tokenRefreshor: tokenRefreshor)
     }
     
@@ -136,7 +136,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         XCTAssertNil(request)
     }
     
-    private var requestGenerator: AutorizedRequestGenerator!
+    private var requestGenerator: AuthorizedRequestGenerator!
     private var request: URLRequest!
     private var error: APICallerError!
     

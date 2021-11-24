@@ -16,33 +16,33 @@ class DefaultVehicleCreator_Specs: XCTestCase {
     private var error: APICallerError!
     
     func test_Creates_vehicle_successful() async {
-        givenVehicleCreator(requestGenerator: FakeRequestGenerator(), apiCaller: SucceedingAPICaller())
+        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
         await whenCreatingVehicle(informations: vehicle)
         thenAccountIsCreated()
     }
     
     func test_Creates_vehicle_failed_with_unfound_ressources() async {
-        givenVehicleCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
+        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         await whenCreatingVehicle(informations: vehicle)
         thenErrorCode(is: 404)
         thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
     }
     
     func test_Creates_vehicle_failed_with_wrong_url() async {
-        givenVehicleCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 400))
+        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 400))
         await whenCreatingVehicle(informations: vehicle)
         thenErrorCode(is: 400)
         thenErrorMessage(is: "Une erreur est survenue")
     }
     
     func test_Creates_vehicle_failed_with_forbidden_access() async {
-        givenVehicleCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 403))
+        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 403))
         await whenCreatingVehicle(informations: vehicle)
         thenErrorCode(is: 403)
         thenErrorMessage(is: "Une erreur est survenue")
     }
     
-    private func givenVehicleCreator(requestGenerator: RequestGenerator, apiCaller: APICaller) {
+    private func givenVehicleCreator(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
         vehicleCreator = DefaultVehicleCreator(requestGenerator: requestGenerator, apiCaller: apiCaller)
         vehicle = Vehicle(brand: "Audi", model: "A1", license: "123456789", type: Vehicle.Category.car, year: "2005")
     }
