@@ -11,45 +11,43 @@ import XCTest
 
 class StartupScenario_Specs : XCTestCase {
 
-    func test_Begins_OnBoarding_scenario() {
+    func test_Begins_OnBoarding_scenario() async {
         givenTokenManagerIsNil()
         givenScenario(with: SucceedingTokenRefreshor(accessToken: "REFRESH_TOKEN"))
         givenOnBoardingViewed(is: false)
-        whenBeginning()
+        await whenBeginning()
         thenHistory(is: [.onBoarding])
     }
 
-    func test_Begins_Login_scenario() {
+    func test_Begins_Login_scenario() async {
         givenTokenManagerIsNil()
         givenScenario(with: SucceedingTokenRefreshor(accessToken: "REFRESH_TOKEN"))
         givenOnBoardingViewed(is: true)
-        whenBeginning()
+        await whenBeginning()
         thenHistory(is: [.login])
     }
 
-    func test_Begins_Vehicle_scenario() {
+    func test_Begins_Vehicle_scenario() async {
         givenSuccedingTokenManager()
         givenScenario(with: SucceedingTokenRefreshor(accessToken: "REFRESH_TOKEN"))
         givenOnBoardingViewed(is: true)
-        whenBeginning()
+        await whenBeginning()
         thenHistory(is: [.myVehicles])
     }
 
-    func test_Begins_Vehicle_scenario_If_Token_Expires() {
+    func test_Begins_Vehicle_scenario_If_Token_Expires() async {
         givenTokenManagerWithTokenExpired()
         givenScenario(with: SucceedingTokenRefreshor(accessToken: "REFRESH_TOKEN"))
         givenOnBoardingViewed(is: true)
-        whenBeginning()
-        sleep(1)
+        await whenBeginning()
         thenHistory(is: [.myVehicles])
     }
 
-    func test_Begins_Login_scenario_If_Refresh_Fails() {
+    func test_Begins_Login_scenario_If_Refresh_Fails() async {
         givenTokenManagerWithTokenExpired()
         givenScenario(with: FailingTokenRefreshor(error: APICallerError.unauthorized))
         givenOnBoardingViewed(is: true)
-        whenBeginning()
-        sleep(1)
+        await whenBeginning()
         thenHistory(is: [.login])
     }
 
@@ -74,8 +72,8 @@ class StartupScenario_Specs : XCTestCase {
         scenario.onBoardingIsViewed = viewed
     }
 
-    private func whenBeginning() {
-        scenario.begin()
+    private func whenBeginning() async {
+        await scenario.begin()
     }
 
     private func thenHistory(is expected: [SpyStartupNavigator.History]) {

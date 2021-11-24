@@ -37,7 +37,7 @@ class DefaultStartupNavigator : StartupNavigator {
     }
 
     func navigatesToHomeView() {
-        let navigator = DefaultVehicleNavigator(navigationController: navigationController)
+        let navigator = DefaultVehicleNavigator(window: window)
         let scenario = VehicleScenario(navigator: navigator)
         scenario.begin()
     }

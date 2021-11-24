@@ -35,7 +35,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        scenario.begin()
         let navigator = DefaultStartupNavigator(navigationController: navigationController, window: window)
         let scenario = StartupScenario(navigator: navigator)
-        scenario.begin()
+        Task {
+            await scenario.begin()
+        }
 
     }
 

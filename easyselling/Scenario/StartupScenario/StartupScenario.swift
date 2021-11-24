@@ -22,17 +22,19 @@ class StartupScenario {
     private var tokenManager: TokenManager
     private var tokenRefreshor: TokenRefreshor
 
-    func begin() {
+    @MainActor func begin() async {
         do {
 //            tokenManager.flush()
-            guard let refreshToken = tokenManager.refreshToken else {
-                      throw APICallerError.unauthorized
-                  }
-
-            if !tokenManager.accessTokenIsExpired {
-                self.navigator.navigatesToHomeView()
+            if !onBoardingIsViewed {
+                self.navigator.navigatesToOnBoarding()
             } else {
-                Task {
+                guard let refreshToken = tokenManager.refreshToken else {
+                          throw APICallerError.unauthorized
+                      }
+
+                if !tokenManager.accessTokenIsExpired {
+                    self.navigator.navigatesToHomeView()
+                } else {
                     let tokenResult = try await tokenRefreshor.refresh(refreshToken: refreshToken)
                     tokenManager.accessToken = tokenResult.accessToken
                     tokenManager.refreshToken = tokenResult.refreshToken
@@ -40,11 +42,7 @@ class StartupScenario {
                 }
             }
         } catch {
-            if !onBoardingIsViewed {
-                self.navigator.navigatesToOnBoarding()
-            } else {
-                self.navigator.navigatesToLogin()
-            }
+            self.navigator.navigatesToLogin()
         }
     }
 }
