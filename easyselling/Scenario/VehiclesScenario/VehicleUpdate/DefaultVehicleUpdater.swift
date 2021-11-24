@@ -8,10 +8,11 @@
 import Foundation
 
 protocol VehicleUpdater {
-    func updateVehicle(informations: Vehicle) async throws
+    func updateVehicle(id: String, informations: Vehicle) async throws
 }
 
 class DefaultVehicleUpdater: VehicleUpdater {
+
     private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
 
@@ -20,8 +21,8 @@ class DefaultVehicleUpdater: VehicleUpdater {
         self.apiCaller = apiCaller
     }
 
-    func updateVehicle(informations: Vehicle) async throws {
-        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .PATCH, body: informations, headers: [:])
+    func updateVehicle(id: String, informations: Vehicle) async throws {
+        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicleId, method: .PATCH, body: informations, headers: [:], pathKeysValues: ["vehicleId": id])
         try await apiCaller.call(urlRequest)
     }
 }

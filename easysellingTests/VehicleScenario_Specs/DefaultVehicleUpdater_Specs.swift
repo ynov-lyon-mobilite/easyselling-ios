@@ -49,7 +49,7 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
 
     private func whenUpdatingVehicle(informations: Vehicle) async {
         do {
-            try await vehicleUpdater.updateVehicle(informations: informations)
+            try await vehicleUpdater.updateVehicle(id: "", informations: informations)
             self.isRequestSucceed = true
         } catch (let error) {
             self.error = (error as! APICallerError)

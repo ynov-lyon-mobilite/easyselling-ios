@@ -27,7 +27,7 @@ class VehicleScenario_Specs: XCTestCase {
     func test_Navigates_to_vehicle_update() {
         givenScenario()
         whenBeginning()
-        whenNavigatingToVehicleUpdate()
+        whenNavigatingToVehicleUpdate(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
         thenHistory(is: [.myVehicles, .vehicleUpdate])
     }
 
@@ -35,7 +35,7 @@ class VehicleScenario_Specs: XCTestCase {
         givenScenario()
         whenBeginning()
         whenNavigatingToVehicleCreation()
-        await navigator.onFinish?()
+        await whenleavingVehicleCreation()
         thenHistory(is: [.myVehicles, .vehicleCreation, .myVehicles])
     }
 
@@ -53,8 +53,8 @@ class VehicleScenario_Specs: XCTestCase {
     func test_Leaves_vehicle_update() async {
         givenScenario()
         whenBeginning()
-        whenNavigatingToVehicleUpdate()
-        await navigator.onFinish?()
+        whenNavigatingToVehicleUpdate(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+        await whenLeavingVehicleUpdate()
         thenHistory(is: [.myVehicles, .vehicleUpdate, .myVehicles])
     }
     
@@ -75,8 +75,12 @@ class VehicleScenario_Specs: XCTestCase {
         await navigator.onFinish?()
 	}
 
-    private func whenNavigatingToVehicleUpdate() {
-        scenario.navigatesToVehicleUpdate(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+    private func whenLeavingVehicleUpdate() async {
+        await navigator.onFinish?()
+    }
+
+    private func whenNavigatingToVehicleUpdate(vehicle: Vehicle) {
+        scenario.navigatesToVehicleUpdate(vehicle: vehicle)
     }
  
     private func thenHistory(is expected: [SpyVehicleCreationNavigator.History]) {

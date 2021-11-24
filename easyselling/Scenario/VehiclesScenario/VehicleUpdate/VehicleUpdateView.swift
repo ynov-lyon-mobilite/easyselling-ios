@@ -13,7 +13,6 @@ struct VehicleUpdateView: View {
 
     var body: some View {
         VStack {
-
             TextField(viewModel.vehicle.brand, text: $viewModel.brand)
                 .padding(.top)
 
@@ -34,18 +33,15 @@ struct VehicleUpdateView: View {
                     .keyboardType(.numberPad)
             }
                 .padding()
-
                 .alert(isPresented: $viewModel.showAlert, content: {
                     Alert(
                         title: Text(viewModel.alert)
                 )})
-
             Button("Update Vehicle") {
                 Task {
                     await viewModel.updateVehicle()
                 }
             }
-
             Button("Delete") {
                 Task {
                     await viewModel.onFinish()

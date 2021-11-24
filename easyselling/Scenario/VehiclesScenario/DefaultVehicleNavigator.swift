@@ -47,7 +47,7 @@ class DefaultVehicleNavigator: VehicleNavigator {
 
     
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle) {
-        let vm = VehicleUpdateViewModel(vehicle: vehicle, onFinish: onFinish, vehicleVerificator: DefaultVehicleInformationsVerificator(), vehicleUpdater: DefaultVehicleUpdater())
+        let vm = VehicleUpdateViewModel(vehicle: vehicle, onFinish: onFinish)
         let view = VehicleUpdateView(viewModel: vm)
         navigationController.present(UIHostingController(rootView: view), animated: true)
     }
