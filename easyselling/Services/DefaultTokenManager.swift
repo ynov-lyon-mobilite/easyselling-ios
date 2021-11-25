@@ -66,8 +66,4 @@ final class DefaultTokenManager: TokenManager, ObservableObject {
     var accessTokenIsExpired: Bool {
         return decodedToken?.expired ?? true
     }
-
-    func flush() {
-        keychain.clear()
-    }
 }

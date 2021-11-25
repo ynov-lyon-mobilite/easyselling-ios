@@ -20,11 +20,7 @@ class OnBoardingScenario {
     private var navigator: OnBoardingNavigator
 
     func begin() {
-//        if(!onBoardingIsViewed) {
         navigator.navigatesToOnBoardingViewModel(onFinish: hasFinish)
-//        } else {
-//            navigator.navigateToAuthenticationScenario()
-//        }
     }
 
     private func hasFinish() {

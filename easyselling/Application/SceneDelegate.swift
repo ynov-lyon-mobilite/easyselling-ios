@@ -29,10 +29,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
 
         window?.rootViewController = navigationController
-
-//        let navigator = DefaultOnBoardingNavigator(navigationController: navigationController, window: window)
-//        let scenario = OnBoardingScenario(navigator: navigator)
-//        scenario.begin()
         let navigator = DefaultStartupNavigator(navigationController: navigationController, window: window)
         let scenario = StartupScenario(navigator: navigator)
         Task {
