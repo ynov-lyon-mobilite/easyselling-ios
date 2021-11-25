@@ -24,8 +24,8 @@ class VehicleUpdateViewModel: ObservableObject {
     @Published var year: String = ""
 
     init(vehicle: Vehicle, onFinish: @escaping () async -> Void,
-         vehicleVerificator: VehicleInformationsVerificator = DefaultVehicleInformationsVerificator(),
-         vehicleUpdater: VehicleUpdater = DefaultVehicleUpdater()) {
+        vehicleVerificator: VehicleInformationsVerificator = DefaultVehicleInformationsVerificator(),
+        vehicleUpdater: VehicleUpdater = DefaultVehicleUpdater()) {
         self.vehicle = vehicle
         self.onFinish = onFinish
         self.vehicleInformationsVerificator = vehicleVerificator

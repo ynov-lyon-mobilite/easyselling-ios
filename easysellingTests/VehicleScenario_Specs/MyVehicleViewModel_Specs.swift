@@ -60,6 +60,11 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     private func thenHasNavigatingToProfile() {
         XCTAssertTrue(onNavigateToProfile)
     }
+
+    func test_Verify_is_the_same_vehicle_on_click_in_update_button() {
+        givenViewModel(vehiclesGetter:  DefaultVehiclesGetter())
+        whenOpeningVehicleUpdatingModal(vehicle: Vehicle(id: "", brand: "", model: "", license: "", type: .car, year: ""))
+    }
     
     private func givenViewModel(vehiclesGetter: VehiclesGetter) {
         viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter,
@@ -67,7 +72,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
                                                 self.isOpen = true
         }, isNavigatingToProfile: {
             self.onNavigateToProfile = true
-        }, isOpeningVehicleUpdate: {_ in})
+        }, isOpeningVehicleUpdate: {vehicle, _ in})
     }
     
     private func givenViewModelDeletor(vehiclesGetter: VehiclesGetter, vehicleDeletor: VehicleDeletor) {
@@ -88,6 +93,10 @@ class MyVehiclesViewModel_Specs: XCTestCase {
 
     private func whenVehicles(are vehicles: [Vehicle]) {
         viewModel.vehicles = vehicles
+	}
+
+    private func whenOpeningVehicleUpdatingModal(vehicle: Vehicle) {
+        viewModel.openVehicleUpdate(vehicle: vehicle)
     }
     
     private func thenLoadVehicles(are expected: [Vehicle]) {

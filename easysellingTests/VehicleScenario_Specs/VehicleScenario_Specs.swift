@@ -10,7 +10,7 @@ import XCTest
 @testable import easyselling
 
 class VehicleScenario_Specs: XCTestCase {
-    
+
     func test_Begins_scenario() {
         givenScenario()
         whenBeginning()
@@ -57,6 +57,14 @@ class VehicleScenario_Specs: XCTestCase {
         await whenLeavingVehicleUpdate()
         thenHistory(is: [.myVehicles, .vehicleUpdate, .myVehicles])
     }
+
+    func test_Refreshes_vehicles_on_update_Modal() async {
+        givenScenario()
+        whenBeginning()
+        whenNavigatingToVehicleUpdate(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+        await whenLeavingVehicleUpdate()
+        XCTAssertTrue(isRefresh)
+    }
     
     private func givenScenario() {
         navigator = SpyVehicleCreationNavigator()
@@ -80,7 +88,9 @@ class VehicleScenario_Specs: XCTestCase {
     }
 
     private func whenNavigatingToVehicleUpdate(vehicle: Vehicle) {
-        scenario.navigatesToVehicleUpdate(vehicle: vehicle)
+        scenario.navigatesToVehicleUpdate(vehicle: vehicle, refreshVehicles: {
+            self.isRefresh = true
+        })
     }
  
     private func thenHistory(is expected: [SpyVehicleCreationNavigator.History]) {
@@ -89,7 +99,8 @@ class VehicleScenario_Specs: XCTestCase {
     
     private var scenario: VehicleScenario!
     private var navigator: SpyVehicleCreationNavigator!
-    private var isVehicleCreationFinished: Bool!
+    private var isVehicleCreationFinished: Bool = false
+    private var isRefresh: Bool = false
 }
 
 class SpyVehicleCreationNavigator: VehicleNavigator {
