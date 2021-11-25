@@ -13,6 +13,8 @@ protocol TokenManager {
     var accessTokenIsExpired: Bool { get }
     var refreshToken: String? { get set }
     var accessToken: String? { get set }
+
+    func setTokens(_ token: Token)
 }
 
 final class DefaultTokenManager: TokenManager, ObservableObject {
@@ -54,6 +56,11 @@ final class DefaultTokenManager: TokenManager, ObservableObject {
               let decoded = try? decode(jwt: token) else { return nil }
 
         return decoded
+    }
+
+    func setTokens(_ token: Token) {
+        accessToken = token.accessToken
+        refreshToken = token.refreshToken
     }
 
     var accessTokenIsExpired: Bool {

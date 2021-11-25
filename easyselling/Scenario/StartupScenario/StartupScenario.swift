@@ -23,26 +23,31 @@ class StartupScenario {
     private var tokenRefreshor: TokenRefreshor
 
     @MainActor func begin() async {
-        do {
-//            tokenManager.flush()
-            if !onBoardingIsViewed {
-                self.navigator.navigatesToOnBoarding()
-            } else {
-                guard let refreshToken = tokenManager.refreshToken else {
-                          throw APICallerError.unauthorized
-                      }
-
-                if !tokenManager.accessTokenIsExpired {
-                    self.navigator.navigatesToHomeView()
-                } else {
-                    let tokenResult = try await tokenRefreshor.refresh(refreshToken: refreshToken)
-                    tokenManager.accessToken = tokenResult.accessToken
-                    tokenManager.refreshToken = tokenResult.refreshToken
-                    self.navigator.navigatesToHomeView()
-                }
-            }
-        } catch {
-            self.navigator.navigatesToLogin()
+        switch await beginType() {
+        case .onBoarding:
+            navigator.navigatesToOnBoarding()
+        case .login:
+            navigator.navigatesToLogin()
+        case .home:
+            navigator.navigatesToHomeView()
         }
+    }
+
+    private func beginType() async -> BeginType {
+        if !onBoardingIsViewed {
+            return .onBoarding
+        } else if tokenManager.accessToken != nil && !tokenManager.accessTokenIsExpired {
+            return .home
+        } else if let refreshToken = tokenManager.refreshToken,
+                  let tokens = try? await tokenRefreshor.refresh(refreshToken: refreshToken) {
+            tokenManager.setTokens(tokens)
+            return .home
+        } else {
+            return .login
+        }
+    }
+
+    private enum BeginType {
+        case onBoarding, login, home
     }
 }
