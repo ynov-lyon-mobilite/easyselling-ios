@@ -44,20 +44,19 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     }
     
     func test_Deletes_vehicle_when_request_is_success() async {
-        let listOfVehicle = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-                            Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")]
-        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetterWithDelete(listOfVehicle, id: "2"),
+        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
                               vehicleDeletor: SucceedingVehicleDeletor())
+        whenVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
+                           Vehicle(id: "2", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
         await whenDeletingVehicle(withId: "2")
-        await whenTryingToGetVehicles()
         thenLoadVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
     }
 
     func test_Deletes_vehicle_when_request_is_failing() async {
-        let listOfVehicle = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-                            Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")]
-        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetterWithDelete(listOfVehicle, id: "2"),
+        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
                               vehicleDeletor: FailingVehicleDeletor(withError: APICallerError.notFound))
+        whenVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
+                           Vehicle(id: "2", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
         await whenDeletingVehicle(withId: "2")
         thenError(is: "Impossible de trouver ce que vous cherchez")
     }
@@ -86,6 +85,10 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     private func whenOpeningVehiculeCreationModal() {
         viewModel.openVehicleCreation()
     }
+
+    private func whenVehicles(are vehicles: [Vehicle]) {
+        viewModel.vehicles = vehicles
+    }
     
     private func thenLoadVehicles(are expected: [Vehicle]) {
         XCTAssertEqual(expected, viewModel.vehicles)
@@ -102,10 +105,6 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     private func thenVehicleCreationModalIsOpen() {
         XCTAssertTrue(isOpen)
     }
-    
-//    private func thenListOfVehicleAfterDelete() {
-//        XCTAssertEqual(viewModel.vehicles, viewModel.vehicleDeletor.vehicle)
-//    }
  
     private var viewModel: MyVehiclesViewModel!
     private var isOpen: Bool!

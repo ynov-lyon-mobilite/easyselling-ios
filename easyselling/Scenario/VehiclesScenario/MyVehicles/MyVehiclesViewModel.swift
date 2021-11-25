@@ -51,7 +51,6 @@ vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
     }
 
     @MainActor func deleteVehicle(idVehicle: String) async {
-        print("JE DELETE")
         do {
             try await vehicleDeletor.deleteVehicle(id: idVehicle)
             isLoading = true
