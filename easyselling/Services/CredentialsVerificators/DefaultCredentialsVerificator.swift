@@ -50,8 +50,8 @@ enum CredentialsError: LocalizedError, Equatable {
 
     var errorDescription: String? {
         switch self {
-        case .wrongEmail: return "L'addresse email est incorrect"
-        case .emptyEmail: return "L'addresse email est vide"
+        case .wrongEmail: return "L'adresse email est incorrect"
+        case .emptyEmail: return "L'adresse email est vide"
         case .wrongPassword: return "Les mots de passes sont différents"
         case .emptyPassword: return "Le mot de passe est vide"
         case .emptyPasswordConfirmation: return "La confirmation du mot de passe est vide"

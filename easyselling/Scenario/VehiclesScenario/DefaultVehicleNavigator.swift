@@ -18,13 +18,16 @@ protocol VehicleNavigator {
 
 class DefaultVehicleNavigator: VehicleNavigator {
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(window: UIWindow?) {
+        self.window = window
     }
 
-    private var navigationController: UINavigationController
+    private var navigationController: UINavigationController = UINavigationController()
+    private var window: UIWindow?
 
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action) {
+        window?.rootViewController = navigationController
+
         let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen, isNavigatingToProfile: onNavigateToProfile)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
         navigationController.pushViewController(UIHostingController(rootView: myVehiclesView), animated: true)
@@ -37,7 +40,7 @@ class DefaultVehicleNavigator: VehicleNavigator {
     }
 
     func navigatesToProfile() {
-        let navigator = DefaultProfileNavigator(navigationController: navigationController)
+        let navigator = DefaultProfileNavigator(navigationController: navigationController, window: window)
         let scenario = ProfileScenario(navigator: navigator)
         scenario.begin()
     }

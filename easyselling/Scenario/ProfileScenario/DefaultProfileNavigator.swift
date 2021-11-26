@@ -16,11 +16,13 @@ protocol ProfileNavigator {
 
 class DefaultProfileNavigator: ProfileNavigator {
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, window: UIWindow?) {
         self.navigationController = navigationController
+        self.window = window
     }
 
     private var navigationController: UINavigationController
+    private var window: UIWindow?
 
     func navigatesToProfile(onLogout: @escaping Action) {
         let viewModel = ProfileViewModel(onLogout: onLogout)
@@ -29,7 +31,7 @@ class DefaultProfileNavigator: ProfileNavigator {
     }
 
     func navigatesBackToAuthentication() {
-        let navigator = DefaultAuthenticationNavigator(window: UIWindow())
+        let navigator = DefaultAuthenticationNavigator(window: window)
         let scenario = AuthenticationScenario(navigator: navigator)
         scenario.begin(from: .default)
     }
