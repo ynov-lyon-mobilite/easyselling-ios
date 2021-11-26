@@ -29,6 +29,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         thenViewModelIsNotLoading()
     }
     
+    
     private func givenViewModel(vehiclesGetter: VehiclesGetter) {
         viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter,
                                         isOpenningVehicleCreation: {

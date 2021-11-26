@@ -10,8 +10,9 @@ import SwiftUI
 
 protocol VehicleNavigator {
 
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action)
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
+    func navigatesToProfile()
     func goingBackToHomeView()
 }
 
@@ -24,7 +25,7 @@ class DefaultVehicleNavigator: VehicleNavigator {
     private var navigationController: UINavigationController
     weak var delegate: MyVehiclesDelegate?
 
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action) {
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action) {
         let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
         delegate = vm
@@ -35,6 +36,10 @@ class DefaultVehicleNavigator: VehicleNavigator {
         let vm = VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: DefaultVehicleInformationsVerificator(), onFinish: onFinish)
         let vehicleCreationView = VehicleCreationView(viewModel: vm)
         navigationController.present(UIHostingController(rootView: vehicleCreationView), animated: true)
+    }
+
+    func navigatesToProfile() {
+
     }
 
     func goingBackToHomeView() {
