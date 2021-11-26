@@ -27,7 +27,6 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         await whenTryingToGetVehicles()
         thenViewModelState(is: .error)
         thenError(is: "Impossible de trouver ce que vous cherchez")
-        XCTAssertTrue(viewModel.isError)
     }
 
     func test_Navigates_to_profile_view_when_clicking_on_profile_button() {
