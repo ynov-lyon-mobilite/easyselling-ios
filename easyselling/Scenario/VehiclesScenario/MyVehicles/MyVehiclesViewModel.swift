@@ -16,16 +16,19 @@ protocol MyVehiclesDelegate: AnyObject {
 class MyVehiclesViewModel: ObservableObject, MyVehiclesDelegate {
 
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
-         isOpenningVehicleCreation: @escaping Action) {
+         isOpenningVehicleCreation: @escaping Action,
+         isNavigatingToProfile: @escaping Action) {
         self.vehiclesGetter = vehiclesGetter
         self.isOpenningVehicleCreation = isOpenningVehicleCreation
+        self.isNavigatingToProfile = isNavigatingToProfile
     }
 
     private var vehiclesGetter: VehiclesGetter
     private var isOpenningVehicleCreation: Action
-    @Published var isLoading: Bool = true
+    private var isNavigatingToProfile: Action
     @Published var vehicles: [Vehicle] = []
     @Published var error: APICallerError?
+    @Published var state: VehicleState = .loading
     @Published var isError: Bool = false
 
     func openVehicleCreation() {
@@ -33,9 +36,12 @@ class MyVehiclesViewModel: ObservableObject, MyVehiclesDelegate {
     }
 
     @MainActor func getVehicles() async {
+        state = .loading
         do {
             vehicles = try await vehiclesGetter.getVehicles()
+            state = .listingVehicles
         } catch (let error) {
+            state = .error
             if let error = error as? APICallerError {
                 isError = true
                 self.error = error
@@ -43,11 +49,19 @@ class MyVehiclesViewModel: ObservableObject, MyVehiclesDelegate {
                 self.error = nil
             }
         }
+    }
 
-        isLoading = false
+    func navigateToProfile() {
+        self.isNavigatingToProfile()
     }
 
     func updateVehiclesList() async {
        await getVehicles()
+    }
+
+    enum VehicleState {
+        case loading
+        case listingVehicles
+        case error
     }
 }

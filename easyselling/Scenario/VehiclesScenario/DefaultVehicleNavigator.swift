@@ -26,7 +26,7 @@ class DefaultVehicleNavigator: VehicleNavigator {
     weak var delegate: MyVehiclesDelegate?
 
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action) {
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen)
+        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen, isNavigatingToProfile: onNavigateToProfile)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
         delegate = vm
         navigationController.pushViewController(UIHostingController(rootView: myVehiclesView), animated: true)
