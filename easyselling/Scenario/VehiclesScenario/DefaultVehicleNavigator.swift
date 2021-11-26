@@ -23,12 +23,10 @@ class DefaultVehicleNavigator: VehicleNavigator {
     }
 
     private var navigationController: UINavigationController
-    weak var delegate: MyVehiclesDelegate?
 
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action) {
         let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen, isNavigatingToProfile: onNavigateToProfile)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
-        delegate = vm
         navigationController.pushViewController(UIHostingController(rootView: myVehiclesView), animated: true)
     }
 
@@ -39,7 +37,9 @@ class DefaultVehicleNavigator: VehicleNavigator {
     }
 
     func navigatesToProfile() {
-
+        let navigator = DefaultProfileNavigator(navigationController: navigationController)
+        let scenario = ProfileScenario(navigator: navigator)
+        scenario.begin()
     }
 
     func goingBackToHomeView() {

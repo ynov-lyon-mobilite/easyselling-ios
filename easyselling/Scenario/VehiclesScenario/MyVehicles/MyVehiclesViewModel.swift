@@ -9,11 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-protocol MyVehiclesDelegate: AnyObject {
-    func updateVehiclesList() async
-}
-
-class MyVehiclesViewModel: ObservableObject, MyVehiclesDelegate {
+class MyVehiclesViewModel: ObservableObject {
 
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
          isOpenningVehicleCreation: @escaping Action,
