@@ -23,7 +23,9 @@
 "vehicles.car" = "Car";
 "vehicles.moto" = "Motorcycle";
 "vehicles.profile" = "Profil";
-"vehicles.title" = "Mes véhicules";
+"vehicles.title" = "My vehicles";
+"vehicles.deleteButton" = "Delete";
+"vehicles.updateButton" =  "Update";
 
 "createVehicle.title" = "Add a vehicle";
 "createVehicle.brand" = "Brand";

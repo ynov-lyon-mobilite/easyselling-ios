@@ -43,12 +43,12 @@ struct MyVehiclesView: View {
                                 }
                             }
                             .swipeActions(edge: .trailing) {
-                                Button("Delete") {
+                                Button(L10n.Vehicles.deleteButton) {
                                     Task {
                                         await viewModel.deleteVehicle(idVehicle: vehicle.id ?? "")
                                     }
                                 }.tint(Asset.onBoardingDotActive.swiftUIColor)
-								Button("Update") {
+                                Button(L10n.Vehicles.updateButton) {
                                         viewModel.openVehicleUpdate(vehicle: vehicle)
                         		}.tint(Asset.onBoardingDotActive.swiftUIColor)
                             }

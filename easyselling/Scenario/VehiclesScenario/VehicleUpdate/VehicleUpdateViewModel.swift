@@ -45,14 +45,10 @@ class VehicleUpdateViewModel: ObservableObject {
         do {
             try vehicleInformationsVerificator.verifyInformations(vehicle: newInformations)
             try await vehicleUpdater.updateVehicle(id: id, informations: newInformations)
-            await deleteModal()
+            await onFinish()
         } catch (let error) {
             self.alert = (error as? VehicleCreationError)?.description ?? (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
             self.showAlert =  true
         }
-    }
-
-    func deleteModal() async {
-        await self.onFinish()
     }
 }
