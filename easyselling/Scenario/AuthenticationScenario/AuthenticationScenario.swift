@@ -22,7 +22,7 @@ class AuthenticationScenario {
 
     func begin(from beginType: BeginType) {
         switch beginType {
-        case .`default`: navigator.begin(onAccountCreation: self.navigatesToAccountCreation,
+        case .`default`: navigator.navigatesToLoginPage(onAccountCreation: self.navigatesToAccountCreation,
                                     onPasswordReset: self.navigatesToPasswordResetRequest, onUserLogged: { self.navigatesToVehicles() })
         case let .resetPassword(token): navigatesToPasswordReset(withToken: token)
         }
@@ -38,7 +38,7 @@ class AuthenticationScenario {
     }
 
     func navigatesToPasswordReset(withToken token: String) {
-        navigator.begin(onAccountCreation: self.navigatesToAccountCreation,
+        navigator.navigatesToLoginPage(onAccountCreation: self.navigatesToAccountCreation,
                                     onPasswordReset: self.navigatesToPasswordResetRequest, onUserLogged: { self.navigatesToVehicles() })
         navigator.navigatesToPasswordReset(withToken: token, onPasswordReset: goingBackToHomeView)
     }

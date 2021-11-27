@@ -69,11 +69,11 @@ class AuthenticationScenario_Specs: XCTestCase {
     }
     
     private func whenNavigatingToAccountCreation() {
-        scenario.navigatesToAccountCreation()
+        navigator.onNavigationToAccountCreation?()
     }
     
     private func whenNavigatingToPasswordReset() {
-        scenario.navigatesToPasswordResetRequest()
+        navigator.onNavigationToPasswordReset?()
     }
     
     private func thenHistory(is expected: [SpyAuthenticationNavigator.History]) {
@@ -89,11 +89,15 @@ class SpyAuthenticationNavigator: AuthenticationNavigator {
     
     private(set) var history: [History] = []
     private(set) var onFinish: Action?
+    private(set) var onNavigationToAccountCreation: Action?
+    private(set) var onNavigationToPasswordReset: Action?
     private(set) var onUserLogged: Action?
     private(set) var onPasswordReset: Action?
     private(set) var scenarioIsFinished: Bool = false
     
-    func begin(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
+    func navigatesToLoginPage(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
+        self.onNavigationToAccountCreation = onAccountCreation
+        self.onNavigationToPasswordReset = onPasswordReset
         self.onUserLogged = onUserLogged
         history.append(.login)
     }

@@ -22,6 +22,8 @@
 "passwordReset.resetPasswordButton" = "Reset password";
 "vehicles.car" = "Car";
 "vehicles.moto" = "Motorcycle";
+"vehicles.profile" = "Profil";
+"vehicles.title" = "Mes véhicules";
 
 "createVehicle.title" = "Add a vehicle";
 "createVehicle.brand" = "Brand";
@@ -33,3 +35,11 @@
 "createVehicle.error.emptyField" = "A field is empty";
 "createVehicle.error.incorrectYear" = "The year format is incorrect";
 "createVehicle.error.incorrectLicense" = "The license format is incorrect";
+
+"error.occured" = "An error occured";
+
+"credentialsError.invalidEmail" = "Invalid email";
+"credentialsError.emptyEmail" = "Empty email";
+"credentialsError.wrongPasswords" = "Passwords are differents";
+"credentialsError.emptyPassword" = "Empty password";
+"credentialsError.emptyPasswordConfirmation" = "Empty password confirmation";

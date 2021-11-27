@@ -31,6 +31,17 @@ class VehicleScenario_Specs: XCTestCase {
         await navigator.onFinish?()
         thenHistory(is: [.myVehicles, .vehicleCreation, .myVehicles])
     }
+
+    func test_Navigates_to_profil_scenario() {
+        givenScenario()
+        whenBeginning()
+        whenNavigatingToProfil()
+        thenHistory(is: [.myVehicles, .profile])
+    }
+
+    private func whenNavigatingToProfil() {
+        navigator.onNavigateToProfile?()
+    }
     
     private func givenScenario() {
         navigator = SpyVehicleCreationNavigator()
@@ -42,7 +53,7 @@ class VehicleScenario_Specs: XCTestCase {
     }
     
     private func whenNavigatingToVehicleCreation() {
-        scenario.navigatesToVehicleCreation()
+        navigator.onNavigateToVehicleCreation?()
     }
     
     private func whenleavingVehicleCreation() async {
@@ -62,14 +73,22 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
    
     private(set) var history: [History] = []
     private(set) var onFinish: (() async -> Void)?
+    private(set) var onNavigateToVehicleCreation: Action?
+    private(set) var onNavigateToProfile: Action?
     
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action) {
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action) {
+        self.onNavigateToVehicleCreation = onVehicleCreationOpen
+        self.onNavigateToProfile = onNavigateToProfile
         history.append(.myVehicles)
     }
     
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void) {
         self.onFinish = onFinish
         history.append(.vehicleCreation)
+    }
+
+    func navigatesToProfile() {
+        history.append(.profile)
     }
     
     func goingBackToHomeView() {
@@ -79,13 +98,14 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     enum History: CustomDebugStringConvertible, Equatable {
         case myVehicles
         case vehicleCreation
+        case profile
         
         var debugDescription: String {
             switch self {
             case .myVehicles: return "My vehicles"
             case .vehicleCreation: return "vehicle creation"
+            case .profile: return "profile"
             }
         }
-
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 protocol AuthenticationNavigator {
-    func begin(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action)
+    func navigatesToLoginPage(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action)
     func navigatesToAccountCreation(onFinish: @escaping Action)
     func navigatesToPasswordResetRequest()
     func navigatesToPasswordReset(withToken token: String, onPasswordReset: @escaping Action)
@@ -27,7 +27,7 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
     private var window: UIWindow?
     var navigationController = UINavigationController()
 
-    func begin(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
+    func navigatesToLoginPage(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
         window?.rootViewController = navigationController
 
         let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: onAccountCreation, navigateToPasswordReset: onPasswordReset, onUserLogged: onUserLogged)
@@ -64,7 +64,7 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
     }
 
     func navigatesToVehicles() {
-        let vehicleNavigator = DefaultVehicleNavigator(navigationController: navigationController)
+        let vehicleNavigator = DefaultVehicleNavigator(window: window)
         let vehicleScenario = VehicleScenario(navigator: vehicleNavigator)
         vehicleScenario.begin()
     }
