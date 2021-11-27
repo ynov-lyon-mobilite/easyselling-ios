@@ -30,43 +30,43 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
     
     func test_Verifies_message_if_year_has_an_icorrect_format() {
         givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "AA222AA", type: Vehicle.Category.car, year: "222"))
+        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "AA-222-AA", type: Vehicle.Category.car, year: "222"))
         thenError(is: .incorrectYear)
     }
     
-    func test_Verifies_if_license_has_an_incorrect_format_for_new_license() {
+    func test_Verifies_message_when_license_has_an_incorrect_format_for_new_license() {
         givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "A2222AA", type: Vehicle.Category.car, year: "year"))
+        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "AA-2B2-AA", type: Vehicle.Category.car, year: "year"))
         thenError(is: .incorrectLicenseFormat)
     }
 
-    func test_Verifies_if_license_has_an_incorrect_format_for_old_license() {
+    func test_Verifies_message_when_license_has_an_incorrect_format_for_old_license() {
         givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "524WAL7A", type: Vehicle.Category.car, year: "year"))
+        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "524 WAL 7A", type: Vehicle.Category.car, year: "year"))
         thenError(is: .incorrectLicenseFormat)
     }
 
-    func test_Verifies_if_license_has_an_incorrect_size_for_new_license() {
+    func test_Verifies_message_when_license_has_an_incorrect_size_for_new_license() {
         givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "AA222AAA", type: Vehicle.Category.car, year: "year"))
+        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "AA-222-AAA", type: Vehicle.Category.car, year: "year"))
         thenError(is: .incorrectLicenseSize)
     }
 
-    func test_Verifies_if_license_has_an_incorrect_size_for_old_license() {
+    func test_Verifies_message_when_license_has_an_incorrect_size_for_old_license() {
         givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "524WAL7", type: Vehicle.Category.car, year: "year"))
+        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "524 WAL 7", type: Vehicle.Category.car, year: "year"))
         thenError(is: .incorrectLicenseSize)
     }
 
-    func test_Verifies_if_license_is_correct_for_new_license() {
+    func test_Verifies_message_when_license_has_a_correct_format_for_new_license() {
         givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "AA222AA", type: Vehicle.Category.car, year: "year"))
+        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "AA-222-AA", type: Vehicle.Category.car, year: "year"))
         thenNoErrorThrows()
     }
 
-    func test_Verifies_if_license_is_correct_for_old_license() {
+    func test_Verifies_message_when_license_has_a_correct_format_for_old_license() {
         givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "524WAL75", type: Vehicle.Category.car, year: "year"))
+        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "524 WAL 75", type: Vehicle.Category.car, year: "year"))
         thenNoErrorThrows()
     }
 

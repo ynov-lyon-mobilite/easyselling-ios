@@ -13,58 +13,17 @@ protocol VehicleInformationsVerificator {
 
 class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
     func verifyInformations(vehicle: Vehicle) throws {
+        let vehicleVerificator = DefaultVehicleVerificator()
+
         switch true {
             case vehicle.license.isEmpty
                 || vehicle.brand.isEmpty
                 || vehicle.model.isEmpty: throw VehicleCreationError.emptyField
-            case verifyLicenseSize(vehicle: vehicle): throw VehicleCreationError.incorrectLicenseSize
-            case verifyLicenseFormat(vehicle: vehicle): throw VehicleCreationError.incorrectLicenseFormat
+            case vehicleVerificator.verifyLicenseFormat(license: vehicle.license): throw VehicleCreationError.incorrectLicenseFormat
+            case vehicleVerificator.verifyLicenseSize(license: vehicle.license): throw VehicleCreationError.incorrectLicenseSize
             case vehicle.year.count != 4: throw VehicleCreationError.incorrectYear
             default: break
         }
-    }
-
-    func verifyLicenseSize(vehicle: Vehicle) -> Bool {
-        let isNewLicense = !vehicle.license[String.Index(utf16Offset: 0, in: vehicle.license)].isNumber
-
-        switch true {
-        case vehicle.license.count == 7 && isNewLicense:
-            return false
-        case vehicle.license.count == 8 && !isNewLicense:
-            return false
-        case vehicle.license.count != 7 && vehicle.license.count != 8:
-            return true
-        case vehicle.license.count != 7 && isNewLicense:
-            return true
-        case vehicle.license.count != 8 && !isNewLicense:
-            return true
-        default: return true
-        }
-    }
-
-    func verifyLicenseFormat(vehicle: Vehicle) -> Bool {
-        let isNewLicense = vehicle.license.count == 7
-
-        for index in 0...vehicle.license.count - 1 {
-            let isNumber = vehicle.license[String.Index(utf16Offset: index, in: vehicle.license)].isNumber
-
-            switch true {
-            case index < (isNewLicense ? 2 : 3):
-                if (isNumber && isNewLicense) || (!isNumber && !isNewLicense) {
-                    return true
-                }
-            case index < (isNewLicense ? 5 : 6):
-                if (!isNumber && isNewLicense) || (isNumber && !isNewLicense) {
-                    return true
-                }
-            case index < (isNewLicense ? 7 : 8):
-                if (isNumber && isNewLicense) || (!isNumber && !isNewLicense) {
-                    return true
-                }
-            default: break
-            }
-        }
-        return false
     }
 }
 
