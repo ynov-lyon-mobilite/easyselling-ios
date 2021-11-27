@@ -17,7 +17,7 @@ class DefaultVehicleDeletor_Specs: XCTestCase {
 
     func test_Deletes_failed_with_unknown_id_vehicle() async {
         givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
-        await whenDeletingVehicle(withId: "unknown id")
+        await whenDeletingVehicle(withId: "unknownId")
         thenError(is: .notFound)
     }
 

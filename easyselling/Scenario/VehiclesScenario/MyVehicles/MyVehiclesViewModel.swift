@@ -59,8 +59,6 @@ vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
             if let error = error as? APICallerError {
                 isError = true
                 self.error = error
-            } else {
-                self.error = nil
             }
         }
     }
