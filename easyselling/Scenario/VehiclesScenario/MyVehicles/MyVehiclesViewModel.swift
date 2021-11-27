@@ -12,7 +12,7 @@ import SwiftUI
 class MyVehiclesViewModel: ObservableObject {
 
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
-vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
+         vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
          isOpenningVehicleCreation: @escaping Action,
          isNavigatingToProfile: @escaping Action) {
         self.vehiclesGetter = vehiclesGetter
@@ -53,18 +53,16 @@ vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
     @MainActor func deleteVehicle(idVehicle: String) async {
         do {
             try await vehicleDeletor.deleteVehicle(id: idVehicle)
-            isLoading = true
             await updateVehiclesList()
         } catch (let error) {
             if let error = error as? APICallerError {
-                isError = true
                 self.error = error
             }
         }
     }
 
     func updateVehiclesList() async {
-       await getVehicles()
+        await getVehicles()
     }
 
     enum VehicleState {

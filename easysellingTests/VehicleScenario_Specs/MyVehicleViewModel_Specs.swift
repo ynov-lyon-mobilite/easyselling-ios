@@ -35,14 +35,6 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         thenHasNavigatingToProfile()
     }
 
-    private func whenNavigatingToProfile() {
-        viewModel.navigateToProfile()
-    }
-
-    private func thenHasNavigatingToProfile() {
-        XCTAssertTrue(onNavigateToProfile)
-    }
-    
     func test_Deletes_vehicle_when_request_is_success() async {
         givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
                               vehicleDeletor: SucceedingVehicleDeletor())
@@ -60,6 +52,14 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         await whenDeletingVehicle(withId: "2")
         thenError(is: "Impossible de trouver ce que vous cherchez")
     }
+
+    private func whenNavigatingToProfile() {
+        viewModel.navigateToProfile()
+    }
+
+    private func thenHasNavigatingToProfile() {
+        XCTAssertTrue(onNavigateToProfile)
+    }
     
     private func givenViewModel(vehiclesGetter: VehiclesGetter) {
         viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter,
@@ -71,7 +71,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     }
     
     private func givenViewModelDeletor(vehiclesGetter: VehiclesGetter, vehicleDeletor: VehicleDeletor) {
-        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpenningVehicleCreation: {self.isOpen = true})
+        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpenningVehicleCreation: { self.isOpen = true }, isNavigatingToProfile: { self.onNavigateToProfile = true })
     }
     
     private func whenTryingToGetVehicles() async {

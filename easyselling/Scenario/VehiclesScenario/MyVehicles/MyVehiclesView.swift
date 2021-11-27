@@ -24,45 +24,44 @@ struct MyVehiclesView: View {
                             .listRowBackground(Color.clear)
                             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     } else if viewModel.state == .listingVehicles {
-                            ScrollView(.vertical) {
-                                VStack(spacing: 20) {
-                                    ForEach(viewModel.vehicles, id: \.id) { vehicle in
-                                        HStack {
-                                            Image(uiImage: vehicle.image)
-                                                .padding(15)
-                                                .background(Circle().foregroundColor(vehicle.imageColor))
-                                            VStack(alignment: .leading) {
-                                                Text("\(vehicle.brand) \(vehicle.model)")
-                                                    .fontWeight(.bold)
-                                                    .font(.title3)
-                                                Text(vehicle.license)
-                                                    .font(.body)
-                                            }
-                                            Spacer()
-                                            VStack {
-                                                Spacer()
-                                                Text(vehicle.year)
-                                            }
+                        ScrollView(.vertical) {
+                            VStack(spacing: 20) {
+                                ForEach(viewModel.vehicles, id: \.id) { vehicle in
+                                    HStack {
+                                        Image(uiImage: vehicle.image)
+                                            .padding(15)
+                                            .background(Circle().foregroundColor(vehicle.imageColor))
+                                        VStack(alignment: .leading) {
+                                            Text("\(vehicle.brand) \(vehicle.model)")
+                                                .fontWeight(.bold)
+                                                .font(.title3)
+                                            Text(vehicle.license)
+                                                .font(.body)
                                         }
-                                        .padding(.vertical, 15)
-                                        .padding(.horizontal, 20)
-                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                        .background(vehicle.color)
-                                        .cornerRadius(22)
-                                        .padding(.horizontal, 25)
-.swipeActions {
-                        Button("Delete") {
-                            Task {
-                                await viewModel.deleteVehicle(idVehicle: vehicule.id)
-                            }
-                        }.tint(Asset.onBoardingDotActive.swiftUIColor)
-}
+                                        Spacer()
+                                        VStack {
+                                            Spacer()
+                                            Text(vehicle.year)
+                                        }
+                                    }.swipeActions {
+                                        Button("Delete") {
+                                            Task {
+                                                await viewModel.deleteVehicle(idVehicle: vehicle.id)
+                                            }
+                                        }.tint(Asset.onBoardingDotActive.swiftUIColor)
                                     }
+                                    .padding(.vertical, 15)
+                                    .padding(.horizontal, 20)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(vehicle.color)
+                                    .cornerRadius(22)
+                                    .padding(.horizontal, 25)
                                 }
                             }
-                            .listRowSeparatorTint(.clear)
-                            .listRowBackground(Color.clear)
-                            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        }
+                        .listRowSeparatorTint(.clear)
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     }
                 }
                 .listStyle(.plain)
@@ -82,7 +81,7 @@ struct MyVehiclesView: View {
             .navigationTitle(L10n.Vehicles.title)
             .toolbar {
                 Button(L10n.Vehicles.profile) {
-                        viewModel.navigateToProfile()
+                    viewModel.navigateToProfile()
                 }
             }
         }
@@ -101,7 +100,7 @@ struct MyVehiclesView_Previews: PreviewProvider {
         vm.vehicles = [.init(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
                        .init(brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
                        .init(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]
-        vm.state = .error
+        vm.state = .listingVehicles
 
         return MyVehiclesView(viewModel: vm)
     }
