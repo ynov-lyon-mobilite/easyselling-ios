@@ -32,8 +32,7 @@ class AccountCreationViewModel: ObservableObject {
         self.state = .loading
         do {
             let informations = try preparator.prepare(email: email, password: password, passwordConfirmation: passwordConfirmation)
-            await self.createAccount(with: informations
-            )
+            await self.createAccount(with: informations)
         } catch(let error) {
             self.state = .initial
             self.setError(with: (error as? CredentialsError) ?? .unknow)

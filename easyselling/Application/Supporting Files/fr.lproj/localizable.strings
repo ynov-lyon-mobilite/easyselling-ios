@@ -22,6 +22,8 @@
 "passwordReset.resetPasswordButton" = "Réinitialiser le mot de passe";
 "vehicles.car" = "Voiture";
 "vehicles.moto" = "Moto";
+"vehicles.profile" = "Profil";
+"vehicles.title" = "Mes véhicules";
 
 "createVehicle.title" = "Ajouter un véhicule";
 "createVehicle.brand" = "Marque";
@@ -33,3 +35,12 @@
 "createVehicle.error.emptyField" = "Un des champs est vide";
 "createVehicle.error.incorrectYear" = "L'année renseignée est invalide";
 "createVehicle.error.incorrectLicense" = "Le numéro de licence est invalide";
+
+"error.occured" = "Une erreur c'est produite";
+
+"credentialsError.invalidEmail" = "L'adresse email est incorrect";
+"credentialsError.emptyEmail" = "L'adresse email est vide";
+"credentialsError.wrongPasswords" = "Les mots de passes sont différents";
+"credentialsError.emptyPassword" = "Le mot de passe est vide";
+"credentialsError.emptyPasswordConfirmation" = "La confirmation du mot de passe est vide";
+

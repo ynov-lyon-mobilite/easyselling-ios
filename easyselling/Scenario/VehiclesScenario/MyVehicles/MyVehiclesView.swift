@@ -18,7 +18,7 @@ struct MyVehiclesView: View {
                     if viewModel.state == .loading {
                         ProgressView()
                     } else if viewModel.state == .error {
-                        Text("Une erreur c'est produite")
+                        Text(L10n.Error.occured)
                             .padding()
                             .listRowSeparatorTint(.clear)
                             .listRowBackground(Color.clear)
@@ -72,9 +72,9 @@ struct MyVehiclesView: View {
                         .opacity(viewModel.state != .listingVehicles ? 0 : 1)
                 }
             }
-            .navigationTitle("Mes véhicules")
+            .navigationTitle(L10n.Vehicles.title)
             .toolbar {
-                    Button("Profile") {
+                Button(L10n.Vehicles.profile) {
                         viewModel.navigateToProfile()
                 }
             }
