@@ -45,7 +45,6 @@ class DefaultVehicleNavigator: VehicleNavigator {
         scenario.begin()
     }
 
-    
     func navigatesToVehicleUpdate(onFinish: @escaping AsyncableAction, vehicle: Vehicle) {
         let vm = VehicleUpdateViewModel(vehicle: vehicle, onFinish: onFinish)
         let view = VehicleUpdateView(viewModel: vm)
