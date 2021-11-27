@@ -30,7 +30,7 @@ class PasswordResetViewModel_Specs: XCTestCase {
         viewModel.newPasswordConfirmation = "passwordConfirmation"
         await whenResetingPassword()
         thenErrorIsShown()
-        thenError(is: "Le mot de passe est vide")
+        thenError(is: "Empty password")
     }
     
     func test_Shows_error_when_new_password_confirmation_is_empty() async {
@@ -39,7 +39,7 @@ class PasswordResetViewModel_Specs: XCTestCase {
         viewModel.newPasswordConfirmation = ""
         await whenResetingPassword()
         thenErrorIsShown()
-        thenError(is: "La confirmation du mot de passe est vide")
+        thenError(is: "Empty password confirmation")
     }
     
     func test_Shows_error_when_new_password_and_confirmation_mismatch() async {
@@ -48,7 +48,7 @@ class PasswordResetViewModel_Specs: XCTestCase {
         viewModel.newPasswordConfirmation = "password"
         await whenResetingPassword()
         thenErrorIsShown()
-        thenError(is: "Les mots de passes sont différents")
+        thenError(is: "Passwords are differents")
     }
     
     private func givenViewModel(withToken token: String, passwordVerificator: PasswordVerificator = SucceedingPasswordVerificator(), passwordReseter: PasswordReseter) {

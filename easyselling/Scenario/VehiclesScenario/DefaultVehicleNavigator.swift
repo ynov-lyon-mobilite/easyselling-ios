@@ -10,24 +10,26 @@ import SwiftUI
 
 protocol VehicleNavigator {
 
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action)
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
+    func navigatesToProfile()
     func goingBackToHomeView()
 }
 
 class DefaultVehicleNavigator: VehicleNavigator {
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(window: UIWindow?) {
+        self.window = window
     }
 
-    private var navigationController: UINavigationController
-    weak var delegate: MyVehiclesDelegate?
+    private var navigationController: UINavigationController = UINavigationController()
+    private var window: UIWindow?
 
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action) {
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen)
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action) {
+        window?.rootViewController = navigationController
+
+        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen, isNavigatingToProfile: onNavigateToProfile)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
-        delegate = vm
         navigationController.pushViewController(UIHostingController(rootView: myVehiclesView), animated: true)
     }
 
@@ -35,6 +37,12 @@ class DefaultVehicleNavigator: VehicleNavigator {
         let vm = VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: DefaultVehicleInformationsVerificator(), onFinish: onFinish)
         let vehicleCreationView = VehicleCreationView(viewModel: vm)
         navigationController.present(UIHostingController(rootView: vehicleCreationView), animated: true)
+    }
+
+    func navigatesToProfile() {
+        let navigator = DefaultProfileNavigator(navigationController: navigationController, window: window)
+        let scenario = ProfileScenario(navigator: navigator)
+        scenario.begin()
     }
 
     func goingBackToHomeView() {

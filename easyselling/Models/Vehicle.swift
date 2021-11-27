@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import UIKit
+import SwiftUI
 
 struct Vehicle: Codable, Equatable, Identifiable {
     var id: String = ""
@@ -14,6 +16,24 @@ struct Vehicle: Codable, Equatable, Identifiable {
     var license: String
     var type: Category
     var year: String
+    var image: UIImage {
+        switch type {
+        case .car: return Asset.car.image
+        case .moto: return Asset.moto.image
+        }
+    }
+    var imageColor: Color {
+        switch type {
+        case .car: return Asset.darkPurple.swiftUIColor
+        case .moto: return Asset.darkBlue.swiftUIColor
+        }
+    }
+    var color: Color {
+        switch type {
+        case .car: return Asset.lightPurple.swiftUIColor
+        case .moto: return Asset.lightBlue.swiftUIColor
+        }
+    }
 
     enum Category: String, Codable {
       case car, moto
