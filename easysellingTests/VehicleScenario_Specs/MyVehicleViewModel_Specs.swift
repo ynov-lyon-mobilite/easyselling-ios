@@ -35,6 +35,24 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         thenHasNavigatingToProfile()
     }
 
+    func test_Deletes_vehicle_when_request_is_success() async {
+        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
+                              vehicleDeletor: SucceedingVehicleDeletor())
+        whenVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
+                           Vehicle(id: "2", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
+        await whenDeletingVehicle(withId: "2")
+        thenLoadVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
+    }
+
+    func test_Deletes_vehicle_when_request_is_failing() async {
+        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
+                              vehicleDeletor: FailingVehicleDeletor(withError: APICallerError.notFound))
+        whenVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
+                           Vehicle(id: "2", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
+        await whenDeletingVehicle(withId: "2")
+        thenError(is: "Impossible de trouver ce que vous cherchez")
+    }
+
     private func whenNavigatingToProfile() {
         viewModel.navigateToProfile()
     }
@@ -52,12 +70,24 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         })
     }
     
+    private func givenViewModelDeletor(vehiclesGetter: VehiclesGetter, vehicleDeletor: VehicleDeletor) {
+        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpenningVehicleCreation: { self.isOpen = true }, isNavigatingToProfile: { self.onNavigateToProfile = true })
+    }
+    
     private func whenTryingToGetVehicles() async {
         await viewModel.getVehicles()
     }
     
+    private func whenDeletingVehicle(withId: String) async {
+        await viewModel.deleteVehicle(idVehicle: withId)
+    }
+    
     private func whenOpeningVehiculeCreationModal() {
         viewModel.openVehicleCreation()
+    }
+
+    private func whenVehicles(are vehicles: [Vehicle]) {
+        viewModel.vehicles = vehicles
     }
     
     private func thenLoadVehicles(are expected: [Vehicle]) {
