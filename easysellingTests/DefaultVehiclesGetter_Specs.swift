@@ -27,7 +27,7 @@ class DefaultVehiclesGetter_Specs: XCTestCase {
             self.error = (error as! APICallerError)
         }
         
-        let expected = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year:          "year1"),
+        let expected = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
                         Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2"),
                         Vehicle(id: "3", brand: "Citroen", model: "model3", license: "license3", type: .car, year: "year3")]
         
