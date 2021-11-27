@@ -81,16 +81,16 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter,
                                         isOpenningVehicleCreation: {
                                                 self.isOpen = true
-        }, isNavigatingToProfile: {
-            self.onNavigateToProfile = true
         }, isOpeningVehicleUpdate: { vehicle, onRefreshCallback in
             self.onUpdateVehicle = vehicle
             self.expectedCallback = onRefreshCallback
+        }, isNavigatingToProfile: {
+            self.onNavigateToProfile = true
         })
     }
     
     private func givenViewModelDeletor(vehiclesGetter: VehiclesGetter, vehicleDeletor: VehicleDeletor) {
-        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpenningVehicleCreation: { self.isOpen = true }, isNavigatingToProfile: { self.onNavigateToProfile = true })
+        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpenningVehicleCreation: { self.isOpen = true }, isOpeningVehicleUpdate: { _,_ in }, isNavigatingToProfile: { self.onNavigateToProfile = true })
     }
     
     private func whenTryingToGetVehicles() async {

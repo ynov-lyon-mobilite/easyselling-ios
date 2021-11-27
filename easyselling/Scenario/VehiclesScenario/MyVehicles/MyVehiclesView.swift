@@ -45,11 +45,11 @@ struct MyVehiclesView: View {
                             .swipeActions(edge: .trailing) {
                                 Button("Delete") {
                                     Task {
-                                        await viewModel.deleteVehicle(idVehicle: vehicle.id)
+                                        await viewModel.deleteVehicle(idVehicle: vehicle.id ?? "")
                                     }
                                 }.tint(Asset.onBoardingDotActive.swiftUIColor)
 								Button("Update") {
-                            			      viewModel.navigateToUpdatingModal(vehicule: vehicule)
+                                        viewModel.openVehicleUpdate(vehicle: vehicle)
                         		}.tint(Asset.onBoardingDotActive.swiftUIColor)
                             }
                             .padding(.vertical, 15)
@@ -97,10 +97,10 @@ struct MyVehiclesView: View {
 struct MyVehiclesView_Previews: PreviewProvider {
 
     static var previews: some View {
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {}, isOpeningVehicleUpdate: { _ in }, isNavigatingToProfile: {}))
-        vm.vehicles = [.init(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
-                       .init(brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
-                       .init(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]
+        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {}, isOpeningVehicleUpdate: { _, _ in }, isNavigatingToProfile: {})
+        vm.vehicles = [Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
+                       Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
+                       Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]
         vm.state = .listingVehicles
 
         return MyVehiclesView(viewModel: vm)
