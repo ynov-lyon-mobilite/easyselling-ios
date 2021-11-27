@@ -70,10 +70,4 @@ class MyVehiclesViewModel: ObservableObject {
         case listingVehicles
         case error
     }
-
-    enum VehicleState {
-        case loading
-        case listingVehicles
-        case error
-    }
 }
