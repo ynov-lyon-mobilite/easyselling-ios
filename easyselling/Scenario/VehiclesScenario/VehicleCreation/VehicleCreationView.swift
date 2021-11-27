@@ -29,6 +29,10 @@ struct VehicleCreationView: View {
             TextField(L10n.CreateVehicle.license, text: $viewModel.license)
                 .padding(.top)
 
+            Text(L10n.CreateVehicle.Form.adviceForLicense)
+                .font(.system(size: 13))
+                .frame(maxWidth: .infinity, alignment: .leading)
+
             HStack(alignment: .lastTextBaseline) {
                 Picker("Type", selection: $viewModel.type) {
                     Text(L10n.Vehicles.car).tag(Vehicle.Category.car)
