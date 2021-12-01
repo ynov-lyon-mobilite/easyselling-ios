@@ -15,17 +15,13 @@ protocol VehicleVerificator {
 class DefaultVehicleVerificator: VehicleVerificator {
 
     func verifyLicenseSize(license: String) -> Bool {
-        let isNewLicense = !license[String.Index(utf16Offset: 0, in: license)].isNumber
+        let oldLicense = try? NSRegularExpression(pattern: "^.{3} .{3} .{2}$")
+        let newLicense = try? NSRegularExpression(pattern: "^.{2}-.{3}-.{2}$")
+        let range = NSRange(location: 0, length: license.count)
+        let result = (newLicense?.firstMatch(in: license, options: [], range: range) != nil) ||
+                     (oldLicense?.firstMatch(in: license, options: [], range: range) != nil)
 
-        switch true {
-        case license.count != 9 && license.count != 10:
-            return true
-        case license.count != 9 && isNewLicense:
-            return true
-        case license.count != 10 && !isNewLicense:
-            return true
-        default: return false
-        }
+        return !result
     }
 
     func verifyLicenseFormat(license: String) -> Bool {

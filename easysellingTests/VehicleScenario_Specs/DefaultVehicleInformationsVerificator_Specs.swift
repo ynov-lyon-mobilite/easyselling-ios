@@ -28,7 +28,7 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
         thenError(is: .emptyField)
     }
     
-    func test_Verifies_message_if_year_has_an_icorrect_format() {
+    func test_Verifies_message_if_year_has_an_incorrect_format() {
         givenVerificator()
         whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "AA-222-AA", type: Vehicle.Category.car, year: "222"))
         thenError(is: .incorrectYear)

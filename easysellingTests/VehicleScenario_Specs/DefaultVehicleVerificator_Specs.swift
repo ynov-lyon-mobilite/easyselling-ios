@@ -24,13 +24,13 @@ class DefaultVehicleVerificator_Specs: XCTestCase {
 
     func test_Verifies_if_the_licence_has_an_incorrect_format_for_old_license() {
         givenVerificator()
-        whenCheckingLicenseFormat(license: "524 WAL75")
+        whenCheckingLicenseFormat(license: "524 WALA75")
         thenVerificationHasSuccess(expected: true)
     }
 
     func test_Verifies_if_the_licence_has_an_incorrect_format_for_new_license() {
         givenVerificator()
-        whenCheckingLicenseFormat(license: "AE-452BD")
+        whenCheckingLicenseFormat(license: "AE-452BBD")
         thenVerificationHasSuccess(expected: true)
     }
 
