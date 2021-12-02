@@ -12,55 +12,53 @@ import XCTest
 class StartupScenario_Specs : XCTestCase {
 
     func test_Begins_OnBoarding_scenario() async {
-        givenScenario(with: FakeTokenManager())
-        givenIsOnBoardingViewed(false)
+        givenScenario()
+        whenOnBoardingHasNeverBeenViewed()
         await whenBeginning()
         thenHistory(is: [.onBoarding])
     }
 
     func test_Begins_Login_scenario() async {
-        givenScenario(with: FakeTokenManager(), and: SucceedingTokenRefreshor(accessToken: "REFRESH_TOKEN"))
-        givenIsOnBoardingViewed(true)
+        givenScenario()
+        whenOnBoardingHasBeenViewed()
         await whenBeginning()
         thenHistory(is: [.login])
     }
 
-    func test_Begins_Vehicle_scenario() async {
-        givenScenario(with: succedingTokenManager(), and: SucceedingTokenRefreshor(accessToken: "REFRESH_TOKEN"))
-        givenIsOnBoardingViewed(true)
+    func test_Begins_Vehicle_scenario_when_token_is_valid() async {
+        givenScenario(with: FakeTokenManager(accessTokenIsExpired: false, accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN"))
+        whenOnBoardingHasBeenViewed()
         await whenBeginning()
         thenHistory(is: [.myVehicles])
     }
 
-    func test_Begins_Vehicle_scenario_On_Refreshing_Expired_Token() async {
-        givenScenario(with: tokenManagerWithTokenExpired(), and: SucceedingTokenRefreshor(accessToken: "REFRESH_TOKEN"))
-        givenIsOnBoardingViewed(true)
+    func test_Begins_Vehicle_scenario_when_token_is_expired_but_refresh_from_refresh_token() async {
+        givenScenario(with: FakeTokenManager(accessTokenIsExpired: true, accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN"),
+                      and: SucceedingTokenRefreshor(accessToken: "ACCESS_TOKEN"))
+        whenOnBoardingHasBeenViewed()
         await whenBeginning()
         thenHistory(is: [.myVehicles])
     }
 
-    func test_Begins_Login_scenario_If_Refresh_Fails() async {
-        givenScenario(with: tokenManagerWithTokenExpired(), and: FailingTokenRefreshor(error: APICallerError.unauthorized))
-        givenIsOnBoardingViewed(true)
+    func test_Begins_Login_scenario_when_token_and_refresh_token_are_expired() async {
+        givenScenario(with: FakeTokenManager(accessTokenIsExpired: true, accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN"),
+                      and: FailingTokenRefreshor(error: APICallerError.unauthorized))
+        whenOnBoardingHasBeenViewed()
         await whenBeginning()
         thenHistory(is: [.login])
     }
 
-    private func givenScenario(with tokenManager: TokenManager, and tokenRefreshor: TokenRefreshor = DefaultTokenRefreshor()) {
+    private func givenScenario(with tokenManager: TokenManager = FakeTokenManager(), and tokenRefreshor: TokenRefreshor = SucceedingTokenRefreshor(accessToken: "REFRESH_TOKEN")) {
         navigator = SpyStartupNavigator()
         scenario = StartupScenario(navigator: navigator, tokenManager: tokenManager, tokenRefreshor: tokenRefreshor)
     }
 
-    private func succedingTokenManager() -> FakeTokenManager {
-        return FakeTokenManager(accessTokenIsExpired: false, accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN")
+    private func whenOnBoardingHasNeverBeenViewed() {
+        scenario.onBoardingIsViewed = false
     }
 
-    private func tokenManagerWithTokenExpired() -> FakeTokenManager {
-        return FakeTokenManager(accessTokenIsExpired: true, accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN")
-    }
-
-    private func givenIsOnBoardingViewed(_ viewed: Bool) {
-        scenario.onBoardingIsViewed = viewed
+    private func whenOnBoardingHasBeenViewed() {
+        scenario.onBoardingIsViewed = true
     }
 
     private func whenBeginning() async {
