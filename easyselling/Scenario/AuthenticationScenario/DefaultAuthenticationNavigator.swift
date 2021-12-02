@@ -25,7 +25,7 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
     }
 
     private var window: UIWindow?
-    var navigationController = UINavigationController()
+    let navigationController = UINavigationController()
 
     func navigatesToLoginPage(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
         window?.rootViewController = navigationController

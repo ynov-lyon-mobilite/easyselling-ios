@@ -18,4 +18,9 @@ class FakeTokenManager: TokenManager {
         self.accessToken = accessToken
         self.refreshToken = refreshToken
     }
+
+    func setTokens(_ token: Token) {
+        accessToken = token.accessToken
+        refreshToken = token.refreshToken
+    }
 }
