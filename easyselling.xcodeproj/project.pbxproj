@@ -639,7 +639,23 @@
 			sourceTree = "<group>";
 		};
 		39FC6E9C274D59640067E97F /* DefaultVehicleDeletor_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				39FC6E9D274D598A0067E97F /* DefaultVehicleDeletor_Specs.swift */,
+				399465D1274D78120060EFE5 /* SucceedingVehicleDeletor.swift */,
+				39CF8E94274E40C8009A0D28 /* FailingVehicleDeletor.swift */,
+			);
+			path = DefaultVehicleDeletor_Specs;
+			sourceTree = "<group>";
+		};
 		5C44AB38273E936A0061CC1D /* Invoice */ = {
+			isa = PBXGroup;
+			children = (
+				5C44AB39273E93E30061CC1D /* InvoiceScenario_Specs.swift */,
+			);
+			path = Invoice;
+			sourceTree = "<group>";
+		};
 		5CA58D13274E8E27000BF06C /* InvoicesScenario_Specs */ = {
 			isa = PBXGroup;
 			children = (
