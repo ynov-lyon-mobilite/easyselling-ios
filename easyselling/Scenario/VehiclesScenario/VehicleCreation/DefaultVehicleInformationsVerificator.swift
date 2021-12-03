@@ -19,10 +19,10 @@ class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
             case vehicle.license.isEmpty
                 || vehicle.brand.isEmpty
                 || vehicle.model.isEmpty: throw VehicleCreationError.emptyField
-            case vehicleVerificator.verifyLicenseFormat(license: vehicle.license): throw VehicleCreationError.incorrectLicenseFormat
-            case vehicleVerificator.verifyLicenseSize(license: vehicle.license): throw VehicleCreationError.incorrectLicenseSize
             case vehicle.year.count != 4: throw VehicleCreationError.incorrectYear
-            default: break
+            default:
+                try vehicleVerificator.verifyLicenseFormat(license: vehicle.license)
+                try vehicleVerificator.verifyLicenseSize(license: vehicle.license)
         }
     }
 }

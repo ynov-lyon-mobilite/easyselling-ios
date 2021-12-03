@@ -13,49 +13,49 @@ class DefaultVehicleVerificator_Specs: XCTestCase {
     func test_Verifies_if_the_licence_has_a_correct_format_for_old_license() {
         givenVerificator()
         whenCheckingLicenseFormat(license: "524 WAL 75")
-        thenVerificationHasSuccess(expected: false)
+        thenNoErrorThrows()
     }
 
     func test_Verifies_if_the_licence_has_a_correct_format_for_new_license() {
         givenVerificator()
         whenCheckingLicenseFormat(license: "AE-452-BD")
-        thenVerificationHasSuccess(expected: false)
+        thenNoErrorThrows()
     }
 
     func test_Verifies_if_the_licence_has_an_incorrect_format_for_old_license() {
         givenVerificator()
         whenCheckingLicenseFormat(license: "524 WALA75")
-        thenVerificationHasSuccess(expected: true)
+        thenError(is: .incorrectLicenseFormat)
     }
 
     func test_Verifies_if_the_licence_has_an_incorrect_format_for_new_license() {
         givenVerificator()
         whenCheckingLicenseFormat(license: "AE-452BBD")
-        thenVerificationHasSuccess(expected: true)
+        thenError(is: .incorrectLicenseFormat)
     }
 
     func test_Verifies_if_license_has_a_correct_size_for_old_license() {
         givenVerificator()
         whenCheckingLicenseSize(licence: "524 WAL 75")
-        thenVerificationHasSuccess(expected: false)
+        thenNoErrorThrows()
     }
 
     func test_Verifies_if_license_has_a_correct_size_for_new_license() {
         givenVerificator()
         whenCheckingLicenseSize(licence: "AE-452-BD")
-        thenVerificationHasSuccess(expected: false)
+        thenNoErrorThrows()
     }
 
     func test_Verifies_if_license_has_an_incorrect_size_for_old_license() {
         givenVerificator()
         whenCheckingLicenseSize(licence: "524 WAL 755")
-        thenVerificationHasSuccess(expected: true)
+        thenError(is: .incorrectLicenseSize)
     }
 
     func test_Verifies_if_license_has_an_incorrect_size_for_new_license() {
         givenVerificator()
         whenCheckingLicenseSize(licence: "AE-452-BDF")
-        thenVerificationHasSuccess(expected: true)
+        thenError(is: .incorrectLicenseSize)
     }
 
     private func givenVerificator() {
@@ -63,17 +63,30 @@ class DefaultVehicleVerificator_Specs: XCTestCase {
     }
 
     private func whenCheckingLicenseFormat(license: String) {
-        verificationResult = verificator.verifyLicenseFormat(license: license)
+        do {
+            try verificator.verifyLicenseFormat(license: license)
+        } catch (let error) {
+            self.vehicleCreationError = (error as! VehicleCreationError)
+        }
     }
 
     private func whenCheckingLicenseSize(licence: String) {
-        verificationResult = verificator.verifyLicenseSize(license: licence)
+        do {
+            try verificator.verifyLicenseSize(license: licence)
+        } catch (let error) {
+            self.vehicleCreationError = (error as! VehicleCreationError)
+        }
     }
 
-    private func thenVerificationHasSuccess(expected: Bool) {
-        XCTAssertEqual(expected, verificationResult)
+    private func thenNoErrorThrows() {
+        XCTAssertNil(vehicleCreationError)
+    }
+
+    private func thenError(is expected: VehicleCreationError) {
+        XCTAssertEqual(expected.description, vehicleCreationError.description)
+        XCTAssertEqual(expected, vehicleCreationError)
     }
 
     private var verificator: VehicleVerificator!
-    private var verificationResult: Bool!
+    private var vehicleCreationError: VehicleCreationError!
 }
