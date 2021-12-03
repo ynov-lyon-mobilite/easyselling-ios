@@ -30,6 +30,7 @@ class VehicleScenario {
 
     private func navigatesToProfile() {
         navigator.navigatesToProfile()
+    }
 
     private func navigatesToInvoices(ofVehicleId vehicleId: String) {
         navigator.navigatesToInvoices(ofVehicleId: vehicleId)

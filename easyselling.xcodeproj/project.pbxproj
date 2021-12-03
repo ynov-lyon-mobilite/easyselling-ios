@@ -676,8 +676,18 @@
 			isa = PBXGroup;
 			children = (
 				5CA58D15274E8E55000BF06C /* InvoicesScenario_Specs.swift */,
+				5CA58D1C27554DA9000BF06C /* succeededInvoices.json */,
+				5CA58D1F2757F904000BF06C /* VehicleInvoiceViewModel_Specs.swift */,
 			);
 			path = InvoicesScenario_Specs;
+			sourceTree = "<group>";
+		};
+		5CA58D17274E9F56000BF06C /* DefaultVehicleInvoicesGetter_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				5CA58D18274E9F9B000BF06C /* DefaultVehicleInvoicesGetter_Specs.swift */,
+			);
+			name = DefaultVehicleInvoicesGetter_Specs;
 			sourceTree = "<group>";
 		};
 		8705B9A927208233004132CF /* Extensions */ = {
@@ -1303,7 +1313,6 @@
 				035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */,
 				8798D1412730F35000FF3AB4 /* DefaultTokenRefreshor_Specs.swift in Sources */,
 				03004DD9273EAFD000188983 /* FailingPasswordReseter.swift in Sources */,
-				0382E2AA2718186100EB570E /* DefaultCredentialsVerificator_Specs.swift in Sources */,
 				0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */,
 				0317EE36275198A600A6AE0D /* ProfileScenario_Specs.swift in Sources */,
 				8705B9A627207D36004132CF /* FailingUserAuthenticator.swift in Sources */,
