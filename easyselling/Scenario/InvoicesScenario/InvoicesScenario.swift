@@ -14,6 +14,6 @@ class InvoicesScenario {
     private var navigator: InvoiceNavigator
 
     func begin(withVehicleId: String) {
-        navigator.navigatesToInvoicesView()
+        navigator.navigatesToInvoicesView(withVehicleId)
     }
 }

@@ -1,0 +1,25 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "vehicle": "1",
+            "file": "1",
+            "date_created": "date1",
+            "date_updated": ""
+        },
+        {
+            "id": 2,
+            "vehicle": "1",
+            "file": "2",
+            "date_created": "date2",
+            "date_updated": ""
+        },
+        {
+            "id": 3,
+            "vehicle": "2",
+            "file": "3",
+            "date_created": "date3",
+            "date_updated": ""
+        },
+    ]
+}

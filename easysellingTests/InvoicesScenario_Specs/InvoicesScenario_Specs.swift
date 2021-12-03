@@ -35,10 +35,10 @@ class InvoicesScenario_Spec: XCTestCase {
 }
 
 class SpyInvoicesNavigator: InvoiceNavigator {
-
+    
     private(set) var history: [History] = []
 
-    func navigatesToInvoicesView() {
+    func navigatesToInvoicesView(_: String) {
         history.append(.invoices)
     }
 
