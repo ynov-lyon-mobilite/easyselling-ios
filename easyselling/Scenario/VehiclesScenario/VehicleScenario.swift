@@ -4,6 +4,7 @@
 //
 //  Created by Valentin Mont School on 18/10/2021.
 //
+import UIKit
 
 class VehicleScenario {
 
@@ -17,7 +18,7 @@ class VehicleScenario {
         navigator.navigatesToHomeView(onVehicleCreationOpen: navigatesToVehicleCreation,
 									  onVehicleUpdateOpen: navigatesToVehicleUpdate,
                                       onNavigateToProfile: navigatesToProfile,
-                                      onNavigatingToInvoices: navigatesToInvoices)
+										onNavigatingToInvoices: navigatesToInvoices)
     }
 
     private func navigatesToVehicleCreation() {
@@ -36,15 +37,10 @@ class VehicleScenario {
         navigator.navigatesToInvoices(ofVehicleId: vehicleId)
     }
 
-    private func navigatesToInvoices(ofVehicleId vehicleId: String) {
-        navigator.navigatesToInvoices(ofVehicleId: vehicleId)
-    }
-
     func navigatesToVehicleUpdate(vehicle: Vehicle, refreshVehicles: @escaping AsyncableAction) {
         navigator.navigatesToVehicleUpdate(onFinish: { [goingBackToHomeView] in
-            goingBackToHomeView()
             await refreshVehicles()
+            goingBackToHomeView()
         }, vehicle: vehicle)
     }
-
 }

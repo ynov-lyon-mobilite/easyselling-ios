@@ -51,6 +51,12 @@ class DefaultVehicleNavigator: VehicleNavigator {
         scenario.begin()
     }
 
+    func navigatesToVehicleUpdate(onFinish: @escaping AsyncableAction, vehicle: Vehicle) {
+        let vm = VehicleUpdateViewModel(vehicle: vehicle, onFinish: onFinish)
+        let view = VehicleUpdateView(viewModel: vm)
+        navigationController.present(UIHostingController(rootView: view), animated: true)
+	}
+
     func navigatesToInvoices(ofVehicleId vehicleId: String) {
         let navigator = DefaultInvoicesNavigator(navigationController: navigationController)
         let scenario = InvoicesScenario(navigator: navigator)

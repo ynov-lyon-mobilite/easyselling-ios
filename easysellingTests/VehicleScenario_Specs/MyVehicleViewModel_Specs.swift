@@ -192,6 +192,9 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     private var expectedCallback: AsyncableAction!
     private var isNavigatingToInvoices: Bool = false
     private var selectedVehicleId: String!
+    private var expectedVehicles: [Vehicle] = []
+    private var onUpdateVehicle: Vehicle!
+    private var expectedCallback: AsyncableAction!
 }
 
 private func readLocalFile(forName name: String) -> Data? {
