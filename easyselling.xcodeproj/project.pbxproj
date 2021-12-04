@@ -118,6 +118,7 @@
 		87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA727172F780035AB13 /* DefaultRequestGenerator_Specs.swift */; };
 		87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */; };
 		87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BAC271730100035AB13 /* DefaultAPICaller.swift */; };
+		877CAC62275BE1DA00153CEE /* QueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877CAC61275BE1DA00153CEE /* QueryParameters.swift */; };
 		8798D1412730F35000FF3AB4 /* DefaultTokenRefreshor_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D1402730F35000FF3AB4 /* DefaultTokenRefreshor_Specs.swift */; };
 		8798D1432730F3DF00FF3AB4 /* RefreshDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D1422730F3DF00FF3AB4 /* RefreshDTO.swift */; };
 		8798D1452730F67A00FF3AB4 /* DefaultTokenRefreshor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D1442730F67A00FF3AB4 /* DefaultTokenRefreshor.swift */; };
@@ -274,6 +275,7 @@
 		87780BA727172F780035AB13 /* DefaultRequestGenerator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator_Specs.swift; sourceTree = "<group>"; };
 		87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator.swift; sourceTree = "<group>"; };
 		87780BAC271730100035AB13 /* DefaultAPICaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPICaller.swift; sourceTree = "<group>"; };
+		877CAC61275BE1DA00153CEE /* QueryParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameters.swift; sourceTree = "<group>"; };
 		8798D1402730F35000FF3AB4 /* DefaultTokenRefreshor_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTokenRefreshor_Specs.swift; sourceTree = "<group>"; };
 		8798D1422730F3DF00FF3AB4 /* RefreshDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshDTO.swift; sourceTree = "<group>"; };
 		8798D1442730F67A00FF3AB4 /* DefaultTokenRefreshor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTokenRefreshor.swift; sourceTree = "<group>"; };
@@ -716,6 +718,7 @@
 				87780B9D27172F250035AB13 /* Enums */,
 				8705B9A927208233004132CF /* Extensions */,
 				87780B9F27172F380035AB13 /* Protocols */,
+				877CAC61275BE1DA00153CEE /* QueryParameters.swift */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -1104,6 +1107,7 @@
 				8FF0102327329DDE0022314B /* Color+Extensions.swift in Sources */,
 				03C18F0827341AAA00C754E8 /* DefaultEmailVerificator.swift in Sources */,
 				03004DD0273E79D700188983 /* PasswordResetDTO.swift in Sources */,
+				877CAC62275BE1DA00153CEE /* QueryParameters.swift in Sources */,
 				0382E2AC2718190B00EB570E /* DefaultCredentialsVerificator.swift in Sources */,
 				87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */,
 				03004DD2273EA62500188983 /* DefaultPasswordVerificator.swift in Sources */,

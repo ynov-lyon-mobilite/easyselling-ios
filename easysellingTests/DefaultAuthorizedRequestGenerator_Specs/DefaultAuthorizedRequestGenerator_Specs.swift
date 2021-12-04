@@ -101,7 +101,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod,
                                      headers: [String: String] = [:], pathKeysValues: [String: String] = [:]) async {
         do {
-            self.request = try await requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers, pathKeysValues: pathKeysValues)
+            self.request = try await requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers, pathKeysValues: pathKeysValues, queryParameters: nil)
         } catch(let error) {
             self.error = (error as! APICallerError)
         }
@@ -114,7 +114,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         headers: [String: String],
         pathKeysValues: [String: String] = [:]) async {
             do {
-                self.request = try await requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers, pathKeysValues: pathKeysValues)
+                self.request = try await requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers, pathKeysValues: pathKeysValues, queryParameters: nil)
             } catch(let error) {
                 self.error = (error as! APICallerError)
             }
