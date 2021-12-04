@@ -30,7 +30,7 @@ class VehicleUpdateViewModel_specs: XCTestCase {
     }
 
     func test_Shows_alert_when_license_is_incorrect() async {
-        givenViewModel(expected: .incorrectLicense, vehicle:
+        givenViewModel(expected: .incorrectLicenseFormat, vehicle:
                         Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
         await whenUpdating()
         thenAlertMessage(is: "The license format is incorrect")
