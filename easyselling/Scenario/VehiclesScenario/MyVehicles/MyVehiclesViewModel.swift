@@ -13,15 +13,17 @@ class MyVehiclesViewModel: ObservableObject {
 
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
          vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
-         isOpenningVehicleCreation: @escaping Action,
+         isOpenningVehicleCreation: @escaping Action, isOpeningVehicleUpdate: @escaping OnUpdatingVehicle,
          isNavigatingToProfile: @escaping Action) {
         self.vehiclesGetter = vehiclesGetter
         self.vehicleDeletor = vehicleDeletor
         self.isOpenningVehicleCreation = isOpenningVehicleCreation
+		self.isOpeningVehicleUpdate = isOpeningVehicleUpdate
         self.isNavigatingToProfile = isNavigatingToProfile
     }
 
     private var vehiclesGetter: VehiclesGetter
+	private var isOpeningVehicleUpdate: OnUpdatingVehicle
     private var vehicleDeletor: VehicleDeletor
     private var isOpenningVehicleCreation: Action
     private var isNavigatingToProfile: Action
@@ -31,6 +33,10 @@ class MyVehiclesViewModel: ObservableObject {
 
     func openVehicleCreation() {
         self.isOpenningVehicleCreation()
+    }
+
+    func openVehicleUpdate(vehicle: Vehicle) {
+        self.isOpeningVehicleUpdate(vehicle, { await self.getVehicles() })
     }
 
     @MainActor func getVehicles() async {

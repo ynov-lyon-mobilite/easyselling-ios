@@ -9,8 +9,8 @@ import UIKit
 import SwiftUI
 
 protocol VehicleNavigator {
-
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action)
+    func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
     func navigatesToProfile()
     func goingBackToHomeView()
@@ -25,10 +25,10 @@ class DefaultVehicleNavigator: VehicleNavigator {
     private var navigationController: UINavigationController = UINavigationController()
     private var window: UIWindow?
 
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action) {
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action) {
         window?.rootViewController = navigationController
 
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen, isNavigatingToProfile: onNavigateToProfile)
+        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen, isOpeningVehicleUpdate:  onVehicleUpdateOpen, isNavigatingToProfile: onNavigateToProfile)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
         navigationController.pushViewController(UIHostingController(rootView: myVehiclesView), animated: true)
     }
@@ -43,6 +43,12 @@ class DefaultVehicleNavigator: VehicleNavigator {
         let navigator = DefaultProfileNavigator(navigationController: navigationController, window: window)
         let scenario = ProfileScenario(navigator: navigator)
         scenario.begin()
+    }
+
+    func navigatesToVehicleUpdate(onFinish: @escaping AsyncableAction, vehicle: Vehicle) {
+        let vm = VehicleUpdateViewModel(vehicle: vehicle, onFinish: onFinish)
+        let view = VehicleUpdateView(viewModel: vm)
+        navigationController.present(UIHostingController(rootView: view), animated: true)
     }
 
     func goingBackToHomeView() {
