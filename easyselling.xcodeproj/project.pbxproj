@@ -850,6 +850,7 @@
 				87780BAC271730100035AB13 /* DefaultAPICaller.swift */,
 				8705B9A7272081E2004132CF /* DefaultTokenManager.swift */,
 				874975F8273A3AB1000A1289 /* DefaultFileUploader.swift */,
+				9BB84D73274E4A1C00D88B03 /* DefaultPersistantLogin.swift */,
 				2C2DA387275280330085988B /* DefaultVehicleVerificator.swift */,
 			);
 			path = Services;
