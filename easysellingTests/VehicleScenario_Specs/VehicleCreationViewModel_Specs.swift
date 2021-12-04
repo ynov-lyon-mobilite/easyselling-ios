@@ -14,23 +14,23 @@ class VehicleCreationViewModel_Specs: XCTestCase {
     private var viewModel: VehicleCreationViewModel!
     
     func test_Shows_alert_when_a_field_is_empty() async {
-        givenViewModel(exepected: .emptyField)
+        givenViewModel(expected: .emptyField)
         await whenCreating()
         thenAlertMessage(expected: VehicleCreationError.emptyField.description)
         thenAlertIsShowing()
     }
     
     func test_Shows_alert_when_the_field_year_is_incorrect() async {
-        givenViewModel(exepected: .incorrectYear)
+        givenViewModel(expected: .incorrectYear)
         await whenCreating()
         thenAlertMessage(expected: VehicleCreationError.incorrectYear.description)
         thenAlertIsShowing()
     }
     
     func test_Shows_alert_when_the_field_license_is_incorrect() async {
-        givenViewModel(exepected: .incorrectLicense)
+        givenViewModel(expected: .incorrectLicenseFormat)
         await whenCreating()
-        thenAlertMessage(expected: VehicleCreationError.incorrectLicense.description)
+        thenAlertMessage(expected: VehicleCreationError.incorrectLicenseFormat.description)
         thenAlertIsShowing()
     }
     
@@ -46,8 +46,8 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         thenModalIsDismissed()
     }
 
-    private func givenViewModel(exepected: VehicleCreationError = .emptyField) {
-        viewModel = VehicleCreationViewModel(vehicleCreator: SpyVehicleCreator(), vehicleVerificator: SpyVehicleInformationsVerificator(error: exepected), onFinish: {
+    private func givenViewModel(expected: VehicleCreationError = .emptyField) {
+        viewModel = VehicleCreationViewModel(vehicleCreator: SpyVehicleCreator(), vehicleVerificator: SpyVehicleInformationsVerificator(error: expected), onFinish: {
             self.isDismissed = true
         })
     }

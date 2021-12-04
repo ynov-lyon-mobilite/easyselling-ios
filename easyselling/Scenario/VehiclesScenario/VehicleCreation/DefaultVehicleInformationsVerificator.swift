@@ -13,13 +13,16 @@ protocol VehicleInformationsVerificator {
 
 class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
     func verifyInformations(vehicle: Vehicle) throws {
+        let vehicleVerificator = DefaultVehicleVerificator()
+
         switch true {
             case vehicle.license.isEmpty
                 || vehicle.brand.isEmpty
                 || vehicle.model.isEmpty: throw VehicleCreationError.emptyField
-            case vehicle.license.count != 9: throw VehicleCreationError.incorrectLicense
             case vehicle.year.count != 4: throw VehicleCreationError.incorrectYear
-            default: break
+            default:
+                try vehicleVerificator.verifyLicenseFormat(license: vehicle.license)
+                try vehicleVerificator.verifyLicenseSize(license: vehicle.license)
         }
     }
 }
@@ -27,13 +30,15 @@ class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
 enum VehicleCreationError: Equatable, LocalizedError {
     case emptyField
     case incorrectYear
-    case incorrectLicense
+    case incorrectLicenseFormat
+    case incorrectLicenseSize
 
     var description: String {
         switch self {
             case .emptyField: return L10n.CreateVehicle.Error.emptyField
             case .incorrectYear: return L10n.CreateVehicle.Error.incorrectYear
-            case .incorrectLicense: return L10n.CreateVehicle.Error.incorrectLicense
+            case .incorrectLicenseFormat: return L10n.CreateVehicle.Error.incorrectLicenseFormat
+            case .incorrectLicenseSize: return L10n.CreateVehicle.Error.incorrectLicenseSize
         }
     }
 }
