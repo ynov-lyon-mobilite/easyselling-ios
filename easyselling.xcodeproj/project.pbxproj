@@ -53,9 +53,6 @@
 		03B80FA02745B01F00E1BF47 /* DefaultPasswordResetTransformator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B80F9F2745B01E00E1BF47 /* DefaultPasswordResetTransformator.swift */; };
 		03B80FA22745B04B00E1BF47 /* DefaultPasswordResetPreparator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B80FA12745B04A00E1BF47 /* DefaultPasswordResetPreparator_Specs.swift */; };
 		03B80FA42745B7AF00E1BF47 /* DefaultPasswordResetPreparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B80FA32745B7AF00E1BF47 /* DefaultPasswordResetPreparator.swift */; };
-		03B80FB2274717E500E1BF47 /* DefaultEmailVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B80FAF274717E500E1BF47 /* DefaultEmailVerificator_Specs.swift */; };
-		03B80FB3274717E500E1BF47 /* FailingEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B80FB0274717E500E1BF47 /* FailingEmailVerificator.swift */; };
-		03B80FB4274717E500E1BF47 /* SucceedingEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B80FB1274717E500E1BF47 /* SucceedingEmailVerificator.swift */; };
 		03C18F0827341AAA00C754E8 /* DefaultEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C18F0727341AAA00C754E8 /* DefaultEmailVerificator.swift */; };
 		03C18F0D27373F5600C754E8 /* DefaultTokenManager_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C18F0C27373F5600C754E8 /* DefaultTokenManager_Specs.swift */; };
 		03C18F102737D28A00C754E8 /* DefaultPasswordResetRequester_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C18F0F2737D28A00C754E8 /* DefaultPasswordResetRequester_Specs.swift */; };
@@ -135,9 +132,17 @@
 		87DC1D0A271FDF5C002DC193 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D09271FDF5C002DC193 /* LoginDTO.swift */; };
 		87DC1D0C271FDF6B002DC193 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D0B271FDF6B002DC193 /* Token.swift */; };
 		87DC1D0E271FDF8D002DC193 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC1D0D271FDF8D002DC193 /* APIResponse.swift */; };
+		8F38D78E274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D78D274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift */; };
+		8F665CD8274E3F38008DDA7B /* DefaultVehicleUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F665CD7274E3F38008DDA7B /* DefaultVehicleUpdater.swift */; };
+		8F665CDC274E6A9C008DDA7B /* DefaultVehicleUpdater_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F665CDB274E6A9C008DDA7B /* DefaultVehicleUpdater_Specs.swift */; };
 		8F86D4222716E4A000D143D8 /* OnBoardingScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D4212716E4A000D143D8 /* OnBoardingScenario_Specs.swift */; };
 		8F86D42C27172BC900D143D8 /* OnBoardingViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D42B27172BC900D143D8 /* OnBoardingViewModel_Specs.swift */; };
 		8F86D42E27172F3B00D143D8 /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D42D27172F3B00D143D8 /* OnBoardingViewModel.swift */; };
+		8FA938C82747092200B1FA96 /* VehicleUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA938C72747092200B1FA96 /* VehicleUpdateViewModel.swift */; };
+		8FA938CA2747093100B1FA96 /* VehicleUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA938C92747093100B1FA96 /* VehicleUpdateView.swift */; };
+		8FE6243A2752765A000D0FC8 /* SucceedingEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624372752765A000D0FC8 /* SucceedingEmailVerificator.swift */; };
+		8FE6243B2752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624382752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift */; };
+		8FE6243C2752765A000D0FC8 /* FailingEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624392752765A000D0FC8 /* FailingEmailVerificator.swift */; };
 		8FF0102327329DDE0022314B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF0102227329DDE0022314B /* Color+Extensions.swift */; };
 		9B5C547D27387E59005CFD24 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5C547C27387E59005CFD24 /* Vehicle.swift */; };
 		9BB4F7AD273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4F7AC273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift */; };
@@ -204,9 +209,6 @@
 		03B80F9F2745B01E00E1BF47 /* DefaultPasswordResetTransformator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPasswordResetTransformator.swift; sourceTree = "<group>"; };
 		03B80FA12745B04A00E1BF47 /* DefaultPasswordResetPreparator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPasswordResetPreparator_Specs.swift; sourceTree = "<group>"; };
 		03B80FA32745B7AF00E1BF47 /* DefaultPasswordResetPreparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPasswordResetPreparator.swift; sourceTree = "<group>"; };
-		03B80FAF274717E500E1BF47 /* DefaultEmailVerificator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultEmailVerificator_Specs.swift; sourceTree = "<group>"; };
-		03B80FB0274717E500E1BF47 /* FailingEmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailingEmailVerificator.swift; sourceTree = "<group>"; };
-		03B80FB1274717E500E1BF47 /* SucceedingEmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SucceedingEmailVerificator.swift; sourceTree = "<group>"; };
 		03C18F0727341AAA00C754E8 /* DefaultEmailVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmailVerificator.swift; sourceTree = "<group>"; };
 		03C18F0C27373F5600C754E8 /* DefaultTokenManager_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTokenManager_Specs.swift; sourceTree = "<group>"; };
 		03C18F0F2737D28A00C754E8 /* DefaultPasswordResetRequester_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPasswordResetRequester_Specs.swift; sourceTree = "<group>"; };
@@ -283,9 +285,17 @@
 		87DC1D09271FDF5C002DC193 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		87DC1D0B271FDF6B002DC193 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		87DC1D0D271FDF8D002DC193 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		8F38D78D274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleUpdateViewModel_specs.swift; sourceTree = "<group>"; };
+		8F665CD7274E3F38008DDA7B /* DefaultVehicleUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleUpdater.swift; sourceTree = "<group>"; };
+		8F665CDB274E6A9C008DDA7B /* DefaultVehicleUpdater_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleUpdater_Specs.swift; sourceTree = "<group>"; };
 		8F86D4212716E4A000D143D8 /* OnBoardingScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScenario_Specs.swift; sourceTree = "<group>"; };
 		8F86D42B27172BC900D143D8 /* OnBoardingViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel_Specs.swift; sourceTree = "<group>"; };
 		8F86D42D27172F3B00D143D8 /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
+		8FA938C72747092200B1FA96 /* VehicleUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleUpdateViewModel.swift; sourceTree = "<group>"; };
+		8FA938C92747093100B1FA96 /* VehicleUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleUpdateView.swift; sourceTree = "<group>"; };
+		8FE624372752765A000D0FC8 /* SucceedingEmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SucceedingEmailVerificator.swift; sourceTree = "<group>"; };
+		8FE624382752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultEmailVerificator_Specs.swift; sourceTree = "<group>"; };
+		8FE624392752765A000D0FC8 /* FailingEmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailingEmailVerificator.swift; sourceTree = "<group>"; };
 		8FF0102227329DDE0022314B /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		9B5C547C27387E59005CFD24 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		9BB4F7AC273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehiclesGetter_Specs.swift; sourceTree = "<group>"; };
@@ -456,9 +466,9 @@
 		03B80FAE274717E500E1BF47 /* DefaultEmailVerificator_Specs */ = {
 			isa = PBXGroup;
 			children = (
-				03B80FAF274717E500E1BF47 /* DefaultEmailVerificator_Specs.swift */,
-				03B80FB0274717E500E1BF47 /* FailingEmailVerificator.swift */,
-				03B80FB1274717E500E1BF47 /* SucceedingEmailVerificator.swift */,
+				8FE624382752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift */,
+				8FE624392752765A000D0FC8 /* FailingEmailVerificator.swift */,
+				8FE624372752765A000D0FC8 /* SucceedingEmailVerificator.swift */,
 			);
 			path = DefaultEmailVerificator_Specs;
 			sourceTree = "<group>";
@@ -476,10 +486,11 @@
 		03DAF9A3272731FB00FFED55 /* VehiclesScenario */ = {
 			isa = PBXGroup;
 			children = (
+				03B80F9D27416D0B00E1BF47 /* DefaultVehicleNavigator.swift */,
 				2C4486B3271DF7E10021122F /* VehicleScenario.swift */,
+				8FA938C6274708FF00B1FA96 /* VehicleUpdate */,
 				03DAF9A42727320600FFED55 /* MyVehicles */,
 				2CD4B8BE271C5F82002598A4 /* VehicleCreation */,
-				03B80F9D27416D0B00E1BF47 /* DefaultVehicleNavigator.swift */,
 			);
 			path = VehiclesScenario;
 			sourceTree = "<group>";
@@ -577,6 +588,8 @@
 				2C6D0F2A2732D9B500A86349 /* DefaultVehicleCreator_Specs.swift */,
 				2CD8639C2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift */,
 				2C86337B273FB7B10049C186 /* succeededVehicles.json */,
+				8F38D78D274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift */,
+				8F665CDB274E6A9C008DDA7B /* DefaultVehicleUpdater_Specs.swift */,
 			);
 			path = VehicleScenario_Specs;
 			sourceTree = "<group>";
@@ -818,6 +831,16 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		8FA938C6274708FF00B1FA96 /* VehicleUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				8FA938C72747092200B1FA96 /* VehicleUpdateViewModel.swift */,
+				8FA938C92747093100B1FA96 /* VehicleUpdateView.swift */,
+				8F665CD7274E3F38008DDA7B /* DefaultVehicleUpdater.swift */,
+			);
+			path = VehicleUpdate;
+			sourceTree = "<group>";
+		};
 		8FF010242732EDCE0022314B /* OnBoardingScenario */ = {
 			isa = PBXGroup;
 			children = (
@@ -1054,6 +1077,7 @@
 				03004DC6273E70F600188983 /* PasswordResetView.swift in Sources */,
 				0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */,
 				874975FB273A3CA3000A1289 /* UploadedFile.swift in Sources */,
+				8FA938C82747092200B1FA96 /* VehicleUpdateViewModel.swift in Sources */,
 				03B80F9A27416C8B00E1BF47 /* DefaultAuthenticationNavigator.swift in Sources */,
 				03B80FA02745B01F00E1BF47 /* DefaultPasswordResetTransformator.swift in Sources */,
 				2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */,
@@ -1061,6 +1085,7 @@
 				2CAE03D82717118D008D7A68 /* VehicleCreationView.swift in Sources */,
 				87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */,
 				8798D1432730F3DF00FF3AB4 /* RefreshDTO.swift in Sources */,
+				8FA938CA2747093100B1FA96 /* VehicleUpdateView.swift in Sources */,
 				035E860C2718A3AB00684ED0 /* APICallerError.swift in Sources */,
 				035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */,
 				0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */,
@@ -1102,6 +1127,7 @@
 				87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */,
 				03C18F182737FFC600C754E8 /* DefaultPasswordResetRequester.swift in Sources */,
 				872B68A427290EB000FC3FDD /* UserAuthenticationView.swift in Sources */,
+				8F665CD8274E3F38008DDA7B /* DefaultVehicleUpdater.swift in Sources */,
 				035E860A2718982A00684ED0 /* HTTPEndpoint.swift in Sources */,
 				03DAF9A8272733D600FFED55 /* MyVehiclesViewModel.swift in Sources */,
 				0317EE3827519DDA00A6AE0D /* ProfileViewModel.swift in Sources */,
@@ -1129,21 +1155,24 @@
 				034D04F02733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift in Sources */,
 				87BE3098273B0B4400D49D08 /* DefaultFileUploader_Specs.swift in Sources */,
 				03004DDD273EB02C00188983 /* FailingPasswordVerificator.swift in Sources */,
+				8FE6243A2752765A000D0FC8 /* SucceedingEmailVerificator.swift in Sources */,
 				03DAF9AA2727448300FFED55 /* VehicleCreationViewModel_Specs.swift in Sources */,
 				03C18F162737FF8400C754E8 /* SucceedingPasswordResetRequester.swift in Sources */,
 				9BB84D72274E361E00D88B03 /* FakeAuthorizedRequestGenerator.swift in Sources */,
 				8798D14C2730FC1C00FF3AB4 /* FakeTokenManager.swift in Sources */,
 				03F0543F271B3F0A00434706 /* FakeRequestGenerator.swift in Sources */,
+				8F38D78E274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift in Sources */,
 				03DAF9A027271C2D00FFED55 /* VehicleScenario_Specs.swift in Sources */,
 				038862882749382B001D7E36 /* DefaultCredentialsPreparator_Specs.swift in Sources */,
 				03F0543C271B3E9A00434706 /* FailingAPICaller.swift in Sources */,
 				9BB4F7AD273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift in Sources */,
+				8FE6243B2752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift in Sources */,
 				03B80FA22745B04B00E1BF47 /* DefaultPasswordResetPreparator_Specs.swift in Sources */,
-				03B80FB2274717E500E1BF47 /* DefaultEmailVerificator_Specs.swift in Sources */,
 				03C18F102737D28A00C754E8 /* DefaultPasswordResetRequester_Specs.swift in Sources */,
 				03DAF9A62727330300FFED55 /* MyVehicleViewModel_Specs.swift in Sources */,
 				87DC1D03271F6336002DC193 /* DefaultUserAuthenticator_Specs.swift in Sources */,
 				2CD8639D2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift in Sources */,
+				8FE6243C2752765A000D0FC8 /* FailingEmailVerificator.swift in Sources */,
 				03004DCE273E73FB00188983 /* DefaultPasswordReseter_Specs.swift in Sources */,
 				03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */,
 				03004DD5273EA69800188983 /* DefaultPasswordVerificator_Specs.swift in Sources */,
@@ -1151,10 +1180,10 @@
 				87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */,
 				399465D2274D78120060EFE5 /* SucceedingVehicleDeletor.swift in Sources */,
 				8798D150273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift in Sources */,
+				8F665CDC274E6A9C008DDA7B /* DefaultVehicleUpdater_Specs.swift in Sources */,
 				8798D1492730F8B700FF3AB4 /* SucceedingTokenRefreshor.swift in Sources */,
 				8705B9A027207838004132CF /* UserAuthenticationViewModel_Specs.swift in Sources */,
 				0388628C2749414F001D7E36 /* FailingCredentialsPreparator.swift in Sources */,
-				03B80FB3274717E500E1BF47 /* FailingEmailVerificator.swift in Sources */,
 				875E47AE273C6AD90019FC83 /* LocalFile.swift in Sources */,
 				87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */,
 				39FC6E9E274D598A0067E97F /* DefaultVehicleDeletor_Specs.swift in Sources */,
@@ -1165,7 +1194,6 @@
 				0317EE36275198A600A6AE0D /* ProfileScenario_Specs.swift in Sources */,
 				8705B9A627207D36004132CF /* FailingUserAuthenticator.swift in Sources */,
 				8798D1472730F88200FF3AB4 /* FailingTokenRefreshor.swift in Sources */,
-				03B80FB4274717E500E1BF47 /* SucceedingEmailVerificator.swift in Sources */,
 				03F05443271B3F9D00434706 /* FailingAccountCreator.swift in Sources */,
 				03F05431271B392300434706 /* SucceedingInformationsVerificator.swift in Sources */,
 				2C6D0F2B2732D9B600A86349 /* DefaultVehicleCreator_Specs.swift in Sources */,

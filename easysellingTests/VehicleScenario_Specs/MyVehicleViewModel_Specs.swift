@@ -11,7 +11,7 @@ import XCTest
 class MyVehiclesViewModel_Specs: XCTestCase {
     
     func test_Shows_vehicles_when_request_is_success() async {
-        let expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
+        expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
                                 Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")]
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter(expectedVehicles))
         thenViewModelState(is: .loading)
@@ -60,18 +60,37 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     private func thenHasNavigatingToProfile() {
         XCTAssertTrue(onNavigateToProfile)
     }
+
+    func test_Asserts_that_updated_vehicle_is_the_same_that_has_been_clicked() {
+        expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
+                                Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")]
+        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter(expectedVehicles))
+        whenOpeningVehicleUpdatingModal(vehicleId: "1")
+        thenVehicleThatShouldBeUpdate(is: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+    }
+
+    func test_Asserts_that_update_vehicles_callback_contain_on_other_callback_parameter() {
+        expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
+                                Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")]
+        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter(expectedVehicles))
+        whenOpeningVehicleUpdatingModal(vehicleId: "1")
+        XCTAssertNotNil(expectedCallback)
+    }
     
     private func givenViewModel(vehiclesGetter: VehiclesGetter) {
         viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter,
                                         isOpenningVehicleCreation: {
                                                 self.isOpen = true
+        }, isOpeningVehicleUpdate: { vehicle, onRefreshCallback in
+            self.onUpdateVehicle = vehicle
+            self.expectedCallback = onRefreshCallback
         }, isNavigatingToProfile: {
             self.onNavigateToProfile = true
         })
     }
     
     private func givenViewModelDeletor(vehiclesGetter: VehiclesGetter, vehicleDeletor: VehicleDeletor) {
-        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpenningVehicleCreation: { self.isOpen = true }, isNavigatingToProfile: { self.onNavigateToProfile = true })
+        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpenningVehicleCreation: { self.isOpen = true }, isOpeningVehicleUpdate: { _,_ in }, isNavigatingToProfile: { self.onNavigateToProfile = true })
     }
     
     private func whenTryingToGetVehicles() async {
@@ -88,6 +107,9 @@ class MyVehiclesViewModel_Specs: XCTestCase {
 
     private func whenVehicles(are vehicles: [Vehicle]) {
         viewModel.vehicles = vehicles
+	}
+    private func whenOpeningVehicleUpdatingModal(vehicleId: String) {
+        viewModel.openVehicleUpdate(vehicle: expectedVehicles.first { $0.id == vehicleId }!)
     }
     
     private func thenLoadVehicles(are expected: [Vehicle]) {
@@ -105,11 +127,18 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     private func thenVehicleCreationModalIsOpen() {
         XCTAssertTrue(isOpen)
     }
+
+    private func thenVehicleThatShouldBeUpdate(is expected: Vehicle) {
+        XCTAssertEqual(expected, onUpdateVehicle)
+    }
  
     private var viewModel: MyVehiclesViewModel!
     private var isOpen: Bool!
     private var expectedUrlResponse: Data? = readLocalFile(forName: "succeededVehicles")
     private var onNavigateToProfile: Bool = false
+    private var expectedVehicles: [Vehicle] = []
+    private var onUpdateVehicle: Vehicle!
+    private var expectedCallback: AsyncableAction!
 }
 
 private func readLocalFile(forName name: String) -> Data? {
