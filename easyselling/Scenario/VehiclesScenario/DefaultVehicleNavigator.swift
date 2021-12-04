@@ -10,7 +10,9 @@ import SwiftUI
 
 protocol VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen:  @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action,
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
+                             onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+                             onNavigateToProfile: @escaping Action,
                              onNavigatingToInvoices: @escaping (String) -> Void)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
     func navigatesToInvoices(ofVehicleId vehicleId: String)
@@ -27,12 +29,14 @@ class DefaultVehicleNavigator: VehicleNavigator {
     private var navigationController: UINavigationController = UINavigationController()
     private var window: UIWindow?
 
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action,
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
+                             onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+                             onNavigateToProfile: @escaping Action,
                              onNavigatingToInvoices: @escaping (String) -> Void) {
         window?.rootViewController = navigationController
 
         let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen,
-                                     isOpeningVehicleUpdate:  onVehicleUpdateOpen,
+                                     isOpeningVehicleUpdate: onVehicleUpdateOpen,
                                      isNavigatingToProfile: onNavigateToProfile,
                                      isNavigatingToInvoices: onNavigatingToInvoices)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
