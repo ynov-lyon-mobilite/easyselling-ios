@@ -5,7 +5,6 @@
 //  Created by Valentin Mont School on 18/10/2021.
 //
 import UIKit
-import SwiftUI
 
 class VehicleScenario {
 
