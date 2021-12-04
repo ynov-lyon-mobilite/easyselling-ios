@@ -11,9 +11,9 @@ import XCTest
 class VehicleInvoiceViewModel_Specs: XCTestCase {
 
     func test_Shows_vehicle_invoices_when_request_succeeds() async {
-        let expectedVehicleInvoices = [Invoice(id: 1, vehicle: "1", file: "1", date_created: "date1", date_updated: ""),
-                                           Invoice(id: 2, vehicle: "1", file: "2", date_created: "date2", date_updated: ""),
-                                           Invoice(id: 3, vehicle: "2", file: "3", date_created: "date3", date_updated: "")]
+        let expectedVehicleInvoices = [Invoice(id: 1, vehicle: "1", file: "1", dateCreated: "date1", dateUpdated: ""),
+                                           Invoice(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
+                                           Invoice(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")]
         givenViewModel(vehicleInvoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices))
         thenViewModelIsLoading()
         await whenTryingToGetVehicleInvoices()
