@@ -54,7 +54,7 @@ class VehicleUpdateViewModel_specs: XCTestCase {
     }
 
     private func whenUpdateSucceed() async {
-        await viewModel.deleteModal()
+        await viewModel.onFinish()
     }
 
     private func thenAlertMessage(is expected: String) {
