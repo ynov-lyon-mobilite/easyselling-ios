@@ -22,7 +22,7 @@ class DefaultVehicleDeletor: VehicleDeletor {
     private var apiCaller: APICaller
 
     func deleteVehicle(id: String) async throws {
-        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicleId, method: .DELETE, headers: [:], pathKeysValues: ["vehicleId" : id])
+        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicleId, method: .DELETE, headers: [:], pathKeysValues: ["vehicleId" : id], queryParameters: nil)
         try await apiCaller.call(urlRequest)
     }
 }

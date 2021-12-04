@@ -9,7 +9,7 @@ import Foundation
 
 struct FilterQueryParameter: QueryParameter {
     let parameterName: String
-    let type: FilterType = .EQUAL
+    var type: FilterType = .EQUAL
     let value: String
 
     enum FilterType: String {
