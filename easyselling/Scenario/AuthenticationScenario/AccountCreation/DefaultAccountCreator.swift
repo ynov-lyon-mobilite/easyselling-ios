@@ -24,7 +24,8 @@ class DefaultAccountCreator: AccountCreator {
 
     func createAccount(informations: AccountCreationInformations) async throws {
         let urlRequest = try requestGenerator
-            .generateRequest(endpoint: .users, method: .POST, body: informations, headers: [:], pathKeysValues: [:])
+            .generateRequest(endpoint: .users, method: .POST, body: informations,
+                             headers: [:], pathKeysValues: [:], queryParameters: nil)
         try await apiCaller.call(urlRequest)
     }
 }

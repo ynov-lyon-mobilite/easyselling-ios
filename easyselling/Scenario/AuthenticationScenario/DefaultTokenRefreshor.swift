@@ -22,7 +22,9 @@ final class DefaultTokenRefreshor: TokenRefreshor {
 
     func refresh(refreshToken: String) async throws -> Token {
         let dto = RefreshDTO(refreshToken: refreshToken)
-        let request = try requestGenerator.generateRequest(endpoint: .authRefresh, method: .POST, body: dto, headers: [:], pathKeysValues: [:])
+        let request = try requestGenerator
+            .generateRequest(endpoint: .authRefresh, method: .POST, body: dto,
+                             headers: [:], pathKeysValues: [:], queryParameters: nil)
         return try await apiCaller.call(request, decodeType: Token.self)
     }
 }
