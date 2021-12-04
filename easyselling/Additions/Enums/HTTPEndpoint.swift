@@ -18,6 +18,7 @@ enum HTTPEndpoint: String {
     case files = "/files"
     case passwordResetRequest = "/auth/password/request"
     case passwordReset = "/auth/password/reset"
+    case invoices = "/items/invoices"
 
     var url: URL? {
         URL(string: baseURL)?.appendingPathComponent(self.rawValue)

@@ -68,6 +68,36 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body)
         thenRequestWithBody(is: request)
     }
+
+    func test_Generates_Request_with_filter_query_parameter_equal() {
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/invoices?filter%5Bvehicle%5D%5B_eq%5D=1")!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = HTTPMethod.GET.rawValue
+
+        givenService()
+        whenGenerateRequest(endpoint: .invoices, method: .GET, queryParameters: [FilterQueryParameter(parameterName: "vehicle", type: .EQUAL, value: "1")])
+        thenRequest(is: request)
+    }
+
+    func test_Generates_Request_with_filter_query_parameter_inn() {
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/invoices?filter%5Bvehicle%5D%5B_in%5D=1")!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = HTTPMethod.GET.rawValue
+
+        givenService()
+        whenGenerateRequest(endpoint: .invoices, method: .GET, queryParameters: [FilterQueryParameter(parameterName: "vehicle", type: .INN, value: "1")])
+        thenRequest(is: request)
+    }
+
+    func test_Generates_Request_with_filter_query_parameter_between() {
+        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/invoices?filter%5Bvehicle%5D%5B_between%5D=1")!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = HTTPMethod.GET.rawValue
+
+        givenService()
+        whenGenerateRequest(endpoint: .invoices, method: .GET, queryParameters: [FilterQueryParameter(parameterName: "vehicle", type: .BETWEEN, value: "1")])
+        thenRequest(is: request)
+    }
     
     func test_JSON_encode_failure() {
         let body = Double.infinity
@@ -105,10 +135,10 @@ class DefaultRequestGenerator_Specs: XCTestCase {
     }
 
     private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod,
-                                     headers: [String: String] = [:], pathKeysValues: [String: String] = [:]) {
+                                     headers: [String: String] = [:], pathKeysValues: [String: String] = [:], queryParameters: [QueryParameter]? = nil) {
         do {
             self.request = try requestGenerator.generateRequest(endpoint: endpoint, method: method,
-                                                                headers: headers, pathKeysValues: pathKeysValues)
+                                                                headers: headers, pathKeysValues: pathKeysValues, queryParameters: queryParameters)
         } catch(let error) {
             self.error = (error as! APICallerError)
         }
@@ -122,7 +152,7 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         pathKeysValues: [String: String] = [:]) {
             do {
                 self.request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body,
-                                                                    headers: headers,                                        pathKeysValues: pathKeysValues)
+                                                                    headers: headers, pathKeysValues: pathKeysValues, queryParameters: nil)
             } catch(let error) {
                 self.error = (error as! APICallerError)
             }
@@ -132,12 +162,12 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         requestGenerator = nil
     }
 
-    private func thenRequest(is expectedRequest: URLRequest) {
+    private func thenRequest(is expectedRequest: URLRequest, line: UInt = #line) {
         XCTAssertNotNil(request)
-        XCTAssertEqual(request.url, expectedRequest.url)
-        XCTAssertEqual(request.httpMethod, expectedRequest.httpMethod)
-        XCTAssertEqual(request.allHTTPHeaderFields, expectedRequest.allHTTPHeaderFields)
-        XCTAssertEqual(request.httpBody, expectedRequest.httpBody)
+        XCTAssertEqual(expectedRequest.url, request.url, line: line)
+        XCTAssertEqual(expectedRequest.httpMethod, request.httpMethod, line: line)
+        XCTAssertEqual(expectedRequest.allHTTPHeaderFields, request.allHTTPHeaderFields, line: line)
+        XCTAssertEqual(expectedRequest.httpBody, request.httpBody, line: line)
     }
 
     private func thenRequestWithBody(is expectedRequest: URLRequest) {

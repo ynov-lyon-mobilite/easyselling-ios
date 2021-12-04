@@ -23,7 +23,9 @@ class DefaultPasswordReseter: PasswordReseter {
     private var apiCaller: APICaller
 
     func resetPassword(with passwordResetInformations: PasswordResetDTO) async throws {
-        let request = try requestGenerator.generateRequest(endpoint: .passwordReset, method: .POST, body: passwordResetInformations, headers: [:], pathKeysValues: [:])
+        let request = try requestGenerator.generateRequest(endpoint: .passwordReset, method: .POST,
+                                                           body: passwordResetInformations, headers: [:],
+                                                           pathKeysValues: [:], queryParameters: nil)
         try await apiCaller.call(request)
     }
 }

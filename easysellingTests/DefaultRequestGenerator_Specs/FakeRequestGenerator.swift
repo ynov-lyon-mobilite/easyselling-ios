@@ -10,15 +10,15 @@ import Foundation
 
 class FakeRequestGenerator: RequestGenerator {    
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?,
-                                       headers: [String : String], pathKeysValues: [String: String]) -> URLRequest {
-        var request = generateRequest(endpoint: endpoint, method: method, headers: headers, pathKeysValues: pathKeysValues)
+                                       headers: [String : String], pathKeysValues: [String: String], queryParameters: [QueryParameter]?) -> URLRequest {
+        var request = generateRequest(endpoint: endpoint, method: method, headers: headers, pathKeysValues: pathKeysValues, queryParameters: queryParameters)
         request.httpBody = try! JSONEncoder().encode(body)
 
         return request
     }
     
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod,
-                         headers: [String : String], pathKeysValues: [String: String]) -> URLRequest {
+                         headers: [String : String], pathKeysValues: [String: String], queryParameters: [QueryParameter]?) -> URLRequest {
         var urlString = endpoint.url!.absoluteString
         pathKeysValues.keys.forEach { key in
             guard let value = pathKeysValues[key] else { return }

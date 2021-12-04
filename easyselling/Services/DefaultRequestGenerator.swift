@@ -8,11 +8,10 @@
 import Foundation
 
 protocol RequestGenerator {
-    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod,
-                                       body: T?, headers: [String: String],
-                                       pathKeysValues: [String: String]) throws -> URLRequest
-    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod,
-                         headers: [String: String], pathKeysValues: [String: String]) throws -> URLRequest
+    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?, headers: [String: String],
+                                       pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URLRequest
+    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String],
+                         pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URLRequest
 }
 
 class DefaultRequestGenerator: RequestGenerator {
@@ -25,23 +24,22 @@ class DefaultRequestGenerator: RequestGenerator {
     private var jsonEncoder = JSONEncoder()
     private var fixHeaders: [String: String] = ["Content-Type": "application/json"]
 
-    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod = .GET,
-                                       body: T?, headers: [String: String],
-                                       pathKeysValues: [String: String]) throws -> URLRequest {
+    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod = .GET, body: T?, headers: [String: String],
+                                       pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URLRequest {
         guard let encodedBody = try? jsonEncoder.encode(body) else {
             throw APICallerError.encodeError
         }
 
-        var request = try generateRequest(endpoint: endpoint, method: method,
-                                          headers: headers, pathKeysValues: pathKeysValues)
+        var request = try generateRequest(endpoint: endpoint, method: method, headers: headers,
+                                          pathKeysValues: pathKeysValues, queryParameters: queryParameters)
         request.httpBody = encodedBody
 
         return request
     }
 
-    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod,
-                         headers: [String: String], pathKeysValues: [String: String]) throws -> URLRequest {
-        let url = try computeURL(endpoint: endpoint, pathKeysValues: pathKeysValues)
+    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String],
+                         pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URLRequest {
+        let url = try computeURL(endpoint: endpoint, pathKeysValues: pathKeysValues, queryParameters: queryParameters)
 
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
@@ -56,7 +54,7 @@ class DefaultRequestGenerator: RequestGenerator {
         return request
     }
 
-    private func computeURL(endpoint: HTTPEndpoint, pathKeysValues: [String: String]) throws -> URL {
+    private func computeURL(endpoint: HTTPEndpoint, pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URL {
         guard var urlString = endpoint.url?.absoluteString else {
             throw APICallerError.requestGenerationError
         }
@@ -70,11 +68,11 @@ class DefaultRequestGenerator: RequestGenerator {
             throw APICallerError.requestGenerationError
         }
 
-//        if queryParameters != [:], var component = URLComponents(string: urlString) {
-//            component.queryItems = queryParameters.keys.map({ URLQueryItem(name: $0, value: queryParameters[$0]) })
-//
-//            return component.url
-//        }
+        if let queryParameters = queryParameters, var component = URLComponents(string: urlString) {
+            component.queryItems = queryParameters.map { $0.encodeToQueryParameter() }
+
+            return component.url ?? url
+        }
 
         return url
     }

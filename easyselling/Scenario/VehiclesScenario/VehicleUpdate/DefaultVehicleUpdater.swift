@@ -22,7 +22,9 @@ class DefaultVehicleUpdater: VehicleUpdater {
     }
 
     func updateVehicle(id: String, informations: Vehicle) async throws {
-        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicleId, method: .PATCH, body: informations, headers: [:], pathKeysValues: ["vehicleId": id])
+        let urlRequest = try await requestGenerator
+            .generateRequest(endpoint: .vehicleId, method: .PATCH,body: informations, headers: [:],
+                             pathKeysValues: ["vehicleId": id], queryParameters: nil)
         try await apiCaller.call(urlRequest)
     }
 }
