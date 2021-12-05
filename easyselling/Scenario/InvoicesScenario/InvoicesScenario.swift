@@ -17,7 +17,7 @@ class InvoicesScenario {
         navigator.navigatesToInvoicesView(of: vehicleId, onNavigatingToInvoice: navigateToInvoice)
     }
 
-    private func navigateToInvoice(_ invoiceId: String) {
-        navigator.navigateToInvoice(invoiceId)
+    private func navigateToInvoice(_ file: File) {
+        navigator.navigateToInvoice(file)
     }
 }

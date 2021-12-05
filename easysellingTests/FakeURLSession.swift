@@ -24,6 +24,12 @@ class FakeUrlSession: URLSessionProtocol {
                                         httpVersion: nil, headerFields: nil)!
     }
 
+    init(localImage: LocalFile) {
+        self.data = localImage.image
+        self.response = HTTPURLResponse(url: URL(string: "https://google.com/osef")!, statusCode: 200,
+                                        httpVersion: nil, headerFields: nil)!
+    }
+
     func data(for request: URLRequest, delegate: URLSessionTaskDelegate? = nil) async throws -> (Data, URLResponse) {
         return (data, response)
     }

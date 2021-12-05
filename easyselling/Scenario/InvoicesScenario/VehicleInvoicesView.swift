@@ -1,5 +1,5 @@
 //
-//  VehicleInvoiceView.swift
+//  VehicleInvoicesView.swift
 //  easyselling
 //
 //  Created by Nicolas Barbosa on 24/11/2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct VehicleInvoiceView: View {
+struct VehicleInvoicesView: View {
 
     @ObservedObject var viewModel: VehicleInvoiceViewModel
 
@@ -30,6 +30,11 @@ struct VehicleInvoiceView: View {
                             Text(invoice.file)
                         }
                     }
+                    .onTapGesture {
+                        Task {
+                            await viewModel.downloadInvoiceContent(of: invoice.file)
+                        }
+                    }
                 }
             }
         }
@@ -41,8 +46,8 @@ struct VehicleInvoiceView: View {
     }
 }
 
-struct VehicleInvoiceView_Previews: PreviewProvider {
+struct VehicleInvoicesView_Previews: PreviewProvider {
     static var previews: some View {
-        VehicleInvoiceView(viewModel: VehicleInvoiceViewModel(ofVehicleId: ""))
+        VehicleInvoicesView(viewModel: VehicleInvoiceViewModel(ofVehicleId: "", onNavigatingToInvoiceView: {_ in }))
     }
 }

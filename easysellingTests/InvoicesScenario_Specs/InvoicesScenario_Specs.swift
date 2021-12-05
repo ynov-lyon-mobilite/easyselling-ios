@@ -33,7 +33,7 @@ class InvoicesScenario_Spec: XCTestCase {
     }
 
     private func whenNavigatingToInvoiceView() {
-        navigator.onNavigatingToInvoice?("")
+        navigator.onNavigatingToInvoice?(File(title: "", image: UIImage()))
     }
 
     private func thenHistory(is expected: [SpyInvoicesNavigator.History]) {
@@ -48,14 +48,14 @@ class InvoicesScenario_Spec: XCTestCase {
 class SpyInvoicesNavigator: InvoiceNavigator {
     
     private(set) var history: [History] = []
-    private(set) var onNavigatingToInvoice: ((String) -> Void)?
+    private(set) var onNavigatingToInvoice: ((File) -> Void)?
 
-    func navigatesToInvoicesView(of vehicle: String, onNavigatingToInvoice: @escaping (String) -> Void) {
+    func navigatesToInvoicesView(of vehicle: String, onNavigatingToInvoice: @escaping (File) -> Void) {
         self.onNavigatingToInvoice = onNavigatingToInvoice
         history.append(.invoices)
     }
 
-    func navigateToInvoice(_ invoiceId: String) {
+    func navigateToInvoice(_ file: File) {
         history.append(.invoiceView)
     }
 

@@ -10,8 +10,8 @@ import SwiftUI
 
 protocol InvoiceNavigator {
 
-    func navigatesToInvoicesView(of vehicle: String, onNavigatingToInvoice: @escaping (String) -> Void)
-    func navigateToInvoice(_ invoiceId: String)
+    func navigatesToInvoicesView(of vehicle: String, onNavigatingToInvoice: @escaping (File) -> Void)
+    func navigateToInvoice(_ file: File)
 }
 
 class DefaultInvoicesNavigator: InvoiceNavigator {
@@ -21,13 +21,13 @@ class DefaultInvoicesNavigator: InvoiceNavigator {
         self.navigationController = navigationController
     }
 
-    func navigatesToInvoicesView(of vehicle: String, onNavigatingToInvoice: @escaping (String) -> Void) {
-        let vm = VehicleInvoiceViewModel(ofVehicleId: vehicle)
-        let invoicesView = VehicleInvoiceView(viewModel: vm)
+    func navigatesToInvoicesView(of vehicle: String, onNavigatingToInvoice: @escaping (File) -> Void) {
+        let vm = VehicleInvoiceViewModel(ofVehicleId: vehicle, onNavigatingToInvoiceView: onNavigatingToInvoice)
+        let invoicesView = VehicleInvoicesView(viewModel: vm)
         navigationController.pushViewController(UIHostingController(rootView: invoicesView), animated: true)
     }
 
-    func navigateToInvoice(_ invoiceId: String) {
-        
+    func navigateToInvoice(_ file: File) {
+        navigationController.pushViewController(UIHostingController(rootView: InvoiceView()), animated: true)
     }
 }
