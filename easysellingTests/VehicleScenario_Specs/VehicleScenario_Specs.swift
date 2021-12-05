@@ -66,8 +66,8 @@ class VehicleScenario_Specs: XCTestCase {
     func test_Navigates_to_vehicule_invoices() {
         givenScenario()
         whenBeginning()
-        navigator.onNavigatingToInvoices?("VehicleID")
-        XCTAssertEqual("VehicleID", navigator.vehicleID)
+        whenNavigatingToVehicleInvoices()
+        thenVehicleId(is: "VehicleID")
         thenHistory(is: [.myVehicles, .vehicleInvoices])
     }
     
@@ -98,8 +98,16 @@ class VehicleScenario_Specs: XCTestCase {
         })
     }
  
+    private func whenNavigatingToVehicleInvoices() {
+        navigator.onNavigatingToInvoices?("VehicleID")
+    }
+
     private func thenHistory(is expected: [SpyVehicleCreationNavigator.History]) {
         XCTAssertEqual(expected, navigator.history)
+    }
+
+    private func thenVehicleId(is expected: String) {
+        XCTAssertEqual("VehicleID", navigator.vehicleID)
     }
     
     private var scenario: VehicleScenario!
@@ -116,7 +124,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     private(set) var onNavigateToProfile: Action?
     private(set) var onNavigatingToInvoices: ((String) -> Void)?
     private(set) var vehicleID: String = ""
-    
+
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onNavigateToProfile: @escaping Action,
                              onNavigatingToInvoices: @escaping (String) -> Void) {
         self.onNavigateToVehicleCreation = onVehicleCreationOpen

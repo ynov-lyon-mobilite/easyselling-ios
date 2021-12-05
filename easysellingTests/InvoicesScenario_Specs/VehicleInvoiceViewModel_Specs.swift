@@ -52,31 +52,3 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
     private var vehicleId: String = "1"
 
 }
-
-class SucceedingVehicleInvoicesGetter: VehicleInvoicesGetter {
-
-    private var invoices: [Invoice]
-
-    init(_ invoices: [Invoice]) {
-        self.invoices = invoices
-    }
-
-    func getInvoices(ofVehicleId: String) async throws -> [Invoice] {
-        return invoices
-    }
-
-}
-
-class FailingVehicleInvoicesGetter: VehicleInvoicesGetter {
-
-    private var error: APICallerError
-
-    init(withError error: APICallerError) {
-        self.error = error
-    }
-
-    func getInvoices(ofVehicleId: String) async throws -> [Invoice] {
-        throw error
-    }
-
-}
