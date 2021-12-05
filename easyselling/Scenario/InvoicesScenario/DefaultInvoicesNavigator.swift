@@ -28,6 +28,8 @@ class DefaultInvoicesNavigator: InvoiceNavigator {
     }
 
     func navigateToInvoice(_ file: File) {
-        navigationController.pushViewController(UIHostingController(rootView: InvoiceView()), animated: true)
+        let vm = InvoiceViewerViewModel(invoiceFile: file)
+        let view = InvoiceView(viewModel: vm)
+        navigationController.pushViewController(UIHostingController(rootView: view), animated: true)
     }
 }

@@ -9,8 +9,14 @@
 import UIKit
 
 class FailingInvoiceDownloader: InvoiceDownloader {
-    func downloadInvoiceFile(id: String, ofType type: String) async throws -> UIImage {
-        throw APICallerError.unauthorized
 
+    init(withError error: APICallerError) {
+        self.error = error
+    }
+
+    private let error: APICallerError
+
+    func downloadInvoiceFile(id: String, ofType type: String) async throws -> UIImage {
+        throw error
     }
 }

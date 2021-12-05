@@ -37,6 +37,7 @@
 		03422F7A275D38EC0060D19E /* SucceedingFileInformationsGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F78275D38EC0060D19E /* SucceedingFileInformationsGetter.swift */; };
 		03422F7D275D39370060D19E /* FailingFileInformationsGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F7B275D39370060D19E /* FailingFileInformationsGetter.swift */; };
 		03422F7F275D3C9C0060D19E /* InvoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F7E275D3C9C0060D19E /* InvoiceView.swift */; };
+		03422F83275D451B0060D19E /* InvoiceViewerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F82275D451B0060D19E /* InvoiceViewerViewModel.swift */; };
 		034D04E32732976E00576D64 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 034D04E22732976E00576D64 /* GoogleService-Info.plist */; };
 		034D04E62732984400576D64 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 034D04E52732984400576D64 /* FirebaseAnalytics */; };
 		034D04E82732984400576D64 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 034D04E72732984400576D64 /* FirebaseCrashlytics */; };
@@ -221,6 +222,7 @@
 		03422F78275D38EC0060D19E /* SucceedingFileInformationsGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingFileInformationsGetter.swift; sourceTree = "<group>"; };
 		03422F7B275D39370060D19E /* FailingFileInformationsGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingFileInformationsGetter.swift; sourceTree = "<group>"; };
 		03422F7E275D3C9C0060D19E /* InvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceView.swift; sourceTree = "<group>"; };
+		03422F82275D451B0060D19E /* InvoiceViewerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceViewerViewModel.swift; sourceTree = "<group>"; };
 		034D04E22732976E00576D64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		034D04EA2733FE0800576D64 /* PasswordResetRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestViewModel.swift; sourceTree = "<group>"; };
 		034D04EF2733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestViewModel_Specs.swift; sourceTree = "<group>"; };
@@ -495,6 +497,15 @@
 			path = InformationsGetter_Specs;
 			sourceTree = "<group>";
 		};
+		03422F81275D45070060D19E /* InvoiceViewer */ = {
+			isa = PBXGroup;
+			children = (
+				03422F7E275D3C9C0060D19E /* InvoiceView.swift */,
+				03422F82275D451B0060D19E /* InvoiceViewerViewModel.swift */,
+			);
+			path = InvoiceViewer;
+			sourceTree = "<group>";
+		};
 		034D04E92733FDEF00576D64 /* PasswordReset */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,13 +580,13 @@
 		03C8BB49274E3F7400169725 /* InvoicesScenario */ = {
 			isa = PBXGroup;
 			children = (
+				03422F81275D45070060D19E /* InvoiceViewer */,
 				03C8BB4A274E3F9400169725 /* VehicleInvoiceViewModel.swift */,
 				03C8BB4C274E3FBB00169725 /* VehicleInvoicesView.swift */,
 				5CA58D0F274E8D99000BF06C /* DefaultInvoicesNavigator.swift */,
 				5CA58D11274E8DF5000BF06C /* InvoicesScenario.swift */,
 				5CA58D1A274E9FC0000BF06C /* DefaultVehicleInvoicesGetter.swift */,
 				03422F66275CF1DA0060D19E /* DefaultInvoiceDownloader.swift */,
-				03422F7E275D3C9C0060D19E /* InvoiceView.swift */,
 			);
 			path = InvoicesScenario;
 			sourceTree = "<group>";
@@ -1259,6 +1270,7 @@
 				038862852749379D001D7E36 /* DefaultCredentialsPreparator.swift in Sources */,
 				8FF0102327329DDE0022314B /* Color+Extensions.swift in Sources */,
 				03C18F0827341AAA00C754E8 /* DefaultEmailVerificator.swift in Sources */,
+				03422F83275D451B0060D19E /* InvoiceViewerViewModel.swift in Sources */,
 				03004DD0273E79D700188983 /* PasswordResetDTO.swift in Sources */,
 				877CAC62275BE1DA00153CEE /* QueryParameters.swift in Sources */,
 				0382E2AC2718190B00EB570E /* DefaultCredentialsVerificator.swift in Sources */,

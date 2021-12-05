@@ -34,8 +34,16 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
                        invoiceDownloader: SucceedingInvoiceDownloader())
         await whenTryingToGetVehicleInvoices()
         await whenTryingToSeeInvoice("1")
-        XCTAssertTrue(onNavigatingToInvoiceView)
-        XCTAssertEqual(File(title: "title", image: UIImage()), downloadedInvoice)
+        thenUserHasNavigateToInvoiceView()
+        thenInvoiceFile(is: File(title: "title", image: UIImage()))
+    }
+
+    func test_Shows_error_when_dowloading_invoice_fail() async {
+        givenViewModel(vehicleInvoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices),
+                       invoiceFileInformationsGetter: SucceedingFileInformationsGetter(),
+                       invoiceDownloader: FailingInvoiceDownloader(withError: .unauthorized))
+        await whenTryingToSeeInvoice("1")
+        thenError(is: "Une erreur est survenue")
     }
 
     private func givenViewModel(vehicleInvoicesGetter: VehicleInvoicesGetter,
@@ -65,6 +73,14 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
 
     private func thenViewModelIsNotLoading() {
         XCTAssertFalse(viewModel.isLoading)
+    }
+
+    private func thenUserHasNavigateToInvoiceView() {
+        XCTAssertTrue(onNavigatingToInvoiceView)
+    }
+
+    private func thenInvoiceFile(is expected: File) {
+        XCTAssertEqual(expected, downloadedInvoice)
     }
 
     private func thenError(is expected: String) {

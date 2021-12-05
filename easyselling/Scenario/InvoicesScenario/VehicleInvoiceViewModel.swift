@@ -17,9 +17,11 @@ class VehicleInvoiceViewModel: ObservableObject {
     private var onNavigatingToInvoiceView: (File) -> Void
 
     @Published var vehicleId: String
-    @Published var isLoading: Bool = true
     @Published var invoices: [Invoice] = []
     @Published var error: APICallerError?
+    var chosenInvoice: Int?
+    @Published var isLoading: Bool = true
+    @Published var isDownloading: Bool = false
     @Published var isError: Bool = false
 
     init(ofVehicleId: String,
@@ -50,13 +52,20 @@ class VehicleInvoiceViewModel: ObservableObject {
     }
 
     @MainActor func downloadInvoiceContent(of fileId: String) async {
+        isDownloading = true
         do {
             let invoiceFile = try await invoiceFileInformationsGetter.getInvoiceFile(of: fileId)
             let invoiceImage = try await invoiceDownloader.downloadInvoiceFile(id: fileId, ofType: invoiceFile.type)
-
+            isDownloading = false
             self.onNavigatingToInvoiceView(File(title: invoiceFile.title, image: invoiceImage))
         } catch(let error) {
-            print(error)
+            if let error = error as? APICallerError {
+                isError = true
+                self.error = error
+            } else {
+                self.error = nil
+            }
+            isDownloading = false
         }
     }
 }
