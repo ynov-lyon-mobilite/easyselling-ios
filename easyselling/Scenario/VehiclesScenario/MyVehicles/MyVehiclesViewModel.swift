@@ -13,12 +13,14 @@ class MyVehiclesViewModel: ObservableObject {
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
          vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
          isOpenningVehicleCreation: @escaping Action, isOpeningVehicleUpdate: @escaping OnUpdatingVehicle,
-         isNavigatingToProfile: @escaping Action) {
+         isNavigatingToProfile: @escaping Action,
+         isNavigatingToInvoices: @escaping (String) -> Void) {
         self.vehiclesGetter = vehiclesGetter
         self.vehicleDeletor = vehicleDeletor
         self.isOpenningVehicleCreation = isOpenningVehicleCreation
 		self.isOpeningVehicleUpdate = isOpeningVehicleUpdate
         self.isNavigatingToProfile = isNavigatingToProfile
+        self.isNavigatingToInvoices = isNavigatingToInvoices
     }
 
     private var vehiclesGetter: VehiclesGetter
@@ -26,6 +28,9 @@ class MyVehiclesViewModel: ObservableObject {
     private var vehicleDeletor: VehicleDeletor
     private var isOpenningVehicleCreation: Action
     private var isNavigatingToProfile: Action
+    private var isNavigatingToInvoices: (String) -> Void
+
+    @Published var isLoading: Bool = true
     @Published var vehicles: [Vehicle] = []
     @Published var error: APICallerError?
     @Published var state: VehicleState = .loading
@@ -74,5 +79,9 @@ class MyVehiclesViewModel: ObservableObject {
         case loading
         case listingVehicles
         case error
+    }
+
+    func navigatesToInvoices(ofVehicle vehicleId: String) {
+        self.isNavigatingToInvoices(vehicleId)
     }
 }
