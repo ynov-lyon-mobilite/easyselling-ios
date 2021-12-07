@@ -74,6 +74,8 @@ struct UserAuthenticationView: View {
                     .buttonStyle(TextButtonStyle())
                     .fillMaxWidth(alignment: .trailing)
                 }
+                .buttonStyle(TextButtonStyle())
+                .fillMaxWidth(alignment: .trailing)
             }
             Spacer()
             Button(L10n.UserAuthentication.Button.login) {
