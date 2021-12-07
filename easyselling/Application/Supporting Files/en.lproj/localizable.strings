@@ -15,7 +15,8 @@
 "signUp.CreateAccountButton" = "Create account";
 
 "userAuthentication.button.login" = "Login";
-"userAuthentication.button.register" = "Don't have an account yet?\nClick here to register";
+"userAuthentication.register.label" = "Don't have an account yet?";
+"userAuthentication.register.button" = "Register";
 
 "passwordReset.mailSentSuccessfully" = "An email has been sent to you to reset your password";
 "passwordReset.sendMailButton" = "Send a reset email";

@@ -15,10 +15,38 @@ struct UserAuthenticationView: View {
     }
 
     var body: some View {
+        ZStack {
+            GeometryReader { proxy in
+                let height = proxy.size.height * 1.13
+                let spacingTop = (height - proxy.size.height) / 2
+                let spacingLeft = (height - proxy.size.width) / 2
+
+                Image(Asset.logo)
+                    .resizable()
+                    .frame(width: height, height: height)
+                    .opacity(0.07)
+                    .rotationEffect(.init(degrees: -30))
+                    .padding(.top, -spacingTop)
+                    .padding(.leading, -spacingLeft)
+            }.ignoresSafeArea()
+
+            ScrollView {
+                loginView
+            }
+        }
+    }
+
+    private var loginView: some View {
         VStack(spacing: 30) {
             Spacer()
-            Circle()
+
+            Image(Asset.logo)
+                .resizable()
+                .padding()
+                .frame(width: 230, height: 230)
+
             Spacer()
+
             VStack {
                 TextField(L10n.SignUp.mail, text: $viewModel.email)
                     .padding(10)
@@ -40,6 +68,8 @@ struct UserAuthenticationView: View {
                 Button(L10n.Button.forgottenPassword) {
                     viewModel.navigateToPasswordReset()
                 }
+                .buttonStyle(TextButtonStyle())
+                .fillMaxWidth(alignment: .trailing)
             }
             Spacer()
             Button(L10n.UserAuthentication.Button.login) {
@@ -47,27 +77,25 @@ struct UserAuthenticationView: View {
                     await viewModel.login()
                 }
             }
+            .buttonStyle(PrimaryButtonStyle())
             .frame(maxWidth: .infinity)
-            .foregroundColor(Color.black)
-            .padding(.vertical, 8)
-            .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(Color.gray.opacity(0.5),
-                                lineWidth: 4)
-                )
-            .padding(.horizontal)
 
-            Spacer()
+            HStack {
+                Text(L10n.UserAuthentication.Register.label)
 
-            Button(L10n.UserAuthentication.Button.register) {
-                viewModel.navigateToAccountCreation()
+                Button(L10n.UserAuthentication.Register.button) {
+                    viewModel.navigateToAccountCreation()
+                }
+                .buttonStyle(TextButtonStyle())
+                .padding([.leading, .top, .bottom])
             }
         }
+        .navigationBarHidden(true)
         .padding()
+        .fillMaxHeight()
         .alert(isPresented: $viewModel.showAlert) {
-            Alert(
-                title: Text(viewModel.alert?.errorDescription ?? ""),
-                dismissButton: Alert.Button.default(Text(L10n.Button.ok)))
+            Alert(title: Text(viewModel.alert?.errorDescription ?? ""),
+                  dismissButton: .default(Text(L10n.Button.ok)))
         }
     }
 }
@@ -75,6 +103,9 @@ struct UserAuthenticationView: View {
 struct UserAuthenticationView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: {}, navigateToPasswordReset: {}, onUserLogged: {})
+
         UserAuthenticationView(viewModel: viewModel)
+        UserAuthenticationView(viewModel: viewModel)
+            .preferredColorScheme(.dark)
     }
 }
