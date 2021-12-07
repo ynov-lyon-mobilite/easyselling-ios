@@ -13,6 +13,10 @@ struct ProfileView: View {
 
     var body: some View {
         VStack {
+            SelectAppIcon()
+
+            Spacer()
+
             Button(action: viewModel.logout) {
                 Text("LOGOUT")
             }

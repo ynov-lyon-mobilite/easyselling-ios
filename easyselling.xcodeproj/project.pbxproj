@@ -125,6 +125,7 @@
 		875E47B5273C6B9F0019FC83 /* UserAuthenticatorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 875E47B4273C6B9F0019FC83 /* UserAuthenticatorResponse.json */; };
 		875E47B6273C6CBD0019FC83 /* UserAuthenticatorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 875E47B4273C6B9F0019FC83 /* UserAuthenticatorResponse.json */; };
 		875E47B8273C6ECC0019FC83 /* FakeURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875E47B7273C6ECC0019FC83 /* FakeURLSession.swift */; };
+		8767182E275ED39A00844732 /* SelectAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8767182D275ED39A00844732 /* SelectAppIcon.swift */; };
 		87780BA127172F520035AB13 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA027172F520035AB13 /* URLSessionProtocol.swift */; };
 		87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA427172F610035AB13 /* HTTPMethod.swift */; };
 		87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */; };
@@ -294,6 +295,7 @@
 		875E47AF273C6B200019FC83 /* FileUploaderResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FileUploaderResponse.json; sourceTree = "<group>"; };
 		875E47B4273C6B9F0019FC83 /* UserAuthenticatorResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserAuthenticatorResponse.json; sourceTree = "<group>"; };
 		875E47B7273C6ECC0019FC83 /* FakeURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeURLSession.swift; sourceTree = "<group>"; };
+		8767182D275ED39A00844732 /* SelectAppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAppIcon.swift; sourceTree = "<group>"; };
 		87780BA027172F520035AB13 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		87780BA427172F610035AB13 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		87780BA627172F780035AB13 /* DefaultAPICaller_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPICaller_Specs.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 				0317EE322751985F00A6AE0D /* DefaultProfileNavigator.swift */,
 				0317EE3727519DDA00A6AE0D /* ProfileViewModel.swift */,
 				0317EE3927519DF100A6AE0D /* ProfileView.swift */,
+				8767182D275ED39A00844732 /* SelectAppIcon.swift */,
 			);
 			path = ProfileScenario;
 			sourceTree = "<group>";
@@ -810,7 +813,6 @@
 				87780BAC271730100035AB13 /* DefaultAPICaller.swift */,
 				8705B9A7272081E2004132CF /* DefaultTokenManager.swift */,
 				874975F8273A3AB1000A1289 /* DefaultFileUploader.swift */,
-				9BB84D73274E4A1C00D88B03 /* DefaultPersistantLogin.swift */,
 				2C2DA387275280330085988B /* DefaultVehicleVerificator.swift */,
 			);
 			path = Services;
@@ -1215,6 +1217,7 @@
 				03F2098B27170F2E00E10F6C /* OnBoardingScenario.swift in Sources */,
 				9BB84D77274E510B00D88B03 /* StartupScenario.swift in Sources */,
 				03F2098D271711CE00E10F6C /* OnBoardingView.swift in Sources */,
+				8767182E275ED39A00844732 /* SelectAppIcon.swift in Sources */,
 				8F86D42E27172F3B00D143D8 /* OnBoardingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1446,6 +1449,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = easyselling/Application/easyselling.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1479,6 +1483,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = easyselling/Application/easyselling.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
