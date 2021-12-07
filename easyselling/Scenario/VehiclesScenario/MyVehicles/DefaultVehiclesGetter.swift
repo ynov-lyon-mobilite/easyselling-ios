@@ -22,13 +22,13 @@ class DefaultVehiclesGetter : VehiclesGetter {
     private var apiCaller: APICaller
 
     func getVehicles() async throws -> [Vehicle] {
-        let queryParameters: [QueryParameter] = [
-            SortQueryParameter(propertyName: "year", type: .DESC),
-            FilterQueryParameter(parameterName: "model", value: "206")
-        ]
+//        let queryParameters: [QueryParameter] = [
+//            SortQueryParameter(propertyName: "year", type: .DESC),
+//            FilterQueryParameter(parameterName: "model", value: "206")
+//        ]
 
-        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .GET,headers: [:],
-                                                                    pathKeysValues: [:], queryParameters: queryParameters)
+        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .GET, headers: [:],
+                                                                    pathKeysValues: [:], queryParameters: [])
         return try await apiCaller.call(urlRequest, decodeType: [Vehicle].self)
     }
 }

@@ -60,7 +60,7 @@ struct MyVehiclesView: View {
                             .padding(.horizontal, 25)
                             .padding(.vertical)
                             .onTapGesture {
-                                viewModel.navigatesToInvoices(ofVehicle: vehicle.id)
+                                viewModel.navigatesToInvoices(ofVehicle: vehicle.id ?? "")
                             }
                         }
                         .listRowSeparatorTint(.clear)

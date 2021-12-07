@@ -21,7 +21,7 @@ class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
     }
 
     func getInvoices(ofVehicleId: String) async throws -> [Invoice] {
-        let urlRequest = try await requestGenerator.generateRequest(endpoint: .invoices, method: .GET, headers: [:], pathKeysValues: [:])
+        let urlRequest = try await requestGenerator.generateRequest(endpoint: .invoices, method: .GET, headers: [:], pathKeysValues: [:], queryParameters: [])
         return try await apiCaller.call(urlRequest, decodeType: [Invoice].self)
     }
 }
