@@ -47,10 +47,10 @@ struct MyVehiclesView: View {
                                     Task {
                                         await viewModel.deleteVehicle(idVehicle: vehicle.id ?? "")
                                     }
-                                }.tint(Asset.Colors.onBoardingDotActive.swiftUIColor)
+                                }.tint(Color.red)
                                 Button(L10n.Vehicles.updateButton) {
                                         viewModel.openVehicleUpdate(vehicle: vehicle)
-                                }.tint(Asset.Colors.onBoardingDotActive.swiftUIColor)
+                                }.tint(Color.secondaryEasyselling)
                             }
                             .padding(.vertical, 15)
                             .padding(.horizontal, 20)

@@ -14,8 +14,8 @@ class OnBoardingViewModel: ObservableObject {
     @Published var currentFeatureIndex: Int = 0
 
     var feature: Feature { features[currentFeatureIndex] }
-    var isShowingPreviousButton: Bool { currentFeatureIndex == 0 ? false : true }
-    var isShowingSkipButton: Bool { (currentFeatureIndex == features.count - 1) ? false : true }
+    var isShowingPreviousButton: Bool { currentFeatureIndex != 0 }
+    var isLastFeature: Bool { currentFeatureIndex == (features.count - 1) }
     private var onFinish: Action
 
     init(features: [Feature], onFinish: @escaping Action) {
@@ -24,23 +24,21 @@ class OnBoardingViewModel: ObservableObject {
     }
 
     func nextFeature() {
-        if(!(currentFeatureIndex == self.features.count - 1)) {
+        if(currentFeatureIndex != (features.count - 1)) {
             currentFeatureIndex += 1
         } else {
-            self.onFinish()
+            onFinish()
         }
     }
 
     func previousFeature() {
-        if(!(currentFeatureIndex == 0)) {
+        if(currentFeatureIndex != 0) {
             currentFeatureIndex -= 1
         }
     }
 
     func skipFeatures() {
-        if(!(currentFeatureIndex == features.count - 1)) {
-            self.onFinish()
-        }
+        onFinish()
     }
 }
 

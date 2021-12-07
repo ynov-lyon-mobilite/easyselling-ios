@@ -19,82 +19,93 @@ struct OnBoardingView: View {
     let animationWidth: CGFloat = 30
 
     var body: some View {
-        VStack {
+        VStack(spacing: 30) {
+            HStack {
+                Button(action: { viewModel.skipFeatures() }) {
+                    Image(systemName: "xmark")
+                        .resizable()
+                        .foregroundColor(.onBackground)
+                        .frame(width: 15, height: 15)
+                        .padding()
+                }
+            }
+            .fillMaxWidth(alignment: .trailing)
+            .padding(.horizontal)
+
             TabView(selection: $viewModel.currentFeatureIndex) {
                 ForEach(0..<viewModel.features.count) { _ in
-                    VStack {
-                        Image(systemName: viewModel.feature.image)
+                    VStack(spacing: 45) {
+                        Image(viewModel.feature.image)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .padding(.bottom, 75)
+
+                        Spacer()
 
                         Text(viewModel.feature.title)
                             .font(.largeTitle)
-                            .padding(.bottom, 30)
+                            .fillMaxWidth(alignment: .leading)
 
                         Text(viewModel.feature.text)
                             .font(.body)
-                            .multilineTextAlignment(.center)
-                            .frame(width: 250)
+                            .fillMaxWidth(alignment: .leading)
                     }
+                    .padding(.horizontal)
+                    .padding(.vertical, 30)
                 }
-            }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 
             HStack {
                 ForEach(0..<viewModel.features.count) { index in
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
                         .fill(index == viewModel.currentFeatureIndex
-                              ? Asset.Colors.onBoardingDotActive.swiftUIColor
-                              : Asset.Colors.onBoardingDotInactive.swiftUIColor)
+                              ? Color.primaryEasyselling
+                              : Color.onBackground.opacity(0.8))
                         .frame(width: index == viewModel.currentFeatureIndex ?
                                animationWidth : basicWidth, height: 10)
                         .animation(.easeIn, value: index == viewModel.currentFeatureIndex ? animationWidth: basicWidth)
                 }
             }
-            .padding(25)
+
             Spacer()
+
             HStack {
-                Button("Previous") {
+                Button(L10n.OnBoarding.Button.previous) {
                     withAnimation {
                         viewModel.previousFeature()
                     }
                 }
                 .opacity(viewModel.isShowingPreviousButton ? 1 : 0)
                 .disabled(!viewModel.isShowingPreviousButton)
+                .foregroundColor(Asset.Colors.secondary.swiftUIColor)
+                .font(.body.bold())
 
                 Spacer()
 
-                Button("Skip") {
-                    viewModel.skipFeatures()
-                }
-                .opacity(viewModel.isShowingSkipButton ? 1 : 0)
-                .disabled(!viewModel.isShowingSkipButton)
-
-                Spacer()
-
-                Button("Next") {
+                Button(L10n.OnBoarding.Button.next) {
                     withAnimation {
                         viewModel.nextFeature()
                     }
                 }
-                .padding([.trailing, .leading], 20)
-                .padding([.top, .bottom], 10)
-                .background(viewModel.currentFeatureIndex == viewModel.features.count-1 ? Color.red : nil)
+                .foregroundColor(viewModel.isLastFeature ? .white : Color.secondaryEasyselling)
+                .font(.body.bold())
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background(viewModel.isLastFeature ? Asset.Colors.secondary.swiftUIColor : nil)
                 .cornerRadius(100)
-                .foregroundColor(viewModel.currentFeatureIndex == viewModel.features.count-1 ? Color.white : Color.blue)
             }
-            .padding([.leading, .trailing], 10)
+            .padding(.horizontal, 10)
+            .padding(.bottom)
         }
-        .padding(.bottom)
+        .navigationBarHidden(true)
     }
 }
 
 struct OnBoardingView_Previews: PreviewProvider {
     static var previews: some View {
         OnBoardingView(viewModel: OnBoardingViewModel(features: [
-            Feature(title: "Page One", image: "pencil", text: "1 - Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
-            Feature(title: "Page Two", image: "scribble", text: "2 - Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
-            Feature(title: "Page Three", image: "trash", text: "3 - Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi")], onFinish: {}))
+            Feature(title: L10n.OnBoarding.Features._1.title, image: Asset.OnBoarding.first.name, text: L10n.OnBoarding.Features._1.label),
+            Feature(title: L10n.OnBoarding.Features._2.title, image: Asset.OnBoarding.second.name, text: L10n.OnBoarding.Features._2.label),
+            Feature(title: L10n.OnBoarding.Features._3.title, image: Asset.OnBoarding.third.name, text: L10n.OnBoarding.Features._3.label)
+        ], onFinish: {}))
     }
 }
