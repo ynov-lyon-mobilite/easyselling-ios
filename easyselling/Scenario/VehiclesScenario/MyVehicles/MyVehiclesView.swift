@@ -59,6 +59,9 @@ struct MyVehiclesView: View {
                             .cornerRadius(22)
                             .padding(.horizontal, 25)
                             .padding(.vertical)
+                            .onTapGesture {
+                                viewModel.navigatesToInvoices(ofVehicle: vehicle.id ?? "")
+                            }
                         }
                         .listRowSeparatorTint(.clear)
                         .listRowBackground(Color.clear)
@@ -97,7 +100,7 @@ struct MyVehiclesView: View {
 struct MyVehiclesView_Previews: PreviewProvider {
 
     static var previews: some View {
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {}, isOpeningVehicleUpdate: { _, _ in }, isNavigatingToProfile: {})
+        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {}, isOpeningVehicleUpdate: { _, _ in }, isNavigatingToProfile: {}, isNavigatingToInvoices: {_ in })
         vm.vehicles = [Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
                        Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
                        Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]

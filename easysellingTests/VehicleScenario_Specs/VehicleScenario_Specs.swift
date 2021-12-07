@@ -64,23 +64,30 @@ class VehicleScenario_Specs: XCTestCase {
         await whenLeavingVehicleUpdate()
         XCTAssertTrue(isRefresh)
     }
-    
+    func test_Navigates_to_vehicule_invoices() {
+        givenScenario()
+        whenBeginning()
+        whenNavigatingToVehicleInvoices()
+        thenVehicleId(is: "VehicleID")
+        thenHistory(is: [.myVehicles, .vehicleInvoices])
+    }
+
     private func givenScenario() {
         navigator = SpyVehicleCreationNavigator()
         scenario = VehicleScenario(navigator: navigator)
     }
-    
+
     private func whenBeginning() {
         scenario.begin()
     }
-    
+
     private func whenNavigatingToVehicleCreation() {
         navigator.onNavigateToVehicleCreation?()
     }
-    
+
     private func whenleavingVehicleCreation() async {
         await navigator.onFinish?()
-	}
+    }
 
     private func whenLeavingVehicleUpdate() async {
         await navigator.onFinish?()
@@ -91,11 +98,19 @@ class VehicleScenario_Specs: XCTestCase {
             self.isRefresh = true
         })
     }
- 
+
+    private func whenNavigatingToVehicleInvoices() {
+        navigator.onNavigatingToInvoices?("VehicleID")
+    }
+
     private func thenHistory(is expected: [SpyVehicleCreationNavigator.History]) {
         XCTAssertEqual(expected, navigator.history)
     }
-    
+
+    private func thenVehicleId(is expected: String) {
+        XCTAssertEqual(expected, navigator.vehicleID)
+    }
+
     private var scenario: VehicleScenario!
     private var navigator: SpyVehicleCreationNavigator!
     private var isVehicleCreationFinished: Bool = false
@@ -108,13 +123,17 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     private(set) var onFinish: (() async -> Void)?
     private(set) var onNavigateToVehicleCreation: Action?
     private(set) var onNavigateToProfile: Action?
-    
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action) {
+    private(set) var onNavigatingToInvoices: ((String) -> Void)?
+    private(set) var vehicleID: String = ""
+
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action,
+                             onNavigatingToInvoices: @escaping (String) -> Void) {
         self.onNavigateToVehicleCreation = onVehicleCreationOpen
         self.onNavigateToProfile = onNavigateToProfile
+        self.onNavigatingToInvoices = onNavigatingToInvoices
         history.append(.myVehicles)
     }
-    
+
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void) {
         self.onFinish = onFinish
         history.append(.vehicleCreation)
@@ -123,28 +142,35 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     func navigatesToProfile() {
         history.append(.profile)
     }
-    
+
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle) {
         self.onFinish = onFinish
         history.append(.vehicleUpdate)
     }
-    
+
+    func navigatesToInvoices(ofVehicleId vehicleId: String) {
+        self.vehicleID = vehicleId
+        history.append(.vehicleInvoices)
+    }
+
     func goingBackToHomeView() {
         history.append(.myVehicles)
     }
-    
+
     enum History: CustomDebugStringConvertible, Equatable {
         case myVehicles
         case vehicleCreation
         case profile
         case vehicleUpdate
-        
+        case vehicleInvoices
+
         var debugDescription: String {
             switch self {
             case .myVehicles: return "My vehicles"
             case .vehicleCreation: return "vehicle creation"
             case .profile: return "profile"
             case .vehicleUpdate: return "vehicle update"
+            case .vehicleInvoices: return "vehicle invoices"
             }
         }
     }

@@ -77,6 +77,18 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         XCTAssertNotNil(expectedCallback)
     }
     
+    func test_Navigates_to_vehicle_invoices_with_vehicle_id_as_parameter() {
+        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1",
+                                                                         brand: "Brand",
+                                                                         model: "Model",
+                                                                         license: "Licence",
+                                                                         type: .car,
+                                                                         year: "year")]))
+        whenNavigatingToInvoicesView()
+        thenVehicleId(is: "1")
+        thenNavigatesToInvoices()
+    }
+    
     private func givenViewModel(vehiclesGetter: VehiclesGetter) {
         viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter,
                                         isOpenningVehicleCreation: {
@@ -86,11 +98,15 @@ class MyVehiclesViewModel_Specs: XCTestCase {
             self.expectedCallback = onRefreshCallback
         }, isNavigatingToProfile: {
             self.onNavigateToProfile = true
+        },
+                                        isNavigatingToInvoices: { vehicleId in
+            self.isNavigatingToInvoices = true
+            self.selectedVehicleId = vehicleId
         })
     }
     
     private func givenViewModelDeletor(vehiclesGetter: VehiclesGetter, vehicleDeletor: VehicleDeletor) {
-        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpenningVehicleCreation: { self.isOpen = true }, isOpeningVehicleUpdate: { _,_ in }, isNavigatingToProfile: { self.onNavigateToProfile = true })
+        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpenningVehicleCreation: { self.isOpen = true }, isOpeningVehicleUpdate: { _,_ in }, isNavigatingToProfile: { self.onNavigateToProfile = true }, isNavigatingToInvoices: {_ in})
     }
     
     private func whenTryingToGetVehicles() async {
@@ -103,6 +119,10 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     
     private func whenOpeningVehiculeCreationModal() {
         viewModel.openVehicleCreation()
+    }
+
+    private func whenNavigatingToInvoicesView() {
+        viewModel.navigatesToInvoices(ofVehicle: "1")
     }
 
     private func whenVehicles(are vehicles: [Vehicle]) {
@@ -131,14 +151,24 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     private func thenVehicleThatShouldBeUpdate(is expected: Vehicle) {
         XCTAssertEqual(expected, onUpdateVehicle)
     }
+    
+    private func thenVehicleId(is expected: String) {
+        XCTAssertEqual(expected, selectedVehicleId)
+    }
+
+    private func thenNavigatesToInvoices() {
+        XCTAssertTrue(isNavigatingToInvoices)
+    }
  
     private var viewModel: MyVehiclesViewModel!
-    private var isOpen: Bool!
+    private var isOpen: Bool = false
     private var expectedUrlResponse: Data? = readLocalFile(forName: "succeededVehicles")
     private var onNavigateToProfile: Bool = false
     private var expectedVehicles: [Vehicle] = []
     private var onUpdateVehicle: Vehicle!
     private var expectedCallback: AsyncableAction!
+    private var isNavigatingToInvoices: Bool = false
+    private var selectedVehicleId: String!
 }
 
 private func readLocalFile(forName name: String) -> Data? {
