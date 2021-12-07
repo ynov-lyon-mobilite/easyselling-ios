@@ -96,31 +96,3 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         Invoice(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
         Invoice(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")]
 }
-
-class SucceedingVehicleInvoicesGetter: VehicleInvoicesGetter {
-
-    private var invoices: [Invoice]
-
-    init(_ invoices: [Invoice]) {
-        self.invoices = invoices
-    }
-
-    func getInvoices(ofVehicleId: String) async throws -> [Invoice] {
-        return invoices
-    }
-    
-}
-
-class FailingVehicleInvoicesGetter: VehicleInvoicesGetter {
-
-    private var error: APICallerError
-
-    init(withError error: APICallerError) {
-        self.error = error
-    }
-
-    func getInvoices(ofVehicleId: String) async throws -> [Invoice] {
-        throw error
-    }
-
-}

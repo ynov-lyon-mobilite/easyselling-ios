@@ -67,18 +67,6 @@ class DefaultVehicleNavigator: VehicleNavigator {
         scenario.begin(withVehicleId: vehicleId)
     }
 
-    func navigatesToInvoices(ofVehicleId vehicleId: String) {
-        let navigator = DefaultInvoicesNavigator(navigationController: navigationController)
-        let scenario = InvoicesScenario(navigator: navigator)
-        scenario.begin(withVehicleId: vehicleId)
-    }
-
-    func navigatesToVehicleUpdate(onFinish: @escaping AsyncableAction, vehicle: Vehicle) {
-        let vm = VehicleUpdateViewModel(vehicle: vehicle, onFinish: onFinish)
-        let view = VehicleUpdateView(viewModel: vm)
-        navigationController.present(UIHostingController(rootView: view), animated: true)
-    }
-
     func goingBackToHomeView() {
         DispatchQueue.main.async {
             self.navigationController.dismiss(animated: true)
