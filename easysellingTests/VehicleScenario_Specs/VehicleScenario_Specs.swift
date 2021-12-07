@@ -107,7 +107,7 @@ class VehicleScenario_Specs: XCTestCase {
     }
 
     private func thenVehicleId(is expected: String) {
-        XCTAssertEqual("VehicleID", navigator.vehicleID)
+        XCTAssertEqual(expected, navigator.vehicleID)
     }
     
     private var scenario: VehicleScenario!

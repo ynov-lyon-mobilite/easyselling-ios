@@ -15,19 +15,19 @@ class DefaultVehicleInvoicesGetter_Specs: XCTestCase {
     private var error: APICallerError!
 
     func test_Shows_vehicle_invoices_when_request_succeeded() async {
-        let expected = [Invoice(id: 1, vehicle: "1", file: "1", dateCreated: "date1", dateUpdated: ""),
+        let expectedInvoices = [Invoice(id: 1, vehicle: "1", file: "1", dateCreated: "date1", dateUpdated: ""),
                         Invoice(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
                         Invoice(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")]
 
         givenGetter(withAPICaller: DefaultAPICaller(urlSession: FakeUrlSession(localFile: .succeededInvoices)))
         await whenTryingToGetVehicleInvoices()
-        thenReturnInvoices(expected)
+        thenReturnedInvoices(are: expectedInvoices)
     }
 
     func test_Throws_error_when_request_failed() async {
-        givenGetter(withAPICaller: FailingAPICaller(withError: 404))
+        givenGetter(withAPICaller: FailingAPICaller(withError: 400))
         await whenTryingToGetVehicleInvoices()
-        thenError()
+        thenErrorCode(is: 400)
     }
 
     private func givenGetter(withAPICaller apiCaller: APICaller) {
@@ -42,11 +42,11 @@ class DefaultVehicleInvoicesGetter_Specs: XCTestCase {
         }
     }
 
-    private func thenReturnInvoices(_ expected: [Invoice]) {
+    private func thenReturnedInvoices(are expected: [Invoice]) {
         XCTAssertEqual(expected, invoices)
     }
 
-    private func thenError() {
-        XCTAssertEqual(.notFound, self.error)
+    private func thenErrorCode(is expected: Int) {
+        XCTAssertEqual(expected, error.rawValue)
     }
 }
