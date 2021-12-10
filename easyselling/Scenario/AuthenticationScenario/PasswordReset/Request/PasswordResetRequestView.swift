@@ -20,7 +20,7 @@ struct PasswordResetRequestView: View {
             Image(Asset.PasswordRequest.mailBlue.name)
             VStack {
                 TextField(L10n.SignUp.mail, text: $viewModel.email)
-                    .padding()
+                    .padding(10)
                     .background(Color.gray.opacity(0.5))
                     .cornerRadius(10)
                     .textContentType(.emailAddress)

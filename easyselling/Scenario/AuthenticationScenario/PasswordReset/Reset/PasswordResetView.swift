@@ -12,35 +12,37 @@ struct PasswordResetView: View {
     @ObservedObject var viewModel: PasswordResetViewModel
 
     var body: some View {
-        VStack {
-            SecureField(L10n.SignUp.password, text: $viewModel.newPassword)
-                .padding(6)
-                .background(Color.gray.opacity(0.5))
-                .cornerRadius(10)
-                .textContentType(.emailAddress)
+        VStack(spacing: 40) {
+            Image(Asset.PasswordReset.passwordResetBlue.name)
+            VStack {
+                SecureField(L10n.SignUp.password, text: $viewModel.newPassword)
+                    .padding(10)
+                    .background(Color.gray.opacity(0.5))
+                    .cornerRadius(10)
+                    .textContentType(.emailAddress)
 
-            SecureField(L10n.SignUp.passwordConfirmation, text: $viewModel.newPasswordConfirmation)
-                .padding(6)
-                .background(Color.gray.opacity(0.5))
-                .cornerRadius(10)
-                .textContentType(.emailAddress)
+                SecureField(L10n.SignUp.passwordConfirmation, text: $viewModel.newPasswordConfirmation)
+                    .padding(10)
+                    .background(Color.gray.opacity(0.5))
+                    .cornerRadius(10)
+                    .textContentType(.emailAddress)
 
-            Text(viewModel.error?.errorDescription ?? "")
-                .foregroundColor(.red)
-                .font(.headline)
-                .opacity(viewModel.error != nil ? 1 : 0)
-
-            Button(L10n.PasswordReset.resetPasswordButton) {
-                Task {
-                    await viewModel.resetPassword()
-                }
+                Text(viewModel.error?.errorDescription ?? "")
+                    .foregroundColor(.red)
+                    .font(.headline)
+                    .opacity(viewModel.error != nil ? 1 : 0)
             }
-            .foregroundColor(Color.white)
-            .padding()
-            .background(Color.black)
-            .cornerRadius(30)
+
+            Button(action: {
+                Task {
+                await viewModel.resetPassword()
+                }}) {
+                    Text(L10n.PasswordReset.resetPasswordButton)
+            }
+            .buttonStyle(PrimaryButtonStyle())
+            .ignoresSafeArea(.keyboard, edges: .bottom)
         }
-        .padding(.horizontal)
+        .padding(25)
     }
 }
 
