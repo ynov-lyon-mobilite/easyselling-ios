@@ -30,6 +30,7 @@
 "passwordReset.mailSentSuccessfully" = "Un mail vous à été envoyé pour réinitialiser votre mot de passe";
 "passwordReset.sendMailButton" = "Envoyer un mail de réinitialisation";
 "passwordReset.resetPasswordButton" = "Réinitialiser le mot de passe";
+"passwordReset.understand" = "J'ai compris";
 "vehicles.car" = "Voiture";
 "vehicles.moto" = "Moto";
 "vehicles.profile" = "Profil";

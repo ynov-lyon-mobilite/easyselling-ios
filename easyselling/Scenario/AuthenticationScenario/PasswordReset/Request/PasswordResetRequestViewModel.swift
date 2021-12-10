@@ -24,6 +24,7 @@ class PasswordResetRequestViewModel: ObservableObject {
 
     @MainActor
     func requestPasswordReset() async {
+        error = nil
         state = .loading
         do {
             _ = try verificator.verify(email)

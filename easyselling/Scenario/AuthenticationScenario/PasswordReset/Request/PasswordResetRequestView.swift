@@ -16,35 +16,43 @@ struct PasswordResetRequestView: View {
     }
 
     var body: some View {
-        VStack {
-            TextField(L10n.SignUp.mail, text: $viewModel.email)
-                .padding(6)
-                .background(Color.gray.opacity(0.5))
-                .cornerRadius(10)
-                .textContentType(.emailAddress)
+        VStack(spacing: 40) {
+            Image(Asset.PasswordRequest.mailBlue.name)
+            VStack {
+                TextField(L10n.SignUp.mail, text: $viewModel.email)
+                    .padding()
+                    .background(Color.gray.opacity(0.5))
+                    .cornerRadius(10)
+                    .textContentType(.emailAddress)
 
-            if viewModel.state == .loading {
-                ProgressView()
-            } else if viewModel.state == .requestSent {
-                Text(viewModel.resetRequestSuccessfullySent)
-            } else {
+                if viewModel.state == .requestSent {
+                    Text(viewModel.resetRequestSuccessfullySent)
+                        .foregroundColor(Asset.Colors.secondary.swiftUIColor)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 Text(viewModel.error?.errorDescription ?? "")
                     .foregroundColor(.red)
                     .font(.headline)
                     .opacity(viewModel.error != nil ? 1 : 0)
-
-                Button(L10n.PasswordReset.sendMailButton) {
-                    Task {
-                        await viewModel.requestPasswordReset()
-                    }
-                }
-                .foregroundColor(Color.white)
-                .padding()
-                .background(Color.black)
-                .cornerRadius(30)
             }
+
+            Button(action: { Task {
+                await viewModel.requestPasswordReset()
+            }}) {
+                if viewModel.state == .loading {
+                    ProgressView()
+                } else if viewModel.state == .requestSent {
+                    Text("J'ai compris")
+                } else {
+                    Text(L10n.PasswordReset.sendMailButton)
+
+                }
+            }
+            .buttonStyle(PrimaryButtonStyle())
+            .ignoresSafeArea(.keyboard, edges: .bottom)
         }
-        .padding(.horizontal)
+        .padding(25)
     }
 }
 
