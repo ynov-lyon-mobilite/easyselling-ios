@@ -16,7 +16,7 @@ class FailingInvoiceDownloader: InvoiceDownloader {
 
     private let error: APICallerError
 
-    func downloadInvoiceFile(id: String, ofType type: String) async throws -> UIImage {
+    func downloadInvoiceFile(id: String) async throws -> UIImage {
         throw error
     }
 }

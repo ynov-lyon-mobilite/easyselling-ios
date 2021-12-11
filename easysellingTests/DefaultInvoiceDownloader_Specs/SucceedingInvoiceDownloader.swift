@@ -9,7 +9,7 @@
 import UIKit
 
 class SucceedingInvoiceDownloader: InvoiceDownloader {
-    func downloadInvoiceFile(id: String, ofType type: String) async throws -> UIImage {
+    func downloadInvoiceFile(id: String) async throws -> UIImage {
         UIImage()
     }
 }

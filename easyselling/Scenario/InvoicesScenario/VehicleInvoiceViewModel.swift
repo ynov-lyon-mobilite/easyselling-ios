@@ -55,7 +55,7 @@ class VehicleInvoiceViewModel: ObservableObject {
         isDownloading = true
         do {
             let invoiceFile = try await invoiceFileInformationsGetter.getInvoiceFile(of: fileId)
-            let invoiceImage = try await invoiceDownloader.downloadInvoiceFile(id: fileId, ofType: invoiceFile.type)
+            let invoiceImage = try await invoiceDownloader.downloadInvoiceFile(id: fileId)
             isDownloading = false
             self.onNavigatingToInvoiceView(File(title: invoiceFile.title, image: invoiceImage))
         } catch(let error) {

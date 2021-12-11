@@ -72,6 +72,9 @@
 		03C18F162737FF8400C754E8 /* SucceedingPasswordResetRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C18F152737FF8400C754E8 /* SucceedingPasswordResetRequester.swift */; };
 		03C18F182737FFC600C754E8 /* DefaultPasswordResetRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C18F172737FFC600C754E8 /* DefaultPasswordResetRequester.swift */; };
 		03C18F1A27380DF700C754E8 /* FailingPasswordResetRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C18F1927380DF700C754E8 /* FailingPasswordResetRequester.swift */; };
+		03C759FA27654FD30032652F /* DefaultInvoiceFileInformationsGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C759F927654FD30032652F /* DefaultInvoiceFileInformationsGetter.swift */; };
+		03C759FC2765508F0032652F /* DefaultImageCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C759FB2765508F0032652F /* DefaultImageCaller.swift */; };
+		03C759FF2765544A0032652F /* FailingImageCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C759FE2765544A0032652F /* FailingImageCaller.swift */; };
 		03C8BB4B274E3F9400169725 /* VehicleInvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8BB4A274E3F9400169725 /* VehicleInvoiceViewModel.swift */; };
 		03C8BB4D274E3FBB00169725 /* VehicleInvoicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8BB4C274E3FBB00169725 /* VehicleInvoicesView.swift */; };
 		03DAF9A027271C2D00FFED55 /* VehicleScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DAF99F27271C2D00FFED55 /* VehicleScenario_Specs.swift */; };
@@ -256,6 +259,9 @@
 		03C18F152737FF8400C754E8 /* SucceedingPasswordResetRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingPasswordResetRequester.swift; sourceTree = "<group>"; };
 		03C18F172737FFC600C754E8 /* DefaultPasswordResetRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPasswordResetRequester.swift; sourceTree = "<group>"; };
 		03C18F1927380DF700C754E8 /* FailingPasswordResetRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingPasswordResetRequester.swift; sourceTree = "<group>"; };
+		03C759F927654FD30032652F /* DefaultInvoiceFileInformationsGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvoiceFileInformationsGetter.swift; sourceTree = "<group>"; };
+		03C759FB2765508F0032652F /* DefaultImageCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImageCaller.swift; sourceTree = "<group>"; };
+		03C759FE2765544A0032652F /* FailingImageCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingImageCaller.swift; sourceTree = "<group>"; };
 		03C8BB4A274E3F9400169725 /* VehicleInvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInvoiceViewModel.swift; sourceTree = "<group>"; };
 		03C8BB4C274E3FBB00169725 /* VehicleInvoicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInvoicesView.swift; sourceTree = "<group>"; };
 		03DAF99F27271C2D00FFED55 /* VehicleScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleScenario_Specs.swift; sourceTree = "<group>"; };
@@ -578,6 +584,14 @@
 			path = DefaultPasswordResetRequestor_Specs;
 			sourceTree = "<group>";
 		};
+		03C759FD276554380032652F /* DefaultImageCaller_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				03C759FE2765544A0032652F /* FailingImageCaller.swift */,
+			);
+			path = DefaultImageCaller_Specs;
+			sourceTree = "<group>";
+		};
 		03C8BB49274E3F7400169725 /* InvoicesScenario */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,6 +602,7 @@
 				5CA58D11274E8DF5000BF06C /* InvoicesScenario.swift */,
 				5CA58D1A274E9FC0000BF06C /* DefaultVehicleInvoicesGetter.swift */,
 				03422F66275CF1DA0060D19E /* DefaultInvoiceDownloader.swift */,
+				03C759F927654FD30032652F /* DefaultInvoiceFileInformationsGetter.swift */,
 			);
 			path = InvoicesScenario;
 			sourceTree = "<group>";
@@ -807,6 +822,7 @@
 		873552C2270D847B00F2DDBD /* easysellingTests */ = {
 			isa = PBXGroup;
 			children = (
+				03C759FD276554380032652F /* DefaultImageCaller_Specs */,
 				03422F73275D38B20060D19E /* Invoice_Specs */,
 				03422F5F275CEDE20060D19E /* DefaultInvoiceDownloader_Specs */,
 				9BB84D78274E518600D88B03 /* StartupScenario_Specs */,
@@ -877,6 +893,7 @@
 				8705B9A7272081E2004132CF /* DefaultTokenManager.swift */,
 				874975F8273A3AB1000A1289 /* DefaultFileUploader.swift */,
 				2C2DA387275280330085988B /* DefaultVehicleVerificator.swift */,
+				03C759FB2765508F0032652F /* DefaultImageCaller.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1272,6 +1289,7 @@
 				03B80F9C27416CC000E1BF47 /* DefaultOnBoardingNavigator.swift in Sources */,
 				0317EE312751985100A6AE0D /* ProfileScenario.swift in Sources */,
 				03B80FA42745B7AF00E1BF47 /* DefaultPasswordResetPreparator.swift in Sources */,
+				03C759FA27654FD30032652F /* DefaultInvoiceFileInformationsGetter.swift in Sources */,
 				0317EE332751985F00A6AE0D /* DefaultProfileNavigator.swift in Sources */,
 				034D04EB2733FE0800576D64 /* PasswordResetRequestViewModel.swift in Sources */,
 				87DC1D0C271FDF6B002DC193 /* Token.swift in Sources */,
@@ -1286,6 +1304,7 @@
 				0317EE3827519DDA00A6AE0D /* ProfileViewModel.swift in Sources */,
 				2CD4B8C0271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift in Sources */,
 				2C4486B4271DF7E10021122F /* VehicleScenario.swift in Sources */,
+				03C759FC2765508F0032652F /* DefaultImageCaller.swift in Sources */,
 				03F2098B27170F2E00E10F6C /* OnBoardingScenario.swift in Sources */,
 				9BB84D77274E510B00D88B03 /* StartupScenario.swift in Sources */,
 				03F2098D271711CE00E10F6C /* OnBoardingView.swift in Sources */,
@@ -1364,6 +1383,7 @@
 				2C6D0F2B2732D9B600A86349 /* DefaultVehicleCreator_Specs.swift in Sources */,
 				03F05439271B3E8300434706 /* SucceedingAPICaller.swift in Sources */,
 				8F86D42C27172BC900D143D8 /* OnBoardingViewModel_Specs.swift in Sources */,
+				03C759FF2765544A0032652F /* FailingImageCaller.swift in Sources */,
 				39CF8E95274E40C8009A0D28 /* FailingVehicleDeletor.swift in Sources */,
 				8F86D4222716E4A000D143D8 /* OnBoardingScenario_Specs.swift in Sources */,
 				9BB84D7A274E51A600D88B03 /* StartupScenario_Specs.swift in Sources */,

@@ -13,5 +13,5 @@ class InvoiceViewerViewModel: ObservableObject {
         self.invoiceFile = invoiceFile
     }
 
-    @Published var invoiceFile: File
+    let invoiceFile: File
 }

@@ -26,8 +26,4 @@ class FailingAPICaller: APICaller {
     func call(_ urlRequest: URLRequest) async throws {
         throw APICallerError.from(statusCode: error)
     }
-
-    func callImage(_ urlRequest: URLRequest) async throws -> UIImage {
-        throw APICallerError.from(statusCode: error)
-    }
 }
