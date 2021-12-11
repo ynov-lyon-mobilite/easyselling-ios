@@ -27,6 +27,12 @@ struct PasswordResetView: View {
                     .cornerRadius(10)
                     .textContentType(.emailAddress)
 
+                if viewModel.state == .resetSuccessfull {
+                    Text(L10n.PasswordReset.resetSuccessfully)
+                        .foregroundColor(Asset.Colors.secondary.swiftUIColor)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 Text(viewModel.error?.errorDescription ?? "")
                     .foregroundColor(.red)
                     .font(.headline)
@@ -37,7 +43,11 @@ struct PasswordResetView: View {
                 Task {
                 await viewModel.resetPassword()
                 }}) {
-                    Text(L10n.PasswordReset.resetPasswordButton)
+                    if viewModel.state == .resetSuccessfull {
+                        Text(L10n.UserAuthentication.Button.login)
+                    } else {
+                        Text(L10n.PasswordReset.resetPasswordButton)
+                    }
             }
             .buttonStyle(PrimaryButtonStyle())
             .ignoresSafeArea(.keyboard, edges: .bottom)

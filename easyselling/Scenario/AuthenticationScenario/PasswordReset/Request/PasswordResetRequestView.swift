@@ -43,7 +43,7 @@ struct PasswordResetRequestView: View {
                 if viewModel.state == .loading {
                     ProgressView()
                 } else if viewModel.state == .requestSent {
-                    Text("J'ai compris")
+                    Text(L10n.PasswordReset.iUnderstand)
                 } else {
                     Text(L10n.PasswordReset.sendMailButton)
 

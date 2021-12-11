@@ -27,29 +27,41 @@ class PasswordResetViewModel: ObservableObject {
     @Published var error: CredentialsError?
     @Published var alert: APICallerError?
     @Published var showAlert: Bool = false
-    @Published var showError: Bool = false
     @Published var newPassword: String = ""
     @Published var newPasswordConfirmation: String = ""
+    @Published var state: PasswordResetViewModelState = .initial
 
+    @MainActor
     func resetPassword() async {
-        do {
-            var passwordResetDto = try preparator.prepare(newPassword, passwordConfirmation: newPasswordConfirmation)
-            passwordResetDto.token = token
-            try await passwordReseter.resetPassword(with: passwordResetDto)
+        error = nil
+        if state == .resetSuccessfull {
             self.onPasswordReset()
-        } catch(let error) {
-            if let error = error as? CredentialsError {
-                self.setError(with: error)
-                self.showError = true
-            }
-            if let error = error as? APICallerError {
-                self.alert = error
-                self.showAlert = true
+        } else {
+            do {
+                var passwordResetDto = try preparator.prepare(newPassword, passwordConfirmation: newPasswordConfirmation)
+                passwordResetDto.token = token
+                try await passwordReseter.resetPassword(with: passwordResetDto)
+                state = .resetSuccessfull
+            } catch(let error) {
+                if let error = error as? CredentialsError {
+                    self.setError(with: error)
+                }
+                if let error = error as? APICallerError {
+                    self.alert = error
+                    self.showAlert = true
+                }
+                state = .error
             }
         }
     }
 
     private func setError(with error: CredentialsError) {
         self.error = error
+    }
+
+    enum PasswordResetViewModelState: Equatable {
+        case initial
+        case resetSuccessfull
+        case error
     }
 }
