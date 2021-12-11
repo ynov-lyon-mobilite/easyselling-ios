@@ -67,4 +67,10 @@ class PasswordResetViewModel: ObservableObject {
         case resetSuccessfull
         case error
     }
+
+    enum PasswordResetViewModelState: Equatable {
+        case initial
+        case resetSuccessfull
+        case error
+    }
 }
