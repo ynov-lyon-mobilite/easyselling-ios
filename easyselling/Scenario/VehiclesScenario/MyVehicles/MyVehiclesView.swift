@@ -100,7 +100,7 @@ struct MyVehiclesView: View {
 struct MyVehiclesView_Previews: PreviewProvider {
 
     static var previews: some View {
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {}, isOpeningVehicleUpdate: { _, _ in }, isNavigatingToProfile: {}, isNavigatingToInvoices: {_ in })
+        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {}, isOpeningVehicleUpdate: {_,_ in }, isNavigatingToProfile: {}, isNavigatingToInvoices: {_ in })
         vm.vehicles = [Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
                        Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
                        Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]

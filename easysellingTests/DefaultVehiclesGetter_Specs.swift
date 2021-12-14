@@ -38,29 +38,3 @@ class DefaultVehiclesGetter_Specs: XCTestCase {
     private var vehicles: [Vehicle]!
     private var error: APICallerError!
 }
-
-class SucceedingVehiclesGetter: VehiclesGetter {
-    
-    init(_ vehicles: [Vehicle]) {
-        self.vehicles = vehicles
-    }
-    
-    private var vehicles: [Vehicle]
-    
-    func getVehicles() async throws -> [Vehicle] {
-        return vehicles
-    }
-}
-
-class FailingVehiclesGetter: VehiclesGetter {
-    
-    init(withError error: APICallerError) {
-        self.error = error
-    }
-    
-    private var error: APICallerError
-    
-    func getVehicles() async throws -> [Vehicle] {
-        throw error
-    }
-}

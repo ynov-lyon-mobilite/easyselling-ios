@@ -16,6 +16,13 @@ class InvoicesScenario_Spec: XCTestCase {
         thenHistory(is: [.invoices])
     }
 
+    func test_Navigates_to_invoice_view() {
+        givenScenario()
+        whenBeginning()
+        whenNavigatingToInvoiceView()
+        thenHistory(is: [.invoices, .invoiceView])
+    }
+
     private func givenScenario() {
         navigator = SpyInvoicesNavigator()
         scenario = InvoicesScenario(navigator: navigator)
@@ -23,6 +30,10 @@ class InvoicesScenario_Spec: XCTestCase {
 
     private func whenBeginning() {
         scenario.begin(withVehicleId: "VehicleID")
+    }
+
+    private func whenNavigatingToInvoiceView() {
+        navigator.onNavigatingToInvoice?(File(title: "", image: UIImage()))
     }
 
     private func thenHistory(is expected: [SpyInvoicesNavigator.History]) {
@@ -37,17 +48,25 @@ class InvoicesScenario_Spec: XCTestCase {
 class SpyInvoicesNavigator: InvoiceNavigator {
     
     private(set) var history: [History] = []
+    private(set) var onNavigatingToInvoice: ((File) -> Void)?
 
-    func navigatesToInvoicesView(_: String) {
+    func navigatesToInvoicesView(of vehicle: String, onNavigatingToInvoice: @escaping (File) -> Void) {
+        self.onNavigatingToInvoice = onNavigatingToInvoice
         history.append(.invoices)
+    }
+
+    func navigateToInvoice(_ file: File) {
+        history.append(.invoiceView)
     }
 
     enum History: CustomDebugStringConvertible, Equatable {
         case invoices
+        case invoiceView
 
         var debugDescription: String {
             switch self {
             case .invoices: return "Invoices"
+            case .invoiceView: return "View of invoice"
             }
         }
     }
