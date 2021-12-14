@@ -38,7 +38,6 @@ final class DefaultAPICaller: APICaller {
             }
 
             do {
-                print(data)
                 let decodedResult = try jsonDecoder.decode(APIResponse<T>.self, from: data)
                 return decodedResult.data
             } catch (let error) {
