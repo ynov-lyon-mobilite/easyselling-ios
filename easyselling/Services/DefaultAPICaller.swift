@@ -14,6 +14,7 @@ protocol APICaller {
 }
 
 final class DefaultAPICaller: APICaller {
+
     private var jsonDecoder = JSONDecoder()
     private var successStatusCodes = Set<Int>(200...209)
     private let urlSession: URLSessionProtocol

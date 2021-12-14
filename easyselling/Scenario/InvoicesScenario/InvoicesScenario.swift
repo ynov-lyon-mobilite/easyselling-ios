@@ -13,7 +13,11 @@ class InvoicesScenario {
 
     private var navigator: InvoiceNavigator
 
-    func begin(withVehicleId: String) {
-        navigator.navigatesToInvoicesView(withVehicleId)
+    func begin(withVehicleId vehicleId: String) {
+        navigator.navigatesToInvoicesView(of: vehicleId, onNavigatingToInvoice: navigateToInvoice)
+    }
+
+    private func navigateToInvoice(_ file: File) {
+        navigator.navigateToInvoice(file)
     }
 }

@@ -87,7 +87,7 @@ class VehicleScenario_Specs: XCTestCase {
 
     private func whenleavingVehicleCreation() async {
         await navigator.onFinish?()
-    }
+	}
 
     private func whenLeavingVehicleUpdate() async {
         await navigator.onFinish?()

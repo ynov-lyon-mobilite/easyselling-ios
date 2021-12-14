@@ -12,16 +12,29 @@ import SwiftUI
 class VehicleInvoiceViewModel: ObservableObject {
 
     private var vehicleInvoicesGetter: VehicleInvoicesGetter
+    private var invoiceDownloader: InvoiceDownloader
+    private var invoiceFileInformationsGetter: InvoiceFileInformationsGetter
+    private var onNavigatingToInvoiceView: (File) -> Void
 
     @Published var vehicleId: String
-    @Published var isLoading: Bool = true
     @Published var invoices: [Invoice] = []
     @Published var error: APICallerError?
+    var chosenInvoice: Int?
+    @Published var isLoading: Bool = true
+    @Published var isDownloading: Bool = false
     @Published var isError: Bool = false
 
-    init(vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(), ofVehicleId: String) {
-        self.vehicleInvoicesGetter = vehicleInvoicesGetter
+    init(ofVehicleId: String,
+         vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(),
+         invoiceDownloader: InvoiceDownloader = DefaultInvoiceDownloader(),
+         invoiceFileInformationsGetter: InvoiceFileInformationsGetter = DefaultInvoiceFileInformationsGetter(),
+         onNavigatingToInvoiceView: @escaping (File) -> Void) {
+
         self.vehicleId = ofVehicleId
+        self.vehicleInvoicesGetter = vehicleInvoicesGetter
+        self.invoiceDownloader = invoiceDownloader
+        self.invoiceFileInformationsGetter = invoiceFileInformationsGetter
+        self.onNavigatingToInvoiceView = onNavigatingToInvoiceView
     }
 
     @MainActor func getInvoices(ofVehicleId vehicleId: String) async {
@@ -36,5 +49,23 @@ class VehicleInvoiceViewModel: ObservableObject {
             }
         }
         isLoading = false
+    }
+
+    @MainActor func downloadInvoiceContent(of fileId: String) async {
+        isDownloading = true
+        do {
+            let invoiceFile = try await invoiceFileInformationsGetter.getInvoiceFile(of: fileId)
+            let invoiceImage = try await invoiceDownloader.downloadInvoiceFile(id: fileId)
+            isDownloading = false
+            self.onNavigatingToInvoiceView(File(title: invoiceFile.title, image: invoiceImage))
+        } catch(let error) {
+            if let error = error as? APICallerError {
+                isError = true
+                self.error = error
+            } else {
+                self.error = nil
+            }
+            isDownloading = false
+        }
     }
 }

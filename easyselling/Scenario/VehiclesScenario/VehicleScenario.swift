@@ -17,7 +17,7 @@ class VehicleScenario {
         navigator.navigatesToHomeView(onVehicleCreationOpen: navigatesToVehicleCreation,
 									  onVehicleUpdateOpen: navigatesToVehicleUpdate,
                                       onNavigateToProfile: navigatesToProfile,
-                                      onNavigatingToInvoices: navigatesToInvoices)
+										onNavigatingToInvoices: navigatesToInvoices)
     }
 
     private func navigatesToVehicleCreation() {
@@ -38,9 +38,8 @@ class VehicleScenario {
 
     func navigatesToVehicleUpdate(vehicle: Vehicle, refreshVehicles: @escaping AsyncableAction) {
         navigator.navigatesToVehicleUpdate(onFinish: { [goingBackToHomeView] in
-            goingBackToHomeView()
             await refreshVehicles()
+            goingBackToHomeView()
         }, vehicle: vehicle)
     }
-
 }

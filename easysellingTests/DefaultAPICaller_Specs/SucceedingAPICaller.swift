@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 @testable import easyselling
+import UIKit
 
 class SucceedingAPICaller: APICaller {
     
@@ -20,5 +21,9 @@ class SucceedingAPICaller: APICaller {
     func call(_ urlRequest: URLRequest) {
         isCallSucceed = true
         return
+    }
+
+    func callImage(_ urlRequest: URLRequest) async throws -> UIImage {
+        UIImage()
     }
 }

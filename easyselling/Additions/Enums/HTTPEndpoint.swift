@@ -16,6 +16,8 @@ enum HTTPEndpoint: String {
     case authLogin = "/auth/login"
     case authRefresh = "/auth/refresh"
     case files = "/files"
+    case fileById = "/files/:fileId"
+    case downloadFile = "/assets/:fileId"
     case passwordResetRequest = "/auth/password/request"
     case passwordReset = "/auth/password/reset"
     case invoices = "/items/invoices"

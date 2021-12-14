@@ -10,7 +10,9 @@ import SwiftUI
 
 protocol VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen:  @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action,
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
+                             onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+                             onNavigateToProfile: @escaping Action,
                              onNavigatingToInvoices: @escaping (String) -> Void)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
     func navigatesToInvoices(ofVehicleId vehicleId: String)
@@ -27,12 +29,14 @@ class DefaultVehicleNavigator: VehicleNavigator {
     private var navigationController: UINavigationController = UINavigationController()
     private var window: UIWindow?
 
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action,
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
+                             onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+                             onNavigateToProfile: @escaping Action,
                              onNavigatingToInvoices: @escaping (String) -> Void) {
         window?.rootViewController = navigationController
 
         let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen,
-                                     isOpeningVehicleUpdate:  onVehicleUpdateOpen,
+                                     isOpeningVehicleUpdate: onVehicleUpdateOpen,
                                      isNavigatingToProfile: onNavigateToProfile,
                                      isNavigatingToInvoices: onNavigatingToInvoices)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
@@ -51,16 +55,16 @@ class DefaultVehicleNavigator: VehicleNavigator {
         scenario.begin()
     }
 
-    func navigatesToInvoices(ofVehicleId vehicleId: String) {
-        let navigator = DefaultInvoicesNavigator(navigationController: navigationController)
-        let scenario = InvoicesScenario(navigator: navigator)
-        scenario.begin(withVehicleId: vehicleId)
-    }
-
     func navigatesToVehicleUpdate(onFinish: @escaping AsyncableAction, vehicle: Vehicle) {
         let vm = VehicleUpdateViewModel(vehicle: vehicle, onFinish: onFinish)
         let view = VehicleUpdateView(viewModel: vm)
         navigationController.present(UIHostingController(rootView: view), animated: true)
+	}
+
+    func navigatesToInvoices(ofVehicleId vehicleId: String) {
+        let navigator = DefaultInvoicesNavigator(navigationController: navigationController)
+        let scenario = InvoicesScenario(navigator: navigator)
+        scenario.begin(withVehicleId: vehicleId)
     }
 
     func goingBackToHomeView() {
