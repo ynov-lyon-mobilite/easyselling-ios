@@ -34,7 +34,7 @@ final class DefaultAPICaller: APICaller {
                   }
 
             if let serverError = try? jsonDecoder.decode(ServerErrorResponse.self, from: data).errors.first {
-                try? logServerError(with: serverError)
+                try? handleServerError(with: serverError)
             }
 
             if !successStatusCodes.contains(strongResponse.statusCode) {
@@ -63,13 +63,13 @@ final class DefaultAPICaller: APICaller {
         }
     }
 
-    func logServerError(with body: ServerErrorBody) throws {
+    func handleServerError(with body: ServerErrorBody) throws {
         NSLog(body.extensions.code + " : %@", body.message)
 
         switch body.extensions.code {
-            case ServerError.forbidden.errorDescription:
+            case ServerError.forbidden.rawValue:
                 throw ServerError.forbidden
-            case ServerError.service_unavailable.errorDescription:
+            case ServerError.service_unavailable.rawValue:
                 throw ServerError.service_unavailable
             default: break
         }
