@@ -11,18 +11,16 @@ import SwiftUI
 
 protocol OnBoardingNavigator {
     func navigatesToOnBoardingViewModel(onFinish: @escaping Action)
-    func navigateToAuthenticationScenario()
+    func closeOnBoarding()
 }
 
 class DefaultOnBoardingNavigator: OnBoardingNavigator {
 
-    init(navigationController: UINavigationController, window: UIWindow?) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.window = window
     }
 
     private var navigationController: UINavigationController
-    private var window: UIWindow?
 
     func navigatesToOnBoardingViewModel(onFinish: @escaping Action) {
         let viewModel = OnBoardingViewModel(features: [
@@ -32,12 +30,11 @@ class DefaultOnBoardingNavigator: OnBoardingNavigator {
         ], onFinish: onFinish)
         let onBoardingView = OnBoardingView(viewModel: viewModel)
         let view: UIViewController = UIHostingController(rootView: onBoardingView)
-        navigationController.pushViewController(view, animated: true)
+        view.modalPresentationStyle = .fullScreen
+        navigationController.present(view, animated: true)
     }
 
-    func navigateToAuthenticationScenario() {
-        let navigator = DefaultAuthenticationNavigator(window: window)
-        let scenario = AuthenticationScenario(navigator: navigator)
-        scenario.begin(from: .default)
+    func closeOnBoarding() {
+        navigationController.dismiss(animated: true, completion: nil)
     }
 }

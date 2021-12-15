@@ -26,10 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
 
-        let navigationController = UINavigationController()
-
-        window?.rootViewController = navigationController
-        let navigator = DefaultStartupNavigator(navigationController: navigationController, window: window)
+        let navigator = DefaultStartupNavigator(window: window)
         let scenario = StartupScenario(navigator: navigator)
         Task {
             await scenario.begin()
@@ -45,9 +42,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                   let tokenQueryItem = url.queryItems?.first(where: { $0.name == "token" }),
                   let token = tokenQueryItem.value else { return }
 
-            let navigator = DefaultAuthenticationNavigator(window: window)
+            let navigationController = UINavigationController()
             window?.makeKeyAndVisible()
-            window?.rootViewController = navigator.navigationController
+            window?.rootViewController = navigationController
+
+            let navigator = DefaultAuthenticationNavigator(navigationController: navigationController, window: window)
             let scenario = AuthenticationScenario(navigator: navigator)
             scenario.begin(from: .resetPassword(token: token))
         }
