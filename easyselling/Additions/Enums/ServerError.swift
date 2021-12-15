@@ -13,8 +13,8 @@ enum ServerError: String, LocalizedError, Equatable {
 
     var errorDescription: String? {
         switch self {
-            case .forbidden: return "FORBIDDEN"
-            case .service_unavailable: return "SERVICE_UNAVAILABLE"
+            case .forbidden: return L10n.ServerError.forbidden
+            case .service_unavailable: return L10n.ServerError.serviceUnavailable
         }
     }
 }

@@ -60,3 +60,6 @@
 "credentialsError.emptyPasswordConfirmation" = "Empty password confirmation";
 
 "invoice.deleteButton" = "Delete invoice";
+
+"serverError.forbidden" = "You are not allowed to do the current action";
+"serverError.serviceUnavailable" = "The external service can't be used";
