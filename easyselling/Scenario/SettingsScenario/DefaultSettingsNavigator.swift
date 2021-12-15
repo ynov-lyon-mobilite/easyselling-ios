@@ -14,13 +14,11 @@ protocol SettingsNavigator {
 
 class DefaultSettingsNavigator: SettingsNavigator {
 
-    init(navigationController: UINavigationController, window: UIWindow?) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.window = window
     }
 
     private var navigationController: UINavigationController
-    private var window: UIWindow?
 
     func navigatesToSettingsView() {
         let viewModel = SettingsViewModel()

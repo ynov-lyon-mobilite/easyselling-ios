@@ -88,7 +88,7 @@ struct MyVehiclesView: View {
             .navigationTitle(L10n.Vehicles.title)
             .toolbar {
                 Button(L10n.Vehicles.profile) {
-                    viewModel.navigatesToSettingsMenu()
+                    viewModel.navigateToProfile()
                 }
             }
         }

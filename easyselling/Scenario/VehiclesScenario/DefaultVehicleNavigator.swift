@@ -72,7 +72,7 @@ class DefaultVehicleNavigator: VehicleNavigator {
     }
 
     func navigatesToSettingsMenu() {
-        let navigator = DefaultSettingsNavigator(navigationController: navigationController, window: window)
+        let navigator = DefaultSettingsNavigator(navigationController: navigationController)
         let scenario = SettingsScenario(navigator: navigator)
         scenario.begin()
     }
