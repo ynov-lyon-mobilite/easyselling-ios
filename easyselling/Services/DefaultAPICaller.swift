@@ -53,10 +53,14 @@ final class DefaultAPICaller: APICaller {
     func call(_ urlRequest: URLRequest) async throws {
         let result: (Data, URLResponse)? = try? await urlSession.data(for: urlRequest, delegate: nil)
 
-        guard let (_, response) = result,
+        guard let (data, response) = result,
               let strongResponse = response as? HTTPURLResponse else {
                   throw APICallerError.internalServerError
               }
+
+        if let serverError = try? jsonDecoder.decode(ServerErrorResponse.self, from: data).errors.first {
+            try? handleServerError(with: serverError)
+        }
 
         if !successStatusCodes.contains(strongResponse.statusCode) {
             throw APICallerError.from(statusCode: strongResponse.statusCode)
