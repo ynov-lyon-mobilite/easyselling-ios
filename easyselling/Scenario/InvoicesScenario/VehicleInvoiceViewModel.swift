@@ -15,6 +15,7 @@ class VehicleInvoiceViewModel: ObservableObject {
     private var invoiceDownloader: InvoiceDownloader
     private var invoiceFileInformationsGetter: InvoiceFileInformationsGetter
     private var onNavigatingToInvoiceView: (File) -> Void
+    private var invoiceDeletor: InvoiceDeletor
 
     @Published var vehicleId: String
     @Published var invoices: [Invoice] = []
@@ -25,12 +26,14 @@ class VehicleInvoiceViewModel: ObservableObject {
     @Published var isError: Bool = false
 
     init(ofVehicleId: String,
+         invoiceDeletor: InvoiceDeletor = DefaultInvoiceDeletor(),
          vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(),
          invoiceDownloader: InvoiceDownloader = DefaultInvoiceDownloader(),
          invoiceFileInformationsGetter: InvoiceFileInformationsGetter = DefaultInvoiceFileInformationsGetter(),
          onNavigatingToInvoiceView: @escaping (File) -> Void) {
 
         self.vehicleId = ofVehicleId
+        self.invoiceDeletor = invoiceDeletor
         self.vehicleInvoicesGetter = vehicleInvoicesGetter
         self.invoiceDownloader = invoiceDownloader
         self.invoiceFileInformationsGetter = invoiceFileInformationsGetter
@@ -68,4 +71,22 @@ class VehicleInvoiceViewModel: ObservableObject {
             isDownloading = false
         }
     }
+
+    @MainActor func deleteInvoice(idInvoice: Int) async {
+        do {
+            try await invoiceDeletor.deleteInvoice(id: idInvoice)
+            deleteInvoiceOnTheView(idInvoice: idInvoice)
+        } catch (let error) {
+            if let error = error as? APICallerError {
+                self.error = error
+            }
+        }
+    }
+
+    private func deleteInvoiceOnTheView(idInvoice: Int) {
+        invoices = invoices.filter { (invoice) -> Bool in
+            invoice.id != idInvoice
+        }
+    }
+
 }

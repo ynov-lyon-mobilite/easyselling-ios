@@ -49,3 +49,4 @@
 "credentialsError.emptyPassword" = "Le mot de passe est vide";
 "credentialsError.emptyPasswordConfirmation" = "La confirmation du mot de passe est vide";
 
+"invoice.deleteButton" = "Supprimer la facture";

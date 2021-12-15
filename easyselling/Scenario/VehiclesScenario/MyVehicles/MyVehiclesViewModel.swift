@@ -65,7 +65,7 @@ class MyVehiclesViewModel: ObservableObject {
     @MainActor func deleteVehicle(idVehicle: String) async {
         do {
             try await vehicleDeletor.deleteVehicle(id: idVehicle)
-            await updateVehiclesList()
+            deleteVehicleOnTheView(idVehicle: idVehicle)
         } catch (let error) {
             if let error = error as? APICallerError {
                 self.error = error
@@ -73,8 +73,10 @@ class MyVehiclesViewModel: ObservableObject {
         }
     }
 
-    func updateVehiclesList() async {
-        await getVehicles()
+    private func deleteVehicleOnTheView(idVehicle: String) {
+        vehicles = vehicles.filter { (vehicle) -> Bool in
+            vehicle.id != idVehicle
+        }
     }
 
     enum VehicleState {
