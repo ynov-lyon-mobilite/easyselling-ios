@@ -48,3 +48,5 @@
 "credentialsError.wrongPasswords" = "Passwords are differents";
 "credentialsError.emptyPassword" = "Empty password";
 "credentialsError.emptyPasswordConfirmation" = "Empty password confirmation";
+
+"invoice.deleteButton" = "Delete invoice";

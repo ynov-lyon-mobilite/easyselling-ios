@@ -42,6 +42,13 @@ struct VehicleInvoicesView: View {
                             await viewModel.downloadInvoiceContent(of: invoice.file)
                         }
                     }
+                    .swipeActions(edge: .trailing) {
+                        Button(L10n.Invoice.deleteButton) {
+                            Task {
+                                await viewModel.deleteInvoice(idInvoice: invoice.id)
+                            }
+                        }.tint(Asset.onBoardingDotActive.swiftUIColor)
+                    }
                 }
             }
         }
