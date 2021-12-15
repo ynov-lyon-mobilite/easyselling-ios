@@ -36,19 +36,18 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     }
 
     func test_Deletes_vehicle_when_request_is_success() async {
-        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
+        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([
+            Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
+            Vehicle(id: "2", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
                               vehicleDeletor: SucceedingVehicleDeletor())
-        whenVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-                           Vehicle(id: "2", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
+        await whenTryingToGetVehicles()
         await whenDeletingVehicle(withId: "2")
         thenLoadVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
     }
 
     func test_Deletes_vehicle_when_request_is_failing() async {
-        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
+        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),Vehicle(id: "2", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
                               vehicleDeletor: FailingVehicleDeletor(withError: APICallerError.notFound))
-        whenVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-                           Vehicle(id: "2", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
         await whenDeletingVehicle(withId: "2")
         thenError(is: "Impossible de trouver ce que vous cherchez")
     }
