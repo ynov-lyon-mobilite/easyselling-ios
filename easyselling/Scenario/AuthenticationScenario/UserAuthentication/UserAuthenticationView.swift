@@ -38,11 +38,14 @@ struct UserAuthenticationView: View {
 
     private var loginView: some View {
         VStack(spacing: 30) {
+            Spacer()
 
             Image(Asset.logo)
                 .resizable()
                 .padding()
                 .frame(width: 230, height: 230)
+
+            Spacer()
 
             VStack {
                 TextField(L10n.SignUp.mail, text: $viewModel.email)
@@ -57,18 +60,22 @@ struct UserAuthenticationView: View {
                     .cornerRadius(10)
                     .textContentType(.password)
 
-                Text(viewModel.error?.errorDescription ?? "")
-                    .foregroundColor(.red)
-                    .font(.headline)
-                    .opacity(viewModel.error != nil ? 1 : 0)
+                HStack {
+                    Text(viewModel.error?.errorDescription ?? " ")
+                        .foregroundColor(.red)
+                        .font(.headline)
+                        .opacity(viewModel.error != nil ? 1 : 0)
 
-                Button(L10n.Button.forgottenPassword) {
-                    viewModel.navigateToPasswordReset()
+                    Spacer()
+
+                    Button(L10n.Button.forgottenPassword) {
+                        viewModel.navigateToPasswordReset()
+                    }
+                    .buttonStyle(TextButtonStyle())
+                    .fillMaxWidth(alignment: .trailing)
                 }
-                .buttonStyle(TextButtonStyle())
-                .fillMaxWidth(alignment: .trailing)
             }
-
+            Spacer()
             Button(L10n.UserAuthentication.Button.login) {
                 Task {
                     await viewModel.login()

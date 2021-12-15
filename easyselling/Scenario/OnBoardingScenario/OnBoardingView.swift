@@ -33,19 +33,21 @@ struct OnBoardingView: View {
             .padding(.horizontal)
 
             TabView(selection: $viewModel.currentFeatureIndex) {
-                ForEach(0..<viewModel.features.count) { _ in
+                ForEach(0..<viewModel.features.count) { index in
+                    let feature = viewModel.features[index]
+
                     VStack(spacing: 45) {
-                        Image(viewModel.feature.image)
+                        Image(feature.image)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
 
                         Spacer()
 
-                        Text(viewModel.feature.title)
+                        Text(feature.title)
                             .font(.largeTitle)
                             .fillMaxWidth(alignment: .leading)
 
-                        Text(viewModel.feature.text)
+                        Text(feature.text)
                             .font(.body)
                             .fillMaxWidth(alignment: .leading)
                     }
