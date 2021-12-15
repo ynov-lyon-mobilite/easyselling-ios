@@ -9,13 +9,23 @@
 "button.ok" = "Ok";
 "button.forgottenPassword" = "Mot de passe oublié";
 
+"onBoarding.button.previous" = "Précédent";
+"onBoarding.button.next" = "Suivant";
+"onBoarding.features.1.title" = "Retrouvez vos véhicules";
+"onBoarding.features.1.label" = "Vous pourrez ajouter, modifier et supprimer des véhicules avec des mouvements simples.";
+"onBoarding.features.2.title" = "Stockez vos factures";
+"onBoarding.features.2.label" = "EasySelling vous permet d’ajouter et de stocker les factures de vos véhicules facilement pour les retrouver rapidement.";
+"onBoarding.features.3.title" = "Partagez votre véhicule";
+"onBoarding.features.3.label" = "Après avoir vendu votre véhicule, vous pourrez partager celui-ci et ses factures à son nouveau propriétaire.";
+
 "signUp.mail" = "Email";
 "signUp.password" = "Mot de passe";
 "signUp.passwordConfirmation" = "Confirmation de mot de passe";
 "signUp.CreateAccountButton" = "Créer un compte";
 
 "userAuthentication.button.login" = "Se connecter";
-"userAuthentication.button.register" = "Vous n'avez pas encore de compte ?\nCliquez ici pour vous inscrire";
+"userAuthentication.register.label" = "Vous n'avez pas encore de compte ?";
+"userAuthentication.register.button" = "S'inscrire";
 
 "passwordReset.mailSentSuccessfully" = "Un mail vous à été envoyé pour réinitialiser votre mot de passe";
 "passwordReset.sendMailButton" = "Envoyer un mail de réinitialisation";

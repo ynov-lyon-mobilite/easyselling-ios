@@ -24,14 +24,14 @@ struct Vehicle: Codable, Equatable, Identifiable {
     }
     var imageColor: Color {
         switch type {
-        case .car: return Asset.darkPurple.swiftUIColor
-        case .moto: return Asset.darkBlue.swiftUIColor
+        case .car: return Asset.Colors.secondary.swiftUIColor
+        case .moto: return Asset.Colors.primary.swiftUIColor
         }
     }
     var color: Color {
         switch type {
-        case .car: return Asset.lightPurple.swiftUIColor
-        case .moto: return Asset.lightBlue.swiftUIColor
+        case .car: return Asset.Colors.lightPurple.swiftUIColor
+        case .moto: return Asset.Colors.lightBlue.swiftUIColor
         }
     }
 

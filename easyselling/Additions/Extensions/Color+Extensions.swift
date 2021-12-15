@@ -12,3 +12,9 @@ extension ColorAsset {
         return SwiftUI.Color(cgColor: color.cgColor)
     }
 }
+
+extension Color {
+    static var primaryEasyselling = Asset.Colors.primary.swiftUIColor
+    static var secondaryEasyselling = Asset.Colors.secondary.swiftUIColor
+    static var onBackground = Asset.Colors.onBackground.swiftUIColor
+}

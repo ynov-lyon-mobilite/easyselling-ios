@@ -117,36 +117,6 @@ class OnBoardingViewModel_Specs: XCTestCase {
         whenCurrentFeatureShown(is: 1)
         whenSkippingFeatures()
         thenOnBoardingIsFinished()
-}
-    
-    func test_Enables_skip_button_when_not_on_last_feature(){
-        givenOnBoardingViewModel(withFeatures: [
-            Feature(title: "title 1", image: "image 1", text: "text 1"),
-            Feature(title: "title 2", image: "image 2", text: "text 2"),
-            Feature(title: "title 3", image: "image 3", text: "text 3")
-        ])
-        whenCurrentFeatureShown(is: 0)
-        thenSkipButtonIsShown()
-    }
-    
-    func test_Enables_skip_button_when_not_on_last_feature2(){
-        givenOnBoardingViewModel(withFeatures: [
-            Feature(title: "title 1", image: "image 1", text: "text 1"),
-            Feature(title: "title 2", image: "image 2", text: "text 2"),
-            Feature(title: "title 3", image: "image 3", text: "text 3")
-        ])
-        whenCurrentFeatureShown(is: 1)
-        thenSkipButtonIsShown()
-    }
-    
-    func test_Disables_skip_button_when_on_last_feature(){
-        givenOnBoardingViewModel(withFeatures: [
-            Feature(title: "title 1", image: "image 1", text: "text 1"),
-            Feature(title: "title 2", image: "image 2", text: "text 2"),
-            Feature(title: "title 3", image: "image 3", text: "text 3")
-        ])
-        whenCurrentFeatureShown(is: 2)
-        thenSkipButtonIsNotShown()
     }
     
     func test_Finish_onBoarding_when_clicking_next_button_on_last_feature() {
@@ -181,7 +151,7 @@ class OnBoardingViewModel_Specs: XCTestCase {
     }
     
     private func whenSkippingFeatures(){
-        self.onBoardingViewModel.skipFeatures()
+        self.onBoardingViewModel.onFinish()
     }
 
     
@@ -203,14 +173,6 @@ class OnBoardingViewModel_Specs: XCTestCase {
     
     private func thenPreviousButtonIsNotShown() {
         XCTAssertFalse(onBoardingViewModel.isShowingPreviousButton)
-    }
-    
-    private func thenSkipButtonIsNotShown() {
-        XCTAssertFalse(onBoardingViewModel.isShowingSkipButton)
-    }
-    
-    private func thenSkipButtonIsShown() {
-        XCTAssertTrue(onBoardingViewModel.isShowingSkipButton)
     }
     
     private func thenOnBoardingIsFinished() {
