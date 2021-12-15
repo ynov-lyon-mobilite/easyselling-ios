@@ -111,7 +111,7 @@ class VehicleScenario_Specs: XCTestCase {
     }
 
     private func whenNavigatingToSettingsMenu() {
-        navigator.navigatesToSettingsMenu()
+        navigator.onNavigateToSettingsMenu?()
     }
 
     private func thenHistory(is expected: [SpyVehicleCreationNavigator.History]) {

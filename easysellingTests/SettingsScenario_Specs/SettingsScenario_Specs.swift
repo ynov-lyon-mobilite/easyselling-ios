@@ -13,7 +13,7 @@ class SettingsScenario_Specs: XCTestCase {
     func test_Starts_settings_scenario() {
         givenScenario()
         whenBeginning()
-        thenHistory(is: [.menu])
+        thenHistory(is: [.settings])
     }
     
     func givenScenario() {
@@ -37,10 +37,10 @@ class SpySettingsNavigator: SettingsNavigator {
     private(set) var history: [History] = []
 
     func navigatesToSettingsView() {
-        history.append(.menu)
+        history.append(.settings)
     }
 
     enum History {
-        case menu
+        case settings
     }
 }
