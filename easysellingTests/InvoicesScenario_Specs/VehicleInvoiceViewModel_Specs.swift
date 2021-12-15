@@ -46,6 +46,25 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         thenError(is: "Une erreur est survenue")
     }
 
+    func test_Deletes_invoice_when_request_is_success() async {
+        givenViewModelDeletor(invoicesGetter: SucceedingVehicleInvoicesGetter([
+            Invoice(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
+            Invoice(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")]),
+                              invoiceDeletor: SucceedingInvoiceDeletor())
+        whenInvoices(are: expectedVehicleInvoices)
+        await whenDeletingInvoice(withId: 1)
+        thenLoadInvoices(are: [
+            Invoice(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
+            Invoice(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")])
+    }
+
+    func test_Deletes_invoice_when_request_is_failing() async {
+        givenViewModelDeletor(invoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices), invoiceDeletor: FailingInvoiceDeletor(withError: APICallerError.notFound))
+        whenInvoices(are: expectedVehicleInvoices)
+        await whenDeletingInvoice(withId: 1)
+        thenError(is: "Impossible de trouver ce que vous cherchez")
+    }
+
     private func givenViewModel(vehicleInvoicesGetter: VehicleInvoicesGetter,
                                 invoiceFileInformationsGetter: InvoiceFileInformationsGetter = SucceedingFileInformationsGetter(),
                                 invoiceDownloader: InvoiceDownloader = SucceedingInvoiceDownloader()) {
@@ -57,6 +76,21 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
             self.onNavigatingToInvoiceView = true
             self.downloadedInvoice = invoice
         })
+    }
+
+    private func givenViewModelDeletor(invoicesGetter: VehicleInvoicesGetter, invoiceDeletor: InvoiceDeletor) {
+        viewModel = VehicleInvoiceViewModel(ofVehicleId: vehicleId, invoiceDeletor: invoiceDeletor, vehicleInvoicesGetter: invoicesGetter,invoiceDownloader: SucceedingInvoiceDownloader(), invoiceFileInformationsGetter: SucceedingFileInformationsGetter(), onNavigatingToInvoiceView: { invoice in
+            self.onNavigatingToInvoiceView = true
+            self.downloadedInvoice = invoice
+        })
+    }
+
+    private func whenInvoices(are invoices: [Invoice]) {
+        viewModel.invoices = invoices
+    }
+
+    private func whenDeletingInvoice(withId: Int) async {
+        await viewModel.deleteInvoice(idInvoice: withId)
     }
 
     private func whenTryingToGetVehicleInvoices() async {
@@ -85,6 +119,10 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
 
     private func thenError(is expected: String) {
         XCTAssertEqual(expected, viewModel.error?.errorDescription)
+    }
+
+    private func thenLoadInvoices(are expected: [Invoice]) {
+        XCTAssertEqual(expected, viewModel.invoices)
     }
 
     private var viewModel: VehicleInvoiceViewModel!
