@@ -47,10 +47,10 @@ struct MyVehiclesView: View {
                                     Task {
                                         await viewModel.deleteVehicle(idVehicle: vehicle.id ?? "")
                                     }
-                                }.tint(Asset.onBoardingDotActive.swiftUIColor)
+                                }.tint(Color.red)
                                 Button(L10n.Vehicles.updateButton) {
                                         viewModel.openVehicleUpdate(vehicle: vehicle)
-                        		}.tint(Asset.onBoardingDotActive.swiftUIColor)
+                                }.tint(Color.secondaryEasyselling)
                             }
                             .padding(.vertical, 15)
                             .padding(.horizontal, 20)
@@ -77,10 +77,10 @@ struct MyVehiclesView: View {
                 }
                 Button(action: viewModel.openVehicleCreation) {
                     Image(systemName: "plus")
-                        .foregroundColor(Asset.darkPurple.swiftUIColor)
+                        .foregroundColor(Asset.Colors.secondary.swiftUIColor)
                         .padding(.vertical, 15)
                         .frame(maxWidth: .infinity)
-                        .background(Asset.darkBlue.swiftUIColor)
+                        .background(Asset.Colors.primary.swiftUIColor)
                         .disabled(viewModel.state != .listingVehicles)
                         .opacity(viewModel.state != .listingVehicles ? 0 : 1)
                 }

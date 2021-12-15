@@ -139,6 +139,10 @@
 		873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 873552B9270D847B00F2DDBD /* Preview Assets.xcassets */; };
 		874975F9273A3AB1000A1289 /* DefaultFileUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874975F8273A3AB1000A1289 /* DefaultFileUploader.swift */; };
 		874975FB273A3CA3000A1289 /* UploadedFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874975FA273A3CA3000A1289 /* UploadedFile.swift */; };
+		87533396275FFF7C005E4697 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87533395275FFF7C005E4697 /* PrimaryButtonStyle.swift */; };
+		875333982760012E005E4697 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875333972760012E005E4697 /* View+Extensions.swift */; };
+		8753339A2760043D005E4697 /* TextButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875333992760043D005E4697 /* TextButtonStyle.swift */; };
+		8753339C27600C18005E4697 /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8753339B27600C18005E4697 /* Image+Extensions.swift */; };
 		875E47AE273C6AD90019FC83 /* LocalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875E47AD273C6AD90019FC83 /* LocalFile.swift */; };
 		875E47B0273C6B200019FC83 /* FileUploaderResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 875E47AF273C6B200019FC83 /* FileUploaderResponse.json */; };
 		875E47B1273C6B320019FC83 /* FileUploaderResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 875E47AF273C6B200019FC83 /* FileUploaderResponse.json */; };
@@ -334,6 +338,10 @@
 		873552BF270D847B00F2DDBD /* easysellingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = easysellingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		874975F8273A3AB1000A1289 /* DefaultFileUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFileUploader.swift; sourceTree = "<group>"; };
 		874975FA273A3CA3000A1289 /* UploadedFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadedFile.swift; sourceTree = "<group>"; };
+		87533395275FFF7C005E4697 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
+		875333972760012E005E4697 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		875333992760043D005E4697 /* TextButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButtonStyle.swift; sourceTree = "<group>"; };
+		8753339B27600C18005E4697 /* Image+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
 		875E47AD273C6AD90019FC83 /* LocalFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalFile.swift; sourceTree = "<group>"; };
 		875E47AF273C6B200019FC83 /* FileUploaderResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FileUploaderResponse.json; sourceTree = "<group>"; };
 		875E47B4273C6B9F0019FC83 /* UserAuthenticatorResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserAuthenticatorResponse.json; sourceTree = "<group>"; };
@@ -801,8 +809,10 @@
 		8705B9A927208233004132CF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */,
 				8FF0102227329DDE0022314B /* Color+Extensions.swift */,
+				8705B9AA27208249004132CF /* KeychainSwift+Extensions.swift */,
+				8753339B27600C18005E4697 /* Image+Extensions.swift */,
+				875333972760012E005E4697 /* View+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -840,6 +850,7 @@
 		873552B1270D847700F2DDBD /* easyselling */ = {
 			isa = PBXGroup;
 			children = (
+				87533394275FFF67005E4697 /* Styles */,
 				87DC1D07271FDF3F002DC193 /* Models */,
 				03004DBC273DB7CA00188983 /* Info.plist */,
 				87780BAA27172FB10035AB13 /* Services */,
@@ -892,6 +903,15 @@
 				875E47AD273C6AD90019FC83 /* LocalFile.swift */,
 			);
 			path = easysellingTests;
+			sourceTree = "<group>";
+		};
+		87533394275FFF67005E4697 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				87533395275FFF7C005E4697 /* PrimaryButtonStyle.swift */,
+				875333992760043D005E4697 /* TextButtonStyle.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		87780B9C27172F1C0035AB13 /* Additions */ = {
@@ -1298,6 +1318,7 @@
 				2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */,
 				874975F9273A3AB1000A1289 /* DefaultFileUploader.swift in Sources */,
 				8F901D4E2769E16300CF0F28 /* DefaultInvoiceDeletor.swift in Sources */,
+				8753339A2760043D005E4697 /* TextButtonStyle.swift in Sources */,
 				2CAE03D82717118D008D7A68 /* VehicleCreationView.swift in Sources */,
 				87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */,
 				8798D1432730F3DF00FF3AB4 /* RefreshDTO.swift in Sources */,
@@ -1305,6 +1326,7 @@
 				035E860C2718A3AB00684ED0 /* APICallerError.swift in Sources */,
 				035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */,
 				0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */,
+				875333982760012E005E4697 /* View+Extensions.swift in Sources */,
 				87DC1D0A271FDF5C002DC193 /* LoginDTO.swift in Sources */,
 				87DC1D06271F6A4C002DC193 /* DefaultUserAuthenticator.swift in Sources */,
 				8705B9A427207A8D004132CF /* UserAuthenticationViewModel.swift in Sources */,
@@ -1312,6 +1334,7 @@
 				0317EE3A27519DF100A6AE0D /* ProfileView.swift in Sources */,
 				038862852749379D001D7E36 /* DefaultCredentialsPreparator.swift in Sources */,
 				8FF0102327329DDE0022314B /* Color+Extensions.swift in Sources */,
+				8753339C27600C18005E4697 /* Image+Extensions.swift in Sources */,
 				03C18F0827341AAA00C754E8 /* DefaultEmailVerificator.swift in Sources */,
 				03422F83275D451B0060D19E /* InvoiceViewerViewModel.swift in Sources */,
 				03004DD0273E79D700188983 /* PasswordResetDTO.swift in Sources */,
@@ -1320,6 +1343,7 @@
 				39D101E12769E98D00F101AB /* SettingsView.swift in Sources */,
 				87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */,
 				03004DD2273EA62500188983 /* DefaultPasswordVerificator.swift in Sources */,
+				87533396275FFF7C005E4697 /* PrimaryButtonStyle.swift in Sources */,
 				03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */,
 				2C2DA388275280330085988B /* DefaultVehicleVerificator.swift in Sources */,
 				03DAF9A2272730D500FFED55 /* MyVehiclesView.swift in Sources */,
@@ -1616,6 +1640,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = easyselling/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Easyselling;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1650,6 +1675,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = easyselling/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Easyselling;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

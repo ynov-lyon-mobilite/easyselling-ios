@@ -24,10 +24,10 @@ class OnBoardingScenario {
 
     private func hasFinish() {
         self.onBoardingIsViewed = true
-        navigator.navigateToAuthenticationScenario()
+        navigator.closeOnBoarding()
     }
 
     private func navigateToAuthenticationScenario() {
-        navigator.navigateToAuthenticationScenario()
+        navigator.closeOnBoarding()
     }
 }

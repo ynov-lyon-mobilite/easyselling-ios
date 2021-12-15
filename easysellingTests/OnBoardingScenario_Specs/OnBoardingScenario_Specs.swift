@@ -74,7 +74,7 @@ class SpyOnBoardingNavigator: OnBoardingNavigator {
         self.onFinish = onFinish
     }
     
-    func navigateToAuthenticationScenario() {
+    func closeOnBoarding() {
         scenarioDidFinished = true
     }
 }

@@ -47,7 +47,7 @@ struct VehicleInvoicesView: View {
                             Task {
                                 await viewModel.deleteInvoice(idInvoice: invoice.id)
                             }
-                        }.tint(Asset.onBoardingDotActive.swiftUIColor)
+                        }.tint(.red)
                     }
                 }
             }

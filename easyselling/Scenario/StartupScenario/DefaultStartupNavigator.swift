@@ -15,23 +15,23 @@ protocol StartupNavigator {
 }
 
 class DefaultStartupNavigator : StartupNavigator {
-
-    init(navigationController: UINavigationController, window: UIWindow?) {
-        self.navigationController = navigationController
-        self.window = window
-    }
-
-    private var navigationController: UINavigationController
+    private var navigationController = UINavigationController()
     private var window: UIWindow?
 
+    init(window: UIWindow?) {
+        self.window = window
+        self.window?.rootViewController = navigationController
+    }
+
     func navigatesToOnBoarding() {
-        let navigator = DefaultOnBoardingNavigator(navigationController: navigationController, window: window)
+        let navigator = DefaultOnBoardingNavigator(navigationController: navigationController)
         let scenario = OnBoardingScenario(navigator: navigator)
+        navigatesToLogin()
         scenario.begin()
     }
 
     func navigatesToLogin() {
-        let navigator = DefaultAuthenticationNavigator(window: window)
+        let navigator = DefaultAuthenticationNavigator(navigationController: navigationController, window: window)
         let scenario = AuthenticationScenario(navigator: navigator)
         scenario.begin(from: .default)
     }
@@ -41,5 +41,4 @@ class DefaultStartupNavigator : StartupNavigator {
         let scenario = VehicleScenario(navigator: navigator)
         scenario.begin()
     }
-
 }
