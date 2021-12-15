@@ -31,7 +31,9 @@ class DefaultProfileNavigator: ProfileNavigator {
     }
 
     func navigatesBackToAuthentication() {
-        let navigator = DefaultAuthenticationNavigator(window: window)
+        let navigationController = UINavigationController()
+        window?.rootViewController = navigationController
+        let navigator = DefaultAuthenticationNavigator(navigationController: navigationController, window: window)
         let scenario = AuthenticationScenario(navigator: navigator)
         scenario.begin(from: .default)
     }

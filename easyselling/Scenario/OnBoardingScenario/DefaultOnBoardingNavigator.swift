@@ -11,33 +11,30 @@ import SwiftUI
 
 protocol OnBoardingNavigator {
     func navigatesToOnBoardingViewModel(onFinish: @escaping Action)
-    func navigateToAuthenticationScenario()
+    func closeOnBoarding()
 }
 
 class DefaultOnBoardingNavigator: OnBoardingNavigator {
 
-    init(navigationController: UINavigationController, window: UIWindow?) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.window = window
     }
 
     private var navigationController: UINavigationController
-    private var window: UIWindow?
 
     func navigatesToOnBoardingViewModel(onFinish: @escaping Action) {
-            let viewModel = OnBoardingViewModel(features: [
-                Feature(title: "Page One", image: "pencil", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
-                Feature(title: "Page Two", image: "scribble", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi"),
-                Feature(title: "Page Three", image: "trash", text: "Lorem ipsum dolor sit amet. Ea nihil veritatis et labore molestias eum rerum excepturi")], onFinish: onFinish)
-            let onBoardingView = OnBoardingView(viewModel: viewModel)
-            let view: UIViewController = UIHostingController(rootView: onBoardingView)
-            navigationController.pushViewController(view,
-                                                    animated: true)
+        let viewModel = OnBoardingViewModel(features: [
+            Feature(title: L10n.OnBoarding.Features._1.title, image: Asset.OnBoarding.first.name, text: L10n.OnBoarding.Features._1.label),
+            Feature(title: L10n.OnBoarding.Features._2.title, image: Asset.OnBoarding.second.name, text: L10n.OnBoarding.Features._2.label),
+            Feature(title: L10n.OnBoarding.Features._3.title, image: Asset.OnBoarding.third.name, text: L10n.OnBoarding.Features._3.label)
+        ], onFinish: onFinish)
+        let onBoardingView = OnBoardingView(viewModel: viewModel)
+        let view: UIViewController = UIHostingController(rootView: onBoardingView)
+        view.modalPresentationStyle = .fullScreen
+        navigationController.present(view, animated: true)
     }
 
-    func navigateToAuthenticationScenario() {
-        let navigator = DefaultAuthenticationNavigator(window: window)
-        let scenario = AuthenticationScenario(navigator: navigator)
-        scenario.begin(from: .default)
+    func closeOnBoarding() {
+        navigationController.dismiss(animated: true, completion: nil)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class UserAuthenticationViewModel: ObservableObject {
     private var tokenManager: TokenManager
@@ -53,7 +54,9 @@ final class UserAuthenticationViewModel: ObservableObject {
     }
 
     private func setError(with error: CredentialsError) {
-        self.error = error
+        withAnimation {
+            self.error = error
+        }
     }
 
     private func verifyInformations() throws {

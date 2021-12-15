@@ -20,16 +20,15 @@ protocol AuthenticationNavigator {
 
 class DefaultAuthenticationNavigator: AuthenticationNavigator {
 
-    init(window: UIWindow?) {
+    init(navigationController: UINavigationController, window: UIWindow?) {
         self.window = window
+        self.navigationController = navigationController
     }
 
     private var window: UIWindow?
-    let navigationController = UINavigationController()
+    private let navigationController: UINavigationController
 
     func navigatesToLoginPage(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
-        window?.rootViewController = navigationController
-
         let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: onAccountCreation, navigateToPasswordReset: onPasswordReset, onUserLogged: onUserLogged)
         let userAuthenticationView = UserAuthenticationView(viewModel: viewModel)
         navigationController.pushViewController(UIHostingController(rootView: userAuthenticationView), animated: true)
@@ -49,8 +48,6 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
     }
 
     func navigatesToPasswordReset(withToken token: String, onPasswordReset: @escaping Action) {
-        window?.rootViewController = navigationController
-
         let passwordResetViewModel = PasswordResetViewModel(token: token, onPasswordReset: onPasswordReset)
         let passwordResetView = PasswordResetView(viewModel: passwordResetViewModel)
 
