@@ -16,7 +16,7 @@ class OnBoardingViewModel: ObservableObject {
     var feature: Feature { features[currentFeatureIndex] }
     var isShowingPreviousButton: Bool { currentFeatureIndex != 0 }
     var isLastFeature: Bool { currentFeatureIndex == (features.count - 1) }
-    private var onFinish: Action
+    var onFinish: Action
 
     init(features: [Feature], onFinish: @escaping Action) {
         self.features = features
@@ -35,10 +35,6 @@ class OnBoardingViewModel: ObservableObject {
         if(currentFeatureIndex != 0) {
             currentFeatureIndex -= 1
         }
-    }
-
-    func skipFeatures() {
-        onFinish()
     }
 }
 

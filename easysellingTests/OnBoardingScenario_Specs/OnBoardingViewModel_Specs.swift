@@ -151,7 +151,7 @@ class OnBoardingViewModel_Specs: XCTestCase {
     }
     
     private func whenSkippingFeatures(){
-        self.onBoardingViewModel.skipFeatures()
+        self.onBoardingViewModel.onFinish()
     }
 
     

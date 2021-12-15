@@ -21,7 +21,7 @@ struct OnBoardingView: View {
     var body: some View {
         VStack(spacing: 30) {
             HStack {
-                Button(action: { viewModel.skipFeatures() }) {
+                Button(action: { viewModel.onFinish() }) {
                     Image(systemName: "xmark")
                         .resizable()
                         .foregroundColor(.onBackground)
