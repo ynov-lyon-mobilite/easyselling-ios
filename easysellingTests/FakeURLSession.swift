@@ -10,8 +10,10 @@ import Foundation
 
 class FakeUrlSession: URLSessionProtocol {
     
-    private let data: Data
-    private let response: URLResponse
+    private var data: Data = Data()
+    private var response: URLResponse = URLResponse()
+
+    init(){}
     
     init(expected response: URLResponse, with data: Data = Data()) {
         self.data = data

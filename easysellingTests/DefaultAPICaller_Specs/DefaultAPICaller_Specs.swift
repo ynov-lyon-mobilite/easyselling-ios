@@ -59,6 +59,37 @@ class DefaultAPICaller_Specs: XCTestCase {
         XCTAssertEqual(APICallerError.decodeError, requestError)
     }
 
+    func test_Handles_a_forbidden_server_error() {
+        givenNetworkService()
+        whenReceivingResponse(response: "{\"errors\":[{\"message\":\"forbidden.\",\"extensions\":{\"code\":\"FORBIDDEN\"}}]}")
+        thenResponseServerError(expected: .forbidden)
+    }
+
+    func test_Handles_a_service_unavailable_server_error() {
+        givenNetworkService()
+        whenReceivingResponse(response: "{\"errors\":[{\"message\":\"service_unavailable.\",\"extensions\":{\"code\":\"SERVICE_UNAVAILABLE\"}}]}")
+        thenResponseServerError(expected: .service_unavailable)
+    }
+
+    private func givenNetworkService() {
+        networkService = DefaultAPICaller(urlSession: FakeUrlSession())
+    }
+
+    private func whenReceivingResponse(response: String) {
+        let jsonDecoder = JSONDecoder()
+        let decodedJson = try! jsonDecoder.decode(ServerErrorResponse.self, from: response.data(using: .utf8)!)
+
+        do {
+            try networkService.logServerError(with: decodedJson.errors.first!)
+        } catch (let error) {
+            serverError = (error as? ServerError)
+        }
+    }
+
+    private func thenResponseServerError(expected: ServerError) {
+        XCTAssertEqual(expected, serverError)
+    }
+
     private func givenNetworkService(withReponseHTTPCode httpCode: Int, body: Data = Data()) {
         let urlSession = FakeUrlSession(expected: generateExtectedURLResponse(httpCode: httpCode), with: body)
         networkService = DefaultAPICaller(urlSession: urlSession)
@@ -139,6 +170,7 @@ class DefaultAPICaller_Specs: XCTestCase {
     private var isCallSucceeded: Bool!
     private var requestResult: Any!
     private var requestError: APICallerError!
+    private var serverError: ServerError!
     private var networkService: DefaultAPICaller!
 }
 
