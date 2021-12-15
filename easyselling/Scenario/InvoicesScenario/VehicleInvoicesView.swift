@@ -43,7 +43,7 @@ struct VehicleInvoicesView: View {
                         }
                     }
                     .swipeActions(edge: .trailing) {
-                        Button(L10n.Vehicles.deleteButton) {
+                        Button(L10n.Invoice.deleteButton) {
                             Task {
                                 await viewModel.deleteInvoice(idInvoice: invoice.id)
                             }
