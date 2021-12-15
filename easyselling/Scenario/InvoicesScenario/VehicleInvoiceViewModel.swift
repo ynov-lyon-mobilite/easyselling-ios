@@ -74,9 +74,8 @@ class VehicleInvoiceViewModel: ObservableObject {
 
     @MainActor func deleteInvoice(idInvoice: Int) async {
         do {
-            print(idInvoice)
             try await invoiceDeletor.deleteInvoice(id: idInvoice)
-            await updateInvoicesList()
+            deleteInvoiceOnTheView(idInvoice: idInvoice)
         } catch (let error) {
             if let error = error as? APICallerError {
                 self.error = error
@@ -84,7 +83,10 @@ class VehicleInvoiceViewModel: ObservableObject {
         }
     }
 
-    func updateInvoicesList() async {
-        await getInvoices(ofVehicleId: vehicleId)
+    private func deleteInvoiceOnTheView(idInvoice: Int) {
+        invoices = invoices.filter { (invoice) -> Bool in
+            invoice.id != idInvoice
+        }
     }
- }
+
+}
