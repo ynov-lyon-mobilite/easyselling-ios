@@ -30,7 +30,7 @@ struct UserAuthenticationView: View {
                     .padding(.leading, -spacingLeft)
             }.ignoresSafeArea()
 
-            ScrollView {
+            ScrollView(.vertical, showsIndicators: false) {
                 loginView
             }
         }
@@ -38,14 +38,11 @@ struct UserAuthenticationView: View {
 
     private var loginView: some View {
         VStack(spacing: 30) {
-            Spacer()
 
             Image(Asset.logo)
                 .resizable()
                 .padding()
                 .frame(width: 230, height: 230)
-
-            Spacer()
 
             VStack {
                 TextField(L10n.SignUp.mail, text: $viewModel.email)
@@ -71,7 +68,7 @@ struct UserAuthenticationView: View {
                 .buttonStyle(TextButtonStyle())
                 .fillMaxWidth(alignment: .trailing)
             }
-            Spacer()
+
             Button(L10n.UserAuthentication.Button.login) {
                 Task {
                     await viewModel.login()
