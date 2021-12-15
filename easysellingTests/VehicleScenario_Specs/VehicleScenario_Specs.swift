@@ -45,11 +45,12 @@ class VehicleScenario_Specs: XCTestCase {
         thenHistory(is: [.myVehicles, .profile])
     }
 
-    func test_Navigates_to_settings_menu() {
+    func test_Finishes_scenario_when_navigate_to_settings_menu() {
         givenScenario()
         whenBeginning()
         whenNavigatingToSettingsMenu()
-        thenHistory(is: [.myVehicles, .settings])
+        thenHistory(is: [.myVehicles])
+        thenVehicleScenarioIsFinished()
     }
 
     private func whenNavigatingToProfil() {
@@ -122,6 +123,10 @@ class VehicleScenario_Specs: XCTestCase {
         XCTAssertEqual(expected, navigator.vehicleID)
     }
 
+    private func  thenVehicleScenarioIsFinished() {
+        XCTAssertTrue(navigator.vehicleScenarioIsFinished)
+    }
+
     private var scenario: VehicleScenario!
     private var navigator: SpyVehicleCreationNavigator!
     private var isVehicleCreationFinished: Bool = false
@@ -137,6 +142,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     private(set) var onNavigatingToInvoices: ((String) -> Void)?
     private(set) var onNavigateToSettingsMenu: Action?
     private(set) var vehicleID: String = ""
+    private(set) var vehicleScenarioIsFinished: Bool = false
 
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action,
                              onNavigatingToInvoices: @escaping (String) -> Void, onNavigateToSettingsMenu: @escaping Action) {
@@ -167,7 +173,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     }
 
     func navigatesToSettingsMenu() {
-        history.append(.settings)
+        vehicleScenarioIsFinished = true
     }
 
     func goingBackToHomeView() {
