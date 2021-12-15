@@ -13,11 +13,13 @@ protocol VehicleNavigator {
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
                              onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigateToProfile: @escaping Action,
-                             onNavigatingToInvoices: @escaping (String) -> Void)
+                             onNavigatingToInvoices: @escaping (String) -> Void,
+                             onNavigateToSettingsMenu: @escaping Action)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
     func navigatesToInvoices(ofVehicleId vehicleId: String)
     func navigatesToProfile()
     func goingBackToHomeView()
+    func navigatesToSettingsMenu()
 }
 
 class DefaultVehicleNavigator: VehicleNavigator {
@@ -32,13 +34,15 @@ class DefaultVehicleNavigator: VehicleNavigator {
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
                              onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigateToProfile: @escaping Action,
-                             onNavigatingToInvoices: @escaping (String) -> Void) {
+                             onNavigatingToInvoices: @escaping (String) -> Void,
+                             onNavigateToSettingsMenu: @escaping Action) {
         window?.rootViewController = navigationController
 
         let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen,
                                      isOpeningVehicleUpdate: onVehicleUpdateOpen,
                                      isNavigatingToProfile: onNavigateToProfile,
-                                     isNavigatingToInvoices: onNavigatingToInvoices)
+                                     isNavigatingToInvoices: onNavigatingToInvoices,
+                                     isNavigatingToSettingsMenu: onNavigateToSettingsMenu)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
         navigationController.pushViewController(UIHostingController(rootView: myVehiclesView), animated: true)
     }
@@ -65,6 +69,12 @@ class DefaultVehicleNavigator: VehicleNavigator {
         let navigator = DefaultInvoicesNavigator(navigationController: navigationController)
         let scenario = InvoicesScenario(navigator: navigator)
         scenario.begin(withVehicleId: vehicleId)
+    }
+
+    func navigatesToSettingsMenu() {
+        let navigator = DefaultSettingsNavigator(navigationController: navigationController, window: window)
+        let scenario = SettingsScenario(navigator: navigator)
+        scenario.begin()
     }
 
     func goingBackToHomeView() {

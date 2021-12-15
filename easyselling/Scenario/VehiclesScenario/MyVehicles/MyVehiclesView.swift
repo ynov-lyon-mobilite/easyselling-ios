@@ -72,6 +72,9 @@ struct MyVehiclesView: View {
                 .refreshable {
                     await viewModel.getVehicles()
                 }
+                Button("SETTINGS") {
+                    viewModel.navigatesToSettingsMenu()
+                }
                 Button(action: viewModel.openVehicleCreation) {
                     Image(systemName: "plus")
                         .foregroundColor(Asset.darkPurple.swiftUIColor)
@@ -85,7 +88,7 @@ struct MyVehiclesView: View {
             .navigationTitle(L10n.Vehicles.title)
             .toolbar {
                 Button(L10n.Vehicles.profile) {
-                    viewModel.navigateToProfile()
+                    viewModel.navigatesToSettingsMenu()
                 }
             }
         }
@@ -100,7 +103,11 @@ struct MyVehiclesView: View {
 struct MyVehiclesView_Previews: PreviewProvider {
 
     static var previews: some View {
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {}, isOpeningVehicleUpdate: {_,_ in }, isNavigatingToProfile: {}, isNavigatingToInvoices: {_ in })
+        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {},
+                                     isOpeningVehicleUpdate: {_,_ in },
+                                     isNavigatingToProfile: {},
+                                     isNavigatingToInvoices: {_ in },
+                                     isNavigatingToSettingsMenu: {})
         vm.vehicles = [Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
                        Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
                        Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]
