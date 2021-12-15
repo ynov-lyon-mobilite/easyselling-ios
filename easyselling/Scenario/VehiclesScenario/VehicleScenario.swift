@@ -17,7 +17,8 @@ class VehicleScenario {
         navigator.navigatesToHomeView(onVehicleCreationOpen: navigatesToVehicleCreation,
 									  onVehicleUpdateOpen: navigatesToVehicleUpdate,
                                       onNavigateToProfile: navigatesToProfile,
-										onNavigatingToInvoices: navigatesToInvoices)
+                                      onNavigatingToInvoices: navigatesToInvoices,
+                                      onNavigateToSettingsMenu: navigatesToSettingsMenu)
     }
 
     private func navigatesToVehicleCreation() {
@@ -41,5 +42,9 @@ class VehicleScenario {
             await refreshVehicles()
             goingBackToHomeView()
         }, vehicle: vehicle)
+    }
+
+    private func navigatesToSettingsMenu() {
+        navigator.navigatesToSettingsMenu()
     }
 }
