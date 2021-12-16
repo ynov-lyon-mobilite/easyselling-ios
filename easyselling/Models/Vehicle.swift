@@ -18,8 +18,8 @@ struct Vehicle: Codable, Equatable, Identifiable {
     var year: String
     var image: UIImage {
         switch type {
-        case .car: return Asset.car.image
-        case .moto: return Asset.moto.image
+        case .car: return Asset.Icons.car.image
+        case .moto: return Asset.Icons.moto.image
         }
     }
     var imageColor: Color {

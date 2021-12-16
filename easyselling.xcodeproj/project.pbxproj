@@ -441,16 +441,6 @@
 			path = Reset;
 			sourceTree = "<group>";
 		};
-		03004DC7273E71D100188983 /* PasswordReset_Specs */ = {
-			isa = PBXGroup;
-			children = (
-				034D04EF2733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift */,
-				03004DC8273E721100188983 /* PasswordResetViewModel_Specs.swift */,
-				03B80FA12745B04A00E1BF47 /* DefaultPasswordResetPreparator_Specs.swift */,
-			);
-			path = PasswordReset_Specs;
-			sourceTree = "<group>";
-		};
 		03004DCC273E73DB00188983 /* DefaultPasswordReseter_Specs */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,7 +487,6 @@
 			isa = PBXGroup;
 			children = (
 				0317EE35275198A600A6AE0D /* ProfileScenario_Specs.swift */,
-				0317EE3B27519E6200A6AE0D /* ProfileViewModel_Specs.swift */,
 			);
 			path = ProfileScenario_Specs;
 			sourceTree = "<group>";
@@ -513,21 +502,13 @@
 			path = DefaultInvoiceDownloader_Specs;
 			sourceTree = "<group>";
 		};
-		03422F73275D38B20060D19E /* Invoice_Specs */ = {
-			isa = PBXGroup;
-			children = (
-				03422F74275D38C60060D19E /* InformationsGetter_Specs */,
-			);
-			path = Invoice_Specs;
-			sourceTree = "<group>";
-		};
-		03422F74275D38C60060D19E /* InformationsGetter_Specs */ = {
+		03422F74275D38C60060D19E /* DefaultInformationsGetter_Specs */ = {
 			isa = PBXGroup;
 			children = (
 				03422F78275D38EC0060D19E /* SucceedingFileInformationsGetter.swift */,
 				03422F7B275D39370060D19E /* FailingFileInformationsGetter.swift */,
 			);
-			path = InformationsGetter_Specs;
+			path = DefaultInformationsGetter_Specs;
 			sourceTree = "<group>";
 		};
 		03422F81275D45070060D19E /* InvoiceViewer */ = {
@@ -734,14 +715,11 @@
 		2CAE03D227170F98008D7A68 /* VehicleScenario_Specs */ = {
 			isa = PBXGroup;
 			children = (
-				03DAF9A52727330300FFED55 /* MyVehicleViewModel_Specs.swift */,
+				2C86337B273FB7B10049C186 /* succeededVehicles.json */,
 				03DAF99F27271C2D00FFED55 /* VehicleScenario_Specs.swift */,
-				03DAF9A92727448300FFED55 /* VehicleCreationViewModel_Specs.swift */,
 				2C6D0F2A2732D9B500A86349 /* DefaultVehicleCreator_Specs.swift */,
 				2CD8639C2737F65C00C18EC5 /* DefaultVehicleInformationsVerificator_Specs.swift */,
 				2C2DA3892752814E0085988B /* DefaultVehicleVerificator_Specs.swift */,
-				2C86337B273FB7B10049C186 /* succeededVehicles.json */,
-				8F38D78D274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift */,
 				8F665CDB274E6A9C008DDA7B /* DefaultVehicleUpdater_Specs.swift */,
 			);
 			path = VehicleScenario_Specs;
@@ -791,7 +769,6 @@
 			isa = PBXGroup;
 			children = (
 				5CA58D1C27554DA9000BF06C /* succeededInvoices.json */,
-				5CA58D1F2757F904000BF06C /* VehicleInvoiceViewModel_Specs.swift */,
 				5CB4C5D6275D123E0055CB8B /* FailingVehicleInvoicesGetter.swift */,
 				5CB4C5D8275D12BA0055CB8B /* SucceedingVehicleInvoicesGetter.swift */,
 			);
@@ -804,6 +781,7 @@
 				5CA58D18274E9F9B000BF06C /* DefaultVehicleInvoicesGetter_Specs.swift */,
 			);
 			name = DefaultVehicleInvoicesGetter_Specs;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		8705B9A927208233004132CF /* Extensions */ = {
@@ -820,10 +798,8 @@
 		87184C882729DB65006586FD /* AuthenticationScenario_Specs */ = {
 			isa = PBXGroup;
 			children = (
-				03004DC7273E71D100188983 /* PasswordReset_Specs */,
+				03B80FA12745B04A00E1BF47 /* DefaultPasswordResetPreparator_Specs.swift */,
 				0382E29927175FB700EB570E /* AuthenticationScenario_Specs.swift */,
-				0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */,
-				8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */,
 			);
 			path = AuthenticationScenario_Specs;
 			sourceTree = "<group>";
@@ -872,37 +848,111 @@
 		873552C2270D847B00F2DDBD /* easysellingTests */ = {
 			isa = PBXGroup;
 			children = (
-				39D101E82769EE3500F101AB /* SettingsScenario_Specs */,
-				8F901D512769F43000CF0F28 /* DefaultInvoiceDeletor */,
-				03C759FD276554380032652F /* DefaultImageCaller_Specs */,
-				03422F73275D38B20060D19E /* Invoice_Specs */,
-				03422F5F275CEDE20060D19E /* DefaultInvoiceDownloader_Specs */,
-				9BB84D78274E518600D88B03 /* StartupScenario_Specs */,
-				5CA58D17274E9F56000BF06C /* DefaultVehicleInvoicesGetter_Specs */,
-				9BB84D70274E35C800D88B03 /* DefaultAuthorizedRequestGenerator_Specs */,
-				39FC6E9C274D59640067E97F /* DefaultVehicleDeletor_Specs */,
-				5CA58D13274E8E27000BF06C /* InvoicesScenario_Specs */,
-				038862862749380C001D7E36 /* DefaultCredentialsPreparator_Specs */,
-				03004DCC273E73DB00188983 /* DefaultPasswordReseter_Specs */,
-				9BB4F7AB273D48A700340BD3 /* DefaultVehiclesGetter_Specs */,
-				03C18F0E2737D26B00C754E8 /* DefaultPasswordResetRequestor_Specs */,
-				03F05436271B3E3900434706 /* DefaultAccountCreator_Specs */,
+				87470E93276BF3B1004FCA6B /* Scenario */,
+				87470E96276BF408004FCA6B /* Services */,
+				87470E95276BF3F2004FCA6B /* ViewModels */,
 				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
-				87BE3096273B0AED00D49D08 /* DefaultFileUploader_Specs */,
-				03F0543D271B3EFB00434706 /* DefaultRequestGenerator_Specs */,
-				8798D14A2730FAEB00FF3AB4 /* DefaultTokenManager_Specs */,
-				8798D13D2730F2CE00FF3AB4 /* DefaultTokenRefreshor_Specs */,
-				87DC1D01271F61E2002DC193 /* DefaultUserAuthenticator_Specs */,
-				87184C882729DB65006586FD /* AuthenticationScenario_Specs */,
-				2CAE03D227170F98008D7A68 /* VehicleScenario_Specs */,
-				0317EE342751988A00A6AE0D /* ProfileScenario_Specs */,
-				03B80FAE274717E500E1BF47 /* DefaultEmailVerificator_Specs */,
-				03F0542F271B38EB00434706 /* DefaultCredentialsVerificator_Specs */,
-				8FF010252732EDEC0022314B /* OnBoardingScenario_Specs */,
 				875E47B7273C6ECC0019FC83 /* FakeURLSession.swift */,
 				875E47AD273C6AD90019FC83 /* LocalFile.swift */,
 			);
 			path = easysellingTests;
+			sourceTree = "<group>";
+		};
+		87470E93276BF3B1004FCA6B /* Scenario */ = {
+			isa = PBXGroup;
+			children = (
+				87184C882729DB65006586FD /* AuthenticationScenario_Specs */,
+				5CA58D13274E8E27000BF06C /* InvoicesScenario_Specs */,
+				8FF010252732EDEC0022314B /* OnBoardingScenario_Specs */,
+				0317EE342751988A00A6AE0D /* ProfileScenario_Specs */,
+				39D101E82769EE3500F101AB /* SettingsScenario_Specs */,
+				9BB84D78274E518600D88B03 /* StartupScenario_Specs */,
+				2CAE03D227170F98008D7A68 /* VehicleScenario_Specs */,
+			);
+			path = Scenario;
+			sourceTree = "<group>";
+		};
+		87470E95276BF3F2004FCA6B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				87470E98276BF622004FCA6B /* Authentication */,
+				87470E99276BF62C004FCA6B /* Invoices */,
+				87470E9A276BF635004FCA6B /* OnBoarding */,
+				87470E9B276BF63D004FCA6B /* Profile */,
+				87470E97276BF5DD004FCA6B /* Vehicles */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		87470E96276BF408004FCA6B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				03F05436271B3E3900434706 /* DefaultAccountCreator_Specs */,
+				9BB84D70274E35C800D88B03 /* DefaultAuthorizedRequestGenerator_Specs */,
+				038862862749380C001D7E36 /* DefaultCredentialsPreparator_Specs */,
+				03F0542F271B38EB00434706 /* DefaultCredentialsVerificator_Specs */,
+				03B80FAE274717E500E1BF47 /* DefaultEmailVerificator_Specs */,
+				87BE3096273B0AED00D49D08 /* DefaultFileUploader_Specs */,
+				03422F74275D38C60060D19E /* DefaultInformationsGetter_Specs */,
+				03C759FD276554380032652F /* DefaultImageCaller_Specs */,
+				8F901D512769F43000CF0F28 /* DefaultInvoiceDeletor_Specs */,
+				03422F5F275CEDE20060D19E /* DefaultInvoiceDownloader_Specs */,
+				03004DCC273E73DB00188983 /* DefaultPasswordReseter_Specs */,
+				03C18F0E2737D26B00C754E8 /* DefaultPasswordResetRequestor_Specs */,
+				03F0543D271B3EFB00434706 /* DefaultRequestGenerator_Specs */,
+				8798D14A2730FAEB00FF3AB4 /* DefaultTokenManager_Specs */,
+				8798D13D2730F2CE00FF3AB4 /* DefaultTokenRefreshor_Specs */,
+				87DC1D01271F61E2002DC193 /* DefaultUserAuthenticator_Specs */,
+				39FC6E9C274D59640067E97F /* DefaultVehicleDeletor_Specs */,
+				9BB4F7AB273D48A700340BD3 /* DefaultVehiclesGetter_Specs */,
+				5CA58D17274E9F56000BF06C /* DefaultVehicleInvoicesGetter_Specs */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		87470E97276BF5DD004FCA6B /* Vehicles */ = {
+			isa = PBXGroup;
+			children = (
+				03DAF9A52727330300FFED55 /* MyVehicleViewModel_Specs.swift */,
+				03DAF9A92727448300FFED55 /* VehicleCreationViewModel_Specs.swift */,
+				8F38D78D274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift */,
+			);
+			path = Vehicles;
+			sourceTree = "<group>";
+		};
+		87470E98276BF622004FCA6B /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				0382E2A72717668300EB570E /* AccountCreationViewModel_Specs.swift */,
+				034D04EF2733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift */,
+				03004DC8273E721100188983 /* PasswordResetViewModel_Specs.swift */,
+				8705B99F27207838004132CF /* UserAuthenticationViewModel_Specs.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		87470E99276BF62C004FCA6B /* Invoices */ = {
+			isa = PBXGroup;
+			children = (
+				5CA58D1F2757F904000BF06C /* VehicleInvoiceViewModel_Specs.swift */,
+			);
+			path = Invoices;
+			sourceTree = "<group>";
+		};
+		87470E9A276BF635004FCA6B /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				8F86D42B27172BC900D143D8 /* OnBoardingViewModel_Specs.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		87470E9B276BF63D004FCA6B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0317EE3B27519E6200A6AE0D /* ProfileViewModel_Specs.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		87533394275FFF67005E4697 /* Styles */ = {
@@ -1045,14 +1095,14 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
-		8F901D512769F43000CF0F28 /* DefaultInvoiceDeletor */ = {
+		8F901D512769F43000CF0F28 /* DefaultInvoiceDeletor_Specs */ = {
 			isa = PBXGroup;
 			children = (
 				8F901D4F2769F40500CF0F28 /* SucceedingInvoiceDeletor.swift */,
 				8F901D522769FAC700CF0F28 /* FailingInvoiceDeletor.swift */,
 				8F901D542769FE0900CF0F28 /* DefaultInvoiceDeletor_Specs.swift */,
 			);
-			path = DefaultInvoiceDeletor;
+			path = DefaultInvoiceDeletor_Specs;
 			sourceTree = "<group>";
 		};
 		8FA938C6274708FF00B1FA96 /* VehicleUpdate */ = {
@@ -1079,7 +1129,6 @@
 		8FF010252732EDEC0022314B /* OnBoardingScenario_Specs */ = {
 			isa = PBXGroup;
 			children = (
-				8F86D42B27172BC900D143D8 /* OnBoardingViewModel_Specs.swift */,
 				8F86D4212716E4A000D143D8 /* OnBoardingScenario_Specs.swift */,
 			);
 			path = OnBoardingScenario_Specs;
@@ -1093,6 +1142,7 @@
 				03422F87275FF3880060D19E /* FailingVehicleGetter.swift */,
 			);
 			name = DefaultVehiclesGetter_Specs;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9BB84D70274E35C800D88B03 /* DefaultAuthorizedRequestGenerator_Specs */ = {
