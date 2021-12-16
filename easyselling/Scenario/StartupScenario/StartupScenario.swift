@@ -17,8 +17,7 @@ class StartupScenario {
         self.tokenRefreshor = tokenRefreshor
     }
 
-    var onBoardingIsViewed: Bool = false
-//    @AppStorage("onBoardingIsViewed") var onBoardingIsViewed: Bool = false
+    @AppStorage("onBoardingIsViewed") var onBoardingIsViewed: Bool = false
     private var navigator: StartupNavigator
     private var tokenManager: TokenManager
     private var tokenRefreshor: TokenRefreshor

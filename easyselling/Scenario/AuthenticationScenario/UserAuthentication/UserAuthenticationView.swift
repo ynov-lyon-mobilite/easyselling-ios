@@ -62,6 +62,7 @@ struct UserAuthenticationView: View {
 
                 HStack {
                     Text(viewModel.error?.errorDescription ?? " ")
+                        .fixedSize()
                         .foregroundColor(.red)
                         .font(.headline)
                         .opacity(viewModel.error != nil ? 1 : 0)

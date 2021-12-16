@@ -37,6 +37,7 @@ struct PasswordResetView: View {
                     .foregroundColor(.red)
                     .font(.headline)
                     .opacity(viewModel.error != nil ? 1 : 0)
+                    .transition(.opacity)
             }
 
             Button(action: {

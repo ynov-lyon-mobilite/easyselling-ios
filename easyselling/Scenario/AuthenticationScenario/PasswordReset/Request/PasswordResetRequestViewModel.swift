@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class PasswordResetRequestViewModel: ObservableObject {
 
@@ -42,7 +43,9 @@ class PasswordResetRequestViewModel: ObservableObject {
     }
 
     private func setError(with error: CredentialsError) {
-        self.error = error
+        withAnimation {
+            self.error = error
+        }
     }
 
     enum PasswordResetState: Equatable {
