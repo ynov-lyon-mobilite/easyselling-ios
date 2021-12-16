@@ -25,7 +25,7 @@ struct OrangeTheme: AppTheme {
     var onBackground: Color = Asset.Colors.onBackground.swiftUIColor
     var background: Color = Asset.Colors.background.swiftUIColor
 
-    var logo: ImageAsset = Asset.logo
+    var logo: ImageAsset = Asset.ThemeImages.Orange.logoOrange
 }
 
 struct BlueTheme: AppTheme {
@@ -34,7 +34,7 @@ struct BlueTheme: AppTheme {
     var onBackground: Color = Asset.Colors.onBackground.swiftUIColor
     var background: Color = Asset.Colors.background.swiftUIColor
 
-    var logo: ImageAsset = Asset.logoBlue
+    var logo: ImageAsset = Asset.ThemeImages.Blue.logoBlue
 }
 
 final class ThemeManager: ObservableObject {

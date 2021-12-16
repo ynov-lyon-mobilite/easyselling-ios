@@ -881,6 +881,7 @@
 				87470E99276BF62C004FCA6B /* Invoices */,
 				87470E9A276BF635004FCA6B /* OnBoarding */,
 				87470E9B276BF63D004FCA6B /* Profile */,
+				87470E9C276BF65A004FCA6B /* Settings */,
 				87470E97276BF5DD004FCA6B /* Vehicles */,
 			);
 			path = ViewModels;
@@ -955,6 +956,13 @@
 				0317EE3B27519E6200A6AE0D /* ProfileViewModel_Specs.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		87470E9C276BF65A004FCA6B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		87533394275FFF67005E4697 /* Styles */ = {
