@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct PrimaryButtonStyle: ButtonStyle {
-    private let color: Color
+    @ObservedObject private var themeManager: ThemeManager = .shared
+    private let color: Color?
 
-    init(color: Color = Asset.Colors.primary.swiftUIColor) {
+    init(color: Color? = nil) {
         self.color = color
     }
 
@@ -19,7 +20,7 @@ struct PrimaryButtonStyle: ButtonStyle {
             .padding()
             .fillMaxWidth()
             .font(.body.bold())
-            .background(color)
+            .background(color ?? themeManager.theme.primaryColor)
             .foregroundColor(.white)
             .cornerRadius(15)
     }

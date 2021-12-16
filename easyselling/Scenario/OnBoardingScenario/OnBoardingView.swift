@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnBoardingView: View {
-
+    @ObservedObject private var themeManager: ThemeManager = .shared
     @ObservedObject var viewModel: OnBoardingViewModel
 
     init(viewModel: OnBoardingViewModel) {
@@ -24,7 +24,7 @@ struct OnBoardingView: View {
                 Button(action: { viewModel.onFinish() }) {
                     Image(systemName: "xmark")
                         .resizable()
-                        .foregroundColor(.onBackground)
+                        .foregroundColor(themeManager.theme.onBackground)
                         .frame(width: 15, height: 15)
                         .padding()
                 }
@@ -60,8 +60,8 @@ struct OnBoardingView: View {
                 ForEach(0..<viewModel.features.count) { index in
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
                         .fill(index == viewModel.currentFeatureIndex
-                              ? Color.primaryEasyselling
-                              : Color.onBackground.opacity(0.8))
+                              ? themeManager.theme.primaryColor
+                              : themeManager.theme.onBackground.opacity(0.8))
                         .frame(width: index == viewModel.currentFeatureIndex ?
                                animationWidth : basicWidth, height: 10)
                         .animation(.easeIn, value: index == viewModel.currentFeatureIndex ? animationWidth: basicWidth)
@@ -78,7 +78,7 @@ struct OnBoardingView: View {
                 }
                 .opacity(viewModel.isShowingPreviousButton ? 1 : 0)
                 .disabled(!viewModel.isShowingPreviousButton)
-                .foregroundColor(Asset.Colors.secondary.swiftUIColor)
+                .foregroundColor(themeManager.theme.secondaryColor)
                 .font(.body.bold())
 
                 Spacer()
@@ -88,11 +88,11 @@ struct OnBoardingView: View {
                         viewModel.nextFeature()
                     }
                 }
-                .foregroundColor(viewModel.isLastFeature ? .white : Color.secondaryEasyselling)
+                .foregroundColor(viewModel.isLastFeature ? .white : themeManager.theme.secondaryColor)
                 .font(.body.bold())
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
-                .background(viewModel.isLastFeature ? Asset.Colors.secondary.swiftUIColor : nil)
+                .background(viewModel.isLastFeature ? themeManager.theme.secondaryColor : nil)
                 .cornerRadius(100)
             }
             .padding(.horizontal, 10)
