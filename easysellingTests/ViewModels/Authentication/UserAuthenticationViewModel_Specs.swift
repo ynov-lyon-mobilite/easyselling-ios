@@ -17,7 +17,7 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
         thenAlertIsNotShown()
     }
     
-    func Shows_error_when_try_to_log_in_with_empty_password() async {
+    func test_Shows_error_when_try_to_log_in_with_empty_password() async {
         givenViewModel(userAuthenticator: FailingUserAuthenticator(error: .unauthorized))
         await whenUserLogin(email: "user@domain.com", password: "")
         thenError(is: CredentialsError.emptyPassword)
@@ -89,7 +89,7 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
         XCTAssertTrue(!viewModel.showAlert)
     }
     
-    private func thenError(is expectedError: LocalizedError) {
+    private func thenError(is expectedError: LocalizedError?) {
         XCTAssertEqual(expectedError as? CredentialsError, viewModel.error)
     }
     

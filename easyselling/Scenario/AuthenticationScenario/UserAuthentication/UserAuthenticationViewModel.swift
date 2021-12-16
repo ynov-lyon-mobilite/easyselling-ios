@@ -55,8 +55,11 @@ final class UserAuthenticationViewModel: ObservableObject {
 
     private func setError(with error: CredentialsError) {
         self.error = error
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { _ in
+            self.error = nil
+        }
     }
-    
+
     private func verifyInformations() throws {
         if email.isEmpty { throw CredentialsError.emptyEmail }
         if password.isEmpty { throw CredentialsError.emptyPassword }

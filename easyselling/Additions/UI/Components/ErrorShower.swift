@@ -19,8 +19,7 @@ struct ErrorShower: ViewModifier {
                         Text(error)
                             .font(.headline)
                             .foregroundColor(.red)
-                            .padding(.vertical)
-                            .padding(.horizontal, 25)
+                            .padding()
                             .frame(maxWidth: .infinity)
                             .background(RoundedRectangle(cornerRadius: 30)
                                             .fill(Asset.Colors.errorBackground.swiftUIColor))
@@ -29,7 +28,7 @@ struct ErrorShower: ViewModifier {
                     .padding(.top)
                     .padding(.horizontal, 25)
                     .transition(.move(edge: .top))
-                    .animation(.easeInOut(duration: 0.6))
+                    .animation(.spring())
                 }
             }
         }
