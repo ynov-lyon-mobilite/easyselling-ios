@@ -40,16 +40,13 @@ struct PasswordResetRequestView: View {
             Button(action: { Task {
                 await viewModel.requestPasswordReset()
             }}) {
-                if viewModel.state == .loading {
-                    ProgressView()
-                } else if viewModel.state == .requestSent {
+                if viewModel.state == .requestSent {
                     Text(L10n.PasswordReset.iUnderstand)
                 } else {
                     Text(L10n.PasswordReset.sendMailButton)
-
                 }
             }
-            .buttonStyle(PrimaryButtonStyle())
+            .buttonStyle(PrimaryButtonStyle(isLoading: .constant(viewModel.state == .loading)))
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }
         .padding(25)

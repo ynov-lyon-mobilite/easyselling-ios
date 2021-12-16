@@ -12,25 +12,51 @@ struct AccountCreationView: View {
     @ObservedObject var viewModel: AccountCreationViewModel
 
     var body: some View {
+        ZStack {
+            GeometryReader { proxy in
+                let height = proxy.size.height * 1.13
+                let spacingTop = (height - proxy.size.height) / 2
+                let spacingLeft = (height - proxy.size.width) / 2
+
+                Image(Asset.logo)
+                    .resizable()
+                    .frame(width: height, height: height)
+                    .opacity(0.07)
+                    .rotationEffect(.init(degrees: -30))
+                    .padding(.top, -spacingTop)
+                    .padding(.leading, -spacingLeft)
+            }.ignoresSafeArea()
+
+            ScrollView(showsIndicators: false) {
+                accountCreationView
+            }
+        }
+    }
+
+    private var accountCreationView: some View {
         VStack(spacing: 30) {
             if viewModel.state == .loading {
                 ProgressView()
             } else {
+                Image(Asset.logo.name)
+                    .resizable()
+                    .padding()
+                    .frame(width: 230, height: 230)
 
-                TextField(L10n.SignUp.mail, text: $viewModel.email)
-                    .padding(6)
-                    .background(Color.gray.opacity(0.5))
-                    .cornerRadius(10)
-                    .textContentType(.emailAddress)
-
+                Spacer()
                 VStack {
+                    TextField(L10n.SignUp.mail, text: $viewModel.email)
+                        .padding(10)
+                        .background(Color.gray.opacity(0.5))
+                        .cornerRadius(10)
+                        .textContentType(.emailAddress)
                     SecureField(L10n.SignUp.password, text: $viewModel.password)
-                        .padding(6)
+                        .padding(10)
                         .background(Color.gray.opacity(0.5))
                         .cornerRadius(10)
                         .textContentType(.newPassword)
                     SecureField(L10n.SignUp.passwordConfirmation, text: $viewModel.passwordConfirmation)
-                        .padding(6)
+                        .padding(10)
                         .background(Color.gray.opacity(0.5))
                         .cornerRadius(10)
                         .textContentType(.newPassword)
@@ -40,19 +66,18 @@ struct AccountCreationView: View {
                         .opacity(viewModel.error != nil ? 1 : 0)
                     }
 
+                Spacer()
+
                 Button(L10n.SignUp.createAccountButton) {
                     Task {
                         await viewModel.createAccount()
                     }
                 }
-                .foregroundColor(Color.white)
-                .padding()
-                .background(Color.black)
-                .cornerRadius(30)
-
+                .buttonStyle(PrimaryButtonStyle())
             }
         }
-        .padding(.horizontal, 50)
+        .padding(25)
+        .fillMaxHeight()
         .alert(isPresented: $viewModel.showAlert, content: {
             Alert(
                 title: Text(viewModel.alert?.errorDescription ?? ""),
