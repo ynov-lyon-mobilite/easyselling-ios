@@ -20,4 +20,8 @@ extension View {
     func fillMaxSize(alignment: Alignment = .center) -> some View {
         self.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: alignment)
     }
+
+    func ableToShowError(_ error: String, when isShowingError: Bool) -> some View {
+        modifier(ErrorShower(error: error, isShowingError: isShowingError))
+    }
 }

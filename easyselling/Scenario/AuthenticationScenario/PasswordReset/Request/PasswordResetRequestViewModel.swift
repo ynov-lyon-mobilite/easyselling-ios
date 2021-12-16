@@ -43,9 +43,7 @@ class PasswordResetRequestViewModel: ObservableObject {
     }
 
     private func setError(with error: CredentialsError) {
-        withAnimation {
-            self.error = error
-        }
+        self.error = error
     }
 
     enum PasswordResetState: Equatable {

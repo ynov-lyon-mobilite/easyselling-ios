@@ -31,10 +31,6 @@ struct PasswordResetRequestView: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                Text(viewModel.error?.errorDescription ?? "")
-                    .foregroundColor(.red)
-                    .font(.headline)
-                    .opacity(viewModel.error != nil ? 1 : 0)
             }
 
             Button(action: { Task {
@@ -50,6 +46,8 @@ struct PasswordResetRequestView: View {
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }
         .padding(25)
+        .ableToShowError(viewModel.error?.errorDescription ?? "",
+                         when: viewModel.error == nil ? false : true)
     }
 }
 

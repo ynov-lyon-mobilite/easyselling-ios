@@ -16,6 +16,7 @@ struct AccountCreationView: View {
             ScrollView(showsIndicators: false) {
                 accountCreationView
             }
+            .ableToShowError(viewModel.error?.errorDescription ?? "", when: viewModel.error == nil ? false : true)
         }
     }
 
@@ -46,10 +47,6 @@ struct AccountCreationView: View {
                         .background(Color.gray.opacity(0.5))
                         .cornerRadius(10)
                         .textContentType(.newPassword)
-                    Text(viewModel.error?.errorDescription ?? "")
-                        .foregroundColor(.red)
-                        .font(.headline)
-                        .opacity(viewModel.error != nil ? 1 : 0)
                     }
 
                 Spacer()
