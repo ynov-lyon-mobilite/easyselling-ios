@@ -37,29 +37,36 @@ struct BlueTheme: AppTheme {
     var logo: ImageAsset = Asset.ThemeImages.Blue.logoBlue
 }
 
-final class ThemeManager: ObservableObject {
-    @AppStorage("APP_THEME") private var selectedTheme: Themes = .orange
+ class DefaultThemeManager: ThemeManager {
+    @AppStorage("APP_THEME") var selectedTheme: Themes = .orange
     var theme: AppTheme {
         selectedTheme.theme
     }
 
-    static let shared = ThemeManager()
+    static let shared = DefaultThemeManager()
 
     func setTheme(_ theme: Themes) {
         withAnimation { [weak self] in
             self?.selectedTheme = theme
         }
     }
+}
 
-    enum Themes: Int {
-        case orange = 0
-        case blue = 1
+enum Themes: Int {
+    case orange = 0
+    case blue = 1
 
-        var theme: AppTheme {
-            switch self {
-            case .orange: return OrangeTheme()
-            case .blue: return BlueTheme()
-            }
+    var theme: AppTheme {
+        switch self {
+        case .orange: return OrangeTheme()
+        case .blue: return BlueTheme()
         }
     }
+}
+
+protocol ThemeManager: ObservableObject {
+    var selectedTheme: Themes { get set }
+    var theme: AppTheme { get }
+
+    func setTheme(_ theme: Themes)
 }

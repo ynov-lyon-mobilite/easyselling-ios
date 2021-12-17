@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TextButtonStyle: ButtonStyle {
-    @ObservedObject private var themeManager: ThemeManager = .shared
+    @ObservedObject private var themeManager: DefaultThemeManager = .shared
     private let color: Color?
 
     init(color: Color? = nil) {

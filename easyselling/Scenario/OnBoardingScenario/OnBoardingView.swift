@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnBoardingView: View {
-    @ObservedObject private var themeManager: ThemeManager = .shared
+    @ObservedObject private var themeManager: DefaultThemeManager = .shared
     @ObservedObject var viewModel: OnBoardingViewModel
 
     init(viewModel: OnBoardingViewModel) {

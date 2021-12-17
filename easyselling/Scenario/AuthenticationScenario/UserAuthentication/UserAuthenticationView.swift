@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserAuthenticationView: View {
     @ObservedObject private var viewModel: UserAuthenticationViewModel
-    @ObservedObject private var themeManager: ThemeManager = .shared
+    @ObservedObject private var themeManager: DefaultThemeManager = .shared
 
     init(viewModel: UserAuthenticationViewModel) {
         self.viewModel = viewModel

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyVehiclesView: View {
-    @ObservedObject private var themeManager: ThemeManager = .shared
+    @ObservedObject private var themeManager: DefaultThemeManager = .shared
     @ObservedObject var viewModel: MyVehiclesViewModel
 
     var body: some View {
