@@ -67,28 +67,21 @@ final class DefaultAPICaller: APICaller {
         }
     }
 
-    func handleServerError(with body: ServerErrorBody) throws {
+    func handleServerError(with body: ServerErrorResponse.ServerErrorBody) throws {
         NSLog(body.extensions.code + " : %@", body.message)
-
-        switch body.extensions.code {
-            case ServerError.forbidden.rawValue:
-                throw ServerError.forbidden
-            case ServerError.service_unavailable.rawValue:
-                throw ServerError.service_unavailable
-            default: break
-        }
+        throw ServerError.from(code: body.extensions.code)
     }
 }
 
 struct ServerErrorResponse: Decodable {
     let errors: [ServerErrorBody]
-}
 
-struct ServerErrorBody: Decodable {
-    let message: String
-    let extensions: Extensions
-}
+    struct ServerErrorBody: Decodable {
+        let message: String
+        let extensions: Extensions
+    }
 
-struct Extensions: Decodable {
-    let code: String
+    struct Extensions: Decodable {
+        let code: String
+    }
 }

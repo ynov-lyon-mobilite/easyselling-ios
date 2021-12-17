@@ -63,3 +63,4 @@
 
 "serverError.forbidden" = "You are not allowed to do the current action";
 "serverError.serviceUnavailable" = "The external service can't be used";
+"serverError.invalidCredentials" = "Your credentials are incorrect";

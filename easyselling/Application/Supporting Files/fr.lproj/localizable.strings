@@ -63,3 +63,4 @@
 
 "serverError.forbidden" = "Vous n'êtes pas autorisé à effectuer cette action";
 "serverError.serviceUnavailable" = "Le service externe ne peut être utilisé";
+"serverError.invalidCredentials" = "Vos informations sont incorrectes";

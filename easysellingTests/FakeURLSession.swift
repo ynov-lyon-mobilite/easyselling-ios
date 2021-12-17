@@ -13,7 +13,7 @@ class FakeUrlSession: URLSessionProtocol {
     private var data: Data = Data()
     private var response: URLResponse = URLResponse()
 
-    init(){}
+    init() {}
     
     init(expected response: URLResponse, with data: Data = Data()) {
         self.data = data

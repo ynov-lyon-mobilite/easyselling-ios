@@ -71,6 +71,12 @@ class DefaultAPICaller_Specs: XCTestCase {
         thenResponseServerError(expected: .service_unavailable)
     }
 
+    func test_Handles_an_invalid_credentials_error() {
+        givenNetworkService()
+        whenReceivingResponse(response: "{\"errors\":[{\"message\":\"invalid_credentials.\",\"extensions\":{\"code\":\"INVALID_CREDENTIALS\"}}]}")
+        thenResponseServerError(expected: .invalid_credentials)
+    }
+
     private func givenNetworkService() {
         networkService = DefaultAPICaller(urlSession: FakeUrlSession())
     }
