@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct TextButtonStyle: ButtonStyle {
-    private let color: Color
+    @ObservedObject private var themeManager: DefaultThemeManager = .shared
+    private let color: Color?
 
-    init(color: Color = Asset.Colors.primary.swiftUIColor) {
+    init(color: Color? = nil) {
         self.color = color
     }
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.body.bold())
-            .foregroundColor(color)
+            .foregroundColor(color ?? themeManager.theme.primaryColor)
     }
 }
 

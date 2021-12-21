@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UserAuthenticationView: View {
     @ObservedObject private var viewModel: UserAuthenticationViewModel
+    @ObservedObject private var themeManager: DefaultThemeManager = .shared
 
     init(viewModel: UserAuthenticationViewModel) {
         self.viewModel = viewModel
@@ -21,7 +22,7 @@ struct UserAuthenticationView: View {
                 let spacingTop = (height - proxy.size.height) / 2
                 let spacingLeft = (height - proxy.size.width) / 2
 
-                Image(Asset.ThemeImages.Orange.logoOrange)
+                Image(themeManager.theme.logo)
                     .resizable()
                     .frame(width: height, height: height)
                     .opacity(0.07)
@@ -40,7 +41,7 @@ struct UserAuthenticationView: View {
         VStack(spacing: 30) {
             Spacer()
 
-            Image(Asset.ThemeImages.Orange.logoOrange)
+            Image(themeManager.theme.logo)
                 .resizable()
                 .padding()
                 .frame(width: 230, height: 230)

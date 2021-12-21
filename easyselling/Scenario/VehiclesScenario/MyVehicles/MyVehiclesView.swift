@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyVehiclesView: View {
-
+    @ObservedObject private var themeManager: DefaultThemeManager = .shared
     @ObservedObject var viewModel: MyVehiclesViewModel
 
     var body: some View {
@@ -50,7 +50,7 @@ struct MyVehiclesView: View {
                                 }.tint(Color.red)
                                 Button(L10n.Vehicles.updateButton) {
                                         viewModel.openVehicleUpdate(vehicle: vehicle)
-                                }.tint(Color.secondaryEasyselling)
+                                }.tint(themeManager.theme.secondaryColor)
                             }
                             .padding(.vertical, 15)
                             .padding(.horizontal, 20)
@@ -77,10 +77,10 @@ struct MyVehiclesView: View {
                 }
                 Button(action: viewModel.openVehicleCreation) {
                     Image(systemName: "plus")
-                        .foregroundColor(Asset.Colors.secondary.swiftUIColor)
+                        .foregroundColor(themeManager.theme.secondaryColor)
                         .padding(.vertical, 15)
                         .frame(maxWidth: .infinity)
-                        .background(Asset.Colors.primary.swiftUIColor)
+                        .background(themeManager.theme.primaryColor)
                         .disabled(viewModel.state != .listingVehicles)
                         .opacity(viewModel.state != .listingVehicles ? 0 : 1)
                 }
