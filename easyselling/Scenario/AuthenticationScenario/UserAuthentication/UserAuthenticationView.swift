@@ -21,7 +21,7 @@ struct UserAuthenticationView: View {
                 let spacingTop = (height - proxy.size.height) / 2
                 let spacingLeft = (height - proxy.size.width) / 2
 
-                Image(Asset.logo)
+                Image(Asset.ThemeImages.Orange.logoOrange)
                     .resizable()
                     .frame(width: height, height: height)
                     .opacity(0.07)
@@ -40,7 +40,7 @@ struct UserAuthenticationView: View {
         VStack(spacing: 30) {
             Spacer()
 
-            Image(Asset.logo)
+            Image(Asset.ThemeImages.Orange.logoOrange)
                 .resizable()
                 .padding()
                 .frame(width: 230, height: 230)
