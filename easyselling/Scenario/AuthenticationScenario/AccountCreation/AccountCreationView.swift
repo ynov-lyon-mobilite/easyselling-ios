@@ -12,21 +12,7 @@ struct AccountCreationView: View {
     @ObservedObject var viewModel: AccountCreationViewModel
 
     var body: some View {
-        ZStack {
-            GeometryReader { proxy in
-                let height = proxy.size.height * 1.13
-                let spacingTop = (height - proxy.size.height) / 2
-                let spacingLeft = (height - proxy.size.width) / 2
-
-                Image(Asset.logo)
-                    .resizable()
-                    .frame(width: height, height: height)
-                    .opacity(0.07)
-                    .rotationEffect(.init(degrees: -30))
-                    .padding(.top, -spacingTop)
-                    .padding(.leading, -spacingLeft)
-            }.ignoresSafeArea()
-
+        ImagedBackground {
             ScrollView(showsIndicators: false) {
                 accountCreationView
             }
@@ -38,7 +24,7 @@ struct AccountCreationView: View {
             if viewModel.state == .loading {
                 ProgressView()
             } else {
-                Image(Asset.logo.name)
+                Image(Asset.ThemeImages.Orange.logoOrange)
                     .resizable()
                     .padding()
                     .frame(width: 230, height: 230)

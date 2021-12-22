@@ -15,21 +15,7 @@ struct UserAuthenticationView: View {
     }
 
     var body: some View {
-        ZStack {
-            GeometryReader { proxy in
-                let height = proxy.size.height * 1.13
-                let spacingTop = (height - proxy.size.height) / 2
-                let spacingLeft = (height - proxy.size.width) / 2
-
-                Image(Asset.ThemeImages.Orange.logoOrange)
-                    .resizable()
-                    .frame(width: height, height: height)
-                    .opacity(0.07)
-                    .rotationEffect(.init(degrees: -30))
-                    .padding(.top, -spacingTop)
-                    .padding(.leading, -spacingLeft)
-            }.ignoresSafeArea()
-
+        ImagedBackground {
             ScrollView(.vertical, showsIndicators: false) {
                 loginView
             }
@@ -98,7 +84,7 @@ struct UserAuthenticationView: View {
             }
         }
         .navigationBarHidden(true)
-        .padding()
+        .padding(25)
         .fillMaxHeight()
         .alert(isPresented: $viewModel.showAlert) {
             Alert(title: Text(viewModel.alert?.errorDescription ?? ""),

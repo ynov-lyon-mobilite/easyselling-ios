@@ -41,7 +41,7 @@ struct PasswordResetRequestView: View {
                 await viewModel.requestPasswordReset()
             }}) {
                 if viewModel.state == .requestSent {
-                    Text(L10n.PasswordReset.iUnderstand)
+                    Text(L10n.PasswordReset.understand)
                 } else {
                     Text(L10n.PasswordReset.sendMailButton)
                 }
