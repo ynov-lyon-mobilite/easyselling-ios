@@ -693,6 +693,7 @@
 		03F209772716E1C500E10F6C /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				8F8617D6276A4A7700F5E453 /* Launch Screen.storyboard */,
 				034D04E22732976E00576D64 /* GoogleService-Info.plist */,
 				03F209782716E21100E10F6C /* Supporting Files */,
 				035E860327184EDC00684ED0 /* AppDelegate.swift */,
@@ -835,7 +836,6 @@
 				87780B9C27172F1C0035AB13 /* Additions */,
 				03F209772716E1C500E10F6C /* Application */,
 				0382E2A12717648000EB570E /* Scenario */,
-				8F8617D6276A4A7700F5E453 /* Launch Screen.storyboard */,
 			);
 			path = easyselling;
 			sourceTree = "<group>";
