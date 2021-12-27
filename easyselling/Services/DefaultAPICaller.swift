@@ -34,7 +34,8 @@ final class DefaultAPICaller: APICaller {
                   }
 
             if let serverError = try? jsonDecoder.decode(ServerErrorResponse.self, from: data).errors.first {
-                try? handleServerError(with: serverError)
+                NSLog(serverError.extensions.code + " : %@", serverError.message)
+                throw ServerError.from(code: serverError.extensions.code)
             }
 
             if !successStatusCodes.contains(strongResponse.statusCode) {
@@ -59,17 +60,13 @@ final class DefaultAPICaller: APICaller {
               }
 
         if let serverError = try? jsonDecoder.decode(ServerErrorResponse.self, from: data).errors.first {
-            try? handleServerError(with: serverError)
+            NSLog(serverError.extensions.code + " : %@", serverError.message)
+            throw ServerError.from(code: serverError.extensions.code)
         }
 
         if !successStatusCodes.contains(strongResponse.statusCode) {
             throw APICallerError.from(statusCode: strongResponse.statusCode)
         }
-    }
-
-    func handleServerError(with body: ServerErrorResponse.ServerErrorBody) throws {
-        NSLog(body.extensions.code + " : %@", body.message)
-        throw ServerError.from(code: body.extensions.code)
     }
 }
 

@@ -60,25 +60,27 @@ class DefaultAPICaller_Specs: XCTestCase {
     }
 
     func test_Handles_a_forbidden_error() {
-        givenNetworkService()
-        whenReceivingResponse(response: "{\"errors\":[{\"message\":\"forbidden.\",\"extensions\":{\"code\":\"FORBIDDEN\"}}]}")
+        let body = "{\"errors\":[{\"message\":\"forbidden.\",\"extensions\":{\"code\":\"FORBIDDEN\"}}]}"
+
+        givenNetworkService(withReponseHTTPCode: 300, body: body.data(using: .utf8)!)
+        whenMakingAPICall(withUrlRequest: request, decodeTo: ServerErrorResponse.self)
         thenResponseServerError(expected: .forbidden)
     }
 
     func test_Handles_a_service_unavailable_error() {
-        givenNetworkService()
-        whenReceivingResponse(response: "{\"errors\":[{\"message\":\"service_unavailable.\",\"extensions\":{\"code\":\"SERVICE_UNAVAILABLE\"}}]}")
+        let body = "{\"errors\":[{\"message\":\"service_unavailable.\",\"extensions\":{\"code\":\"SERVICE_UNAVAILABLE\"}}]}"
+
+        givenNetworkService(withReponseHTTPCode: 300, body: body.data(using: .utf8)!)
+        whenMakingAPICall(withUrlRequest: request, decodeTo: ServerErrorResponse.self)
         thenResponseServerError(expected: .service_unavailable)
     }
 
     func test_Handles_an_invalid_credentials_error() {
-        givenNetworkService()
-        whenReceivingResponse(response: "{\"errors\":[{\"message\":\"invalid_credentials.\",\"extensions\":{\"code\":\"INVALID_CREDENTIALS\"}}]}")
-        thenResponseServerError(expected: .invalid_credentials)
-    }
+        let body = "{\"errors\":[{\"message\":\"invalid_credentials.\",\"extensions\":{\"code\":\"INVALID_CREDENTIALS\"}}]}"
 
-    private func givenNetworkService() {
-        networkService = DefaultAPICaller(urlSession: FakeUrlSession())
+        givenNetworkService(withReponseHTTPCode: 300, body: body.data(using: .utf8)!)
+        whenMakingAPICall(withUrlRequest: request, decodeTo: ServerErrorResponse.self)
+        thenResponseServerError(expected: .invalid_credentials)
     }
 
     private func givenNetworkService(withReponseHTTPCode httpCode: Int, body: Data = Data()) {
@@ -111,23 +113,19 @@ class DefaultAPICaller_Specs: XCTestCase {
                 self.requestResult = try await networkService.call(request, decodeType: T.self)
                 expectation.fulfill()
             } catch (let error) {
-                self.requestError = (error as! APICallerError)
+                if let error = error as? APICallerError {
+                    self.requestError = error
+                }
+
+                if let error = error as? ServerError {
+                    self.serverError = error
+                }
+
                 expectation.fulfill()
             }
         }
 
         wait(for: [expectation], timeout: 3)
-    }
-
-    private func whenReceivingResponse(response: String) {
-        let jsonDecoder = JSONDecoder()
-        let decodedJson = try! jsonDecoder.decode(ServerErrorResponse.self, from: response.data(using: .utf8)!)
-
-        do {
-            try networkService.handleServerError(with: decodedJson.errors.first!)
-        } catch (let error) {
-            serverError = (error as? ServerError)
-        }
     }
 
     private func thenResponseServerError(expected: ServerError) {
