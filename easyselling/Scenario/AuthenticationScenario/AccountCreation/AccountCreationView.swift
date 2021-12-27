@@ -12,25 +12,37 @@ struct AccountCreationView: View {
     @ObservedObject var viewModel: AccountCreationViewModel
 
     var body: some View {
+        ImagedBackground {
+            ScrollView(showsIndicators: false) {
+                accountCreationView
+            }
+        }
+    }
+
+    private var accountCreationView: some View {
         VStack(spacing: 30) {
             if viewModel.state == .loading {
                 ProgressView()
             } else {
+                Image(Asset.ThemeImages.Orange.logoOrange)
+                    .resizable()
+                    .padding()
+                    .frame(width: 230, height: 230)
 
-                TextField(L10n.SignUp.mail, text: $viewModel.email)
-                    .padding(6)
-                    .background(Color.gray.opacity(0.5))
-                    .cornerRadius(10)
-                    .textContentType(.emailAddress)
-
+                Spacer()
                 VStack {
+                    TextField(L10n.SignUp.mail, text: $viewModel.email)
+                        .padding(10)
+                        .background(Color.gray.opacity(0.5))
+                        .cornerRadius(10)
+                        .textContentType(.emailAddress)
                     SecureField(L10n.SignUp.password, text: $viewModel.password)
-                        .padding(6)
+                        .padding(10)
                         .background(Color.gray.opacity(0.5))
                         .cornerRadius(10)
                         .textContentType(.newPassword)
                     SecureField(L10n.SignUp.passwordConfirmation, text: $viewModel.passwordConfirmation)
-                        .padding(6)
+                        .padding(10)
                         .background(Color.gray.opacity(0.5))
                         .cornerRadius(10)
                         .textContentType(.newPassword)
@@ -40,19 +52,18 @@ struct AccountCreationView: View {
                         .opacity(viewModel.error != nil ? 1 : 0)
                     }
 
+                Spacer()
+
                 Button(L10n.SignUp.createAccountButton) {
                     Task {
                         await viewModel.createAccount()
                     }
                 }
-                .foregroundColor(Color.white)
-                .padding()
-                .background(Color.black)
-                .cornerRadius(30)
-
+                .buttonStyle(PrimaryButtonStyle())
             }
         }
-        .padding(.horizontal, 50)
+        .padding(25)
+        .fillMaxHeight()
         .alert(isPresented: $viewModel.showAlert, content: {
             Alert(
                 title: Text(viewModel.alert?.errorDescription ?? ""),

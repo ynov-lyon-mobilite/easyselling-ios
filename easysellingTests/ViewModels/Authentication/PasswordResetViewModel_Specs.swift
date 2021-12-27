@@ -13,6 +13,8 @@ class PasswordResetViewModel_Specs: XCTestCase {
     func test_Leaves_when_password_reset_succeed() async {
         givenViewModel(withToken: "goodTokenToResetPassword", passwordReseter: SucceedingPasswordReseter())
         await whenResetingPassword()
+        thenViewModelState(is: .resetSuccessfull)
+        await whenDidResetPassword()
         XCTAssertTrue(didResetPassword)
     }
     
@@ -29,7 +31,7 @@ class PasswordResetViewModel_Specs: XCTestCase {
         viewModel.newPassword = ""
         viewModel.newPasswordConfirmation = "passwordConfirmation"
         await whenResetingPassword()
-        thenErrorIsShown()
+        thenViewModelState(is: .error)
         thenError(is: "Empty password")
     }
     
@@ -38,7 +40,7 @@ class PasswordResetViewModel_Specs: XCTestCase {
         viewModel.newPassword = "password"
         viewModel.newPasswordConfirmation = ""
         await whenResetingPassword()
-        thenErrorIsShown()
+        thenViewModelState(is: .error)
         thenError(is: "Empty password confirmation")
     }
     
@@ -47,7 +49,7 @@ class PasswordResetViewModel_Specs: XCTestCase {
         viewModel.newPassword = "password"
         viewModel.newPasswordConfirmation = "password"
         await whenResetingPassword()
-        thenErrorIsShown()
+        thenViewModelState(is: .error)
         thenError(is: "Passwords are differents")
     }
     
@@ -56,6 +58,10 @@ class PasswordResetViewModel_Specs: XCTestCase {
     }
     
     private func whenResetingPassword() async {
+        await viewModel.resetPassword()
+    }
+
+    private func whenDidResetPassword() async {
         await viewModel.resetPassword()
     }
     
@@ -67,12 +73,12 @@ class PasswordResetViewModel_Specs: XCTestCase {
         XCTAssertTrue(viewModel.showAlert)
     }
     
-    private func thenErrorIsShown() {
-        XCTAssertTrue(viewModel.showError)
-    }
-    
     private func thenError(is expected: String) {
         XCTAssertEqual(expected, viewModel.error?.errorDescription)
+    }
+    
+    private func thenViewModelState(is expected: PasswordResetViewModel.PasswordResetViewModelState) {
+        XCTAssertEqual(expected, viewModel.state)
     }
     
     private var viewModel: PasswordResetViewModel!

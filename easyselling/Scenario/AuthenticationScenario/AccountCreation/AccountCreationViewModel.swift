@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class AccountCreationViewModel: ObservableObject {
 
@@ -52,7 +53,9 @@ class AccountCreationViewModel: ObservableObject {
     }
 
     private func setError(with error: CredentialsError) {
-        self.error = error
+        withAnimation {
+            self.error = error
+        }
     }
 
     enum AccountCreationState: Equatable {
