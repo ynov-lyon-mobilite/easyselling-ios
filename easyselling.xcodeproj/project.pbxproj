@@ -874,7 +874,6 @@
 				87470E93276BF3B1004FCA6B /* Scenario */,
 				87470E96276BF408004FCA6B /* Services */,
 				87470E95276BF3F2004FCA6B /* ViewModels */,
-				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
 				875E47B7273C6ECC0019FC83 /* FakeURLSession.swift */,
 				875E47AD273C6AD90019FC83 /* LocalFile.swift */,
 			);
@@ -911,6 +910,7 @@
 			isa = PBXGroup;
 			children = (
 				03F05436271B3E3900434706 /* DefaultAccountCreator_Specs */,
+				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
 				9BB84D70274E35C800D88B03 /* DefaultAuthorizedRequestGenerator_Specs */,
 				038862862749380C001D7E36 /* DefaultCredentialsPreparator_Specs */,
 				03F0542F271B38EB00434706 /* DefaultCredentialsVerificator_Specs */,
