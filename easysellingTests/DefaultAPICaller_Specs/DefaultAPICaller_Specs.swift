@@ -59,6 +59,30 @@ class DefaultAPICaller_Specs: XCTestCase {
         XCTAssertEqual(APICallerError.decodeError, requestError)
     }
 
+    func test_Handles_a_forbidden_error() {
+        let body = "{\"errors\":[{\"message\":\"forbidden.\",\"extensions\":{\"code\":\"FORBIDDEN\"}}]}"
+
+        givenNetworkService(withReponseHTTPCode: 300, body: body.data(using: .utf8)!)
+        whenMakingAPICall(withUrlRequest: request, decodeTo: ServerErrorResponse.self)
+        thenResponseServerError(expected: .forbidden)
+    }
+
+    func test_Handles_a_service_unavailable_error() {
+        let body = "{\"errors\":[{\"message\":\"service_unavailable.\",\"extensions\":{\"code\":\"SERVICE_UNAVAILABLE\"}}]}"
+
+        givenNetworkService(withReponseHTTPCode: 300, body: body.data(using: .utf8)!)
+        whenMakingAPICall(withUrlRequest: request, decodeTo: ServerErrorResponse.self)
+        thenResponseServerError(expected: .service_unavailable)
+    }
+
+    func test_Handles_an_invalid_credentials_error() {
+        let body = "{\"errors\":[{\"message\":\"invalid_credentials.\",\"extensions\":{\"code\":\"INVALID_CREDENTIALS\"}}]}"
+
+        givenNetworkService(withReponseHTTPCode: 300, body: body.data(using: .utf8)!)
+        whenMakingAPICall(withUrlRequest: request, decodeTo: ServerErrorResponse.self)
+        thenResponseServerError(expected: .invalid_credentials)
+    }
+
     private func givenNetworkService(withReponseHTTPCode httpCode: Int, body: Data = Data()) {
         let urlSession = FakeUrlSession(expected: generateExtectedURLResponse(httpCode: httpCode), with: body)
         networkService = DefaultAPICaller(urlSession: urlSession)
@@ -89,12 +113,23 @@ class DefaultAPICaller_Specs: XCTestCase {
                 self.requestResult = try await networkService.call(request, decodeType: T.self)
                 expectation.fulfill()
             } catch (let error) {
-                self.requestError = (error as! APICallerError)
+                if let error = error as? APICallerError {
+                    self.requestError = error
+                }
+
+                if let error = error as? ServerError {
+                    self.serverError = error
+                }
+
                 expectation.fulfill()
             }
         }
 
         wait(for: [expectation], timeout: 3)
+    }
+
+    private func thenResponseServerError(expected: ServerError) {
+        XCTAssertEqual(expected, serverError)
     }
 
     private func thenResponseErrorCode(is expected: Int) {
@@ -139,6 +174,7 @@ class DefaultAPICaller_Specs: XCTestCase {
     private var isCallSucceeded: Bool!
     private var requestResult: Any!
     private var requestError: APICallerError!
+    private var serverError: ServerError!
     private var networkService: DefaultAPICaller!
 }
 
