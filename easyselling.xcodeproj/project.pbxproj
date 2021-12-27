@@ -45,6 +45,7 @@
 		034D04E82732984400576D64 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 034D04E72732984400576D64 /* FirebaseCrashlytics */; };
 		034D04EB2733FE0800576D64 /* PasswordResetRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D04EA2733FE0800576D64 /* PasswordResetRequestViewModel.swift */; };
 		034D04F02733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D04EF2733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift */; };
+		0354E83927737449004AEECB /* ImagedBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0354E83827737449004AEECB /* ImagedBackground.swift */; };
 		035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860327184EDC00684ED0 /* AppDelegate.swift */; };
 		035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860527188E9300684ED0 /* DefaultAccountCreator.swift */; };
 		035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */; };
@@ -246,6 +247,7 @@
 		034D04E22732976E00576D64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		034D04EA2733FE0800576D64 /* PasswordResetRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestViewModel.swift; sourceTree = "<group>"; };
 		034D04EF2733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestViewModel_Specs.swift; sourceTree = "<group>"; };
+		0354E83827737449004AEECB /* ImagedBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagedBackground.swift; sourceTree = "<group>"; };
 		035E860327184EDC00684ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		035E860527188E9300684ED0 /* DefaultAccountCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAccountCreator.swift; sourceTree = "<group>"; };
 		035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAccountCreator_Specs.swift; sourceTree = "<group>"; };
@@ -531,6 +533,23 @@
 				03004DC1273E708600188983 /* Request */,
 			);
 			path = PasswordReset;
+			sourceTree = "<group>";
+		};
+		0354E8362773742B004AEECB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0354E83727737437004AEECB /* Components */,
+				87533394275FFF67005E4697 /* Styles */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		0354E83727737437004AEECB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0354E83827737449004AEECB /* ImagedBackground.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		0382E29B2717638400EB570E /* TypeAlias */ = {
@@ -831,7 +850,6 @@
 		873552B1270D847700F2DDBD /* easyselling */ = {
 			isa = PBXGroup;
 			children = (
-				87533394275FFF67005E4697 /* Styles */,
 				87DC1D07271FDF3F002DC193 /* Models */,
 				03004DBC273DB7CA00188983 /* Info.plist */,
 				87780BAA27172FB10035AB13 /* Services */,
@@ -856,7 +874,6 @@
 				87470E93276BF3B1004FCA6B /* Scenario */,
 				87470E96276BF408004FCA6B /* Services */,
 				87470E95276BF3F2004FCA6B /* ViewModels */,
-				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
 				875E47B7273C6ECC0019FC83 /* FakeURLSession.swift */,
 				875E47AD273C6AD90019FC83 /* LocalFile.swift */,
 			);
@@ -893,6 +910,7 @@
 			isa = PBXGroup;
 			children = (
 				03F05436271B3E3900434706 /* DefaultAccountCreator_Specs */,
+				03F05437271B3E6E00434706 /* DefaultAPICaller_Specs */,
 				9BB84D70274E35C800D88B03 /* DefaultAuthorizedRequestGenerator_Specs */,
 				038862862749380C001D7E36 /* DefaultCredentialsPreparator_Specs */,
 				03F0542F271B38EB00434706 /* DefaultCredentialsVerificator_Specs */,
@@ -972,6 +990,7 @@
 		87780B9C27172F1C0035AB13 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				0354E8362773742B004AEECB /* UI */,
 				0382E29B2717638400EB570E /* TypeAlias */,
 				87780B9D27172F250035AB13 /* Enums */,
 				8705B9A927208233004132CF /* Extensions */,
@@ -1384,6 +1403,7 @@
 				035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */,
 				0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */,
 				875333982760012E005E4697 /* View+Extensions.swift in Sources */,
+				0354E83927737449004AEECB /* ImagedBackground.swift in Sources */,
 				87DC1D0A271FDF5C002DC193 /* LoginDTO.swift in Sources */,
 				87DC1D06271F6A4C002DC193 /* DefaultUserAuthenticator.swift in Sources */,
 				8705B9A427207A8D004132CF /* UserAuthenticationViewModel.swift in Sources */,

@@ -28,8 +28,11 @@
 "userAuthentication.register.button" = "Register";
 
 "passwordReset.mailSentSuccessfully" = "An email has been sent to you to reset your password";
+"passwordReset.resetSuccessfully" = "Your password has been reset successfully";
 "passwordReset.sendMailButton" = "Send a reset email";
 "passwordReset.resetPasswordButton" = "Reset password";
+"passwordReset.understand" = "I understand";
+
 "vehicles.car" = "Car";
 "vehicles.moto" = "Motorcycle";
 "vehicles.profile" = "Profil";

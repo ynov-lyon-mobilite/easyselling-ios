@@ -15,6 +15,17 @@ class PasswordResetRequestViewModel_Specs: XCTestCase {
         await whenRequestingPasswordReset(of: "")
         thenError(is: .emptyEmail)
     }
+
+    // need to find a way to test error nil during asynchronous process
+//    func test_Unshows_error_if_user_has_pressed_reset_again() async {
+//        var verificator: EmailVerificator = FailingEmailVerificator(error: .emptyEmail)
+//        givenViewModel(verificator: verificator)
+//        await whenRequestingPasswordReset(of: "")
+//        thenError(is: .emptyEmail)
+//        verificator = SucceedingEmailVerificator()
+//        await whenRequestingPasswordReset(of: "")
+//        thenError(is: nil)
+//    }
     
     // need to find a way to test loading state during asynchronous process
 //    func test_Shows_loading_when_requesting_password_reset() async {
@@ -49,7 +60,7 @@ class PasswordResetRequestViewModel_Specs: XCTestCase {
         await viewModel.requestPasswordReset()
     }
     
-    private func thenError(is expected: CredentialsError) {
+    private func thenError(is expected: CredentialsError?) {
         XCTAssertEqual(expected, viewModel.error)
     }
     

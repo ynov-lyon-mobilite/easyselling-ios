@@ -9,19 +9,28 @@ import SwiftUI
 
 struct PrimaryButtonStyle: ButtonStyle {
     private let color: Color
+    @Binding var isLoading: Bool
 
-    init(color: Color = Asset.Colors.primary.swiftUIColor) {
+    init(color: Color = Asset.Colors.primary.swiftUIColor,
+         isLoading: Binding<Bool> = .constant(false)) {
         self.color = color
+        self._isLoading = isLoading
     }
 
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding()
-            .fillMaxWidth()
-            .font(.body.bold())
-            .background(color)
-            .foregroundColor(.white)
-            .cornerRadius(15)
+        VStack {
+            if isLoading {
+                ProgressView()
+            } else {
+                configuration.label
+            }
+        }
+        .padding()
+        .fillMaxWidth()
+        .font(.body.bold())
+        .background(color)
+        .foregroundColor(.white)
+        .cornerRadius(15)
     }
 }
 
@@ -32,7 +41,7 @@ struct PrimaryButtonStyle_Peviews: PreviewProvider {
             .previewLayout(.sizeThatFits)
 
         Button(L10n.Button.forgottenPassword, action: {})
-            .buttonStyle(PrimaryButtonStyle())
+            .buttonStyle(PrimaryButtonStyle(isLoading: .constant(true)))
             .previewLayout(.sizeThatFits)
             .preferredColorScheme(.dark)
     }
