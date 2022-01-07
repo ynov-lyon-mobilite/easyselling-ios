@@ -851,6 +851,7 @@
 		873552B1270D847700F2DDBD /* easyselling */ = {
 			isa = PBXGroup;
 			children = (
+				8F97E1122788790F005035C8 /* CoreData */,
 				87DC1D07271FDF3F002DC193 /* Models */,
 				03004DBC273DB7CA00188983 /* Info.plist */,
 				87780BAA27172FB10035AB13 /* Services */,
@@ -1127,6 +1128,13 @@
 				8F901D542769FE0900CF0F28 /* DefaultInvoiceDeletor_Specs.swift */,
 			);
 			path = DefaultInvoiceDeletor_Specs;
+			sourceTree = "<group>";
+		};
+		8F97E1122788790F005035C8 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		8FA938C6274708FF00B1FA96 /* VehicleUpdate */ = {
