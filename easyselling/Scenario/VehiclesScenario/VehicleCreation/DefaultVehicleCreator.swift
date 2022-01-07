@@ -8,7 +8,7 @@
 import Foundation
 
 protocol VehicleCreator {
-    func createVehicle(informations: Vehicle) async throws
+    func createVehicle(informations: VehicleDTO) async throws
 }
 
 class DefaultVehicleCreator: VehicleCreator {
@@ -20,7 +20,7 @@ class DefaultVehicleCreator: VehicleCreator {
         self.apiCaller = apiCaller
     }
 
-    func createVehicle(informations: Vehicle) async throws {
+    func createVehicle(informations: VehicleDTO) async throws {
         let urlRequest = try await requestGenerator
             .generateRequest(endpoint: .vehicles, method: .POST, body: informations,
                              headers: [:], pathKeysValues: [:], queryParameters: nil)
