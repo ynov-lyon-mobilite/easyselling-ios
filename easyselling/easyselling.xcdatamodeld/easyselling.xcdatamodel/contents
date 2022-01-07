@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Vehicle" representedClassName="Vehicle" syncable="YES" codeGenerationType="class">
-        <attribute name="brand" optional="YES" attributeType="String"/>
+        <attribute name="brand" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="license" optional="YES" attributeType="String"/>
-        <attribute name="model" optional="YES" attributeType="String"/>
-        <attribute name="type" optional="YES" attributeType="String"/>
-        <attribute name="year" optional="YES" attributeType="String"/>
+        <attribute name="license" attributeType="String"/>
+        <attribute name="model" attributeType="String"/>
+        <attribute name="type" attributeType="String"/>
+        <attribute name="year" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Vehicle" positionX="-45" positionY="0" width="128" height="119"/>
+        <element name="Vehicle" positionX="-36" positionY="-36" width="128" height="119"/>
     </elements>
 </model>
