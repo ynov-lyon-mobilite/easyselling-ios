@@ -103,6 +103,7 @@
 		2C863378273FB4040049C186 /* DefaultVehiclesGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C863377273FB4040049C186 /* DefaultVehiclesGetter.swift */; };
 		2C86337C273FB7B10049C186 /* succeededVehicles.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C86337B273FB7B10049C186 /* succeededVehicles.json */; };
 		2C86337D273FBA630049C186 /* succeededVehicles.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C86337B273FB7B10049C186 /* succeededVehicles.json */; };
+		2C958D862788832C007CCB3A /* easyselling.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C958D842788832C007CCB3A /* easyselling.xcdatamodeld */; };
 		2CAE03D82717118D008D7A68 /* VehicleCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */; };
 		2CD4B8C0271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */; };
 		2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */; };
@@ -305,6 +306,7 @@
 		2C6D0F2A2732D9B500A86349 /* DefaultVehicleCreator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleCreator_Specs.swift; sourceTree = "<group>"; };
 		2C863377273FB4040049C186 /* DefaultVehiclesGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehiclesGetter.swift; sourceTree = "<group>"; };
 		2C86337B273FB7B10049C186 /* succeededVehicles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = succeededVehicles.json; sourceTree = "<group>"; };
+		2C958D852788832C007CCB3A /* easyselling.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = easyselling.xcdatamodel; sourceTree = "<group>"; };
 		2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationView.swift; sourceTree = "<group>"; };
 		2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleInformationsVerificator.swift; sourceTree = "<group>"; };
 		2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationViewModel.swift; sourceTree = "<group>"; };
@@ -850,13 +852,13 @@
 		873552B1270D847700F2DDBD /* easyselling */ = {
 			isa = PBXGroup;
 			children = (
-				8F97E1122788790F005035C8 /* CoreData */,
 				87DC1D07271FDF3F002DC193 /* Models */,
 				03004DBC273DB7CA00188983 /* Info.plist */,
 				87780BAA27172FB10035AB13 /* Services */,
 				87780B9C27172F1C0035AB13 /* Additions */,
 				03F209772716E1C500E10F6C /* Application */,
 				0382E2A12717648000EB570E /* Scenario */,
+				2C958D842788832C007CCB3A /* easyselling.xcdatamodeld */,
 			);
 			path = easyselling;
 			sourceTree = "<group>";
@@ -1131,13 +1133,6 @@
 			path = DefaultInvoiceDeletor_Specs;
 			sourceTree = "<group>";
 		};
-		8F97E1122788790F005035C8 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		8FA938C6274708FF00B1FA96 /* VehicleUpdate */ = {
 			isa = PBXGroup;
 			children = (
@@ -1403,6 +1398,7 @@
 				874975F9273A3AB1000A1289 /* DefaultFileUploader.swift in Sources */,
 				8F901D4E2769E16300CF0F28 /* DefaultInvoiceDeletor.swift in Sources */,
 				8753339A2760043D005E4697 /* TextButtonStyle.swift in Sources */,
+				2C958D862788832C007CCB3A /* easyselling.xcdatamodeld in Sources */,
 				2CAE03D82717118D008D7A68 /* VehicleCreationView.swift in Sources */,
 				87780BA527172F610035AB13 /* HTTPMethod.swift in Sources */,
 				8798D1432730F3DF00FF3AB4 /* RefreshDTO.swift in Sources */,
@@ -1928,6 +1924,19 @@
 			productName = JWTDecode;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		2C958D842788832C007CCB3A /* easyselling.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2C958D852788832C007CCB3A /* easyselling.xcdatamodel */,
+			);
+			currentVersion = 2C958D852788832C007CCB3A /* easyselling.xcdatamodel */;
+			path = easyselling.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 873552A7270D847700F2DDBD /* Project object */;
 }
