@@ -14,6 +14,7 @@ struct MyVehiclesView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Button("Filtrer") {}
                 List {
                     if viewModel.state == .loading {
                         ProgressView()
