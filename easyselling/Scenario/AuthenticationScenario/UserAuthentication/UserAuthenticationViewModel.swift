@@ -54,9 +54,13 @@ final class UserAuthenticationViewModel: ObservableObject {
     }
 
     private func setError(with error: CredentialsError) {
-        self.error = error
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { _ in
-            self.error = nil
+        withAnimation(.easeInOut(duration: 0.2)) {
+            self.error = error
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    self.error = nil
+                }
+            }
         }
     }
 

@@ -8,28 +8,32 @@
 import SwiftUI
 
 struct ErrorShower: ViewModifier {
+    @Namespace private var animation
     var error: String
     var isShowingError: Bool
 
     func body(content: Content) -> some View {
-            ZStack {
-                content
-                if isShowingError == true {
+        ZStack {
+            content
+            VStack {
+                if isShowingError {
                     VStack {
                         Text(error)
                             .font(.headline)
-                            .foregroundColor(.red)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(RoundedRectangle(cornerRadius: 30)
-                                            .fill(Asset.Colors.errorBackground.swiftUIColor))
-                        Spacer()
+                            .foregroundColor(.white)
+                            .padding(25)
                     }
-                    .padding(.top)
-                    .padding(.horizontal, 25)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.red)
+                    .cornerRadius(30)
+                    .padding(.top, 100)
                     .transition(.move(edge: .top))
-                    .animation(.spring())
                 }
+                Spacer()
             }
+            .padding(.horizontal, 25)
+
         }
+        .ignoresSafeArea()
+    }
 }

@@ -53,7 +53,14 @@ class AccountCreationViewModel: ObservableObject {
     }
 
     private func setError(with error: CredentialsError) {
-        self.error = error
+        withAnimation(.easeInOut(duration: 0.2)) {
+            self.error = error
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    self.error = nil
+                }
+            }
+        }
     }
 
     enum AccountCreationState: Equatable {

@@ -22,10 +22,7 @@ struct AccountCreationView: View {
 
     private var accountCreationView: some View {
         VStack(spacing: 30) {
-            if viewModel.state == .loading {
-                ProgressView()
-            } else {
-                Image(Asset.ThemeImages.Orange.logoOrange)
+            Image(Asset.ThemeImages.Orange.logoOrange)
                     .resizable()
                     .padding()
                     .frame(width: 230, height: 230)
@@ -56,9 +53,8 @@ struct AccountCreationView: View {
                         await viewModel.createAccount()
                     }
                 }
-                .buttonStyle(PrimaryButtonStyle())
+                .buttonStyle(PrimaryButtonStyle(isLoading: .constant(viewModel.state == .loading)))
             }
-        }
         .padding(25)
         .fillMaxHeight()
         .alert(isPresented: $viewModel.showAlert, content: {
