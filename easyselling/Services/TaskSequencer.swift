@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import CoreData
 
 protocol TaskAPI {
-
+    func generateRequest() async -> URLRequest?
+    func parseJSONToCoreDataObject() async
 }
 
 class TaskSequencer {
@@ -16,9 +18,13 @@ class TaskSequencer {
 
     var tasks: [TaskAPI] = []
 
-    func proccess() {
-        tasks.forEach({ taskAPI in
-            print(taskAPI)
-        })
+    func proccess() async {
+        for taskAPI in tasks {
+            do {
+                await taskAPI.parseJSONToCoreDataObject()
+            } catch (let error) {
+                print(error)
+            }
+        }
     }
 }
