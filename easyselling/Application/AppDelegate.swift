@@ -18,7 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-let mainContext = NSPersistentContainer(name: "easyselling").viewContext
+var persistentContainer: NSPersistentContainer = {
+    let container = NSPersistentContainer(name: "easyselling")
+    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        if let error = error as NSError? {
+            fatalError("Unresolved error \(error), \(error.userInfo)")
+        }
+    })
+    return container
+}()
 
 func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
