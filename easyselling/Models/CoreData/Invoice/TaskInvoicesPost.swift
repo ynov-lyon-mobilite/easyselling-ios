@@ -23,7 +23,7 @@ class TaskInvoicesPost {
 
     private func save() {
         do {
-            try mainContext.save()
+            try persistentContainer.viewContext.save()
         } catch {
             print("Une erreur est survenue")
         }

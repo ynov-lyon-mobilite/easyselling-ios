@@ -14,7 +14,7 @@ class TaskInvoicesGetter {
     func getInvoices() {
         do {
             let fetchRequest = Invoice.fetchRequest()
-            let objects = try mainContext.fetch(fetchRequest)
+            let objects = try persistentContainer.viewContext.fetch(fetchRequest)
         } catch {
 
         }
