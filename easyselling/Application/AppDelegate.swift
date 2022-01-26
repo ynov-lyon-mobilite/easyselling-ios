@@ -14,11 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 
         TaskSequencer.shared.tasks.append(MyVehicleTask())
-        TaskSequencer.shared.proccess()
 
         let taskInvoicesPost  = TaskInvoicesPost(invoices: [InvoiceDTO(id: 12, vehicle: "test", file: "test", dateCreated: "test", dateUpdated: "test")])
-        taskInvoicesPost.insertInvoices()
-        TaskInvoicesGetter().getInvoices() 
 
         return true
     }
