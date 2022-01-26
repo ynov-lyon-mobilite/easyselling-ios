@@ -20,11 +20,7 @@ class TaskSequencer {
 
     func proccess() async {
         for taskAPI in tasks {
-            do {
-                await taskAPI.parseJSONToCoreDataObject()
-            } catch (let error) {
-                print(error)
-            }
+            await taskAPI.parseJSONToCoreDataObject()
         }
     }
 }

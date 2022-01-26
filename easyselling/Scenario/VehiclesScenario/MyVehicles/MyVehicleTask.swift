@@ -24,16 +24,20 @@ class MyVehicleTask: DefaultAPICaller, TaskAPI {
 
             for vehicle in vehicles {
                 mainContext.performAndWait {
-                    let entity = Vehicle(context: mainContext)
-                    entity.id = vehicle.id
-                    entity.license = vehicle.license
-                    entity.brand = vehicle.brand
-                    entity.year = vehicle.year
-                    entity.type = vehicle.type
-                    entity.model = vehicle.model
+                    let isAlreadyInsert = (try? mainContext.fetch(Vehicle.fetchRequestById(id: vehicle.id ?? "")))?.count ?? 0
 
-                    if mainContext.hasChanges {
-                        try? mainContext.save()
+                    if isAlreadyInsert < 1 {
+                        let entity = Vehicle(context: mainContext)
+                        entity.id = vehicle.id
+                        entity.license = vehicle.license
+                        entity.brand = vehicle.brand
+                        entity.year = vehicle.year
+                        entity.type = vehicle.type
+                        entity.model = vehicle.model
+
+                        if mainContext.hasChanges {
+                            try? mainContext.save()
+                        }
                     }
                 }
             }

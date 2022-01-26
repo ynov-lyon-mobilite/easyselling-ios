@@ -8,7 +8,7 @@
 import Foundation
 
 protocol VehiclesGetter {
-    func getVehicles() async throws -> [Vehicle]
+    func getVehicles() throws -> [Vehicle]
 }
 
 class DefaultVehiclesGetter : VehiclesGetter {
@@ -21,21 +21,13 @@ class DefaultVehiclesGetter : VehiclesGetter {
     private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
 
-    func getVehicles() async throws -> [Vehicle] {
-//        let queryParameters: [QueryParameter] = [
-//            SortQueryParameter(propertyName: "year", type: .DESC),
-//            FilterQueryParameter(parameterName: "model", value: "206")
-//        ]
-
-        let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .GET, headers: [:],
-                                                                    pathKeysValues: [:], queryParameters: [])
-
+    func getVehicles() -> [Vehicle] {
         do {
-            let _: [VehicleDTO] = try await apiCaller.call(urlRequest, decodeType: [VehicleDTO].self)
+            return try mainContext.fetch(Vehicle.fetchRequest())
         } catch (let error) {
-            throw error
+            print(error)
         }
 
-        return [Vehicle()]
+        return []
     }
 }
