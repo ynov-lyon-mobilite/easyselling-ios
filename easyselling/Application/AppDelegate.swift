@@ -12,6 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 
+        TaskSequencer.shared.tasks.append(MyVehicleTask())
+        TaskSequencer.shared.proccess()
         return true
     }
 }
