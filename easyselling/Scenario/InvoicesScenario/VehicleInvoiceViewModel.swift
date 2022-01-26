@@ -16,7 +16,8 @@ class VehicleInvoiceViewModel: ObservableObject {
     private var onNavigatingToInvoiceView: (File) -> Void
     private var invoiceDeletor: InvoiceDeletor
 
-    @Published var invoices: [Invoice] = []
+    @Published var vehicleId: String
+    @Published var invoices: [InvoiceDTO] = []
     @Published var error: APICallerError?
     @Published var isLoading: Bool = true
     @Published var isDownloading: Bool = false

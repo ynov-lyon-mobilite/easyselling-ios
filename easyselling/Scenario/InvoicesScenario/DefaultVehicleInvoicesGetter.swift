@@ -8,7 +8,7 @@
 import Foundation
 
 protocol VehicleInvoicesGetter {
-    func getInvoices(ofVehicleId: String) async throws -> [Invoice]
+    func getInvoices(ofVehicleId: String) async throws -> [InvoiceDTO]
 }
 
 class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
@@ -20,12 +20,12 @@ class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
         self.apiCaller = apiCaller
     }
 
-    func getInvoices(ofVehicleId id: String) async throws -> [Invoice] {
+    func getInvoices(ofVehicleId id: String) async throws -> [InvoiceDTO] {
         let urlRequest = try await requestGenerator.generateRequest(endpoint: .invoices,
                                                                     method: .GET,
                                                                     headers: [:],
-                                                                    pathKeysValues: ["vehicleId": id],
-                                                                    queryParameters: nil)
-        return try await apiCaller.call(urlRequest, decodeType: [Invoice].self)
+                                                                    pathKeysValues: [:],
+                                                                    queryParameters: [FilterQueryParameter(parameterName: "vehicle", type: .EQUAL, value: id)])
+        return try await apiCaller.call(urlRequest, decodeType: [InvoiceDTO].self)
     }
 }
