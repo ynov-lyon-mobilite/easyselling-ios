@@ -13,7 +13,7 @@ protocol APICaller {
     func call(_ urlRequest: URLRequest) async throws
 }
 
-final class DefaultAPICaller: APICaller {
+class DefaultAPICaller: APICaller {
 
     private var jsonDecoder = JSONDecoder()
     private var successStatusCodes = Set<Int>(200...209)
