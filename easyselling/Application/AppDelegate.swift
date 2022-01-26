@@ -18,14 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-var persistentContainer: NSPersistentContainer = {
+var mainContext: NSManagedObjectContext = {
     let container = NSPersistentContainer(name: "easyselling")
-    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+    container.loadPersistentStores(completionHandler: { _, error in
         if let error = error as NSError? {
             fatalError("Unresolved error \(error), \(error.userInfo)")
         }
     })
-    return container
+    return container.viewContext
 }()
 
 func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
