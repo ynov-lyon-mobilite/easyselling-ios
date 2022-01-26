@@ -6,26 +6,17 @@
 //
 
 import Foundation
+import CoreData
 import SwiftUI
 
 class TaskInvoicesGetter {
 
-    private let invoices: [InvoiceDTO]
-
-    init(invoices: [InvoiceDTO]) {
-        self.invoices = invoices
-    }
-
-    func insertInvoices() {
-        let datas = invoices.map { $0.convertToInvoice() }
-        save()
-    }
-
-    private func save() {
+    func getInvoices() {
         do {
-            try AppDelegate.mainContext.save()
+            let fetchRequest = Invoice.fetchRequest()
+            let objects = try mainContext.fetch(fetchRequest)
         } catch {
-            print("Une erreur est survenue")
+
         }
     }
 }
