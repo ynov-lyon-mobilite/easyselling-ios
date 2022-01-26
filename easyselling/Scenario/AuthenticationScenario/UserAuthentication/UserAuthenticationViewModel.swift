@@ -43,6 +43,7 @@ final class UserAuthenticationViewModel: ObservableObject {
             tokenManager.accessToken = token.accessToken
             tokenManager.refreshToken = token.refreshToken
             self.onUserLogged()
+            await TaskSequencer.shared.proccess()
         } catch(let error) {
             if let credentialError = error as? CredentialsError {
                 self.setError(with: credentialError)
