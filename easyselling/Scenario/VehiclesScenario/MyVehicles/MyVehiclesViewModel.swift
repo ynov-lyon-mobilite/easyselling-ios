@@ -59,17 +59,17 @@ class MyVehiclesViewModel: ObservableObject {
         self.isOpeningVehicleUpdate(vehicle, { await self.getVehicles() })
     }
 
-    @MainActor func getVehicles() async {
-//        state = .loading
-//        do {
-//            vehicles = try await vehiclesGetter.getVehicles()
-//            state = .listingVehicles
-//        } catch (let error) {
-//            state = .error
-//            if let error = error as? APICallerError {
-//                self.error = error
-//            }
-//        }
+    @MainActor func getVehicles() {
+        state = .loading
+        do {
+            vehicles = try mainContext.fetch(Vehicle.fetchRequest())
+            state = .listingVehicles
+        } catch (let error) {
+            state = .error
+            if let error = error as? APICallerError {
+                self.error = error
+            }
+        }
     }
 
     func navigateToProfile() {
