@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct InvoiceDTO : Codable, Equatable, Identifiable {
     var id : Int
@@ -30,7 +31,8 @@ struct InvoiceDTO : Codable, Equatable, Identifiable {
     }
 
     func convertToInvoice() -> Invoice {
-        let invoiceCoreData = Invoice(context: AppDelegate.mainContext)
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Invoice", in: mainContext)!
+        let invoiceCoreData = Invoice(entity: entityDescription, insertInto: mainContext)
         invoiceCoreData.id = Int16(id)
         invoiceCoreData.vehicle = vehicle
         invoiceCoreData.file = file
