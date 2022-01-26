@@ -23,8 +23,8 @@ class MyVehicleTask: DefaultAPICaller, TaskAPI {
             let vehicles = try await self.call(request, decodeType: [VehicleResponse].self)
 
             for vehicle in vehicles {
-                persistentContainer.viewContext.performAndWait {
-                    let entity = Vehicle(context: persistentContainer.viewContext)
+                mainContext.performAndWait {
+                    let entity = Vehicle(context: mainContext)
                     entity.id = vehicle.id
                     entity.license = vehicle.license
                     entity.brand = vehicle.brand
@@ -32,12 +32,9 @@ class MyVehicleTask: DefaultAPICaller, TaskAPI {
                     entity.type = vehicle.type
                     entity.model = vehicle.model
 
-                    if persistentContainer.viewContext.hasChanges {
-                        try? persistentContainer.viewContext.save()
+                    if mainContext.hasChanges {
+                        try? mainContext.save()
                     }
-
-
-                    print(try? persistentContainer.viewContext.fetch(Vehicle.fetchRequest()))
                 }
             }
         } catch (let error) {
