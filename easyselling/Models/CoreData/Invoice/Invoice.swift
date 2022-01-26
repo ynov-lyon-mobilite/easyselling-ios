@@ -16,8 +16,8 @@ public class Invoice: NSManagedObject {
     }
 
     @NSManaged public var id: Int16
-    @NSManaged public var vehicle: String?
-    @NSManaged public var file: String?
-    @NSManaged public var dateCreated: String?
+    @NSManaged public var vehicle: String
+    @NSManaged public var file: String
+    @NSManaged public var dateCreated: String
     @NSManaged public var dateUpdated: String?
 }
