@@ -18,9 +18,9 @@ class VehicleInvoiceViewModel: ObservableObject {
     private var invoiceDeletor: InvoiceDeletor
 
     @Published var vehicleId: String
-    @Published var invoices: [InvoiceDTO] = []
+    @Published var invoices: [Invoice] = []
     @Published var error: APICallerError?
-    var chosenInvoice: Int?
+    var chosenInvoice: Int16?
     @Published var isLoading: Bool = true
     @Published var isDownloading: Bool = false
     @Published var isError: Bool = false

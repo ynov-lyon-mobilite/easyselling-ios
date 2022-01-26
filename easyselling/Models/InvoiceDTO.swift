@@ -31,8 +31,8 @@ struct InvoiceDTO : Codable, Equatable, Identifiable {
     }
 
     func convertToInvoice() -> Invoice {
-        let entityDescription = NSEntityDescription.entity(forEntityName: "Invoice", in: persistentContainer.viewContext)!
-        let invoiceCoreData = Invoice(entity: entityDescription, insertInto: persistentContainer.viewContext)
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Invoice", in: mainContext)!
+        let invoiceCoreData = Invoice(entity: entityDescription, insertInto: mainContext)
         invoiceCoreData.id = Int16(id)
         invoiceCoreData.vehicle = vehicle
         invoiceCoreData.file = file
