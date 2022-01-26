@@ -11,6 +11,8 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static let mainContext = NSManagedObjectContext()
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 
         TaskSequencer.shared.tasks.append(MyVehicleTask())

@@ -1,5 +1,5 @@
 //
-//  Invoice.swift
+//  InvoiceDTO.swift
 //  easysellingTests
 //
 //  Created by Corentin Laurencine on 11/11/2021.
@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct Invoice : Codable, Equatable, Identifiable {
-
+struct InvoiceDTO : Codable, Equatable, Identifiable {
     var id : Int
     var vehicle : String
     var file : String
@@ -23,10 +22,21 @@ struct Invoice : Codable, Equatable, Identifiable {
         self.dateUpdated = dateUpdated
     }
 
-    static func == (lhs: Invoice, rhs: Invoice) -> Bool {
+    static func == (lhs: Self, rhs: Self) -> Bool {
         let areEqual = lhs.id == rhs.id &&
         lhs.vehicle == rhs.vehicle && lhs.file == rhs.file
 
         return areEqual
+    }
+
+    func convertToInvoice() -> Invoice {
+        let invoiceCoreData = Invoice(context: AppDelegate.mainContext)
+        invoiceCoreData.id = Int16(id)
+        invoiceCoreData.vehicle = vehicle
+        invoiceCoreData.file = file
+        invoiceCoreData.dateCreated = dateCreated
+        invoiceCoreData.dateUpdated = dateUpdated
+
+        return invoiceCoreData
     }
 }
