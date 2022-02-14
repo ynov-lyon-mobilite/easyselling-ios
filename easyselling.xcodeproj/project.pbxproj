@@ -22,6 +22,7 @@
 		0317EE3827519DDA00A6AE0D /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317EE3727519DDA00A6AE0D /* ProfileViewModel.swift */; };
 		0317EE3A27519DF100A6AE0D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317EE3927519DF100A6AE0D /* ProfileView.swift */; };
 		0317EE3C27519E6200A6AE0D /* ProfileViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317EE3B27519E6200A6AE0D /* ProfileViewModel_Specs.swift */; };
+		032CCB3727A9CF3300FC6275 /* ModalizedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032CCB3627A9CF3300FC6275 /* ModalizedView.swift */; };
 		032BF80F27A14860005BC077 /* ErrorShower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032BF80E27A1485F005BC077 /* ErrorShower.swift */; };
 		03422F61275CEDF70060D19E /* DefaultInvoiceDownloader_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F60275CEDF70060D19E /* DefaultInvoiceDownloader_Specs.swift */; };
 		03422F63275CEE140060D19E /* SucceedingInvoiceDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F62275CEE140060D19E /* SucceedingInvoiceDownloader.swift */; };
@@ -44,6 +45,7 @@
 		035E860A2718982A00684ED0 /* HTTPEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E86092718982A00684ED0 /* HTTPEndpoint.swift */; };
 		035E860C2718A3AB00684ED0 /* APICallerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860B2718A3AB00684ED0 /* APICallerError.swift */; };
 		0375446A27D66182009D7196 /* netfox in Frameworks */ = {isa = PBXBuildFile; productRef = 0375446927D66182009D7196 /* netfox */; };
+		0375616227AEE5140067325A /* DotControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0375616127AEE5140067325A /* DotControlView.swift */; };
 		0382E29A27175FB700EB570E /* AuthenticationScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29927175FB700EB570E /* AuthenticationScenario_Specs.swift */; };
 		0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29C2717639A00EB570E /* TypesAlias.swift */; };
 		0382E29F2717647500EB570E /* AuthenticationScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29E2717647500EB570E /* AuthenticationScenario.swift */; };
@@ -214,6 +216,7 @@
 		0317EE3727519DDA00A6AE0D /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		0317EE3927519DF100A6AE0D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0317EE3B27519E6200A6AE0D /* ProfileViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel_Specs.swift; sourceTree = "<group>"; };
+		032CCB3627A9CF3300FC6275 /* ModalizedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalizedView.swift; sourceTree = "<group>"; };
 		03278315276B75CE00F32915 /* ErrorShower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorShower.swift; sourceTree = "<group>"; };
 		032BF80E27A1485F005BC077 /* ErrorShower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorShower.swift; sourceTree = "<group>"; };
 		03422F60275CEDF70060D19E /* DefaultInvoiceDownloader_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvoiceDownloader_Specs.swift; sourceTree = "<group>"; };
@@ -235,6 +238,7 @@
 		035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAccountCreator_Specs.swift; sourceTree = "<group>"; };
 		035E86092718982A00684ED0 /* HTTPEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPEndpoint.swift; sourceTree = "<group>"; };
 		035E860B2718A3AB00684ED0 /* APICallerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICallerError.swift; sourceTree = "<group>"; };
+		0375616127AEE5140067325A /* DotControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotControlView.swift; sourceTree = "<group>"; };
 		0382E29927175FB700EB570E /* AuthenticationScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationScenario_Specs.swift; sourceTree = "<group>"; };
 		0382E29C2717639A00EB570E /* TypesAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesAlias.swift; sourceTree = "<group>"; };
 		0382E29E2717647500EB570E /* AuthenticationScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationScenario.swift; sourceTree = "<group>"; };
@@ -504,6 +508,8 @@
 				0354E83827737449004AEECB /* ImagedBackground.swift */,
 				39D701E827BD28E200F93287 /* ButtonList.swift */,
 				39D701EE27BD353900F93287 /* TitleNavigationView.swift */,
+				032CCB3627A9CF3300FC6275 /* ModalizedView.swift */,
+				0375616127AEE5140067325A /* DotControlView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1373,6 +1379,7 @@
 				03C8BB4D274E3FBB00169725 /* VehicleInvoicesView.swift in Sources */,
 				03B80F9E27416D0B00E1BF47 /* DefaultVehicleNavigator.swift in Sources */,
 				5CA58D12274E8DF5000BF06C /* InvoicesScenario.swift in Sources */,
+				0375616227AEE5140067325A /* DotControlView.swift in Sources */,
 				0382E29F2717647500EB570E /* AuthenticationScenario.swift in Sources */,
 				87204D94274E51D100374957 /* DefaultVehicleCreator.swift in Sources */,
 				03004DC4273E70D700188983 /* PasswordResetViewModel.swift in Sources */,
@@ -1401,6 +1408,7 @@
 				0317EE3827519DDA00A6AE0D /* ProfileViewModel.swift in Sources */,
 				2CD4B8C0271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift in Sources */,
 				2C4486B4271DF7E10021122F /* VehicleScenario.swift in Sources */,
+				032CCB3727A9CF3300FC6275 /* ModalizedView.swift in Sources */,
 				03C759FC2765508F0032652F /* DefaultImageCaller.swift in Sources */,
 				87CD2C0727F50811004511D3 /* DefaultFirebaseAuthProvider.swift in Sources */,
 				39D101E52769E9B600F101AB /* SettingsScenario.swift in Sources */,

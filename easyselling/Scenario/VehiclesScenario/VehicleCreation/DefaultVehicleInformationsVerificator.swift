@@ -20,10 +20,15 @@ class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
                 || vehicle.brand.isEmpty
                 || vehicle.model.isEmpty: throw VehicleCreationError.emptyField
             case vehicle.year.count != 4: throw VehicleCreationError.incorrectYear
-            default:
-                try vehicleVerificator.verifyLicenseFormat(license: vehicle.license)
-                try vehicleVerificator.verifyLicenseSize(license: vehicle.license)
+            default: break
         }
+    }
+
+    func verifyLicence(_ licence: String) throws {
+        let vehicleVerificator = DefaultVehicleVerificator()
+
+        try vehicleVerificator.verifyLicenseFormat(license: licence)
+        try vehicleVerificator.verifyLicenseSize(license: licence)
     }
 }
 

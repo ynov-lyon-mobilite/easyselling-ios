@@ -20,9 +20,23 @@ class VehicleCreationViewModel: ObservableObject {
     @Published var model: String = ""
     @Published var license: String = ""
     @Published var year: String = ""
-    @Published var type: Vehicle.Category = .car
+    @Published var type: Vehicle.Category = .unknow
+    var createdVehicle: Vehicle = Vehicle(brand: "", model: "", license: "", type: .unknow, year: "")
 
-    init(vehicleCreator: VehicleCreator, vehicleVerificator: VehicleInformationsVerificator,
+    var title: String {
+        switch vehicleCreationStep {
+        case .vehicleType: return "Mon type de véhicule"
+        case .licence: return "Ma plaque d'immatriculation"
+        case .brandAndModel: return "Marque et modèle"
+        case .year: return "Année d'immatriculation"
+        }
+    }
+
+    var vehiclesTypes: [String] = ["Une voiture", "Une moto"]
+
+    var vehicleCreationStep: VehicleCreationStep = .vehicleType
+
+    init(vehicleCreator: VehicleCreator = DefaultVehicleCreator(), vehicleVerificator: VehicleInformationsVerificator = DefaultVehicleInformationsVerificator(),
          onFinish: @escaping () async -> Void) {
         self.vehicleCreator = vehicleCreator
         self.vehicleInformationsVerificator = vehicleVerificator
@@ -31,18 +45,39 @@ class VehicleCreationViewModel: ObservableObject {
 
     @MainActor func createVehicle() async {
         let informations = VehicleDTO(brand: brand, model: model, license: license, type: type, year: year)
-
-        do {
-            try vehicleInformationsVerificator.verifyInformations(vehicle: informations)
-            try await vehicleCreator.createVehicle(informations: informations)
-            await dismissModal()
-        } catch (let error) {
-            self.alert = (error as? VehicleCreationError)?.description ?? (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
-            self.showAlert = true
+}
+    func continueVehicleCreation() {
+        switch vehicleCreationStep {
+        case .vehicleType:
+            self.createdVehicle.type = self.type
+            self.vehicleCreationStep = .licence
+        case .licence:
+            let vehicleVerificator = DefaultVehicleVerificator()
+            do {
+                try vehicleVerificator.verifyLicenseFormat(license: self.license)
+                try vehicleVerificator.verifyLicenseSize(license: self.license)
+                self.createdVehicle.license = self.license
+                self.vehicleCreationStep = .brandAndModel
+            } catch (let error) {
+                
+            }
+        case .brandAndModel:
+            self.createdVehicle.brand = self.brand
+            self.createdVehicle.model = self.model
+            self.vehicleCreationStep = .year
+        case .year:
+            break
         }
     }
 
     func dismissModal() async {
         await self.onFinish()
+    }
+
+    enum VehicleCreationStep {
+        case vehicleType
+        case licence
+        case brandAndModel
+        case year
     }
 }

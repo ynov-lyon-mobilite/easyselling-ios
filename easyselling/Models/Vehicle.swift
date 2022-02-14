@@ -26,23 +26,26 @@ struct Vehicle: Codable, Equatable, Identifiable {
         switch type {
         case .car: return Asset.Icons.car.image
         case .moto: return Asset.Icons.moto.image
+        case .unknow: return UIImage()
         }
     }
     var imageColor: Color {
         switch type {
         case .car: return Asset.Colors.secondary.swiftUIColor
         case .moto: return Asset.Colors.primary.swiftUIColor
+        case .unknow: return .white
         }
     }
     var color: Color {
         switch type {
         case .car: return Asset.Colors.lightPurple.swiftUIColor
         case .moto: return Asset.Colors.lightBlue.swiftUIColor
+        case .unknow: return .white
         }
     }
 
     enum Category: String, Codable {
-      case car, moto
+      case car, moto, unknow
 
       var description: String {
         switch self {
@@ -50,6 +53,8 @@ struct Vehicle: Codable, Equatable, Identifiable {
             return L10n.Vehicles.car
         case .moto:
             return L10n.Vehicles.moto
+        case .unknow:
+            return ""
         }
       }
     }

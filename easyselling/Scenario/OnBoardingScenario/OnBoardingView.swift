@@ -54,17 +54,7 @@ struct OnBoardingView: View {
                 }
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 
-            HStack {
-                ForEach(viewModel.features) { feature in
-                    RoundedRectangle(cornerRadius: 25, style: .continuous)
-                        .fill(feature == viewModel.currentFeature
-                              ? Color.primaryEasyselling
-                              : Color.onBackground.opacity(0.8))
-                        .frame(width: feature == viewModel.currentFeature ?
-                               animationWidth : basicWidth, height: 10)
-                        .animation(.easeIn, value: feature == viewModel.currentFeature ? animationWidth: basicWidth)
-                }
-            }
+            DotControlView(totalElements: viewModel.features.count, contentIndex: viewModel.currentFeatureIndex)
 
             Spacer()
 
