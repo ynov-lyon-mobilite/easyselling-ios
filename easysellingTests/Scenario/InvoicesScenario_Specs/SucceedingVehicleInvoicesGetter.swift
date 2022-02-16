@@ -11,13 +11,13 @@ import Combine
 
 class SucceedingVehicleInvoicesGetter: VehicleInvoicesGetter {
 
-    private var invoices: [InvoiceCoreData]
+    private var invoices: [Invoice]
 
-    init(_ invoices: [InvoiceCoreData]) {
+    init(_ invoices: [Invoice]) {
         self.invoices = invoices
     }
 
-    func getInvoices(ofVehicleId: String) async throws -> [InvoiceCoreData] {
+    func getInvoices(ofVehicleId: String) async throws -> [Invoice] {
         return invoices
     }
 

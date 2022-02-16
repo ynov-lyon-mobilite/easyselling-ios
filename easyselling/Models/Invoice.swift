@@ -8,7 +8,7 @@
 import Foundation
 import CloudKit
 
-struct Invoice: Decodable {
+struct Invoice: Decodable, Equatable {
     let id: Int16
     let vehicle: String
     let file: String
