@@ -26,7 +26,7 @@ struct SettingsView: View {
                     .padding(.top, 10)
                 SelectAppIcon()
             }
-            .background(Color.white)
+            .background(Asset.Colors.secondaryBackground.swiftUIColor)
             .cornerRadius(20)
             .padding(.bottom, 30)
 
@@ -37,11 +37,12 @@ struct SettingsView: View {
                     .padding(.top, 10)
                 SelectAppIcon()
             }
-            .background(Color.white)
+            .background(Asset.Colors.secondaryBackground.swiftUIColor)
             .cornerRadius(20)
             Spacer()
         }
         .padding(.horizontal, 25)
+        .foregroundColor(Asset.Colors.text.swiftUIColor)
         .background(Asset.Colors.currentBackground.swiftUIColor.ignoresSafeArea())
     }
 }

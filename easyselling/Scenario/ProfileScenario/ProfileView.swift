@@ -15,9 +15,9 @@ struct ProfileView: View {
         VStack(alignment: .leading) {
             TitleNavigationView(title: L10n.Profile.title)
             VStack(alignment: .leading) {
-                ButtonList(title: L10n.Profile.explanations, icon: Asset.Icons.questionmark.image, color: Color.blue, action: {})
-                ButtonList(title: L10n.Profile.informations, icon: Asset.Icons.info.image, color: Color.blue, action: {})
-                ButtonList(title: L10n.Profile.settings, icon: Asset.Icons.settings.image, color: Color.blue, action: viewModel.navigatesToSettingsMenu)
+                ButtonList(title: L10n.Profile.explanations, icon: Asset.Icons.questionmark.image, color: Asset.Colors.secondary.swiftUIColor, action: {})
+                ButtonList(title: L10n.Profile.informations, icon: Asset.Icons.info.image, color: Asset.Colors.secondary.swiftUIColor, action: {})
+                ButtonList(title: L10n.Profile.settings, icon: Asset.Icons.settings.image, color: Asset.Colors.secondary.swiftUIColor, action: viewModel.navigatesToSettingsMenu)
                 Spacer()
                 ButtonList(title: L10n.Profile.logout, icon: Asset.Icons.logout.image, color: Color.red, action: viewModel.logout)
             }

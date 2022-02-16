@@ -27,8 +27,8 @@ struct ButtonList: View {
                     .padding(.leading, 10)
                 Spacer()
             }
-            .foregroundColor(Color.black)
-            .background(Color.white)
+            .foregroundColor(Asset.Colors.text.swiftUIColor)
+            .background(Asset.Colors.secondaryBackground.swiftUIColor)
             .cornerRadius(20)
             .padding(.bottom, 15)
         }
