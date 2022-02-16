@@ -108,7 +108,7 @@ struct MyVehiclesView_Previews: PreviewProvider {
                                      isNavigatingToProfile: {},
                                      isNavigatingToInvoices: {_ in },
                                      isNavigatingToSettingsMenu: {})
-        vm.vehicles = [VehicleCoreData()]
+        vm.vehicles = [Vehicle(brand: "", id: "", license: "", model: "", type: .car, year: "")]
         vm.state = .listingVehicles
 
         return MyVehiclesView(viewModel: vm)

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-class Vehicle {
+struct Vehicle: Decodable {
     var brand: String
     var id: String?
     var license: String
@@ -17,21 +17,12 @@ class Vehicle {
     var type: Category
     var year: String
 
-    init(id: String, brand: String, license: String, model: String, type: String, year: String) {
-        self.id = id
-        self.brand = brand
-        self.license = license
-        self.model = model
-        self.type = Category.from(category: type)
-        self.year = year
-    }
-
     static func toEncodableStruct (vehicle: Vehicle) -> VehicleDTO? {
         return VehicleDTO(brand: vehicle.brand, license: vehicle.license, model: vehicle.model, type: vehicle.type.rawValue, year: vehicle.year)
     }
 
-    static func toCoreDataObject (vehicle: VehicleResponse) -> VehicleCoreData {
-        return VehicleCoreData(id: vehicle.id, brand: vehicle.brand, license: vehicle.license, model: vehicle.model, type: vehicle.type, year: vehicle.year)
+    static func toCoreDataObject (vehicle: Vehicle) -> VehicleCoreData {
+        return VehicleCoreData(id: vehicle.id ?? "", brand: vehicle.brand, license: vehicle.license, model: vehicle.model, type: vehicle.type.rawValue, year: vehicle.year)
     }
 }
 
@@ -70,13 +61,4 @@ extension Vehicle {
                 return .init(rawValue: category) ?? .car
             }
         }
-}
-
-struct VehicleResponse: Decodable {
-    var brand: String
-    var id: String
-    var license: String
-    var model: String
-    var type: String
-    var year: String
 }
