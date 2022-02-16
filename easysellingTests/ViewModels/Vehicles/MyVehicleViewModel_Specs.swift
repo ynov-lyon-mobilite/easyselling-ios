@@ -9,7 +9,53 @@ import XCTest
 @testable import easyselling
 
 class MyVehiclesViewModel_Specs: XCTestCase {
-    
+
+    func test_Navigates_to_profile_view_when_clicking_on_profile_button() {
+        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([]))
+        whenNavigatingToProfile()
+        thenHasNavigatingToProfile()
+    }
+
+    func test_Navigates_to_vehicle_creation() {
+        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([]))
+        whenOpeningVehiculeCreationModal()
+        thenHasNavigatingToVehicleCreationModal()
+    }
+
+    func test_Navigates_to_vehicle_invoices_with_vehicle_id_as_parameter() {
+        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1",
+                                                                         brand: "Brand",
+                                                                         model: "Model",
+                                                                         license: "Licence",
+                                                                         type: .car,
+                                                                         year: "year")]))
+        whenNavigatingToInvoicesView()
+        thenVehicleId(is: "1")
+        thenNavigatesToInvoices()
+    }
+
+    func test_Navigates_to_vehicle_invoices() {
+        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1",
+                                                                         brand: "Brand",
+                                                                         model: "Model",
+                                                                         license: "Licence",
+                                                                         type: .car,
+                                                                         year: "year")]))
+        viewModel.navigatesToInvoices(ofVehicle: "1")
+        XCTAssertTrue(onNavigatingToInvoices)
+    }
+
+    func test_Navigates_to_settings_menu() {
+        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1",
+                                                                         brand: "Brand",
+                                                                         model: "Model",
+                                                                         license: "Licence",
+                                                                         type: .car,
+                                                                         year: "year")]))
+        whenNavigatingToSettingsMenu()
+        thenNavigatesToSettingsMenu()
+    }
+
     func test_Shows_vehicles_when_request_is_success() async {
         expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
                                 Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")]
@@ -29,12 +75,6 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         thenError(is: APICallerError.notFound.errorDescription)
     }
 
-    func test_Navigates_to_profile_view_when_clicking_on_profile_button() {
-        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([]))
-        whenNavigatingToProfile()
-        thenHasNavigatingToProfile()
-    }
-
     func test_Deletes_vehicle_when_request_is_success() async {
         givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([
             Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
@@ -50,14 +90,6 @@ class MyVehiclesViewModel_Specs: XCTestCase {
                               vehicleDeletor: FailingVehicleDeletor(withError: APICallerError.notFound))
         await whenDeletingVehicle(withId: "2")
         thenError(is: APICallerError.notFound.errorDescription)
-    }
-
-    private func whenNavigatingToProfile() {
-        viewModel.navigateToProfile()
-    }
-
-    private func thenHasNavigatingToProfile() {
-        XCTAssertTrue(onNavigateToProfile)
     }
 
     func test_Asserts_that_updated_vehicle_is_the_same_that_has_been_clicked() {
@@ -145,10 +177,6 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     private func thenViewModelState(is expected: MyVehiclesViewModel.VehicleState) {
         XCTAssertEqual(expected, viewModel.state)
     }
-    
-    private func thenVehicleCreationModalIsOpen() {
-        XCTAssertTrue(isOpen)
-    }
 
     private func thenVehicleThatShouldBeUpdate(is expected: Vehicle) {
         XCTAssertEqual(expected, onUpdateVehicle)
@@ -159,17 +187,28 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     }
 
     private func thenNavigatesToInvoices() {
-        XCTAssertTrue(isNavigatingToInvoices)
+        XCTAssertTrue(onNavigatingToInvoices)
     }
 
+    private func thenNavigatesToSettingsMenu() {
+        XCTAssertTrue(onNavigateToSettingsMenu)
+    }
+
+    private func thenHasNavigatingToProfile() {
+        XCTAssertTrue(onNavigateToProfile)
+    }
+
+    private func thenHasNavigatingToVehicleCreationModal() {
+        XCTAssertTrue(viewModel.isOpenningVehicleCreation)
+    }
+ 
     private var viewModel: MyVehiclesViewModel!
-    private var isOpen: Bool = false
     private var expectedUrlResponse: Data? = readLocalFile(forName: "succeededVehicles")
     private var onNavigateToProfile: Bool = false
     private var expectedVehicles: [Vehicle] = []
     private var onUpdateVehicle: Vehicle!
     private var expectedCallback: AsyncableAction!
-    private var isNavigatingToInvoices: Bool = false
+    private var onNavigatingToInvoices: Bool = false
     private var selectedVehicle: Vehicle!
     private var onNavigateToSettingsMenu: Bool = false
 }

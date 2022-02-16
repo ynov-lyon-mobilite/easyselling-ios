@@ -8,62 +8,50 @@
 import Foundation
 import SwiftUI
 
-struct ModalizedView<Content : View>: View {
-    let modalizedContent: Content
-    let modalContent: Content
-    let isModalized: Bool
-    init(@ViewBuilder modalizedContent: () -> Content, modalContent: () -> Content, isModalized: Bool = false) {
-        self.modalizedContent = modalizedContent()
-        self.modalContent = modalContent()
-        self.isModalized = isModalized
-    }
+private struct ModalizedView<V: View, Content : View>: View {
+    let modalizedContent: V
+    @ViewBuilder let modalContent: Content
+    @Binding var isModalized: Bool
 
     var body: some View {
-        ZStack {
-            modalizedContent
-                .blur(radius: isModalized ? 2 : 0)
-            if isModalized {
-                Color.black
-                    .opacity(0.6)
+        GeometryReader { reader in
+            ZStack {
+                modalizedContent
+                    .blur(radius: isModalized ? 2 : 0)
+                    .disabled(isModalized)
+                if isModalized {
+                    Color.black
+                        .opacity(0.6)
+                        .ignoresSafeArea()
+                }
+
                 VStack {
                     Spacer()
-                    Rectangle()
+                    modalContent
+                        .padding(.bottom, reader.safeAreaInsets.bottom)
                         .cornerRadius(25, corners: [.topLeft, .topRight])
-                        .overlay {
-                            modalContent
-                        }
-                        .foregroundColor(.white)
-                        .frame(maxHeight: 400)
-
                 }
+                .ignoresSafeArea(edges: .bottom)
+                .offset(y: isModalized ? 0 : reader.size.height)
             }
         }
-        .ignoresSafeArea()
     }
 }
 
 struct ModalizedView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ModalizedView(modalizedContent: {
-                VStack {
-                    Text("Test")
-                }
-            }, modalContent: {
-                VStack {
-                    Text("Test 2")
-                }
-        })
-            ModalizedView(modalizedContent: {
-                VStack {
-                    Text("Test")
-                }
-            }, modalContent: {
-                VStack {
-                    Text("Test 2")
-                }
-            })
-                .previewDevice("iPhone 8")
+            VStack {
+                Text("Test")
+            }
+
+            VStack {
+                Text("Test")
+            }
+            .previewDevice("iPhone 8")
+
+        }.modal(isModalized: .constant(true)) {
+            VehicleCreationView(viewModel: VehicleCreationViewModel(isOpenningVehicleCreation: .constant(true)))
         }
     }
 }
@@ -82,5 +70,9 @@ struct RoundedCorner: Shape {
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners))
+    }
+
+    func modal<Content: View>(isModalized: Binding<Bool>, @ViewBuilder modalContent: @escaping () -> Content) -> some View {
+        return ModalizedView(modalizedContent: self, modalContent: modalContent, isModalized: isModalized)
     }
 }

@@ -57,5 +57,7 @@ struct Vehicle: Codable, Equatable, Identifiable {
             return ""
         }
       }
+
+
     }
 }

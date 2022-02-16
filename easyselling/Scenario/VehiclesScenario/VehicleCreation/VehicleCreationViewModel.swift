@@ -6,21 +6,31 @@
 //
 import Foundation
 import Combine
+import SwiftUI
 
 class VehicleCreationViewModel: ObservableObject {
 
+    init(vehicleCreator: VehicleCreator = DefaultVehicleCreator(),
+         vehicleVerificator: VehicleInformationsVerificator = DefaultVehicleInformationsVerificator(),
+         isOpenningVehicleCreation: Binding<Bool>) {
+        self.vehicleCreator = vehicleCreator
+        self.vehicleInformationsVerificator = vehicleVerificator
+        self.isOpenningVehicleCreation = isOpenningVehicleCreation
+    }
+
     private var vehicleCreator: VehicleCreator
     private var vehicleInformationsVerificator: VehicleInformationsVerificator
-    private var onFinish: () async -> Void
 
+    var isOpenningVehicleCreation: Binding<Bool>
     @Published var alert: String = ""
     @Published var showAlert = false
-
     @Published var brand: String = ""
     @Published var model: String = ""
     @Published var license: String = ""
     @Published var year: String = ""
-    @Published var type: Vehicle.Category = .unknow
+    @Published var vehicleCreationStep: VehicleCreationStep = .vehicleType
+
+
     var createdVehicle: Vehicle = Vehicle(brand: "", model: "", license: "", type: .unknow, year: "")
 
     var title: String {
@@ -32,15 +42,10 @@ class VehicleCreationViewModel: ObservableObject {
         }
     }
 
-    var vehiclesTypes: [String] = ["Une voiture", "Une moto"]
+    private var type: Vehicle.Category = .unknow
 
-    var vehicleCreationStep: VehicleCreationStep = .vehicleType
-
-    init(vehicleCreator: VehicleCreator = DefaultVehicleCreator(), vehicleVerificator: VehicleInformationsVerificator = DefaultVehicleInformationsVerificator(),
-         onFinish: @escaping () async -> Void) {
-        self.vehicleCreator = vehicleCreator
-        self.vehicleInformationsVerificator = vehicleVerificator
-        self.onFinish = onFinish
+    func selectType(_ type: Vehicle.Category) {
+        self.type = type
     }
 
     @MainActor func createVehicle() async {
@@ -70,8 +75,10 @@ class VehicleCreationViewModel: ObservableObject {
         }
     }
 
-    func dismissModal() async {
-        await self.onFinish()
+    func dismissModal() {
+        withAnimation(.easeInOut(duration: 0.4)) {
+            isOpenningVehicleCreation.wrappedValue.toggle()
+        }
     }
 
     enum VehicleCreationStep {

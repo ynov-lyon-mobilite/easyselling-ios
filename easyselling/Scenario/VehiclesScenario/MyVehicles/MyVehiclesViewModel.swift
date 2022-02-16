@@ -12,14 +12,12 @@ class MyVehiclesViewModel: ObservableObject {
 
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
          vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
-         isOpenningVehicleCreation: @escaping Action,
          isOpeningVehicleUpdate: @escaping OnUpdatingVehicle,
          isNavigatingToProfile: @escaping Action,
          isNavigatingToInvoices: @escaping (Vehicle) -> Void) {
 
         self.vehiclesGetter = vehiclesGetter
         self.vehicleDeletor = vehicleDeletor
-        self.isOpenningVehicleCreation = isOpenningVehicleCreation
         self.isOpeningVehicleUpdate = isOpeningVehicleUpdate
         self.isNavigatingToProfile = isNavigatingToProfile
         self.isNavigatingToInvoices = isNavigatingToInvoices
@@ -28,11 +26,11 @@ class MyVehiclesViewModel: ObservableObject {
     private var vehiclesGetter: VehiclesGetter
     private var isOpeningVehicleUpdate: OnUpdatingVehicle
     private var vehicleDeletor: VehicleDeletor
-    private var isOpenningVehicleCreation: Action
     private var isNavigatingToProfile: Action
     private var isNavigatingToInvoices: (Vehicle) -> Void
 
     @Published var isLoading: Bool = true
+    @Published var isOpenningVehicleCreation: Bool = false
     @Published var vehicles: [Vehicle] = []
     @Published var error: APICallerError?
     @Published var state: VehicleState = .loading
@@ -52,7 +50,9 @@ class MyVehiclesViewModel: ObservableObject {
     }
 
     func openVehicleCreation() {
-        self.isOpenningVehicleCreation()
+        withAnimation(.easeInOut(duration: 0.4)) {
+            isOpenningVehicleCreation = true
+        }
     }
 
     func openVehicleUpdate(vehicle: Vehicle) {

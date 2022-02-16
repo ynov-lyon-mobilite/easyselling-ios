@@ -10,8 +10,7 @@ import SwiftUI
 
 protocol VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
-                             onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigateToProfile: @escaping Action,
                              onNavigatingToInvoices: @escaping (Vehicle) -> Void,
                              onNavigateToSettingsMenu: @escaping Action)
@@ -30,26 +29,25 @@ class DefaultVehicleNavigator: VehicleNavigator {
     private var navigationController: UINavigationController = UINavigationController()
     private var window: UIWindow?
 
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
-                             onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigateToProfile: @escaping Action,
                              onNavigatingToInvoices: @escaping (Vehicle) -> Void,
                              onNavigateToSettingsMenu: @escaping Action) {
         window?.rootViewController = navigationController
 
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen,
-                                     isOpeningVehicleUpdate: onVehicleUpdateOpen,
+        let vm = MyVehiclesViewModel(isOpeningVehicleUpdate: onVehicleUpdateOpen,
                                      isNavigatingToProfile: onNavigateToProfile,
                                      isNavigatingToInvoices: onNavigatingToInvoices)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
+
         navigationController.pushViewController(UIHostingController(rootView: myVehiclesView), animated: true)
     }
 
-    func navigatesToVehicleCreation(onFinish: @escaping () async -> Void) {
-        let vm = VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: DefaultVehicleInformationsVerificator(), onFinish: onFinish)
-        let vehicleCreationView = VehicleCreationView(viewModel: vm)
-        navigationController.present(UIHostingController(rootView: vehicleCreationView), animated: true)
-    }
+//    func navigatesToVehicleCreation(onFinish: @escaping () async -> Void) {
+//        let vm = VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: DefaultVehicleInformationsVerificator(), onFinish: onFinish)
+//        let vehicleCreationView = VehicleCreationView(viewModel: vm)
+//        navigationController.present(UIHostingController(rootView: vehicleCreationView), animated: true)
+//    }
 
     func navigatesToProfile() {
         let navigator = DefaultProfileNavigator(navigationController: navigationController, window: window)

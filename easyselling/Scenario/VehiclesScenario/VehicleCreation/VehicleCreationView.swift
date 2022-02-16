@@ -13,37 +13,29 @@ struct VehicleCreationView: View {
 
     var body: some View {
         VStack(spacing: 15) {
-                Text("Mon type de véhicule")
+            Text(viewModel.title)
                     .foregroundColor(Asset.Colors.primary.swiftUIColor)
                     .font(.title2)
                     .bold()
 
-                Button(action: {}) {
-                    Text("Une voiture")
-                        .foregroundColor(Asset.Colors.primary.swiftUIColor)
-                        .font(.headline)
-                        .bold()
+            VStack(spacing: 20) {
+                if viewModel.vehicleCreationStep == .vehicleType {
+                    VehicleFormButton(action: {viewModel.selectType(.car)}, title: "Une voiture", isSelected: viewModel.selectedType)
+                    VehicleFormButton(action: {viewModel.selectType(.moto)}, title: "Une moto", isSelected: viewModel.selectedType)
+                } else if viewModel.vehicleCreationStep == .licence {
+                    VehicleFormTextField(text: $viewModel.license, placeholder: "Immatriculation")
+                } else if viewModel.vehicleCreationStep == .brandAndModel {
+                    VehicleFormTextField(text: $viewModel.brand, placeholder: "Marque")
+                    VehicleFormTextField(text: $viewModel.model, placeholder: "Modèle")
+                } else if viewModel.vehicleCreationStep == .year {
+                    VehicleFormTextField(text: $viewModel.year, placeholder: "JJ/MM/AAAA")
                 }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.white)
-                .cornerRadius(25)
-                .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 0)
+            }
+            .padding(.top, 20)
 
-                Button(action: {}) {
-                    Text("Une moto")
-                        .foregroundColor(Asset.Colors.primary.swiftUIColor)
-                        .font(.headline)
-                        .bold()
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.white)
-                .cornerRadius(25)
-                .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 0)
-
-                Button("Continuer", action: {})
+            Button("Continuer", action: viewModel.continueVehicleCreation)
                     .buttonStyle(PrimaryButtonStyle())
+                    .padding(.vertical, 20)
 
                 DotControlView(totalElements: 4, contentIndex: 0)
             }
@@ -55,7 +47,10 @@ struct VehicleCreationView: View {
 
 struct VehicleCreationView_Previews: PreviewProvider {
     static var previews: some View {
-        VehicleCreationView(viewModel: VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: DefaultVehicleInformationsVerificator(), onFinish: {}))
+        let viewModel = VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: DefaultVehicleInformationsVerificator(), isOpenningVehicleCreation: .constant(true))
+        viewModel.vehicleCreationStep = .vehicleType
+
+            return VehicleCreationView(viewModel: viewModel)
             .previewLayout(PreviewLayout.sizeThatFits)
     }
 }
@@ -98,3 +93,30 @@ struct VehicleCreationView_Previews: PreviewProvider {
 //            }
 //            .padding(.top)
 //            Spacer()
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
+    }
+}
+
+struct CheckToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        Button {
+            configuration.isOn.toggle()
+        } label: {
+            Label {
+                configuration.label
+            } icon: {
+            }
+        }
+        .buttonStyle(ToggleButtonStyle(isOn: configuration.$isOn))
+    }
+}

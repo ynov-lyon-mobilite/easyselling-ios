@@ -91,14 +91,20 @@ struct MyVehiclesView: View {
                 }
             }
         }
-        .task { await viewModel.getVehicles() }
+        .onAppear {
+            Task {
+                await viewModel.getVehicles()
+            }
+        }.modal(isModalized: $viewModel.isOpenningVehicleCreation) {
+            VehicleCreationView(viewModel: VehicleCreationViewModel(isOpenningVehicleCreation: $viewModel.isOpenningVehicleCreation))
+        }
     }
 }
 
 struct MyVehiclesView_Previews: PreviewProvider {
 
     static var previews: some View {
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {},
+        let vm = MyVehiclesViewModel(
                                      isOpeningVehicleUpdate: {_,_ in },
                                      isNavigatingToProfile: {},
                                      isNavigatingToInvoices: {_ in })
