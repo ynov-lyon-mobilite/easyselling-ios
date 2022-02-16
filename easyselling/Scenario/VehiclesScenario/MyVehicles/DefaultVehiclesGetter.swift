@@ -8,7 +8,7 @@
 import Foundation
 
 protocol VehiclesGetter {
-    func getVehicles() async throws -> [Vehicle]
+    func getVehicles() async throws -> [VehicleCoreData]
 }
 
 class DefaultVehiclesGetter : VehiclesGetter {
@@ -21,33 +21,26 @@ class DefaultVehiclesGetter : VehiclesGetter {
     private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
 
-    func getVehicles() async throws -> [Vehicle] {
+    func getVehicles() async throws -> [VehicleCoreData] {
         do {
             let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .GET, headers: [:],
                                                                                pathKeysValues: [:], queryParameters: [])
 
-            let vehicles = try await apiCaller.call(urlRequest, decodeType: [VehicleDTO].self)
+            let vehicles = try await apiCaller.call(urlRequest, decodeType: [VehicleResponse].self)
 
             mainContext.performAndWait {
                 for vehicle in vehicles {
-                    let vehicleInCoreData = Vehicle.fetchRequestById(id: vehicle.id ?? "")
+                    let vehicleInCoreData = VehicleCoreData.fetchRequestById(id: vehicle.id)
 
                     if vehicleInCoreData == nil {
-                        let entity = Vehicle(context: mainContext)
-                        entity.id = vehicle.id
-                        entity.license = vehicle.license
-                        entity.brand = vehicle.brand
-                        entity.year = vehicle.year
-                        entity.type = vehicle.type.rawValue
-                        entity.model = vehicle.model
-
+                        _ = Vehicle.toCoreDataObject(vehicle: vehicle)
                         if mainContext.hasChanges {
                             try? mainContext.save()
                         }
                     }
                 }
             }
-            return try mainContext.fetch(Vehicle.fetchRequest())
+            return try mainContext.fetch(VehicleCoreData.fetchRequest())
         } catch (_) {
             throw APICallerError.internalServerError
         }

@@ -34,7 +34,7 @@ class VehicleUpdateViewModel: ObservableObject {
         self.brand = vehicle.brand
         self.model = vehicle.model
         self.license = vehicle.license
-        self.type = vehicle.vehicleCategory
+        self.type = vehicle.type
         self.year = vehicle.year
     }
 
@@ -42,7 +42,7 @@ class VehicleUpdateViewModel: ObservableObject {
     func updateVehicle() async {
         guard let id = vehicle.id else { return }
 
-        let newInformations = VehicleDTO(brand: brand, model: model, license: license, type: type, year: year)
+        let newInformations = VehicleDTO(brand: brand, license: license, model: model, type: type.rawValue, year: year)
 
         do {
             try vehicleInformationsVerificator.verifyInformations(vehicle: newInformations)
