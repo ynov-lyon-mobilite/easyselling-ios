@@ -10,17 +10,15 @@ import XCTest
 
 class DefaultVehicleInvoicesGetter_Specs: XCTestCase {
 
-    private var invoices: [Invoice]!
+    private var invoices: [InvoiceCoreData]!
     private var invoiceGetter: DefaultVehicleInvoicesGetter!
     private var error: APICallerError!
     
     func test_Shows_vehicle_invoices_when_request_succeeded() async {
-        let expectedInvoices = [
-            Invoice(id: "0AJEAZ9", vehicle: "1", file: .preview),
-            Invoice(id: "0AJEAZ8", vehicle: "1", file: .preview),
-            Invoice(id: "0AJEAZ7", vehicle: "2", file: .preview)
-        ]
-        
+        let expectedInvoices = [InvoiceCoreData(id: 1, vehicle: "1", file: "1", dateCreated: "date1", dateUpdated: ""),
+                        InvoiceCoreData(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
+                        InvoiceCoreData(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")]
+
         givenGetter(withAPICaller: DefaultAPICaller(urlSession: FakeUrlSession(localFile: .succeededInvoices)))
         await whenTryingToGetVehicleInvoices()
         thenReturnedInvoices(are: expectedInvoices)
@@ -44,7 +42,7 @@ class DefaultVehicleInvoicesGetter_Specs: XCTestCase {
         }
     }
 
-    private func thenReturnedInvoices(are expected: [Invoice]) {
+    private func thenReturnedInvoices(are expected: [InvoiceCoreData]) {
         XCTAssertEqual(expected, invoices)
     }
 

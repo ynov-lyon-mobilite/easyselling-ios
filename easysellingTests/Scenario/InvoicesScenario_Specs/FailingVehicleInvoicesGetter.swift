@@ -17,7 +17,7 @@ class FailingVehicleInvoicesGetter: VehicleInvoicesGetter {
         self.error = error
     }
 
-    func getInvoices(ofVehicleId: String) async throws -> [Invoice] {
+    func getInvoices(ofVehicleId: String) async throws -> [InvoiceCoreData] {
         throw error
     }
 

@@ -15,9 +15,9 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         thenViewModelIsLoading()
         await whenTryingToGetVehicleInvoices()
         thenViewModelIsNotLoading()
-        XCTAssertEqual([Invoice(id: "0AJEAZ9", vehicle: "1", file: .preview),
-                        Invoice(id: "0AJEAZ8", vehicle: "1", file: .preview),
-                        Invoice(id: "0AJEAZ7", vehicle: "2", file: .preview)], viewModel.invoices)
+        XCTAssertEqual([InvoiceCoreData(id: 1, vehicle: "1", file: "1", dateCreated: "date1", dateUpdated: ""),
+                        InvoiceCoreData(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
+                        InvoiceCoreData(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")], viewModel.invoices)
     }
 
     func test_Shows_error_when_request_is_failing() async {
@@ -50,8 +50,8 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         await whenTryingToGetVehicleInvoices()
         await whenDeletingInvoice(withId: "0AJEAZ8")
         thenLoadInvoices(are: [
-            Invoice(id: "0AJEAZ9", vehicle: "1", file: .preview),
-            Invoice(id: "0AJEAZ7", vehicle: "2", file: .preview)])
+            InvoiceCoreData(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
+            InvoiceCoreData(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")])
     }
 
     func test_Shows_an_error_when_the_request_fails_when_deleting_an_invoice() async {
@@ -113,7 +113,7 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         XCTAssertEqual(expected, viewModel.error?.errorDescription)
     }
 
-    private func thenLoadInvoices(are expected: [Invoice]) {
+    private func thenLoadInvoices(are expected: [InvoiceCoreData]) {
         XCTAssertEqual(expected, viewModel.invoices)
     }
 
@@ -122,8 +122,7 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
     private var downloadedInvoice: File!
     private var onNavigatingToInvoiceView: Bool = false
     private let expectedVehicleInvoices = [
-        Invoice(id: "0AJEAZ9", vehicle: "1", file: .preview),
-        Invoice(id: "0AJEAZ8", vehicle: "1", file: .preview),
-        Invoice(id: "0AJEAZ7", vehicle: "2", file: .preview)
-    ]
+        InvoiceCoreData(id: 1, vehicle: "1", file: "1", dateCreated: "date1", dateUpdated: ""),
+        InvoiceCoreData(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
+        InvoiceCoreData(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")]
 }
