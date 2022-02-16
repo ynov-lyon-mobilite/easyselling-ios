@@ -59,10 +59,10 @@ class MyVehiclesViewModel: ObservableObject {
         self.isOpeningVehicleUpdate(vehicle, { await self.getVehicles() })
     }
 
-    @MainActor func getVehicles() {
+    @MainActor func getVehicles() async {
         state = .loading
         do {
-            vehicles = try mainContext.fetch(Vehicle.fetchRequest())
+            vehicles = try await vehiclesGetter.getVehicles()
             state = .listingVehicles
         } catch (let error) {
             state = .error

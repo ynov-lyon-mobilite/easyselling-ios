@@ -30,7 +30,6 @@ class StartupScenario {
             navigator.navigatesToLogin()
         case .home:
             navigator.navigatesToHomeView()
-            await TaskSequencer.shared.proccess()
         }
     }
 
