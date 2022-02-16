@@ -17,11 +17,11 @@ class VehicleUpdateViewModel: ObservableObject {
     @Published var alert: String = ""
     @Published var showAlert = false
 
-    @Published var brand: String = ""
-    @Published var model: String = ""
-    @Published var license: String = ""
-    @Published var type: String = ""
-    @Published var year: String = ""
+    @Published var brand: String
+    @Published var model: String
+    @Published var license: String
+    @Published var type: Vehicle.Category
+    @Published var year: String
 
     init(vehicle: Vehicle, onFinish: @escaping () async -> Void,
          vehicleVerificator: VehicleInformationsVerificator = DefaultVehicleInformationsVerificator(),
@@ -34,7 +34,7 @@ class VehicleUpdateViewModel: ObservableObject {
         self.brand = vehicle.brand
         self.model = vehicle.model
         self.license = vehicle.license
-        self.type = vehicle.type
+        self.type = vehicle.vehicleCategory
         self.year = vehicle.year
     }
 
