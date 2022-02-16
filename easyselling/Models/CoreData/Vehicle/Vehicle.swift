@@ -29,4 +29,8 @@ public class Vehicle: NSManagedObject {
     @NSManaged public var model: String
     @NSManaged public var type: String
     @NSManaged public var year: String
+
+    var vehicleCategory: Vehicle.Category {
+        .init(rawValue: type) ?? .car
+    }
 }

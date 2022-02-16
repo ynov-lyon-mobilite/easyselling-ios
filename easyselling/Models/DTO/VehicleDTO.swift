@@ -12,6 +12,6 @@ struct VehicleDTO: Codable, Equatable, Identifiable {
     var brand: String
     var model: String
     var license: String
-    var type: String
+    var type: Vehicle.Category
     var year: String
 }

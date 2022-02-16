@@ -20,9 +20,8 @@ class DefaultRequestGenerator: RequestGenerator {
     init(tokenManager: TokenManager = DefaultTokenManager.shared) {
         self.tokenManager = tokenManager
     }
-
-    private var jsonEncoder = JSONEncoder()
-    private var fixHeaders: [String: String] = ["Content-Type": "application/json"]
+        private let jsonEncoder = JSONEncoder()
+        private let fixHeaders: [String: String] = ["Content-Type": "application/json"]
 
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod = .GET, body: T?, headers: [String: String],
                                        pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URLRequest {

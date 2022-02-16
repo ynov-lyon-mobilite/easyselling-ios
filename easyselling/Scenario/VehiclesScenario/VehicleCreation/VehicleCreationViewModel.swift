@@ -20,7 +20,7 @@ class VehicleCreationViewModel: ObservableObject {
     @Published var model: String = ""
     @Published var license: String = ""
     @Published var year: String = ""
-    @Published var type: String = ""
+    @Published var type: Vehicle.Category = .car
 
     init(vehicleCreator: VehicleCreator, vehicleVerificator: VehicleInformationsVerificator,
          onFinish: @escaping () async -> Void) {
