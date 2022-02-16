@@ -8,7 +8,7 @@
 import Foundation
 
 protocol VehiclesGetter {
-    func getVehicles() async throws -> [VehicleCoreData]
+    func getVehicles() async throws -> [Vehicle]
 }
 
 class DefaultVehiclesGetter : VehiclesGetter {
@@ -21,16 +21,16 @@ class DefaultVehiclesGetter : VehiclesGetter {
     private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
 
-    func getVehicles() async throws -> [VehicleCoreData] {
+    func getVehicles() async throws -> [Vehicle] {
         do {
             let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .GET, headers: [:],
                                                                                pathKeysValues: [:], queryParameters: [])
 
-            let vehicles = try await apiCaller.call(urlRequest, decodeType: [VehicleResponse].self)
+            let vehiclesDTO = try await apiCaller.call(urlRequest, decodeType: [Vehicle].self)
 
             mainContext.performAndWait {
-                for vehicle in vehicles {
-                    let vehicleInCoreData = VehicleCoreData.fetchRequestById(id: vehicle.id)
+                for vehicle in vehiclesDTO {
+                    let vehicleInCoreData = VehicleCoreData.fetchRequestById(id: vehicle.id ?? "")
 
                     if vehicleInCoreData == nil {
                         _ = Vehicle.toCoreDataObject(vehicle: vehicle)
@@ -40,7 +40,15 @@ class DefaultVehiclesGetter : VehiclesGetter {
                     }
                 }
             }
-            return try mainContext.fetch(VehicleCoreData.fetchRequest())
+
+            let vehiclesCoreData = try mainContext.fetch(VehicleCoreData.fetchRequest())
+            var vehicles: [Vehicle] = []
+
+            vehiclesCoreData.forEach { vehicle in
+                vehicles.append(Vehicle(brand: vehicle.brand, id: vehicle.id, license: vehicle.license, model: vehicle.model, type: Vehicle.Category(rawValue: vehicle.type) ?? .car, year: vehicle.year))
+            }
+
+            return vehicles
         } catch (_) {
             throw APICallerError.internalServerError
         }
