@@ -96,6 +96,8 @@
 		03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F209852716EECA00E10F6C /* XCAssets+Generated.swift */; };
 		03F2098B27170F2E00E10F6C /* OnBoardingScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F2098A27170F2E00E10F6C /* OnBoardingScenario.swift */; };
 		03F2098D271711CE00E10F6C /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F2098C271711CE00E10F6C /* OnBoardingView.swift */; };
+		2C28A92A27BD3F1500C5E468 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C28A92927BD3F1500C5E468 /* Vehicle.swift */; };
+		2C28A92C27BD47B500C5E468 /* VehicleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C28A92B27BD47B500C5E468 /* VehicleDTO.swift */; };
 		2C2DA388275280330085988B /* DefaultVehicleVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2DA387275280330085988B /* DefaultVehicleVerificator.swift */; };
 		2C2DA38A2752814E0085988B /* DefaultVehicleVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2DA3892752814E0085988B /* DefaultVehicleVerificator_Specs.swift */; };
 		2C4486B4271DF7E10021122F /* VehicleScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4486B3271DF7E10021122F /* VehicleScenario.swift */; };
@@ -104,8 +106,7 @@
 		2C86337C273FB7B10049C186 /* succeededVehicles.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C86337B273FB7B10049C186 /* succeededVehicles.json */; };
 		2C86337D273FBA630049C186 /* succeededVehicles.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C86337B273FB7B10049C186 /* succeededVehicles.json */; };
 		2C958D862788832C007CCB3A /* easyselling.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C958D842788832C007CCB3A /* easyselling.xcdatamodeld */; };
-		2C98317F2788A17900066E5E /* Vehicle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98317E2788A17900066E5E /* Vehicle+Extension.swift */; };
-		2C99B015278891D6005E75E8 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C99B013278891D6005E75E8 /* Vehicle.swift */; };
+		2C99B015278891D6005E75E8 /* VehicleCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C99B013278891D6005E75E8 /* VehicleCoreData.swift */; };
 		2CAE03D82717118D008D7A68 /* VehicleCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */; };
 		2CD4B8C0271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */; };
 		2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */; };
@@ -196,7 +197,6 @@
 		8FE6243B2752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624382752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift */; };
 		8FE6243C2752765A000D0FC8 /* FailingEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624392752765A000D0FC8 /* FailingEmailVerificator.swift */; };
 		8FF0102327329DDE0022314B /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF0102227329DDE0022314B /* Color+Extensions.swift */; };
-		9B5C547D27387E59005CFD24 /* VehicleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5C547C27387E59005CFD24 /* VehicleDTO.swift */; };
 		9BB4F7AD273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB4F7AC273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift */; };
 		9BB84D72274E361E00D88B03 /* FakeAuthorizedRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB84D71274E361E00D88B03 /* FakeAuthorizedRequestGenerator.swift */; };
 		9BB84D77274E510B00D88B03 /* StartupScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB84D76274E510B00D88B03 /* StartupScenario.swift */; };
@@ -303,6 +303,8 @@
 		03F209852716EECA00E10F6C /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		03F2098A27170F2E00E10F6C /* OnBoardingScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScenario.swift; sourceTree = "<group>"; };
 		03F2098C271711CE00E10F6C /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		2C28A92927BD3F1500C5E468 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		2C28A92B27BD47B500C5E468 /* VehicleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDTO.swift; sourceTree = "<group>"; };
 		2C2DA387275280330085988B /* DefaultVehicleVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleVerificator.swift; sourceTree = "<group>"; };
 		2C2DA3892752814E0085988B /* DefaultVehicleVerificator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleVerificator_Specs.swift; sourceTree = "<group>"; };
 		2C4486B3271DF7E10021122F /* VehicleScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleScenario.swift; sourceTree = "<group>"; };
@@ -310,8 +312,7 @@
 		2C863377273FB4040049C186 /* DefaultVehiclesGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehiclesGetter.swift; sourceTree = "<group>"; };
 		2C86337B273FB7B10049C186 /* succeededVehicles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = succeededVehicles.json; sourceTree = "<group>"; };
 		2C958D852788832C007CCB3A /* easyselling.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = easyselling.xcdatamodel; sourceTree = "<group>"; };
-		2C98317E2788A17900066E5E /* Vehicle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vehicle+Extension.swift"; sourceTree = "<group>"; };
-		2C99B013278891D6005E75E8 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		2C99B013278891D6005E75E8 /* VehicleCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCoreData.swift; sourceTree = "<group>"; };
 		2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationView.swift; sourceTree = "<group>"; };
 		2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleInformationsVerificator.swift; sourceTree = "<group>"; };
 		2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationViewModel.swift; sourceTree = "<group>"; };
@@ -399,7 +400,6 @@
 		8FE624382752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultEmailVerificator_Specs.swift; sourceTree = "<group>"; };
 		8FE624392752765A000D0FC8 /* FailingEmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailingEmailVerificator.swift; sourceTree = "<group>"; };
 		8FF0102227329DDE0022314B /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
-		9B5C547C27387E59005CFD24 /* VehicleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDTO.swift; sourceTree = "<group>"; };
 		9BB4F7AC273D48D700340BD3 /* DefaultVehiclesGetter_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehiclesGetter_Specs.swift; sourceTree = "<group>"; };
 		9BB84D71274E361E00D88B03 /* FakeAuthorizedRequestGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAuthorizedRequestGenerator.swift; sourceTree = "<group>"; };
 		9BB84D76274E510B00D88B03 /* StartupScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupScenario.swift; sourceTree = "<group>"; };
@@ -748,8 +748,8 @@
 		2C98317D2788A0F800066E5E /* Vehicle */ = {
 			isa = PBXGroup;
 			children = (
-				2C99B013278891D6005E75E8 /* Vehicle.swift */,
-				2C98317E2788A17900066E5E /* Vehicle+Extension.swift */,
+				2C99B013278891D6005E75E8 /* VehicleCoreData.swift */,
+				2C28A92927BD3F1500C5E468 /* Vehicle.swift */,
 			);
 			path = Vehicle;
 			sourceTree = "<group>";
@@ -1143,7 +1143,7 @@
 				87DC1D09271FDF5C002DC193 /* LoginDTO.swift */,
 				8798D1422730F3DF00FF3AB4 /* RefreshDTO.swift */,
 				03004DCF273E79D700188983 /* PasswordResetDTO.swift */,
-				9B5C547C27387E59005CFD24 /* VehicleDTO.swift */,
+				2C28A92B27BD47B500C5E468 /* VehicleDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1438,11 +1438,11 @@
 				8798D1432730F3DF00FF3AB4 /* RefreshDTO.swift in Sources */,
 				8FA938CA2747093100B1FA96 /* VehicleUpdateView.swift in Sources */,
 				035E860C2718A3AB00684ED0 /* APICallerError.swift in Sources */,
-				2C98317F2788A17900066E5E /* Vehicle+Extension.swift in Sources */,
 				035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */,
 				0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */,
 				875333982760012E005E4697 /* View+Extensions.swift in Sources */,
 				0354E83927737449004AEECB /* ImagedBackground.swift in Sources */,
+				2C28A92A27BD3F1500C5E468 /* Vehicle.swift in Sources */,
 				87DC1D0A271FDF5C002DC193 /* LoginDTO.swift in Sources */,
 				87DC1D06271F6A4C002DC193 /* DefaultUserAuthenticator.swift in Sources */,
 				8705B9A427207A8D004132CF /* UserAuthenticationViewModel.swift in Sources */,
@@ -1450,6 +1450,7 @@
 				0317EE3A27519DF100A6AE0D /* ProfileView.swift in Sources */,
 				038862852749379D001D7E36 /* DefaultCredentialsPreparator.swift in Sources */,
 				8FF0102327329DDE0022314B /* Color+Extensions.swift in Sources */,
+				2C28A92C27BD47B500C5E468 /* VehicleDTO.swift in Sources */,
 				8753339C27600C18005E4697 /* Image+Extensions.swift in Sources */,
 				03C18F0827341AAA00C754E8 /* DefaultEmailVerificator.swift in Sources */,
 				03422F83275D451B0060D19E /* InvoiceViewerViewModel.swift in Sources */,
@@ -1478,7 +1479,6 @@
 				5CA58D10274E8D99000BF06C /* DefaultInvoicesNavigator.swift in Sources */,
 				03004DBE273DB9E800188983 /* SceneDelegate.swift in Sources */,
 				87DC1D0E271FDF8D002DC193 /* APIResponse.swift in Sources */,
-				9B5C547D27387E59005CFD24 /* VehicleDTO.swift in Sources */,
 				87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */,
 				03F209872716EECA00E10F6C /* XCAssets+Generated.swift in Sources */,
 				03B80F9C27416CC000E1BF47 /* DefaultOnBoardingNavigator.swift in Sources */,
@@ -1502,7 +1502,7 @@
 				03C759FC2765508F0032652F /* DefaultImageCaller.swift in Sources */,
 				39D101E52769E9B600F101AB /* SettingsScenario.swift in Sources */,
 				03F2098B27170F2E00E10F6C /* OnBoardingScenario.swift in Sources */,
-				2C99B015278891D6005E75E8 /* Vehicle.swift in Sources */,
+				2C99B015278891D6005E75E8 /* VehicleCoreData.swift in Sources */,
 				9BB84D77274E510B00D88B03 /* StartupScenario.swift in Sources */,
 				03F2098D271711CE00E10F6C /* OnBoardingView.swift in Sources */,
 				8767182E275ED39A00844732 /* SelectAppIcon.swift in Sources */,

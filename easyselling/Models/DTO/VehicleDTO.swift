@@ -1,17 +1,16 @@
 //
-//  Vehicle.swift
+//  VehicleDTO.swift
 //  easyselling
 //
-//  Created by Théo Tanchoux on 07/11/2021.
+//  Created by Valentin Mont School on 16/02/2022.
 //
 
 import Foundation
 
-struct VehicleDTO: Codable, Equatable, Identifiable {
-    var id: String?
+struct VehicleDTO: Encodable {
     var brand: String
-    var model: String
     var license: String
-    var type: Vehicle.Category
+    var model: String
+    var type: String
     var year: String
 }
