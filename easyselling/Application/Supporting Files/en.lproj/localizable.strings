@@ -68,3 +68,12 @@
 "serverError.forbidden" = "You are not allowed to do the current action";
 "serverError.serviceUnavailable" = "The external service can't be used";
 "serverError.invalidCredentials" = "Your credentials are incorrect";
+
+"profile.title" = "My profile";
+"profile.explanations" = "Explanations";
+"profile.informations" = "Informations";
+"profile.settings" = "Settings";
+"profile.logout" = "Logout";
+
+"settings.icons" = "Application icon";
+"settings.theme" = "Application theme";

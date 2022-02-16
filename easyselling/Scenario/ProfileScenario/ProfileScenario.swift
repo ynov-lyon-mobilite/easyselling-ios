@@ -14,11 +14,15 @@ class ProfileScenario {
     }
 
     func begin() {
-        navigator.navigatesToProfile(onLogout: navigatesBackToAuthentication)
+        navigator.navigatesToProfile(onLogout: navigatesBackToAuthentication, onNavigateToSettingsMenu: navigatesToSettingsMenu)
     }
 
     private func navigatesBackToAuthentication() {
         navigator.navigatesBackToAuthentication()
+    }
+
+    private func navigatesToSettingsMenu() {
+        navigator.navigatesToSettingsMenu()
     }
 
     private var navigator: ProfileNavigator

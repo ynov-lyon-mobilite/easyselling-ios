@@ -10,8 +10,9 @@ import UIKit
 import SwiftUI
 
 protocol ProfileNavigator {
-    func navigatesToProfile(onLogout: @escaping Action)
+    func navigatesToProfile(onLogout: @escaping Action, onNavigateToSettingsMenu: @escaping Action)
     func navigatesBackToAuthentication()
+    func navigatesToSettingsMenu()
 }
 
 class DefaultProfileNavigator: ProfileNavigator {
@@ -24,8 +25,8 @@ class DefaultProfileNavigator: ProfileNavigator {
     private var navigationController: UINavigationController
     private var window: UIWindow?
 
-    func navigatesToProfile(onLogout: @escaping Action) {
-        let viewModel = ProfileViewModel(onLogout: onLogout)
+    func navigatesToProfile(onLogout: @escaping Action, onNavigateToSettingsMenu: @escaping Action) {
+        let viewModel = ProfileViewModel(onLogout: onLogout, isNavigatingToSettingsMenu: onNavigateToSettingsMenu)
         let view = ProfileView(viewModel: viewModel)
         navigationController.pushViewController(UIHostingController(rootView: view), animated: true)
     }
@@ -36,5 +37,11 @@ class DefaultProfileNavigator: ProfileNavigator {
         let navigator = DefaultAuthenticationNavigator(navigationController: navigationController, window: window)
         let scenario = AuthenticationScenario(navigator: navigator)
         scenario.begin(from: .default)
+    }
+
+    func navigatesToSettingsMenu() {
+        let navigator = DefaultSettingsNavigator(navigationController: navigationController)
+        let scenario = SettingsScenario(navigator: navigator)
+        scenario.begin()
     }
 }

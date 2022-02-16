@@ -23,6 +23,14 @@ class ProfileScenario_Specs: XCTestCase {
         thenScenarioHasBeenLeaved()
     }
 
+    func test_Finishes_scenario_when_navigate_to_settings_menu() {
+        givenScenario()
+        whenBeginning()
+        whenNavigatingToSettingsMenu()
+        thenHistory(is: [.profile, .settings])
+        thenProfileScenarioIsFinished()
+    }
+
     private func givenScenario() {
         navigator = SpyProfileNavigator()
         scenario = ProfileScenario(navigator: navigator)
@@ -36,8 +44,16 @@ class ProfileScenario_Specs: XCTestCase {
         navigator.onLogout?()
     }
 
+    private func whenNavigatingToSettingsMenu() {
+        navigator.onNavigateToSettingsMenu?()
+    }
+
     private func thenScenarioHasBeenLeaved() {
         XCTAssertTrue(navigator.isLoggingOut)
+    }
+
+    private func thenProfileScenarioIsFinished() {
+        XCTAssertTrue(navigator.profileScenarioIsFinished)
     }
 
     private func thenHistory(is expected: [SpyProfileNavigator.History]) {
@@ -52,10 +68,13 @@ class SpyProfileNavigator: ProfileNavigator {
 
     private(set) var history: [History] = []
     private(set) var onLogout: Action?
+    private(set) var onNavigateToSettingsMenu: Action?
     private(set) var isLoggingOut: Bool = false
+    private(set) var profileScenarioIsFinished: Bool = false
 
-    func navigatesToProfile(onLogout: @escaping Action) {
+    func navigatesToProfile(onLogout: @escaping Action, onNavigateToSettingsMenu: @escaping Action) {
         self.onLogout = onLogout
+        self.onNavigateToSettingsMenu = onNavigateToSettingsMenu
         history.append(.profile)
     }
 
@@ -63,12 +82,19 @@ class SpyProfileNavigator: ProfileNavigator {
         self.isLoggingOut = true
     }
 
+    func navigatesToSettingsMenu() {
+        profileScenarioIsFinished = true
+        history.append(.settings)
+    }
+
     enum History {
         case profile
+        case settings
 
         var debugDescription: String {
             switch self {
             case .profile: return "Profile"
+            case .settings: return "settings menu"
             }
         }
     }

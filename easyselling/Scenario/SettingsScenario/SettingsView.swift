@@ -17,32 +17,32 @@ struct SettingsView: View {
     }
 
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading) {
-                VStack {
-                    Text("Icône d'application")
-                        .fontWeight(.bold)
-                        .font(.title3)
-                    SelectAppIcon()
-                }
-                .background(Color.white)
-                .cornerRadius(20)
-                .padding(.bottom, 30)
-
-                VStack {
-                    Text("Thème d'application")
-                        .fontWeight(.bold)
-                        .font(.title3)
-                    SelectAppIcon()
-                }
-                .background(Color.white)
-                .cornerRadius(20)
+        VStack(alignment: .leading) {
+            TitleNavigationView(title: L10n.Profile.settings)
+            VStack {
+                Text(L10n.Settings.icons)
+                    .fontWeight(.bold)
+                    .font(.title3)
+                    .padding(.top, 10)
+                SelectAppIcon()
             }
-            .navigationTitle("Préférences")
-            .frame(width: .infinity, height: .infinity)
-            .padding(20)
-            .background(Asset.Colors.currentBackground.swiftUIColor)
+            .background(Color.white)
+            .cornerRadius(20)
+            .padding(.bottom, 30)
+
+            VStack {
+                Text(L10n.Settings.theme)
+                    .fontWeight(.bold)
+                    .font(.title3)
+                    .padding(.top, 10)
+                SelectAppIcon()
+            }
+            .background(Color.white)
+            .cornerRadius(20)
+            Spacer()
         }
+        .padding(.horizontal, 25)
+        .background(Asset.Colors.currentBackground.swiftUIColor.ignoresSafeArea())
     }
 }
 
