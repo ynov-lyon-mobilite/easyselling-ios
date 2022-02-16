@@ -16,6 +16,12 @@ struct Vehicle: Codable, Equatable, Identifiable {
     var license: String
     var type: Category
     var year: String
+
+    enum CodingKeys: String, CodingKey {
+        case brand, model, license, type, year
+        case id = "_id"
+    }
+
     var image: UIImage {
         switch type {
         case .car: return Asset.Icons.car.image

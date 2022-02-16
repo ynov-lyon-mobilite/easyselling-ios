@@ -32,14 +32,14 @@ struct VehicleInvoicesView: View {
                             HStack {
                                 Text("File Id :")
                                 Spacer()
-                                Text(invoice.file)
+                                Text(invoice.file?.filename ?? "")
                             }
                         }
                     }
                     .onTapGesture {
                         viewModel.chosenInvoice = invoice.id
                         Task {
-                            await viewModel.downloadInvoiceContent(of: invoice.file)
+                            await viewModel.downloadInvoiceContent(file: invoice.file!)
                         }
                     }
                     .swipeActions(edge: .trailing) {
@@ -52,10 +52,8 @@ struct VehicleInvoicesView: View {
                 }
             }
         }
-        .onAppear {
-            Task {
-                await viewModel.getInvoices(ofVehicleId: viewModel.vehicleId)
-            }
+        .task {
+            await viewModel.getInvoices(ofVehicleId: viewModel.vehicleId)
         }
     }
 }
@@ -63,7 +61,7 @@ struct VehicleInvoicesView: View {
 struct VehicleInvoicesView_Previews: PreviewProvider {
     static var previews: some View {
         let vm = VehicleInvoiceViewModel(ofVehicleId: "", onNavigatingToInvoiceView: {_ in })
-        vm.invoices = [Invoice(id: 1, vehicle: "Vehicle", file: "File", dateCreated: "54164", dateUpdated: "6549874")]
+        vm.invoices = [Invoice(id: "A08ZDH09AHJD", vehicle: "Vehicle", file: nil)]
         vm.isLoading = false
         vm.isDownloading = true
         return VehicleInvoicesView(viewModel: vm)

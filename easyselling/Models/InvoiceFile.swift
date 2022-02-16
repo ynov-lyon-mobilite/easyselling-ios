@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-struct InvoiceFile: Equatable, Decodable {
-
-    var title: String
-    var type: String
+struct InvoiceFile: Equatable, Codable {
+    let filename: String
+    let type: String
+    let url: String
 }
 
 struct File: Equatable {

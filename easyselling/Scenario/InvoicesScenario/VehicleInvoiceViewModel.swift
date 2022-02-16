@@ -13,14 +13,13 @@ class VehicleInvoiceViewModel: ObservableObject {
 
     private var vehicleInvoicesGetter: VehicleInvoicesGetter
     private var invoiceDownloader: InvoiceDownloader
-    private var invoiceFileInformationsGetter: InvoiceFileInformationsGetter
     private var onNavigatingToInvoiceView: (File) -> Void
     private var invoiceDeletor: InvoiceDeletor
 
-    @Published var vehicleId: String
+    var vehicleId: String
     @Published var invoices: [Invoice] = []
     @Published var error: APICallerError?
-    var chosenInvoice: Int?
+    var chosenInvoice: String?
     @Published var isLoading: Bool = true
     @Published var isDownloading: Bool = false
     @Published var isError: Bool = false
@@ -29,14 +28,12 @@ class VehicleInvoiceViewModel: ObservableObject {
          invoiceDeletor: InvoiceDeletor = DefaultInvoiceDeletor(),
          vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(),
          invoiceDownloader: InvoiceDownloader = DefaultInvoiceDownloader(),
-         invoiceFileInformationsGetter: InvoiceFileInformationsGetter = DefaultInvoiceFileInformationsGetter(),
          onNavigatingToInvoiceView: @escaping (File) -> Void) {
 
         self.vehicleId = ofVehicleId
         self.invoiceDeletor = invoiceDeletor
         self.vehicleInvoicesGetter = vehicleInvoicesGetter
         self.invoiceDownloader = invoiceDownloader
-        self.invoiceFileInformationsGetter = invoiceFileInformationsGetter
         self.onNavigatingToInvoiceView = onNavigatingToInvoiceView
     }
 
@@ -54,13 +51,12 @@ class VehicleInvoiceViewModel: ObservableObject {
         isLoading = false
     }
 
-    @MainActor func downloadInvoiceContent(of fileId: String) async {
+    @MainActor func downloadInvoiceContent(file: InvoiceFile) async {
         isDownloading = true
         do {
-            let invoiceFile = try await invoiceFileInformationsGetter.getInvoiceFile(of: fileId)
-            let invoiceImage = try await invoiceDownloader.downloadInvoiceFile(id: fileId)
+            let invoiceImage = try await invoiceDownloader.downloadInvoiceFile(id: file.filename)
             isDownloading = false
-            self.onNavigatingToInvoiceView(File(title: invoiceFile.title, image: invoiceImage))
+            self.onNavigatingToInvoiceView(File(title: file.filename, image: invoiceImage))
         } catch(let error) {
             if let error = error as? APICallerError {
                 isError = true
@@ -72,21 +68,19 @@ class VehicleInvoiceViewModel: ObservableObject {
         }
     }
 
-    @MainActor func deleteInvoice(idInvoice: Int) async {
+    @MainActor func deleteInvoice(idInvoice: String) async {
         do {
             try await invoiceDeletor.deleteInvoice(id: idInvoice)
             deleteInvoiceOnTheView(idInvoice: idInvoice)
         } catch (let error) {
+            print(error)
             if let error = error as? APICallerError {
                 self.error = error
             }
         }
     }
 
-    private func deleteInvoiceOnTheView(idInvoice: Int) {
-        invoices = invoices.filter { (invoice) -> Bool in
-            invoice.id != idInvoice
-        }
+    private func deleteInvoiceOnTheView(idInvoice: String) {
+        invoices = invoices.filter { $0.id != idInvoice }
     }
-
 }

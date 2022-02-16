@@ -68,7 +68,7 @@ class DefaultRequestGenerator: RequestGenerator {
             throw APICallerError.requestGenerationError
         }
 
-        if let queryParameters = queryParameters, var component = URLComponents(string: urlString) {
+        if let queryParameters = queryParameters, !queryParameters.isEmpty, var component = URLComponents(string: urlString) {
             component.queryItems = queryParameters.map { $0.encodeToQueryParameter() }
 
             return component.url ?? url

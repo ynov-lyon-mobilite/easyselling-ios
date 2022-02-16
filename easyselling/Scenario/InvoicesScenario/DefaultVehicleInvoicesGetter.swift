@@ -24,8 +24,8 @@ class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
         let urlRequest = try await requestGenerator.generateRequest(endpoint: .invoices,
                                                                     method: .GET,
                                                                     headers: [:],
-                                                                    pathKeysValues: [:],
-                                                                    queryParameters: [FilterQueryParameter(parameterName: "vehicle", type: .EQUAL, value: id)])
+                                                                    pathKeysValues: ["vehicleId": id],
+                                                                    queryParameters: [])
         return try await apiCaller.call(urlRequest, decodeType: [Invoice].self)
     }
 }

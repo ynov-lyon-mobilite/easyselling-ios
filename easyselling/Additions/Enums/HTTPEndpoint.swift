@@ -8,7 +8,7 @@
 import Foundation
 
 enum HTTPEndpoint: String {
-    var baseURL: String { "https://easyselling.maxencemottard.com" }
+    var baseURL: String { "https://api.easyselling.maxencemottard.com" }
 
     case users = "/users"
     case vehicles = "/items/vehicles"
@@ -17,10 +17,9 @@ enum HTTPEndpoint: String {
     case authRefresh = "/auth/refresh"
     case files = "/files"
     case fileById = "/files/:fileId"
-    case downloadFile = "/assets/:fileId"
     case passwordResetRequest = "/auth/password/request"
     case passwordReset = "/auth/password/reset"
-    case invoices = "/items/invoices"
+    case invoices = "/items/invoices/vehicle/:vehicleId"
     case invoiceId = "/items/invoices/:invoiceId"
 
     var url: URL? {
