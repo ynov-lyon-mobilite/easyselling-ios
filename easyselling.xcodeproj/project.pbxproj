@@ -34,8 +34,6 @@
 		03422F69275CF3620060D19E /* InvoiceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F68275CF3620060D19E /* InvoiceFile.swift */; };
 		03422F71275D2B220060D19E /* succeededFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 03422F70275D2B220060D19E /* succeededFile.json */; };
 		03422F72275D2B220060D19E /* succeededFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 03422F70275D2B220060D19E /* succeededFile.json */; };
-		03422F7A275D38EC0060D19E /* SucceedingFileInformationsGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F78275D38EC0060D19E /* SucceedingFileInformationsGetter.swift */; };
-		03422F7D275D39370060D19E /* FailingFileInformationsGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F7B275D39370060D19E /* FailingFileInformationsGetter.swift */; };
 		03422F7F275D3C9C0060D19E /* InvoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F7E275D3C9C0060D19E /* InvoiceView.swift */; };
 		03422F83275D451B0060D19E /* InvoiceViewerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F82275D451B0060D19E /* InvoiceViewerViewModel.swift */; };
 		03422F86275FF3370060D19E /* SucceedingVehicleGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F85275FF3370060D19E /* SucceedingVehicleGetter.swift */; };
@@ -160,7 +158,6 @@
 		87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BA727172F780035AB13 /* DefaultRequestGenerator_Specs.swift */; };
 		87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */; };
 		87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87780BAC271730100035AB13 /* DefaultAPICaller.swift */; };
-		877CAC62275BE1DA00153CEE /* QueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877CAC61275BE1DA00153CEE /* QueryParameters.swift */; };
 		8798D1412730F35000FF3AB4 /* DefaultTokenRefreshor_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D1402730F35000FF3AB4 /* DefaultTokenRefreshor_Specs.swift */; };
 		8798D1432730F3DF00FF3AB4 /* RefreshDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D1422730F3DF00FF3AB4 /* RefreshDTO.swift */; };
 		8798D1452730F67A00FF3AB4 /* DefaultTokenRefreshor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8798D1442730F67A00FF3AB4 /* DefaultTokenRefreshor.swift */; };
@@ -242,8 +239,6 @@
 		03422F66275CF1DA0060D19E /* DefaultInvoiceDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvoiceDownloader.swift; sourceTree = "<group>"; };
 		03422F68275CF3620060D19E /* InvoiceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceFile.swift; sourceTree = "<group>"; };
 		03422F70275D2B220060D19E /* succeededFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = succeededFile.json; sourceTree = "<group>"; };
-		03422F78275D38EC0060D19E /* SucceedingFileInformationsGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingFileInformationsGetter.swift; sourceTree = "<group>"; };
-		03422F7B275D39370060D19E /* FailingFileInformationsGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingFileInformationsGetter.swift; sourceTree = "<group>"; };
 		03422F7E275D3C9C0060D19E /* InvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceView.swift; sourceTree = "<group>"; };
 		03422F82275D451B0060D19E /* InvoiceViewerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceViewerViewModel.swift; sourceTree = "<group>"; };
 		03422F85275FF3370060D19E /* SucceedingVehicleGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingVehicleGetter.swift; sourceTree = "<group>"; };
@@ -363,7 +358,6 @@
 		87780BA727172F780035AB13 /* DefaultRequestGenerator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator_Specs.swift; sourceTree = "<group>"; };
 		87780BAB271730100035AB13 /* DefaultRequestGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRequestGenerator.swift; sourceTree = "<group>"; };
 		87780BAC271730100035AB13 /* DefaultAPICaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAPICaller.swift; sourceTree = "<group>"; };
-		877CAC61275BE1DA00153CEE /* QueryParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameters.swift; sourceTree = "<group>"; };
 		8798D1402730F35000FF3AB4 /* DefaultTokenRefreshor_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTokenRefreshor_Specs.swift; sourceTree = "<group>"; };
 		8798D1422730F3DF00FF3AB4 /* RefreshDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshDTO.swift; sourceTree = "<group>"; };
 		8798D1442730F67A00FF3AB4 /* DefaultTokenRefreshor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTokenRefreshor.swift; sourceTree = "<group>"; };
@@ -511,15 +505,6 @@
 				03422F70275D2B220060D19E /* succeededFile.json */,
 			);
 			path = DefaultInvoiceDownloader_Specs;
-			sourceTree = "<group>";
-		};
-		03422F74275D38C60060D19E /* DefaultInformationsGetter_Specs */ = {
-			isa = PBXGroup;
-			children = (
-				03422F78275D38EC0060D19E /* SucceedingFileInformationsGetter.swift */,
-				03422F7B275D39370060D19E /* FailingFileInformationsGetter.swift */,
-			);
-			path = DefaultInformationsGetter_Specs;
 			sourceTree = "<group>";
 		};
 		03422F81275D45070060D19E /* InvoiceViewer */ = {
@@ -932,7 +917,6 @@
 				03F0542F271B38EB00434706 /* DefaultCredentialsVerificator_Specs */,
 				03B80FAE274717E500E1BF47 /* DefaultEmailVerificator_Specs */,
 				87BE3096273B0AED00D49D08 /* DefaultFileUploader_Specs */,
-				03422F74275D38C60060D19E /* DefaultInformationsGetter_Specs */,
 				03C759FD276554380032652F /* DefaultImageCaller_Specs */,
 				8F901D512769F43000CF0F28 /* DefaultInvoiceDeletor_Specs */,
 				03422F5F275CEDE20060D19E /* DefaultInvoiceDownloader_Specs */,
@@ -1011,7 +995,6 @@
 				87780B9D27172F250035AB13 /* Enums */,
 				8705B9A927208233004132CF /* Extensions */,
 				87780B9F27172F380035AB13 /* Protocols */,
-				877CAC61275BE1DA00153CEE /* QueryParameters.swift */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -1431,7 +1414,6 @@
 				03C18F0827341AAA00C754E8 /* DefaultEmailVerificator.swift in Sources */,
 				03422F83275D451B0060D19E /* InvoiceViewerViewModel.swift in Sources */,
 				03004DD0273E79D700188983 /* PasswordResetDTO.swift in Sources */,
-				877CAC62275BE1DA00153CEE /* QueryParameters.swift in Sources */,
 				0382E2AC2718190B00EB570E /* DefaultCredentialsVerificator.swift in Sources */,
 				39D101E12769E98D00F101AB /* SettingsView.swift in Sources */,
 				87780BAE271730100035AB13 /* DefaultAPICaller.swift in Sources */,
@@ -1497,7 +1479,6 @@
 				875E47B8273C6ECC0019FC83 /* FakeURLSession.swift in Sources */,
 				03004DD7273EAFA500188983 /* SucceedingPasswordReseter.swift in Sources */,
 				8F901D502769F40500CF0F28 /* SucceedingInvoiceDeletor.swift in Sources */,
-				03422F7A275D38EC0060D19E /* SucceedingFileInformationsGetter.swift in Sources */,
 				8705B9A227207A39004132CF /* SucceedingUserAuthenticator.swift in Sources */,
 				03004DC9273E721100188983 /* PasswordResetViewModel_Specs.swift in Sources */,
 				03F05441271B3F7700434706 /* SuccedingAccountCreator.swift in Sources */,
@@ -1556,7 +1537,6 @@
 				8705B9A627207D36004132CF /* FailingUserAuthenticator.swift in Sources */,
 				8798D1472730F88200FF3AB4 /* FailingTokenRefreshor.swift in Sources */,
 				5CA58D202757F905000BF06C /* VehicleInvoiceViewModel_Specs.swift in Sources */,
-				03422F7D275D39370060D19E /* FailingFileInformationsGetter.swift in Sources */,
 				8F901D532769FAC700CF0F28 /* FailingInvoiceDeletor.swift in Sources */,
 				03F05443271B3F9D00434706 /* FailingAccountCreator.swift in Sources */,
 				03F05431271B392300434706 /* SucceedingInformationsVerificator.swift in Sources */,

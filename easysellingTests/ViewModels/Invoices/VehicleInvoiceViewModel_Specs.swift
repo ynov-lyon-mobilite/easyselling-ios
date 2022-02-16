@@ -15,9 +15,9 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         thenViewModelIsLoading()
         await whenTryingToGetVehicleInvoices()
         thenViewModelIsNotLoading()
-        XCTAssertEqual([Invoice(id: 1, vehicle: "1", file: "1", dateCreated: "date1", dateUpdated: ""),
-                        Invoice(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
-                        Invoice(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")], viewModel.invoices)
+        XCTAssertEqual([Invoice(id: "0AJEAZ9", vehicle: "1", file: .preview),
+                        Invoice(id: "0AJEAZ8", vehicle: "1", file: .preview),
+                        Invoice(id: "0AJEAZ7", vehicle: "2", file: .preview)], viewModel.invoices)
     }
 
     func test_Shows_error_when_request_is_failing() async {
@@ -30,17 +30,15 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
 
     func test_Download_invoice_file_when_user_tap_one_invoice() async {
         givenViewModel(vehicleInvoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices),
-                       invoiceFileInformationsGetter: SucceedingFileInformationsGetter(),
                        invoiceDownloader: SucceedingInvoiceDownloader())
         await whenTryingToGetVehicleInvoices()
-        await whenTryingToSeeInvoice("1")
+        await whenTryingToSeeInvoice("title")
         thenUserHasNavigateToInvoiceView()
         thenInvoiceFile(is: File(title: "title", image: UIImage()))
     }
 
     func test_Shows_error_when_dowloading_invoice_fail() async {
         givenViewModel(vehicleInvoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices),
-                       invoiceFileInformationsGetter: SucceedingFileInformationsGetter(),
                        invoiceDownloader: FailingInvoiceDownloader(withError: .unauthorized))
         await whenTryingToSeeInvoice("1")
         thenError(is: "Une erreur est survenue")
@@ -50,20 +48,19 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         givenViewModel(vehicleInvoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices),
                               invoiceDeletor: SucceedingInvoiceDeletor())
         await whenTryingToGetVehicleInvoices()
-        await whenDeletingInvoice(withId: 1)
+        await whenDeletingInvoice(withId: "0AJEAZ8")
         thenLoadInvoices(are: [
-            Invoice(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
-            Invoice(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")])
+            Invoice(id: "0AJEAZ9", vehicle: "1", file: .preview),
+            Invoice(id: "0AJEAZ7", vehicle: "2", file: .preview)])
     }
 
     func test_Shows_an_error_when_the_request_fails_when_deleting_an_invoice() async {
         givenViewModel(vehicleInvoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices), invoiceDeletor: FailingInvoiceDeletor(withError: APICallerError.notFound))
-        await whenDeletingInvoice(withId: 1)
+        await whenDeletingInvoice(withId: "98YZG")
         thenError(is: "Impossible de trouver ce que vous cherchez")
     }
 
     private func givenViewModel(vehicleInvoicesGetter: VehicleInvoicesGetter,
-                                invoiceFileInformationsGetter: InvoiceFileInformationsGetter = SucceedingFileInformationsGetter(),
                                 invoiceDownloader: InvoiceDownloader = SucceedingInvoiceDownloader(),
                                 invoiceDeletor: InvoiceDeletor = SucceedingInvoiceDeletor()) {
 
@@ -71,7 +68,6 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
                                             invoiceDeletor: invoiceDeletor,
                                             vehicleInvoicesGetter: vehicleInvoicesGetter,
                                             invoiceDownloader: invoiceDownloader,
-                                            invoiceFileInformationsGetter: invoiceFileInformationsGetter,
                                             onNavigatingToInvoiceView: { invoice in
             self.onNavigatingToInvoiceView = true
             self.downloadedInvoice = invoice
@@ -79,13 +75,13 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
     }
 
     private func givenViewModelDeletor(invoicesGetter: VehicleInvoicesGetter, invoiceDeletor: InvoiceDeletor) {
-        viewModel = VehicleInvoiceViewModel(ofVehicleId: vehicleId, invoiceDeletor: invoiceDeletor, vehicleInvoicesGetter: invoicesGetter,invoiceDownloader: SucceedingInvoiceDownloader(), invoiceFileInformationsGetter: SucceedingFileInformationsGetter(), onNavigatingToInvoiceView: { invoice in
+        viewModel = VehicleInvoiceViewModel(ofVehicleId: vehicleId, invoiceDeletor: invoiceDeletor, vehicleInvoicesGetter: invoicesGetter,invoiceDownloader: SucceedingInvoiceDownloader(), onNavigatingToInvoiceView: { invoice in
             self.onNavigatingToInvoiceView = true
             self.downloadedInvoice = invoice
         })
     }
 
-    private func whenDeletingInvoice(withId: Int) async {
+    private func whenDeletingInvoice(withId: String) async {
         await viewModel.deleteInvoice(idInvoice: withId)
     }
 
@@ -94,7 +90,7 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
     }
 
     private func whenTryingToSeeInvoice(_ invoiceId: String) async {
-        await viewModel.downloadInvoiceContent(of: invoiceId)
+        await viewModel.downloadInvoiceContent(filename: invoiceId)
     }
 
     private func thenViewModelIsLoading() {
@@ -126,7 +122,8 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
     private var downloadedInvoice: File!
     private var onNavigatingToInvoiceView: Bool = false
     private let expectedVehicleInvoices = [
-        Invoice(id: 1, vehicle: "1", file: "1", dateCreated: "date1", dateUpdated: ""),
-        Invoice(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
-        Invoice(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")]
+        Invoice(id: "0AJEAZ9", vehicle: "1", file: .preview),
+        Invoice(id: "0AJEAZ8", vehicle: "1", file: .preview),
+        Invoice(id: "0AJEAZ7", vehicle: "2", file: .preview)
+    ]
 }

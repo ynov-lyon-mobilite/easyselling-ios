@@ -1,25 +1,31 @@
 {
     "data": [
         {
-            "id": 1,
+            "_id": "0AJEAZ9",
             "vehicle": "1",
-            "file": "1",
-            "dateCreated": "date1",
-            "dateUpdated": ""
+            "file": {
+                "filename": "myFile.pdf",
+                "type": "application/pdf",
+                "url": "https://google.com"
+            }
         },
         {
-            "id": 2,
+            "_id": "0AJEAZ8",
             "vehicle": "1",
-            "file": "2",
-            "dateCreated": "date2",
-            "dateUpdated": ""
+            "file": {
+                "filename": "myFile.pdf",
+                "type": "application/pdf",
+                "url": "https://google.com"
+            }
         },
         {
-            "id": 3,
+            "_id": "0AJEAZ7",
             "vehicle": "2",
-            "file": "3",
-            "dateCreated": "date3",
-            "dateUpdated": ""
+            "file": {
+                "filename": "myFile.pdf",
+                "type": "application/pdf",
+                "url": "https://google.com"
+            }
         },
     ]
 }

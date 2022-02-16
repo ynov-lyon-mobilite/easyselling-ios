@@ -51,12 +51,12 @@ class VehicleInvoiceViewModel: ObservableObject {
         isLoading = false
     }
 
-    @MainActor func downloadInvoiceContent(file: InvoiceFile) async {
+    @MainActor func downloadInvoiceContent(filename: String) async {
         isDownloading = true
         do {
-            let invoiceImage = try await invoiceDownloader.downloadInvoiceFile(id: file.filename)
+            let invoiceImage = try await invoiceDownloader.downloadInvoiceFile(id: filename)
             isDownloading = false
-            self.onNavigatingToInvoiceView(File(title: file.filename, image: invoiceImage))
+            self.onNavigatingToInvoiceView(File(title: filename, image: invoiceImage))
         } catch(let error) {
             if let error = error as? APICallerError {
                 isError = true

@@ -25,7 +25,7 @@ class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
                                                                     method: .GET,
                                                                     headers: [:],
                                                                     pathKeysValues: ["vehicleId": id],
-                                                                    queryParameters: [])
+                                                                    queryParameters: nil)
         return try await apiCaller.call(urlRequest, decodeType: [Invoice].self)
     }
 }

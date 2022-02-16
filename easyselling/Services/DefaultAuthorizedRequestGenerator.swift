@@ -9,9 +9,9 @@ import Foundation
 
 protocol AuthorizedRequestGenerator {
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String], pathKeysValues: [String: String],
-                         queryParameters: [QueryParameter]?) async throws -> URLRequest
+                         queryParameters: [String: String]?) async throws -> URLRequest
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?, headers: [String: String],
-                                       pathKeysValues: [String: String], queryParameters: [QueryParameter]?) async throws -> URLRequest
+                                       pathKeysValues: [String: String], queryParameters: [String: String]?) async throws -> URLRequest
 }
 
 class DefaultAuthorizedRequestGenerator: AuthorizedRequestGenerator {
@@ -28,7 +28,7 @@ class DefaultAuthorizedRequestGenerator: AuthorizedRequestGenerator {
     }
 
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String : String],
-                         pathKeysValues: [String: String], queryParameters: [QueryParameter]?) async throws -> URLRequest {
+                         pathKeysValues: [String: String], queryParameters: [String: String]?) async throws -> URLRequest {
         var request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers,
                                                            pathKeysValues: pathKeysValues, queryParameters: queryParameters)
 
@@ -40,7 +40,7 @@ class DefaultAuthorizedRequestGenerator: AuthorizedRequestGenerator {
 
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?,
                                        headers: [String : String], pathKeysValues: [String: String],
-                                       queryParameters: [QueryParameter]?) async throws -> URLRequest {
+                                       queryParameters: [String: String]?) async throws -> URLRequest {
         var request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers,
                                                            pathKeysValues: pathKeysValues, queryParameters: queryParameters)
 

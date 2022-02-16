@@ -8,18 +8,16 @@
 import Foundation
 
 struct Invoice : Codable, Equatable, Identifiable {
-    var id: String
-    var vehicle : String
-    var file : InvoiceFile?
-//    var dateCreated : String
-//    var dateUpdated : String?
+    let id: String
+    let vehicle : String
+    let file : InvoiceFile
 
     enum CodingKeys: String, CodingKey {
         case vehicle, file
         case id = "_id"
     }
 
-    init(id: String, vehicle: String, file: InvoiceFile?) {
+    init(id: String, vehicle: String, file: InvoiceFile) {
         self.id = id
         self.vehicle = vehicle
         self.file = file

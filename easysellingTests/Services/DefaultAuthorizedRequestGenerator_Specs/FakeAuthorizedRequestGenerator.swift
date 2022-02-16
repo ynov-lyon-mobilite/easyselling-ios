@@ -16,7 +16,7 @@ class FakeAuthorizedRequestGenerator: AuthorizedRequestGenerator {
         self.requestGenerator = requestGenerator
     }
     
-    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String], pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URLRequest {
+    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String], pathKeysValues: [String: String], queryParameters: [String: String]?) throws -> URLRequest {
         var request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers, pathKeysValues: pathKeysValues, queryParameters: queryParameters)
 
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
@@ -24,7 +24,7 @@ class FakeAuthorizedRequestGenerator: AuthorizedRequestGenerator {
         return request
     }
 
-    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?, headers: [String: String], pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URLRequest {
+    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?, headers: [String: String], pathKeysValues: [String: String], queryParameters: [String: String]?) throws -> URLRequest {
         var request = try requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers, pathKeysValues: pathKeysValues, queryParameters: queryParameters)
 
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")

@@ -14,8 +14,13 @@ struct InvoiceFile: Equatable, Codable {
     let url: String
 }
 
-struct File: Equatable {
+extension InvoiceFile {
+    static var preview: InvoiceFile {
+        .init(filename: "myFile.pdf", type: "application/pdf", url: "https://google.com")
+    }
+}
 
+struct File: Equatable {
     var title: String
     var image: UIImage
 }

@@ -11,7 +11,7 @@ import XCTest
 class DefaultRequestGenerator_Specs: XCTestCase {
 
     func test_Generates_Request() {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/users")!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = HTTPMethod.POST.rawValue
 
@@ -21,7 +21,7 @@ class DefaultRequestGenerator_Specs: XCTestCase {
     }
 
     func test_Generates_Request_With_Headers() {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/users")!)
         request.httpMethod = HTTPMethod.POST.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("With tested value", forHTTPHeaderField: "test-header")
@@ -34,7 +34,7 @@ class DefaultRequestGenerator_Specs: XCTestCase {
     }
 
     func test_Generates_Request_and_override_content_type_set_to_JSON() {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/users")!)
         request.httpMethod = HTTPMethod.POST.rawValue
         request.addValue("application/xml", forHTTPHeaderField: "Content-Type")
 
@@ -46,7 +46,7 @@ class DefaultRequestGenerator_Specs: XCTestCase {
     func test_Generates_Request_With_Path_keys_values() {
         let body = "BODY"
 
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles/ABCD")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/items/vehicles/ABCD")!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = HTTPMethod.POST.rawValue
         request.httpBody = try! JSONEncoder().encode(body)
@@ -59,7 +59,7 @@ class DefaultRequestGenerator_Specs: XCTestCase {
     func test_Generates_Request_With_Body() {
         let body = "BODY"
 
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/users")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/users")!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = HTTPMethod.POST.rawValue
         request.httpBody = try! JSONEncoder().encode(body)
@@ -67,36 +67,6 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         givenService()
         whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body)
         thenRequestWithBody(is: request)
-    }
-
-    func test_Generates_Request_with_filter_query_parameter_equal() {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/invoices?filter%5Bvehicle%5D%5B_eq%5D=1")!)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = HTTPMethod.GET.rawValue
-
-        givenService()
-        whenGenerateRequest(endpoint: .invoices, method: .GET, queryParameters: [FilterQueryParameter(parameterName: "vehicle", type: .EQUAL, value: "1")])
-        thenRequest(is: request)
-    }
-
-    func test_Generates_Request_with_filter_query_parameter_inn() {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/invoices?filter%5Bvehicle%5D%5B_in%5D=1")!)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = HTTPMethod.GET.rawValue
-
-        givenService()
-        whenGenerateRequest(endpoint: .invoices, method: .GET, queryParameters: [FilterQueryParameter(parameterName: "vehicle", type: .INN, value: "1")])
-        thenRequest(is: request)
-    }
-
-    func test_Generates_Request_with_filter_query_parameter_between() {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/invoices?filter%5Bvehicle%5D%5B_between%5D=1")!)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = HTTPMethod.GET.rawValue
-
-        givenService()
-        whenGenerateRequest(endpoint: .invoices, method: .GET, queryParameters: [FilterQueryParameter(parameterName: "vehicle", type: .BETWEEN, value: "1")])
-        thenRequest(is: request)
     }
     
     func test_JSON_encode_failure() {
@@ -135,7 +105,7 @@ class DefaultRequestGenerator_Specs: XCTestCase {
     }
 
     private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod,
-                                     headers: [String: String] = [:], pathKeysValues: [String: String] = [:], queryParameters: [QueryParameter]? = nil) {
+                                     headers: [String: String] = [:], pathKeysValues: [String: String] = [:], queryParameters: [String: String]? = nil) {
         do {
             self.request = try requestGenerator.generateRequest(endpoint: endpoint, method: method,
                                                                 headers: headers, pathKeysValues: pathKeysValues, queryParameters: queryParameters)
