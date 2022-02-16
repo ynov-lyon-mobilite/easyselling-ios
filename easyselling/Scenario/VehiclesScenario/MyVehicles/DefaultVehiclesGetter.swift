@@ -8,7 +8,7 @@
 import Foundation
 
 protocol VehiclesGetter {
-    func getVehicles() async -> [Vehicle]
+    func getVehicles() async throws -> [VehicleCoreData]
 }
 
 class DefaultVehiclesGetter : VehiclesGetter {
@@ -21,16 +21,16 @@ class DefaultVehiclesGetter : VehiclesGetter {
     private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
 
-    func getVehicles() async -> [Vehicle] {
+    func getVehicles() async throws -> [VehicleCoreData] {
         do {
             let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .GET, headers: [:],
                                                                                pathKeysValues: [:], queryParameters: [])
 
-            let vehicles = try await apiCaller.call(urlRequest, decodeType: [Vehicle].self)
+            let vehicles = try await apiCaller.call(urlRequest, decodeType: [VehicleResponse].self)
 
             mainContext.performAndWait {
                 for vehicle in vehicles {
-                    let vehicleInCoreData = VehicleCoreData.fetchRequestById(id: vehicle.id ?? "")
+                    let vehicleInCoreData = VehicleCoreData.fetchRequestById(id: vehicle.id)
 
                     if vehicleInCoreData == nil {
                         _ = Vehicle.toCoreDataObject(vehicle: vehicle)
@@ -40,7 +40,7 @@ class DefaultVehiclesGetter : VehiclesGetter {
                     }
                 }
             }
-            return vehicles
+            return try mainContext.fetch(VehicleCoreData.fetchRequest())
         } catch (_) {
             let vehiclesCoreData = try? mainContext.fetch(VehicleCoreData.fetchRequest())
             var vehicles: [Vehicle] = []

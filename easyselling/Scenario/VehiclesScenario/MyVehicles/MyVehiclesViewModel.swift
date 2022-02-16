@@ -33,7 +33,7 @@ class MyVehiclesViewModel: ObservableObject {
     private var isNavigatingToInvoices: (String) -> Void
 
     @Published var isLoading: Bool = true
-    @Published var vehicles: [Vehicle] = []
+    @Published var vehicles: [VehicleCoreData] = []
     @Published var error: APICallerError?
     @Published var state: VehicleState = .loading
 
