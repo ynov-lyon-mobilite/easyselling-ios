@@ -20,7 +20,15 @@ class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
         self.apiCaller = apiCaller
     }
 
+    func generateRequest() async -> URLRequest? {
+        let request: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator()
+        let urlRequest = try? await request.generateRequest(endpoint: .invoices, method: .GET, headers: [:], pathKeysValues: [:], queryParameters: [])
+
+        return urlRequest
+    }
+
     func getInvoices(ofVehicleId id: String) async throws -> [Invoice] {
+        guard let request = await self.generateRequest() else { return [] }
         do {
             let urlRequest = try await requestGenerator.generateRequest(endpoint: .invoices, method: .GET, headers: [:],
                                                                         pathKeysValues: [:], queryParameters: [FilterQueryParameter(
@@ -52,5 +60,14 @@ class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
 
             return invoices
         }
+    }
+
+    private func isDuplicate(id: Int) -> Bool {
+
+        if (((try? mainContext.fetch(Invoice.fetchRequestById(id: Int16(id))))?.count) != nil) {
+            return true
+        }
+
+        return false
     }
 }
