@@ -46,7 +46,7 @@ class DefaultRequestGenerator_Specs: XCTestCase {
     func test_Generates_Request_With_Path_keys_values() {
         let body = "BODY"
 
-        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/items/vehicles/ABCD")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles/ABCD")!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = HTTPMethod.POST.rawValue
         request.httpBody = try! JSONEncoder().encode(body)
@@ -67,6 +67,16 @@ class DefaultRequestGenerator_Specs: XCTestCase {
         givenService()
         whenGenerateRequestWithBody(endpoint: .users, method: .POST, body: body)
         thenRequestWithBody(is: request)
+    }
+
+    func test_Generates_Request_with_filter_query_parameter_equal() {
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/invoices/vehicle/:vehicleId?vehicle=1")!)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = HTTPMethod.GET.rawValue
+
+        givenService()
+        whenGenerateRequest(endpoint: .invoices, method: .GET, queryParameters: ["vehicle": "1"])
+        thenRequest(is: request)
     }
     
     func test_JSON_encode_failure() {

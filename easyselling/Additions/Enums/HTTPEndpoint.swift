@@ -11,16 +11,16 @@ enum HTTPEndpoint: String {
     var baseURL: String { "https://api.easyselling.maxencemottard.com" }
 
     case users = "/users"
-    case vehicles = "/items/vehicles"
-    case vehicleId = "/items/vehicles/:vehicleId"
+    case vehicles = "/vehicles"
+    case vehicleId = "/vehicles/:vehicleId"
     case authLogin = "/auth/login"
     case authRefresh = "/auth/refresh"
     case files = "/files"
     case fileById = "/files/:fileId"
     case passwordResetRequest = "/auth/password/request"
     case passwordReset = "/auth/password/reset"
-    case invoices = "/items/invoices/vehicle/:vehicleId"
-    case invoiceId = "/items/invoices/:invoiceId"
+    case invoices = "/invoices/vehicle/:vehicleId"
+    case invoiceId = "/invoices/:invoiceId"
 
     var url: URL? {
         URL(string: baseURL)?.appendingPathComponent(self.rawValue)

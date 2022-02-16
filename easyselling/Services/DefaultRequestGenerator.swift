@@ -69,9 +69,7 @@ class DefaultRequestGenerator: RequestGenerator {
         }
 
         if let queryParameters = queryParameters, !queryParameters.keys.isEmpty, var component = URLComponents(string: urlString) {
-            component.queryItems = queryParameters.map { parameter in
-                return URLQueryItem(name: parameter.key, value: parameter.value)
-            }
+            component.queryItems = queryParameters.map { URLQueryItem(name: $0.key, value: $0.value) }
 
             return component.url ?? url
         }

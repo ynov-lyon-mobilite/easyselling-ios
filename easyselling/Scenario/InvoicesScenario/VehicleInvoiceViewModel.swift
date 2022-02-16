@@ -16,13 +16,13 @@ class VehicleInvoiceViewModel: ObservableObject {
     private var onNavigatingToInvoiceView: (File) -> Void
     private var invoiceDeletor: InvoiceDeletor
 
-    var vehicleId: String
     @Published var invoices: [Invoice] = []
     @Published var error: APICallerError?
-    var chosenInvoice: String?
     @Published var isLoading: Bool = true
     @Published var isDownloading: Bool = false
     @Published var isError: Bool = false
+
+    let vehicleId: String
 
     init(ofVehicleId: String,
          invoiceDeletor: InvoiceDeletor = DefaultInvoiceDeletor(),
@@ -73,7 +73,6 @@ class VehicleInvoiceViewModel: ObservableObject {
             try await invoiceDeletor.deleteInvoice(id: idInvoice)
             deleteInvoiceOnTheView(idInvoice: idInvoice)
         } catch (let error) {
-            print(error)
             if let error = error as? APICallerError {
                 self.error = error
             }

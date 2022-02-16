@@ -18,7 +18,7 @@ struct VehicleInvoicesView: View {
             } else {
                 List(viewModel.invoices) { invoice in
                     VStack {
-                        if viewModel.isDownloading && viewModel.chosenInvoice == invoice.id {
+                        if viewModel.isDownloading {
                             HStack {
                                 ProgressView()
                             }
@@ -37,7 +37,6 @@ struct VehicleInvoicesView: View {
                         }
                     }
                     .onTapGesture {
-                        viewModel.chosenInvoice = invoice.id
                         Task {
                             await viewModel.downloadInvoiceContent(filename: invoice.file.filename)
                         }
