@@ -15,12 +15,19 @@ public class Vehicle: NSManagedObject {
         return NSFetchRequest<Vehicle>(entityName: "Vehicle")
     }
 
-    @nonobjc public class func fetchRequestById(id: String) -> NSFetchRequest<Vehicle> {
-        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Vehicle")
-        let predicate = NSPredicate(format: "id = %@", id) // Specify your condition here
+    @nonobjc public class func fetchRequestById(id: String) -> Vehicle? {
+        let fetch = NSFetchRequest<Vehicle>(entityName: "Vehicle")
+        let predicate = NSPredicate(format: "id = %@", id)
 
         fetch.predicate = predicate
-        return NSFetchRequest<Vehicle>(entityName: "Vehicle")
+        do {
+            let results = try fetch.execute()
+            return results.first
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+
+        return nil
     }
 
     @NSManaged public var brand: String

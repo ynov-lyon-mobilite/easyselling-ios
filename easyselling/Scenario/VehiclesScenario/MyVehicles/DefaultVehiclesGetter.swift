@@ -28,17 +28,17 @@ class DefaultVehiclesGetter : VehiclesGetter {
 
             let vehicles = try await apiCaller.call(urlRequest, decodeType: [VehicleDTO].self)
 
-            for vehicle in vehicles {
-                mainContext.performAndWait {
-                    let isAlreadyInsert = (try? mainContext.fetch(Vehicle.fetchRequestById(id: vehicle.id ?? "")))?.count ?? 0
+            mainContext.performAndWait {
+                for vehicle in vehicles {
+                    let vehicleInCoreData = Vehicle.fetchRequestById(id: vehicle.id ?? "")
 
-                    if isAlreadyInsert < 1 {
+                    if vehicleInCoreData == nil {
                         let entity = Vehicle(context: mainContext)
                         entity.id = vehicle.id
                         entity.license = vehicle.license
                         entity.brand = vehicle.brand
                         entity.year = vehicle.year
-                        entity.type = vehicle.type
+                        entity.type = vehicle.type.rawValue
                         entity.model = vehicle.model
 
                         if mainContext.hasChanges {
