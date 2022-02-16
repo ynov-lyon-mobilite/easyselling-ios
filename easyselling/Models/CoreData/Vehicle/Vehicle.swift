@@ -24,6 +24,11 @@ struct Vehicle: Decodable {
     static func toCoreDataObject (vehicle: Vehicle) -> VehicleCoreData {
         return VehicleCoreData(id: vehicle.id ?? "", brand: vehicle.brand, license: vehicle.license, model: vehicle.model, type: vehicle.type.rawValue, year: vehicle.year)
     }
+
+    static func fromCoreDataToObject (vehicle: VehicleCoreData) -> Vehicle {
+        let type = Vehicle.Category(rawValue: vehicle.type) ?? .car
+        return Vehicle(brand: vehicle.brand, id: vehicle.id, license: vehicle.license, model: vehicle.model, type: type, year: vehicle.year)
+    }
 }
 
 extension Vehicle {
