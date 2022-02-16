@@ -17,9 +17,31 @@ struct SettingsView: View {
     }
 
     var body: some View {
-        VStack {
-            Text("Hello, here is the settings menu")
-            SelectAppIcon()
+        NavigationView {
+            VStack(alignment: .leading) {
+                VStack {
+                    Text("Icône d'application")
+                        .fontWeight(.bold)
+                        .font(.title3)
+                    SelectAppIcon()
+                }
+                .background(Color.white)
+                .cornerRadius(20)
+                .padding(.bottom, 30)
+
+                VStack {
+                    Text("Thème d'application")
+                        .fontWeight(.bold)
+                        .font(.title3)
+                    SelectAppIcon()
+                }
+                .background(Color.white)
+                .cornerRadius(20)
+            }
+            .navigationTitle("Préférences")
+            .frame(width: .infinity, height: .infinity)
+            .padding(20)
+            .background(Asset.Colors.currentBackground.swiftUIColor)
         }
     }
 }
