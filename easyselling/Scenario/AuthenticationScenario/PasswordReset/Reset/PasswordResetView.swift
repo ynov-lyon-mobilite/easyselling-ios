@@ -49,7 +49,7 @@ struct PasswordResetView: View {
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }
         .padding(25)
-        .ableToShowError(viewModel.error?.errorDescription ?? "", when: viewModel.state == .error)
+        .ableToShowError(viewModel.error)
     }
 }
 
