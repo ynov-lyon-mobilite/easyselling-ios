@@ -16,7 +16,7 @@ struct AccountCreationView: View {
             ScrollView(showsIndicators: false) {
                 accountCreationView
             }
-            .ableToShowError(viewModel.error?.errorDescription ?? "", when: viewModel.error == nil ? false : true)
+            .ableToShowError(viewModel.error)
         }
     }
 
