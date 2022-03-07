@@ -19,7 +19,7 @@ struct UserAuthenticationView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 loginView
             }
-            .ableToShowError(viewModel.error?.errorDescription ?? "", when: viewModel.error == nil ? false : true)
+            .ableToShowError(viewModel.error)
         }
     }
 
