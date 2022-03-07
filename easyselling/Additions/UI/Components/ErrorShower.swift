@@ -15,9 +15,9 @@ struct ErrorShower: ViewModifier {
         ZStack {
             content
             VStack {
-                if isShowingError {
+                if let error = error {
                     VStack {
-                        Text(error)
+                        Text(error.errorDescription)
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding(25)
