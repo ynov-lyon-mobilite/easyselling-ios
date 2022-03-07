@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ErrorShower: ViewModifier {
     @Namespace private var animation
-    var error: String
-    var isShowingError: Bool
+    var error: Error?
 
     func body(content: Content) -> some View {
         ZStack {
