@@ -47,7 +47,7 @@ class VehicleUpdateViewModel: ObservableObject {
             try await vehicleUpdater.updateVehicle(id: vehicle.id, informations: newInformations)
             await onFinish()
         } catch (let error) {
-            self.alert = (error as? VehicleCreationError)?.description ?? (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
+            self.alert = (error as? VehicleCreationError)?.errorDescription ?? (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
             self.showAlert =  true
         }
     }

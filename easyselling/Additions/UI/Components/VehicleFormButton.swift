@@ -14,7 +14,7 @@ struct VehicleFormButton: View {
     let isSelected: Bool
 
     var body: some View {
-        Button(action: {}) {
+        Button(action: action) {
             Text(title)
                 .foregroundColor(Asset.Colors.primary.swiftUIColor)
                 .font(.headline)

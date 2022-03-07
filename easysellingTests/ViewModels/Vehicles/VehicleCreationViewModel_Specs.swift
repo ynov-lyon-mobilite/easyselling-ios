@@ -31,17 +31,17 @@ class VehicleCreationViewModel_Specs: XCTestCase {
     }
 
     func test_Keeps_vehicle_creation_when_licence_is_correct() {
-        givenViewModel()
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
         whenSelectingVehicleType(.car)
-        XCTAssertEqual(.licence, viewModel.vehicleCreationStep)
+        thenActualStep(is: .licence)
         whenSelectingLicence("AA-222-AA")
         XCTAssertEqual("AA-222-AA", viewModel.license)
         XCTAssertEqual("AA-222-AA", viewModel.createdVehicle.license)
-        XCTAssertEqual(.brandAndModel, viewModel.vehicleCreationStep)
+        thenActualStep(is: .brandAndModel)
     }
 
-    func test_Keeps_vehicle_creation_when_brand_and_model_are_corrects() {
-        givenViewModel()
+    func test_Continues_vehicle_creation_when_brand_and_model_are_corrects() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
         whenSelectingVehicleType(.car)
         XCTAssertEqual(.licence, viewModel.vehicleCreationStep)
         whenSelectingLicence("AA-222-AA")
@@ -52,6 +52,35 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         XCTAssertEqual("206", viewModel.model)
         XCTAssertEqual("206", viewModel.createdVehicle.model)
         XCTAssertEqual(.year, viewModel.vehicleCreationStep)
+    }
+
+    func test_Shows_error_when_user_hasnt_choose_a_vehicle_type() {
+        givenViewModel()
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.unknow)
+        thenActualStep(is: .vehicleType)
+        thenError(is: .unchosenType)
+    }
+
+    func test_Shows_error_when_user_has_write_invalid_licence() {
+        givenViewModel(vehicleInformationsVerificator: FailingVehicleInformationsVerificator(error: .incorrectLicenseFormat))
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenSelectingLicence("invalid")
+        thenError(is: .incorrectLicenseFormat)
+    }
+
+    func test_Returns_back_if_user_has_made_something_wrong() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenGoingBack()
+        thenActualStep(is: .vehicleType)
+    }
+
+    private func whenGoingBack() {
+        viewModel.goingToPrevious()
     }
 
     private func whenSelectingVehicleType(_ vehicleType: Vehicle.Category) {
@@ -74,41 +103,14 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         viewModel.continueVehicleCreation()
     }
     
-//    func test_Shows_alert_when_a_field_is_empty() async {
-//        givenViewModel(expected: .emptyField)
-//        await whenCreating()
-//        thenAlertMessage(expected: VehicleCreationError.emptyField.description)
-//        thenAlertIsShowing()
-//    }
-//
-//    func test_Shows_alert_when_the_field_year_is_incorrect() async {
-//        givenViewModel(expected: .incorrectYear)
-//        await whenCreating()
-//        thenAlertMessage(expected: VehicleCreationError.incorrectYear.description)
-//        thenAlertIsShowing()
-//    }
-//
-//    func test_Shows_alert_when_the_field_license_is_incorrect() async {
-//        givenViewModel(expected: .incorrectLicenseFormat)
-//        await whenCreating()
-//        thenAlertMessage(expected: VehicleCreationError.incorrectLicenseFormat.description)
-//        thenAlertIsShowing()
-//    }
-//
-//    func test_Shows_alert_when_an_error_happens_after_an_api_call() async {
-//        givenViewModel()
-//        await whenCreating()
-//        thenAlertIsShowing()
-//    }
-    
     func test_Dismisses_modal_when_the_creation_have_successful() async {
         givenViewModel()
         await whenCreationSuccessful()
 //        thenModalIsDismissed()
     }
 
-    private func givenViewModel(expected: VehicleCreationError = .emptyField) {
-        viewModel = VehicleCreationViewModel(vehicleCreator: SpyVehicleCreator(), vehicleVerificator: SpyVehicleInformationsVerificator(error: expected), isOpenningVehicleCreation: .constant(true))
+    private func givenViewModel(vehicleInformationsVerificator: VehicleInformationsVerificator = FailingVehicleInformationsVerificator(error: .emptyField)) {
+        viewModel = VehicleCreationViewModel(vehicleCreator: SpyVehicleCreator(), vehicleVerificator: vehicleInformationsVerificator, isOpenningVehicleCreation: .constant(true))
     }
 
     private func whenCreating() async {
@@ -122,10 +124,6 @@ class VehicleCreationViewModel_Specs: XCTestCase {
     private func thenAlertIsShowing() {
         XCTAssertTrue(viewModel.showAlert)
     }
-    
-    private func thenAlertMessage(expected: String) {
-        XCTAssertEqual(expected, viewModel.alert)
-    }
 
     private func thenActualStep(is expected: VehicleCreationViewModel.VehicleCreationStep) {
         XCTAssertEqual(expected, viewModel.vehicleCreationStep)
@@ -133,6 +131,10 @@ class VehicleCreationViewModel_Specs: XCTestCase {
 
     private func thenTitle(is expected: String) {
         XCTAssertEqual(expected, viewModel.title)
+    }
+
+    private func thenError(is expected: VehicleCreationError) {
+        XCTAssertEqual(expected.errorDescription, viewModel.error?.errorDescription)
     }
 
     private var viewModel: VehicleCreationViewModel!
@@ -145,7 +147,7 @@ class SpyVehicleCreator: VehicleCreator {
     }
 }
 
-class SpyVehicleInformationsVerificator: VehicleInformationsVerificator {
+class FailingVehicleInformationsVerificator: VehicleInformationsVerificator {
     
     private let error: VehicleCreationError
     
@@ -159,5 +161,16 @@ class SpyVehicleInformationsVerificator: VehicleInformationsVerificator {
 
     func verifyLicence(_ licence: String) throws {
         throw error
+    }
+}
+
+class SucceedingVehicleInformationsVerificator: VehicleInformationsVerificator {
+
+    func verifyInformations(vehicle: Vehicle) throws {
+        return
+    }
+
+    func verifyLicence(_ licence: String) throws {
+        return
     }
 }

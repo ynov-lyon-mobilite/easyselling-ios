@@ -95,7 +95,7 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
     }
     
     private func thenError(is expected: VehicleCreationError) {
-        XCTAssertEqual(expected.description, vehicleCreationError.description)
+        XCTAssertEqual(expected.errorDescription, vehicleCreationError.errorDescription)
         XCTAssertEqual(expected, vehicleCreationError)
     }
 

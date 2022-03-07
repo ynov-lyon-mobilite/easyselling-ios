@@ -13,32 +13,48 @@ struct VehicleCreationView: View {
 
     var body: some View {
         VStack(spacing: 15) {
-            Text(viewModel.title)
-                    .foregroundColor(Asset.Colors.primary.swiftUIColor)
-                    .font(.title2)
-                    .bold()
+            VStack {
+                Text(viewModel.title)
+                        .foregroundColor(Asset.Colors.primary.swiftUIColor)
+                        .font(.title2)
+                        .bold()
+                        .transition(AnyTransition.opacity.combined(with: .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading))))
 
-            VStack(spacing: 20) {
-                if viewModel.vehicleCreationStep == .vehicleType {
-                    VehicleFormButton(action: {viewModel.selectType(.car)}, title: "Une voiture", isSelected: viewModel.selectedType)
-                    VehicleFormButton(action: {viewModel.selectType(.moto)}, title: "Une moto", isSelected: viewModel.selectedType)
-                } else if viewModel.vehicleCreationStep == .licence {
-                    VehicleFormTextField(text: $viewModel.license, placeholder: "Immatriculation")
-                } else if viewModel.vehicleCreationStep == .brandAndModel {
-                    VehicleFormTextField(text: $viewModel.brand, placeholder: "Marque")
-                    VehicleFormTextField(text: $viewModel.model, placeholder: "Modèle")
-                } else if viewModel.vehicleCreationStep == .year {
-                    VehicleFormTextField(text: $viewModel.year, placeholder: "JJ/MM/AAAA")
+                VStack(spacing: 20) {
+                    if viewModel.vehicleCreationStep == .vehicleType {
+                        VehicleFormButton(action: {viewModel.selectType(.car)}, title: "Une voiture", isSelected: viewModel.type == .car)
+                        VehicleFormButton(action: {viewModel.selectType(.moto)}, title: "Une moto", isSelected: viewModel.type == .moto)
+                    } else if viewModel.vehicleCreationStep == .licence {
+                        VehicleFormTextField(text: $viewModel.license, placeholder: "Immatriculation")
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    } else if viewModel.vehicleCreationStep == .brandAndModel {
+                        VehicleFormTextField(text: $viewModel.brand, placeholder: "Marque")
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                        VehicleFormTextField(text: $viewModel.model, placeholder: "Modèle")
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    } else if viewModel.vehicleCreationStep == .year {
+                        VehicleFormTextField(text: $viewModel.year, placeholder: "JJ/MM/AAAA")
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    }
                 }
+                .padding(.top, 20)
             }
-            .padding(.top, 20)
-
-            Button("Continuer", action: viewModel.continueVehicleCreation)
+            Spacer()
+            Button("Continuer", action: withAnimation {
+                viewModel.continueVehicleCreation
+            })
                     .buttonStyle(PrimaryButtonStyle())
-                    .padding(.vertical, 20)
 
-                DotControlView(totalElements: 4, contentIndex: 0)
+            Button(action: viewModel.goingToPrevious) {
+                    Text("Précédent")
+                    .foregroundColor(Color.black)
+                    .bold()
             }
+                .padding(.bottom, 20)
+
+            DotControlView(totalElements: viewModel.vehicleCreationStep.count, contentIndex: viewModel.vehicleCreationStep.currentIndex)
+            }
+            .frame(height: 350)
             .padding([.leading, .trailing, .bottom], 25)
             .padding(.top, 10)
             .background(Asset.Colors.whiteBackground.swiftUIColor)
@@ -52,58 +68,6 @@ struct VehicleCreationView_Previews: PreviewProvider {
 
             return VehicleCreationView(viewModel: viewModel)
             .previewLayout(PreviewLayout.sizeThatFits)
-    }
-}
-
-//
-//            Text(L10n.CreateVehicle.title)
-//                .font(.title)
-//                .fontWeight(.bold)
-//
-//            Divider()
-//
-//            TextField(L10n.CreateVehicle.brand, text: $viewModel.brand)
-//                .padding(.top)
-//
-//            TextField(L10n.CreateVehicle.model, text: $viewModel.model)
-//                .padding(.top)
-//
-//            TextField(L10n.CreateVehicle.license, text: $viewModel.license)
-//                .padding(.top)
-//
-//            Text(L10n.CreateVehicle.Form.adviceForLicense)
-//                .font(.system(size: 13))
-//                .frame(maxWidth: .infinity, alignment: .leading)
-//
-//            HStack(alignment: .lastTextBaseline) {
-//                Picker("Type", selection: $viewModel.type) {
-//                    Text(L10n.Vehicles.car).tag(Vehicle.Category.car)
-//                    Text(L10n.Vehicles.moto).tag(Vehicle.Category.moto)
-//                }
-//                Spacer(minLength: 50)
-//                TextField(L10n.CreateVehicle.year, text: $viewModel.year)
-//                    .padding(.top)
-//                    .keyboardType(.numberPad)
-//            }
-//
-//            Button(L10n.CreateVehicle.submit) {
-//                Task {
-//                    await viewModel.createVehicle()
-//                }
-//            }
-//            .padding(.top)
-//            Spacer()
-
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .leading,
-        @ViewBuilder placeholder: () -> Content) -> some View {
-
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
-        }
     }
 }
 

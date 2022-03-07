@@ -23,6 +23,11 @@ private struct ModalizedView<V: View, Content : View>: View {
                     Color.black
                         .opacity(0.6)
                         .ignoresSafeArea()
+                        .onTapGesture {
+                            withAnimation {
+                                isModalized = false
+                            }
+                        }
                 }
 
                 VStack {

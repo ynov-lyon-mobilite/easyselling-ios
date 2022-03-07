@@ -29,9 +29,3 @@ struct VehicleFormTextField: View {
             .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 0)
     }
 }
-
-//struct VehicleFormTextField_Previews: PreviewProvider {
-//    static var previews: some View {
-//        VehicleFormTextField(text: text)
-//    }
-//}

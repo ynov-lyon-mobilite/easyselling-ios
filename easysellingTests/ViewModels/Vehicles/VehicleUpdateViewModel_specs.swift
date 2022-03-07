@@ -46,7 +46,7 @@ class VehicleUpdateViewModel_specs: XCTestCase {
     private func givenViewModel(expected: VehicleCreationError = .emptyField, vehicle: Vehicle) {
         viewModel = VehicleUpdateViewModel(vehicle: vehicle, onFinish: {
             self.isDelete = true
-        }, vehicleVerificator: SpyVehicleInformationsVerificator(error: expected), vehicleUpdater: DefaultVehicleUpdater())
+        }, vehicleVerificator: FailingVehicleInformationsVerificator(error: expected), vehicleUpdater: DefaultVehicleUpdater())
     }
 
     private func whenUpdating() async{

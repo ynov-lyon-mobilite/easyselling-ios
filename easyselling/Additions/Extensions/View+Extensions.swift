@@ -21,6 +21,16 @@ extension View {
         self.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: alignment)
     }
 
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
+}
     func ableToShowError(_ error: LocalizedError?) -> some View {
         modifier(ErrorShower(error: error))
     }

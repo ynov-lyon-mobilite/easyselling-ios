@@ -37,13 +37,15 @@ enum VehicleCreationError: Equatable, LocalizedError {
     case incorrectYear
     case incorrectLicenseFormat
     case incorrectLicenseSize
+    case unchosenType
 
-    var description: String {
+    var errorDescription: String? {
         switch self {
             case .emptyField: return L10n.CreateVehicle.Error.emptyField
             case .incorrectYear: return L10n.CreateVehicle.Error.incorrectYear
             case .incorrectLicenseFormat: return L10n.CreateVehicle.Error.incorrectLicenseFormat
             case .incorrectLicenseSize: return L10n.CreateVehicle.Error.incorrectLicenseSize
+            case .unchosenType: return "Vous devez choisir un type de véhicule"
         }
     }
 }

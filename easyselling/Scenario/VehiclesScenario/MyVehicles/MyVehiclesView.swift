@@ -95,7 +95,8 @@ struct MyVehiclesView: View {
             Task {
                 await viewModel.getVehicles()
             }
-        }.modal(isModalized: $viewModel.isOpenningVehicleCreation) {
+        }
+        .modal(isModalized: $viewModel.isOpenningVehicleCreation) {
             VehicleCreationView(viewModel: VehicleCreationViewModel(isOpenningVehicleCreation: $viewModel.isOpenningVehicleCreation))
         }
     }
