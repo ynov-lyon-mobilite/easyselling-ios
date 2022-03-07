@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import NetFox
 import Firebase
+import netfox
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

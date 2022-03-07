@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ErrorShower: ViewModifier {
     @Namespace private var animation
-    var error: Error?
+    var error: LocalizedError?
 
     func body(content: Content) -> some View {
         ZStack {
@@ -17,7 +17,7 @@ struct ErrorShower: ViewModifier {
             VStack {
                 if let error = error {
                     VStack {
-                        Text(error.errorDescription)
+                        Text(error.errorDescription ?? "")
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding(25)

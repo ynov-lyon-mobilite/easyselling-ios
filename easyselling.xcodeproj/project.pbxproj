@@ -27,7 +27,6 @@
 		0317EE3A27519DF100A6AE0D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317EE3927519DF100A6AE0D /* ProfileView.swift */; };
 		0317EE3C27519E6200A6AE0D /* ProfileViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317EE3B27519E6200A6AE0D /* ProfileViewModel_Specs.swift */; };
 		032BF80F27A14860005BC077 /* ErrorShower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032BF80E27A1485F005BC077 /* ErrorShower.swift */; };
-		033F4AF32718C8A800B79149 /* NetFox in Frameworks */ = {isa = PBXBuildFile; productRef = 033F4AF22718C8A800B79149 /* NetFox */; };
 		03422F61275CEDF70060D19E /* DefaultInvoiceDownloader_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F60275CEDF70060D19E /* DefaultInvoiceDownloader_Specs.swift */; };
 		03422F63275CEE140060D19E /* SucceedingInvoiceDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F62275CEE140060D19E /* SucceedingInvoiceDownloader.swift */; };
 		03422F65275CEE370060D19E /* FailingInvoiceDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F64275CEE370060D19E /* FailingInvoiceDownloader.swift */; };
@@ -52,6 +51,7 @@
 		035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860727188EB800684ED0 /* DefaultAccountCreator_Specs.swift */; };
 		035E860A2718982A00684ED0 /* HTTPEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E86092718982A00684ED0 /* HTTPEndpoint.swift */; };
 		035E860C2718A3AB00684ED0 /* APICallerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860B2718A3AB00684ED0 /* APICallerError.swift */; };
+		0375446A27D66182009D7196 /* netfox in Frameworks */ = {isa = PBXBuildFile; productRef = 0375446927D66182009D7196 /* netfox */; };
 		0382E29A27175FB700EB570E /* AuthenticationScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29927175FB700EB570E /* AuthenticationScenario_Specs.swift */; };
 		0382E29D2717639A00EB570E /* TypesAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29C2717639A00EB570E /* TypesAlias.swift */; };
 		0382E29F2717647500EB570E /* AuthenticationScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0382E29E2717647500EB570E /* AuthenticationScenario.swift */; };
@@ -410,8 +410,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8705B9B127208464004132CF /* KeychainSwift in Frameworks */,
-				033F4AF32718C8A800B79149 /* NetFox in Frameworks */,
 				8798D15327310BFC00FF3AB4 /* JWTDecode in Frameworks */,
+				0375446A27D66182009D7196 /* netfox in Frameworks */,
 				034D04E82732984400576D64 /* FirebaseCrashlytics in Frameworks */,
 				034D04E62732984400576D64 /* FirebaseAnalytics in Frameworks */,
 				D00736582712D93800ED0F2C /* AuthenticationServices.framework in Frameworks */,
@@ -1236,11 +1236,11 @@
 			);
 			name = easyselling;
 			packageProductDependencies = (
-				033F4AF22718C8A800B79149 /* NetFox */,
 				8705B9B027208464004132CF /* KeychainSwift */,
 				034D04E52732984400576D64 /* FirebaseAnalytics */,
 				034D04E72732984400576D64 /* FirebaseCrashlytics */,
 				8798D15227310BFC00FF3AB4 /* JWTDecode */,
+				0375446927D66182009D7196 /* netfox */,
 			);
 			productName = easyselling;
 			productReference = 873552AF270D847700F2DDBD /* easyselling.app */;
@@ -1295,10 +1295,10 @@
 			);
 			mainGroup = 873552A6270D847700F2DDBD;
 			packageReferences = (
-				033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */,
 				8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				8798D15127310BFC00FF3AB4 /* XCRemoteSwiftPackageReference "JWTDecode" */,
 				034D04E42732984400576D64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				0375446827D66182009D7196 /* XCRemoteSwiftPackageReference "netfox" */,
 			);
 			productRefGroup = 873552B0270D847700F2DDBD /* Products */;
 			projectDirPath = "";
@@ -1873,20 +1873,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MaxenceMottard/netfox";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		034D04E42732984400576D64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				branch = master;
 				kind = branch;
+			};
+		};
+		0375446827D66182009D7196 /* XCRemoteSwiftPackageReference "netfox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kasketis/netfox";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 		8705B9AF27208464004132CF /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
@@ -1908,11 +1908,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		033F4AF22718C8A800B79149 /* NetFox */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 033F4AF12718C8A800B79149 /* XCRemoteSwiftPackageReference "netfox" */;
-			productName = NetFox;
-		};
 		034D04E52732984400576D64 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 034D04E42732984400576D64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -1922,6 +1917,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 034D04E42732984400576D64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		0375446927D66182009D7196 /* netfox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0375446827D66182009D7196 /* XCRemoteSwiftPackageReference "netfox" */;
+			productName = netfox;
 		};
 		8705B9B027208464004132CF /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;

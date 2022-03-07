@@ -21,7 +21,7 @@ extension View {
         self.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: alignment)
     }
 
-    func ableToShowError(_ error: Error?) -> some View {
-        modifier(ErrorShower(error: Error?))
+    func ableToShowError(_ error: LocalizedError?) -> some View {
+        modifier(ErrorShower(error: error))
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class PasswordResetRequestViewModel: NSObject, ObservableObject {
+class PasswordResetRequestViewModel: ObservableObject {
 
     init(verificator: EmailVerificator = DefaultEmailVerificator(), passwordRequester: PasswordResetRequester = DefaultPasswordResetRequester()) {
         self.verificator = verificator
