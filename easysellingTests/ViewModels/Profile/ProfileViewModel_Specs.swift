@@ -25,13 +25,23 @@ class ProfileViewModel_Specs: XCTestCase {
         thenHasLoggedOut()
     }
 
+    func test_Navigates_to_settings_menu() {
+        givenViewModel(tokenManager: FakeTokenManager(accessToken: "Access token", refreshToken: "Refresh token"))
+        whenNavigatingToSettingsMenu()
+        thenNavigatesToSettingsMenu()
+    }
+
     private func givenViewModel(tokenManager: TokenManager) {
         self.tokenManager = tokenManager
-        viewModel = ProfileViewModel(tokenManager: tokenManager, onLogout: { self.hasLoggedOut = true })
+        viewModel = ProfileViewModel(tokenManager: tokenManager, onLogout: { self.hasLoggedOut = true }, isNavigatingToSettingsMenu: { self.onNavigateToSettingsMenu = true})
     }
 
     private func whenTryingToLoggingOut() {
         viewModel.logout()
+    }
+
+    private func whenNavigatingToSettingsMenu() {
+        viewModel.navigatesToSettingsMenu()
     }
 
     private func thenToken(is expected: String?) {
@@ -46,7 +56,12 @@ class ProfileViewModel_Specs: XCTestCase {
         XCTAssertTrue(hasLoggedOut)
     }
 
+    private func thenNavigatesToSettingsMenu() {
+        XCTAssertTrue(onNavigateToSettingsMenu)
+    }
+
     private var viewModel: ProfileViewModel!
     private var tokenManager: TokenManager!
     private var hasLoggedOut: Bool = false
+    private var onNavigateToSettingsMenu: Bool = false
 }

@@ -17,10 +17,33 @@ struct SettingsView: View {
     }
 
     var body: some View {
-        VStack {
-            Text("Hello, here is the settings menu")
-            SelectAppIcon()
+        VStack(alignment: .leading) {
+            TitleNavigationView(title: L10n.Profile.settings)
+            VStack {
+                Text(L10n.Settings.icons)
+                    .fontWeight(.bold)
+                    .font(.title3)
+                    .padding(.top, 10)
+                SelectAppIcon()
+            }
+            .background(Asset.Colors.secondaryBackground.swiftUIColor)
+            .cornerRadius(20)
+            .padding(.bottom, 30)
+
+            VStack {
+                Text(L10n.Settings.theme)
+                    .fontWeight(.bold)
+                    .font(.title3)
+                    .padding(.top, 10)
+                SelectAppIcon()
+            }
+            .background(Asset.Colors.secondaryBackground.swiftUIColor)
+            .cornerRadius(20)
+            Spacer()
         }
+        .padding(.horizontal, 25)
+        .foregroundColor(Asset.Colors.text.swiftUIColor)
+        .background(Asset.Colors.currentBackground.swiftUIColor.ignoresSafeArea())
     }
 }
 

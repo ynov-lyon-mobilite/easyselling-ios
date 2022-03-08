@@ -15,8 +15,7 @@ class MyVehiclesViewModel: ObservableObject {
          isOpenningVehicleCreation: @escaping Action,
          isOpeningVehicleUpdate: @escaping OnUpdatingVehicle,
          isNavigatingToProfile: @escaping Action,
-         isNavigatingToInvoices: @escaping (String) -> Void,
-         isNavigatingToSettingsMenu: @escaping Action) {
+         isNavigatingToInvoices: @escaping (String) -> Void) {
 
         self.vehiclesGetter = vehiclesGetter
         self.vehicleDeletor = vehicleDeletor
@@ -24,7 +23,6 @@ class MyVehiclesViewModel: ObservableObject {
         self.isOpeningVehicleUpdate = isOpeningVehicleUpdate
         self.isNavigatingToProfile = isNavigatingToProfile
         self.isNavigatingToInvoices = isNavigatingToInvoices
-        self.isNavigatingToSettingsMenu = isNavigatingToSettingsMenu
     }
 
     private var vehiclesGetter: VehiclesGetter
@@ -33,7 +31,6 @@ class MyVehiclesViewModel: ObservableObject {
     private var isOpenningVehicleCreation: Action
     private var isNavigatingToProfile: Action
     private var isNavigatingToInvoices: (String) -> Void
-    private var isNavigatingToSettingsMenu: Action
 
     @Published var isLoading: Bool = true
     @Published var vehicles: [Vehicle] = []
@@ -90,9 +87,5 @@ class MyVehiclesViewModel: ObservableObject {
 
     func navigatesToInvoices(ofVehicle vehicleId: String) {
         self.isNavigatingToInvoices(vehicleId)
-    }
-
-    func navigatesToSettingsMenu() {
-        self.isNavigatingToSettingsMenu()
     }
 }

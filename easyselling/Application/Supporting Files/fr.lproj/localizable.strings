@@ -33,6 +33,7 @@
 "passwordReset.iUnderstand" = "J'ai compris";
 "passwordReset.resetPasswordButton" = "Réinitialiser le mot de passe";
 "passwordReset.understand" = "J'ai compris";
+
 "vehicles.car" = "Voiture";
 "vehicles.moto" = "Moto";
 "vehicles.profile" = "Profil";
@@ -67,3 +68,12 @@
 "serverError.forbidden" = "Vous n'êtes pas autorisé à effectuer cette action";
 "serverError.serviceUnavailable" = "Le service externe ne peut être utilisé";
 "serverError.invalidCredentials" = "Vos informations sont incorrectes";
+
+"profile.title" = "Mon profil";
+"profile.explanations" = "Explications";
+"profile.informations" = "Informations";
+"profile.settings" = "Préférences";
+"profile.logout" = "Se déconnecter";
+
+"settings.icons" = "Icône d'application";
+"settings.theme" = "Thème d'application";

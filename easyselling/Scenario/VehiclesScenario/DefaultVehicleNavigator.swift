@@ -13,13 +13,11 @@ protocol VehicleNavigator {
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
                              onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigateToProfile: @escaping Action,
-                             onNavigatingToInvoices: @escaping (String) -> Void,
-                             onNavigateToSettingsMenu: @escaping Action)
+                             onNavigatingToInvoices: @escaping (String) -> Void)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
     func navigatesToInvoices(ofVehicleId vehicleId: String)
     func navigatesToProfile()
     func goingBackToHomeView()
-    func navigatesToSettingsMenu()
 }
 
 class DefaultVehicleNavigator: VehicleNavigator {
@@ -34,15 +32,13 @@ class DefaultVehicleNavigator: VehicleNavigator {
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
                              onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigateToProfile: @escaping Action,
-                             onNavigatingToInvoices: @escaping (String) -> Void,
-                             onNavigateToSettingsMenu: @escaping Action) {
+                             onNavigatingToInvoices: @escaping (String) -> Void) {
         window?.rootViewController = navigationController
 
         let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen,
                                      isOpeningVehicleUpdate: onVehicleUpdateOpen,
                                      isNavigatingToProfile: onNavigateToProfile,
-                                     isNavigatingToInvoices: onNavigatingToInvoices,
-                                     isNavigatingToSettingsMenu: onNavigateToSettingsMenu)
+                                     isNavigatingToInvoices: onNavigatingToInvoices)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
         navigationController.pushViewController(UIHostingController(rootView: myVehiclesView), animated: true)
     }

@@ -117,6 +117,8 @@
 		39D101E52769E9B600F101AB /* SettingsScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D101E42769E9B600F101AB /* SettingsScenario.swift */; };
 		39D101E72769E9F400F101AB /* DefaultSettingsNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D101E62769E9F400F101AB /* DefaultSettingsNavigator.swift */; };
 		39D101EA2769F0A500F101AB /* SettingsScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D101E92769F0A500F101AB /* SettingsScenario_Specs.swift */; };
+		39D701E927BD28E200F93287 /* ButtonList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D701E827BD28E200F93287 /* ButtonList.swift */; };
+		39D701EF27BD353900F93287 /* TitleNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D701EE27BD353900F93287 /* TitleNavigationView.swift */; };
 		39FC6E9E274D598A0067E97F /* DefaultVehicleDeletor_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FC6E9D274D598A0067E97F /* DefaultVehicleDeletor_Specs.swift */; };
 		5C05F12B274E2966001BCD7C /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F8EF5274E190B00CF6740 /* Invoice.swift */; };
 		5CA58D10274E8D99000BF06C /* DefaultInvoicesNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA58D0F274E8D99000BF06C /* DefaultInvoicesNavigator.swift */; };
@@ -321,6 +323,8 @@
 		39D101E42769E9B600F101AB /* SettingsScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScenario.swift; sourceTree = "<group>"; };
 		39D101E62769E9F400F101AB /* DefaultSettingsNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSettingsNavigator.swift; sourceTree = "<group>"; };
 		39D101E92769F0A500F101AB /* SettingsScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScenario_Specs.swift; sourceTree = "<group>"; };
+		39D701E827BD28E200F93287 /* ButtonList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonList.swift; sourceTree = "<group>"; };
+		39D701EE27BD353900F93287 /* TitleNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleNavigationView.swift; sourceTree = "<group>"; };
 		39FC6E9D274D598A0067E97F /* DefaultVehicleDeletor_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleDeletor_Specs.swift; sourceTree = "<group>"; };
 		5C6F8EF5274E190B00CF6740 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
 		5CA58D0F274E8D99000BF06C /* DefaultInvoicesNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvoicesNavigator.swift; sourceTree = "<group>"; };
@@ -552,6 +556,8 @@
 			children = (
 				032BF80E27A1485F005BC077 /* ErrorShower.swift */,
 				0354E83827737449004AEECB /* ImagedBackground.swift */,
+				39D701E827BD28E200F93287 /* ButtonList.swift */,
+				39D701EE27BD353900F93287 /* TitleNavigationView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1437,6 +1443,7 @@
 				03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */,
 				2C2DA388275280330085988B /* DefaultVehicleVerificator.swift in Sources */,
 				03DAF9A2272730D500FFED55 /* MyVehiclesView.swift in Sources */,
+				39D701E927BD28E200F93287 /* ButtonList.swift in Sources */,
 				03422F67275CF1DA0060D19E /* DefaultInvoiceDownloader.swift in Sources */,
 				2CE2407B276A382300B92165 /* ServerError.swift in Sources */,
 				8705B9A8272081E3004132CF /* DefaultTokenManager.swift in Sources */,
@@ -1451,6 +1458,7 @@
 				8798D14E2730FE7D00FF3AB4 /* DefaultAuthorizedRequestGenerator.swift in Sources */,
 				5CA58D10274E8D99000BF06C /* DefaultInvoicesNavigator.swift in Sources */,
 				03004DBE273DB9E800188983 /* SceneDelegate.swift in Sources */,
+				39D701EF27BD353900F93287 /* TitleNavigationView.swift in Sources */,
 				87DC1D0E271FDF8D002DC193 /* APIResponse.swift in Sources */,
 				9B5C547D27387E59005CFD24 /* Vehicle.swift in Sources */,
 				87780BAD271730100035AB13 /* DefaultRequestGenerator.swift in Sources */,
