@@ -16,6 +16,8 @@ struct ImagedBackground<Content : View>: View {
 
     var body: some View {
         ZStack {
+            Color.backgroundColor
+                .ignoresSafeArea()
             GeometryReader { proxy in
                 let height = proxy.size.height * 1.13
                 let spacingTop = (height - proxy.size.height) / 2

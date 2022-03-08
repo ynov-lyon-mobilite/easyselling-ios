@@ -19,6 +19,7 @@ struct UserAuthenticationView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 loginView
             }
+            .ableToShowError(viewModel.error)
         }
     }
 
@@ -46,23 +47,11 @@ struct UserAuthenticationView: View {
                     .cornerRadius(10)
                     .textContentType(.password)
 
-                HStack {
-                    Text(viewModel.error?.errorDescription ?? " ")
-                        .fixedSize()
-                        .foregroundColor(.red)
-                        .font(.headline)
-                        .opacity(viewModel.error != nil ? 1 : 0)
-
-                    Spacer()
-
                     Button(L10n.Button.forgottenPassword) {
                         viewModel.navigateToPasswordReset()
                     }
                     .buttonStyle(TextButtonStyle())
                     .fillMaxWidth(alignment: .trailing)
-                }
-                .buttonStyle(TextButtonStyle())
-                .fillMaxWidth(alignment: .trailing)
             }
             Spacer()
             Button(L10n.UserAuthentication.Button.login) {

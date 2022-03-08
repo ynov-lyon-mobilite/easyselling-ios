@@ -33,11 +33,6 @@ struct PasswordResetView: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                Text(viewModel.error?.errorDescription ?? "")
-                    .foregroundColor(.red)
-                    .font(.headline)
-                    .opacity(viewModel.error != nil ? 1 : 0)
-                    .transition(.opacity)
             }
 
             Button(action: {
@@ -54,6 +49,7 @@ struct PasswordResetView: View {
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }
         .padding(25)
+        .ableToShowError(viewModel.error)
     }
 }
 

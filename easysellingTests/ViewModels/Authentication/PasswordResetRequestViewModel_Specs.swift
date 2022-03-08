@@ -28,12 +28,17 @@ class PasswordResetRequestViewModel_Specs: XCTestCase {
 //    }
     
     // need to find a way to test loading state during asynchronous process
-//    func test_Shows_loading_when_requesting_password_reset() async {
-//        givenViewModel()
-//        thenViewModelState(is: .initial)
-//        await whenRequestingPasswordReset(of: "test@test.com")
-//        thenViewModelState(is: .loading)
-//    }
+    func test_Shows_loading_when_requesting_password_reset() async {
+
+        givenViewModel()
+        thenViewModelState(is: .initial)
+        let predicate = NSPredicate(block: { _, _ -> Bool in
+            return self.viewModel.state == .loading
+            })
+        let publishExpectation = XCTNSPredicateExpectation(predicate: predicate, object: .none)
+        await whenRequestingPasswordReset(of: "test@test.com")
+        XCTWaiter().wait(for: [publishExpectation], timeout: 5)
+    }
     
     func test_Shows_succeed_message_when_password_reset_request_has_sent_mail() async {
         givenViewModel()
@@ -69,4 +74,19 @@ class PasswordResetRequestViewModel_Specs: XCTestCase {
     }
     
     private var viewModel: PasswordResetRequestViewModel!
+}
+
+extension XCTestCase {
+    /// Creates an expectation for monitoring the given condition.
+    /// - Parameters:
+    ///   - condition: The condition to evaluate to be `true`.
+    ///   - description: A string to display in the test log for this expectation, to help diagnose failures.
+    /// - Returns: The expectation for matching the condition.
+    func expectation(for condition: @autoclosure @escaping () -> Bool, description: String = "") -> XCTestExpectation {
+        let predicate = NSPredicate { _, _ in
+            return condition()
+        }
+
+        return XCTNSPredicateExpectation(predicate: predicate, object: nil)
+    }
 }

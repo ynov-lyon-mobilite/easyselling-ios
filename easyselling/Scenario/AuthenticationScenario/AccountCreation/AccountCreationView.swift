@@ -16,15 +16,13 @@ struct AccountCreationView: View {
             ScrollView(showsIndicators: false) {
                 accountCreationView
             }
+            .ableToShowError(viewModel.error)
         }
     }
 
     private var accountCreationView: some View {
         VStack(spacing: 30) {
-            if viewModel.state == .loading {
-                ProgressView()
-            } else {
-                Image(Asset.ThemeImages.Orange.logoOrange)
+            Image(Asset.ThemeImages.Orange.logoOrange)
                     .resizable()
                     .padding()
                     .frame(width: 230, height: 230)
@@ -46,10 +44,6 @@ struct AccountCreationView: View {
                         .background(Color.gray.opacity(0.5))
                         .cornerRadius(10)
                         .textContentType(.newPassword)
-                    Text(viewModel.error?.errorDescription ?? "")
-                        .foregroundColor(.red)
-                        .font(.headline)
-                        .opacity(viewModel.error != nil ? 1 : 0)
                     }
 
                 Spacer()
@@ -59,9 +53,8 @@ struct AccountCreationView: View {
                         await viewModel.createAccount()
                     }
                 }
-                .buttonStyle(PrimaryButtonStyle())
+                .buttonStyle(PrimaryButtonStyle(isLoading: .constant(viewModel.state == .loading)))
             }
-        }
         .padding(25)
         .fillMaxHeight()
         .alert(isPresented: $viewModel.showAlert, content: {
