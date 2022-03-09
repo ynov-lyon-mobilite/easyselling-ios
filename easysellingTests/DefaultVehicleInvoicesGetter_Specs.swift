@@ -15,9 +15,9 @@ class DefaultVehicleInvoicesGetter_Specs: XCTestCase {
     private var error: APICallerError!
     
     func test_Shows_vehicle_invoices_when_request_succeeded() async {
-        let expectedInvoices = [InvoiceCoreData(id: 1, vehicle: "1", file: "1", dateCreated: "date1", dateUpdated: ""),
-                        InvoiceCoreData(id: 2, vehicle: "1", file: "2", dateCreated: "date2", dateUpdated: ""),
-                        InvoiceCoreData(id: 3, vehicle: "2", file: "3", dateCreated: "date3", dateUpdated: "")]
+        let expectedInvoices = [Invoice(),
+                                Invoice(),
+                                Invoice()]
 
         givenGetter(withAPICaller: DefaultAPICaller(urlSession: FakeUrlSession(localFile: .succeededInvoices)))
         await whenTryingToGetVehicleInvoices()

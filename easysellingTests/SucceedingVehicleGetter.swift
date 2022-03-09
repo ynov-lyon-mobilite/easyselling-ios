@@ -15,7 +15,7 @@ class SucceedingVehiclesGetter: VehiclesGetter {
 
     private var vehicles: [Vehicle]
 
-    func getVehicles() async throws -> [Vehicle] {
+    func getVehicles() async -> [Vehicle] {
         return vehicles
     }
 }

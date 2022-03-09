@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 import SwiftUI
 
-class Vehicle {
-    var brand: String
+struct Vehicle: Decodable, Equatable {
     var id: String?
-    var license: String
+    var brand: String
     var model: String
+    var license: String
     var type: Category
     var year: String
 
@@ -30,8 +30,9 @@ class Vehicle {
         return VehicleDTO(brand: vehicle.brand, license: vehicle.license, model: vehicle.model, type: vehicle.type.rawValue, year: vehicle.year)
     }
 
-    static func toCoreDataObject (vehicle: VehicleResponse) -> VehicleCoreData {
-        return VehicleCoreData(id: vehicle.id, brand: vehicle.brand, license: vehicle.license, model: vehicle.model, type: vehicle.type, year: vehicle.year)
+    static func fromCoreDataToObject (vehicle: VehicleCoreData) -> Vehicle {
+        let type = Vehicle.Category(rawValue: vehicle.type) ?? .car
+        return Vehicle(id: vehicle.id, brand: vehicle.brand, model: vehicle.model, license: vehicle.license, type: type, year: vehicle.year)
     }
 }
 

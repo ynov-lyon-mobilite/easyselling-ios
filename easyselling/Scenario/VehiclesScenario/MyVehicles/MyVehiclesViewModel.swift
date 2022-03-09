@@ -61,8 +61,12 @@ class MyVehiclesViewModel: ObservableObject {
 
     @MainActor func getVehicles() async {
         state = .loading
-        vehicles = await vehiclesGetter.getVehicles()
-        state = .listingVehicles
+        do {
+            vehicles = try await vehiclesGetter.getVehicles()
+            state = .listingVehicles
+        } catch (let error) {
+            print(error)
+        }
     }
 
     func navigateToProfile() {

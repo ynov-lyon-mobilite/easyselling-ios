@@ -8,7 +8,7 @@
 import Foundation
 
 protocol VehiclesGetter {
-    func getVehicles() async throws -> [VehicleCoreData]
+    func getVehicles() async throws -> [Vehicle]
 }
 
 class DefaultVehiclesGetter : VehiclesGetter {
