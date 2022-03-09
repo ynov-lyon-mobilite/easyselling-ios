@@ -14,17 +14,16 @@ struct Invoice: Decodable {
     var file : String
     var dateCreated : String
     var dateUpdated : String?
-    var fileData: Data?
 
     static func toEncodableStruct (invoice: Invoice) -> InvoiceDTO {
         return InvoiceDTO(vehicle: invoice.vehicle, file: invoice.file, dateCreated: invoice.dateCreated, dateUpdated: invoice.dateUpdated ?? "")
     }
 
     static func toCoreDataObject (invoice: Invoice) -> InvoiceCoreData {
-        return InvoiceCoreData(id: Int16(invoice.id), vehicle: invoice.vehicle, file: invoice.file, dateCreated: invoice.dateCreated, dateUpdated: invoice.dateUpdated, fileData: invoice.fileData ?? Data())
+        return InvoiceCoreData(id: Int16(invoice.id), vehicle: invoice.vehicle, file: invoice.file, dateCreated: invoice.dateCreated, dateUpdated: invoice.dateUpdated)
     }
 
     static func fromCoreDataToObject (invoice: InvoiceCoreData) -> Invoice {
-        return Invoice(id: Int(invoice.id), vehicle: invoice.vehicle, file: invoice.file, dateCreated: invoice.dateCreated, dateUpdated: invoice.dateUpdated, fileData: invoice.fileData)
+        return Invoice(id: Int(invoice.id), vehicle: invoice.vehicle, file: invoice.file, dateCreated: invoice.dateCreated, dateUpdated: invoice.dateUpdated)
     }
 }
