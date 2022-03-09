@@ -12,10 +12,9 @@ protocol VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
     func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigateToProfile: @escaping Action,
-                             onNavigatingToInvoices: @escaping (Vehicle) -> Void,
-                             onNavigateToSettingsMenu: @escaping Action)
+                             onNavigatingToInvoices: @escaping (String) -> Void)
+    func navigatesToInvoices(ofVehicleId vehicleId: String)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
-    func navigatesToInvoices(vehicle: Vehicle)
     func navigatesToProfile()
     func goingBackToHomeView()
 }

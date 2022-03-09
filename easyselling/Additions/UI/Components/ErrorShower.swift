@@ -21,6 +21,7 @@ struct ErrorShower: ViewModifier {
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding(25)
+                            .multilineTextAlignment(.center)
                     }
                     .frame(maxWidth: .infinity)
                     .background(Color.red)

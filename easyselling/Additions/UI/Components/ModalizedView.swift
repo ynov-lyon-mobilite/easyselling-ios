@@ -36,7 +36,7 @@ private struct ModalizedView<V: View, Content : View>: View {
                         .padding(.bottom, reader.safeAreaInsets.bottom)
                         .cornerRadius(25, corners: [.topLeft, .topRight])
                 }
-                .ignoresSafeArea(edges: .bottom)
+                .ignoresSafeArea(edges: .vertical)
                 .offset(y: isModalized ? 0 : reader.size.height)
             }
         }
@@ -56,7 +56,7 @@ struct ModalizedView_Previews: PreviewProvider {
             .previewDevice("iPhone 8")
 
         }.modal(isModalized: .constant(true)) {
-            VehicleCreationView(viewModel: VehicleCreationViewModel(isOpenningVehicleCreation: .constant(true)))
+            VehicleCreationView(viewModel: VehicleCreationViewModel(hasFinishedVehicleCreation: {}))
         }
     }
 }

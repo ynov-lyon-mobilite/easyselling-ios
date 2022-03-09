@@ -97,7 +97,12 @@ struct MyVehiclesView: View {
             }
         }
         .modal(isModalized: $viewModel.isOpenningVehicleCreation) {
-            VehicleCreationView(viewModel: VehicleCreationViewModel(isOpenningVehicleCreation: $viewModel.isOpenningVehicleCreation))
+            VehicleCreationView(viewModel: VehicleCreationViewModel(hasFinishedVehicleCreation: {
+                $viewModel.isOpenningVehicleCreation.wrappedValue.toggle()
+                Task {
+                    await viewModel.getVehicles()
+                }
+            }))
         }
     }
 }

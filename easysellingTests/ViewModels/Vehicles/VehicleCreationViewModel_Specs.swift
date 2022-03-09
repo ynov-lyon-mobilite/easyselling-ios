@@ -79,6 +79,38 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         thenActualStep(is: .vehicleType)
     }
 
+    func test_Dismiss_modal_when_user_has_finished_create_vehicle_without_error() async {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        whenSelectingVehicleType(.car)
+        XCTAssertEqual(.licence, viewModel.vehicleCreationStep)
+        whenSelectingLicence("AA-222-AA")
+        XCTAssertEqual(.brandAndModel, viewModel.vehicleCreationStep)
+        whenSelectingBrandAndModel("Peugeot", "206")
+        XCTAssertEqual("Peugeot", viewModel.brand)
+        XCTAssertEqual("Peugeot", viewModel.createdVehicle.brand)
+        XCTAssertEqual("206", viewModel.model)
+        XCTAssertEqual("206", viewModel.createdVehicle.model)
+        XCTAssertEqual(.year, viewModel.vehicleCreationStep)
+        await whenCreatingVehicle()
+        ThenVehicleCreationHasFinish()
+    }
+
+    func test_show_error_when_vehicle_creation_fail() async {
+        givenViewModel(vehicleCreator: FailingVehicleCreator(error: .forbidden), vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        whenSelectingVehicleType(.car)
+        XCTAssertEqual(.licence, viewModel.vehicleCreationStep)
+        whenSelectingLicence("AA-222-AA")
+        XCTAssertEqual(.brandAndModel, viewModel.vehicleCreationStep)
+        whenSelectingBrandAndModel("Peugeot", "206")
+        XCTAssertEqual("Peugeot", viewModel.brand)
+        XCTAssertEqual("Peugeot", viewModel.createdVehicle.brand)
+        XCTAssertEqual("206", viewModel.model)
+        XCTAssertEqual("206", viewModel.createdVehicle.model)
+        XCTAssertEqual(.year, viewModel.vehicleCreationStep)
+        await whenCreatingVehicle()
+        thenError(is: .forbidden)
+    }
+
     private func whenGoingBack() {
         viewModel.goingToPrevious()
     }
@@ -102,23 +134,20 @@ class VehicleCreationViewModel_Specs: XCTestCase {
     private func whenContinueVehicleCreation() {
         viewModel.continueVehicleCreation()
     }
-    
-    func test_Dismisses_modal_when_the_creation_have_successful() async {
-        givenViewModel()
-        await whenCreationSuccessful()
-//        thenModalIsDismissed()
+
+    private func givenViewModel(vehicleCreator: VehicleCreator = SucceedingVehicleCreator(), vehicleInformationsVerificator: VehicleInformationsVerificator = FailingVehicleInformationsVerificator(error: .emptyField)) {
+        
+        viewModel = VehicleCreationViewModel(vehicleCreator: vehicleCreator, vehicleVerificator: vehicleInformationsVerificator, hasFinishedVehicleCreation: {
+            self.hasCreatedVehicle = true
+        })
     }
 
-    private func givenViewModel(vehicleInformationsVerificator: VehicleInformationsVerificator = FailingVehicleInformationsVerificator(error: .emptyField)) {
-        viewModel = VehicleCreationViewModel(vehicleCreator: SpyVehicleCreator(), vehicleVerificator: vehicleInformationsVerificator, isOpenningVehicleCreation: .constant(true))
-    }
-
-    private func whenCreating() async {
-//        await viewModel.createVehicle()
+    private func whenCreatingVehicle() async {
+        await viewModel.createVehicle()
     }
     
-    private func whenCreationSuccessful() async {
-        await viewModel.dismissModal()
+    private func whenCreationSuccessful() {
+        viewModel.dismissModal()
     }
 
     private func thenAlertIsShowing() {
@@ -137,13 +166,34 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         XCTAssertEqual(expected.errorDescription, viewModel.error?.errorDescription)
     }
 
+    private func thenError(is expected: APICallerError) {
+        XCTAssertEqual(expected.errorDescription, viewModel.error?.errorDescription)
+    }
+
+    private func ThenVehicleCreationHasFinish() {
+        XCTAssertTrue(hasCreatedVehicle)
+    }
+
     private var viewModel: VehicleCreationViewModel!
+    private var hasCreatedVehicle: Bool = false
 }
 
-class SpyVehicleCreator: VehicleCreator {
-    
-    func createVehicle(informations: VehicleDTO) async throws {
-        throw APICallerError.internalServerError
+class FailingVehicleCreator: VehicleCreator {
+
+    init(error: APICallerError) {
+        self.error = error
+    }
+
+    private var error: APICallerError
+
+    func createVehicle(informations: Vehicle) async throws {
+        throw error
+    }
+}
+
+class SucceedingVehicleCreator: VehicleCreator {
+    func createVehicle(informations: Vehicle) async throws {
+        return
     }
 }
 

@@ -12,16 +12,16 @@ class VehicleCreationViewModel: ObservableObject {
 
     init(vehicleCreator: VehicleCreator = DefaultVehicleCreator(),
          vehicleVerificator: VehicleInformationsVerificator = DefaultVehicleInformationsVerificator(),
-         isOpenningVehicleCreation: Binding<Bool>) {
+         hasFinishedVehicleCreation: @escaping Action) {
         self.vehicleCreator = vehicleCreator
         self.vehicleInformationsVerificator = vehicleVerificator
-        self.isOpenningVehicleCreation = isOpenningVehicleCreation
+        self.hasFinishedVehicleCreation = hasFinishedVehicleCreation
     }
 
     private var vehicleCreator: VehicleCreator
     private var vehicleInformationsVerificator: VehicleInformationsVerificator
 
-    var isOpenningVehicleCreation: Binding<Bool>
+    private var hasFinishedVehicleCreation: Action
     @Published var error: LocalizedError?
     @Published var showAlert = false
     @Published var brand: String = ""
@@ -50,9 +50,24 @@ class VehicleCreationViewModel: ObservableObject {
 
     }
 
-    @MainActor func createVehicle() async {
+    @MainActor
+    func createVehicle() async {
         let informations = VehicleDTO(brand: brand, model: model, license: license, type: type, year: year)
-}
+        do {
+            try vehicleInformationsVerificator.verifyInformations(vehicle: informations)
+            try await vehicleCreator.createVehicle(informations: informations)
+            dismissModal()
+        } catch (let error) {
+
+            if let error = error as? VehicleCreationError {
+                setError(with: error)
+            }
+            if let error = error as? APICallerError {
+                setError(with: error)
+            }
+        }
+    }
+
     func continueVehicleCreation() {
         withAnimation(.easeInOut(duration: 0.4)) {
             switch vehicleCreationStep {
@@ -63,7 +78,7 @@ class VehicleCreationViewModel: ObservableObject {
                     self.vehicleCreationStep = .licence
                 } catch (let error) {
                     if let error = error as? VehicleCreationError {
-                        self.error = error
+                        setError(with: error)
                     }
                 }
             case .licence:
@@ -73,7 +88,7 @@ class VehicleCreationViewModel: ObservableObject {
                     self.vehicleCreationStep = .brandAndModel
                 } catch (let error) {
                     if let error = error as? VehicleCreationError {
-                        self.error = error
+                        setError(with: error)
                     }
                 }
             case .brandAndModel:
@@ -99,7 +114,18 @@ class VehicleCreationViewModel: ObservableObject {
 
     func dismissModal() {
         withAnimation(.easeInOut(duration: 0.4)) {
-            isOpenningVehicleCreation.wrappedValue.toggle()
+            hasFinishedVehicleCreation()
+        }
+    }
+
+    private func setError(with error: LocalizedError) {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            self.error = error
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    self.error = nil
+                }
+            }
         }
     }
 
