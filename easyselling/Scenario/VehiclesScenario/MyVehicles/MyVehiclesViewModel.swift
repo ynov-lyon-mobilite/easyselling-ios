@@ -37,6 +37,20 @@ class MyVehiclesViewModel: ObservableObject {
     @Published var error: APICallerError?
     @Published var state: VehicleState = .loading
 
+    @Published var searchFilteringVehicle = ""
+
+    var filteredVehicle: [Vehicle] {
+        return vehicles.filter { [searchFilteringVehicle] vehicle in
+            if (searchFilteringVehicle.isEmpty) {
+                return true
+            }
+
+            return vehicle.brand.contains(searchFilteringVehicle)
+            || vehicle.model.contains(searchFilteringVehicle)
+            || vehicle.type.rawValue.contains(searchFilteringVehicle)
+        }
+    }
+
     func openVehicleCreation() {
         self.isOpenningVehicleCreation()
     }
