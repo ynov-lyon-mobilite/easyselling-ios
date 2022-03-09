@@ -23,11 +23,13 @@ class DefaultInvoiceDownloader: InvoiceDownloader {
     private var imageCaller: ImageCaller
 
     func downloadInvoiceFile(id: String) async throws -> UIImage {
-        let downloadFileRequest = try await requestGenerator.generateRequest(endpoint: .downloadFile,
-                                                                             method: .GET,
-                                                                             headers: [:],
-                                                                             pathKeysValues: ["fileId": id],
-                                                                             queryParameters: nil)
-        return try await imageCaller.callImage(downloadFileRequest)
+        do {
+            let downloadFileRequest = try await requestGenerator.generateRequest(endpoint: .fileById,
+                                                                                 method: .GET,
+                                                                                 headers: [:],
+                                                                                 pathKeysValues: ["fileId": id],
+                                                                                 queryParameters: nil)
+            return try await imageCaller.callImage(downloadFileRequest)
+        }
     }
 }
