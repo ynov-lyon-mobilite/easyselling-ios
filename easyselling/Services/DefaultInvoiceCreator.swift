@@ -8,7 +8,7 @@
 import Foundation
 
 protocol InvoiceCreator {
-    func createInvoice(invoice: InvoiceDTO) async throws
+    func createInvoice(vehicleId: String, invoice: InvoiceDTO) async throws
 }
 
 class DefaultInvoiceCreator: InvoiceCreator {
@@ -20,8 +20,8 @@ class DefaultInvoiceCreator: InvoiceCreator {
         self.apiCaller = apiCaller
     }
 
-    func createInvoice(invoice: InvoiceDTO) async throws {
-        let urlRequest = try await requestGenerator.generateRequest(endpoint: .invoices, method: .POST, body: invoice, headers: [:], pathKeysValues: [:], queryParameters: nil)
+    func createInvoice(vehicleId: String, invoice: InvoiceDTO) async throws {
+        let urlRequest = try await requestGenerator.generateRequest(endpoint: .invoices, method: .POST, body: invoice, headers: [:], pathKeysValues: ["vehicleId" : vehicleId], queryParameters: nil)
         try await apiCaller.call(urlRequest)
     }
 }

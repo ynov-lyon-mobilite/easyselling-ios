@@ -12,10 +12,10 @@ protocol FileUploader {
 }
 
 final class DefaultFileUploader: FileUploader {
-    private var requestGenerator: RequestGenerator
+    private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
 
-    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
+    init(requestGenerator: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
         self.apiCaller = apiCaller
     }
@@ -23,7 +23,7 @@ final class DefaultFileUploader: FileUploader {
     func upload(_ fileDTO: FileDTO) async throws -> UploadedFile {
         let (body, contentType) = try generateBody(fileDTO)
 
-        var urlRequest = try requestGenerator
+        var urlRequest = try await requestGenerator
             .generateRequest(endpoint: .files, method: .POST, headers: ["Content-Type": contentType],
                              pathKeysValues: [:], queryParameters: nil)
         urlRequest.httpBody = body

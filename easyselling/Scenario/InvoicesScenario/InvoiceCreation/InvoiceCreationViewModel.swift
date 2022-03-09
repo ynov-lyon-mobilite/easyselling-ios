@@ -10,7 +10,6 @@ import Combine
 import UniformTypeIdentifiers
 
 class InvoiceCreationViewModel: ObservableObject {
-
     private var onFinish: () async -> Void
     private var invoiceCreator: InvoiceCreator
     private var fileUploader: FileUploader
@@ -58,15 +57,13 @@ class InvoiceCreationViewModel: ObservableObject {
             return //TODO: Throw an Error
         }
 
-        let informations = InvoiceDTO(vehicle: vehicle.id, file: fileId)
+        let informations = InvoiceDTO(file: fileId)
 
         do {
-            try await invoiceCreator.createInvoice(invoice: informations)
+            try await invoiceCreator.createInvoice(vehicleId: vehicle.id, invoice: informations)
             await dismissModal()
         } catch (let error) {
-            print(error)
-//            self.alert = (error as? APICallerError)?.errorDescription ?? APICallerError.internalServerError.errorDescription ?? ""
-//            self.showAlert = true
+            print(error) //TODO: Throw an Error
         }
     }
 

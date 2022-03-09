@@ -13,8 +13,6 @@ struct UploadedFile: Decodable, Equatable {
     let type: String
 
     enum CodingKeys: String, CodingKey {
-        case id, type
-        case filename = "filename_download"
-
+        case id = "_id", type, filename
     }
 }

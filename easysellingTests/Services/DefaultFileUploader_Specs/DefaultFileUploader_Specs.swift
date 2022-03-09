@@ -52,7 +52,7 @@ class DefaultFileUploader_Specs: XCTestCase {
     }
     
     private func givenFileUploader(apiCaller: APICaller) {
-        fileUploader = DefaultFileUploader(requestGenerator: FakeRequestGenerator(), apiCaller: apiCaller)
+        fileUploader = DefaultFileUploader(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: apiCaller)
     }
     
     private func whenUploadFile(filename: String, filetype: String, data: Data) async {

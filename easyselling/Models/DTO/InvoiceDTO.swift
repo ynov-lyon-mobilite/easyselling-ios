@@ -8,6 +8,5 @@
 import Foundation
 
 struct InvoiceDTO : Encodable {
-    var vehicle : String
     var file : String
 }
