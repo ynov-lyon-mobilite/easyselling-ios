@@ -64,7 +64,7 @@ struct VehicleInvoicesView_Previews: PreviewProvider {
     static var previews: some View {
         let vehicle = Vehicle(id: "1098HFD10°H", brand: "Yamaha", model: "XJ6", license: "AA-123-BB", type: .moto, year: "2013")
         let vm = VehicleInvoiceViewModel(vehicle: vehicle, onNavigatingToInvoiceView: { _ in }, isOpeningInvoiceCreation: { _,_  in })
-        vm.invoices = [Invoice(id: 1, vehicle: "1098HFD10°H", file: .preview)]
+        vm.invoices = [Invoice(id: "123DAEA", vehicle: "1098HFD10°H", file: .preview)]
         vm.isLoading = false
         vm.isDownloading = true
         return VehicleInvoicesView(viewModel: vm)

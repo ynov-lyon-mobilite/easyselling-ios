@@ -1,5 +1,7 @@
 {
     "data": {
-        "id": "AZ90JAPNDAIUBOAN"
+        "id": "AZ90JAPNDAIUBOAN",
+        "filename_download": "filaname.jpg",
+        "type": "image/jpeg"
     }
 }

@@ -17,7 +17,8 @@ class VehicleScenario {
         navigator.navigatesToHomeView(onVehicleCreationOpen: navigatesToVehicleCreation,
 									  onVehicleUpdateOpen: navigatesToVehicleUpdate,
                                       onNavigateToProfile: navigatesToProfile,
-                                      onNavigatingToInvoices: navigatesToInvoices)
+                                      onNavigatingToInvoices: navigatesToInvoices,
+                                      onNavigateToSettingsMenu: {})
     }
 
     private func navigatesToVehicleCreation() {

@@ -77,14 +77,14 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
                                             onNavigatingToInvoiceView: { invoice in
             self.onNavigatingToInvoiceView = true
             self.downloadedInvoice = invoice
-        }, isOpeningInvoiceCreation: { _ in self.isOpen = true })
+        }, isOpeningInvoiceCreation: { _, _  in self.isOpen = true })
     }
 
     private func givenViewModelDeletor(invoicesGetter: VehicleInvoicesGetter, invoiceDeletor: InvoiceDeletor) {
-        viewModel = VehicleInvoiceViewModel(vehicle: vehicle, invoiceDeletor: invoiceDeletor, vehicleInvoicesGetter: invoicesGetter,invoiceDownloader: SucceedingInvoiceDownloader(), invoiceFileInformationsGetter: SucceedingFileInformationsGetter(), onNavigatingToInvoiceView: { invoice in
+        viewModel = VehicleInvoiceViewModel(vehicle: vehicle, invoiceDeletor: invoiceDeletor, vehicleInvoicesGetter: invoicesGetter,invoiceDownloader: SucceedingInvoiceDownloader(), onNavigatingToInvoiceView: { invoice in
             self.onNavigatingToInvoiceView = true
             self.downloadedInvoice = invoice
-        }, isOpeningInvoiceCreation: {_ in })
+        }, isOpeningInvoiceCreation: {_,_  in })
     }
 
     private func whenDeletingInvoice(withId: String) async {

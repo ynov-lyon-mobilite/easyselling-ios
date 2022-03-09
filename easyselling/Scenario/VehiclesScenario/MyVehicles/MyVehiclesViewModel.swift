@@ -15,8 +15,7 @@ class MyVehiclesViewModel: ObservableObject {
          isOpenningVehicleCreation: @escaping Action,
          isOpeningVehicleUpdate: @escaping OnUpdatingVehicle,
          isNavigatingToProfile: @escaping Action,
-         isNavigatingToInvoices: @escaping (Vehicle) -> Void,
-         isNavigatingToSettingsMenu: @escaping Action) {
+         isNavigatingToInvoices: @escaping (Vehicle) -> Void) {
 
         self.vehiclesGetter = vehiclesGetter
         self.vehicleDeletor = vehicleDeletor
@@ -32,7 +31,6 @@ class MyVehiclesViewModel: ObservableObject {
     private var isOpenningVehicleCreation: Action
     private var isNavigatingToProfile: Action
     private var isNavigatingToInvoices: (Vehicle) -> Void
-    private var isNavigatingToSettingsMenu: Action
 
     @Published var isLoading: Bool = true
     @Published var vehicles: [Vehicle] = []

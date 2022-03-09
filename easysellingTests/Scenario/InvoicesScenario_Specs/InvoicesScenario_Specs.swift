@@ -52,7 +52,7 @@ class InvoicesScenario_Spec: XCTestCase {
     }
 
     private func whenNavigatingToInvoiceCreation() {
-        navigator.onNavigatingToInvoiceCreation?(vehicle)
+        navigator.onNavigatingToInvoiceCreation?(vehicle, {})
     }
 
     private func whenLeavingInvoiceCreation() async {
@@ -70,13 +70,12 @@ class InvoicesScenario_Spec: XCTestCase {
 }
 
 class SpyInvoicesNavigator: InvoiceNavigator {
-
     private(set) var history: [History] = []
     private(set) var onFinish: AsyncableAction?
     private(set) var onNavigatingToInvoice: ((File) -> Void)?
-    private(set) var onNavigatingToInvoiceCreation: ((Vehicle) -> Void)?
+    private(set) var onNavigatingToInvoiceCreation: ( (Vehicle, @escaping () async -> Void) -> Void)?
 
-    func navigatesToInvoicesView(of vehicle: Vehicle, onNavigatingToInvoice: @escaping (File) -> Void, onNavigatingToInvoiceCreation: @escaping (Vehicle) -> Void) {
+    func navigatesToInvoicesView(of vehicle: Vehicle, onNavigatingToInvoice: @escaping (File) -> Void, onNavigatingToInvoiceCreation: @escaping (Vehicle, @escaping () async -> Void) -> Void) {
         self.onNavigatingToInvoice = onNavigatingToInvoice
         self.onNavigatingToInvoiceCreation = onNavigatingToInvoiceCreation
         history.append(.invoices)

@@ -101,8 +101,7 @@ struct MyVehiclesView_Previews: PreviewProvider {
         let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {},
                                      isOpeningVehicleUpdate: {_,_ in },
                                      isNavigatingToProfile: {},
-                                     isNavigatingToInvoices: {_ in },
-                                     isNavigatingToSettingsMenu: {})
+                                     isNavigatingToInvoices: {_ in })
         vm.vehicles = [Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
                        Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
                        Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]

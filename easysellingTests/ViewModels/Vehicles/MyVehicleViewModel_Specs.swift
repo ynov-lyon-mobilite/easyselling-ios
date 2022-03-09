@@ -103,8 +103,6 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         }, isNavigatingToInvoices: { vehicle in
             self.isNavigatingToInvoices = true
             self.selectedVehicle = vehicle
-        }, isNavigatingToSettingsMenu: {
-            self.onNavigateToSettingsMenu = true
         })
     }
 

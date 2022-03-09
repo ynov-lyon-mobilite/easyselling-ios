@@ -13,7 +13,6 @@ class VehicleInvoiceViewModel: ObservableObject {
 
     private let vehicleInvoicesGetter: VehicleInvoicesGetter
     private let invoiceDownloader: InvoiceDownloader
-    private let invoiceFileInformationsGetter: InvoiceFileInformationsGetter
     private let onNavigatingToInvoiceView: (File) -> Void
     private let invoiceDeletor: InvoiceDeletor
     private let isOpeningInvoiceCreation: (Vehicle, @escaping () async -> Void) -> Void
@@ -29,7 +28,6 @@ class VehicleInvoiceViewModel: ObservableObject {
          invoiceDeletor: InvoiceDeletor = DefaultInvoiceDeletor(),
          vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(),
          invoiceDownloader: InvoiceDownloader = DefaultInvoiceDownloader(),
-         invoiceFileInformationsGetter: InvoiceFileInformationsGetter = DefaultInvoiceFileInformationsGetter(),
          onNavigatingToInvoiceView: @escaping (File) -> Void,
          isOpeningInvoiceCreation: @escaping (Vehicle, @escaping () async -> Void) -> Void) {
 
