@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 }
+
+var mainContext: NSManagedObjectContext = {
+    let container = NSPersistentContainer(name: "easyselling")
+    container.loadPersistentStores(completionHandler: { _, error in
+        if let error = error as NSError? {
+            fatalError("Unresolved error \(error), \(error.userInfo)")
+        }
+    })
+    return container.viewContext
+}()
 
 func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
