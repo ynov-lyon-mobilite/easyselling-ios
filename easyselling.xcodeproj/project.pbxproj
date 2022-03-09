@@ -193,6 +193,7 @@
 		8F901D552769FE0900CF0F28 /* DefaultInvoiceDeletor_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F901D542769FE0900CF0F28 /* DefaultInvoiceDeletor_Specs.swift */; };
 		8FA938C82747092200B1FA96 /* VehicleUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA938C72747092200B1FA96 /* VehicleUpdateViewModel.swift */; };
 		8FA938CA2747093100B1FA96 /* VehicleUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA938C92747093100B1FA96 /* VehicleUpdateView.swift */; };
+		8FCE43BB27D89B2900EE6ADD /* InvoiceCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE43BA27D89B2900EE6ADD /* InvoiceCoreData.swift */; };
 		8FE6243A2752765A000D0FC8 /* SucceedingEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624372752765A000D0FC8 /* SucceedingEmailVerificator.swift */; };
 		8FE6243B2752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624382752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift */; };
 		8FE6243C2752765A000D0FC8 /* FailingEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624392752765A000D0FC8 /* FailingEmailVerificator.swift */; };
@@ -396,6 +397,7 @@
 		8F901D542769FE0900CF0F28 /* DefaultInvoiceDeletor_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvoiceDeletor_Specs.swift; sourceTree = "<group>"; };
 		8FA938C72747092200B1FA96 /* VehicleUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleUpdateViewModel.swift; sourceTree = "<group>"; };
 		8FA938C92747093100B1FA96 /* VehicleUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleUpdateView.swift; sourceTree = "<group>"; };
+		8FCE43BA27D89B2900EE6ADD /* InvoiceCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCoreData.swift; sourceTree = "<group>"; };
 		8FE624372752765A000D0FC8 /* SucceedingEmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SucceedingEmailVerificator.swift; sourceTree = "<group>"; };
 		8FE624382752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultEmailVerificator_Specs.swift; sourceTree = "<group>"; };
 		8FE624392752765A000D0FC8 /* FailingEmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailingEmailVerificator.swift; sourceTree = "<group>"; };
@@ -1131,7 +1133,6 @@
 				87DC1D0B271FDF6B002DC193 /* Token.swift */,
 				87DC1D0D271FDF8D002DC193 /* APIResponse.swift */,
 				874975FA273A3CA3000A1289 /* UploadedFile.swift */,
-				5C6F8EF5274E190B00CF6740 /* InvoiceDTO.swift */,
 				03422F68275CF3620060D19E /* InvoiceFile.swift */,
 			);
 			path = Models;
@@ -1140,6 +1141,7 @@
 		87DC1D08271FDF51002DC193 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				5C6F8EF5274E190B00CF6740 /* InvoiceDTO.swift */,
 				87DC1D09271FDF5C002DC193 /* LoginDTO.swift */,
 				8798D1422730F3DF00FF3AB4 /* RefreshDTO.swift */,
 				03004DCF273E79D700188983 /* PasswordResetDTO.swift */,
@@ -1152,6 +1154,7 @@
 			isa = PBXGroup;
 			children = (
 				8F2530C927A14653005592BB /* Invoice.swift */,
+				8FCE43BA27D89B2900EE6ADD /* InvoiceCoreData.swift */,
 			);
 			path = Invoice;
 			sourceTree = "<group>";
@@ -1503,6 +1506,7 @@
 				39D101E52769E9B600F101AB /* SettingsScenario.swift in Sources */,
 				03F2098B27170F2E00E10F6C /* OnBoardingScenario.swift in Sources */,
 				2C99B015278891D6005E75E8 /* VehicleCoreData.swift in Sources */,
+				8FCE43BB27D89B2900EE6ADD /* InvoiceCoreData.swift in Sources */,
 				9BB84D77274E510B00D88B03 /* StartupScenario.swift in Sources */,
 				03F2098D271711CE00E10F6C /* OnBoardingView.swift in Sources */,
 				8767182E275ED39A00844732 /* SelectAppIcon.swift in Sources */,
