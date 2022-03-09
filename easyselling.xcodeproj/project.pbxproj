@@ -101,6 +101,7 @@
 		2C863378273FB4040049C186 /* DefaultVehiclesGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C863377273FB4040049C186 /* DefaultVehiclesGetter.swift */; };
 		2C86337C273FB7B10049C186 /* succeededVehicles.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C86337B273FB7B10049C186 /* succeededVehicles.json */; };
 		2C86337D273FBA630049C186 /* succeededVehicles.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C86337B273FB7B10049C186 /* succeededVehicles.json */; };
+		2C92F3E327D8F56600BCC8E0 /* easyselling.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C92F3E127D8F56600BCC8E0 /* easyselling.xcdatamodeld */; };
 		2CAE03D82717118D008D7A68 /* VehicleCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */; };
 		2CD4B8C0271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */; };
 		2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */; };
@@ -303,6 +304,7 @@
 		2C6D0F2A2732D9B500A86349 /* DefaultVehicleCreator_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleCreator_Specs.swift; sourceTree = "<group>"; };
 		2C863377273FB4040049C186 /* DefaultVehiclesGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehiclesGetter.swift; sourceTree = "<group>"; };
 		2C86337B273FB7B10049C186 /* succeededVehicles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = succeededVehicles.json; sourceTree = "<group>"; };
+		2C92F3E227D8F56600BCC8E0 /* easyselling.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = easyselling.xcdatamodel; sourceTree = "<group>"; };
 		2CAE03D72717118D008D7A68 /* VehicleCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationView.swift; sourceTree = "<group>"; };
 		2CD4B8BF271C625C002598A4 /* DefaultVehicleInformationsVerificator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleInformationsVerificator.swift; sourceTree = "<group>"; };
 		2CD4B8C1271C65EE002598A4 /* VehicleCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleCreationViewModel.swift; sourceTree = "<group>"; };
@@ -720,6 +722,7 @@
 				035E860327184EDC00684ED0 /* AppDelegate.swift */,
 				D00736552712D93800ED0F2C /* easyselling.entitlements */,
 				03004DBD273DB9E800188983 /* SceneDelegate.swift */,
+				2C92F3E127D8F56600BCC8E0 /* easyselling.xcdatamodeld */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1447,6 +1450,7 @@
 				0317EE312751985100A6AE0D /* ProfileScenario.swift in Sources */,
 				03B80FA42745B7AF00E1BF47 /* DefaultPasswordResetPreparator.swift in Sources */,
 				0317EE332751985F00A6AE0D /* DefaultProfileNavigator.swift in Sources */,
+				2C92F3E327D8F56600BCC8E0 /* easyselling.xcdatamodeld in Sources */,
 				034D04EB2733FE0800576D64 /* PasswordResetRequestViewModel.swift in Sources */,
 				87DC1D0C271FDF6B002DC193 /* Token.swift in Sources */,
 				9BB84D7C274E53FE00D88B03 /* DefaultStartupNavigator.swift in Sources */,
@@ -1918,6 +1922,19 @@
 			productName = JWTDecode;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		2C92F3E127D8F56600BCC8E0 /* easyselling.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2C92F3E227D8F56600BCC8E0 /* easyselling.xcdatamodel */,
+			);
+			currentVersion = 2C92F3E227D8F56600BCC8E0 /* easyselling.xcdatamodel */;
+			path = easyselling.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 873552A7270D847700F2DDBD /* Project object */;
 }
