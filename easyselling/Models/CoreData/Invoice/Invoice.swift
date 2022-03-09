@@ -14,6 +14,8 @@ struct Invoice: Decodable {
     var file : String
     var dateCreated : String
     var dateUpdated : String?
+    var fileData: Data?
+    var fileTitle: String?
 
     static func toEncodableStruct (invoice: Invoice) -> InvoiceDTO {
         return InvoiceDTO(vehicle: invoice.vehicle, file: invoice.file, dateCreated: invoice.dateCreated, dateUpdated: invoice.dateUpdated ?? "")
