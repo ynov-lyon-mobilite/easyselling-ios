@@ -24,7 +24,7 @@ struct MyVehiclesView: View {
                             .listRowBackground(Color.clear)
                             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     } else if viewModel.state == .listingVehicles {
-                        ForEach(viewModel.vehicles, id: \.id) { vehicle in
+                        ForEach(viewModel.filteredVehicle, id: \.id) { vehicle in
                             HStack {
                                 Image(uiImage: vehicle.image)
                                     .padding(15)
@@ -68,6 +68,7 @@ struct MyVehiclesView: View {
                         .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     }
                 }
+                .searchable(text: $viewModel.searchFilteringVehicle)
                 .listStyle(.plain)
                 .refreshable {
                     await viewModel.getVehicles()
