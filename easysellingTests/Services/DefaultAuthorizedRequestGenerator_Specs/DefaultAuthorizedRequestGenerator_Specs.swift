@@ -12,7 +12,7 @@ import XCTest
 class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     
     func test_Generates_request_with_token_in_header() async {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         request.httpMethod = HTTPMethod.GET.rawValue
 
@@ -23,7 +23,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
 
     func test_Generates_Request_With_Headers_and_token_in_header() async {
         let body = "BODY"
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         request.addValue("value", forHTTPHeaderField: "teast-haeder")
         request.httpBody = try! JSONEncoder().encode(body)
@@ -34,7 +34,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     }
 
     func test_Generates_Request_With_Path_keys_values_and_token_in_header() async {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles/myVehicle")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles/myVehicle")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
 
         givenService(accessTokenIsExpired: false, accessToken: updatedAccessToken, refreshToken: "FAKE_REFRESH_TOKEN")
@@ -43,7 +43,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     }
     
     func test_Generates_request_with_token_in_header_after_refresh_token() async {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         
         givenService(accessTokenIsExpired: true, accessToken: outdatedAccessToken, refreshToken: "REFRESH_TOKEN")
@@ -53,7 +53,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     
     func test_Generates_Request_With_Headers_and_token_in_header_after_refresh_token() async {
         let body = "BODY"
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         request.httpBody = try! JSONEncoder().encode(body)
         
@@ -63,7 +63,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     }
     
     func test_Throws_error_after_refresh_token_failure() async {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         
         let tokenManager = FakeTokenManager(accessTokenIsExpired: true, accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN")
@@ -74,7 +74,7 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     }
     
     func test_Throws_error_with_empty_access_and_refresh_token() async {
-        var request = URLRequest(url: URL(string: "https://easyselling.maxencemottard.com/items/vehicles")!)
+        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
         request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
         
         givenService(tokenManager: FakeTokenManager(), tokenRefreshor: FailingTokenRefreshor(error: .badRequest))

@@ -9,7 +9,7 @@ import Foundation
 @testable import easyselling
 
 class SucceedingInvoiceDeletor: InvoiceDeletor {
-    func deleteInvoice(id: Int) async throws {
+    func deleteInvoice(id: String) async throws {
         return
     }
 }

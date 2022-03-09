@@ -8,19 +8,19 @@
 import Foundation
 
 struct Invoice : Codable, Equatable, Identifiable {
+    let id: String
+    let vehicle : String
+    let file : InvoiceFile
 
-    var id : Int
-    var vehicle : String
-    var file : String
-    var dateCreated : String
-    var dateUpdated : String?
+    enum CodingKeys: String, CodingKey {
+        case vehicle, file
+        case id = "_id"
+    }
 
-    init(id: Int, vehicle: String, file: String, dateCreated : String, dateUpdated : String) {
+    init(id: String, vehicle: String, file: InvoiceFile) {
         self.id = id
         self.vehicle = vehicle
         self.file = file
-        self.dateCreated = dateCreated
-        self.dateUpdated = dateUpdated
     }
 
     static func == (lhs: Invoice, rhs: Invoice) -> Bool {

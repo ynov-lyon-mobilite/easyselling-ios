@@ -4,8 +4,8 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>webcredentials:easyselling.maxencemottard.com</string>
-		<string>applinks:easyselling.maxencemottard.com</string>
+		<string>webcredentials:api.easyselling.maxencemottard.com</string>
+		<string>applinks:api.easyselling.maxencemottard.com</string>
 	</array>
 	<key>com.apple.developer.authentication-services.autofill-credential-provider</key>
 	<true/>

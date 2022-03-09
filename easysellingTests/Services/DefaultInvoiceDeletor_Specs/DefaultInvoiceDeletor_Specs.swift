@@ -12,13 +12,13 @@ class DefaultInvoiceDeletor_Specs: XCTestCase {
 
     func test_Deletes_succeeding() async {
         givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
-        await whenDeletingInvoice(withId: 1)
+        await whenDeletingInvoice(withId: "A1231")
         thenSuccess()
     }
 
     func test_Deletes_failed_with_unknown_id_invoice() async {
         givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
-        await whenDeletingInvoice(withId: 0897870)
+        await whenDeletingInvoice(withId: "A1231")
         thenError(is: .notFound)
     }
 
@@ -26,7 +26,7 @@ class DefaultInvoiceDeletor_Specs: XCTestCase {
        deletor = DefaultInvoiceDeletor(requestGenerator: requestGenerator, apiCaller: apiCaller)
     }
 
-    private func whenDeletingInvoice(withId id: Int) async {
+    private func whenDeletingInvoice(withId id: String) async {
         do {
             try await deletor.deleteInvoice(id: id)
             self.success = true

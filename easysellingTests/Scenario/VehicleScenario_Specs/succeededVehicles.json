@@ -1,7 +1,7 @@
 {
     "data": [
         {
-            "id": "1",
+            "_id": "1",
             "brand": "Peugeot",
             "model": "model1",
             "license": "license1",
@@ -9,7 +9,7 @@
             "year": "year1"
         },
         {
-            "id": "2",
+            "_id": "2",
             "brand": "Renault",
             "model": "model2",
             "license": "license2",
@@ -17,7 +17,7 @@
             "year": "year2"
         },
         {
-            "id": "3",
+            "_id": "3",
             "brand": "Citroen",
             "model": "model3",
             "license": "license3",

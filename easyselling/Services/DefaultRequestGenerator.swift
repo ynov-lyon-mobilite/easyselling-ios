@@ -9,9 +9,9 @@ import Foundation
 
 protocol RequestGenerator {
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?, headers: [String: String],
-                                       pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URLRequest
+                                       pathKeysValues: [String: String], queryParameters: [String: String]?) throws -> URLRequest
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String],
-                         pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URLRequest
+                         pathKeysValues: [String: String], queryParameters: [String: String]?) throws -> URLRequest
 }
 
 class DefaultRequestGenerator: RequestGenerator {
@@ -25,7 +25,7 @@ class DefaultRequestGenerator: RequestGenerator {
     private var fixHeaders: [String: String] = ["Content-Type": "application/json"]
 
     func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod = .GET, body: T?, headers: [String: String],
-                                       pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URLRequest {
+                                       pathKeysValues: [String: String], queryParameters: [String: String]?) throws -> URLRequest {
         guard let encodedBody = try? jsonEncoder.encode(body) else {
             throw APICallerError.encodeError
         }
@@ -38,7 +38,7 @@ class DefaultRequestGenerator: RequestGenerator {
     }
 
     func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String],
-                         pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URLRequest {
+                         pathKeysValues: [String: String], queryParameters: [String: String]?) throws -> URLRequest {
         let url = try computeURL(endpoint: endpoint, pathKeysValues: pathKeysValues, queryParameters: queryParameters)
 
         var request = URLRequest(url: url)
@@ -54,7 +54,7 @@ class DefaultRequestGenerator: RequestGenerator {
         return request
     }
 
-    private func computeURL(endpoint: HTTPEndpoint, pathKeysValues: [String: String], queryParameters: [QueryParameter]?) throws -> URL {
+    private func computeURL(endpoint: HTTPEndpoint, pathKeysValues: [String: String], queryParameters: [String: String]?) throws -> URL {
         guard var urlString = endpoint.url?.absoluteString else {
             throw APICallerError.requestGenerationError
         }
@@ -68,8 +68,8 @@ class DefaultRequestGenerator: RequestGenerator {
             throw APICallerError.requestGenerationError
         }
 
-        if let queryParameters = queryParameters, var component = URLComponents(string: urlString) {
-            component.queryItems = queryParameters.map { $0.encodeToQueryParameter() }
+        if let queryParameters = queryParameters, !queryParameters.keys.isEmpty, var component = URLComponents(string: urlString) {
+            component.queryItems = queryParameters.map { URLQueryItem(name: $0.key, value: $0.value) }
 
             return component.url ?? url
         }

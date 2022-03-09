@@ -16,7 +16,7 @@ class FailingInvoiceDeletor: InvoiceDeletor {
 
     private var error: APICallerError
 
-    func deleteInvoice(id: Int) async throws {
+    func deleteInvoice(id: String) async throws {
         throw error
     }
 }

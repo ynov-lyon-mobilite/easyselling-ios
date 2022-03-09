@@ -8,7 +8,7 @@
 import Foundation
 
 protocol InvoiceDeletor {
-    func deleteInvoice(id: Int) async throws
+    func deleteInvoice(id: String) async throws
 }
 
 class DefaultInvoiceDeletor: InvoiceDeletor {
@@ -21,9 +21,9 @@ class DefaultInvoiceDeletor: InvoiceDeletor {
     private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
 
-    func deleteInvoice(id: Int) async throws {
+    func deleteInvoice(id: String) async throws {
         let urlRequest = try await requestGenerator.generateRequest(endpoint: .invoiceId, method: .DELETE, headers: [:],
-                                                                    pathKeysValues: ["invoiceId" : String(id)], queryParameters: nil)
+                                                                    pathKeysValues: ["invoiceId" : id], queryParameters: nil)
         try await apiCaller.call(urlRequest)
     }
 }

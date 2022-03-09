@@ -8,14 +8,19 @@
 import Foundation
 import UIKit
 
-struct InvoiceFile: Equatable, Decodable {
+struct InvoiceFile: Equatable, Codable {
+    let filename: String
+    let type: String
+    let url: String
+}
 
-    var title: String
-    var type: String
+extension InvoiceFile {
+    static var preview: InvoiceFile {
+        .init(filename: "myFile.pdf", type: "application/pdf", url: "https://google.com")
+    }
 }
 
 struct File: Equatable {
-
     var title: String
     var image: UIImage
 }
