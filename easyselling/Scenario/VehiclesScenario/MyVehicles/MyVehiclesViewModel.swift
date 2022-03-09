@@ -65,7 +65,7 @@ class MyVehiclesViewModel: ObservableObject {
             vehicles = try await vehiclesGetter.getVehicles()
             state = .listingVehicles
         } catch (let error) {
-            self.error = error
+            print(error)
         }
     }
 
