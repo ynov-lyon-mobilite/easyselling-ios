@@ -35,13 +35,15 @@ public class InvoiceCoreData: NSManagedObject {
     @NSManaged public var file: String
     @NSManaged public var dateCreated: String
     @NSManaged public var dateUpdated: String?
+    @NSManaged public var fileData: Data
 
-    convenience init(id: Int16, vehicle: String, file: String, dateCreated: String, dateUpdated: String?) {
+    convenience init(id: Int16, vehicle: String, file: String, dateCreated: String, dateUpdated: String?, fileData: Data) {
         self.init(context: mainContext)
         self.id = id
         self.vehicle = vehicle
         self.file = file
         self.dateCreated = dateCreated
         self.dateUpdated = dateUpdated
+        self.fileData = fileData
     }
 }
