@@ -7,17 +7,23 @@
 //
 
 import Foundation
-import CoreData
 
-@objc(Invoice)
-public class Invoice: NSManagedObject {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Invoice> {
-        return NSFetchRequest<Invoice>(entityName: "Invoice")
+struct Invoice: Decodable {
+    var id : Int
+    var vehicle : String
+    var file : String
+    var dateCreated : String
+    var dateUpdated : String?
+
+    static func toEncodableStruct (invoice: Invoice) -> InvoiceDTO {
+        return InvoiceDTO(vehicle: invoice.vehicle, file: invoice.file, dateCreated: invoice.dateCreated, dateUpdated: invoice.dateUpdated ?? "")
     }
 
-    @NSManaged public var id: Int16
-    @NSManaged public var vehicle: String
-    @NSManaged public var file: String
-    @NSManaged public var dateCreated: String
-    @NSManaged public var dateUpdated: String?
+    static func toCoreDataObject (invoice: Invoice) -> InvoiceCoreData {
+        return InvoiceCoreData(id: Int16(invoice.id), vehicle: invoice.vehicle, file: invoice.file, dateCreated: invoice.dateCreated, dateUpdated: invoice.dateUpdated)
+    }
+
+    static func fromCoreDataToObject (invoice: InvoiceCoreData) -> Invoice {
+        return Invoice(id: Int(invoice.id), vehicle: invoice.vehicle, file: invoice.file, dateCreated: invoice.dateCreated, dateUpdated: invoice.dateUpdated)
+    }
 }

@@ -22,7 +22,35 @@ class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
 
     func getInvoices(ofVehicleId id: String) async throws -> [Invoice] {
         do {
-            return try mainContext.fetch(Invoice.fetchRequest())
+            let urlRequest = try await requestGenerator.generateRequest(endpoint: .invoices, method: .GET, headers: [:],
+                                                                        pathKeysValues: [:], queryParameters: [FilterQueryParameter(
+                                                                            parameterName: "vehicle",
+                                                                            type: .EQUAL,
+                                                                            value: id)])
+            let invoices = try await apiCaller.call(urlRequest, decodeType: [Invoice].self)
+
+            mainContext.performAndWait {
+                for invoice in invoices {
+                    let invoiceCoreData = InvoiceCoreData.fetchRequestById(id: invoice.id)
+
+                    if invoiceCoreData == nil {
+                        _ = Invoice.toCoreDataObject(invoice: invoice)
+                        if mainContext.hasChanges {
+                            try? mainContext.save()
+                        }
+                    }
+                }
+            }
+            return invoices
+        } catch (_) {
+            let invoicesCoreData = try? mainContext.fetch(InvoiceCoreData.fetchRequest())
+            var invoices: [Invoice] = []
+
+            invoicesCoreData?.forEach { invoice in
+                invoices.append(Invoice.fromCoreDataToObject(invoice: invoice))
+            }
+
+            return invoices
         }
     }
 }
