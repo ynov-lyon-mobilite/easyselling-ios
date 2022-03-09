@@ -1,0 +1,10 @@
+{
+  "data": {
+    "id": "1",
+    "brand": "Peugeot",
+    "model": "model1",
+    "license": "license1",
+    "type": "car",
+    "year": "year1"
+  }
+}

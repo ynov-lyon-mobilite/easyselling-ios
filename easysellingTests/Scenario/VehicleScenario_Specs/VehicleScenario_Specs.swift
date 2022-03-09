@@ -46,6 +46,15 @@ class VehicleScenario_Specs: XCTestCase {
         thenHistory(is: [.myVehicles, .vehicleInvoices])
     }
 
+    func test_Navigates_to_vehicle_share() {
+        givenScenario()
+        whenBeginning()
+        whenNavigatingToVehicleShare()
+        thenVehicleId(is: "VehicleID")
+        thenHistory(is: [.myVehicles, .vehicleShare])
+    }
+
+
     private func givenScenario() {
         navigator = SpyVehicleCreationNavigator()
         scenario = VehicleScenario(navigator: navigator)
@@ -73,6 +82,11 @@ class VehicleScenario_Specs: XCTestCase {
         navigator.onNavigatingToInvoices?(vehicle)
     }
 
+
+    private func whenNavigatingToVehicleShare() {
+        navigator.onVehicleShareOpen?("VehicleID")
+    }
+
     private func thenHistory(is expected: [SpyVehicleCreationNavigator.History]) {
         XCTAssertEqual(expected, navigator.history)
     }
@@ -96,9 +110,13 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     private(set) var onNavigateToSettingsMenu: Action?
     private(set) var vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
     private(set) var vehicleScenarioIsFinished: Bool = false
+    private(set) var onVehicleShareOpen: ((String) -> Void)?
+    private(set) var vehicleID: String = ""
 
-    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void) {
+    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void, onVehicleShareOpen: @escaping (String) -> Void) {
         self.onNavigatingToInvoices = onNavigatingToInvoices
+        self.onVehicleShareOpen = onVehicleShareOpen
+
         history.append(.myVehicles)
     }
 
@@ -120,11 +138,17 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
         history.append(.myVehicles)
     }
 
+    func navigatesToVehicleShare(vehicleId: String) {
+        self.vehicleID = vehicleId
+        history.append(.vehicleShare)
+    }
+
     enum History: CustomDebugStringConvertible, Equatable {
         case myVehicles
         case profile
         case vehicleUpdate
         case vehicleInvoices
+        case vehicleShare
 
         var debugDescription: String {
             switch self {
@@ -132,6 +156,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
             case .profile: return "profile"
             case .vehicleUpdate: return "vehicle update"
             case .vehicleInvoices: return "vehicle invoices"
+            case .vehicleShare: return "vehicle share"
             }
         }
     }

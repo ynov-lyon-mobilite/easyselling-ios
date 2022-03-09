@@ -46,6 +46,7 @@
 "vehicles.deleteButton" = "Supprimer";
 "vehicles.updateButton" =  "Modifier";
 "vehicles.searchBar.placeholder" = "Cherchez un nom, modèle...";
+"vehicles.shareButton" =  "Partager";
 
 "createVehicle.title" = "Ajouter un véhicule";
 "createVehicle.brand" = "Marque";
@@ -89,3 +90,6 @@
 
 "settings.icons" = "Icône d'application";
 "settings.theme" = "Thème d'application";
+"shareVehicle.title" = "Véhicule partagé";
+"shareVehicle.hint" = "Avec qui voulez-vous partager ce véhicule ?";
+"shareVehicle.send" = "Envoyer";

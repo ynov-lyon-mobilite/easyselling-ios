@@ -1,5 +1,5 @@
 //
-//  FailingVehicleGetter.swift
+//  FailingVehiclesGetter.swift
 //  easysellingTests
 //
 //  Created by Nicolas Barbosa on 07/12/2021.

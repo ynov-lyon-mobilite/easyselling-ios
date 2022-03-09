@@ -13,7 +13,8 @@ class MyVehiclesViewModel: ObservableObject {
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
          vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(context: mainContext),
          isOpeningVehicleUpdate: @escaping OnUpdatingVehicle,
-         isNavigatingToInvoices: @escaping (Vehicle) -> Void) {
+         isNavigatingToInvoices: @escaping (Vehicle) -> Void),
+         isOpeningVehicleShare: @escaping (String) -> Void) {
 
         self.vehiclesGetter = vehiclesGetter
         self.vehicleDeletor = vehicleDeletor
@@ -25,6 +26,7 @@ class MyVehiclesViewModel: ObservableObject {
     private var isOpeningVehicleUpdate: OnUpdatingVehicle
     private var vehicleDeletor: VehicleDeletor
     private var isNavigatingToInvoices: (Vehicle) -> Void
+    private var isOpeningVehicleShare: (String) -> Void
 
     @Published var isOpenningVehicleCreation: Bool = false
     @Published var vehicles: [Vehicle] = [.placeholderCar, .placeholderMoto]
@@ -53,6 +55,10 @@ class MyVehiclesViewModel: ObservableObject {
 
     func openVehicleUpdate(vehicle: Vehicle) {
         self.isOpeningVehicleUpdate(vehicle, { await self.getVehicles() })
+    }
+
+    func openVehicleShare(vehicleId: String) {
+        self.isOpeningVehicleShare(vehicleId)
     }
 
     @MainActor func getVehicles() async {
