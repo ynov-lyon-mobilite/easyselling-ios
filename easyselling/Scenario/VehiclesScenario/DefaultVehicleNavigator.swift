@@ -25,6 +25,10 @@ class DefaultVehicleNavigator: VehicleNavigator {
         self.window = window
     }
 
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+
     private var navigationController: UINavigationController = UINavigationController()
     private var window: UIWindow?
 

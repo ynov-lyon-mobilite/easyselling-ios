@@ -22,10 +22,14 @@
 		0317EE3827519DDA00A6AE0D /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317EE3727519DDA00A6AE0D /* ProfileViewModel.swift */; };
 		0317EE3A27519DF100A6AE0D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317EE3927519DF100A6AE0D /* ProfileView.swift */; };
 		0317EE3C27519E6200A6AE0D /* ProfileViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317EE3B27519E6200A6AE0D /* ProfileViewModel_Specs.swift */; };
+		032BF80F27A14860005BC077 /* ErrorShower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032BF80E27A1485F005BC077 /* ErrorShower.swift */; };
 		032CCB3727A9CF3300FC6275 /* ModalizedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032CCB3627A9CF3300FC6275 /* ModalizedView.swift */; };
+		032DE8D327D8EC5C004B2337 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032DE8D227D8EC5C004B2337 /* HomeView.swift */; };
+		032DE8D627D90608004B2337 /* HomeScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032DE8D527D90608004B2337 /* HomeScenario.swift */; };
+		032DE8D927D90635004B2337 /* HomeScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032DE8D827D90635004B2337 /* HomeScenario_Specs.swift */; };
+		032DE8DC27D908AD004B2337 /* HomeViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032DE8DB27D908AD004B2337 /* HomeViewModel_Specs.swift */; };
 		033C846F27BB97F000A5748A /* VehicleFormButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C846E27BB97F000A5748A /* VehicleFormButton.swift */; };
 		033C847127BBB10100A5748A /* VehicleFormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C847027BBB10100A5748A /* VehicleFormTextField.swift */; };
-		032BF80F27A14860005BC077 /* ErrorShower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032BF80E27A1485F005BC077 /* ErrorShower.swift */; };
 		03422F61275CEDF70060D19E /* DefaultInvoiceDownloader_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F60275CEDF70060D19E /* DefaultInvoiceDownloader_Specs.swift */; };
 		03422F63275CEE140060D19E /* SucceedingInvoiceDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F62275CEE140060D19E /* SucceedingInvoiceDownloader.swift */; };
 		03422F65275CEE370060D19E /* FailingInvoiceDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03422F64275CEE370060D19E /* FailingInvoiceDownloader.swift */; };
@@ -219,9 +223,13 @@
 		0317EE3727519DDA00A6AE0D /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		0317EE3927519DF100A6AE0D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0317EE3B27519E6200A6AE0D /* ProfileViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel_Specs.swift; sourceTree = "<group>"; };
-		032CCB3627A9CF3300FC6275 /* ModalizedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalizedView.swift; sourceTree = "<group>"; };
 		03278315276B75CE00F32915 /* ErrorShower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorShower.swift; sourceTree = "<group>"; };
 		032BF80E27A1485F005BC077 /* ErrorShower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorShower.swift; sourceTree = "<group>"; };
+		032CCB3627A9CF3300FC6275 /* ModalizedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalizedView.swift; sourceTree = "<group>"; };
+		032DE8D227D8EC5C004B2337 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		032DE8D527D90608004B2337 /* HomeScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScenario.swift; sourceTree = "<group>"; };
+		032DE8D827D90635004B2337 /* HomeScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScenario_Specs.swift; sourceTree = "<group>"; };
+		032DE8DB27D908AD004B2337 /* HomeViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel_Specs.swift; sourceTree = "<group>"; };
 		033C846E27BB97F000A5748A /* VehicleFormButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleFormButton.swift; sourceTree = "<group>"; };
 		033C847027BBB10100A5748A /* VehicleFormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleFormTextField.swift; sourceTree = "<group>"; };
 		03422F60275CEDF70060D19E /* DefaultInvoiceDownloader_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvoiceDownloader_Specs.swift; sourceTree = "<group>"; };
@@ -469,6 +477,31 @@
 			path = ProfileScenario_Specs;
 			sourceTree = "<group>";
 		};
+		032DE8D127D8EC3A004B2337 /* HomeScenario */ = {
+			isa = PBXGroup;
+			children = (
+				032DE8D227D8EC5C004B2337 /* HomeView.swift */,
+				032DE8D527D90608004B2337 /* HomeScenario.swift */,
+			);
+			path = HomeScenario;
+			sourceTree = "<group>";
+		};
+		032DE8D727D90623004B2337 /* HomeScenario_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				032DE8D827D90635004B2337 /* HomeScenario_Specs.swift */,
+			);
+			path = HomeScenario_Specs;
+			sourceTree = "<group>";
+		};
+		032DE8DA27D9089F004B2337 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				032DE8DB27D908AD004B2337 /* HomeViewModel_Specs.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		03422F5F275CEDE20060D19E /* DefaultInvoiceDownloader_Specs */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,6 +574,7 @@
 		0382E2A12717648000EB570E /* Scenario */ = {
 			isa = PBXGroup;
 			children = (
+				032DE8D127D8EC3A004B2337 /* HomeScenario */,
 				39D101DF2769E95600F101AB /* SettingsScenario */,
 				0317EE2F2751984300A6AE0D /* ProfileScenario */,
 				9BB84D75274E50CE00D88B03 /* StartupScenario */,
@@ -872,6 +906,7 @@
 		87470E93276BF3B1004FCA6B /* Scenario */ = {
 			isa = PBXGroup;
 			children = (
+				032DE8D727D90623004B2337 /* HomeScenario_Specs */,
 				87184C882729DB65006586FD /* AuthenticationScenario_Specs */,
 				5CA58D13274E8E27000BF06C /* InvoicesScenario_Specs */,
 				8FF010252732EDEC0022314B /* OnBoardingScenario_Specs */,
@@ -886,6 +921,7 @@
 		87470E95276BF3F2004FCA6B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				032DE8DA27D9089F004B2337 /* Home */,
 				87470E98276BF622004FCA6B /* Authentication */,
 				87470E99276BF62C004FCA6B /* Invoices */,
 				87470E9A276BF635004FCA6B /* OnBoarding */,
@@ -1350,6 +1386,7 @@
 				0382E2A62717664000EB570E /* AccountCreationViewModel.swift in Sources */,
 				874975FB273A3CA3000A1289 /* UploadedFile.swift in Sources */,
 				03422F69275CF3620060D19E /* InvoiceFile.swift in Sources */,
+				032DE8D627D90608004B2337 /* HomeScenario.swift in Sources */,
 				8FA938C82747092200B1FA96 /* VehicleUpdateViewModel.swift in Sources */,
 				03B80F9A27416C8B00E1BF47 /* DefaultAuthenticationNavigator.swift in Sources */,
 				5CA58D1B274E9FC0000BF06C /* DefaultVehicleInvoicesGetter.swift in Sources */,
@@ -1395,6 +1432,7 @@
 				03DAF9A2272730D500FFED55 /* MyVehiclesView.swift in Sources */,
 				39D701E927BD28E200F93287 /* ButtonList.swift in Sources */,
 				03422F67275CF1DA0060D19E /* DefaultInvoiceDownloader.swift in Sources */,
+				032DE8D327D8EC5C004B2337 /* HomeView.swift in Sources */,
 				03C8BB4D274E3FBB00169725 /* VehicleInvoicesView.swift in Sources */,
 				03B80F9E27416D0B00E1BF47 /* DefaultVehicleNavigator.swift in Sources */,
 				5CA58D12274E8DF5000BF06C /* InvoicesScenario.swift in Sources */,
@@ -1482,11 +1520,13 @@
 				03F05433271B393100434706 /* FailingInformationsVerificator.swift in Sources */,
 				03004DD5273EA69800188983 /* DefaultPasswordVerificator_Specs.swift in Sources */,
 				0382E29A27175FB700EB570E /* AuthenticationScenario_Specs.swift in Sources */,
+				032DE8D927D90635004B2337 /* HomeScenario_Specs.swift in Sources */,
 				87780BA927172F780035AB13 /* DefaultRequestGenerator_Specs.swift in Sources */,
 				87CD2C0A27F50F9C004511D3 /* SucceedingFirebaseAuthProvider.swift in Sources */,
 				399465D2274D78120060EFE5 /* SucceedingVehicleDeletor.swift in Sources */,
 				8798D150273100B700FF3AB4 /* DefaultAuthorizedRequestGenerator_Specs.swift in Sources */,
 				8F665CDC274E6A9C008DDA7B /* DefaultVehicleUpdater_Specs.swift in Sources */,
+				032DE8DC27D908AD004B2337 /* HomeViewModel_Specs.swift in Sources */,
 				03422F65275CEE370060D19E /* FailingInvoiceDownloader.swift in Sources */,
 				8705B9A027207838004132CF /* UserAuthenticationViewModel_Specs.swift in Sources */,
 				0388628C2749414F001D7E36 /* FailingCredentialsPreparator.swift in Sources */,
