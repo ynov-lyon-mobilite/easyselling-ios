@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-private struct ModalizedView<V: View, Content : View>: View {
+struct ModalizedView<V: View, Content : View>: View {
     let modalizedContent: V
     @ViewBuilder let modalContent: Content
     @Binding var isModalized: Bool
@@ -58,26 +58,5 @@ struct ModalizedView_Previews: PreviewProvider {
         }.modal(isModalized: .constant(true)) {
             VehicleCreationView(viewModel: VehicleCreationViewModel(hasFinishedVehicleCreation: {}))
         }
-    }
-}
-
-struct RoundedCorner: Shape {
-
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-}
-
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedCorner(radius: radius, corners: corners))
-    }
-
-    func modal<Content: View>(isModalized: Binding<Bool>, @ViewBuilder modalContent: @escaping () -> Content) -> some View {
-        return ModalizedView(modalizedContent: self, modalContent: modalContent, isModalized: isModalized)
     }
 }

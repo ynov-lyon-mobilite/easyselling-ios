@@ -84,6 +84,7 @@ struct MyVehiclesView: View {
                         .opacity(viewModel.state != .listingVehicles ? 0 : 1)
                 }
             }
+            .background(Asset.Colors.backgroundColor.swiftUIColor)
             .navigationTitle(L10n.Vehicles.title)
             .toolbar {
                 Button(L10n.Vehicles.profile) {

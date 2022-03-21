@@ -21,8 +21,6 @@ struct TitleNavigationView: View {
             .foregroundColor(color)
             .fontWeight(.bold)
             .font(.system(size: 40))
-            .padding(.bottom, 30)
-            .padding(.top, 60)
     }
 }
 
