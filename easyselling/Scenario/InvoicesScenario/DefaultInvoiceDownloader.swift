@@ -24,7 +24,6 @@ class DefaultInvoiceDownloader: InvoiceDownloader {
 
     func downloadInvoiceFile(id: String) async throws -> UIImage {
         do {
-            print(id)
             let downloadFileRequest = try await requestGenerator.generateRequest(endpoint: .fileById,
                                                                                  method: .GET,
                                                                                  headers: [:],
@@ -33,9 +32,8 @@ class DefaultInvoiceDownloader: InvoiceDownloader {
             let image = try await imageCaller.callImage(downloadFileRequest)
 
             mainContext.performAndWait {
-                let invoiceCoreData = InvoiceCoreData.fetchRequestById(id: id)
+                let invoiceCoreData = InvoiceCoreData.fetchRequestByTitle(title: id)
                 invoiceCoreData?.fileData = image.pngData()
-                print(image.pngData())
                 if mainContext.hasChanges {
                     try? mainContext.save()
                 }
@@ -45,7 +43,7 @@ class DefaultInvoiceDownloader: InvoiceDownloader {
         } catch (_) {
             var image = UIImage()
             mainContext.performAndWait {
-                let invoiceCoreData = InvoiceCoreData.fetchRequestById(id: id)
+                let invoiceCoreData = InvoiceCoreData.fetchRequestByTitle(title: id)
 
                 if let data = invoiceCoreData?.fileData {
                     image = UIImage(data: data) ?? UIImage()

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct Invoice: Decodable, Equatable {
     var id : String
@@ -21,8 +22,8 @@ struct Invoice: Decodable, Equatable {
         return InvoiceDTO(file: String(invoice.id))
     }
 
-    static func toCoreDataObject (invoice: Invoice) -> InvoiceCoreData {
-        return InvoiceCoreData(id: invoice.id, fileTitle: invoice.file?.filename, fileData: invoice.fileData ?? Data())
+    static func toCoreDataObject (invoice: Invoice, in context: NSManagedObjectContext) -> InvoiceCoreData {
+        return InvoiceCoreData(id: invoice.id, fileTitle: invoice.file?.filename, fileData: invoice.fileData ?? Data(), in: context)
     }
 
     static func fromCoreDataToObject (invoice: InvoiceCoreData) -> Invoice {
