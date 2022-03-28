@@ -48,7 +48,6 @@ class VehicleInvoiceViewModel: ObservableObject {
     @MainActor func getInvoices() async {
         do {
             invoices = try await vehicleInvoicesGetter.getInvoices(ofVehicleId: vehicleId)
-            print(invoices)
         } catch (let error) {
             if let error = error as? APICallerError {
                 isError = true

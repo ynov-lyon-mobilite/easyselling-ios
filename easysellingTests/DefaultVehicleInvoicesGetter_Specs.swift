@@ -16,9 +16,9 @@ class DefaultVehicleInvoicesGetter_Specs: XCTestCase {
     
     func test_Shows_vehicle_invoices_when_request_succeeded() async {
         let expectedInvoices = [
-            Invoice(id: "0AJEAZ9", vehicle: "1", file: .preview),
-            Invoice(id: "0AJEAZ8", vehicle: "1", file: .preview),
-            Invoice(id: "0AJEAZ7", vehicle: "2", file: .preview)
+            Invoice(id: "0AJEAZ9", file: nil),
+            Invoice(id: "0AJEAZ8", file: nil),
+            Invoice(id: "0AJEAZ7", file: nil)
         ]
         
         givenGetter(withAPICaller: DefaultAPICaller(urlSession: FakeUrlSession(localFile: .succeededInvoices)))

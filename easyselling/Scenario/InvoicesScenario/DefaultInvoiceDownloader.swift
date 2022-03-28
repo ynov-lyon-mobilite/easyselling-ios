@@ -30,9 +30,29 @@ class DefaultInvoiceDownloader: InvoiceDownloader {
                                                                                  headers: [:],
                                                                                  pathKeysValues: ["fileId": id],
                                                                                  queryParameters: nil)
-            return try await imageCaller.callImage(downloadFileRequest)
+            let image = try await imageCaller.callImage(downloadFileRequest)
+
+            mainContext.performAndWait {
+                let invoiceCoreData = InvoiceCoreData.fetchRequestById(id: id)
+                invoiceCoreData?.fileData = image.pngData()
+                print(image.pngData())
+                if mainContext.hasChanges {
+                    try? mainContext.save()
+                }
+            }
+
+            return image
         } catch (_) {
-            return UIImage()
+            var image = UIImage()
+            mainContext.performAndWait {
+                let invoiceCoreData = InvoiceCoreData.fetchRequestById(id: id)
+
+                if let data = invoiceCoreData?.fileData {
+                    image = UIImage(data: data) ?? UIImage()
+                }
+
+            }
+            return image
         }
     }
 }
