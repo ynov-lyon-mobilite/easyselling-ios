@@ -1,12 +1,16 @@
 //
-//  InvoiceDTO.swift
-//  easyselling
+//  Invoice.swift
+//  easysellingTests
 //
-//  Created by Maxence on 07/01/2022.
+//  Created by Corentin Laurencine on 11/11/2021.
 //
 
 import Foundation
 
-struct InvoiceDTO : Encodable {
-    var file : String
+struct InvoiceDTO: Codable {
+    let file : String
+
+    init(file: String) {
+        self.file = file
+    }
 }
