@@ -33,9 +33,7 @@ struct OnBoardingView: View {
             .padding(.horizontal)
 
             TabView(selection: $viewModel.currentFeatureIndex) {
-                ForEach(0..<viewModel.features.count) { index in
-                    let feature = viewModel.features[index]
-
+                ForEach(viewModel.features) { feature in
                     VStack(spacing: 45) {
                         Image(feature.image)
                             .resizable()
@@ -57,14 +55,14 @@ struct OnBoardingView: View {
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 
             HStack {
-                ForEach(0..<viewModel.features.count) { index in
+                ForEach(viewModel.features) { feature in
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
-                        .fill(index == viewModel.currentFeatureIndex
+                        .fill(feature == viewModel.currentFeature
                               ? Color.primaryEasyselling
                               : Color.onBackground.opacity(0.8))
-                        .frame(width: index == viewModel.currentFeatureIndex ?
+                        .frame(width: feature == viewModel.currentFeature ?
                                animationWidth : basicWidth, height: 10)
-                        .animation(.easeIn, value: index == viewModel.currentFeatureIndex ? animationWidth: basicWidth)
+                        .animation(.easeIn, value: feature == viewModel.currentFeature ? animationWidth: basicWidth)
                 }
             }
 
