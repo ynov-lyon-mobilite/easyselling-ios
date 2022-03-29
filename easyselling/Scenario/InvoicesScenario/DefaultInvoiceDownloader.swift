@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 protocol InvoiceDownloader {
     func downloadInvoiceFile(id: String) async throws -> UIImage
@@ -14,13 +15,17 @@ protocol InvoiceDownloader {
 
 class DefaultInvoiceDownloader: InvoiceDownloader {
 
-    init(requestGenerator: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator(), imageCaller: ImageCaller = DefaultImageCaller()) {
+    init(requestGenerator: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator(),
+         imageCaller: ImageCaller = DefaultImageCaller(),
+         context: NSManagedObjectContext = mainContext) {
         self.requestGenerator = requestGenerator
         self.imageCaller = imageCaller
+        self.context = context
     }
 
     private var requestGenerator: AuthorizedRequestGenerator
     private var imageCaller: ImageCaller
+    private var context: NSManagedObjectContext
 
     func downloadInvoiceFile(id: String) async throws -> UIImage {
         do {
@@ -31,18 +36,18 @@ class DefaultInvoiceDownloader: InvoiceDownloader {
                                                                                  queryParameters: nil)
             let image = try await imageCaller.callImage(downloadFileRequest)
 
-            mainContext.performAndWait {
+            context.performAndWait {
                 let invoiceCoreData = InvoiceCoreData.fetchRequestByTitle(title: id)
                 invoiceCoreData?.fileData = image.pngData()
-                if mainContext.hasChanges {
-                    try? mainContext.save()
+                if context.hasChanges {
+                    try? context.save()
                 }
             }
 
             return image
         } catch (_) {
             var image = UIImage()
-            mainContext.performAndWait {
+            context.performAndWait {
                 let invoiceCoreData = InvoiceCoreData.fetchRequestByTitle(title: id)
 
                 if let data = invoiceCoreData?.fileData {
