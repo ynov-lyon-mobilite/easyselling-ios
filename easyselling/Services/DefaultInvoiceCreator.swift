@@ -21,7 +21,9 @@ class DefaultInvoiceCreator: InvoiceCreator {
     }
 
     func createInvoice(vehicleId: String, invoice: InvoiceDTO) async throws {
-        let urlRequest = try await requestGenerator.generateRequest(endpoint: .invoices, method: .POST, body: invoice, headers: [:], pathKeysValues: ["vehicleId" : vehicleId], queryParameters: nil)
+        let urlRequest = try await requestGenerator.generateRequest(
+            endpoint: .invoices, method: .POST, body: invoice, headers: [:],
+            pathKeysValues: ["vehicleId" : vehicleId], queryParameters: nil)
         try await apiCaller.call(urlRequest)
     }
 }
