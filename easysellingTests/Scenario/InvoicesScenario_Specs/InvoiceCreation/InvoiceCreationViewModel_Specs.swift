@@ -47,7 +47,7 @@ class InvoiceCreationViewModel_Specs: XCTestCase {
 }
 
 class SpyInvoiceCreator: InvoiceCreator {
-    func createInvoice(invoice: InvoiceDTO) async throws {
+    func createInvoice(vehicleId: String, invoice: InvoiceDTO) async throws {
         throw APICallerError.internalServerError
     }
 }
