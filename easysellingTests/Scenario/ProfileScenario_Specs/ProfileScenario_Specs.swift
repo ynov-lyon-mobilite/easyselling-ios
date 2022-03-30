@@ -33,7 +33,10 @@ class ProfileScenario_Specs: XCTestCase {
 
     private func givenScenario() {
         navigator = SpyProfileNavigator()
-        scenario = ProfileScenario(navigator: navigator)
+        scenario = ProfileScenario(navigator: navigator,
+                                   onLogout: {
+            self.isLoggingOut = true
+        })
     }
 
     private func whenBeginning() {
@@ -49,7 +52,7 @@ class ProfileScenario_Specs: XCTestCase {
     }
 
     private func thenScenarioHasBeenLeaved() {
-        XCTAssertTrue(navigator.isLoggingOut)
+        XCTAssertTrue(isLoggingOut)
     }
 
     private func thenProfileScenarioIsFinished() {
@@ -62,6 +65,7 @@ class ProfileScenario_Specs: XCTestCase {
 
     private var scenario: ProfileScenario!
     private var navigator: SpyProfileNavigator!
+    private var isLoggingOut: Bool = false
 }
 
 class SpyProfileNavigator: ProfileNavigator {
@@ -69,17 +73,12 @@ class SpyProfileNavigator: ProfileNavigator {
     private(set) var history: [History] = []
     private(set) var onLogout: Action?
     private(set) var onNavigateToSettingsMenu: Action?
-    private(set) var isLoggingOut: Bool = false
     private(set) var profileScenarioIsFinished: Bool = false
 
     func navigatesToProfile(onLogout: @escaping Action, onNavigateToSettingsMenu: @escaping Action) {
         self.onLogout = onLogout
         self.onNavigateToSettingsMenu = onNavigateToSettingsMenu
         history.append(.profile)
-    }
-
-    func navigatesBackToAuthentication() {
-        self.isLoggingOut = true
     }
 
     func navigatesToSettingsMenu() {

@@ -26,7 +26,6 @@ class DefaultVehicleCreator: VehicleCreator {
                              headers: [:], pathKeysValues: [:], queryParameters: nil)
         do {
             try await apiCaller.call(urlRequest)
-            
         } catch (let error) {
             throw error
         }

@@ -22,8 +22,12 @@ class HomeScenario_Specs: XCTestCase {
 class SpyHomeNavigator: HomeNavigator {
     private(set) var history: [History] = []
 
-    func navigatesToVehicles() {
+    func navigatesToVehicles(onLogout: @escaping Action) {
         history.append(.vehicleScenario)
+    }
+
+    func goingBackToAuthenticationScenario() {
+
     }
 
     enum History: CustomDebugStringConvertible {

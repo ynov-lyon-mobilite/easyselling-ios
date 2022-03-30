@@ -61,8 +61,9 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
     }
 
     func navigatesToVehicles() {
-        let vehicleNavigator = DefaultVehicleNavigator(window: window)
-        let vehicleScenario = VehicleScenario(navigator: vehicleNavigator)
-        vehicleScenario.begin()
+        let navigator = DefaultHomeNavigator(window: window)
+        let scenario = HomeScenario(navigator: navigator)
+
+        scenario.begin()
     }
 }

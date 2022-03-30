@@ -15,18 +15,12 @@ class VehicleScenario {
 
     func begin() {
         navigator.navigatesToHomeView(onVehicleUpdateOpen: navigatesToVehicleUpdate,
-                                      onNavigateToProfile: navigatesToProfile,
                                       onNavigatingToInvoices: navigatesToInvoices,
-                                      onNavigateToSettingsMenu: {})
     }
 
     private func goingBackToHomeView() {
         navigator.goingBackToHomeView()
 	}
-
-    private func navigatesToProfile() {
-        navigator.navigatesToProfile()
-    }
 
     private func navigatesToInvoices(vehicle: Vehicle) {
         navigator.navigatesToInvoices(vehicle: vehicle)

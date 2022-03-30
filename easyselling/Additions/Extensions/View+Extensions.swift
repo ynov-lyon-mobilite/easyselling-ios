@@ -42,6 +42,14 @@ extension View {
     func modal<Content: View>(isModalized: Binding<Bool>, @ViewBuilder modalContent: @escaping () -> Content) -> some View {
         return ModalizedView(modalizedContent: self, modalContent: modalContent, isModalized: isModalized)
     }
+
+    @ViewBuilder func redacted(when condition: Bool) -> some View {
+        if condition {
+            redacted(reason: .placeholder)
+        } else {
+            unredacted()
+        }
+    }
 }
 
 struct RoundedCorner: Shape {

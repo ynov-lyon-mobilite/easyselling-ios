@@ -17,27 +17,30 @@ struct MyVehiclesView: View {
             TitleNavigationView(title: L10n.Vehicles.title)
             SearchBar(searchText: $viewModel.searchFilteringVehicle)
             List {
-                //                    if viewModel.state == .loading {
-                //                        ProgressView()
-                //                    } else if viewModel.state == .error {
-                //                        Text(L10n.Error.occured)
-                //                            .padding()
-                //                            .listRowSeparatorTint(.clear)
-                //                            .listRowBackground(Color.clear)
-                //                            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                //                    } else if viewModel.state == .listingVehicles {
-                ForEach(viewModel.filteredVehicle, id: \.id) { vehicle in
-                    VehicleListElement(vehicle: vehicle,
-                                       deleteAction: { Task {
-                        await viewModel.deleteVehicle(idVehicle: vehicle.id ?? "")
-                    } },
-                                       updateAction: { viewModel.openVehicleUpdate(vehicle: vehicle) },
-                                       showInvoices: { viewModel.navigatesToInvoices(ofVehicle: vehicle.id ?? "") })
+                if viewModel.state == .error {
+                    HStack {
+                        Spacer()
+                        Text(L10n.Error.occured)
+                        Spacer()
+                    }
+                    .padding()
+                    .listRowSeparatorTint(.clear)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                } else {
+                    ForEach(viewModel.filteredVehicle, id: \.id) { vehicle in
+                        VehicleListElement(vehicle: vehicle,
+                                           deleteAction: { Task {
+                            await viewModel.deleteVehicle(idVehicle: vehicle.id ?? "")
+                        } },
+                                           updateAction: { viewModel.openVehicleUpdate(vehicle: vehicle) },
+                                           showInvoices: { viewModel.navigatesToInvoices(ofVehicle: vehicle.id ?? "") })
+                            .redacted(when: viewModel.state == .loading)
+                    }
+                    .listRowSeparatorTint(.clear)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
-                .listRowSeparatorTint(.clear)
-                .listRowBackground(Color.clear)
-                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                //                    }
             }
             .listStyle(.plain)
             .refreshable {
@@ -50,9 +53,11 @@ struct MyVehiclesView: View {
                     .padding(.vertical, 15)
                     .frame(maxWidth: .infinity)
                     .background(Asset.Colors.primary.swiftUIColor)
+                    .cornerRadius(5)
                     .disabled(viewModel.state != .listingVehicles)
                     .opacity(viewModel.state != .listingVehicles ? 0 : 1)
             }
+            .padding(.bottom)
         }
         .padding(.horizontal, 25)
         .background(Asset.Colors.backgroundColor.swiftUIColor)
@@ -77,7 +82,6 @@ struct MyVehiclesView_Previews: PreviewProvider {
     static var previews: some View {
         let vm = MyVehiclesViewModel(
             isOpeningVehicleUpdate: {_,_ in },
-            isNavigatingToProfile: {},
             isNavigatingToInvoices: {_ in })
         vm.vehicles = [Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
                        Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),

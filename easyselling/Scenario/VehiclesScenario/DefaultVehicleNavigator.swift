@@ -11,11 +11,9 @@ import SwiftUI
 protocol VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
     func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
-                             onNavigateToProfile: @escaping Action,
                              onNavigatingToInvoices: @escaping (String) -> Void)
     func navigatesToInvoices(ofVehicleId vehicleId: String)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
-    func navigatesToProfile()
     func goingBackToHomeView()
 }
 
@@ -33,13 +31,10 @@ class DefaultVehicleNavigator: VehicleNavigator {
     private var window: UIWindow?
 
     func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
-                             onNavigateToProfile: @escaping Action,
                              onNavigatingToInvoices: @escaping (Vehicle) -> Void,
-                             onNavigateToSettingsMenu: @escaping Action) {
         window?.rootViewController = navigationController
 
         let vm = MyVehiclesViewModel(isOpeningVehicleUpdate: onVehicleUpdateOpen,
-                                     isNavigatingToProfile: onNavigateToProfile,
                                      isNavigatingToInvoices: onNavigatingToInvoices)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
 
@@ -51,12 +46,6 @@ class DefaultVehicleNavigator: VehicleNavigator {
 //        let vehicleCreationView = VehicleCreationView(viewModel: vm)
 //        navigationController.present(UIHostingController(rootView: vehicleCreationView), animated: true)
 //    }
-
-    func navigatesToProfile() {
-        let navigator = DefaultProfileNavigator(navigationController: navigationController, window: window)
-        let scenario = ProfileScenario(navigator: navigator)
-        scenario.begin()
-    }
 
     func navigatesToVehicleUpdate(onFinish: @escaping AsyncableAction, vehicle: Vehicle) {
         let vm = VehicleUpdateViewModel(vehicle: vehicle, onFinish: onFinish)

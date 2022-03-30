@@ -31,15 +31,12 @@ struct VehicleListElement: View {
             Text(vehicle.year)
         }
         .swipeActions(edge: .trailing) {
-            Button(L10n.Vehicles.deleteButton) {
-                Task {
-                    deleteAction
-                }
+            Button(L10n.Vehicles.deleteButton) { deleteAction()
             }.tint(Color.red)
 
             Button(L10n.Vehicles.updateButton) {
                 Task {
-                    updateAction
+                    updateAction()
                 }
             }
             .tint(Color.secondaryEasyselling)
@@ -51,7 +48,7 @@ struct VehicleListElement: View {
         .padding(.vertical)
         .onTapGesture {
             Task {
-                updateAction
+                showInvoices()
             }
         }
     }

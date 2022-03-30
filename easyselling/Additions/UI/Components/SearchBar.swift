@@ -37,7 +37,6 @@ struct SearchBar: View {
         .background(
         RoundedRectangle(cornerRadius: 25)
             .fill(Asset.Colors.secondaryBackground.swiftUIColor)
-            .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 0)
         )
     }
 }

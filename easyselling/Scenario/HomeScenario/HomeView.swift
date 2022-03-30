@@ -10,12 +10,13 @@ import SwiftUI
 struct HomeView: View {
 
     @ObservedObject var viewModel: HomeViewModel
+    
     var body: some View {
         VStack {
             VStack {
                 switch viewModel.selectedTabItem {
                 case .vehicles: VehicleScenarioViewInstantiator()
-                case .profile: ProfileScenarioViewInstantiator()
+                case .profile: ProfileScenarioViewInstantiator(onLogout: viewModel.onLogout)
                 default: Text("test")
                 }
             }
@@ -24,7 +25,7 @@ struct HomeView: View {
                 ForEach(HomeViewModel.TabItems.allCases, id: \.rawValue) { tabItem in
                     Button(action: { viewModel.selectItem(tabItem) }, label: {
                         tabItem.image
-                            .font(.title)
+                            .font(.title2)
                             .foregroundColor(Asset.Colors.primary.swiftUIColor)
                     })
                 }
@@ -38,6 +39,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel())
+        HomeView(viewModel: HomeViewModel(onLogout: {}))
     }
 }

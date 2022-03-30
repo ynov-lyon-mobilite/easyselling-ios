@@ -18,12 +18,17 @@ class HomeScenario {
     private var navigator: HomeNavigator
 
     func begin() {
-        navigator.navigatesToVehicles()
+        navigator.navigatesToVehicles(onLogout: goingBackToAuthenticationScenario)
+    }
+
+    func goingBackToAuthenticationScenario() {
+        navigator.goingBackToAuthenticationScenario()
     }
 }
 
 protocol HomeNavigator {
-    func navigatesToVehicles()
+    func navigatesToVehicles(onLogout: @escaping Action)
+    func goingBackToAuthenticationScenario()
 }
 
 class DefaultHomeNavigator: HomeNavigator {
@@ -35,8 +40,16 @@ class DefaultHomeNavigator: HomeNavigator {
     private var window: UIWindow?
     private var navigationController: UINavigationController = UINavigationController()
 
-    func navigatesToVehicles() {
+    func navigatesToVehicles(onLogout: @escaping Action) {
         window?.rootViewController = navigationController
-        navigationController.pushViewController(UIHostingController(rootView: HomeView(viewModel: HomeViewModel())), animated: true)
+        navigationController.pushViewController(UIHostingController(rootView: HomeView(viewModel: HomeViewModel(onLogout: onLogout))), animated: true)
+    }
+
+    func goingBackToAuthenticationScenario() {
+        let navigationController = UINavigationController()
+        window?.rootViewController = navigationController
+        let navigator = DefaultAuthenticationNavigator(navigationController: navigationController, window: window)
+        let scenario = AuthenticationScenario(navigator: navigator)
+        scenario.begin(from: .default)
     }
 }

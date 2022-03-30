@@ -12,7 +12,30 @@ import XCTest
 class HomeViewModel_Specs: XCTestCase {
 
     func test_Setups() {
-        let vm = HomeViewModel()
-        XCTAssertEqual(.vehicles, vm.selectedTabItem)
+        givenViewModel()
+        XCTAssertEqual(.vehicles, viewModel.selectedTabItem)
     }
+
+    func test_goes_back_when_user_want_to_logout() {
+        givenViewModel()
+        whenUserWantToLogout()
+        thenUserHasLogout()
+    }
+
+    private func givenViewModel() {
+        viewModel = HomeViewModel(onLogout: {
+            self.hasLogout = true
+        })
+    }
+
+    private func whenUserWantToLogout() {
+        viewModel.onLogout()
+    }
+
+    private func thenUserHasLogout() {
+        XCTAssertTrue(hasLogout)
+    }
+
+    private var viewModel: HomeViewModel!
+    private var hasLogout: Bool = false
 }

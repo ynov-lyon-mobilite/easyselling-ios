@@ -22,17 +22,6 @@ class VehicleScenario_Specs: XCTestCase {
         whenNavigatingToVehicleUpdate(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
         thenHistory(is: [.myVehicles, .vehicleUpdate])
     }
-
-    func test_Navigates_to_profil_scenario() {
-        givenScenario()
-        whenBeginning()
-        whenNavigatingToProfil()
-        thenHistory(is: [.myVehicles, .profile])
-    }
-
-    private func whenNavigatingToProfil() {
-        navigator.onNavigateToProfile?()
-    }
     
     func test_Leaves_vehicle_update() async {
         givenScenario()
@@ -103,16 +92,13 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
 
     private(set) var history: [History] = []
     private(set) var onFinish: (() async -> Void)?
-    private(set) var onNavigateToProfile: Action?
     private(set) var onNavigatingToInvoices: ((Vehicle) -> Void)?
     private(set) var onNavigateToSettingsMenu: Action?
     private(set) var vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "year")
     private(set) var vehicleScenarioIsFinished: Bool = false
 
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action,
-                             onNavigatingToInvoices: @escaping (Vehicle) -> Void, onNavigateToSettingsMenu: @escaping Action) {
         self.onNavigateToVehicleCreation = onVehicleCreationOpen
-        self.onNavigateToProfile = onNavigateToProfile
+    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void) {
         self.onNavigatingToInvoices = onNavigatingToInvoices
         history.append(.myVehicles)
     }

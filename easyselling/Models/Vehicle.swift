@@ -59,3 +59,13 @@ struct Vehicle: Codable, Equatable, Identifiable {
       }
     }
 }
+
+extension Vehicle {
+    static var placeholderCar: Vehicle {
+        .init(id: UUID().uuidString, brand: "Marque", model: "Model", license: "Licence", type: .car, year: "0000")
+    }
+
+    static var placeholderMoto: Vehicle {
+        .init(id: UUID().uuidString, brand: "Marque", model: "Model", license: "Licence", type: .moto, year: "0000")
+    }
+}

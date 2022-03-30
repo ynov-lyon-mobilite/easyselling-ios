@@ -10,7 +10,13 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
 
-    @Published var selectedTabItem: TabItems = .profile
+    init(onLogout: @escaping Action) {
+        self.onLogout = onLogout
+    }
+
+    @Published var selectedTabItem: TabItems = .vehicles
+
+    var onLogout: Action
 
     func selectItem(_ tabItem: TabItems) {
         withAnimation {

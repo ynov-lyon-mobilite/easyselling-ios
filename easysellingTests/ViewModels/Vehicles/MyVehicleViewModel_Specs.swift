@@ -10,12 +10,6 @@ import XCTest
 
 class MyVehiclesViewModel_Specs: XCTestCase {
 
-    func test_Navigates_to_profile_view_when_clicking_on_profile_button() {
-        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([]))
-        whenNavigatingToProfile()
-        thenHasNavigatingToProfile()
-    }
-
     func test_Navigates_to_vehicle_creation() {
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([]))
         whenOpeningVehiculeCreationModal()
@@ -117,16 +111,14 @@ class MyVehiclesViewModel_Specs: XCTestCase {
                                         isOpeningVehicleUpdate: { vehicle, onRefreshCallback in
             self.onUpdateVehicle = vehicle
             self.expectedCallback = onRefreshCallback
-        }, isNavigatingToProfile: {
-            self.onNavigateToProfile = true
-            self.onNavigatingToInvoices = true
         }, isNavigatingToInvoices: { vehicleId in
-            self.selectedVehicle = vehicle
-        })
+        self.selectedVehicle = vehicleId
+self.onNavigatingToInvoices = true
+})
     }
 
     private func givenViewModelDeletor(vehiclesGetter: VehiclesGetter, vehicleDeletor: VehicleDeletor) {
-        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpeningVehicleUpdate: { _,_ in }, isNavigatingToProfile: { self.onNavigateToProfile = true }, isNavigatingToInvoices: {_ in})
+        viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter, vehicleDeletor: vehicleDeletor, isOpeningVehicleUpdate: { _,_ in }, isNavigatingToInvoices: {_ in})
     }
     
     private func whenTryingToGetVehicles() async {
@@ -143,10 +135,6 @@ class MyVehiclesViewModel_Specs: XCTestCase {
 
     private func whenNavigatingToInvoicesView(vehicle: Vehicle) {
         viewModel.navigatesToInvoices(vehicle: vehicle)
-    }
-
-    private func whenNavigatingToProfile() {
-        viewModel.navigateToProfile()
     }
 
     private func whenVehicles(are vehicles: [Vehicle]) {
@@ -183,10 +171,6 @@ class MyVehiclesViewModel_Specs: XCTestCase {
 
     private func thenNavigatesToSettingsMenu() {
         XCTAssertTrue(onNavigateToSettingsMenu)
-    }
-
-    private func thenHasNavigatingToProfile() {
-        XCTAssertTrue(onNavigateToProfile)
     }
 
     private func thenHasNavigatingToVehicleCreationModal() {
