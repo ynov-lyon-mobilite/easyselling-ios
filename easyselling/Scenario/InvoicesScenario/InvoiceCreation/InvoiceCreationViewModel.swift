@@ -19,6 +19,8 @@ class InvoiceCreationViewModel: ObservableObject {
     @Published var fileConfirmationDialogIsPresented = false
     @Published var fileSelectionType: FileSelectionType?
     @Published var uploadedFile: UploadedFile?
+    @Published var alertError: Error?
+    @Published var alertIsPresented = false
 
     init(vehicle: Vehicle, fileUploader: FileUploader = DefaultFileUploader(), invoiceCreator: InvoiceCreator = DefaultInvoiceCreator(), onFinish: @escaping () async -> Void) {
         self.vehicle = vehicle
@@ -41,20 +43,30 @@ class InvoiceCreationViewModel: ObservableObject {
               let mimeType = url.mimeType,
               let data = try? Data(contentsOf: url),
               let fileDTO = FileDTO(name: url.lastPathComponent, type: mimeType, data: data) else {
-                  return //TODO: Throw an Error
-              }
+            alertError = APICallerError.unknownError
+            fileSelectionType = nil
+            alertIsPresented = true
+
+            return
+        }
 
         do {
             url.stopAccessingSecurityScopedResource()
             uploadedFile = try await fileUploader.upload(fileDTO)
         } catch(let error) {
-            print(error) //TODO: Throw an Error
+            alertError = error
+            fileSelectionType = nil
+            alertIsPresented = true
         }
     }
 
     @MainActor func createInvoice() async {
         guard let fileId = uploadedFile?.id else {
-            return //TODO: Throw an Error
+            alertError = APICallerError.unknownError
+            fileSelectionType = nil
+            alertIsPresented = true
+
+            return
         }
 
         let informations = InvoiceDTO(file: fileId)
@@ -63,12 +75,14 @@ class InvoiceCreationViewModel: ObservableObject {
             try await invoiceCreator.createInvoice(vehicleId: vehicle.id, invoice: informations)
             await dismissModal()
         } catch (let error) {
-            print(error) //TODO: Throw an Error
+            alertError = error
+            fileSelectionType = nil
+            alertIsPresented = true
         }
     }
 
     func dismissModal() async {
-        await self.onFinish()
+        await onFinish()
     }
 
     enum FileSelectionType {
