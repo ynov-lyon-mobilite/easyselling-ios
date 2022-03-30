@@ -23,19 +23,9 @@ struct HomeView: View {
             HStack(spacing: 100) {
                 ForEach(HomeViewModel.TabItems.allCases, id: \.rawValue) { tabItem in
                     Button(action: { viewModel.selectItem(tabItem) }, label: {
-                        if tabItem == .vehicles {
-                            VStack {
-                                Image(systemName: "plus")
-                                    .font(.title2)
-                                    .background(Color.red)
-                                    .clipShape(Circle())
-                            }
-                            
-//                            .offset(x: 0, y: -50)
-                        } else {
-                            tabItem.image
-                                .font(.title2)
-                        }
+                        tabItem.image
+                            .font(.title)
+                            .foregroundColor(Asset.Colors.primary.swiftUIColor)
                     })
                 }
             }
