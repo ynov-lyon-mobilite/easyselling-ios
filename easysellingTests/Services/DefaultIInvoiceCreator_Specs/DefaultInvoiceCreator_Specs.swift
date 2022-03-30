@@ -9,47 +9,61 @@ import XCTest
 @testable import easyselling
 
 class DefaultInvoiceCreator_Specs: XCTestCase {
-    
-//    func test_Login_user_succesfully() async {
-//        let apiCaller = DefaultAPICaller(urlSession: FakeUrlSession(localFile: .userAuthenticatorResponse))
-//        
-//        givenInvoiceCreator(apiCaller: apiCaller)
-//        await whenCreatingInvoice()
-//        then()
-//    }
-//    
-//    func test_Login_user_failed_because_needed_otp() async {
-//        givenInvoiceCreator(apiCaller: FailingAPICaller(withError: 401))
-//        await whenCreatingInvoice()
-//        thenError(is: .unauthorized)
-//    }
-//    
-//    private func givenInvoiceCreator(apiCaller: APICaller) {
-//        invoiceCreator = DefaultInvoiceCreator(apiCaller: apiCaller)
-//        informations = InvoiceDTO(vehicle: "VehicleID", file: "FileID")
-//    }
-//    
-//    private func whenCreatingInvoice() async {
-//        do {
-//            try await invoiceCreator.createInvoice(invoice: informations)
-//        } catch (let error) {
-////            self.requestError = (error as! APICallerError)
-//        }
-//    }
-//    
-//    private func then() {
-//        XCTAssertNil(requestError)
-////        XCTAssertEqual(expectedRefreshToken, requestResult.refreshToken)
-////        XCTAssertEqual(expectedAccessToken, requestResult.accessToken)
-//    }
-//    
-//    private func thenError(is expectedError: APICallerError) {
-////        XCTAssertNil(requestResult)
-//        XCTAssertEqual(expectedError, requestError)
-//    }
-//    
-//    private var invoiceCreator: DefaultInvoiceCreator!
-////    private var requestResult: Token!
-//    private var requestError: APICallerError!
-//    private var informations: InvoiceDTO!
+    func test_Creates_vehicle_successful() async {
+        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
+        await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
+        thenInvoiceIsCreated()
+    }
+
+    func test_Creates_vehicle_failed_with_unfound_ressources() async {
+        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
+        await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
+        thenErrorCode(is: 404)
+        thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
+    }
+
+    func test_Creates_vehicle_failed_with_wrong_url() async {
+        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 400))
+        await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
+        thenErrorCode(is: 400)
+        thenErrorMessage(is: "Une erreur est survenue")
+    }
+
+    func test_Creates_vehicle_failed_with_forbidden_access() async {
+        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 403))
+        await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
+        thenErrorCode(is: 403)
+        thenErrorMessage(is: "Une erreur est survenue")
+    }
+
+    private func givenVehicleCreator(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
+        invoiceCreator = DefaultInvoiceCreator(requestGenerator: requestGenerator, apiCaller: apiCaller)
+        invoiceInformations = InvoiceDTO(file: UUID().uuidString)
+    }
+
+    private func whenCreatingInvoice(vehicleId: String, informations: InvoiceDTO) async {
+        do {
+            try await invoiceCreator.createInvoice(vehicleId: vehicleId, invoice: informations)
+            self.isRequestSucceed = true
+        } catch (let error) {
+            self.error = (error as! APICallerError)
+        }
+    }
+
+    private func thenInvoiceIsCreated() {
+        XCTAssertTrue(isRequestSucceed)
+    }
+
+    private func thenErrorCode(is expected: Int) {
+        XCTAssertEqual(expected, error.rawValue)
+    }
+
+    private func thenErrorMessage(is expected: String) {
+        XCTAssertEqual(expected, error.errorDescription)
+    }
+
+    private var invoiceCreator: InvoiceCreator!
+    private var invoiceInformations: InvoiceDTO!
+    private var isRequestSucceed: Bool!
+    private var error: APICallerError!
 }
