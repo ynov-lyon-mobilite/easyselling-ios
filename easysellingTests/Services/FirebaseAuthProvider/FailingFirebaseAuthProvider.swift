@@ -27,4 +27,12 @@ final class FailingFirebaseAuthProvider: FirebaseAuthProvider {
     func getAccessToken() async -> String? {
         return nil
     }
+
+    func requestResetPasswordLink(email: String) async throws {
+        throw error
+    }
+
+    func resetPassword(withCode code: String, newPassword password: String) async throws {
+        throw error
+    }
 }

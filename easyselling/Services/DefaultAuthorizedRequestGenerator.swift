@@ -6,13 +6,23 @@
 //
 
 import Foundation
-import FirebaseAuth
 
 protocol AuthorizedRequestGenerator {
-    func generateRequest(endpoint: HTTPEndpoint, method: HTTPMethod, headers: [String: String], pathKeysValues: [String: String],
-                         queryParameters: [String: String]?) async throws -> URLRequest
-    func generateRequest<T: Encodable>(endpoint: HTTPEndpoint, method: HTTPMethod, body: T?, headers: [String: String],
-                                       pathKeysValues: [String: String], queryParameters: [String: String]?) async throws -> URLRequest
+    func generateRequest(
+        endpoint: HTTPEndpoint,
+        method: HTTPMethod,
+        headers: [String: String],
+        pathKeysValues: [String: String],
+        queryParameters: [String: String]?
+    ) async throws -> URLRequest
+
+    func generateRequest<T: Encodable>(
+        endpoint: HTTPEndpoint,
+        method: HTTPMethod,
+        body: T?, headers: [String: String],
+        pathKeysValues: [String: String],
+        queryParameters: [String: String]?
+    ) async throws -> URLRequest
 }
 
 class DefaultAuthorizedRequestGenerator: AuthorizedRequestGenerator {
@@ -30,7 +40,6 @@ class DefaultAuthorizedRequestGenerator: AuthorizedRequestGenerator {
         var request = try requestGenerator.generateRequest(
             endpoint: endpoint, method: method, headers: headers,
             pathKeysValues: pathKeysValues, queryParameters: queryParameters)
-
 
         let token = try await getToken()
         request.addValue("Bearer \(token)", forHTTPHeaderField: "authorization")

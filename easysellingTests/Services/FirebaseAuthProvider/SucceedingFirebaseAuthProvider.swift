@@ -26,4 +26,8 @@ final class SucceedingFirebaseAuthProvider: FirebaseAuthProvider {
 
         return "MY_ACCESS_TOKEN"
     }
+
+    func requestResetPasswordLink(email: String) async throws {}
+
+    func resetPassword(withCode code: String, newPassword password: String) async throws {}
 }

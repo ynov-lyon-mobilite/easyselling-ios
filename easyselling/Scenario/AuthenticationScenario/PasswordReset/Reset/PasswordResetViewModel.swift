@@ -9,21 +9,10 @@ import Foundation
 import SwiftUI
 
 class PasswordResetViewModel: ObservableObject {
-
-    init(token: String,
-         preparator: DefaultPasswordResetPreparator = DefaultPasswordResetPreparator(),
-         passwordReseter: PasswordReseter = DefaultPasswordReseter(),
-         onPasswordReset: @escaping Action) {
-        self.token = token
-        self.preparator = preparator
-        self.passwordReseter = passwordReseter
-        self.onPasswordReset = onPasswordReset
-    }
-
-    private var token: String
-    private var preparator: DefaultPasswordResetPreparator
-    private var passwordReseter: PasswordReseter
-    private var onPasswordReset: Action
+    private let token: String
+    private let preparator: DefaultPasswordResetPreparator
+    private let firebaseAuthProvider: FirebaseAuthProvider
+    private let onPasswordReset: Action
 
     @Published var error: CredentialsError?
     @Published var alert: APICallerError?
@@ -32,6 +21,16 @@ class PasswordResetViewModel: ObservableObject {
     @Published var newPasswordConfirmation: String = ""
     @Published var state: PasswordResetViewModelState = .initial
 
+    init(token: String,
+         preparator: DefaultPasswordResetPreparator = DefaultPasswordResetPreparator(),
+         firebaseAuthProvider: FirebaseAuthProvider = DefaultFirebaseAuthProvider(),
+         onPasswordReset: @escaping Action) {
+        self.token = token
+        self.preparator = preparator
+        self.firebaseAuthProvider = firebaseAuthProvider
+        self.onPasswordReset = onPasswordReset
+    }
+
     @MainActor
     func resetPassword() async {
         error = nil
@@ -39,9 +38,8 @@ class PasswordResetViewModel: ObservableObject {
             self.onPasswordReset()
         } else {
             do {
-                var passwordResetDto = try preparator.prepare(newPassword, passwordConfirmation: newPasswordConfirmation)
-                passwordResetDto.token = token
-                try await passwordReseter.resetPassword(with: passwordResetDto)
+                let passwordResetDto = try preparator.prepare(newPassword, passwordConfirmation: newPasswordConfirmation)
+                try await firebaseAuthProvider.resetPassword(withCode: token, newPassword: passwordResetDto.password)
                 state = .resetSuccessfull
             } catch(let error) {
                 if let error = error as? CredentialsError {

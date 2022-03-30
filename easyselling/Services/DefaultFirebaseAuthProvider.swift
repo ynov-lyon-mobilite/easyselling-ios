@@ -13,6 +13,8 @@ protocol FirebaseAuthProvider {
     func signInWithPassword(mail: String, password: String) async throws
     func logout() throws
     func getAccessToken() async -> String?
+    func requestResetPasswordLink(email: String) async throws
+    func resetPassword(withCode code: String, newPassword password: String) async throws
 }
 
 final class DefaultFirebaseAuthProvider: FirebaseAuthProvider {
@@ -32,5 +34,13 @@ final class DefaultFirebaseAuthProvider: FirebaseAuthProvider {
 
     func getAccessToken() async -> String? {
         try? await auth.currentUser?.getIDToken()
+    }
+
+    func requestResetPasswordLink(email: String) async throws {
+        try await auth.sendPasswordReset(withEmail: email)
+    }
+
+    func resetPassword(withCode code: String, newPassword password: String) async throws {
+        try await auth.confirmPasswordReset(withCode: code, newPassword: password)
     }
 }

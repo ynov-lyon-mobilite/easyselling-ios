@@ -9,19 +9,20 @@ import Foundation
 import SwiftUI
 
 class PasswordResetRequestViewModel: ObservableObject {
-
-    init(verificator: EmailVerificator = DefaultEmailVerificator(), passwordRequester: PasswordResetRequester = DefaultPasswordResetRequester()) {
-        self.verificator = verificator
-        self.passwordRequester = passwordRequester
-    }
-
     private let verificator: EmailVerificator
-    private let passwordRequester: PasswordResetRequester
+    private let firebaseAuthProvider: FirebaseAuthProvider
+
     @Published var email: String = ""
     @Published var error: CredentialsError?
     @Published var alert: APICallerError?
     @Published var state: PasswordResetState = .initial
     var resetRequestSuccessfullySent: String = L10n.PasswordReset.mailSentSuccessfully
+
+    init(verificator: EmailVerificator = DefaultEmailVerificator(),
+         firebaseAuthProvider: FirebaseAuthProvider = DefaultFirebaseAuthProvider()) {
+        self.verificator = verificator
+        self.self.firebaseAuthProvider = firebaseAuthProvider
+    }
 
     @MainActor
     func requestPasswordReset() async {
@@ -29,7 +30,7 @@ class PasswordResetRequestViewModel: ObservableObject {
         state = .loading
         do {
             _ = try verificator.verify(email)
-            try await passwordRequester.askForPasswordReset(of: email)
+            try await firebaseAuthProvider.requestResetPasswordLink(email: email)
             state = .requestSent
         } catch(let error) {
             state = .initial
