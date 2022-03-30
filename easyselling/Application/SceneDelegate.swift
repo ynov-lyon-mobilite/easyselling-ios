@@ -6,20 +6,12 @@
 //
 
 import UIKit
-import Firebase
-import netfox
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
-        FirebaseApp.configure()
-#if DEBUG
-        NFX.sharedInstance().start()
-#endif
-
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -36,8 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         guard let universalLinkUrl = userActivity.webpageURL else { return }
-        if universalLinkUrl.path == "/admin/reset-password" {
 
+        if universalLinkUrl.path == "/admin/reset-password" {
             guard let url = URLComponents(string: universalLinkUrl.absoluteString),
                   let tokenQueryItem = url.queryItems?.first(where: { $0.name == "token" }),
                   let token = tokenQueryItem.value else { return }
