@@ -32,22 +32,27 @@ struct VehicleInvoicesView: View {
                             HStack {
                                 Text("File Id :")
                                 Spacer()
-                                //Text(invoice.file.filename)
+                                // Text(invoice.file.filename)
                             }
                         }
                     }
+                    .alert(isPresented: $viewModel.isError, content: {
+                        Alert(
+                            title: Text(viewModel.error?.errorDescription ?? ""),
+                            dismissButton: Alert.Button.default(Text(L10n.Button.ok)))
+                    })
                     .onTapGesture {
                         Task {
                             await viewModel.downloadInvoiceContent(filename: invoice.file?.filename ?? "")
                         }
                     }
-                    /*.swipeActions(edge: .trailing) {
+                    swipeActions(edge: .trailing) {
                         Button(L10n.Invoice.deleteButton) {
                             Task {
                                 await viewModel.deleteInvoice(idInvoice: invoice.id)
                             }
                         }.tint(.red)
-                    }*/
+                    }
                 }
                 Button(action: viewModel.openInvoiceCreation) {
                     Image(systemName: "plus")

@@ -17,7 +17,7 @@ class DefaultInvoiceDownloader: InvoiceDownloader {
 
     init(requestGenerator: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator(),
          imageCaller: ImageCaller = DefaultImageCaller(),
-         context: NSManagedObjectContext = mainContext) {
+         context: NSManagedObjectContext) {
         self.requestGenerator = requestGenerator
         self.imageCaller = imageCaller
         self.context = context

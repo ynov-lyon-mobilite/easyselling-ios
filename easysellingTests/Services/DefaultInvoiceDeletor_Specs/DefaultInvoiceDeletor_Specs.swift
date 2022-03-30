@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import easyselling
+import CoreData
 
 class DefaultInvoiceDeletor_Specs: XCTestCase {
 
@@ -15,17 +16,19 @@ class DefaultInvoiceDeletor_Specs: XCTestCase {
             return ""
         })
         await whenDeletingInvoice(withId: "A1231")
-        thenSuccess()
+        thenSuccess(with: "A1231")
     }
 
     func test_Deletes_failed_with_unknown_id_invoice() async {
         givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         await whenDeletingInvoice(withId: "A1231")
-        thenError(is: .notFound)
+        thenError(is: .notFound, with: "A1231")
     }
 
     private func givenDeletor(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
-       deletor = DefaultInvoiceDeletor(requestGenerator: requestGenerator, apiCaller: apiCaller)
+        context = TestCoreDataStack().persistentContainer.newBackgroundContext()
+        deletor = DefaultInvoiceDeletor(requestGenerator: requestGenerator, apiCaller: apiCaller, context: context)
+        _ = InvoiceCoreData(id: "A1231", fileTitle: "", fileData: Data(), in: context)
     }
 
     private func whenDeletingInvoice(withId id: String) async {
@@ -37,14 +40,21 @@ class DefaultInvoiceDeletor_Specs: XCTestCase {
         }
     }
 
-    private func thenError(is expected: APICallerError) {
-        XCTAssertEqual(expected, self.error)
+    private func thenError(is expected: APICallerError, with id: String) {
+        context.performAndWait {
+            XCTAssertTrue(InvoiceCoreData.fetchRequestById(id: id) != nil)
+            XCTAssertEqual(expected, self.error)
+        }
     }
 
-    private func thenSuccess() {
-        XCTAssertTrue(self.success)
+    private func thenSuccess(with id: String) {
+        context.performAndWait {
+            XCTAssertTrue(InvoiceCoreData.fetchRequestById(id: id) == nil)
+            XCTAssertTrue(self.success)
+        }
     }
 
+    private var context: NSManagedObjectContext!
     private var deletor: DefaultInvoiceDeletor!
     private var error: APICallerError!
     private var success: Bool!

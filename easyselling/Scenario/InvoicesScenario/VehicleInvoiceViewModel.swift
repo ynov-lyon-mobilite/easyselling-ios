@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import CoreData
 
 class VehicleInvoiceViewModel: ObservableObject {
 
@@ -24,10 +25,11 @@ class VehicleInvoiceViewModel: ObservableObject {
     @Published var isDownloading: Bool = false
     @Published var isError: Bool = false
 
-    init(vehicle: Vehicle,
-         invoiceDeletor: InvoiceDeletor = DefaultInvoiceDeletor(),
+    let vehicleId: String
+
+    init(ofVehicleId: String,
+         invoiceDeletor: InvoiceDeletor = DefaultInvoiceDeletor(context: mainContext),
          vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(),
-         invoiceDownloader: InvoiceDownloader = DefaultInvoiceDownloader(),
          onNavigatingToInvoiceView: @escaping (File) -> Void,
          isOpeningInvoiceCreation: @escaping (Vehicle, @escaping () async -> Void) -> Void) {
 
@@ -83,6 +85,7 @@ class VehicleInvoiceViewModel: ObservableObject {
         } catch (let error) {
             if let error = error as? APICallerError {
                 self.error = error
+                self.isError = true
             }
         }
     }
