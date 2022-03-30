@@ -105,7 +105,10 @@ struct VehicleCreationView: View {
 
 struct VehicleCreationView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: DefaultVehicleInformationsVerificator(), hasFinishedVehicleCreation: {})
+        let viewModel = VehicleCreationViewModel(
+            vehicleCreator: DefaultVehicleCreator(),
+            vehicleVerificator: DefaultVehicleInformationsVerificator(),
+            hasFinishedVehicleCreation: {})
         viewModel.vehicleCreationStep = .vehicleType
 
         return Group {
