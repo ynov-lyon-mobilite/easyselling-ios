@@ -25,32 +25,16 @@ class StartupScenario_Specs : XCTestCase {
         thenHistory(is: [.login])
     }
 
-    func test_Begins_Vehicle_scenario_when_token_is_valid() async {
-        givenScenario(with: FakeTokenManager(accessTokenIsExpired: false, accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN"))
+    func test_Begins_Vehicle_scenario_when_user_is_authenticated() async {
+        givenScenario(firebaseAuthProvider: SucceedingFirebaseAuthProvider(isAuthenticated: true))
         whenOnBoardingHasBeenViewed()
         await whenBeginning()
         thenHistory(is: [.myVehicles])
     }
 
-    func test_Begins_Vehicle_scenario_when_token_is_expired_but_refresh_from_refresh_token() async {
-        givenScenario(with: FakeTokenManager(accessTokenIsExpired: true, accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN"),
-                      and: SucceedingTokenRefreshor(accessToken: "ACCESS_TOKEN"))
-        whenOnBoardingHasBeenViewed()
-        await whenBeginning()
-        thenHistory(is: [.myVehicles])
-    }
-
-    func test_Begins_Login_scenario_when_token_and_refresh_token_are_expired() async {
-        givenScenario(with: FakeTokenManager(accessTokenIsExpired: true, accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN"),
-                      and: FailingTokenRefreshor(error: APICallerError.unauthorized))
-        whenOnBoardingHasBeenViewed()
-        await whenBeginning()
-        thenHistory(is: [.login])
-    }
-
-    private func givenScenario(with tokenManager: TokenManager = FakeTokenManager(), and tokenRefreshor: TokenRefreshor = SucceedingTokenRefreshor(accessToken: "REFRESH_TOKEN")) {
+    private func givenScenario(firebaseAuthProvider: FirebaseAuthProvider = SucceedingFirebaseAuthProvider()) {
         navigator = SpyStartupNavigator()
-        scenario = StartupScenario(navigator: navigator, tokenManager: tokenManager, tokenRefreshor: tokenRefreshor)
+        scenario = StartupScenario(navigator: navigator, firebaseAuthProvider: firebaseAuthProvider)
     }
 
     private func whenOnBoardingHasNeverBeenViewed() {

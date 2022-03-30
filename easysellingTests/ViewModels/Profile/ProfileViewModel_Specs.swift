@@ -9,31 +9,25 @@ import XCTest
 @testable import easyselling
 
 class ProfileViewModel_Specs: XCTestCase {
-
-    func test_Discards_tokens_when_trying_to_logout() {
-        givenViewModel(tokenManager: FakeTokenManager(accessToken: "Access token", refreshToken: "Refresh token"))
+    func test_Leaves_on_logout() async {
+        givenViewModel()
         whenTryingToLoggingOut()
-        thenToken(is: nil)
-        thenRefreshToken(is: nil)
-    }
-
-    func test_Leaves_on_logout() {
-        givenViewModel(tokenManager: FakeTokenManager(accessToken: "Access token", refreshToken: "Refresh token"))
-        whenTryingToLoggingOut()
-        thenToken(is: nil)
-        thenRefreshToken(is: nil)
+        await thenToken(is: nil)
         thenHasLoggedOut()
     }
 
     func test_Navigates_to_settings_menu() {
-        givenViewModel(tokenManager: FakeTokenManager(accessToken: "Access token", refreshToken: "Refresh token"))
+        givenViewModel()
         whenNavigatingToSettingsMenu()
         thenNavigatesToSettingsMenu()
     }
 
-    private func givenViewModel(tokenManager: TokenManager) {
-        self.tokenManager = tokenManager
-        viewModel = ProfileViewModel(tokenManager: tokenManager, onLogout: { self.hasLoggedOut = true }, isNavigatingToSettingsMenu: { self.onNavigateToSettingsMenu = true})
+    private func givenViewModel(firebaseAuthProvider: FirebaseAuthProvider = SucceedingFirebaseAuthProvider()) {
+        viewModel = ProfileViewModel(
+            firebaseAuthProvider: firebaseAuthProvider,
+            onLogout: { self.hasLoggedOut = true },
+            isNavigatingToSettingsMenu: { self.onNavigateToSettingsMenu = true }
+        )
     }
 
     private func whenTryingToLoggingOut() {
@@ -44,12 +38,9 @@ class ProfileViewModel_Specs: XCTestCase {
         viewModel.navigatesToSettingsMenu()
     }
 
-    private func thenToken(is expected: String?) {
-        XCTAssertEqual(expected, tokenManager.accessToken)
-    }
-
-    private func thenRefreshToken(is expected: String?) {
-        XCTAssertEqual(expected, tokenManager.refreshToken)
+    private func thenToken(is expected: String?) async {
+        let accessToken = await viewModel.firebaseAuthProvider.getAccessToken()
+        XCTAssertEqual(expected, accessToken)
     }
 
     private func thenHasLoggedOut() {
@@ -61,7 +52,6 @@ class ProfileViewModel_Specs: XCTestCase {
     }
 
     private var viewModel: ProfileViewModel!
-    private var tokenManager: TokenManager!
     private var hasLoggedOut: Bool = false
     private var onNavigateToSettingsMenu: Bool = false
 }
