@@ -49,16 +49,16 @@
 "createVehicle.title" = "Ajouter un véhicule";
 "createVehicle.brand" = "Marque";
 "createVehicle.model" = "Modèle";
-"createVehicle.license" = "Licence";
+"createVehicle.licence" = "Licence";
 "createVehicle.year" = "Année";
 "createVehicle.submit" = "Ajouter";
 
 "createVehicle.error.emptyField" = "Un des champs est vide";
 "createVehicle.error.incorrectYear" = "L'année renseignée est invalide";
-"createVehicle.error.incorrectLicenseFormat" = "Le numéro de licence est invalide";
-"createVehicle.error.incorrectLicenseSize" = "La longueur de la licence est invalide";
+"createVehicle.error.incorrectLicenseFormat" = "Le numéro d'immatriculation est invalide";
+"createVehicle.error.incorrectLicenseSize" = "La longueur du numéro d'immatricution est invalide";
 
-"createVehicle.form.adviceForLicense" = "AA-222-AA ou 555 AAA 55";
+"createVehicle.form.adviceForLicense" = "AA-123-AA ou 123 ABC 12";
 
 "error.occured" = "Une erreur c'est produite";
 

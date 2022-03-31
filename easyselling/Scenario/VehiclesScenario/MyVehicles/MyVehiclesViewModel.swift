@@ -26,7 +26,6 @@ class MyVehiclesViewModel: ObservableObject {
     private var vehicleDeletor: VehicleDeletor
     private var isNavigatingToInvoices: (Vehicle) -> Void
 
-    @Published var isLoading: Bool = true
     @Published var isOpenningVehicleCreation: Bool = false
     @Published var vehicles: [Vehicle] = [.placeholderCar, .placeholderMoto]
     @Published var error: APICallerError?
@@ -57,12 +56,12 @@ class MyVehiclesViewModel: ObservableObject {
     }
 
     @MainActor func getVehicles() async {
-        state = .loading
+        setState(.loading)
         do {
             vehicles = try await vehiclesGetter.getVehicles()
-            state = .listingVehicles
+                setState(.listingVehicles)
         } catch (let error) {
-            state = .error
+            setState(.error)
             if let error = error as? APICallerError {
                 self.error = error
             }
@@ -74,6 +73,7 @@ class MyVehiclesViewModel: ObservableObject {
             try await vehicleDeletor.deleteVehicle(id: idVehicle)
             deleteVehicleOnTheView(idVehicle: idVehicle)
         } catch (let error) {
+            setState(.error)
             if let error = error as? APICallerError {
                 self.error = error
             }
@@ -84,6 +84,10 @@ class MyVehiclesViewModel: ObservableObject {
         vehicles = vehicles.filter { (vehicle) -> Bool in
             vehicle.id != idVehicle
         }
+    }
+
+    private func setState(_ state: VehicleState) {
+            self.state = state
     }
 
     enum VehicleState {

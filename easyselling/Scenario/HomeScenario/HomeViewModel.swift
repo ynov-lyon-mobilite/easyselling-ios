@@ -36,5 +36,13 @@ class HomeViewModel: ObservableObject {
             case .profile: return Image(systemName: "person")
             }
         }
+
+        var imageColor: Color {
+            switch self {
+            case .informations: return Color.pink
+            case .vehicles: return Asset.Colors.primary.swiftUIColor
+            case .profile: return Asset.Colors.secondary.swiftUIColor
+            }
+        }
     }
 }

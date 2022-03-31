@@ -22,6 +22,7 @@ struct VehicleCreationView: View {
                             .foregroundColor(Asset.Colors.primary.swiftUIColor)
                             .font(.title2)
                             .bold()
+                            .animation(nil)
 
                     VStack(spacing: 20) {
                         Spacer()
@@ -31,7 +32,11 @@ struct VehicleCreationView: View {
                             VehicleFormButton(action: {viewModel.selectType(.moto)}, title: L10n.Vehicles.moto, isSelected: viewModel.type == .moto)
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                         } else if viewModel.vehicleCreationStep == .licence {
-                            VehicleFormTextField(text: $viewModel.license, placeholder: L10n.CreateVehicle.license)
+                            VehicleFormTextField(text: $viewModel.license, placeholder: L10n.CreateVehicle.licence)
+                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                            Text(L10n.CreateVehicle.Form.adviceForLicense)
+                                .font(.subheadline)
+                                .italic()
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                         } else if viewModel.vehicleCreationStep == .brandAndModel {
                             VehicleFormTextField(text: $viewModel.brand, placeholder: L10n.CreateVehicle.brand)
@@ -39,12 +44,17 @@ struct VehicleCreationView: View {
                             VehicleFormTextField(text: $viewModel.model, placeholder: L10n.CreateVehicle.model)
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                         } else if viewModel.vehicleCreationStep == .year {
-                            VehicleFormTextField(text: $viewModel.year, placeholder: L10n.CreateVehicle.year)
-                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                            Picker("", selection: $viewModel.year) {
+                                ForEach(viewModel.rangeOfYears, id: \.self) {
+                                                Text($0)
+                                            }
+                                        }
+                            .pickerStyle(.wheel)
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                         }
                         Spacer()
                     }
-                    .frame(maxHeight: 150)
+                    .frame(maxHeight: 160)
                 }
 
                 HStack {

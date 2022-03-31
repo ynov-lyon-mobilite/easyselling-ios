@@ -26,11 +26,10 @@ struct HomeView: View {
                         VStack {
                             tabItem.image
                                 .font(.title2)
-                                .foregroundColor(Asset.Colors.primary.swiftUIColor)
-
-                            
+                                .foregroundColor(viewModel.selectedTabItem == tabItem ? tabItem.imageColor : Color.gray)
                         }
                     })
+                    .transition(.move(edge: .top))
                 }
             }
             .frame(maxWidth: .infinity)

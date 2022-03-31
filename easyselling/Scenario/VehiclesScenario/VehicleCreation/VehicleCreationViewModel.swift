@@ -30,6 +30,13 @@ class VehicleCreationViewModel: ObservableObject {
     @Published var year: String = ""
     @Published var vehicleCreationStep: VehicleCreationStep = .vehicleType
 
+    var rangeOfYears: [String] {
+        let actualDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        guard let year = Int(dateFormatter.string(from: actualDate)) else { return [] }
+        return (1900...year).reversed().map { String($0) }
+    }
     var createdVehicle: Vehicle = Vehicle(brand: "", model: "", license: "", type: .unknow, year: "")
 
     var title: String {

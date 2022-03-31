@@ -58,7 +58,7 @@
 "createVehicle.error.incorrectLicenseFormat" = "The license format is incorrect";
 "createVehicle.error.incorrectLicenseSize" = "The length of the license is incorrect";
 
-"createVehicle.form.adviceForLicense" = "AA-222-AA or 555 AAA 55";
+"createVehicle.form.adviceForLicense" = "AA-123-AA or 123 ABC 12";
 
 "error.occured" = "An error occured";
 

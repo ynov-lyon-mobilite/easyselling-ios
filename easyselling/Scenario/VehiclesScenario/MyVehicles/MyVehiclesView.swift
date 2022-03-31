@@ -40,6 +40,7 @@ struct MyVehiclesView: View {
                     .listRowSeparatorTint(.clear)
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+
                 }
             }
             .listStyle(.plain)
@@ -47,18 +48,16 @@ struct MyVehiclesView: View {
                 await viewModel.getVehicles()
             }
 
-            Button(action: viewModel.openVehicleCreation) {
-                Text(L10n.CreateVehicle.title)
-                    .font(.title2)
-                    .foregroundColor(Color.white)
-                    .padding(.vertical, 15)
-                    .frame(maxWidth: .infinity)
-                    .background(Asset.Colors.primary.swiftUIColor)
-                    .cornerRadius(22)
-                    .disabled(viewModel.state != .listingVehicles)
-                    .opacity(viewModel.state != .listingVehicles ? 0 : 1)
-            }
-            .padding(.bottom)
+                Button(action: viewModel.openVehicleCreation) {
+                    Text(L10n.CreateVehicle.title)
+                        .font(.title2)
+                        .foregroundColor(Color.white)
+                        .padding(.vertical, 15)
+                        .frame(maxWidth: .infinity)
+                        .background(Asset.Colors.primary.swiftUIColor)
+                        .cornerRadius(22)
+                }
+                .padding(.bottom)
         }
         .padding(.horizontal, 25)
         .background(Asset.Colors.backgroundColor.swiftUIColor)
