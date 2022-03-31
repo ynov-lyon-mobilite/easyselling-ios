@@ -31,7 +31,7 @@ class DefaultStartupNavigator : StartupNavigator {
     }
 
     func navigatesToLogin() {
-        let navigator = DefaultAuthenticationNavigator(navigationController: navigationController, window: window)
+        let navigator = DefaultAuthenticationNavigator(window: window)
         let scenario = AuthenticationScenario(navigator: navigator)
         scenario.begin(from: .default)
     }

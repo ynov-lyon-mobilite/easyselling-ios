@@ -23,7 +23,7 @@ class DefaultVehicleGetter : VehicleGetter {
 
     func getVehicle(id: String) async throws -> Vehicle {
         let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicleId, method: .GET, headers: [:],
-                                                                    pathKeysValues: ["vehicleId": id], queryParameters: [])
+                                                                    pathKeysValues: ["vehicleId": id], queryParameters: [:])
         return try await apiCaller.call(urlRequest, decodeType: Vehicle.self)
     }
 }

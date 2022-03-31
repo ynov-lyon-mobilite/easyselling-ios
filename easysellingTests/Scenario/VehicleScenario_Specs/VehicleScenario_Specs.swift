@@ -50,7 +50,7 @@ class VehicleScenario_Specs: XCTestCase {
         givenScenario()
         whenBeginning()
         whenNavigatingToVehicleShare()
-        thenVehicleId(is: "VehicleID")
+        thenVehicle(is: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
         thenHistory(is: [.myVehicles, .vehicleShare])
     }
 
@@ -84,7 +84,7 @@ class VehicleScenario_Specs: XCTestCase {
 
 
     private func whenNavigatingToVehicleShare() {
-        navigator.onVehicleShareOpen?("VehicleID")
+        navigator.onVehicleShareOpen?(Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
     }
 
     private func thenHistory(is expected: [SpyVehicleCreationNavigator.History]) {
@@ -92,6 +92,10 @@ class VehicleScenario_Specs: XCTestCase {
     }
 
     private func thenVehicleId(is expected: Vehicle) {
+        XCTAssertEqual(expected, navigator.vehicle)
+    }
+
+    private func thenVehicle(is expected: Vehicle) {
         XCTAssertEqual(expected, navigator.vehicle)
     }
 
@@ -110,10 +114,11 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     private(set) var onNavigateToSettingsMenu: Action?
     private(set) var vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
     private(set) var vehicleScenarioIsFinished: Bool = false
-    private(set) var onVehicleShareOpen: ((String) -> Void)?
+    private(set) var onVehicleShareOpen: ((Vehicle) -> Void)?
     private(set) var vehicleID: String = ""
+    private(set) var vehicle: Vehicle?
 
-    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void, onVehicleShareOpen: @escaping (String) -> Void) {
+    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void, onVehicleShareOpen: @escaping (Vehicle) -> Void) {
         self.onNavigatingToInvoices = onNavigatingToInvoices
         self.onVehicleShareOpen = onVehicleShareOpen
 
@@ -138,8 +143,8 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
         history.append(.myVehicles)
     }
 
-    func navigatesToVehicleShare(vehicleId: String) {
-        self.vehicleID = vehicleId
+    func navigatesToVehicleShare(vehicle: Vehicle) {
+        self.vehicle = vehicle
         history.append(.vehicleShare)
     }
 

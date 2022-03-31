@@ -93,8 +93,8 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         }, isNavigatingToInvoices: { vehicleId in
         	self.selectedVehicle = vehicleId
 			self.onNavigatingToInvoices = true
-		}, isOpeningVehicleShare: { vehicleId in
-            self.selectedVehicleId = vehicleId
+		}, isOpeningVehicleShare: { vehicle in
+            self.selectedVehicleId = vehicle
         })
     }
 
@@ -167,6 +167,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     private var onNavigatingToInvoices: Bool = false
     private var selectedVehicle: Vehicle!
     private var onNavigateToSettingsMenu: Bool = false
+    private var sharedVehicle: Vehicle!
 }
 
 private func readLocalFile(forName name: String) -> Data? {

@@ -9,36 +9,33 @@ import Foundation
 
 class VehicleShareViewModel: ObservableObject {
 
-    init(vehicleGetter: VehicleGetter = DefaultVehicleGetter(),
-         vehicleId: String = "") {
-        self.vehicleGetter = vehicleGetter
-        self.vehicleId = vehicleId
+    init(vehicle: Vehicle, vehicleShare: VehicleShare = DefaultVehicleShare()) {
+        self.vehicle = vehicle
+        self.vehicleShare = vehicleShare
     }
-
-    private var vehicleGetter: VehicleGetter
-    private var vehicleId: String
-
-    @Published var isLoading: Bool = true
+    private var vehicleShare: VehicleShare
     @Published var email: String = ""
     @Published var error: APICallerError?
-    @Published var state: VehicleState = .loading
-    @Published var vehicle: Vehicle?
-    @MainActor func getVehicle() async {
+    @Published var vehicle: Vehicle
+    @Published var state: ShareState = .sharingVehicle
+
+    @MainActor func shareVehicle() async {
         state = .loading
         do {
-            vehicle = try await vehicleGetter.getVehicle(id: self.vehicleId)
-            state = .displayingVehicle
+            try await vehicleShare.shareVehicle(id: vehicle.id ?? "", email: email)
+            if error != nil {
+                error = nil
+            }
         } catch (let error) {
-            state = .error
             if let error = error as? APICallerError {
                 self.error = error
             }
         }
+        state = .sharingVehicle
     }
 
-    enum VehicleState {
+    enum ShareState {
         case loading
-        case displayingVehicle
-        case error
+        case sharingVehicle
     }
 }

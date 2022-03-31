@@ -12,10 +12,10 @@ protocol VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
     func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigatingToInvoices: @escaping (Vehicle) -> Void,
-                             onVehicleShareOpen: @escaping (String) -> Void)
+                             onVehicleShareOpen: @escaping (Vehicle) -> Void)
     func navigatesToInvoices(vehicle: Vehicle)
     func goingBackToHomeView()
-    func navigatesToVehicleShare(vehicleId: String)
+    func navigatesToVehicleShare(vehicle: Vehicle)
 }
 
 class DefaultVehicleNavigator: VehicleNavigator {
@@ -33,7 +33,7 @@ class DefaultVehicleNavigator: VehicleNavigator {
 
     func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigatingToInvoices: @escaping (Vehicle) -> Void,
-                             onVehicleShareOpen: @escaping (String) -> Void) {
+                             onVehicleShareOpen: @escaping (Vehicle) -> Void) {
         window?.rootViewController = navigationController
 
         let vm = MyVehiclesViewModel(isOpeningVehicleUpdate: onVehicleUpdateOpen,
@@ -62,8 +62,8 @@ class DefaultVehicleNavigator: VehicleNavigator {
         scenario.begin()
     }
 
-    func navigatesToVehicleShare(vehicleId: String) {
-        let vm = VehicleShareViewModel(vehicleId: vehicleId)
+    func navigatesToVehicleShare(vehicle: Vehicle) {
+        let vm = VehicleShareViewModel(vehicle: vehicle)
         let view = VehicleShareView(viewModel: vm)
         navigationController.present(UIHostingController(rootView: view), animated: true)
     }

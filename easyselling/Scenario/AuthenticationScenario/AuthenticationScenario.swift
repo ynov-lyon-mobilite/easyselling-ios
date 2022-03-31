@@ -12,6 +12,7 @@ class AuthenticationScenario {
     enum BeginType {
         case `default`
         case resetPassword(token: String)
+        case vehicleActivation(id: String)
     }
 
     private var navigator: AuthenticationNavigator
@@ -25,6 +26,8 @@ class AuthenticationScenario {
         case .`default`: navigator.navigatesToLoginPage(onAccountCreation: self.navigatesToAccountCreation,
                                     onPasswordReset: self.navigatesToPasswordResetRequest, onUserLogged: { self.navigatesToVehicles() })
         case let .resetPassword(token): navigatesToPasswordReset(withToken: token)
+        case let .vehicleActivation(id):navigator.navigatesToLoginPage(onAccountCreation: self.navigatesToAccountCreation,
+                                                                       onPasswordReset: self.navigatesToPasswordResetRequest, onUserLogged: { self.navigatesToVehicles(withVehicleActivationId: id) })
         }
 
     }
@@ -43,8 +46,8 @@ class AuthenticationScenario {
         navigator.navigatesToPasswordReset(withToken: token, onPasswordReset: goingBackToHomeView)
     }
 
-    func navigatesToVehicles() {
-        navigator.navigatesToVehicles()
+    func navigatesToVehicles(withVehicleActivationId id: String? = nil) {
+        navigator.navigatesToVehicles(withVehicleActivationId: id)
     }
 
     private func goingBackToHomeView() {

@@ -15,18 +15,17 @@ protocol AuthenticationNavigator {
     func navigatesToPasswordResetRequest()
     func navigatesToPasswordReset(withToken token: String, onPasswordReset: @escaping Action)
     func goingBackToHomeView()
-    func navigatesToVehicles()
+    func navigatesToVehicles(withVehicleActivationId id: String?)
 }
 
 class DefaultAuthenticationNavigator: AuthenticationNavigator {
 
-    init(navigationController: UINavigationController, window: UIWindow?) {
+    init(window: UIWindow?) {
         self.window = window
-        self.navigationController = navigationController
     }
 
     private var window: UIWindow?
-    private let navigationController: UINavigationController
+    private let navigationController: UINavigationController = UINavigationController()
 
     func navigatesToLoginPage(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
         let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: onAccountCreation, navigateToPasswordReset: onPasswordReset, onUserLogged: onUserLogged)
@@ -65,5 +64,12 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
         let scenario = HomeScenario(navigator: navigator)
 
         scenario.begin()
+	}
+    func navigatesToVehicles(withVehicleActivationId id: String?) {
+        let vehicleNavigator = DefaultVehicleNavigator(window: window)
+        let vehicleScenario = VehicleScenario(navigator: vehicleNavigator)
+        Task {
+            await vehicleScenario.begin(withVehicleActivationId: id)
+        }
     }
 }

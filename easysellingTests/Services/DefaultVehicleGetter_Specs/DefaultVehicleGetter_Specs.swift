@@ -19,7 +19,7 @@ class DefaultVehicleGetter_Specs: XCTestCase {
         XCTAssertEqual(.notFound, self.error)
     }
 
-    func test_Shows_vehicles_when_request_succeeded() async {
+    func test_Shows_vehicle_when_request_succeeded() async {
         let vehicleGetter = DefaultVehicleGetter(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: DefaultAPICaller(urlSession: FakeUrlSession(localFile: .succeededVehicle)))
         do {
             vehicle = try await vehicleGetter.getVehicle(id: "1")

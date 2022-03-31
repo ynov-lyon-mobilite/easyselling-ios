@@ -7,14 +7,21 @@
 
 class VehicleScenario {
 
-    init(navigator: VehicleNavigator) {
+    init(navigator: VehicleNavigator,
+         vehicleActivator: VehicleActivator = DefaultVehicleActivator()) {
         self.navigator = navigator
+        self.vehicleActivator = vehicleActivator
     }
 
     private var navigator: VehicleNavigator
+    private var vehicleActivator: VehicleActivator
 
-    func begin() {
-        navigator.navigatesToHomeView(onVehicleUpdateOpen: navigatesToVehicleUpdate,
+    func begin(withVehicleActivationId id: String? = nil) async {
+        if id != nil {
+            try? await vehicleActivator.activateVehicle(id: id!)
+        }
+        navigator.navigatesToHomeView(withActivationId: id,
+									  onVehicleUpdateOpen: navigatesToVehicleUpdate,
                                       onNavigatingToInvoices: navigatesToInvoices,
                                       onVehicleShareOpen: navigatesToVehicleShare)
     }
@@ -34,7 +41,7 @@ class VehicleScenario {
         }, vehicle: vehicle)
     }
 
-    private func navigatesToVehicleShare(vehicleId: String) {
-        navigator.navigatesToVehicleShare(vehicleId: vehicleId)
+    private func navigatesToVehicleShare(vehicle: Vehicle) {
+        navigator.navigatesToVehicleShare(vehicle: vehicle)
     }
 }
