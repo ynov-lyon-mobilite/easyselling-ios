@@ -26,20 +26,20 @@ struct VehicleCreationView: View {
                     VStack(spacing: 20) {
                         Spacer()
                         if viewModel.vehicleCreationStep == .vehicleType {
-                            VehicleFormButton(action: {viewModel.selectType(.car)}, title: "Une voiture", isSelected: viewModel.type == .car)
+                            VehicleFormButton(action: {viewModel.selectType(.car)}, title: L10n.Vehicles.car, isSelected: viewModel.type == .car)
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                            VehicleFormButton(action: {viewModel.selectType(.moto)}, title: "Une moto", isSelected: viewModel.type == .moto)
+                            VehicleFormButton(action: {viewModel.selectType(.moto)}, title: L10n.Vehicles.moto, isSelected: viewModel.type == .moto)
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                         } else if viewModel.vehicleCreationStep == .licence {
-                            VehicleFormTextField(text: $viewModel.license, placeholder: "Immatriculation")
+                            VehicleFormTextField(text: $viewModel.license, placeholder: L10n.CreateVehicle.license)
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                         } else if viewModel.vehicleCreationStep == .brandAndModel {
-                            VehicleFormTextField(text: $viewModel.brand, placeholder: "Marque")
+                            VehicleFormTextField(text: $viewModel.brand, placeholder: L10n.CreateVehicle.brand)
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                            VehicleFormTextField(text: $viewModel.model, placeholder: "Modèle")
+                            VehicleFormTextField(text: $viewModel.model, placeholder: L10n.CreateVehicle.model)
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                         } else if viewModel.vehicleCreationStep == .year {
-                            VehicleFormTextField(text: $viewModel.year, placeholder: "JJ/MM/AAAA")
+                            VehicleFormTextField(text: $viewModel.year, placeholder: L10n.CreateVehicle.year)
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                         }
                         Spacer()
@@ -62,7 +62,6 @@ struct VehicleCreationView: View {
                     DotControlView(totalElements: viewModel.vehicleCreationStep.count, contentIndex: viewModel.vehicleCreationStep.currentIndex)
 
                     Spacer()
-
                     if viewModel.vehicleCreationStep != .year {
                         Button(action: viewModel.continueVehicleCreation, label: {
                             Image(systemName: "arrow.right")
@@ -71,6 +70,8 @@ struct VehicleCreationView: View {
                                 .padding()
                                 .background(Asset.Colors.primary.swiftUIColor
                                                 .clipShape(Circle()))
+                                .opacity(viewModel.vehicleCreationStep == .vehicleType ? 0 : 1)
+                                .disabled(viewModel.vehicleCreationStep == .vehicleType)
                         })
                     } else {
                         Button(action: { Task {

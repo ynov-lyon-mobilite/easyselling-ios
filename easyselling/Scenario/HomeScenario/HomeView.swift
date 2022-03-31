@@ -23,9 +23,13 @@ struct HomeView: View {
             HStack(spacing: 100) {
                 ForEach(HomeViewModel.TabItems.allCases, id: \.rawValue) { tabItem in
                     Button(action: { viewModel.selectItem(tabItem) }, label: {
-                        tabItem.image
-                            .font(.title2)
-                            .foregroundColor(Asset.Colors.primary.swiftUIColor)
+                        VStack {
+                            tabItem.image
+                                .font(.title2)
+                                .foregroundColor(Asset.Colors.primary.swiftUIColor)
+
+                            
+                        }
                     })
                 }
             }

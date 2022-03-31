@@ -47,7 +47,7 @@ class VehicleCreationViewModel: ObservableObject {
 
     func selectType(_ type: Vehicle.Category) {
         self.type = type
-
+        continueVehicleCreation()
     }
 
     @MainActor

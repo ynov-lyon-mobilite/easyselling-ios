@@ -21,6 +21,7 @@ struct VehicleFormTextField: View {
                     .font(.headline)
             }
             .font(.headline)
+            .foregroundColor(Asset.Colors.primary.swiftUIColor)
             .multilineTextAlignment(.center)
             .padding()
             .frame(maxWidth: .infinity)

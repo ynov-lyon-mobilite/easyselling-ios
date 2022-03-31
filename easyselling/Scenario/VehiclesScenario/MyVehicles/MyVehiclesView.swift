@@ -48,12 +48,13 @@ struct MyVehiclesView: View {
             }
 
             Button(action: viewModel.openVehicleCreation) {
-                Image(systemName: "plus")
-                    .foregroundColor(Asset.Colors.secondary.swiftUIColor)
+                Text(L10n.CreateVehicle.title)
+                    .font(.title2)
+                    .foregroundColor(Color.white)
                     .padding(.vertical, 15)
                     .frame(maxWidth: .infinity)
                     .background(Asset.Colors.primary.swiftUIColor)
-                    .cornerRadius(5)
+                    .cornerRadius(22)
                     .disabled(viewModel.state != .listingVehicles)
                     .opacity(viewModel.state != .listingVehicles ? 0 : 1)
             }
@@ -62,6 +63,8 @@ struct MyVehiclesView: View {
         .padding(.horizontal, 25)
         .background(Asset.Colors.backgroundColor.swiftUIColor)
         .onAppear {
+            UITableView.appearance().showsVerticalScrollIndicator = false
+
             Task {
                 await viewModel.getVehicles()
             }

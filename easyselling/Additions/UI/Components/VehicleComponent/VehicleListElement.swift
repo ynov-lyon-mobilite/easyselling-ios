@@ -31,15 +31,17 @@ struct VehicleListElement: View {
             Text(vehicle.year)
         }
         .swipeActions(edge: .trailing) {
-            Button(L10n.Vehicles.deleteButton) { deleteAction()
-            }.tint(Color.red)
+            Button(action: { deleteAction() }, label: {
+                Image(systemName: "trash.fill")
+                    .font(.title2)
+            })
+            .tint(Color.red)
 
-            Button(L10n.Vehicles.updateButton) {
-                Task {
-                    updateAction()
-                }
-            }
-            .tint(Color.secondaryEasyselling)
+            Button(action: { updateAction() }, label: {
+                Image(systemName: "pencil")
+                    .font(.title2)
+            })
+            .tint(Asset.Colors.secondary.swiftUIColor)
         }
         .padding(.vertical, 15)
         .padding(.horizontal, 20)
