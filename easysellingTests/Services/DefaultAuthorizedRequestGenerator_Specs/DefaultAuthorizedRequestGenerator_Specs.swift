@@ -13,10 +13,10 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     
     func test_Generates_request_with_token_in_header() async {
         var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
-        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
         request.httpMethod = HTTPMethod.GET.rawValue
 
-        givenService(accessTokenIsExpired: false, accessToken: updatedAccessToken, refreshToken: "FAKE_REFRESH_TOKEN")
+        givenService(firebaseAuthProvider: SucceedingFirebaseAuthProvider(isAuthenticated: true))
         await whenGenerateRequest(endpoint: .vehicles, method: .GET, headers: [:])
         thenRequest(is: request)
     }
@@ -24,84 +24,55 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     func test_Generates_Request_With_Headers_and_token_in_header() async {
         let body = "BODY"
         var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
-        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
         request.addValue("value", forHTTPHeaderField: "teast-haeder")
         request.httpBody = try! JSONEncoder().encode(body)
 
-        givenService(accessTokenIsExpired: false, accessToken: updatedAccessToken, refreshToken: "FAKE_REFRESH_TOKEN")
+        givenService(firebaseAuthProvider: SucceedingFirebaseAuthProvider(isAuthenticated: true))
         await whenGenerateRequestWithBody(endpoint: .vehicles, method: .GET, body: body, headers: ["teast-haeder": "value"])
         thenRequestWithBody(is: request)
     }
 
     func test_Generates_Request_With_Path_keys_values_and_token_in_header() async {
         var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles/myVehicle")!)
-        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
 
-        givenService(accessTokenIsExpired: false, accessToken: updatedAccessToken, refreshToken: "FAKE_REFRESH_TOKEN")
+        givenService(firebaseAuthProvider: SucceedingFirebaseAuthProvider(isAuthenticated: true))
         await whenGenerateRequest(endpoint: .vehicleId, method: .GET, headers: [:], pathKeysValues: ["vehicleId": "myVehicle"])
         thenRequest(is: request)
     }
     
-    func test_Generates_request_with_token_in_header_after_refresh_token() async {
-        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
-        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
-        
-        givenService(accessTokenIsExpired: true, accessToken: outdatedAccessToken, refreshToken: "REFRESH_TOKEN")
-        await whenGenerateRequest(endpoint: .vehicles, method: .GET, headers: [:])
-        thenRequest(is: request)
-    }
     
-    func test_Generates_Request_With_Headers_and_token_in_header_after_refresh_token() async {
-        let body = "BODY"
+    func test_Throws_error_with_empty_access_token() async {
         var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
-        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
-        request.httpBody = try! JSONEncoder().encode(body)
-        
-        givenService(accessTokenIsExpired: true, accessToken: outdatedAccessToken, refreshToken: "REFRESH_TOKEN")
-        await whenGenerateRequestWithBody(endpoint: .vehicles, method: .GET, body: body, headers: [:])
-        thenRequestWithBody(is: request)
-    }
-    
-    func test_Throws_error_after_refresh_token_failure() async {
-        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
-        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
-        
-        let tokenManager = FakeTokenManager(accessTokenIsExpired: true, accessToken: "ACCESS_TOKEN", refreshToken: "REFRESH_TOKEN")
-        
-        givenService(tokenManager: tokenManager, tokenRefreshor: FailingTokenRefreshor(error: .badRequest))
-        await whenGenerateRequest(endpoint: .vehicles, method: .GET, headers: [:])
-        thenError(is: .badRequest)
-    }
-    
-    func test_Throws_error_with_empty_access_and_refresh_token() async {
-        var request = URLRequest(url: URL(string: "https://api.easyselling.maxencemottard.com/vehicles")!)
-        request.addValue("Bearer \(updatedAccessToken)", forHTTPHeaderField: "authorization")
-        
-        givenService(tokenManager: FakeTokenManager(), tokenRefreshor: FailingTokenRefreshor(error: .badRequest))
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
+
+        givenService(firebaseAuthProvider: SucceedingFirebaseAuthProvider(isAuthenticated: false))
         await whenGenerateRequest(endpoint: .vehicles, method: .GET, headers: [:])
         thenError(is: .unauthorized)
     }
     
-    private func givenService(accessTokenIsExpired: Bool, accessToken: String?, refreshToken: String?) {
-        let requestGenerator = FakeRequestGenerator()
-        let tokenManager = FakeTokenManager(accessTokenIsExpired: accessTokenIsExpired,
-                                            accessToken: accessToken,
-                                            refreshToken: refreshToken)
+    private func givenService(firebaseAuthProvider: FirebaseAuthProvider) {
         self.requestGenerator = DefaultAuthorizedRequestGenerator(
-            requestGenerator: requestGenerator, tokenManager: tokenManager,
-            tokenRefreshor: SucceedingTokenRefreshor(accessToken: updatedAccessToken))
+            requestGenerator: FakeRequestGenerator(),
+            firebaseAuthProvider: firebaseAuthProvider
+        )
     }
     
-    private func givenService(tokenManager: TokenManager, tokenRefreshor: TokenRefreshor) {
-        let requestGenerator = FakeRequestGenerator()
-        self.requestGenerator = DefaultAuthorizedRequestGenerator(requestGenerator: requestGenerator, tokenManager: tokenManager,
-                                                                 tokenRefreshor: tokenRefreshor)
-    }
-    
-    private func whenGenerateRequest(endpoint: HTTPEndpoint, method: HTTPMethod,
-                                     headers: [String: String] = [:], pathKeysValues: [String: String] = [:]) async {
+    private func whenGenerateRequest(
+        endpoint: HTTPEndpoint,
+        method: HTTPMethod,
+        headers: [String: String] = [:],
+        pathKeysValues: [String: String] = [:]) async
+    {
         do {
-            self.request = try await requestGenerator.generateRequest(endpoint: endpoint, method: method, headers: headers, pathKeysValues: pathKeysValues, queryParameters: nil)
+            self.request = try await requestGenerator.generateRequest(
+                endpoint: endpoint,
+                method: method,
+                headers: headers,
+                pathKeysValues: pathKeysValues,
+                queryParameters: nil
+            )
         } catch(let error) {
             self.error = (error as! APICallerError)
         }
@@ -112,9 +83,17 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
         method: HTTPMethod,
         body: T,
         headers: [String: String],
-        pathKeysValues: [String: String] = [:]) async {
+        pathKeysValues: [String: String] = [:]
+    ) async {
             do {
-                self.request = try await requestGenerator.generateRequest(endpoint: endpoint, method: method, body: body, headers: headers, pathKeysValues: pathKeysValues, queryParameters: nil)
+                self.request = try await requestGenerator.generateRequest(
+                    endpoint: endpoint,
+                    method: method,
+                    body: body,
+                    headers: headers,
+                    pathKeysValues: pathKeysValues,
+                    queryParameters: nil
+                )
             } catch(let error) {
                 self.error = (error as! APICallerError)
             }
@@ -151,8 +130,6 @@ class DefaultAuthorizedRequestGenerator_Specs: XCTestCase {
     private var requestGenerator: AuthorizedRequestGenerator!
     private var request: URLRequest!
     private var error: APICallerError!
-    
-    private let outdatedAccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzU4MzMwOTAsImV4cCI6MTYwNDI5NzA5MCwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSJ9.E3KPcWx5_rzlyThc7s-EKFQPLu6xkXv7TX5RbpIHINY"
-    
-    private var updatedAccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjI1NTA5Nzc4NjIsImV4cCI6MjU1MDk3Nzg2MiwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSJ9.ENKI9xGTd8ytjIcR-WU4ew1OjosULqgzznYcwneY4_s"
+
+    private let accessToken = "MY_ACCESS_TOKEN"
 }

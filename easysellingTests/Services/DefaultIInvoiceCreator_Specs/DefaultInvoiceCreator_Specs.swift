@@ -19,21 +19,21 @@ class DefaultInvoiceCreator_Specs: XCTestCase {
         givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
         thenErrorCode(is: 404)
-        thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
+        thenErrorMessage(is: APICallerError.notFound.errorDescription)
     }
 
     func test_Creates_invoice_failed_with_wrong_url() async {
         givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 400))
         await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
         thenErrorCode(is: 400)
-        thenErrorMessage(is: "Une erreur est survenue")
+        thenErrorMessage(is: APICallerError.internalServerError.errorDescription)
     }
 
     func test_Creates_invoice_failed_with_forbidden_access() async {
         givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 403))
         await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
         thenErrorCode(is: 403)
-        thenErrorMessage(is: "Une erreur est survenue")
+        thenErrorMessage(is: APICallerError.forbidden.errorDescription)
     }
 
     private func givenInvoiceCreator(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
@@ -58,7 +58,7 @@ class DefaultInvoiceCreator_Specs: XCTestCase {
         XCTAssertEqual(expected, error.rawValue)
     }
 
-    private func thenErrorMessage(is expected: String) {
+    private func thenErrorMessage(is expected: String?) {
         XCTAssertEqual(expected, error.errorDescription)
     }
 

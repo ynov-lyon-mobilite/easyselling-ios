@@ -24,7 +24,7 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         givenViewModel(vehicleInvoicesGetter: FailingVehicleInvoicesGetter(withError: APICallerError.notFound))
         thenViewModelIsLoading()
         await whenTryingToGetVehicleInvoices()
-        thenError(is: "Impossible de trouver ce que vous cherchez")
+        thenError(is: APICallerError.notFound.errorDescription)
         thenViewModelIsNotLoading()
     }
 
@@ -41,7 +41,7 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         givenViewModel(vehicleInvoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices),
                        invoiceDownloader: FailingInvoiceDownloader(withError: .unauthorized))
         await whenTryingToSeeInvoice("1")
-        thenError(is: "Une erreur est survenue")
+        thenError(is: APICallerError.unauthorized.errorDescription)
     }
 
     func test_Deletes_invoice_when_request_is_success() async {
@@ -57,7 +57,7 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
     func test_Shows_an_error_when_the_request_fails_when_deleting_an_invoice() async {
         givenViewModel(vehicleInvoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices), invoiceDeletor: FailingInvoiceDeletor(withError: APICallerError.notFound))
         await whenDeletingInvoice(withId: "98YZG")
-        thenError(is: "Impossible de trouver ce que vous cherchez")
+        thenError(is: APICallerError.notFound.errorDescription)
     }
     
     func test_Navigates_to_invoice_creation() {
@@ -119,7 +119,7 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         XCTAssertEqual(expected, downloadedInvoice)
     }
 
-    private func thenError(is expected: String) {
+    private func thenError(is expected: String?) {
         XCTAssertEqual(expected, viewModel.error?.errorDescription)
     }
 

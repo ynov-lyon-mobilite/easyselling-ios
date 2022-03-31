@@ -9,8 +9,7 @@ import Foundation
 import SwiftUI
 
 final class UserAuthenticationViewModel: ObservableObject {
-    private var tokenManager: TokenManager
-    private let userAuthenticator: UserAuthenticatior
+    let firebaseAuthProvider: FirebaseAuthProvider
 
     let navigateToAccountCreation: Action
     private let onUserLogged: Action
@@ -24,24 +23,20 @@ final class UserAuthenticationViewModel: ObservableObject {
     @Published var alert: APICallerError?
 
     init(
-        userAuthenticator: UserAuthenticatior = DefaultUserAuthenticator(),
-        tokenManager: TokenManager = DefaultTokenManager.shared,
+        firebaseAuthProvider: FirebaseAuthProvider = DefaultFirebaseAuthProvider(),
         navigateToAccountCreation: @escaping Action,
         navigateToPasswordReset: @escaping Action,
         onUserLogged: @escaping Action) {
-            self.userAuthenticator = userAuthenticator
-            self.tokenManager = tokenManager
             self.navigateToAccountCreation = navigateToAccountCreation
             self.navigateToPasswordReset = navigateToPasswordReset
             self.onUserLogged = onUserLogged
+            self.firebaseAuthProvider = firebaseAuthProvider
         }
 
     @MainActor func login() async {
         do {
             try verifyInformations()
-            let token = try await userAuthenticator.login(mail: email, password: password)
-            tokenManager.accessToken = token.accessToken
-            tokenManager.refreshToken = token.refreshToken
+            try await firebaseAuthProvider.signInWithPassword(mail: email, password: password)
             self.onUserLogged()
         } catch(let error) {
             if let credentialError = error as? CredentialsError {

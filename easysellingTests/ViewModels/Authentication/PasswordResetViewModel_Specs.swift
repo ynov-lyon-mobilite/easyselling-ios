@@ -9,25 +9,8 @@ import XCTest
 @testable import easyselling
 
 class PasswordResetViewModel_Specs: XCTestCase {
-    
-    func test_Leaves_when_password_reset_succeed() async {
-        givenViewModel(withToken: "goodTokenToResetPassword", passwordReseter: SucceedingPasswordReseter())
-        await whenResetingPassword()
-        thenViewModelState(is: .resetSuccessfull)
-        await whenDidResetPassword()
-        XCTAssertTrue(didResetPassword)
-    }
-    
-    func test_Shows_alert_when_password_reset_failed() async {
-        givenViewModel(withToken: "", passwordReseter: FailingPasswordReseter(withError: APICallerError.notFound))
-        await whenResetingPassword()
-        thenAlert(is: "Impossible de trouver ce que vous cherchez")
-        thenAlertIsShown()
-        XCTAssertFalse(didResetPassword)
-    }
-    
     func test_Shows_error_when_new_password_is_empty() async {
-        givenViewModel(withToken: "", passwordVerificator: FailingPasswordVerificator(withError: CredentialsError.emptyPassword), passwordReseter: SucceedingPasswordReseter())
+        givenViewModel(withToken: "", passwordVerificator: FailingPasswordVerificator(withError: CredentialsError.emptyPassword))
         viewModel.newPassword = ""
         viewModel.newPasswordConfirmation = "passwordConfirmation"
         await whenResetingPassword()
@@ -36,7 +19,7 @@ class PasswordResetViewModel_Specs: XCTestCase {
     }
     
     func test_Shows_error_when_new_password_confirmation_is_empty() async {
-        givenViewModel(withToken: "", passwordVerificator: FailingPasswordVerificator(withError: CredentialsError.emptyPasswordConfirmation), passwordReseter: SucceedingPasswordReseter())
+        givenViewModel(withToken: "", passwordVerificator: FailingPasswordVerificator(withError: CredentialsError.emptyPasswordConfirmation))
         viewModel.newPassword = "password"
         viewModel.newPasswordConfirmation = ""
         await whenResetingPassword()
@@ -45,7 +28,7 @@ class PasswordResetViewModel_Specs: XCTestCase {
     }
     
     func test_Shows_error_when_new_password_and_confirmation_mismatch() async {
-        givenViewModel(withToken: "", passwordVerificator: FailingPasswordVerificator(withError: CredentialsError.wrongPassword), passwordReseter: SucceedingPasswordReseter())
+        givenViewModel(withToken: "", passwordVerificator: FailingPasswordVerificator(withError: CredentialsError.wrongPassword))
         viewModel.newPassword = "password"
         viewModel.newPasswordConfirmation = "password"
         await whenResetingPassword()
@@ -53,8 +36,16 @@ class PasswordResetViewModel_Specs: XCTestCase {
         thenError(is: "Passwords are differents")
     }
     
-    private func givenViewModel(withToken token: String, passwordVerificator: PasswordVerificator = SucceedingPasswordVerificator(), passwordReseter: PasswordReseter) {
-        viewModel = PasswordResetViewModel(token: token, preparator: DefaultPasswordResetPreparator(verificator: passwordVerificator), passwordReseter: passwordReseter, onPasswordReset: { self.didResetPassword = true })
+    private func givenViewModel(
+        withToken token: String,
+        passwordVerificator: PasswordVerificator = SucceedingPasswordVerificator(),
+        firebaseAuthProvider: FirebaseAuthProvider = SucceedingFirebaseAuthProvider()
+    ) {
+        viewModel = PasswordResetViewModel(
+            token: token,
+            preparator: DefaultPasswordResetPreparator(verificator: passwordVerificator),
+            firebaseAuthProvider: firebaseAuthProvider,
+            onPasswordReset: { self.didResetPassword = true })
     }
     
     private func whenResetingPassword() async {

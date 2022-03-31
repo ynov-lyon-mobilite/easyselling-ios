@@ -8,20 +8,19 @@
 import Foundation
 
 class ProfileViewModel: ObservableObject {
+    let firebaseAuthProvider: FirebaseAuthProvider
+    private let onLogout: Action
+    private let isNavigatingToSettingsMenu: Action
 
-    init(tokenManager: TokenManager = DefaultTokenManager(), onLogout: @escaping Action, isNavigatingToSettingsMenu: @escaping Action) {
-        self.tokenManager = tokenManager
+    init(firebaseAuthProvider: FirebaseAuthProvider = DefaultFirebaseAuthProvider(),
+         onLogout: @escaping Action, isNavigatingToSettingsMenu: @escaping Action) {
         self.onLogout = onLogout
         self.isNavigatingToSettingsMenu = isNavigatingToSettingsMenu
+        self.firebaseAuthProvider = firebaseAuthProvider
     }
 
-    private var tokenManager: TokenManager
-    private var onLogout: Action
-    private var isNavigatingToSettingsMenu: Action
-
     func logout() {
-        tokenManager.accessToken = nil
-        tokenManager.refreshToken = nil
+        try? firebaseAuthProvider.logout()
         onLogout()
     }
 

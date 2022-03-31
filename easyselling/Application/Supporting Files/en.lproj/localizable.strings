@@ -9,6 +9,11 @@
 "button.ok" = "Ok";
 "button.forgottenPassword" = "Forgot your password ?";
 
+"error.forbidden" = "You are not allowed to do the current action";
+"error.invalidCredentials" = "Your credentials are incorrect. Please try again";
+"error.notFound" = "Unable to find the item you are looking for.";
+"error.internalError" = "An error has occurred. We apologise for the inconvenience.\nPlease try again.";
+
 "onBoarding.button.previous" = "Pevious";
 "onBoarding.button.next" = "Next";
 "onBoarding.features.1.title" = "Find your vehicles";
@@ -68,10 +73,6 @@
 "invoiceCreation.label.addFile" = "Add document";
 "invoiceCreation.button.scan" = "Scan file";
 "invoiceCreation.button.upload" = "Upload file";
-
-"serverError.forbidden" = "You are not allowed to do the current action";
-"serverError.serviceUnavailable" = "The external service can't be used";
-"serverError.invalidCredentials" = "Your credentials are incorrect";
 
 "profile.title" = "My profile";
 "profile.explanations" = "Explanations";

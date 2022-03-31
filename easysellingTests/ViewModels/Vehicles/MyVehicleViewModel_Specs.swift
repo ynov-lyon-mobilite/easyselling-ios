@@ -26,7 +26,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         thenViewModelState(is: .loading)
         await whenTryingToGetVehicles()
         thenViewModelState(is: .error)
-        thenError(is: "Impossible de trouver ce que vous cherchez")
+        thenError(is: APICallerError.notFound.errorDescription)
     }
 
     func test_Navigates_to_profile_view_when_clicking_on_profile_button() {
@@ -49,7 +49,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),Vehicle(id: "2", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
                               vehicleDeletor: FailingVehicleDeletor(withError: APICallerError.notFound))
         await whenDeletingVehicle(withId: "2")
-        thenError(is: "Impossible de trouver ce que vous cherchez")
+        thenError(is: APICallerError.notFound.errorDescription)
     }
 
     private func whenNavigatingToProfile() {
@@ -138,7 +138,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         XCTAssertEqual(expected, viewModel.vehicles)
     }
     
-    private func thenError(is expected: String) {
+    private func thenError(is expected: String?) {
         XCTAssertEqual(expected, viewModel.error?.errorDescription)
     }
     

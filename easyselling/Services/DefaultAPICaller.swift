@@ -33,10 +33,10 @@ final class DefaultAPICaller: APICaller {
                       throw APICallerError.internalServerError
                   }
 
-            if let serverError = try? jsonDecoder.decode(ServerErrorResponse.self, from: data).errors.first {
-                NSLog(serverError.extensions.code + " : %@", serverError.message)
-                throw ServerError.from(code: serverError.extensions.code)
-            }
+//            if let serverError = try? jsonDecoder.decode(ServerErrorResponse.self, from: data).errors.first {
+//                NSLog(serverError.extensions.code + " : %@", serverError.message)
+//                throw ServerError.from(code: serverError.extensions.code)
+//            }
 
             if !successStatusCodes.contains(strongResponse.statusCode) {
                 throw APICallerError.from(statusCode: strongResponse.statusCode)
@@ -54,15 +54,15 @@ final class DefaultAPICaller: APICaller {
     func call(_ urlRequest: URLRequest) async throws {
         let result: (Data, URLResponse)? = try? await urlSession.data(for: urlRequest, delegate: nil)
 
-        guard let (data, response) = result,
+        guard let (_, response) = result,
               let strongResponse = response as? HTTPURLResponse else {
                   throw APICallerError.internalServerError
               }
 
-        if let serverError = try? jsonDecoder.decode(ServerErrorResponse.self, from: data).errors.first {
-            NSLog(serverError.extensions.code + " : %@", serverError.message)
-            throw ServerError.from(code: serverError.extensions.code)
-        }
+//        if let serverError = try? jsonDecoder.decode(ServerErrorResponse.self, from: data).errors.first {
+//            NSLog(serverError.extensions.code + " : %@", serverError.message)
+//            throw ServerError.from(code: serverError.extensions.code)
+//        }
 
         if !successStatusCodes.contains(strongResponse.statusCode) {
             throw APICallerError.from(statusCode: strongResponse.statusCode)

@@ -41,14 +41,14 @@ class DefaultFileUploader_Specs: XCTestCase {
         givenFileUploader(apiCaller: FailingAPICaller(withError: 400))
         await whenUploadFile(filename: "sample.pdf", filetype: "application/pdf", data: Data())
         thenErrorCode(is: 400)
-        thenErrorMessage(is: "Une erreur est survenue")
+        thenErrorMessage(is: APICallerError.internalServerError.errorDescription)
     }
     
     func test_Uploads_file_failed_with_not_found() async {
         givenFileUploader(apiCaller: FailingAPICaller(withError: 404))
         await whenUploadFile(filename: "sample.pdf", filetype: "application/pdf", data: Data())
         thenErrorCode(is: 404)
-        thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
+        thenErrorMessage(is: APICallerError.notFound.errorDescription)
     }
     
     private func givenFileUploader(apiCaller: APICaller) {
@@ -86,7 +86,7 @@ class DefaultFileUploader_Specs: XCTestCase {
         XCTAssertEqual(expected, error.rawValue)
     }
     
-    private func thenErrorMessage(is expected: String) {
+    private func thenErrorMessage(is expected: String?) {
         XCTAssertEqual(expected, error.errorDescription)
     }
     

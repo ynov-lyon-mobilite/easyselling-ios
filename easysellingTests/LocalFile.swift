@@ -10,7 +10,6 @@ import UIKit
 
 enum LocalFile: String {
     case fileUploaderResponse = "FileUploaderResponse"
-    case userAuthenticatorResponse = "UserAuthenticatorResponse"
     case succeededVehicles = "succeededVehicles"
     case succeededInvoices = "succeededInvoices"
     case succeededFile = "succeededFile"
