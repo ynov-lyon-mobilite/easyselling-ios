@@ -186,13 +186,13 @@ class FailingVehicleCreator: VehicleCreator {
 
     private var error: APICallerError
 
-    func createVehicle(informations: Vehicle) async throws {
+    func createVehicle(informations: VehicleDTO) async throws {
         throw error
     }
 }
 
 class SucceedingVehicleCreator: VehicleCreator {
-    func createVehicle(informations: Vehicle) async throws {
+    func createVehicle(informations: VehicleDTO) async throws {
         return
     }
 }
@@ -216,7 +216,7 @@ class FailingVehicleInformationsVerificator: VehicleInformationsVerificator {
 
 class SucceedingVehicleInformationsVerificator: VehicleInformationsVerificator {
 
-    func verifyInformations(vehicle: Vehicle) throws {
+    func verifyInformations(vehicle: VehicleDTO) throws {
         return
     }
 

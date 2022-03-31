@@ -97,8 +97,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     private(set) var vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "year")
     private(set) var vehicleScenarioIsFinished: Bool = false
 
-        self.onNavigateToVehicleCreation = onVehicleCreationOpen
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void) {
+    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void) {
         self.onNavigatingToInvoices = onNavigatingToInvoices
         history.append(.myVehicles)
     }

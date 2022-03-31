@@ -31,10 +31,10 @@ struct MyVehiclesView: View {
                     ForEach(viewModel.filteredVehicle, id: \.id) { vehicle in
                         VehicleListElement(vehicle: vehicle,
                                            deleteAction: { Task {
-                            await viewModel.deleteVehicle(idVehicle: vehicle.id ?? "")
+                            await viewModel.deleteVehicle(idVehicle: vehicle.id )
                         } },
                                            updateAction: { viewModel.openVehicleUpdate(vehicle: vehicle) },
-                                           showInvoices: { viewModel.navigatesToInvoices(ofVehicle: vehicle.id ?? "") })
+                                           showInvoices: { viewModel.navigatesToInvoices(vehicle: vehicle) })
                             .redacted(when: viewModel.state == .loading)
                     }
                     .listRowSeparatorTint(.clear)

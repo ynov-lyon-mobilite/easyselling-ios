@@ -12,7 +12,7 @@ class VehicleCreationViewModel: ObservableObject {
 
     init(vehicleCreator: VehicleCreator = DefaultVehicleCreator(),
          vehicleVerificator: VehicleInformationsVerificator = DefaultVehicleInformationsVerificator(),
-         hasFinishedVehicleCreation: @escaping Action) {
+         hasFinishedVehicleCreation: @escaping () -> Void) {
         self.vehicleCreator = vehicleCreator
         self.vehicleInformationsVerificator = vehicleVerificator
         self.hasFinishedVehicleCreation = hasFinishedVehicleCreation
@@ -21,7 +21,7 @@ class VehicleCreationViewModel: ObservableObject {
     private var vehicleCreator: VehicleCreator
     private var vehicleInformationsVerificator: VehicleInformationsVerificator
 
-    private var hasFinishedVehicleCreation: Action
+    private var hasFinishedVehicleCreation: () -> Void
     @Published var error: LocalizedError?
     @Published var showAlert = false
     @Published var brand: String = ""
@@ -37,7 +37,7 @@ class VehicleCreationViewModel: ObservableObject {
         guard let year = Int(dateFormatter.string(from: actualDate)) else { return [] }
         return (1900...year).reversed().map { String($0) }
     }
-    var createdVehicle: Vehicle = Vehicle(brand: "", model: "", license: "", type: .unknow, year: "")
+    var createdVehicle: Vehicle = Vehicle(id: "", brand: "", model: "", license: "", type: .unknow, year: "")
 
     var title: String {
         withAnimation(.easeInOut(duration: 0.4)) {

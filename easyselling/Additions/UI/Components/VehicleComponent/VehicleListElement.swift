@@ -30,7 +30,7 @@ struct VehicleListElement: View {
             Spacer()
             Text(vehicle.year)
         }
-        .swipeActions(edge: .trailing) {
+        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button(action: { deleteAction() }, label: {
                 Image(systemName: "trash.fill")
                     .font(.title2)

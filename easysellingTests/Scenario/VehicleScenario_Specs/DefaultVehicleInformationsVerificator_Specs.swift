@@ -46,30 +46,6 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
         thenNoErrorThrows()
     }
 
-    func test_Verfies_message_when_license_is_empty() {
-        givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .emptyField)
-    }
-    
-    func test_Verfies_message_when_brand_is_empty() {
-        givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "", model: "model", license: "123456789", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .emptyField)
-    }
-    
-    func test_Verfies_message_when_model_is_empty() {
-        givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "brand", model: "", license: "123456789", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .emptyField)
-    }
-    
-    func test_Verifies_message_if_year_has_an_incorrect_format() {
-        givenVerificator()
-        whenChecking(vehicle: Vehicle(brand: "brand", model: "model", license: "AA-222-AA", type: Vehicle.Category.car, year: "222"))
-        thenError(is: .incorrectYear)
-    }
-
     private func givenVerificator() {
         verificator = DefaultVehicleInformationsVerificator()
     }

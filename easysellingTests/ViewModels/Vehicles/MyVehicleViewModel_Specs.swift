@@ -15,29 +15,6 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         whenOpeningVehiculeCreationModal()
         thenHasNavigatingToVehicleCreationModal()
     }
-
-    func test_Navigates_to_vehicle_invoices_with_vehicle_id_as_parameter() {
-        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1",
-                                                                         brand: "Brand",
-                                                                         model: "Model",
-                                                                         license: "Licence",
-                                                                         type: .car,
-                                                                         year: "year")]))
-        whenNavigatingToInvoicesView()
-        thenVehicleId(is: "1")
-        thenNavigatesToInvoices()
-    }
-
-    func test_Navigates_to_vehicle_invoices() {
-        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1",
-                                                                         brand: "Brand",
-                                                                         model: "Model",
-                                                                         license: "Licence",
-                                                                         type: .car,
-                                                                         year: "year")]))
-        viewModel.navigatesToInvoices(ofVehicle: "1")
-        XCTAssertTrue(onNavigatingToInvoices)
-    }
     
     func test_Shows_vehicles_when_request_is_success() async {
         expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
@@ -103,7 +80,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "year")
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([vehicle]))
         viewModel.navigatesToInvoices(vehicle: vehicle)
-        XCTAssertTrue(isNavigatingToInvoices)
+        XCTAssertTrue(onNavigatingToInvoices)
     }
     
     private func givenViewModel(vehiclesGetter: VehiclesGetter) {

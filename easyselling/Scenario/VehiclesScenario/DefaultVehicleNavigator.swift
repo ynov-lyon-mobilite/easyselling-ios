@@ -11,9 +11,8 @@ import SwiftUI
 protocol VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
     func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
-                             onNavigatingToInvoices: @escaping (String) -> Void)
-    func navigatesToInvoices(ofVehicleId vehicleId: String)
-    func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
+                             onNavigatingToInvoices: @escaping (Vehicle) -> Void)
+    func navigatesToInvoices(vehicle: Vehicle)
     func goingBackToHomeView()
 }
 
@@ -31,7 +30,7 @@ class DefaultVehicleNavigator: VehicleNavigator {
     private var window: UIWindow?
 
     func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
-                             onNavigatingToInvoices: @escaping (Vehicle) -> Void,
+                             onNavigatingToInvoices: @escaping (Vehicle) -> Void) {
         window?.rootViewController = navigationController
 
         let vm = MyVehiclesViewModel(isOpeningVehicleUpdate: onVehicleUpdateOpen,
@@ -40,12 +39,6 @@ class DefaultVehicleNavigator: VehicleNavigator {
 
         navigationController.pushViewController(UIHostingController(rootView: myVehiclesView), animated: true)
     }
-
-//    func navigatesToVehicleCreation(onFinish: @escaping () async -> Void) {
-//        let vm = VehicleCreationViewModel(vehicleCreator: DefaultVehicleCreator(), vehicleVerificator: DefaultVehicleInformationsVerificator(), onFinish: onFinish)
-//        let vehicleCreationView = VehicleCreationView(viewModel: vm)
-//        navigationController.present(UIHostingController(rootView: vehicleCreationView), animated: true)
-//    }
 
     func navigatesToVehicleUpdate(onFinish: @escaping AsyncableAction, vehicle: Vehicle) {
         let vm = VehicleUpdateViewModel(vehicle: vehicle, onFinish: onFinish)
