@@ -9,34 +9,34 @@ import XCTest
 @testable import easyselling
 
 class DefaultInvoiceCreator_Specs: XCTestCase {
-    func test_Creates_vehicle_successful() async {
-        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
+    func test_Creates_invoice_successful() async {
+        givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
         await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
         thenInvoiceIsCreated()
     }
 
-    func test_Creates_vehicle_failed_with_unfound_ressources() async {
-        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
+    func test_Creates_invoice_failed_with_unfound_ressources() async {
+        givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
         thenErrorCode(is: 404)
         thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
     }
 
-    func test_Creates_vehicle_failed_with_wrong_url() async {
-        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 400))
+    func test_Creates_invoice_failed_with_wrong_url() async {
+        givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 400))
         await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
         thenErrorCode(is: 400)
         thenErrorMessage(is: "Une erreur est survenue")
     }
 
-    func test_Creates_vehicle_failed_with_forbidden_access() async {
-        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 403))
+    func test_Creates_invoice_failed_with_forbidden_access() async {
+        givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 403))
         await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
         thenErrorCode(is: 403)
         thenErrorMessage(is: "Une erreur est survenue")
     }
 
-    private func givenVehicleCreator(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
+    private func givenInvoiceCreator(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
         invoiceCreator = DefaultInvoiceCreator(requestGenerator: requestGenerator, apiCaller: apiCaller)
         invoiceInformations = InvoiceDTO(file: UUID().uuidString)
     }
