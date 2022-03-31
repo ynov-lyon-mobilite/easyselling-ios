@@ -17,7 +17,8 @@ class VehicleScenario {
         navigator.navigatesToHomeView(onVehicleCreationOpen: navigatesToVehicleCreation,
 									  onVehicleUpdateOpen: navigatesToVehicleUpdate,
                                       onNavigateToProfile: navigatesToProfile,
-                                      onNavigatingToInvoices: navigatesToInvoices)
+                                      onNavigatingToInvoices: navigatesToInvoices,
+                                      onNavigateToSettingsMenu: {})
     }
 
     private func navigatesToVehicleCreation() {
@@ -32,8 +33,8 @@ class VehicleScenario {
         navigator.navigatesToProfile()
     }
 
-    private func navigatesToInvoices(ofVehicleId vehicleId: String) {
-        navigator.navigatesToInvoices(ofVehicleId: vehicleId)
+    private func navigatesToInvoices(vehicle: Vehicle) {
+        navigator.navigatesToInvoices(vehicle: vehicle)
     }
 
     func navigatesToVehicleUpdate(vehicle: Vehicle, refreshVehicles: @escaping AsyncableAction) {

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol VehicleUpdater {
-    func updateVehicle(id: String, informations: Vehicle) async throws
+    func updateVehicle(id: String, informations: VehicleDTO) async throws
 }
 
 class DefaultVehicleUpdater: VehicleUpdater {
@@ -21,7 +21,7 @@ class DefaultVehicleUpdater: VehicleUpdater {
         self.apiCaller = apiCaller
     }
 
-    func updateVehicle(id: String, informations: Vehicle) async throws {
+    func updateVehicle(id: String, informations: VehicleDTO) async throws {
         let urlRequest = try await requestGenerator
             .generateRequest(endpoint: .vehicleId, method: .PATCH,body: informations, headers: [:],
                              pathKeysValues: ["vehicleId": id], queryParameters: nil)

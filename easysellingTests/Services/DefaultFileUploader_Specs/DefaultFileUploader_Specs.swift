@@ -34,7 +34,7 @@ class DefaultFileUploader_Specs: XCTestCase {
 
         givenFileUploader(apiCaller: apiCaller)
         await whenUploadFile(filename: "sample.pdf", filetype: "application/pdf", data: Data())
-        thenFile(is: UploadedFile(id: "AZ90JAPNDAIUBOAN"))
+        thenFile(is: UploadedFile(id: "AZ90JAPNDAIUBOAN", filename: "filaname.jpg", type: "image/jpeg"))
     }
     
     func test_Uploads_file_failed_with_bad_request() async {
@@ -52,20 +52,22 @@ class DefaultFileUploader_Specs: XCTestCase {
     }
     
     private func givenFileUploader(apiCaller: APICaller) {
-        fileUploader = DefaultFileUploader(requestGenerator: FakeRequestGenerator(), apiCaller: apiCaller)
+        fileUploader = DefaultFileUploader(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: apiCaller)
     }
     
     private func whenUploadFile(filename: String, filetype: String, data: Data) async {
         do {
-            uploadedFile = try await fileUploader.upload(filename: filename, filetype: filetype, data: data)
+            let fileDTO = FileDTO(name: filename, type: filetype, data: data)
+            uploadedFile = try await fileUploader.upload(fileDTO)
         } catch (let error) {
             self.error = (error as! APICallerError)
         }
     }
     
     private func whenGenerateBody(filename: String, filetype: String, data: Data, boundary: String) {
+        let fileDTO = FileDTO(name: filename, type: filetype, data: data)
         do {
-            generatedBody = try fileUploader.generateBody(filename: filename, filetype: filetype, data: data, boundary: boundary)
+            generatedBody = try fileUploader.generateBody(fileDTO, boundary: boundary)
         } catch (let error) {
             self.error = (error as! APICallerError)
         }

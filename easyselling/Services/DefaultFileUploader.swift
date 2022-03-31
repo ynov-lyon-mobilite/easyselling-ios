@@ -8,22 +8,22 @@
 import Foundation
 
 protocol FileUploader {
-    func upload(filename: String, filetype: String, data: Data) async throws -> UploadedFile
+    func upload(_ fileDTO: FileDTO) async throws -> UploadedFile
 }
 
 final class DefaultFileUploader: FileUploader {
-    private var requestGenerator: RequestGenerator
+    private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
 
-    init(requestGenerator: RequestGenerator = DefaultRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
+    init(requestGenerator: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator
         self.apiCaller = apiCaller
     }
 
-    func upload(filename: String, filetype: String, data: Data) async throws -> UploadedFile {
-        let (body, contentType) = try generateBody(filename: filename, filetype: filetype, data: data)
+    func upload(_ fileDTO: FileDTO) async throws -> UploadedFile {
+        let (body, contentType) = try generateBody(fileDTO)
 
-        var urlRequest = try requestGenerator
+        var urlRequest = try await requestGenerator
             .generateRequest(endpoint: .files, method: .POST, headers: ["Content-Type": contentType],
                              pathKeysValues: [:], queryParameters: nil)
         urlRequest.httpBody = body
@@ -31,13 +31,13 @@ final class DefaultFileUploader: FileUploader {
         return try await apiCaller.call(urlRequest, decodeType: UploadedFile.self)
     }
 
-    func generateBody(filename: String, filetype: String, data: Data, boundary: String = UUID().uuidString) throws -> (Data, String) {
+    func generateBody(_ fileDTO: FileDTO, boundary: String = UUID().uuidString) throws -> (Data, String) {
         let contentType = "multipart/form-data; boundary=" + boundary
 
         guard let boundaryStart = "--\(boundary)\r\n".data(using: .utf8),
               let boundaryEnd = "--\(boundary)--\r\n".data(using: .utf8),
-              let contentDispositionString = "Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8),
-              let contentTypeString = "Content-Type: \(filetype)\r\n\r\n".data(using: .utf8),
+              let contentDispositionString = "Content-Disposition: form-data; name=\"file\"; filename=\"\(fileDTO.name)\"\r\n".data(using: .utf8),
+              let contentTypeString = "Content-Type: \(fileDTO.type)\r\n\r\n".data(using: .utf8),
               let separator = "\r\n".data(using: .utf8) else {
                   throw APICallerError.requestGenerationError
               }
@@ -46,7 +46,7 @@ final class DefaultFileUploader: FileUploader {
         body.append(boundaryStart)
         body.append(contentDispositionString)
         body.append(contentTypeString)
-        body.append(data)
+        body.append(fileDTO.data)
         body.append(separator)
         body.append(boundaryEnd)
 

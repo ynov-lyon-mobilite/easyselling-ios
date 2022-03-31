@@ -30,7 +30,7 @@ class VehicleCreationViewModel: ObservableObject {
     }
 
     @MainActor func createVehicle() async {
-        let informations = Vehicle(brand: brand, model: model, license: license, type: type, year: year)
+        let informations = VehicleDTO(brand: brand, model: model, license: license, type: type, year: year)
 
         do {
             try vehicleInformationsVerificator.verifyInformations(vehicle: informations)

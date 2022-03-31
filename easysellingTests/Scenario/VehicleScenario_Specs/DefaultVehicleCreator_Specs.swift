@@ -9,12 +9,6 @@ import XCTest
 @testable import easyselling
 
 class DefaultVehicleCreator_Specs: XCTestCase {
-    
-    private var vehicleCreator: VehicleCreator!
-    private var vehicle: Vehicle!
-    private var isRequestSucceed: Bool!
-    private var error: APICallerError!
-    
     func test_Creates_vehicle_successful() async {
         givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
         await whenCreatingVehicle(informations: vehicle)
@@ -44,10 +38,10 @@ class DefaultVehicleCreator_Specs: XCTestCase {
     
     private func givenVehicleCreator(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
         vehicleCreator = DefaultVehicleCreator(requestGenerator: requestGenerator, apiCaller: apiCaller)
-        vehicle = Vehicle(brand: "Audi", model: "A1", license: "123456789", type: Vehicle.Category.car, year: "2005")
+        vehicle = VehicleDTO(brand: "Audi", model: "A1", license: "123456789", type: Vehicle.Category.car, year: "2005")
     }
     
-    private func whenCreatingVehicle(informations: Vehicle) async {
+    private func whenCreatingVehicle(informations: VehicleDTO) async {
         do {
             try await vehicleCreator.createVehicle(informations: informations)
             self.isRequestSucceed = true
@@ -67,4 +61,9 @@ class DefaultVehicleCreator_Specs: XCTestCase {
     private func thenErrorMessage(is expected: String) {
         XCTAssertEqual(expected, error.errorDescription)
     }
+
+    private var vehicleCreator: VehicleCreator!
+    private var vehicle: VehicleDTO!
+    private var isRequestSucceed: Bool!
+    private var error: APICallerError!
 }

@@ -59,26 +59,32 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         await whenDeletingInvoice(withId: "98YZG")
         thenError(is: "Impossible de trouver ce que vous cherchez")
     }
+    
+    func test_Navigates_to_invoice_creation() {
+        givenViewModel(vehicleInvoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices))
+        whenOpeningInvoiceCreationModal()
+        XCTAssertTrue(isOpen)
+    }
 
     private func givenViewModel(vehicleInvoicesGetter: VehicleInvoicesGetter,
                                 invoiceDownloader: InvoiceDownloader = SucceedingInvoiceDownloader(),
                                 invoiceDeletor: InvoiceDeletor = SucceedingInvoiceDeletor()) {
 
-        viewModel = VehicleInvoiceViewModel(ofVehicleId: vehicleId,
+        viewModel = VehicleInvoiceViewModel(vehicle: vehicle,
                                             invoiceDeletor: invoiceDeletor,
                                             vehicleInvoicesGetter: vehicleInvoicesGetter,
                                             invoiceDownloader: invoiceDownloader,
                                             onNavigatingToInvoiceView: { invoice in
             self.onNavigatingToInvoiceView = true
             self.downloadedInvoice = invoice
-        })
+        }, isOpeningInvoiceCreation: { _, _  in self.isOpen = true })
     }
 
     private func givenViewModelDeletor(invoicesGetter: VehicleInvoicesGetter, invoiceDeletor: InvoiceDeletor) {
-        viewModel = VehicleInvoiceViewModel(ofVehicleId: vehicleId, invoiceDeletor: invoiceDeletor, vehicleInvoicesGetter: invoicesGetter,invoiceDownloader: SucceedingInvoiceDownloader(), onNavigatingToInvoiceView: { invoice in
+        viewModel = VehicleInvoiceViewModel(vehicle: vehicle, invoiceDeletor: invoiceDeletor, vehicleInvoicesGetter: invoicesGetter,invoiceDownloader: SucceedingInvoiceDownloader(), onNavigatingToInvoiceView: { invoice in
             self.onNavigatingToInvoiceView = true
             self.downloadedInvoice = invoice
-        })
+        }, isOpeningInvoiceCreation: {_,_  in })
     }
 
     private func whenDeletingInvoice(withId: String) async {
@@ -86,11 +92,15 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
     }
 
     private func whenTryingToGetVehicleInvoices() async {
-        await viewModel.getInvoices(ofVehicleId: vehicleId)
+        await viewModel.getInvoices()
     }
 
     private func whenTryingToSeeInvoice(_ invoiceId: String) async {
         await viewModel.downloadInvoiceContent(filename: invoiceId)
+    }
+
+    private func whenOpeningInvoiceCreationModal() {
+        viewModel.openInvoiceCreation()
     }
 
     private func thenViewModelIsLoading() {
@@ -117,8 +127,9 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         XCTAssertEqual(expected, viewModel.invoices)
     }
 
+    private let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "year")
+    private var isOpen: Bool = false
     private var viewModel: VehicleInvoiceViewModel!
-    private var vehicleId: String = "1"
     private var downloadedInvoice: File!
     private var onNavigatingToInvoiceView: Bool = false
     private let expectedVehicleInvoices = [

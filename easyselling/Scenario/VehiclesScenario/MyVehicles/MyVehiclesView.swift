@@ -45,7 +45,7 @@ struct MyVehiclesView: View {
                             .swipeActions(edge: .trailing) {
                                 Button(L10n.Vehicles.deleteButton) {
                                     Task {
-                                        await viewModel.deleteVehicle(idVehicle: vehicle.id ?? "")
+                                        await viewModel.deleteVehicle(idVehicle: vehicle.id)
                                     }
                                 }.tint(Color.red)
                                 Button(L10n.Vehicles.updateButton) {
@@ -60,7 +60,7 @@ struct MyVehiclesView: View {
                             .padding(.horizontal, 25)
                             .padding(.vertical)
                             .onTapGesture {
-                                viewModel.navigatesToInvoices(ofVehicle: vehicle.id ?? "")
+                                viewModel.navigatesToInvoices(vehicle: vehicle)
                             }
                         }
                         .listRowSeparatorTint(.clear)
@@ -91,11 +91,7 @@ struct MyVehiclesView: View {
                 }
             }
         }
-        .onAppear {
-            Task {
-                await viewModel.getVehicles()
-            }
-        }
+        .task { await viewModel.getVehicles() }
     }
 }
 
@@ -106,9 +102,9 @@ struct MyVehiclesView_Previews: PreviewProvider {
                                      isOpeningVehicleUpdate: {_,_ in },
                                      isNavigatingToProfile: {},
                                      isNavigatingToInvoices: {_ in })
-        vm.vehicles = [Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
-                       Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
-                       Vehicle(brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]
+        vm.vehicles = [Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
+                       Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
+                       Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]
         vm.state = .listingVehicles
 
         return MyVehiclesView(viewModel: vm)

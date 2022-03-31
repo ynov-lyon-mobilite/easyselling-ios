@@ -13,9 +13,10 @@ protocol VehicleNavigator {
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
                              onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigateToProfile: @escaping Action,
-                             onNavigatingToInvoices: @escaping (String) -> Void)
+                             onNavigatingToInvoices: @escaping (Vehicle) -> Void,
+                             onNavigateToSettingsMenu: @escaping Action)
     func navigatesToVehicleCreation(onFinish: @escaping () async -> Void)
-    func navigatesToInvoices(ofVehicleId vehicleId: String)
+    func navigatesToInvoices(vehicle: Vehicle)
     func navigatesToProfile()
     func goingBackToHomeView()
 }
@@ -32,7 +33,8 @@ class DefaultVehicleNavigator: VehicleNavigator {
     func navigatesToHomeView(onVehicleCreationOpen: @escaping Action,
                              onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigateToProfile: @escaping Action,
-                             onNavigatingToInvoices: @escaping (String) -> Void) {
+                             onNavigatingToInvoices: @escaping (Vehicle) -> Void,
+                             onNavigateToSettingsMenu: @escaping Action) {
         window?.rootViewController = navigationController
 
         let vm = MyVehiclesViewModel(isOpenningVehicleCreation: onVehicleCreationOpen,
@@ -61,10 +63,10 @@ class DefaultVehicleNavigator: VehicleNavigator {
         navigationController.present(UIHostingController(rootView: view), animated: true)
 	}
 
-    func navigatesToInvoices(ofVehicleId vehicleId: String) {
+    func navigatesToInvoices(vehicle: Vehicle) {
         let navigator = DefaultInvoicesNavigator(navigationController: navigationController)
         let scenario = InvoicesScenario(navigator: navigator)
-        scenario.begin(withVehicleId: vehicleId)
+        scenario.begin(vehicle: vehicle)
     }
 
     func navigatesToSettingsMenu() {

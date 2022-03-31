@@ -11,10 +11,12 @@ import SwiftUI
 
 class VehicleInvoiceViewModel: ObservableObject {
 
-    private var vehicleInvoicesGetter: VehicleInvoicesGetter
-    private var invoiceDownloader: InvoiceDownloader
-    private var onNavigatingToInvoiceView: (File) -> Void
-    private var invoiceDeletor: InvoiceDeletor
+    private let vehicleInvoicesGetter: VehicleInvoicesGetter
+    private let invoiceDownloader: InvoiceDownloader
+    private let onNavigatingToInvoiceView: (File) -> Void
+    private let invoiceDeletor: InvoiceDeletor
+    private let isOpeningInvoiceCreation: (Vehicle, @escaping () async -> Void) -> Void
+    private let vehicle: Vehicle
 
     @Published var invoices: [Invoice] = []
     @Published var error: APICallerError?
@@ -22,24 +24,30 @@ class VehicleInvoiceViewModel: ObservableObject {
     @Published var isDownloading: Bool = false
     @Published var isError: Bool = false
 
-    let vehicleId: String
-
-    init(ofVehicleId: String,
+    init(vehicle: Vehicle,
          invoiceDeletor: InvoiceDeletor = DefaultInvoiceDeletor(),
          vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(),
          invoiceDownloader: InvoiceDownloader = DefaultInvoiceDownloader(),
-         onNavigatingToInvoiceView: @escaping (File) -> Void) {
+         onNavigatingToInvoiceView: @escaping (File) -> Void,
+         isOpeningInvoiceCreation: @escaping (Vehicle, @escaping () async -> Void) -> Void) {
 
-        self.vehicleId = ofVehicleId
+        self.vehicle = vehicle
         self.invoiceDeletor = invoiceDeletor
         self.vehicleInvoicesGetter = vehicleInvoicesGetter
         self.invoiceDownloader = invoiceDownloader
         self.onNavigatingToInvoiceView = onNavigatingToInvoiceView
+        self.isOpeningInvoiceCreation = isOpeningInvoiceCreation
     }
 
-    @MainActor func getInvoices(ofVehicleId vehicleId: String) async {
+    func openInvoiceCreation() {
+        self.isOpeningInvoiceCreation(vehicle) { [weak self] in
+            await self?.getInvoices()
+        }
+    }
+
+    @MainActor func getInvoices() async {
         do {
-            invoices = try await vehicleInvoicesGetter.getInvoices(ofVehicleId: vehicleId)
+            invoices = try await vehicleInvoicesGetter.getInvoices(ofVehicleId: vehicle.id)
         } catch (let error) {
             if let error = error as? APICallerError {
                 isError = true

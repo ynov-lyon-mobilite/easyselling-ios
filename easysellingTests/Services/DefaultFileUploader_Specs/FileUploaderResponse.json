@@ -1,5 +1,7 @@
 {
     "data": {
-        "id": "AZ90JAPNDAIUBOAN"
+        "_id": "AZ90JAPNDAIUBOAN",
+        "filename": "filaname.jpg",
+        "type": "image/jpeg"
     }
 }
