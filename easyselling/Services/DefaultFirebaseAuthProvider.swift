@@ -25,7 +25,9 @@ final class DefaultFirebaseAuthProvider: FirebaseAuthProvider {
     }
 
     func signInWithPassword(mail: String, password: String) async throws {
-        try await auth.signIn(withEmail: mail, password: password)
+        try await catchFirebaseErrors { [auth] in
+            try await auth.signIn(withEmail: mail, password: password)
+        }
     }
 
     func logout() throws {
@@ -37,10 +39,30 @@ final class DefaultFirebaseAuthProvider: FirebaseAuthProvider {
     }
 
     func requestResetPasswordLink(email: String) async throws {
-        try await auth.sendPasswordReset(withEmail: email)
+        try await catchFirebaseErrors { [auth] in
+            try await auth.sendPasswordReset(withEmail: email)
+        }
     }
 
     func resetPassword(withCode code: String, newPassword password: String) async throws {
-        try await auth.confirmPasswordReset(withCode: code, newPassword: password)
+        try await catchFirebaseErrors { [auth] in
+            try await auth.confirmPasswordReset(withCode: code, newPassword: password)
+        }
+    }
+
+    private func catchFirebaseErrors(function: () async throws -> Void) async throws {
+        do {
+            try await function()
+        } catch(let error) {
+            let nsError = error as NSError
+            guard let firebaseErrorKey = nsError.userInfo["FIRAuthErrorUserInfoNameKey"] as? String else {
+                throw APICallerError.unknownError
+            }
+
+            switch firebaseErrorKey {
+            case "ERROR_WRONG_PASSWORD": throw APICallerError.badCredentials
+            default: throw APICallerError.unknownError
+            }
+        }
     }
 }

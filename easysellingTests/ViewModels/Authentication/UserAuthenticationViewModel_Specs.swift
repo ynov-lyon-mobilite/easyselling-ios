@@ -84,7 +84,7 @@ class UserAuthenticationViewModel_Specs: XCTestCase {
         XCTAssertTrue(!viewModel.showAlert)
     }
     
-    private func thenError(is expectedError: LocalizedError?) {
+    private func thenError(is expectedError: Error?) {
         XCTAssertEqual(expectedError as? CredentialsError, viewModel.error)
     }
     

@@ -7,13 +7,14 @@
 
 import Foundation
 
-enum APICallerError: Int, LocalizedError, Equatable {
+enum APICallerError: Int, Error, Equatable {
     //  Application errors
     case unknownError = 001
     case encodeError = 002
     case decodeError = 003
     case requestGenerationError = 004
     case mimeTypeError = 005
+    case badCredentials = 006
 
     //  HTTP errors
     case badRequest = 400
@@ -35,9 +36,11 @@ enum APICallerError: Int, LocalizedError, Equatable {
 
     var errorDescription: String? {
         switch self {
-        case .notFound: return "Impossible de trouver ce que vous cherchez"
-        case .internalServerError: return "Une erreur est survenue"
-        default: return "Une erreur est survenue"
+        case .unauthorized, .forbidden: return L10n.Error.forbidden
+        case .badCredentials: return L10n.Error.invalidCredentials
+        case .notFound: return L10n.Error.notFound
+        case .internalServerError: return L10n.Error.internalError
+        default: return L10n.Error.internalError
         }
     }
 

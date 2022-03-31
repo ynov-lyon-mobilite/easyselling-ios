@@ -9,6 +9,11 @@
 "button.ok" = "Ok";
 "button.forgottenPassword" = "Mot de passe oublié";
 
+"error.forbidden" = "Vous n'êtes pas autorisé à effectuer cette action.";
+"error.invalidCredentials" = "Vos identifiants sont incorrectes. Veuillez réessayer.";
+"error.notFound" = "Impossible de trouver l'élément que vous cherchez.";
+"error.internalError" = "Une erreur est est survenue. Veuillez nous excuser pour la gêne occasionnée.\nVeuillez réessayer.";
+
 "onBoarding.button.previous" = "Précédent";
 "onBoarding.button.next" = "Suivant";
 "onBoarding.features.1.title" = "Retrouvez vos véhicules";
@@ -68,10 +73,6 @@
 "invoiceCreation.label.addFile" = "Ajouter un document";
 "invoiceCreation.button.scan" = "Scanner un document";
 "invoiceCreation.button.upload" = "Importer un document";
-
-"serverError.forbidden" = "Vous n'êtes pas autorisé à effectuer cette action";
-"serverError.serviceUnavailable" = "Le service externe ne peut être utilisé";
-"serverError.invalidCredentials" = "Vos informations sont incorrectes";
 
 "profile.title" = "Mon profil";
 "profile.explanations" = "Explications";

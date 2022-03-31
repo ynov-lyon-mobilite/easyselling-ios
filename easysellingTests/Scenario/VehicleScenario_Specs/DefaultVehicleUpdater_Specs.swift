@@ -20,21 +20,21 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
         givenVehicleUpdater(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         await whenUpdatingVehicle(informations: vehicle)
         thenErrorCode(is: 404)
-        thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
+        thenErrorMessage(is: APICallerError.notFound.errorDescription)
     }
 
     func test_Updates_vehicle_failed_with_wrong_url() async {
         givenVehicleUpdater(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 400))
         await whenUpdatingVehicle(informations: vehicle)
         thenErrorCode(is: 400)
-        thenErrorMessage(is: "Une erreur est survenue")
+        thenErrorMessage(is: APICallerError.internalServerError.errorDescription)
     }
 
     func test_Updates_vehicle_failed_with_forbidden_access() async {
         givenVehicleUpdater(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 403))
         await whenUpdatingVehicle(informations: vehicle)
         thenErrorCode(is: 403)
-        thenErrorMessage(is: "Une erreur est survenue")
+        thenErrorMessage(is: APICallerError.forbidden.errorDescription)
     }
 
     private func givenVehicleUpdater(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
@@ -59,7 +59,7 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
         XCTAssertEqual(expected, error.rawValue)
     }
 
-    private func thenErrorMessage(is expected: String) {
+    private func thenErrorMessage(is expected: String?) {
         XCTAssertEqual(expected, error.errorDescription)
     }
 

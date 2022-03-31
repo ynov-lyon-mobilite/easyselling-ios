@@ -22,14 +22,14 @@ class DefaultAccountCreator_Specs: XCTestCase {
         givenAccountCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 400))
         await whenCreatingAccount()
         thenErrorCode(is: 400)
-        thenErrorMessage(is: "Une erreur est survenue")
+        thenErrorMessage(is: APICallerError.internalServerError.errorDescription)
     }
     
     func test_Creates_account_failed_with_forbidden_access() async {
         givenAccountCreator(requestGenerator: FakeRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         await whenCreatingAccount()
         thenErrorCode(is: 404)
-        thenErrorMessage(is: "Impossible de trouver ce que vous cherchez")
+        thenErrorMessage(is: APICallerError.notFound.errorDescription)
     }
     
     private func givenAccountCreator(requestGenerator: RequestGenerator, apiCaller: APICaller) {
@@ -53,7 +53,7 @@ class DefaultAccountCreator_Specs: XCTestCase {
         XCTAssertEqual(expected, error.rawValue)
     }
     
-    private func thenErrorMessage(is expected: String) {
+    private func thenErrorMessage(is expected: String?) {
         XCTAssertEqual(expected, error.errorDescription)
     }
     
