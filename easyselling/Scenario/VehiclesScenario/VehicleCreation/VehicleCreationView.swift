@@ -27,22 +27,36 @@ struct VehicleCreationView: View {
                     VStack(spacing: 20) {
                         Spacer()
                         if viewModel.vehicleCreationStep == .vehicleType {
-                            VehicleFormButton(action: {viewModel.selectType(.car)}, title: L10n.Vehicles.car, isSelected: viewModel.type == .car)
-                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                            VehicleFormButton(action: {viewModel.selectType(.moto)}, title: L10n.Vehicles.moto, isSelected: viewModel.type == .moto)
-                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                            Button(L10n.Vehicles.car) {
+                                viewModel.selectType(.car)
+                            }
+                            .buttonStyle(VehicleFormButtonStyle(isSelected: viewModel.type == .car))
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                            Button(L10n.Vehicles.moto) {
+                                viewModel.selectType(.moto)
+                            }
+                            .buttonStyle(VehicleFormButtonStyle(isSelected: viewModel.type == .moto))
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+
                         } else if viewModel.vehicleCreationStep == .licence {
-                            VehicleFormTextField(text: $viewModel.license, placeholder: L10n.CreateVehicle.licence)
+                            TextField(L10n.CreateVehicle.licence, text: $viewModel.licence)
+                                .textFieldStyle(VehicleFormTextFieldStyle())
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                            Text(L10n.CreateVehicle.Form.adviceForLicense)
+
+                            Text(L10n.CreateVehicle.Form.adviceForlicence)
                                 .font(.subheadline)
                                 .italic()
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                         } else if viewModel.vehicleCreationStep == .brandAndModel {
-                            VehicleFormTextField(text: $viewModel.brand, placeholder: L10n.CreateVehicle.brand)
+
+                            TextField(L10n.CreateVehicle.brand, text: $viewModel.brand)
+                                .textFieldStyle(VehicleFormTextFieldStyle())
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                            VehicleFormTextField(text: $viewModel.model, placeholder: L10n.CreateVehicle.model)
+
+                            TextField(L10n.CreateVehicle.model, text: $viewModel.model)
+                                .textFieldStyle(VehicleFormTextFieldStyle())
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+
                         } else if viewModel.vehicleCreationStep == .year {
                             Picker("", selection: $viewModel.year) {
                                 ForEach(viewModel.rangeOfYears, id: \.self) {
@@ -127,41 +141,5 @@ struct VehicleCreationView_Previews: PreviewProvider {
             VehicleCreationView(viewModel: viewModel)
                 .previewDevice("iPhone 8")
         }
-    }
-}
-
-struct CheckToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        Button {
-            configuration.isOn.toggle()
-        } label: {
-            Label {
-                configuration.label
-            } icon: {
-            }
-        }
-        .buttonStyle(ToggleButtonStyle(isOn: configuration.$isOn))
-    }
-}
-
-extension Publishers {
-    // 1.
-    static var keyboardHeight: AnyPublisher<CGFloat, Never> {
-        // 2.
-        let willShow = NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)
-            .map { $0.keyboardHeight }
-
-        let willHide = NotificationCenter.default.publisher(for: UIApplication.keyboardWillHideNotification)
-            .map { _ in CGFloat(20) }
-
-        // 3.
-        return MergeMany(willShow, willHide)
-            .eraseToAnyPublisher()
-    }
-}
-
-extension Notification {
-    var keyboardHeight: CGFloat {
-        return (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
     }
 }

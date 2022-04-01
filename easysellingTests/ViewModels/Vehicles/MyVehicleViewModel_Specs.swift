@@ -17,13 +17,13 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     }
     
     func test_Shows_vehicles_when_request_is_success() async {
-        expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-                                Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")]
+        expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
+                                Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")]
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter(expectedVehicles))
         thenViewModelState(is: .loading)
         await whenTryingToGetVehicles()
-        thenLoadVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-                               Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")])
+        thenLoadVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
+                               Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")])
         thenViewModelState(is: .listingVehicles)
     }
     
@@ -37,39 +37,39 @@ class MyVehiclesViewModel_Specs: XCTestCase {
 
     func test_Deletes_vehicle_when_request_is_success() async {
         givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([
-            Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-            Vehicle(id: "2", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
+            Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
+            Vehicle(id: "2", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1")]),
                               vehicleDeletor: SucceedingVehicleDeletor())
         await whenTryingToGetVehicles()
         await whenDeletingVehicle(withId: "2")
-        thenLoadVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")])
+        thenLoadVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1")])
     }
 
     func test_Deletes_vehicle_when_request_is_failing() async {
-        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),Vehicle(id: "2", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")]),
+        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),Vehicle(id: "2", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1")]),
                               vehicleDeletor: FailingVehicleDeletor(withError: APICallerError.notFound))
         await whenDeletingVehicle(withId: "2")
         thenError(is: APICallerError.notFound.errorDescription)
     }
 
     func test_Asserts_that_updated_vehicle_is_the_same_that_has_been_clicked() {
-        expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-                                Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")]
+        expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
+                                Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")]
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter(expectedVehicles))
         whenOpeningVehicleUpdatingModal(vehicleId: "1")
-        thenVehicleThatShouldBeUpdate(is: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+        thenVehicleThatShouldBeUpdate(is: Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"))
     }
 
     func test_Asserts_that_update_vehicles_callback_contain_on_other_callback_parameter() {
-        expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-                                Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2")]
+        expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
+                                Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")]
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter(expectedVehicles))
         whenOpeningVehicleUpdatingModal(vehicleId: "1")
         XCTAssertNotNil(expectedCallback)
     }
     
     func test_Navigates_to_vehicle_invoices_with_vehicle_id_as_parameter() {
-        let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "year")
+        let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([vehicle]))
         whenNavigatingToInvoicesView(vehicle: vehicle)
         thenVehicleId(is: vehicle)
@@ -77,7 +77,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     }
     
     func test_Navigates_to_vehicle_invoices() {
-        let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "year")
+        let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([vehicle]))
         viewModel.navigatesToInvoices(vehicle: vehicle)
         XCTAssertTrue(onNavigatingToInvoices)

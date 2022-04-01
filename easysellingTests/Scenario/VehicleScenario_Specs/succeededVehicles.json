@@ -4,7 +4,7 @@
             "_id": "1",
             "brand": "Peugeot",
             "model": "model1",
-            "license": "license1",
+            "licence": "licence1",
             "type": "car",
             "year": "year1"
         },
@@ -12,7 +12,7 @@
             "_id": "2",
             "brand": "Renault",
             "model": "model2",
-            "license": "license2",
+            "licence": "licence2",
             "type": "car",
             "year": "year2"
         },
@@ -20,7 +20,7 @@
             "_id": "3",
             "brand": "Citroen",
             "model": "model3",
-            "license": "license3",
+            "licence": "licence3",
             "type": "car",
             "year": "year3"
         },

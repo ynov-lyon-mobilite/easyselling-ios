@@ -14,7 +14,7 @@ struct InvoiceCreationView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("\(viewModel.vehicle.brand) \(viewModel.vehicle.model) - \(viewModel.vehicle.license)")
+            Text("\(viewModel.vehicle.brand) \(viewModel.vehicle.model) - \(viewModel.vehicle.licence)")
 
             if let file = viewModel.uploadedFile {
                 Text(file.filename)
@@ -54,7 +54,7 @@ struct InvoiceCreationView_Previews: PreviewProvider {
         InvoiceCreationView(
             viewModel: InvoiceCreationViewModel(
                 vehicle: .init(id: "abcdefgh", brand: "Renault", model: "R5",
-                               license: "AA-123-BB", type: .car, year: "2001"),
+                               licence: "AA-123-BB", type: .car, year: "2001"),
                 onFinish: {})
         )
     }

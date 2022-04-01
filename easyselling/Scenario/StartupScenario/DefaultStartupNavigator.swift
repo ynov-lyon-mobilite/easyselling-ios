@@ -41,9 +41,5 @@ class DefaultStartupNavigator : StartupNavigator {
         let scenario = HomeScenario(navigator: navigator)
 
         scenario.begin()
-
-//        let navigator = DefaultVehicleNavigator(window: window)
-//        let scenario = VehicleScenario(navigator: navigator)
-//        scenario.begin()
     }
 }

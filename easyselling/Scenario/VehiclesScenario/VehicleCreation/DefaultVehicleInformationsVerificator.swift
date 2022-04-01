@@ -15,7 +15,7 @@ protocol VehicleInformationsVerificator {
 class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
     func verifyInformations(vehicle: VehicleDTO) throws {
         switch true {
-            case vehicle.license.isEmpty
+            case vehicle.licence.isEmpty
                 || vehicle.brand.isEmpty
                 || vehicle.model.isEmpty: throw VehicleCreationError.emptyField
             case vehicle.year.count != 4: throw VehicleCreationError.incorrectYear
@@ -26,25 +26,25 @@ class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
     func verifyLicence(_ licence: String) throws {
         let vehicleVerificator = DefaultVehicleVerificator()
 
-        try vehicleVerificator.verifyLicenseFormat(license: licence)
-        try vehicleVerificator.verifyLicenseSize(license: licence)
+        try vehicleVerificator.verifylicenceFormat(licence: licence)
+        try vehicleVerificator.verifylicenceSize(licence: licence)
     }
 }
 
 enum VehicleCreationError: Equatable, LocalizedError {
     case emptyField
     case incorrectYear
-    case incorrectLicenseFormat
-    case incorrectLicenseSize
+    case incorrectlicenceFormat
+    case incorrectlicenceSize
     case unchosenType
 
     var errorDescription: String? {
         switch self {
             case .emptyField: return L10n.CreateVehicle.Error.emptyField
             case .incorrectYear: return L10n.CreateVehicle.Error.incorrectYear
-            case .incorrectLicenseFormat: return L10n.CreateVehicle.Error.incorrectLicenseFormat
-            case .incorrectLicenseSize: return L10n.CreateVehicle.Error.incorrectLicenseSize
-            case .unchosenType: return "Vous devez choisir un type de véhicule"
+            case .incorrectlicenceFormat: return L10n.CreateVehicle.Error.incorrectlicenceFormat
+            case .incorrectlicenceSize: return L10n.CreateVehicle.Error.incorrectlicenceSize
+            case .unchosenType: return L10n.CreateVehicle.Error.unchosenType
         }
     }
 }

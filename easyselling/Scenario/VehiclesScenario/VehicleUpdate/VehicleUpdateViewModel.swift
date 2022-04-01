@@ -19,7 +19,7 @@ class VehicleUpdateViewModel: ObservableObject {
 
     @Published var brand: String = ""
     @Published var model: String = ""
-    @Published var license: String = ""
+    @Published var licence: String = ""
     @Published var type: Vehicle.Category = .car
     @Published var year: String = ""
 
@@ -33,14 +33,14 @@ class VehicleUpdateViewModel: ObservableObject {
 
         self.brand = vehicle.brand
         self.model = vehicle.model
-        self.license = vehicle.license
+        self.licence = vehicle.licence
         self.type = vehicle.type
         self.year = vehicle.year
     }
 
     @MainActor
     func updateVehicle() async {
-        let newInformations = VehicleDTO(brand: brand, model: model, license: license, type: type, year: year)
+        let newInformations = VehicleDTO(brand: brand, model: model, licence: licence, type: type, year: year)
 
         do {
             try vehicleInformationsVerificator.verifyInformations(vehicle: newInformations)

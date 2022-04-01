@@ -59,7 +59,7 @@ class MyVehiclesViewModel: ObservableObject {
         setState(.loading)
         do {
             vehicles = try await vehiclesGetter.getVehicles()
-                setState(.listingVehicles)
+            setState(.listingVehicles)
         } catch (let error) {
             setState(.error)
             if let error = error as? APICallerError {
@@ -87,7 +87,7 @@ class MyVehiclesViewModel: ObservableObject {
     }
 
     private func setState(_ state: VehicleState) {
-            self.state = state
+        self.state = state
     }
 
     enum VehicleState {

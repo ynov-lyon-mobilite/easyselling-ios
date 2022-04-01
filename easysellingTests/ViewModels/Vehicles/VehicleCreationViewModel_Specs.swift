@@ -12,13 +12,13 @@ class VehicleCreationViewModel_Specs: XCTestCase {
 
     func test_Updates_title_for_vehicle_creation_step() {
         givenViewModel()
-        thenTitle(is: "Mon type de véhicule")
+        thenTitle(is: "My vehicle type")
         viewModel.vehicleCreationStep = .licence
-        thenTitle(is: "Ma plaque d'immatriculation")
+        thenTitle(is: "My licence plate")
         viewModel.vehicleCreationStep = .brandAndModel
-        thenTitle(is: "Marque et modèle")
+        thenTitle(is: "Brand and model")
         viewModel.vehicleCreationStep = .year
-        thenTitle(is: "Année d'immatriculation")
+        thenTitle(is: "Year of registration")
     }
 
     func test_Keeps_vehicle_creation_when_vehicle_type_is_correct() {
@@ -35,8 +35,8 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         whenSelectingVehicleType(.car)
         thenActualStep(is: .licence)
         whenSelectingLicence("AA-222-AA")
-        XCTAssertEqual("AA-222-AA", viewModel.license)
-        XCTAssertEqual("AA-222-AA", viewModel.createdVehicle.license)
+        XCTAssertEqual("AA-222-AA", viewModel.licence)
+        XCTAssertEqual("AA-222-AA", viewModel.createdVehicle.licence)
         thenActualStep(is: .brandAndModel)
     }
 
@@ -63,11 +63,11 @@ class VehicleCreationViewModel_Specs: XCTestCase {
     }
 
     func test_Shows_error_when_user_has_write_invalid_licence() {
-        givenViewModel(vehicleInformationsVerificator: FailingVehicleInformationsVerificator(error: .incorrectLicenseFormat))
+        givenViewModel(vehicleInformationsVerificator: FailingVehicleInformationsVerificator(error: .incorrectlicenceFormat))
         whenSelectingVehicleType(.car)
         thenActualStep(is: .licence)
         whenSelectingLicence("invalid")
-        thenError(is: .incorrectLicenseFormat)
+        thenError(is: .incorrectlicenceFormat)
     }
 
     func test_Returns_back_if_user_has_made_something_wrong() {
@@ -121,7 +121,7 @@ class VehicleCreationViewModel_Specs: XCTestCase {
     }
 
     private func whenSelectingLicence(_ licence: String) {
-        viewModel.license = licence
+        viewModel.licence = licence
         whenContinueVehicleCreation()
     }
 

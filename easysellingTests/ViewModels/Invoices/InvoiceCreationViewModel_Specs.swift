@@ -44,7 +44,7 @@ class InvoiceCreationViewModel_Specs: XCTestCase {
     }
 
     private func givenViewModel() {
-        let vehicle = Vehicle(id: "VehicleID", brand: "Brand", model: "Model", license: "License", type: .car, year: "1795")
+        let vehicle = Vehicle(id: "VehicleID", brand: "Brand", model: "Model", licence: "licence", type: .car, year: "1795")
         viewModel = InvoiceCreationViewModel(vehicle: vehicle, fileUploader: SpyFileUploader(), invoiceCreator: SpyInvoiceCreator(), onFinish: { self.isDismissed = true })
     }
 

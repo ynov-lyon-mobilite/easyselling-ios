@@ -19,7 +19,7 @@ class VehicleScenario_Specs: XCTestCase {
     func test_Navigates_to_vehicle_update() {
         givenScenario()
         whenBeginning()
-        whenNavigatingToVehicleUpdate(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+        whenNavigatingToVehicleUpdate(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"))
         thenHistory(is: [.myVehicles, .vehicleUpdate])
     }
     
@@ -85,7 +85,7 @@ class VehicleScenario_Specs: XCTestCase {
     private var navigator: SpyVehicleCreationNavigator!
     private var isVehicleCreationFinished: Bool = false
     private var isRefresh: Bool = false
-    private let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "year")
+    private let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
 }
 
 class SpyVehicleCreationNavigator: VehicleNavigator {
@@ -94,7 +94,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     private(set) var onFinish: (() async -> Void)?
     private(set) var onNavigatingToInvoices: ((Vehicle) -> Void)?
     private(set) var onNavigateToSettingsMenu: Action?
-    private(set) var vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "year")
+    private(set) var vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
     private(set) var vehicleScenarioIsFinished: Bool = false
 
     func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void) {

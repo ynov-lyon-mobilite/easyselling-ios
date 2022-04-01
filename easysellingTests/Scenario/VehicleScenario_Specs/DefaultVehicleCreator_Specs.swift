@@ -38,7 +38,7 @@ class DefaultVehicleCreator_Specs: XCTestCase {
     
     private func givenVehicleCreator(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
         vehicleCreator = DefaultVehicleCreator(requestGenerator: requestGenerator, apiCaller: apiCaller)
-        vehicle = VehicleDTO(brand: "Audi", model: "A1", license: "123456789", type: Vehicle.Category.car, year: "2005")
+        vehicle = VehicleDTO(brand: "Audi", model: "A1", licence: "123456789", type: Vehicle.Category.car, year: "2005")
     }
     
     private func whenCreatingVehicle(informations: VehicleDTO) async {

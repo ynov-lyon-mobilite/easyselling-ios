@@ -15,20 +15,17 @@ struct SearchBar: View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(Asset.Colors.primary.swiftUIColor)
-            TextField("", text: $searchText)
-                .placeholder(when: searchText.isEmpty, placeholder: {
-                    Text("Cherchez un nom, modèle...").foregroundColor(Asset.Colors.primary.swiftUIColor)
-                })
+
+            TextField(L10n.Vehicles.SearchBar.placeholder, text: $searchText)
                 .foregroundColor(Asset.Colors.primary.swiftUIColor)
                 .overlay(
-                    Image(systemName: "xmark.circle.fill")
-                        .padding()
-                        .offset(x: 10)
-                        .foregroundColor(Asset.Colors.primary.swiftUIColor)
-                        .opacity(searchText.isEmpty ? 0 : 1)
-                        .onTapGesture {
-                            searchText = ""
-                        }, alignment: .trailing
+                    Button(action: { searchText = "" }, label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .padding()
+                            .offset(x: 10)
+                            .foregroundColor(Asset.Colors.primary.swiftUIColor)
+                            .opacity(searchText.isEmpty ? 0 : 1)
+                    }), alignment: .trailing
                 )
 
         }

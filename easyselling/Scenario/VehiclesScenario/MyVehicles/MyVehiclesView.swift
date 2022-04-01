@@ -63,10 +63,7 @@ struct MyVehiclesView: View {
         .background(Asset.Colors.backgroundColor.swiftUIColor)
         .onAppear {
             UITableView.appearance().showsVerticalScrollIndicator = false
-
-            Task {
-                await viewModel.getVehicles()
-            }
+            Task { await viewModel.getVehicles() }
         }
         .modal(isModalized: $viewModel.isOpenningVehicleCreation) {
             VehicleCreationView(viewModel: VehicleCreationViewModel(hasFinishedVehicleCreation: {
@@ -85,9 +82,9 @@ struct MyVehiclesView_Previews: PreviewProvider {
         let vm = MyVehiclesViewModel(
             isOpeningVehicleUpdate: {_,_ in },
             isNavigatingToInvoices: {_ in })
-        vm.vehicles = [Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
-                       Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
-                       Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]
+        vm.vehicles = [Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "Year"),
+                       Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "Licence", type: .moto, year: "Year"),
+                       Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "Year")]
         vm.state = .listingVehicles
 
         return MyVehiclesView(viewModel: vm)

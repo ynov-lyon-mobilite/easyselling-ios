@@ -19,7 +19,7 @@ struct VehicleUpdateView: View {
             TextField(viewModel.vehicle.model, text: $viewModel.model)
                 .padding(.top)
 
-            TextField(viewModel.vehicle.license, text: $viewModel.license)
+            TextField(viewModel.vehicle.licence, text: $viewModel.licence)
                 .padding(.top)
 
             HStack(alignment: .lastTextBaseline) {
@@ -53,7 +53,7 @@ struct VehicleUpdateView: View {
 
 struct VehicleUpdateView_Previews: PreviewProvider {
     static var previews: some View {
-        let vehicle = Vehicle(id: "AZ98EHA09AZ", brand: "Yamaha", model: "XJ7", license: "11AA-123-BB", type: .moto, year: "2015")
+        let vehicle = Vehicle(id: "AZ98EHA09AZ", brand: "Yamaha", model: "XJ7", licence: "11AA-123-BB", type: .moto, year: "2015")
 
         VehicleUpdateView(
             viewModel: VehicleUpdateViewModel(

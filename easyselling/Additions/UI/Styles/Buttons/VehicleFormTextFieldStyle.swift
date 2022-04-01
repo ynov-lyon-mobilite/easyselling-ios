@@ -7,19 +7,9 @@
 
 import SwiftUI
 
-struct VehicleFormTextField: View {
-
-    @Binding var text: String
-    var placeholder: String
-
-    var body: some View {
-        TextField("", text: $text)
-            .placeholder(when: text.isEmpty) {
-                Text(placeholder)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .foregroundColor(Asset.Colors.primary.swiftUIColor)
-                    .font(.headline)
-            }
+struct VehicleFormTextFieldStyle: TextFieldStyle {
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
             .font(.headline)
             .foregroundColor(Asset.Colors.primary.swiftUIColor)
             .multilineTextAlignment(.center)

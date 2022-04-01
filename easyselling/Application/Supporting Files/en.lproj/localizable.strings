@@ -45,20 +45,28 @@
 "vehicles.title" = "My vehicles";
 "vehicles.deleteButton" = "Delete";
 "vehicles.updateButton" =  "Update";
+"vehicles.searchBar.placeholder" = "Search for a name, model...";
 
 "createVehicle.title" = "Add a vehicle";
 "createVehicle.brand" = "Brand";
 "createVehicle.model" = "Model";
-"createVehicle.license" = "License";
+"createVehicle.licence" = "licence";
 "createVehicle.year" = "Year";
 "createVehicle.submit" = "Add";
 
+"createVehicle.form.vehicleType.title" = "My vehicle type";
+"createVehicle.form.licence.title" = "My licence plate";
+"createVehicle.form.brandAndModel.title" = "Brand and model";
+"createVehicle.form.year.title" = "Year of registration";
+
 "createVehicle.error.emptyField" = "A field is empty";
 "createVehicle.error.incorrectYear" = "The year format is incorrect";
-"createVehicle.error.incorrectLicenseFormat" = "The license format is incorrect";
-"createVehicle.error.incorrectLicenseSize" = "The length of the license is incorrect";
+"createVehicle.error.incorrectlicenceFormat" = "The licence format is incorrect";
+"createVehicle.error.incorrectlicenceSize" = "The length of the licence is incorrect";
+"createVehicle.error.unchosenType" = "You must chose a vehicle type";
 
-"createVehicle.form.adviceForLicense" = "AA-123-AA or 123 ABC 12";
+
+"createVehicle.form.adviceForlicence" = "AA-123-AA or 123 ABC 12";
 
 "error.occured" = "An error occured";
 

@@ -26,7 +26,7 @@ class VehicleCreationViewModel: ObservableObject {
     @Published var showAlert = false
     @Published var brand: String = ""
     @Published var model: String = ""
-    @Published var license: String = ""
+    @Published var licence: String = ""
     @Published var year: String = ""
     @Published var vehicleCreationStep: VehicleCreationStep = .vehicleType
 
@@ -37,15 +37,15 @@ class VehicleCreationViewModel: ObservableObject {
         guard let year = Int(dateFormatter.string(from: actualDate)) else { return [] }
         return (1900...year).reversed().map { String($0) }
     }
-    var createdVehicle: Vehicle = Vehicle(id: "", brand: "", model: "", license: "", type: .unknow, year: "")
+    var createdVehicle: Vehicle = Vehicle(id: "", brand: "", model: "", licence: "", type: .unknow, year: "")
 
     var title: String {
         withAnimation(.easeInOut(duration: 0.4)) {
             switch vehicleCreationStep {
-            case .vehicleType: return "Mon type de véhicule"
-            case .licence: return "Ma plaque d'immatriculation"
-            case .brandAndModel: return "Marque et modèle"
-            case .year: return "Année d'immatriculation"
+            case .vehicleType: return L10n.CreateVehicle.Form.VehicleType.title
+            case .licence: return L10n.CreateVehicle.Form.Licence.title
+            case .brandAndModel: return L10n.CreateVehicle.Form.BrandAndModel.title
+            case .year: return L10n.CreateVehicle.Form.Year.title
             }
         }
     }
@@ -59,7 +59,7 @@ class VehicleCreationViewModel: ObservableObject {
 
     @MainActor
     func createVehicle() async {
-        let informations = VehicleDTO(brand: brand, model: model, license: license, type: type, year: year)
+        let informations = VehicleDTO(brand: brand, model: model, licence: licence, type: type, year: year)
         do {
             try vehicleInformationsVerificator.verifyInformations(vehicle: informations)
             try await vehicleCreator.createVehicle(informations: informations)
@@ -90,8 +90,8 @@ class VehicleCreationViewModel: ObservableObject {
                 }
             case .licence:
                 do {
-                    try vehicleInformationsVerificator.verifyLicence(self.license)
-                    self.createdVehicle.license = self.license
+                    try vehicleInformationsVerificator.verifyLicence(self.licence)
+                    self.createdVehicle.licence = self.licence
                     self.vehicleCreationStep = .brandAndModel
                 } catch (let error) {
                     if let error = error as? VehicleCreationError {

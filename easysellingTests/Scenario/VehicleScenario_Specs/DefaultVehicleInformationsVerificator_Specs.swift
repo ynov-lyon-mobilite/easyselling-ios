@@ -13,34 +13,34 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
     func test_Throws_error_if_licence_has_an_incorrect_licence_format() {
         givenVerificator()
         whenCheckingLicence("AA-2B2-AA")
-        thenError(is: .incorrectLicenseFormat)
+        thenError(is: .incorrectlicenceFormat)
     }
 
     func test_Throws_error_if_licence_has_an_incorrect_licence_format2() {
         givenVerificator()
         whenCheckingLicence("524 WAL 7A")
-        thenError(is: .incorrectLicenseFormat)
+        thenError(is: .incorrectlicenceFormat)
     }
 
     func test_Throws_error_if_licence_has_an_incorrect_licence_size() {
         givenVerificator()
         whenCheckingLicence("AA-222-AAA")
-        thenError(is: .incorrectLicenseSize)
+        thenError(is: .incorrectlicenceSize)
     }
 
     func test_Throws_error_if_licence_has_an_incorrect_licence_size2() {
         givenVerificator()
         whenCheckingLicence("524 WAL 7")
-        thenError(is: .incorrectLicenseSize)
+        thenError(is: .incorrectlicenceSize)
     }
 
-    func test_Verifies_license_has_a_correct_format() {
+    func test_Verifies_licence_has_a_correct_format() {
         givenVerificator()
         whenCheckingLicence("AA-222-AA")
         thenNoErrorThrows()
     }
 
-    func test_Verifies_license_has_a_correct_format2() {
+    func test_Verifies_licence_has_a_correct_format2() {
         givenVerificator()
         whenCheckingLicence("524 WAL 75")
         thenNoErrorThrows()
