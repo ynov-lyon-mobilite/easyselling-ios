@@ -19,7 +19,7 @@ struct ButtonList: View {
                 Image(uiImage: self.icon)
                     .padding(10)
                     .background(Circle().foregroundColor(self.color))
-                    .padding(.leading, 10)
+                    .padding(.horizontal, 20)
                 Text(self.title)
                     .fontWeight(.bold)
                     .font(.title2)

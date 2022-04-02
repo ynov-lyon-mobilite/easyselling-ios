@@ -40,12 +40,14 @@ struct UserAuthenticationView: View {
                     .background(Color.gray.opacity(0.5))
                     .cornerRadius(10)
                     .textContentType(.emailAddress)
+                    .disableAutocorrection(true)
 
                 SecureField(L10n.SignUp.password, text: $viewModel.password)
                     .padding(10)
                     .background(Color.gray.opacity(0.5))
                     .cornerRadius(10)
                     .textContentType(.password)
+                    .disableAutocorrection(true)
 
                     Button(L10n.Button.forgottenPassword) {
                         viewModel.navigateToPasswordReset()

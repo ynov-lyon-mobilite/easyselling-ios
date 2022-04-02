@@ -30,7 +30,7 @@ struct PrimaryButtonStyle: ButtonStyle {
         .font(.body.bold())
         .background(color)
         .foregroundColor(.white)
-        .cornerRadius(15)
+        .cornerRadius(25)
     }
 }
 

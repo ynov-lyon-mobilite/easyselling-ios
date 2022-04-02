@@ -15,7 +15,7 @@ class VehicleUpdateViewModel_specs: XCTestCase {
 
     func test_Shows_alert_when_brand_is_Empty() async {
         givenViewModel(expected: .emptyField, vehicle:
-                        Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+                        Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"))
         await whenUpdating()
         thenAlertMessage(is: "A field is empty")
         thenAlertIsShowing()
@@ -23,22 +23,22 @@ class VehicleUpdateViewModel_specs: XCTestCase {
 
     func test_Shows_alert_when_year_is_incorrect() async {
         givenViewModel(expected: .incorrectYear, vehicle:
-                        Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+                        Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"))
         await whenUpdating()
         thenAlertMessage(is: "The year format is incorrect")
         thenAlertIsShowing()
     }
 
-    func test_Shows_alert_when_license_is_incorrect() async {
-        givenViewModel(expected: .incorrectLicenseFormat, vehicle:
-                        Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+    func test_Shows_alert_when_licence_is_incorrect() async {
+        givenViewModel(expected: .incorrectlicenceFormat, vehicle:
+                        Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"))
         await whenUpdating()
-        thenAlertMessage(is: "The license format is incorrect")
+        thenAlertMessage(is: "The licence format is incorrect")
         thenAlertIsShowing()
     }
 
     func test_modifies_the_vehicle() async {
-        givenViewModel(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+        givenViewModel(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"))
         await whenUpdateSucceed()
         thenModalIsDelete()
     }
@@ -46,7 +46,7 @@ class VehicleUpdateViewModel_specs: XCTestCase {
     private func givenViewModel(expected: VehicleCreationError = .emptyField, vehicle: Vehicle) {
         viewModel = VehicleUpdateViewModel(vehicle: vehicle, onFinish: {
             self.isDelete = true
-        }, vehicleVerificator: SpyVehicleInformationsVerificator(error: expected), vehicleUpdater: DefaultVehicleUpdater())
+        }, vehicleVerificator: FailingVehicleInformationsVerificator(error: expected), vehicleUpdater: DefaultVehicleUpdater())
     }
 
     private func whenUpdating() async{

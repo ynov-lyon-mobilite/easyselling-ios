@@ -39,7 +39,7 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
 
     private func givenVehicleUpdater(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
         vehicleUpdater =  DefaultVehicleUpdater(requestGenerator: requestGenerator, apiCaller: apiCaller)
-        vehicle = VehicleDTO(brand: "Audi", model: "A1", license: "123456789", type: Vehicle.Category.car, year: "2005")
+        vehicle = VehicleDTO(brand: "Audi", model: "A1", licence: "123456789", type: Vehicle.Category.car, year: "2005")
     }
 
     private func whenUpdatingVehicle(informations: VehicleDTO) async {

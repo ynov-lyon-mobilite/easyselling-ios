@@ -12,28 +12,22 @@ class MyVehiclesViewModel: ObservableObject {
 
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
          vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
-         isOpenningVehicleCreation: @escaping Action,
          isOpeningVehicleUpdate: @escaping OnUpdatingVehicle,
-         isNavigatingToProfile: @escaping Action,
          isNavigatingToInvoices: @escaping (Vehicle) -> Void) {
 
         self.vehiclesGetter = vehiclesGetter
         self.vehicleDeletor = vehicleDeletor
-        self.isOpenningVehicleCreation = isOpenningVehicleCreation
         self.isOpeningVehicleUpdate = isOpeningVehicleUpdate
-        self.isNavigatingToProfile = isNavigatingToProfile
         self.isNavigatingToInvoices = isNavigatingToInvoices
     }
 
     private var vehiclesGetter: VehiclesGetter
     private var isOpeningVehicleUpdate: OnUpdatingVehicle
     private var vehicleDeletor: VehicleDeletor
-    private var isOpenningVehicleCreation: Action
-    private var isNavigatingToProfile: Action
     private var isNavigatingToInvoices: (Vehicle) -> Void
 
-    @Published var isLoading: Bool = true
-    @Published var vehicles: [Vehicle] = []
+    @Published var isOpenningVehicleCreation: Bool = false
+    @Published var vehicles: [Vehicle] = [.placeholderCar, .placeholderMoto]
     @Published var error: APICallerError?
     @Published var state: VehicleState = .loading
 
@@ -41,7 +35,7 @@ class MyVehiclesViewModel: ObservableObject {
 
     var filteredVehicle: [Vehicle] {
         return vehicles.filter { [searchFilteringVehicle] vehicle in
-            if (searchFilteringVehicle.isEmpty) {
+            if searchFilteringVehicle.isEmpty {
                 return true
             }
 
@@ -52,7 +46,9 @@ class MyVehiclesViewModel: ObservableObject {
     }
 
     func openVehicleCreation() {
-        self.isOpenningVehicleCreation()
+        withAnimation(.easeInOut(duration: 0.4)) {
+            isOpenningVehicleCreation = true
+        }
     }
 
     func openVehicleUpdate(vehicle: Vehicle) {
@@ -60,20 +56,16 @@ class MyVehiclesViewModel: ObservableObject {
     }
 
     @MainActor func getVehicles() async {
-        state = .loading
+        setState(.loading)
         do {
             vehicles = try await vehiclesGetter.getVehicles()
-            state = .listingVehicles
+            setState(.listingVehicles)
         } catch (let error) {
-            state = .error
+            setState(.error)
             if let error = error as? APICallerError {
                 self.error = error
             }
         }
-    }
-
-    func navigateToProfile() {
-        self.isNavigatingToProfile()
     }
 
     @MainActor func deleteVehicle(idVehicle: String) async {
@@ -81,6 +73,7 @@ class MyVehiclesViewModel: ObservableObject {
             try await vehicleDeletor.deleteVehicle(id: idVehicle)
             deleteVehicleOnTheView(idVehicle: idVehicle)
         } catch (let error) {
+            setState(.error)
             if let error = error as? APICallerError {
                 self.error = error
             }
@@ -91,6 +84,10 @@ class MyVehiclesViewModel: ObservableObject {
         vehicles = vehicles.filter { (vehicle) -> Bool in
             vehicle.id != idVehicle
         }
+    }
+
+    private func setState(_ state: VehicleState) {
+        self.state = state
     }
 
     enum VehicleState {

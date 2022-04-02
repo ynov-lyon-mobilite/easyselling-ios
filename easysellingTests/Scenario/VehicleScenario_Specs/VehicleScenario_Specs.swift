@@ -16,37 +16,11 @@ class VehicleScenario_Specs: XCTestCase {
         thenHistory(is: [.myVehicles])
     }
     
-    func test_Navigates_to_vehicle_creation() {
-        givenScenario()
-        whenBeginning()
-        whenNavigatingToVehicleCreation()
-        thenHistory(is: [.myVehicles, .vehicleCreation])
-    }
-    
     func test_Navigates_to_vehicle_update() {
         givenScenario()
         whenBeginning()
-        whenNavigatingToVehicleUpdate(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+        whenNavigatingToVehicleUpdate(vehicle: Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"))
         thenHistory(is: [.myVehicles, .vehicleUpdate])
-    }
-
-    func test_Leaves_vehicle_creation() async {
-        givenScenario()
-        whenBeginning()
-        whenNavigatingToVehicleCreation()
-        await whenleavingVehicleCreation()
-        thenHistory(is: [.myVehicles, .vehicleCreation, .myVehicles])
-    }
-
-    func test_Navigates_to_profil_scenario() {
-        givenScenario()
-        whenBeginning()
-        whenNavigatingToProfil()
-        thenHistory(is: [.myVehicles, .profile])
-    }
-
-    private func whenNavigatingToProfil() {
-        navigator.onNavigateToProfile?()
     }
     
     func test_Leaves_vehicle_update() async {
@@ -81,10 +55,6 @@ class VehicleScenario_Specs: XCTestCase {
         scenario.begin()
     }
 
-    private func whenNavigatingToVehicleCreation() {
-        navigator.onNavigateToVehicleCreation?()
-    }
-
     private func whenleavingVehicleCreation() async {
         await navigator.onFinish?()
 	}
@@ -115,31 +85,21 @@ class VehicleScenario_Specs: XCTestCase {
     private var navigator: SpyVehicleCreationNavigator!
     private var isVehicleCreationFinished: Bool = false
     private var isRefresh: Bool = false
-    private let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "year")
+    private let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
 }
 
 class SpyVehicleCreationNavigator: VehicleNavigator {
 
     private(set) var history: [History] = []
     private(set) var onFinish: (() async -> Void)?
-    private(set) var onNavigateToVehicleCreation: Action?
-    private(set) var onNavigateToProfile: Action?
     private(set) var onNavigatingToInvoices: ((Vehicle) -> Void)?
     private(set) var onNavigateToSettingsMenu: Action?
-    private(set) var vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "year")
+    private(set) var vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
     private(set) var vehicleScenarioIsFinished: Bool = false
 
-    func navigatesToHomeView(onVehicleCreationOpen: @escaping Action, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigateToProfile: @escaping Action,
-                             onNavigatingToInvoices: @escaping (Vehicle) -> Void, onNavigateToSettingsMenu: @escaping Action) {
-        self.onNavigateToVehicleCreation = onVehicleCreationOpen
-        self.onNavigateToProfile = onNavigateToProfile
+    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void) {
         self.onNavigatingToInvoices = onNavigatingToInvoices
         history.append(.myVehicles)
-    }
-
-    func navigatesToVehicleCreation(onFinish: @escaping () async -> Void) {
-        self.onFinish = onFinish
-        history.append(.vehicleCreation)
     }
 
     func navigatesToProfile() {
@@ -162,7 +122,6 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
 
     enum History: CustomDebugStringConvertible, Equatable {
         case myVehicles
-        case vehicleCreation
         case profile
         case vehicleUpdate
         case vehicleInvoices
@@ -170,7 +129,6 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
         var debugDescription: String {
             switch self {
             case .myVehicles: return "My vehicles"
-            case .vehicleCreation: return "vehicle creation"
             case .profile: return "profile"
             case .vehicleUpdate: return "vehicle update"
             case .vehicleInvoices: return "vehicle invoices"

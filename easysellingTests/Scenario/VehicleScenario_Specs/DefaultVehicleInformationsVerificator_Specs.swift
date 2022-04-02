@@ -9,64 +9,40 @@ import XCTest
 @testable import easyselling
 
 class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
-    
-    func test_Verfies_message_when_license_is_empty() {
+
+    func test_Throws_error_if_licence_has_an_incorrect_licence_format() {
         givenVerificator()
-        whenChecking(vehicle: VehicleDTO(brand: "brand", model: "model", license: "", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .emptyField)
-    }
-    
-    func test_Verfies_message_when_brand_is_empty() {
-        givenVerificator()
-        whenChecking(vehicle: VehicleDTO(brand: "", model: "model", license: "123456789", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .emptyField)
-    }
-    
-    func test_Verfies_message_when_model_is_empty() {
-        givenVerificator()
-        whenChecking(vehicle: VehicleDTO(brand: "brand", model: "", license: "123456789", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .emptyField)
-    }
-    
-    func test_Verifies_message_if_year_has_an_incorrect_format() {
-        givenVerificator()
-        whenChecking(vehicle: VehicleDTO(brand: "brand", model: "model", license: "AA-222-AA", type: Vehicle.Category.car, year: "222"))
-        thenError(is: .incorrectYear)
-    }
-    
-    func test_Verifies_message_when_license_has_an_incorrect_format_for_new_license() {
-        givenVerificator()
-        whenChecking(vehicle: VehicleDTO(brand: "brand", model: "model", license: "AA-2B2-AA", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .incorrectLicenseFormat)
+        whenCheckingLicence("AA-2B2-AA")
+        thenError(is: .incorrectlicenceFormat)
     }
 
-    func test_Verifies_message_when_license_has_an_incorrect_format_for_old_license() {
+    func test_Throws_error_if_licence_has_an_incorrect_licence_format2() {
         givenVerificator()
-        whenChecking(vehicle: VehicleDTO(brand: "brand", model: "model", license: "524 WAL 7A", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .incorrectLicenseFormat)
+        whenCheckingLicence("524 WAL 7A")
+        thenError(is: .incorrectlicenceFormat)
     }
 
-    func test_Verifies_message_when_license_has_an_incorrect_size_for_new_license() {
+    func test_Throws_error_if_licence_has_an_incorrect_licence_size() {
         givenVerificator()
-        whenChecking(vehicle: VehicleDTO(brand: "brand", model: "model", license: "AA-222-AAA", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .incorrectLicenseSize)
+        whenCheckingLicence("AA-222-AAA")
+        thenError(is: .incorrectlicenceSize)
     }
 
-    func test_Verifies_message_when_license_has_an_incorrect_size_for_old_license() {
+    func test_Throws_error_if_licence_has_an_incorrect_licence_size2() {
         givenVerificator()
-        whenChecking(vehicle: VehicleDTO(brand: "brand", model: "model", license: "524 WAL 7", type: Vehicle.Category.car, year: "year"))
-        thenError(is: .incorrectLicenseSize)
+        whenCheckingLicence("524 WAL 7")
+        thenError(is: .incorrectlicenceSize)
     }
 
-    func test_Verifies_message_when_license_has_a_correct_format_for_new_license() {
+    func test_Verifies_licence_has_a_correct_format() {
         givenVerificator()
-        whenChecking(vehicle: VehicleDTO(brand: "brand", model: "model", license: "AA-222-AA", type: Vehicle.Category.car, year: "year"))
+        whenCheckingLicence("AA-222-AA")
         thenNoErrorThrows()
     }
 
-    func test_Verifies_message_when_license_has_a_correct_format_for_old_license() {
+    func test_Verifies_licence_has_a_correct_format2() {
         givenVerificator()
-        whenChecking(vehicle: VehicleDTO(brand: "brand", model: "model", license: "524 WAL 75", type: Vehicle.Category.car, year: "year"))
+        whenCheckingLicence("524 WAL 75")
         thenNoErrorThrows()
     }
 
@@ -82,12 +58,20 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
         }
     }
 
+    private func whenCheckingLicence(_ licence: String) {
+        do {
+            try verificator.verifyLicence(licence)
+        } catch (let error) {
+            self.vehicleCreationError = (error as! VehicleCreationError)
+        }
+    }
+
     private func thenNoErrorThrows() {
         XCTAssertNil(vehicleCreationError)
     }
     
     private func thenError(is expected: VehicleCreationError) {
-        XCTAssertEqual(expected.description, vehicleCreationError.description)
+        XCTAssertEqual(expected.errorDescription, vehicleCreationError.errorDescription)
         XCTAssertEqual(expected, vehicleCreationError)
     }
 

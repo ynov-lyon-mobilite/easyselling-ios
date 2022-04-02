@@ -127,7 +127,7 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         XCTAssertEqual(expected, viewModel.invoices)
     }
 
-    private let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "year")
+    private let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
     private var isOpen: Bool = false
     private var viewModel: VehicleInvoiceViewModel!
     private var downloadedInvoice: File!

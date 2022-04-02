@@ -12,99 +12,79 @@ struct MyVehiclesView: View {
     @ObservedObject var viewModel: MyVehiclesViewModel
 
     var body: some View {
-        NavigationView {
-            VStack {
-                List {
-                    if viewModel.state == .loading {
-                        ProgressView()
-                    } else if viewModel.state == .error {
+
+        VStack(alignment: .leading) {
+            TitleNavigationView(title: L10n.Vehicles.title)
+            SearchBar(searchText: $viewModel.searchFilteringVehicle)
+            List {
+                if viewModel.state == .error {
+                    HStack {
+                        Spacer()
                         Text(L10n.Error.occured)
-                            .padding()
-                            .listRowSeparatorTint(.clear)
-                            .listRowBackground(Color.clear)
-                            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                    } else if viewModel.state == .listingVehicles {
-                        ForEach(viewModel.filteredVehicle, id: \.id) { vehicle in
-                            HStack {
-                                Image(uiImage: vehicle.image)
-                                    .padding(15)
-                                    .background(Circle().foregroundColor(vehicle.imageColor))
-                                VStack(alignment: .leading) {
-                                    Text("\(vehicle.brand) \(vehicle.model)")
-                                        .fontWeight(.bold)
-                                        .font(.title3)
-                                    Text(vehicle.license)
-                                        .font(.body)
-                                }
-                                Spacer()
-                                VStack {
-                                    Spacer()
-                                    Text(vehicle.year)
-                                }
-                            }
-                            .swipeActions(edge: .trailing) {
-                                Button(L10n.Vehicles.deleteButton) {
-                                    Task {
-                                        await viewModel.deleteVehicle(idVehicle: vehicle.id)
-                                    }
-                                }.tint(Color.red)
-                                Button(L10n.Vehicles.updateButton) {
-                                        viewModel.openVehicleUpdate(vehicle: vehicle)
-                                }.tint(Color.secondaryEasyselling)
-                            }
-                            .padding(.vertical, 15)
-                            .padding(.horizontal, 20)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(vehicle.color)
-                            .cornerRadius(22)
-                            .padding(.horizontal, 25)
-                            .padding(.vertical)
-                            .onTapGesture {
-                                viewModel.navigatesToInvoices(vehicle: vehicle)
-                            }
-                        }
-                        .listRowSeparatorTint(.clear)
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        Spacer()
                     }
+                    .padding()
+                    .listRowSeparatorTint(.clear)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                } else {
+                    ForEach(viewModel.filteredVehicle, id: \.id) { vehicle in
+                        VehicleListElement(vehicle: vehicle,
+                                           deleteAction: { Task {
+                            await viewModel.deleteVehicle(idVehicle: vehicle.id )
+                        } },
+                                           updateAction: { viewModel.openVehicleUpdate(vehicle: vehicle) },
+                                           showInvoices: { viewModel.navigatesToInvoices(vehicle: vehicle) })
+                            .redacted(when: viewModel.state == .loading)
+                    }
+                    .listRowSeparatorTint(.clear)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+
                 }
-                .searchable(text: $viewModel.searchFilteringVehicle)
-                .listStyle(.plain)
-                .refreshable {
-                    await viewModel.getVehicles()
-                }
+            }
+            .listStyle(.plain)
+            .refreshable {
+                await viewModel.getVehicles()
+            }
 
                 Button(action: viewModel.openVehicleCreation) {
-                    Image(systemName: "plus")
-                        .foregroundColor(Asset.Colors.secondary.swiftUIColor)
+                    Text(L10n.CreateVehicle.title)
+                        .font(.title2)
+                        .foregroundColor(Color.white)
                         .padding(.vertical, 15)
                         .frame(maxWidth: .infinity)
                         .background(Asset.Colors.primary.swiftUIColor)
-                        .disabled(viewModel.state != .listingVehicles)
-                        .opacity(viewModel.state != .listingVehicles ? 0 : 1)
+                        .cornerRadius(22)
                 }
-            }
-            .navigationTitle(L10n.Vehicles.title)
-            .toolbar {
-                Button(L10n.Vehicles.profile) {
-                    viewModel.navigateToProfile()
-                }
-            }
+                .padding(.bottom)
         }
-        .task { await viewModel.getVehicles() }
+        .padding(.horizontal, 25)
+        .background(Asset.Colors.backgroundColor.swiftUIColor)
+        .onAppear {
+            UITableView.appearance().showsVerticalScrollIndicator = false
+            Task { await viewModel.getVehicles() }
+        }
+        .modal(isModalized: $viewModel.isOpenningVehicleCreation) {
+            VehicleCreationView(viewModel: VehicleCreationViewModel(hasFinishedVehicleCreation: {
+                $viewModel.isOpenningVehicleCreation.wrappedValue.toggle()
+                Task {
+                    await viewModel.getVehicles()
+                }
+            }))
+        }
     }
 }
 
 struct MyVehiclesView_Previews: PreviewProvider {
 
     static var previews: some View {
-        let vm = MyVehiclesViewModel(isOpenningVehicleCreation: {},
-                                     isOpeningVehicleUpdate: {_,_ in },
-                                     isNavigatingToProfile: {},
-                                     isNavigatingToInvoices: {_ in })
-        vm.vehicles = [Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year"),
-                       Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .moto, year: "Year"),
-                       Vehicle(id: "ID", brand: "Brand", model: "Model", license: "Licence", type: .car, year: "Year")]
+        let vm = MyVehiclesViewModel(
+            isOpeningVehicleUpdate: {_,_ in },
+            isNavigatingToInvoices: {_ in })
+        vm.vehicles = [Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "Year"),
+                       Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "Licence", type: .moto, year: "Year"),
+                       Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "Year")]
         vm.state = .listingVehicles
 
         return MyVehiclesView(viewModel: vm)

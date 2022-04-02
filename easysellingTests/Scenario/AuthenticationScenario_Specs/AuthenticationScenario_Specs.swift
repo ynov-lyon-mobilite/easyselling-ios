@@ -124,7 +124,7 @@ class SpyAuthenticationNavigator: AuthenticationNavigator {
         scenarioIsFinished = true
     }
     
-    enum History: CustomDebugStringConvertible{
+    enum History: CustomDebugStringConvertible {
         
         case accountCreation
         case login

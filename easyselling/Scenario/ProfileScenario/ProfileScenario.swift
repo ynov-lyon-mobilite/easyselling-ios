@@ -9,16 +9,19 @@ import Foundation
 
 class ProfileScenario {
 
-    init(navigator: ProfileNavigator) {
+    init(navigator: ProfileNavigator, onLogout: @escaping Action) {
         self.navigator = navigator
+        self.onLogout = onLogout
     }
 
+    private var onLogout: Action
+
     func begin() {
-        navigator.navigatesToProfile(onLogout: navigatesBackToAuthentication, onNavigateToSettingsMenu: navigatesToSettingsMenu)
+        navigator.navigatesToProfile(onLogout: onLogout, onNavigateToSettingsMenu: navigatesToSettingsMenu)
     }
 
     private func navigatesBackToAuthentication() {
-        navigator.navigatesBackToAuthentication()
+//        navigator.navigatesBackToAuthentication()
     }
 
     private func navigatesToSettingsMenu() {

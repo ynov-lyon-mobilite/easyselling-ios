@@ -45,20 +45,27 @@
 "vehicles.title" = "Mes véhicules";
 "vehicles.deleteButton" = "Supprimer";
 "vehicles.updateButton" =  "Modifier";
+"vehicles.searchBar.placeholder" = "Cherchez un nom, modèle...";
 
 "createVehicle.title" = "Ajouter un véhicule";
 "createVehicle.brand" = "Marque";
 "createVehicle.model" = "Modèle";
-"createVehicle.license" = "Licence";
+"createVehicle.licence" = "Licence";
 "createVehicle.year" = "Année";
 "createVehicle.submit" = "Ajouter";
 
+"createVehicle.form.vehicleType.title" = "Mon type de véhicule";
+"createVehicle.form.licence.title" = "Ma plaque d'immatriculation";
+"createVehicle.form.brandAndModel.title" = "Marque et modèle";
+"createVehicle.form.year.title" = "Année d'immatriculation";
+
 "createVehicle.error.emptyField" = "Un des champs est vide";
 "createVehicle.error.incorrectYear" = "L'année renseignée est invalide";
-"createVehicle.error.incorrectLicenseFormat" = "Le numéro de licence est invalide";
-"createVehicle.error.incorrectLicenseSize" = "La longueur de la licence est invalide";
+"createVehicle.error.incorrectlicenceFormat" = "Le numéro d'immatriculation est invalide";
+"createVehicle.error.incorrectlicenceSize" = "La longueur du numéro d'immatricution est invalide";
+"createVehicle.error.unchosenType" = "Vous devez choisir un type de véhicule";
 
-"createVehicle.form.adviceForLicense" = "AA-222-AA ou 555 AAA 55";
+"createVehicle.form.adviceForlicence" = "AA-123-AA ou 123 ABC 12";
 
 "error.occured" = "Une erreur c'est produite";
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum APICallerError: Int, Error, Equatable {
+enum APICallerError: Int, LocalizedError, Equatable {
     //  Application errors
     case unknownError = 001
     case encodeError = 002

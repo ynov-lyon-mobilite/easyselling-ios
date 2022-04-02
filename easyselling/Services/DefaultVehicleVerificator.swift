@@ -8,33 +8,33 @@
 import Foundation
 
 protocol VehicleVerificator {
-    func verifyLicenseSize(license: String) throws
-    func verifyLicenseFormat(license: String) throws
+    func verifylicenceSize(licence: String) throws
+    func verifylicenceFormat(licence: String) throws
 }
 
 class DefaultVehicleVerificator: VehicleVerificator {
 
-    func verifyLicenseSize(license: String) throws {
-        let oldLicense = try? NSRegularExpression(pattern: "^.{3} .{3} .{2}$")
-        let newLicense = try? NSRegularExpression(pattern: "^.{2}-.{3}-.{2}$")
-        let range = NSRange(location: 0, length: license.count)
-        let licenseIsCorrect = (newLicense?.firstMatch(in: license, options: [], range: range) != nil) ||
-                     (oldLicense?.firstMatch(in: license, options: [], range: range) != nil)
+    func verifylicenceSize(licence: String) throws {
+        let oldlicence = try? NSRegularExpression(pattern: "^.{3} .{3} .{2}$")
+        let newlicence = try? NSRegularExpression(pattern: "^.{2}-.{3}-.{2}$")
+        let range = NSRange(location: 0, length: licence.count)
+        let licenceIsCorrect = (newlicence?.firstMatch(in: licence, options: [], range: range) != nil) ||
+                     (oldlicence?.firstMatch(in: licence, options: [], range: range) != nil)
 
-        guard licenseIsCorrect else {
-            throw VehicleCreationError.incorrectLicenseSize
+        guard licenceIsCorrect else {
+            throw VehicleCreationError.incorrectlicenceSize
         }
     }
 
-    func verifyLicenseFormat(license: String) throws {
-        let oldLicense = try? NSRegularExpression(pattern: "^[0-9]* [A-Z]* [0-9]*$")
-        let newLicense = try? NSRegularExpression(pattern: "^[A-Z]*-[0-9]*-[A-Z]*$")
-        let range = NSRange(location: 0, length: license.count)
-        let licenseIsCorrect = (newLicense?.firstMatch(in: license, options: [], range: range) != nil) ||
-                     (oldLicense?.firstMatch(in: license, options: [], range: range) != nil)
+    func verifylicenceFormat(licence: String) throws {
+        let oldlicence = try? NSRegularExpression(pattern: "^[0-9]* [A-Z]* [0-9]*$")
+        let newlicence = try? NSRegularExpression(pattern: "^[A-Z]*-[0-9]*-[A-Z]*$")
+        let range = NSRange(location: 0, length: licence.count)
+        let licenceIsCorrect = (newlicence?.firstMatch(in: licence, options: [], range: range) != nil) ||
+                     (oldlicence?.firstMatch(in: licence, options: [], range: range) != nil)
 
-        guard licenseIsCorrect else {
-            throw VehicleCreationError.incorrectLicenseFormat
+        guard licenceIsCorrect else {
+            throw VehicleCreationError.incorrectlicenceFormat
         }
     }
 }
