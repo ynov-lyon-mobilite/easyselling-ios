@@ -47,7 +47,7 @@ class DefaultVehicleCreator_Specs: XCTestCase {
     private func givenVehicleCreator(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
         context = TestCoreDataStack().persistentContainer.newBackgroundContext()
         vehicleCreator = DefaultVehicleCreator(requestGenerator: requestGenerator, apiCaller: apiCaller, context: context)
-        vehicleDTO = VehicleDTO(brand: "Audi", license: "123456789", model: "A1", type: .car, year: "2005")
+        vehicleDTO = VehicleDTO(brand: "Audi", licence: "123456789", model: "A1", type: .car, year: "2005")
     }
     
     private func whenCreatingVehicle(informations: VehicleDTO) async {

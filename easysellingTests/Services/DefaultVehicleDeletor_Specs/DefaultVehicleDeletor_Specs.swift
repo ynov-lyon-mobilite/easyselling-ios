@@ -42,7 +42,7 @@ class DefaultVehicleDeletor_Specs: XCTestCase {
     private func givenDeletor(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
         context = TestCoreDataStack().persistentContainer.newBackgroundContext()
         deletor = DefaultVehicleDeletor(requestGenerator: requestGenerator, apiCaller: apiCaller, context: context)
-        _ = VehicleCoreData(id: "1", brand: "", license: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context)
+        _ = VehicleCoreData(id: "1", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context)
     }
 
     private func whenDeletingVehicle(withId id: String) async {

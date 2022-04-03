@@ -15,9 +15,9 @@ class DefaultVehiclesGetter_Specs: XCTestCase {
 
         let vehicleGetter = DefaultVehiclesGetter(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404), context: context)
 
-        let expected = [Vehicle(id: "", brand: "", model: "", license: "", type: .car, year: ""),
-                        Vehicle(id: "", brand: "", model: "", license: "", type: .car, year: ""),
-                        Vehicle(id: "", brand: "", model: "", license: "", type: .car, year: "")]
+        let expected = [Vehicle(id: "", brand: "", model: "", licence: "", type: .car, year: ""),
+                        Vehicle(id: "", brand: "", model: "", licence: "", type: .car, year: ""),
+                        Vehicle(id: "", brand: "", model: "", licence: "", type: .car, year: "")]
 
         vehicles = try? await vehicleGetter.getVehicles()
         XCTAssertEqual(expected, vehicles)
@@ -30,9 +30,9 @@ class DefaultVehiclesGetter_Specs: XCTestCase {
 
         vehicles = try? await vehicleGetter.getVehicles()
 
-        let expected = [Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"),
-                        Vehicle(id: "2", brand: "Renault", model: "model2", license: "license2", type: .car, year: "year2"),
-                        Vehicle(id: "3", brand: "Citroen", model: "model3", license: "license3", type: .car, year: "year3")]
+        let expected = [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
+                        Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2"),
+                        Vehicle(id: "3", brand: "Citroen", model: "model3", licence: "licence3", type: .car, year: "year3")]
 
         let fetchRequest: NSFetchRequest<VehicleCoreData> = VehicleCoreData.fetchRequest()
         let coreDataObjects = try? context.fetch(fetchRequest)

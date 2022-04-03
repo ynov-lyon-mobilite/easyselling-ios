@@ -8,7 +8,7 @@ import Foundation
 
 struct VehicleDTO: Encodable, Equatable {
     var brand: String
-    var license: String
+    var licence: String
     var model: String
     var type: Vehicle.Category
     var year: String

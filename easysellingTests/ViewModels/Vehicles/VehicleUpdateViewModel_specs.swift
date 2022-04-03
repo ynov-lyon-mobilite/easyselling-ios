@@ -49,7 +49,7 @@ class VehicleUpdateViewModel_specs: XCTestCase {
         context = TestCoreDataStack().persistentContainer.newBackgroundContext()
         viewModel = VehicleUpdateViewModel(vehicle: vehicle, onFinish: {
             self.isDelete = true
-        }, vehicleVerificator: SpyVehicleInformationsVerificator(error: expected), vehicleUpdater: DefaultVehicleUpdater(context: context))
+        }, vehicleVerificator: FailingVehicleInformationsVerificator(error: expected), vehicleUpdater: DefaultVehicleUpdater(context: context))
     }
 
     private func whenUpdating() async{

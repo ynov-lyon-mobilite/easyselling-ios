@@ -48,8 +48,8 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
     private func givenVehicleUpdater(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
         context = TestCoreDataStack().persistentContainer.newBackgroundContext()
         vehicleUpdater = DefaultVehicleUpdater(requestGenerator: requestGenerator, apiCaller: apiCaller, context: context)
-        vehicle = Vehicle(id: "1", brand: "Audi", model: "A1", license: "123456789", type: .car, year: "2005")
-        vehicleCoreData = VehicleCoreData(id: "1", brand: "Audi", license: "123456783", model: "A2", type: Vehicle.Category.car.rawValue, year: "2004", in: context)
+        vehicle = Vehicle(id: "1", brand: "Audi", model: "A1", licence: "123456789", type: .car, year: "2005")
+        vehicleCoreData = VehicleCoreData(id: "1", brand: "Audi", licence: "123456783", model: "A2", type: Vehicle.Category.car.rawValue, year: "2004", in: context)
     }
 
     private func whenUpdatingVehicle(informations: Vehicle) async {

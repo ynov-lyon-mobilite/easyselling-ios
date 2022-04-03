@@ -99,6 +99,10 @@ class MyVehiclesViewModel: ObservableObject {
         }
     }
 
+    func navigatesToInvoices(vehicle: Vehicle) {
+        self.isNavigatingToInvoices(vehicle)
+    }
+
     private func setState(_ state: VehicleState) {
         self.state = state
     }

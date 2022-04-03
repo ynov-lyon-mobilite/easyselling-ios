@@ -10,7 +10,7 @@ import SwiftUI
 
 class VehicleCreationViewModel: ObservableObject {
 
-    init(vehicleCreator: VehicleCreator = DefaultVehicleCreator(),
+    init(vehicleCreator: VehicleCreator = DefaultVehicleCreator(context: mainContext),
          vehicleVerificator: VehicleInformationsVerificator = DefaultVehicleInformationsVerificator(),
          hasFinishedVehicleCreation: @escaping () -> Void) {
         self.vehicleCreator = vehicleCreator
@@ -37,6 +37,7 @@ class VehicleCreationViewModel: ObservableObject {
         guard let year = Int(dateFormatter.string(from: actualDate)) else { return [] }
         return (1900...year).reversed().map { String($0) }
     }
+
     var createdVehicle: Vehicle = Vehicle(id: "", brand: "", model: "", licence: "", type: .unknow, year: "")
 
     var title: String {
@@ -59,7 +60,7 @@ class VehicleCreationViewModel: ObservableObject {
 
     @MainActor
     func createVehicle() async {
-        let informations = VehicleDTO(brand: brand, model: model, licence: licence, type: type, year: year)
+        let informations = VehicleDTO(brand: brand, licence: model, model: licence, type: type, year: year)
         do {
             try vehicleInformationsVerificator.verifyInformations(vehicle: informations)
             try await vehicleCreator.createVehicle(informations: informations)

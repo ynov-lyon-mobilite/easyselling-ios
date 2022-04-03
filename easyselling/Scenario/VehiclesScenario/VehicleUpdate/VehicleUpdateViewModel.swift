@@ -42,7 +42,7 @@ class VehicleUpdateViewModel: ObservableObject {
 
     @MainActor
     func updateVehicle() async {
-        let newInformations = Vehicle(id: vehicle.id, brand: brand, model: model, license: license, type: type, year: year)
+        let newInformations = Vehicle(id: vehicle.id, brand: brand, model: model, licence: licence, type: type, year: year)
 
         do {
             try vehicleInformationsVerificator.verifyInformations(vehicle: newInformations.toDTO())

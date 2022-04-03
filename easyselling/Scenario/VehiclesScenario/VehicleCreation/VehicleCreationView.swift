@@ -125,18 +125,13 @@ struct VehicleCreationView: View {
         }
         .background(Color.clear)
         .ableToShowError(viewModel.error)
-        .alert(isPresented: $viewModel.showAlert, content: {
-            Alert(
-                title: Text(viewModel.alert),
-                dismissButton: Alert.Button.default(Text(L10n.Button.ok)))
-        })
     }
 }
 
 struct VehicleCreationView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = VehicleCreationViewModel(
-            vehicleCreator: DefaultVehicleCreator(),
+            vehicleCreator: DefaultVehicleCreator(context: mainContext),
             vehicleVerificator: DefaultVehicleInformationsVerificator(),
             hasFinishedVehicleCreation: {})
         viewModel.vehicleCreationStep = .vehicleType
