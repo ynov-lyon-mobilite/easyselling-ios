@@ -74,7 +74,6 @@ class MyVehiclesViewModel: ObservableObject {
             try await vehicleDeletor.deleteVehicle(id: idVehicle)
             deleteVehicleOnTheView(idVehicle: idVehicle)
         } catch (let error) {
-            setState(.error)
             if let error = error as? APICallerError {
                 setError(with: error)
                 self.showAlert = true
