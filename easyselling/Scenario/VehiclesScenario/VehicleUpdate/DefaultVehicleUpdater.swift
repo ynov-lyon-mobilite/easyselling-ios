@@ -26,8 +26,6 @@ class DefaultVehicleUpdater: VehicleUpdater {
         self.context = context
     }
 
-    // pass and test that informations (vehicle) is transformed into vehicleDTO inside this function instead of inside viewModel
-    // need proof with tests
     func updateVehicle(informations: Vehicle) async throws {
         let urlRequest = try await requestGenerator
             .generateRequest(endpoint: .vehicleId, method: .PATCH, body: informations.toDTO(), headers: [:],
