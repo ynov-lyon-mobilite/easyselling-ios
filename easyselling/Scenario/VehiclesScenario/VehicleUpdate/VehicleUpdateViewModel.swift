@@ -23,9 +23,10 @@ class VehicleUpdateViewModel: ObservableObject {
     @Published var type: Vehicle.Category = .car
     @Published var year: String = ""
 
-    init(vehicle: Vehicle, onFinish: @escaping () async -> Void,
+    init(vehicle: Vehicle,
+         onFinish: @escaping () async -> Void,
          vehicleVerificator: VehicleInformationsVerificator = DefaultVehicleInformationsVerificator(),
-         vehicleUpdater: VehicleUpdater = DefaultVehicleUpdater()) {
+         vehicleUpdater: VehicleUpdater = DefaultVehicleUpdater(context: mainContext)) {
         self.vehicle = vehicle
         self.onFinish = onFinish
         self.vehicleInformationsVerificator = vehicleVerificator
@@ -36,15 +37,16 @@ class VehicleUpdateViewModel: ObservableObject {
         self.licence = vehicle.licence
         self.type = vehicle.type
         self.year = vehicle.year
+
     }
 
     @MainActor
     func updateVehicle() async {
-        let newInformations = VehicleDTO(brand: brand, model: model, licence: licence, type: type, year: year)
+        let newInformations = Vehicle(id: vehicle.id, brand: brand, model: model, license: license, type: type, year: year)
 
         do {
-            try vehicleInformationsVerificator.verifyInformations(vehicle: newInformations)
-            try await vehicleUpdater.updateVehicle(id: vehicle.id, informations: newInformations)
+            try vehicleInformationsVerificator.verifyInformations(vehicle: newInformations.toDTO())
+            try await vehicleUpdater.updateVehicle(informations: newInformations)
             await onFinish()
         } catch (let error) {
             self.alert = (error as? VehicleCreationError)?.errorDescription

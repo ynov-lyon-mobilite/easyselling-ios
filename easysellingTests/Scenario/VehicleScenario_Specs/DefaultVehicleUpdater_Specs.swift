@@ -7,8 +7,16 @@
 
 import XCTest
 @testable import easyselling
+import CoreData
 
 class DefaultVehicleUpdater_Specs: XCTestCase {
+
+    private var vehicleUpdater: VehicleUpdater!
+    private var vehicle: Vehicle!
+    private var vehicleCoreData: VehicleCoreData!
+    private var isRequestSucceed: Bool!
+    private var error: APICallerError!
+    private var context: NSManagedObjectContext!
 
     func test_Updates_vehicle_is_successful() async {
         givenVehicleUpdater(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
@@ -38,13 +46,15 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
     }
 
     private func givenVehicleUpdater(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
-        vehicleUpdater =  DefaultVehicleUpdater(requestGenerator: requestGenerator, apiCaller: apiCaller)
-        vehicle = VehicleDTO(brand: "Audi", model: "A1", licence: "123456789", type: Vehicle.Category.car, year: "2005")
+        context = TestCoreDataStack().persistentContainer.newBackgroundContext()
+        vehicleUpdater = DefaultVehicleUpdater(requestGenerator: requestGenerator, apiCaller: apiCaller, context: context)
+        vehicle = Vehicle(id: "1", brand: "Audi", model: "A1", license: "123456789", type: .car, year: "2005")
+        vehicleCoreData = VehicleCoreData(id: "1", brand: "Audi", license: "123456783", model: "A2", type: Vehicle.Category.car.rawValue, year: "2004", in: context)
     }
 
-    private func whenUpdatingVehicle(informations: VehicleDTO) async {
+    private func whenUpdatingVehicle(informations: Vehicle) async {
         do {
-            try await vehicleUpdater.updateVehicle(id: "", informations: informations)
+            try await vehicleUpdater.updateVehicle(informations: informations)
             self.isRequestSucceed = true
         } catch (let error) {
             self.error = (error as! APICallerError)
@@ -52,7 +62,10 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
     }
 
     private func thenVehicleIsUpdating() {
-        XCTAssertTrue(isRequestSucceed)
+        context.performAndWait {
+            XCTAssertEqual(Vehicle.toVehicle(vehicle: VehicleCoreData.fetchRequestById(id: "1")!), vehicle)
+            XCTAssertTrue(isRequestSucceed)
+        }
     }
 
     private func thenErrorCode(is expected: Int) {
@@ -62,9 +75,4 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
     private func thenErrorMessage(is expected: String?) {
         XCTAssertEqual(expected, error.errorDescription)
     }
-
-    private var vehicleUpdater: VehicleUpdater!
-    private var vehicle: VehicleDTO!
-    private var isRequestSucceed: Bool!
-    private var error: APICallerError!
 }

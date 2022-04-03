@@ -60,7 +60,7 @@ struct VehicleUpdateView_Previews: PreviewProvider {
                 vehicle: vehicle,
                 onFinish: {},
                 vehicleVerificator: DefaultVehicleInformationsVerificator(),
-                vehicleUpdater: DefaultVehicleUpdater()
+                vehicleUpdater: DefaultVehicleUpdater(context: mainContext)
             )
         )
     }

@@ -125,6 +125,11 @@ struct VehicleCreationView: View {
         }
         .background(Color.clear)
         .ableToShowError(viewModel.error)
+        .alert(isPresented: $viewModel.showAlert, content: {
+            Alert(
+                title: Text(viewModel.alert),
+                dismissButton: Alert.Button.default(Text(L10n.Button.ok)))
+        })
     }
 }
 

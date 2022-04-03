@@ -15,7 +15,13 @@ class SucceedingAPICaller: APICaller {
     private(set) var isCallSucceed: Bool = false
     
     func call<T: Decodable>(_ urlRequest: URLRequest, decodeType: T.Type) -> T {
-        return "" as! T
+        let response: T
+        if (decodeType == easyselling.Vehicle.self) {
+            response = Vehicle(id: "", brand: "", model: "", license: "", type: .car, year: "") as! T
+        } else {
+            response = "" as! T
+        }
+        return response
     }
     
     func call(_ urlRequest: URLRequest) {

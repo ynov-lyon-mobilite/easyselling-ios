@@ -6,12 +6,14 @@
 //
 
 import XCTest
+import CoreData
 @testable import easyselling
 
 class VehicleUpdateViewModel_specs: XCTestCase {
 
     private var isDelete: Bool!
     private var viewModel: VehicleUpdateViewModel!
+    private var context: NSManagedObjectContext!
 
     func test_Shows_alert_when_brand_is_Empty() async {
         givenViewModel(expected: .emptyField, vehicle:
@@ -44,9 +46,10 @@ class VehicleUpdateViewModel_specs: XCTestCase {
     }
     
     private func givenViewModel(expected: VehicleCreationError = .emptyField, vehicle: Vehicle) {
+        context = TestCoreDataStack().persistentContainer.newBackgroundContext()
         viewModel = VehicleUpdateViewModel(vehicle: vehicle, onFinish: {
             self.isDelete = true
-        }, vehicleVerificator: FailingVehicleInformationsVerificator(error: expected), vehicleUpdater: DefaultVehicleUpdater())
+        }, vehicleVerificator: SpyVehicleInformationsVerificator(error: expected), vehicleUpdater: DefaultVehicleUpdater(context: context))
     }
 
     private func whenUpdating() async{
