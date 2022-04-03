@@ -11,38 +11,36 @@ import CoreData
 
 class DefaultVehicleDeletor_Specs: XCTestCase {
 
-//    func test_Deletes_vehicle_one() {
-//        let vehicles = [.vehicle1, .vehicle2]
-//        givenCoreData(vehicles)
-//        givenDeletor()
-//        whenDeletingVehicle(withId: vehicle1)
-//        thenVehicles(are: [vehicle2])
-//    }
-//
-//    func test_Does_not_delete_vehicle_from_core_data_when_delete_call_fail() {
-//        let vehicles = [.vehicle1, .vehicle2]
-//        givenCoreData(vehicles)
-//        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
-//        whenDeletingVehicle(withId: vehicle1)
-//        thenVehicles(are: [.vehicle1, .vehicle2])
-//    }
+    func test_Deletes_vehicle_one() async {
+        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
+        givenCoreData()
+        await whenDeletingVehicle(withId: "1")
+        thenSuccess(withId: "1")
+        thenVehicles(are: 2)
+    }
+
+    func test_Does_not_delete_vehicle_from_core_data_when_delete_call_fail() async {
+        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
+        givenCoreData()
+        await whenDeletingVehicle(withId: "1")
+        thenVehicles(are: 3)
+    }
 
     func test_Deletes_vehicle_succeeding() async {
         givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
         await whenDeletingVehicle(withId: "1")
-        thenSuccess(with: "1")
+        thenSuccess(withId: "1")
     }
 
     func test_Deletes_failed_with_unknown_id_vehicle() async {
         givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         await whenDeletingVehicle(withId: "unknownId")
-        thenError(is: .notFound, with: "1")
+        thenError(is: .notFound)
     }
 
     private func givenDeletor(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
         context = TestCoreDataStack().persistentContainer.newBackgroundContext()
         deletor = DefaultVehicleDeletor(requestGenerator: requestGenerator, apiCaller: apiCaller, context: context)
-        _ = VehicleCoreData(id: "1", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context)
     }
 
     private func whenDeletingVehicle(withId id: String) async {
@@ -54,18 +52,31 @@ class DefaultVehicleDeletor_Specs: XCTestCase {
         }
     }
 
-    private func thenError(is expected: APICallerError, with id: String) {
+    private func thenError(is expected: APICallerError) {
         context.performAndWait {
-            XCTAssertTrue(VehicleCoreData.fetchRequestById(id: id) != nil)
             XCTAssertEqual(expected, self.error)
         }
     }
 
-    private func thenSuccess(with id: String) {
+    private func thenSuccess(withId id: String) {
         context.performAndWait {
             XCTAssertTrue(VehicleCoreData.fetchRequestById(id: id) == nil)
             XCTAssertTrue(self.success)
         }
+    }
+
+    private func thenVehicles(are expected: Int) {
+        let fetchRequest: NSFetchRequest<VehicleCoreData> = VehicleCoreData.fetchRequest()
+        let vehicles = try? context.fetch(fetchRequest)
+        XCTAssertEqual(expected, vehicles?.count)
+    }
+
+    private func givenCoreData() {
+        _ = VehicleCoreData(id: "1", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context)
+        _ = VehicleCoreData(id: "2", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context)
+        _ = VehicleCoreData(id: "3", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context)
+
+        try? context.save()
     }
 
     private var context: NSManagedObjectContext!

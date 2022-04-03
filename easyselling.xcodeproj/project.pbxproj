@@ -629,13 +629,6 @@
 			path = DefaultEmailVerificator_Specs;
 			sourceTree = "<group>";
 		};
-		03BA0A3E27F62A2500C2DCB3 /* DefaultVehicleDeletor_CoreData_Specs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DefaultVehicleDeletor_CoreData_Specs;
-			sourceTree = "<group>";
-		};
 		03BD74CF27F45007009A0018 /* VehicleComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -840,7 +833,6 @@
 		39FC6E9C274D59640067E97F /* DefaultVehicleDeletor_Specs */ = {
 			isa = PBXGroup;
 			children = (
-				03BA0A3E27F62A2500C2DCB3 /* DefaultVehicleDeletor_CoreData_Specs */,
 				39FC6E9D274D598A0067E97F /* DefaultVehicleDeletor_Specs.swift */,
 				399465D1274D78120060EFE5 /* SucceedingVehicleDeletor.swift */,
 				39CF8E94274E40C8009A0D28 /* FailingVehicleDeletor.swift */,
