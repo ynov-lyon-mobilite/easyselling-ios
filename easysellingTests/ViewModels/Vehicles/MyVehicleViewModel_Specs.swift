@@ -27,6 +27,14 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         thenViewModelState(is: .listingVehicles)
     }
 
+    func test_Shows_error_when_request_is_failing() async {
+        givenViewModel(vehiclesGetter: FailingVehiclesGetter(withError: APICallerError.notFound))
+        thenViewModelState(is: .loading)
+        await whenTryingToGetVehicles()
+        thenViewModelState(is: .error)
+        thenError(is: APICallerError.notFound.errorDescription)
+    }
+
     func test_Deletes_vehicle_when_request_is_success() async {
         givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([
             Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),

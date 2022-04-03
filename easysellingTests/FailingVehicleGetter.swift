@@ -9,13 +9,13 @@
 
 class FailingVehiclesGetter: VehiclesGetter {
 
-    var error: APICallerError?
-
     init(withError error: APICallerError) {
         self.error = error
     }
 
-    func getVehicles() async -> [Vehicle] {
-        return []
+    private var error: APICallerError
+
+    func getVehicles() async throws -> [Vehicle] {
+        throw error
     }
 }
