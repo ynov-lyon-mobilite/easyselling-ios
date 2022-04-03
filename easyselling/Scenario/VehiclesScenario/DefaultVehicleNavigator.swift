@@ -19,22 +19,18 @@ protocol VehicleNavigator {
 }
 
 class DefaultVehicleNavigator: VehicleNavigator {
-
-    init(window: UIWindow?) {
-        self.window = window
-    }
-
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-
     private var navigationController: UINavigationController = UINavigationController()
     private var window: UIWindow?
 
-    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+    init(window: UIWindow?) {
+        self.window = window
+        self.window?.rootViewController = navigationController
+    }
+
+    func navigatesToHomeView(withActivationId id: String?,
+							 onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigatingToInvoices: @escaping (Vehicle) -> Void,
                              onVehicleShareOpen: @escaping (Vehicle) -> Void) {
-        window?.rootViewController = navigationController
 
         let vm = MyVehiclesViewModel(isOpeningVehicleUpdate: onVehicleUpdateOpen,
                                      isNavigatingToInvoices: onNavigatingToInvoices,

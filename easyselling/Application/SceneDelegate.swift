@@ -37,22 +37,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.makeKeyAndVisible()
             window?.rootViewController = navigationController
 
-            let navigator = DefaultAuthenticationNavigator(window: window)
+            let navigator = DefaultAuthenticationNavigator(window: window, navigationController: navigationController)
             let scenario = AuthenticationScenario(navigator: navigator)
             scenario.begin(from: .resetPassword(token: token))
-        }
-        else if universalLinkUrl.path == "/vehicles/share" {
+        } else if universalLinkUrl.path == "/vehicles/share" {
+
             guard let url = URLComponents(string: universalLinkUrl.absoluteString),
                   let idQueryItem = url.queryItems?.first(where: { $0.name == "id" }),
                   let id = idQueryItem.value else { return }
 
-            guard let windowScene = (scene as? UIWindowScene) else { return }
-            
-            window = UIWindow(frame: UIScreen.main.bounds)
+            let navigationController = UINavigationController()
             window?.makeKeyAndVisible()
-            window?.windowScene = windowScene
+            window?.rootViewController = navigationController
 
-            let navigator = DefaultAuthenticationNavigator(window: window)
+            let navigator = DefaultAuthenticationNavigator(window: window, navigationController: navigationController)
             let scenario = AuthenticationScenario(navigator: navigator)
             scenario.begin(from: .vehicleActivation(id: id))
         }

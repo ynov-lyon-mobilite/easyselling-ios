@@ -20,12 +20,17 @@ protocol AuthenticationNavigator {
 
 class DefaultAuthenticationNavigator: AuthenticationNavigator {
 
-    init(window: UIWindow?) {
+    init(window: UIWindow?,
+         navigationController: UINavigationController,
+         vehicleActivator: VehicleActivator = DefaultVehicleActivator()) {
         self.window = window
+        self.vehicleActivator = vehicleActivator
+        self.navigationController = navigationController
     }
 
     private var window: UIWindow?
-    private let navigationController: UINavigationController = UINavigationController()
+    private let navigationController: UINavigationController
+    private var vehicleActivator: VehicleActivator
 
     func navigatesToLoginPage(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
         let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: onAccountCreation, navigateToPasswordReset: onPasswordReset, onUserLogged: onUserLogged)
@@ -69,7 +74,10 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
         let vehicleNavigator = DefaultVehicleNavigator(window: window)
         let vehicleScenario = VehicleScenario(navigator: vehicleNavigator)
         Task {
-            await vehicleScenario.begin(withVehicleActivationId: id)
+            if id != nil {
+                try? await vehicleActivator.activateVehicle(id: id!)
+            }
         }
+        vehicleScenario.begin(withVehicleActivationId: id)
     }
 }

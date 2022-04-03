@@ -26,7 +26,7 @@ class AuthenticationScenario {
         case .`default`: navigator.navigatesToLoginPage(onAccountCreation: self.navigatesToAccountCreation,
                                     onPasswordReset: self.navigatesToPasswordResetRequest, onUserLogged: { self.navigatesToVehicles() })
         case let .resetPassword(token): navigatesToPasswordReset(withToken: token)
-        case let .vehicleActivation(id):navigator.navigatesToLoginPage(onAccountCreation: self.navigatesToAccountCreation,
+        case let .vehicleActivation(id): navigator.navigatesToLoginPage(onAccountCreation: self.navigatesToAccountCreation,
                                                                        onPasswordReset: self.navigatesToPasswordResetRequest, onUserLogged: { self.navigatesToVehicles(withVehicleActivationId: id) })
         }
 

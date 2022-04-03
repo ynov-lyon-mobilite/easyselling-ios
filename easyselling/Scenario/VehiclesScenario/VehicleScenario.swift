@@ -7,19 +7,13 @@
 
 class VehicleScenario {
 
-    init(navigator: VehicleNavigator,
-         vehicleActivator: VehicleActivator = DefaultVehicleActivator()) {
+    init(navigator: VehicleNavigator) {
         self.navigator = navigator
-        self.vehicleActivator = vehicleActivator
     }
 
     private var navigator: VehicleNavigator
-    private var vehicleActivator: VehicleActivator
 
-    func begin(withVehicleActivationId id: String? = nil) async {
-        if id != nil {
-            try? await vehicleActivator.activateVehicle(id: id!)
-        }
+    func begin(withVehicleActivationId id: String? = nil) {
         navigator.navigatesToHomeView(withActivationId: id,
 									  onVehicleUpdateOpen: navigatesToVehicleUpdate,
                                       onNavigatingToInvoices: navigatesToInvoices,
