@@ -13,7 +13,11 @@ class DefaultVehicleDeletor_Specs: XCTestCase {
 
     func test_Deletes_vehicle_one() async {
         givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
-        givenCoreData()
+        givenCoreData(data: [
+            VehicleCoreData(id: "1", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context),
+            VehicleCoreData(id: "2", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context),
+            VehicleCoreData(id: "3", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context)
+        ])
         await whenDeletingVehicle(withId: "1")
         thenSuccess(withId: "1")
         thenVehicles(are: 2)
@@ -21,7 +25,11 @@ class DefaultVehicleDeletor_Specs: XCTestCase {
 
     func test_Does_not_delete_vehicle_from_core_data_when_delete_call_fail() async {
         givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
-        givenCoreData()
+        givenCoreData(data: [
+            VehicleCoreData(id: "1", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context),
+            VehicleCoreData(id: "2", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context),
+            VehicleCoreData(id: "3", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context)
+        ])
         await whenDeletingVehicle(withId: "1")
         thenVehicles(are: 3)
     }
@@ -71,11 +79,7 @@ class DefaultVehicleDeletor_Specs: XCTestCase {
         XCTAssertEqual(expected, vehicles?.count)
     }
 
-    private func givenCoreData() {
-        _ = VehicleCoreData(id: "1", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context)
-        _ = VehicleCoreData(id: "2", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context)
-        _ = VehicleCoreData(id: "3", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context)
-
+    private func givenCoreData(data: [VehicleCoreData]) {
         try? context.save()
     }
 
