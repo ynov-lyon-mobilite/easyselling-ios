@@ -72,11 +72,7 @@ struct MyVehiclesView: View {
             }))
         }
         .task { await viewModel.getVehicles() }
-        .alert(isPresented: $viewModel.showAlert, content: {
-            Alert(
-                title: Text(viewModel.error?.errorDescription ?? APICallerError.unknownError.errorDescription ?? ""),
-                dismissButton: Alert.Button.default(Text(L10n.Button.ok)))
-        })
+        .ableToShowError(viewModel.error)
     }
 }
 

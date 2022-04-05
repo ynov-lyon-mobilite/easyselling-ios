@@ -30,7 +30,6 @@ class MyVehiclesViewModel: ObservableObject {
     @Published var vehicles: [Vehicle] = [.placeholderCar, .placeholderMoto]
     @Published var error: APICallerError?
     @Published var state: VehicleState = .loading
-    @Published var showAlert: Bool = false
 
     @Published var searchFilteringVehicle = ""
 
@@ -76,7 +75,6 @@ class MyVehiclesViewModel: ObservableObject {
         } catch (let error) {
             if let error = error as? APICallerError {
                 setError(with: error)
-                self.showAlert = true
             }
         }
     }
