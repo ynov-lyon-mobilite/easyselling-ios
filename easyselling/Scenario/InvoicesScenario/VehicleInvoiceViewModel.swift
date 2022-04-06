@@ -25,31 +25,26 @@ class VehicleInvoiceViewModel: ObservableObject {
     @Published var isDownloading: Bool = false
     @Published var isError: Bool = false
 
-    let vehicleId: String
+//    let vehicleId: String
 
-    init(ofVehicleId: String,
+    init(vehicle: Vehicle,
          invoiceDeletor: InvoiceDeletor = DefaultInvoiceDeletor(context: mainContext),
-         vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(),
-         onNavigatingToInvoiceView: @escaping (File) -> Void,
-         isOpeningInvoiceCreation: @escaping (Vehicle, @escaping () async -> Void) -> Void) {
+            vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(),
+            invoiceDownloader: InvoiceDownloader = DefaultInvoiceDownloader(context: mainContext),
+            onNavigatingToInvoiceView: @escaping (File) -> Void,
+            isOpeningInvoiceCreation: @escaping (Vehicle, @escaping () async -> Void) -> Void) {
 
-        self.vehicle = vehicle
-        self.invoiceDeletor = invoiceDeletor
-        self.vehicleInvoicesGetter = vehicleInvoicesGetter
-        self.invoiceDownloader = invoiceDownloader
-        self.onNavigatingToInvoiceView = onNavigatingToInvoiceView
-        self.isOpeningInvoiceCreation = isOpeningInvoiceCreation
-    }
-
-    func openInvoiceCreation() {
-        self.isOpeningInvoiceCreation(vehicle) { [weak self] in
-            await self?.getInvoices()
-        }
-    }
+           self.vehicle = vehicle
+           self.invoiceDeletor = invoiceDeletor
+           self.vehicleInvoicesGetter = vehicleInvoicesGetter
+           self.invoiceDownloader = invoiceDownloader
+           self.onNavigatingToInvoiceView = onNavigatingToInvoiceView
+           self.isOpeningInvoiceCreation = isOpeningInvoiceCreation
+       }
 
     @MainActor func getInvoices() async {
         do {
-            invoices = try await vehicleInvoicesGetter.getInvoices(ofVehicleId: vehicleId)
+            invoices = try await vehicleInvoicesGetter.getInvoices(ofVehicleId: vehicle.id)
         } catch (let error) {
             if let error = error as? APICallerError {
                 isError = true

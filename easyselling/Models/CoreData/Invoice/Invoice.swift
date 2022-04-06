@@ -18,7 +18,7 @@ struct Invoice: Decodable, Equatable {
         case file
     }
 
-    static func toEncodableStruct (invoice: Invoice) -> InvoiceDTO {
+    static func toEncodableStruc (invoice: Invoice) -> InvoiceDTO {
         return InvoiceDTO(file: String(invoice.id))
     }
 

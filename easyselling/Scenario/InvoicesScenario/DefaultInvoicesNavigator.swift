@@ -31,7 +31,7 @@ class DefaultInvoicesNavigator: InvoiceNavigator {
         of vehicle: Vehicle,
         onNavigatingToInvoice: @escaping (File) -> Void,
         onNavigatingToInvoiceCreation: @escaping (Vehicle, @escaping () async -> Void) -> Void) {
-        let vm = VehicleInvoiceViewModel(vehicle: vehicle, onNavigatingToInvoiceView: onNavigatingToInvoice, isOpeningInvoiceCreation: onNavigatingToInvoiceCreation)
+            let vm = VehicleInvoiceViewModel(vehicle: vehicle, onNavigatingToInvoiceView: onNavigatingToInvoice, isOpeningInvoiceCreation: onNavigatingToInvoiceCreation)
         let invoicesView = VehicleInvoicesView(viewModel: vm)
         navigationController.pushViewController(UIHostingController(rootView: invoicesView), animated: true)
     }

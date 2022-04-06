@@ -54,11 +54,12 @@ struct VehicleInvoicesView: View {
                         }.tint(.red)
                     }
                 }
-                Button(action: viewModel.openInvoiceCreation) {
-                    Image(systemName: "plus")
-                        .padding(.vertical, 15)
-                        .frame(maxWidth: .infinity)
-                }
+                // TODO: A fixer
+//                Button(action: $viewModel.openInvoiceCreation) {
+//                    Image(systemName: "plus")
+//                        .padding(.vertical, 15)
+//                        .frame(maxWidth: .infinity)
+//                }
             }
         }
         .task { await viewModel.getInvoices() }
@@ -67,7 +68,7 @@ struct VehicleInvoicesView: View {
 
 struct VehicleInvoicesView_Previews: PreviewProvider {
     static var previews: some View {
-        let vm = VehicleInvoiceViewModel(ofVehicleId: "", onNavigatingToInvoiceView: {_ in })
+        let vm = VehicleInvoiceViewModel(vehicle: Vehicle(id: "", brand: "", model: "", licence: "", type: .car, year: ""), onNavigatingToInvoiceView: {_ in }, isOpeningInvoiceCreation: {_, _ in })
         vm.invoices = [Invoice(id: "ID", fileData: Data(), file: FileResponse(filename: ""))]
         vm.isLoading = false
         vm.isDownloading = true
