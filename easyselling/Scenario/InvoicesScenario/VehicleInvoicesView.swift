@@ -54,12 +54,11 @@ struct VehicleInvoicesView: View {
                         }.tint(.red)
                     }
                 }
-                // TODO: A fixer
-//                Button(action: $viewModel.openInvoiceCreation) {
-//                    Image(systemName: "plus")
-//                        .padding(.vertical, 15)
-//                        .frame(maxWidth: .infinity)
-//                }
+                Button(action: viewModel.openInvoiceCreation) {
+                    Image(systemName: "plus")
+                        .padding(.vertical, 15)
+                        .frame(maxWidth: .infinity)
+                }
             }
         }
         .task { await viewModel.getInvoices() }

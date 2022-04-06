@@ -25,14 +25,12 @@ class VehicleInvoiceViewModel: ObservableObject {
     @Published var isDownloading: Bool = false
     @Published var isError: Bool = false
 
-//    let vehicleId: String
-
     init(vehicle: Vehicle,
          invoiceDeletor: InvoiceDeletor = DefaultInvoiceDeletor(context: mainContext),
-            vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(),
-            invoiceDownloader: InvoiceDownloader = DefaultInvoiceDownloader(context: mainContext),
-            onNavigatingToInvoiceView: @escaping (File) -> Void,
-            isOpeningInvoiceCreation: @escaping (Vehicle, @escaping () async -> Void) -> Void) {
+         vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(),
+         invoiceDownloader: InvoiceDownloader = DefaultInvoiceDownloader(context: mainContext),
+         onNavigatingToInvoiceView: @escaping (File) -> Void,
+         isOpeningInvoiceCreation: @escaping (Vehicle, @escaping () async -> Void) -> Void) {
 
            self.vehicle = vehicle
            self.invoiceDeletor = invoiceDeletor
@@ -41,6 +39,12 @@ class VehicleInvoiceViewModel: ObservableObject {
            self.onNavigatingToInvoiceView = onNavigatingToInvoiceView
            self.isOpeningInvoiceCreation = isOpeningInvoiceCreation
        }
+
+    func openInvoiceCreation() {
+        self.isOpeningInvoiceCreation(vehicle) { [weak self] in
+            await self?.getInvoices()
+        }
+    }
 
     @MainActor func getInvoices() async {
         do {
