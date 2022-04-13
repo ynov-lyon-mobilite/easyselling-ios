@@ -10,7 +10,8 @@ import SwiftUI
 
 protocol VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
-    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+    func navigatesToHomeView(withActivationId id: String?,
+                             onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigatingToInvoices: @escaping (Vehicle) -> Void,
                              onVehicleShareOpen: @escaping (Vehicle) -> Void)
     func navigatesToInvoices(vehicle: Vehicle)

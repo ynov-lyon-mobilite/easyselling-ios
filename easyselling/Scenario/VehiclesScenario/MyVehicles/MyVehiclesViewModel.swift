@@ -13,7 +13,7 @@ class MyVehiclesViewModel: ObservableObject {
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
          vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(context: mainContext),
          isOpeningVehicleUpdate: @escaping OnUpdatingVehicle,
-         isNavigatingToInvoices: @escaping (Vehicle) -> Void),
+         isNavigatingToInvoices: @escaping (Vehicle) -> Void,
          isOpeningVehicleShare: @escaping (Vehicle) -> Void) {
 
         self.vehiclesGetter = vehiclesGetter

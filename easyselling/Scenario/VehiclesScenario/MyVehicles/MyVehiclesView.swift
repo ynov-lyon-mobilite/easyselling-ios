@@ -34,6 +34,7 @@ struct MyVehiclesView: View {
                             await viewModel.deleteVehicle(idVehicle: vehicle.id )
                         } },
                                            updateAction: { viewModel.openVehicleUpdate(vehicle: vehicle) },
+                                           shareAction: { viewModel.openVehicleShare(vehicle: vehicle) },
                                            showInvoices: { viewModel.navigatesToInvoices(vehicle: vehicle) })
                             .redacted(when: viewModel.state == .loading)
                     }

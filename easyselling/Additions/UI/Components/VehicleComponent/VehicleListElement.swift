@@ -12,6 +12,7 @@ struct VehicleListElement: View {
     var vehicle: Vehicle
     var deleteAction: Action
     var updateAction: Action
+    var shareAction: Action
     var showInvoices: Action
 
     var body: some View {
@@ -51,6 +52,9 @@ struct VehicleListElement: View {
                     .font(.title2)
             })
             .tint(Asset.Colors.secondary.swiftUIColor)
+            Button(L10n.Vehicles.shareButton) {
+                shareAction()
+            }.tint(Color.green)
         }
     }
 }
@@ -60,6 +64,7 @@ struct VehicleListElement_Previews: PreviewProvider {
         VehicleListElement(vehicle: Vehicle(id: "", brand: "Peugeot", model: "206", licence: "AA-222-aA", type: .car, year: "2022"),
                            deleteAction: {},
                            updateAction: {},
+                           shareAction: {},
                            showInvoices: {})
             .previewLayout(.sizeThatFits)
             .background(Asset.Colors.backgroundColor.swiftUIColor)

@@ -604,6 +604,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		0377A40627A146D700B12DC7 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				03278315276B75CE00F32915 /* ErrorShower.swift */,
+				9BFD065027D9089900C67764 /* ShareDTO.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		0382E29B2717638400EB570E /* TypeAlias */ = {
 			isa = PBXGroup;
 			children = (
@@ -1441,7 +1450,6 @@
 				875E47B0273C6B200019FC83 /* FileUploaderResponse.json in Resources */,
 				2C86337C273FB7B10049C186 /* succeededVehicles.json in Resources */,
 				9BFD064D27D8E22900C67764 /* succeededVehicle.json in Resources */,
-				875E47B5273C6B9F0019FC83 /* UserAuthenticatorResponse.json in Resources */,
 				5CA58D1D27554DA9000BF06C /* succeededInvoices.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1632,9 +1640,8 @@
 				8FE6243A2752765A000D0FC8 /* SucceedingEmailVerificator.swift in Sources */,
 				03DAF9AA2727448300FFED55 /* VehicleCreationViewModel_Specs.swift in Sources */,
 				9BB84D72274E361E00D88B03 /* FakeAuthorizedRequestGenerator.swift in Sources */,
-				03422F86275FF3370060D19E /* SucceedingVehicleGetter.swift in Sources */,
 				03422F86275FF3370060D19E /* SucceedingVehiclesGetter.swift in Sources */,
-				8798D14C2730FC1C00FF3AB4 /* FakeTokenManager.swift in Sources */,
+				03422F86275FF3370060D19E /* SucceedingVehiclesGetter.swift in Sources */,
 				03F0543F271B3F0A00434706 /* FakeRequestGenerator.swift in Sources */,
 				8F38D78E274AC7B000F87BD9 /* VehicleUpdateViewModel_specs.swift in Sources */,
 				5CB4C5D9275D12BA0055CB8B /* SucceedingVehicleInvoicesGetter.swift in Sources */,
