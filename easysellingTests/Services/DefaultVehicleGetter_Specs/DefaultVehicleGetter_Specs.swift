@@ -8,11 +8,11 @@
 import XCTest
 @testable import easyselling
 
-class DefaultVehicleGetter_Specs: XCTestCase {
+class DefaultSharedVehicleGetter_Specs: XCTestCase {
     func test_Throws_error_when_request_failed() async {
-        let vehicleGetter = DefaultVehicleGetter(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
+        let sharedVehiclesGetter = DefaultSharedVehiclesGetter(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
         do {
-            _ = try  await vehicleGetter.getVehicle(id: "1")
+            _ = try  await sharedVehiclesGetter.getSharedVehicles()
         } catch(let error) {
             self.error = (error as! APICallerError)
         }
@@ -20,19 +20,18 @@ class DefaultVehicleGetter_Specs: XCTestCase {
     }
 
     func test_Shows_vehicle_when_request_succeeded() async {
-        let vehicleGetter = DefaultVehicleGetter(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: DefaultAPICaller(urlSession: FakeUrlSession(localFile: .succeededVehicle)))
+        let expected = [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "license1", type: .car, year: "year1")]
+
+        let vehicleGetter = DefaultSharedVehiclesGetter(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: DefaultAPICaller(urlSession: FakeUrlSession(localFile: .succeededVehicle)))
         do {
-            vehicle = try await vehicleGetter.getVehicle(id: "1")
+            vehicles = try await vehicleGetter.getSharedVehicles()
         } catch(let error) {
             self.error = (error as! APICallerError)
         }
 
-        let expected = Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1")
-
-        XCTAssertEqual(expected, vehicle)
-
+        XCTAssertEqual(expected, vehicles)
     }
 
-    private var vehicle: Vehicle!
+    private var vehicles: [Vehicle]!
     private var error: APICallerError!
 }

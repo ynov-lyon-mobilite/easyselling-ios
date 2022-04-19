@@ -50,7 +50,7 @@ class VehicleScenario_Specs: XCTestCase {
         givenScenario()
         whenBeginning()
         whenNavigatingToVehicleShare()
-        thenVehicle(is: Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+        thenVehicle(is: Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "license1", type: .car, year: "year1"))
         thenHistory(is: [.myVehicles, .vehicleShare])
     }
 
@@ -84,7 +84,7 @@ class VehicleScenario_Specs: XCTestCase {
 
 
     private func whenNavigatingToVehicleShare() {
-        navigator.onVehicleShareOpen?(Vehicle(id: "1", brand: "Peugeot", model: "model1", license: "license1", type: .car, year: "year1"))
+        navigator.onVehicleShareOpen?(Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "license1", type: .car, year: "year1"))
     }
 
     private func thenHistory(is expected: [SpyVehicleCreationNavigator.History]) {
@@ -116,9 +116,9 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     private(set) var vehicleScenarioIsFinished: Bool = false
     private(set) var onVehicleShareOpen: ((Vehicle) -> Void)?
     private(set) var vehicleID: String = ""
-    private(set) var vehicle: Vehicle?
+//    private(set) var vehicle: Vehicle?
 
-    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void, onVehicleShareOpen: @escaping (Vehicle) -> Void) {
+    func navigatesToHomeView(withActivationId id: String?, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void, onVehicleShareOpen: @escaping (Vehicle) -> Void) {
         self.onNavigatingToInvoices = onNavigatingToInvoices
         self.onVehicleShareOpen = onVehicleShareOpen
 

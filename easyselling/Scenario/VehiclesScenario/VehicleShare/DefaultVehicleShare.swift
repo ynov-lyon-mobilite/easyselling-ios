@@ -22,7 +22,7 @@ class DefaultVehicleShare : VehicleShare {
     private var apiCaller: APICaller
 
     func shareVehicle(id: String, email: String) async throws {
-        let dto = ShareDTO(email: email)
+        let dto = ShareVehicleDTO(email: email)
         let urlRequest = try await requestGenerator
             .generateRequest(endpoint: .shareVehicle, method: .POST, body: dto,
                              headers: [:], pathKeysValues: ["vehicleId": id], queryParameters: nil)

@@ -14,23 +14,20 @@ protocol AuthenticationNavigator {
     func navigatesToAccountCreation(onFinish: @escaping Action)
     func navigatesToPasswordResetRequest()
     func navigatesToPasswordReset(withToken token: String, onPasswordReset: @escaping Action)
+    func navigatesToVehicles()
     func goingBackToHomeView()
-    func navigatesToVehicles(withVehicleActivationId id: String?)
 }
 
 class DefaultAuthenticationNavigator: AuthenticationNavigator {
 
     init(window: UIWindow?,
-         navigationController: UINavigationController,
-         vehicleActivator: VehicleActivator = DefaultVehicleActivator()) {
+         navigationController: UINavigationController) {
         self.window = window
-        self.vehicleActivator = vehicleActivator
         self.navigationController = navigationController
     }
 
     private var window: UIWindow?
     private let navigationController: UINavigationController
-    private var vehicleActivator: VehicleActivator
 
     func navigatesToLoginPage(onAccountCreation: @escaping Action, onPasswordReset: @escaping Action, onUserLogged: @escaping Action) {
         let viewModel = UserAuthenticationViewModel(navigateToAccountCreation: onAccountCreation, navigateToPasswordReset: onPasswordReset, onUserLogged: onUserLogged)
@@ -70,14 +67,4 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
 
         scenario.begin()
 	}
-    func navigatesToVehicles(withVehicleActivationId id: String?) {
-        let vehicleNavigator = DefaultVehicleNavigator(window: window)
-        let vehicleScenario = VehicleScenario(navigator: vehicleNavigator)
-        Task {
-            if id != nil {
-                try? await vehicleActivator.activateVehicle(id: id!)
-            }
-        }
-        vehicleScenario.begin(withVehicleActivationId: id)
-    }
 }

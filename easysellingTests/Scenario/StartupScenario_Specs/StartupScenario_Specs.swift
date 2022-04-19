@@ -32,6 +32,20 @@ class StartupScenario_Specs : XCTestCase {
         thenHistory(is: [.myVehicles])
     }
 
+//    func test_Begins_with_vehicle_info_share_when_user_is_not_authenticated_and_onboarding_has_been_seen() async {
+//        givenScenario(firebaseAuthProvider: FailingFirebaseAuthProvider(error: NSError()))
+//        whenOnBoardingHasBeenViewed()
+//        await whenBeginning(from: .vehicleInfoShare(id: ""))
+//        thenHistory(is: [.vehicleInfoShare(id: "")])
+//    }
+
+    func test_Begins_with_vehicle_info_share_when_user_is_already_authenticated() async {
+        givenScenario(firebaseAuthProvider: SucceedingFirebaseAuthProvider(isAuthenticated: true))
+        whenOnBoardingHasBeenViewed()
+        await whenBeginning(from: .vehicleInfoShare(id: "id"))
+        thenHistory(is: [.vehicleInfoShare(id: "id")])
+    }
+
     private func givenScenario(firebaseAuthProvider: FirebaseAuthProvider = SucceedingFirebaseAuthProvider()) {
         navigator = SpyStartupNavigator()
         scenario = StartupScenario(navigator: navigator, firebaseAuthProvider: firebaseAuthProvider)
@@ -45,8 +59,8 @@ class StartupScenario_Specs : XCTestCase {
         scenario.onBoardingIsViewed = true
     }
 
-    private func whenBeginning() async {
-        await scenario.begin()
+    private func whenBeginning(from beginWay: StartupScenario.BeginWay = .usual) async {
+        await scenario.begin(from: beginWay)
     }
 
     private func thenHistory(is expected: [SpyStartupNavigator.History]) {
@@ -74,14 +88,22 @@ class SpyStartupNavigator: StartupNavigator {
         history.append(.myVehicles)
     }
 
+    func navigatesToHomeView(withActivationId id: String) {
+        history.append(.vehicleInfoShare(id: id))
+    }
+
     enum History: CustomDebugStringConvertible, Equatable {
-        case myVehicles, onBoarding, login
+        case myVehicles
+        case onBoarding
+        case login
+        case vehicleInfoShare(id: String)
 
         var debugDescription: String {
             switch self {
             case .myVehicles: return "My vehicles"
             case .onBoarding: return "OnBoarding"
             case .login: return "Login"
+            case let .vehicleInfoShare(id): return "Share vehicle info with id \(id)"
             }
         }
 

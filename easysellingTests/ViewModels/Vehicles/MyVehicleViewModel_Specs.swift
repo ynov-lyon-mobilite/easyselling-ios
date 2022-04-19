@@ -27,6 +27,30 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         thenViewModelState(is: .listingVehicles)
     }
 
+    func test_retrives_shared_vehicle() async {
+        expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
+                            Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")]
+        
+        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([]),
+                       sharedVehicleGetter: SucceedingSharedVehiclesGetter(expectedVehicles))
+        thenViewModelState(is: .loading)
+        await whenTryingToGetVehicles()
+        thenSharedVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
+                               Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")])
+        thenViewModelState(is: .listingVehicles)
+        thenSharedVehiclesAreShown()
+    }
+
+    func test_Does_not_show_shared_vehicles_when_shared_vehicles_are_empty() async {
+        givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([]),
+                       sharedVehicleGetter: SucceedingSharedVehiclesGetter([]))
+        thenViewModelState(is: .loading)
+        await whenTryingToGetVehicles()
+        thenSharedVehicles(are: [])
+        thenViewModelState(is: .listingVehicles)
+        thenSharedVehiclesAreNotShown()
+    }
+    
     func test_Shows_error_when_request_is_failing() async {
         givenViewModel(vehiclesGetter: FailingVehiclesGetter(withError: APICallerError.notFound))
         thenViewModelState(is: .loading)
@@ -85,8 +109,10 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         XCTAssertTrue(onNavigatingToInvoices)
     }
     
-    private func givenViewModel(vehiclesGetter: VehiclesGetter) {
+    private func givenViewModel(vehiclesGetter: VehiclesGetter,
+                                sharedVehicleGetter: SharedVehiclesGetter = SucceedingSharedVehiclesGetter([])) {
         viewModel = MyVehiclesViewModel(vehiclesGetter: vehiclesGetter,
+                                        sharedVehiclesGetter: sharedVehicleGetter,
                                         isOpeningVehicleUpdate: { vehicle, onRefreshCallback in
             self.onUpdateVehicle = vehicle
             self.expectedCallback = onRefreshCallback
@@ -94,7 +120,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         	self.selectedVehicle = vehicleId
 			self.onNavigatingToInvoices = true
 		}, isOpeningVehicleShare: { vehicle in
-            self.selectedVehicleId = vehicle
+            self.sharedVehicle = vehicle
         })
     }
 
@@ -129,6 +155,10 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     private func thenLoadVehicles(are expected: [Vehicle]) {
         XCTAssertEqual(expected, viewModel.vehicles)
     }
+
+    private func thenSharedVehicles(are expected: [Vehicle]) {
+        XCTAssertEqual(expected, viewModel.sharedVehicles)
+    }
     
     private func thenError(is expected: String?) {
         XCTAssertEqual(expected, viewModel.error?.errorDescription)
@@ -156,6 +186,14 @@ class MyVehiclesViewModel_Specs: XCTestCase {
 
     private func thenHasNavigatingToVehicleCreationModal() {
         XCTAssertTrue(viewModel.isOpenningVehicleCreation)
+    }
+
+    private func thenSharedVehiclesAreShown() {
+        XCTAssertTrue(viewModel.showSharedVehicles)
+    }
+
+    private func thenSharedVehiclesAreNotShown() {
+        XCTAssertFalse(viewModel.showSharedVehicles)
     }
  
     private var viewModel: MyVehiclesViewModel!

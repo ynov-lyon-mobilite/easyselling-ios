@@ -18,12 +18,44 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
 
-        let navigator = DefaultStartupNavigator(window: window)
-        let scenario = StartupScenario(navigator: navigator)
-        Task {
-            await scenario.begin()
+        guard let userActivity = connectionOptions.userActivities.first,
+                      userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+                      let universalLinkUrl = userActivity.webpageURL else {
+            let navigator = DefaultStartupNavigator(window: window)
+            let scenario = StartupScenario(navigator: navigator)
+            Task {
+                await scenario.begin(from: .usual)
+            }
+            return
         }
 
+        if universalLinkUrl.path == "/admin/reset-password" {
+            guard let url = URLComponents(string: universalLinkUrl.absoluteString),
+                  let token = url.queryItems?.first(where: { $0.name == "oobCode" })?.value else { return }
+
+            let navigationController = UINavigationController()
+            window?.makeKeyAndVisible()
+            window?.rootViewController = navigationController
+
+            let navigator = DefaultAuthenticationNavigator(window: window, navigationController: navigationController)
+            let scenario = AuthenticationScenario(navigator: navigator)
+            scenario.begin(from: .resetPassword(token: token))
+        } else if universalLinkUrl.path == "/vehicles/share" {
+
+            guard let url = URLComponents(string: universalLinkUrl.absoluteString),
+                  let idQueryItem = url.queryItems?.first(where: { $0.name == "id" }),
+                  let id = idQueryItem.value else { return }
+
+            let navigationController = UINavigationController()
+            window?.makeKeyAndVisible()
+            window?.rootViewController = navigationController
+
+            let navigator = DefaultStartupNavigator(window: window)
+            let scenario = StartupScenario(navigator: navigator)
+            Task {
+                await scenario.begin(from: .vehicleInfoShare(id: id))
+            }
+        }
     }
 
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
@@ -50,9 +82,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.makeKeyAndVisible()
             window?.rootViewController = navigationController
 
-            let navigator = DefaultAuthenticationNavigator(window: window, navigationController: navigationController)
-            let scenario = AuthenticationScenario(navigator: navigator)
-            scenario.begin(from: .vehicleActivation(id: id))
+            let navigator = DefaultStartupNavigator(window: window)
+            let scenario = StartupScenario(navigator: navigator)
+            Task {
+                await scenario.begin(from: .vehicleInfoShare(id: id))
+            }
         }
     }
 

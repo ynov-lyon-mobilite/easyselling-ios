@@ -7,7 +7,7 @@
 
 @testable import easyselling
 
-class FailingVehicleGetter: VehicleGetter {
+class FailingSharedVehiclesGetter: SharedVehiclesGetter {
 
     init(withError error: APICallerError) {
         self.error = error
@@ -15,7 +15,7 @@ class FailingVehicleGetter: VehicleGetter {
 
     private var error: APICallerError
 
-    func getVehicle(id: String) async throws -> Vehicle {
+    func getSharedVehicles() async throws -> [Vehicle] {
         throw error
     }
 }

@@ -10,11 +10,14 @@ import SwiftUI
 struct HomeView: View {
 
     @ObservedObject var viewModel: HomeViewModel
+
+    var window: UIWindow?
+
     var body: some View {
         VStack {
             VStack {
                 switch viewModel.selectedTabItem {
-                case .vehicles: VehicleScenarioViewInstantiator()
+                case .vehicles: VehicleScenarioViewInstantiator(window: window)
                 case .profile: ProfileScenarioViewInstantiator(onLogout: viewModel.onLogout)
                 default: Text("test")
                 }

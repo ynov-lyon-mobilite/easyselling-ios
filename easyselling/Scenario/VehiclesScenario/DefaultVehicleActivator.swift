@@ -24,7 +24,7 @@ class DefaultVehicleActivator : VehicleActivator {
     func activateVehicle(id: String) async throws {
         let urlRequest = try await requestGenerator
             .generateRequest(endpoint: .activateVehicle, method: .POST,
-                             headers: [:], pathKeysValues: ["activationId": id], queryParameters: nil)
+                             headers: [:], pathKeysValues: ["authorizationId": id], queryParameters: nil)
         try await apiCaller.call(urlRequest)
     }
 }
