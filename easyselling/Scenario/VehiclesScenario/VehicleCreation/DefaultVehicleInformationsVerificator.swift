@@ -9,7 +9,7 @@ import Foundation
 
 protocol VehicleInformationsVerificator {
     func verifyInformations(vehicle: VehicleDTO) throws
-    func verifyLicence(_ licence: String) throws
+    func verifylicence(_ licence: String) throws
 }
 
 class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
@@ -23,7 +23,7 @@ class DefaultVehicleInformationsVerificator: VehicleInformationsVerificator {
         }
     }
 
-    func verifyLicence(_ licence: String) throws {
+    func verifylicence(_ licence: String) throws {
         let vehicleVerificator = DefaultVehicleVerificator()
 
         try vehicleVerificator.verifylicenceFormat(licence: licence)

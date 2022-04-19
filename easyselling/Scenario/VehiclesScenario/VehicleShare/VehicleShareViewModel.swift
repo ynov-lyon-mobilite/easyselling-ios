@@ -22,7 +22,7 @@ class VehicleShareViewModel: ObservableObject {
     @MainActor func shareVehicle() async {
         state = .loading
         do {
-            try await vehicleShare.shareVehicle(id: vehicle.id ?? "", email: email)
+            try await vehicleShare.shareVehicle(id: vehicle.id, email: email)
             if error != nil {
                 error = nil
             }

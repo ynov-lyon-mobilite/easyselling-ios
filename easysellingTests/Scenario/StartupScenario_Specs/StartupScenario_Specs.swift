@@ -88,7 +88,7 @@ class SpyStartupNavigator: StartupNavigator {
         history.append(.myVehicles)
     }
 
-    func navigatesToHomeView(withActivationId id: String) {
+    func navigatesToHomeView(withActivationId id: String?) {
         history.append(.vehicleInfoShare(id: id))
     }
 
@@ -96,14 +96,14 @@ class SpyStartupNavigator: StartupNavigator {
         case myVehicles
         case onBoarding
         case login
-        case vehicleInfoShare(id: String)
+        case vehicleInfoShare(id: String?)
 
         var debugDescription: String {
             switch self {
             case .myVehicles: return "My vehicles"
             case .onBoarding: return "OnBoarding"
             case .login: return "Login"
-            case let .vehicleInfoShare(id): return "Share vehicle info with id \(id)"
+            case let .vehicleInfoShare(id): return "Share vehicle info with id \(String(describing: id))"
             }
         }
 

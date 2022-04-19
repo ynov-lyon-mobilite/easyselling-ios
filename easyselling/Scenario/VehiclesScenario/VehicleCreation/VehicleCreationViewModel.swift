@@ -91,7 +91,7 @@ class VehicleCreationViewModel: ObservableObject {
                 }
             case .licence:
                 do {
-                    try vehicleInformationsVerificator.verifyLicence(self.licence)
+                    try vehicleInformationsVerificator.verifylicence(self.licence)
                     self.createdVehicle.licence = self.licence
                     self.vehicleCreationStep = .brandAndModel
                 } catch (let error) {

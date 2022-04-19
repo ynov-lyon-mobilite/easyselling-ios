@@ -20,7 +20,7 @@ class DefaultSharedVehicleGetter_Specs: XCTestCase {
     }
 
     func test_Shows_vehicle_when_request_succeeded() async {
-        let expected = [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "license1", type: .car, year: "year1")]
+        let expected = [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1")]
 
         let vehicleGetter = DefaultSharedVehiclesGetter(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: DefaultAPICaller(urlSession: FakeUrlSession(localFile: .succeededVehicle)))
         do {

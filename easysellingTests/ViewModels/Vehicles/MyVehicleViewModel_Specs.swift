@@ -95,7 +95,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     }
     
     func test_Navigates_to_vehicle_invoices_with_vehicle_id_as_parameter() {
-        let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
+        let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "licence", type: .car, year: "year")
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([vehicle]))
         whenNavigatingToInvoicesView(vehicle: vehicle)
         thenVehicleId(is: vehicle)
@@ -103,7 +103,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     }
     
     func test_Navigates_to_vehicle_invoices() {
-        let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
+        let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "licence", type: .car, year: "year")
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([vehicle]))
         viewModel.navigatesToInvoices(vehicle: vehicle)
         XCTAssertTrue(onNavigatingToInvoices)

@@ -29,7 +29,7 @@ class DefaultVehicleNavigator: VehicleNavigator {
     }
 
     func navigatesToHomeView(withActivationId id: String?,
-							 onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+                             onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
                              onNavigatingToInvoices: @escaping (Vehicle) -> Void,
                              onVehicleShareOpen: @escaping (Vehicle) -> Void) {
 

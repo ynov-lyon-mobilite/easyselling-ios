@@ -109,9 +109,9 @@ struct MyVehiclesView_Previews: PreviewProvider {
             isOpeningVehicleUpdate: {_,_ in },
             isNavigatingToInvoices: {_ in },
             isOpeningVehicleShare: {_ in})
-        vm.vehicles = [Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "Year"),
-                       Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "Licence", type: .moto, year: "Year"),
-                       Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "Year")]
+        vm.vehicles = [Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "licence", type: .car, year: "Year"),
+                       Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "licence", type: .moto, year: "Year"),
+                       Vehicle(id: "ID", brand: "Brand", model: "Model", licence: "licence", type: .car, year: "Year")]
         vm.state = .listingVehicles
 
         return MyVehiclesView(viewModel: vm)

@@ -12,37 +12,37 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
 
     func test_Throws_error_if_licence_has_an_incorrect_licence_format() {
         givenVerificator()
-        whenCheckingLicence("AA-2B2-AA")
+        whenCheckinglicence("AA-2B2-AA")
         thenError(is: .incorrectlicenceFormat)
     }
 
     func test_Throws_error_if_licence_has_an_incorrect_licence_format2() {
         givenVerificator()
-        whenCheckingLicence("524 WAL 7A")
+        whenCheckinglicence("524 WAL 7A")
         thenError(is: .incorrectlicenceFormat)
     }
 
     func test_Throws_error_if_licence_has_an_incorrect_licence_size() {
         givenVerificator()
-        whenCheckingLicence("AA-222-AAA")
+        whenCheckinglicence("AA-222-AAA")
         thenError(is: .incorrectlicenceSize)
     }
 
     func test_Throws_error_if_licence_has_an_incorrect_licence_size2() {
         givenVerificator()
-        whenCheckingLicence("524 WAL 7")
+        whenCheckinglicence("524 WAL 7")
         thenError(is: .incorrectlicenceSize)
     }
 
     func test_Verifies_licence_has_a_correct_format() {
         givenVerificator()
-        whenCheckingLicence("AA-222-AA")
+        whenCheckinglicence("AA-222-AA")
         thenNoErrorThrows()
     }
 
     func test_Verifies_licence_has_a_correct_format2() {
         givenVerificator()
-        whenCheckingLicence("524 WAL 75")
+        whenCheckinglicence("524 WAL 75")
         thenNoErrorThrows()
     }
 
@@ -58,9 +58,9 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
         }
     }
 
-    private func whenCheckingLicence(_ licence: String) {
+    private func whenCheckinglicence(_ licence: String) {
         do {
-            try verificator.verifyLicence(licence)
+            try verificator.verifylicence(licence)
         } catch (let error) {
             self.vehicleCreationError = (error as! VehicleCreationError)
         }

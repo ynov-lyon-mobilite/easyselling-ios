@@ -1,10 +1,12 @@
 {
-  "data": {
-    "_id": "1",
-    "brand": "Peugeot",
-    "model": "model1",
-    "license": "license1",
-    "type": "car",
-    "year": "year1"
-  }
+  "data": [
+      {
+        "_id": "1",
+        "brand": "Peugeot",
+        "model": "model1",
+        "licence": "licence1",
+        "type": "car",
+        "year": "year1"
+      }
+  ]
 }

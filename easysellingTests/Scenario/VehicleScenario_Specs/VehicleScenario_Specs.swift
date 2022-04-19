@@ -50,7 +50,7 @@ class VehicleScenario_Specs: XCTestCase {
         givenScenario()
         whenBeginning()
         whenNavigatingToVehicleShare()
-        thenVehicle(is: Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "license1", type: .car, year: "year1"))
+        thenVehicle(is: Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"))
         thenHistory(is: [.myVehicles, .vehicleShare])
     }
 
@@ -84,7 +84,7 @@ class VehicleScenario_Specs: XCTestCase {
 
 
     private func whenNavigatingToVehicleShare() {
-        navigator.onVehicleShareOpen?(Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "license1", type: .car, year: "year1"))
+        navigator.onVehicleShareOpen?(Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"))
     }
 
     private func thenHistory(is expected: [SpyVehicleCreationNavigator.History]) {
@@ -103,7 +103,7 @@ class VehicleScenario_Specs: XCTestCase {
     private var navigator: SpyVehicleCreationNavigator!
     private var isVehicleCreationFinished: Bool = false
     private var isRefresh: Bool = false
-    private let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
+    private let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "licence", type: .car, year: "year")
 }
 
 class SpyVehicleCreationNavigator: VehicleNavigator {
@@ -112,7 +112,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     private(set) var onFinish: (() async -> Void)?
     private(set) var onNavigatingToInvoices: ((Vehicle) -> Void)?
     private(set) var onNavigateToSettingsMenu: Action?
-    private(set) var vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
+    private(set) var vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "licence", type: .car, year: "year")
     private(set) var vehicleScenarioIsFinished: Bool = false
     private(set) var onVehicleShareOpen: ((Vehicle) -> Void)?
     private(set) var vehicleID: String = ""

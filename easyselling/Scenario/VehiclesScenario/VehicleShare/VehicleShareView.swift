@@ -23,7 +23,7 @@ struct VehicleShareView: View {
 //                            Text("\(viewModel.vehicle.brand) \(viewModel.vehicle.model)")
 //                                .fontWeight(.bold)
 //                                .font(.title3)
-//                            Text(viewModel.vehicle.license)
+//                            Text(viewModel.vehicle.licence)
 //                                .font(.body)
 //                        }
 //                        Spacer()

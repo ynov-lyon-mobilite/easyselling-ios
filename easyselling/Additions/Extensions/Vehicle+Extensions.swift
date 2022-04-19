@@ -33,10 +33,10 @@ extension Vehicle {
     }
 
     static var placeholderCar: Vehicle {
-        .init(id: UUID().uuidString, brand: "Marque", model: "Model", licence: "Licence", type: .car, year: "0000")
+        .init(id: UUID().uuidString, brand: "Marque", model: "Model", licence: "licence", type: .car, year: "0000")
     }
 
     static var placeholderMoto: Vehicle {
-        .init(id: UUID().uuidString, brand: "Marque", model: "Model", licence: "Licence", type: .moto, year: "0000")
+        .init(id: UUID().uuidString, brand: "Marque", model: "Model", licence: "licence", type: .moto, year: "0000")
     }
 }

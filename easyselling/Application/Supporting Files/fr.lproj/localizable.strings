@@ -51,7 +51,7 @@
 "createVehicle.title" = "Ajouter un véhicule";
 "createVehicle.brand" = "Marque";
 "createVehicle.model" = "Modèle";
-"createVehicle.licence" = "Licence";
+"createVehicle.licence" = "licence";
 "createVehicle.year" = "Année";
 "createVehicle.submit" = "Ajouter";
 
