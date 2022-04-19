@@ -25,7 +25,8 @@ struct VehicleScenarioViewInstantiator: UIViewControllerRepresentable {
 
     private func vehicleScenario() -> UINavigationController {
         let navigationController = UINavigationController()
-        let vehicleNavigator = DefaultVehicleNavigator(window: window)
+        let vehicleNavigator = DefaultVehicleNavigator(window: window,
+                                                       navigationController: navigationController)
         let vehicleScenario = VehicleScenario(navigator: vehicleNavigator)
         vehicleScenario.begin()
 

@@ -67,7 +67,6 @@ class MyVehiclesViewModel: ObservableObject {
     }
 
     @MainActor func getVehicles() async {
-        setState(.loading)
         do {
             vehicles = try await vehiclesGetter.getVehicles()
             setState(.listingVehicles)
@@ -86,6 +85,7 @@ class MyVehiclesViewModel: ObservableObject {
         }
     }
 
+    @MainActor
     private func getSharedVehicles() async {
         do {
             sharedVehicles = try await sharedVehiclesGetter.getSharedVehicles()

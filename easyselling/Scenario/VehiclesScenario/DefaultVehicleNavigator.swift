@@ -20,12 +20,12 @@ protocol VehicleNavigator {
 }
 
 class DefaultVehicleNavigator: VehicleNavigator {
-    private var navigationController: UINavigationController = UINavigationController()
+    private var navigationController: UINavigationController
     private var window: UIWindow?
 
-    init(window: UIWindow?) {
+    init(window: UIWindow?, navigationController: UINavigationController) {
         self.window = window
-        self.window?.rootViewController = navigationController
+        self.navigationController = navigationController
     }
 
     func navigatesToHomeView(withActivationId id: String?,
