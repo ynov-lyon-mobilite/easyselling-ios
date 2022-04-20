@@ -17,9 +17,9 @@ struct MyVehiclesView: View {
         VStack(alignment: .leading) {
             TitleNavigationView(title: L10n.Vehicles.title)
 
-            Picker("Choose your vehicle", selection: $vehicleShowed) {
-                            Text("Mes véhicules").tag(0)
-                            Text("Mes véhicules partagés").tag(1)
+            Picker(L10n.Vehicles.chooseList, selection: $vehicleShowed) {
+                Text(L10n.Vehicles.List.myVehicles).tag(0)
+                Text(L10n.Vehicles.List.sharedVehicles).tag(1)
                         }
                         .pickerStyle(.segmented)
 

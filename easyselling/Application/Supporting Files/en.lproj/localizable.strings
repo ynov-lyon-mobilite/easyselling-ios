@@ -47,6 +47,9 @@
 "vehicles.updateButton" =  "Update";
 "vehicles.searchBar.placeholder" = "Search for a name, model...";
 "vehicles.shareButton" =  "Share";
+"vehicles.chooseList" = "Choose your vehicle list";
+"vehicles.list.myVehicles" = "My vehicles";
+"vehicles.list.sharedVehicles" = "My shared vehicles";
 
 "createVehicle.title" = "Add a vehicle";
 "createVehicle.brand" = "Brand";

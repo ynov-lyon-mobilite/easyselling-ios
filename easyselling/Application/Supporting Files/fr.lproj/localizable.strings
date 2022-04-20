@@ -47,11 +47,14 @@
 "vehicles.updateButton" =  "Modifier";
 "vehicles.searchBar.placeholder" = "Cherchez un nom, modèle...";
 "vehicles.shareButton" =  "Partager";
+"vehicles.chooseList" = "Choisissez votre liste de véhicule";
+"vehicles.list.myVehicles" = "Mes véhicules";
+"vehicles.list.sharedVehicles" = "Mes véhicules partagés";
 
 "createVehicle.title" = "Ajouter un véhicule";
 "createVehicle.brand" = "Marque";
 "createVehicle.model" = "Modèle";
-"createVehicle.licence" = "licence";
+"createVehicle.licence" = "Immatriculation";
 "createVehicle.year" = "Année";
 "createVehicle.submit" = "Ajouter";
 
