@@ -17,10 +17,7 @@ final class UserAuthenticationViewModel: ObservableObject {
 
     @Published var email: String = ""
     @Published var password: String = ""
-
-    @Published var showAlert = false
-    @Published var error: CredentialsError?
-    @Published var alert: APICallerError?
+    @Published var error: LocalizedError?
 
     init(
         firebaseAuthProvider: FirebaseAuthProvider = DefaultFirebaseAuthProvider(),
@@ -42,13 +39,12 @@ final class UserAuthenticationViewModel: ObservableObject {
             if let credentialError = error as? CredentialsError {
                 self.setError(with: credentialError)
             } else if let apiCallerError = error as? APICallerError {
-                self.alert = apiCallerError
-                showAlert = true
+                self.setError(with: apiCallerError)
             }
         }
     }
 
-    private func setError(with error: CredentialsError) {
+    private func setError(with error: LocalizedError) {
         withAnimation(.easeInOut(duration: 0.2)) {
             self.error = error
             Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in

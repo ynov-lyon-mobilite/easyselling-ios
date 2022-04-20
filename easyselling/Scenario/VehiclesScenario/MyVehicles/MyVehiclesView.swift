@@ -57,16 +57,16 @@ struct MyVehiclesView: View {
                 .refreshable {
                     await viewModel.getVehicles()
                 }
-                Button(action: viewModel.openVehicleCreation) {
-                    Text(L10n.CreateVehicle.title)
-                        .font(.title2)
-                        .foregroundColor(Color.white)
-                        .padding(.vertical, 15)
-                        .frame(maxWidth: .infinity)
-                        .background(Asset.Colors.primary.swiftUIColor)
-                        .cornerRadius(22)
-                }
-                .padding(.bottom)
+                    Button(action: viewModel.openVehicleCreation) {
+                        Text(L10n.CreateVehicle.title)
+                            .font(.title2)
+                            .foregroundColor(Color.white)
+                            .padding(.vertical, 15)
+                            .frame(maxWidth: .infinity)
+                            .background(Asset.Colors.primary.swiftUIColor)
+                            .cornerRadius(22)
+                    }
+                    .padding(.bottom)
             } else {
                 VStack {
                     List {

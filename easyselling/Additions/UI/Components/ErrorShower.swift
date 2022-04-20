@@ -34,6 +34,5 @@ struct ErrorShower: ViewModifier {
             .padding(.horizontal, 25)
 
         }
-        .ignoresSafeArea()
     }
 }
