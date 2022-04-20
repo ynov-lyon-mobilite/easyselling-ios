@@ -43,7 +43,8 @@ struct VehicleInvoicesView: View {
                     })
                     .onTapGesture {
                         Task {
-                            await viewModel.downloadInvoiceContent(filename: invoice.file?.filename ?? "")
+                            guard let fileName = invoice.file?.filename else { return }
+                            await viewModel.downloadInvoiceContent(filename: fileName)
                         }
                     }
                     swipeActions(edge: .trailing) {

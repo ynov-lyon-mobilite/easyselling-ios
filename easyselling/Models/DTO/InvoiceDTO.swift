@@ -9,8 +9,4 @@ import Foundation
 
 struct InvoiceDTO: Codable {
     let file : String
-
-    init(file: String) {
-        self.file = file
-    }
 }

@@ -19,9 +19,9 @@ class DefaultVehicleInvoicesGetter_Specs: XCTestCase {
 
     func test_Shows_vehicle_invoices_when_request_succeeded() async {
         let expectedInvoices = [
-            Invoice(id: "0AJEAZ9", file: nil),
-            Invoice(id: "0AJEAZ8", file: nil),
-            Invoice(id: "0AJEAZ7", file: nil)
+            Invoice(id: "0AJEAZ7", file: FileResponse(filename: "myFile.pdf")),
+            Invoice(id: "0AJEAZ8", file: FileResponse(filename: "myFile.pdf")),
+            Invoice(id: "0AJEAZ9", file: FileResponse(filename: "myFile.pdf"))
         ]
         
         givenCoreDataObject()
@@ -32,9 +32,9 @@ class DefaultVehicleInvoicesGetter_Specs: XCTestCase {
     
     func test_Throws_error_when_request_failed() async {
         let expected = [
-            Invoice(id: "test", fileData: Data()),
-            Invoice(id: "test1", fileData: Data()),
-            Invoice(id: "test2", fileData: Data())
+            Invoice(id: "test", fileData: nil, file: FileResponse(filename: "test")),
+            Invoice(id: "test1", fileData: nil, file: FileResponse(filename: "test1")),
+            Invoice(id: "test2", fileData: nil, file: FileResponse(filename: "test2"))
         ]
 
         givenCoreDataObject()
@@ -62,7 +62,8 @@ class DefaultVehicleInvoicesGetter_Specs: XCTestCase {
 
     private func whenTryingToGetVehicleInvoices() async {
         do {
-            invoices = try await invoiceGetter.getInvoices(ofVehicleId: "VehicleId")
+            invoices = try await invoiceGetter.getInvoices(ofVehicleId: "test")
+            invoices.sort { $0.id < $1.id }
         } catch(let error) {
             self.error = (error as! APICallerError)
         }

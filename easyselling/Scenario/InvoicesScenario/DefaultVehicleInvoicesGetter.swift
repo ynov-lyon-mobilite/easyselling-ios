@@ -38,7 +38,7 @@ class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
                     let invoiceCoreData = InvoiceCoreData.fetchRequestById(id: invoice.id)
 
                     if invoiceCoreData == nil {
-                        _ = InvoiceCoreData().toCoreDataObject(invoice: invoice, in: context)
+                        _ = invoice.toCoreDataObject(in: context)
                         if context.hasChanges {
                             try? context.save()
                         }
@@ -50,7 +50,7 @@ class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
             let invoicesCoreData = try? context.fetch(InvoiceCoreData.fetchRequest())
             var invoices: [Invoice] = []
             invoicesCoreData?.forEach { invoice in
-                invoices.append(invoice.fromCoreDataToObject())
+                invoices.append(invoice.toObject())
             }
 
             return invoices

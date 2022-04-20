@@ -18,12 +18,11 @@ struct Invoice: Decodable, Equatable {
         case file
     }
 
-    static func == (lhs: Invoice, rhs: Invoice) -> Bool {
-        return true
+    func toCoreDataObject (in context: NSManagedObjectContext) -> InvoiceCoreData {
+        return InvoiceCoreData(id: self.id, fileTitle: self.file?.filename, fileData: self.fileData ?? Data(), in: context)
     }
-
 }
 
-struct FileResponse: Decodable {
+struct FileResponse: Decodable, Equatable {
     var filename: String
 }

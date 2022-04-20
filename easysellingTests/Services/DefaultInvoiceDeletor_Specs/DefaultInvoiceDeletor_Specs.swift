@@ -13,7 +13,7 @@ class DefaultInvoiceDeletor_Specs: XCTestCase {
 
     func test_Deletes_succeeding() async {
         givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller() {
-            return ""
+            return Invoice(id: "", fileData: Data(), file: FileResponse(filename: ""))
         })
         await whenDeletingInvoice(withId: "A1231")
         thenSuccess(with: "A1231")

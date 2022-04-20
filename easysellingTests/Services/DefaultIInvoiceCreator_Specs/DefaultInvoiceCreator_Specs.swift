@@ -11,8 +11,8 @@ import CoreData
 
 class DefaultInvoiceCreator_Specs: XCTestCase {
     func test_Creates_invoice_successful() async {
-        givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller(){
-            return ""
+        givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller() {
+            return Invoice(id: "", fileData: Data(), file: FileResponse(filename: ""))
         })
         await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
         thenInvoiceIsCreated()
