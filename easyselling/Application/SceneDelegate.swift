@@ -19,18 +19,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
 
-        guard let userActivity = connectionOptions.userActivities.first,
-                      userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-                      let universalLinkUrl = userActivity.webpageURL else {
+        let navigator = DefaultLaunchScreenNavigator(window: window)
+        let scenario = LaunchScreenScenario(navigator: navigator)
 
-            startStartupScenario()
-            return
-        }
+        scenario.begin { [weak self] in
+            guard let userActivity = connectionOptions.userActivities.first,
+                          userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+                          let universalLinkUrl = userActivity.webpageURL else {
 
-        switch universalLinkUrl.path {
-        case "/admin/reset-password": resetPassword(according: universalLinkUrl)
-        case "vehicles/share": shareVehicleInfos(according: universalLinkUrl)
-        default: break
+                self?.startStartupScenario()
+                return
+            }
+
+            switch universalLinkUrl.path {
+            case "/admin/reset-password": self?.resetPassword(according: universalLinkUrl)
+            case "vehicles/share": self?.shareVehicleInfos(according: universalLinkUrl)
+            default: self?.startStartupScenario()
+            }
         }
     }
 
