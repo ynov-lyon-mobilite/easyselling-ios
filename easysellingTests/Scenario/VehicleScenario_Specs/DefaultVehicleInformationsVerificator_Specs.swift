@@ -60,7 +60,7 @@ class DefaultVehicleInformationsVerificator_Specs: XCTestCase {
 
     private func whenCheckinglicence(_ licence: String) {
         do {
-            try verificator.verifylicence(licence)
+            try verificator.verifyLicence(licence)
         } catch (let error) {
             self.vehicleCreationError = (error as! VehicleCreationError)
         }

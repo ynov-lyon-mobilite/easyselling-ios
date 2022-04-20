@@ -118,7 +118,7 @@ class SpyVehicleCreationNavigator: VehicleNavigator {
     private(set) var vehicleID: String = ""
 //    private(set) var vehicle: Vehicle?
 
-    func navigatesToHomeView(withActivationId id: String?, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void, onVehicleShareOpen: @escaping (Vehicle) -> Void) {
+    func navigatesToVehicleView(withActivationId id: String?, onVehicleUpdateOpen: @escaping OnUpdatingVehicle, onNavigatingToInvoices: @escaping (Vehicle) -> Void, onVehicleShareOpen: @escaping (Vehicle) -> Void) {
         self.onNavigatingToInvoices = onNavigatingToInvoices
         self.onVehicleShareOpen = onVehicleShareOpen
 

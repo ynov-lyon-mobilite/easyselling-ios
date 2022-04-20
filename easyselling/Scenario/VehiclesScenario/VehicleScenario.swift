@@ -14,7 +14,7 @@ class VehicleScenario {
     private var navigator: VehicleNavigator
 
     func begin(withVehicleActivationId id: String? = nil) {
-        navigator.navigatesToHomeView(withActivationId: id,
+        navigator.navigatesToVehicleView(withActivationId: id,
 									  onVehicleUpdateOpen: navigatesToVehicleUpdate,
                                       onNavigatingToInvoices: navigatesToInvoices,
                                       onVehicleShareOpen: navigatesToVehicleShare)

@@ -210,7 +210,7 @@
 		9BD8881027BD2FAA007F8816 /* VehicleShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD8880F27BD2FAA007F8816 /* VehicleShareView.swift */; };
 		9BD8881227BD2FBC007F8816 /* VehicleShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD8881127BD2FBC007F8816 /* VehicleShareViewModel.swift */; };
 		9BFD064127D8C22300C67764 /* DefaultSharedVehiclesGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFD064027D8C22300C67764 /* DefaultSharedVehiclesGetter.swift */; };
-		9BFD064427D8C31A00C67764 /* DefaultVehicleGetter_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFD064327D8C31A00C67764 /* DefaultVehicleGetter_Specs.swift */; };
+		9BFD064427D8C31A00C67764 /* DefaultSharedVehicleGetter_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFD064327D8C31A00C67764 /* DefaultSharedVehicleGetter_Specs.swift */; };
 		9BFD064627D8C32C00C67764 /* SucceedingSharedVehiclesGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFD064527D8C32C00C67764 /* SucceedingSharedVehiclesGetter.swift */; };
 		9BFD064827D8C44F00C67764 /* FailingSharedVehicleGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFD064727D8C44F00C67764 /* FailingSharedVehicleGetter.swift */; };
 		9BFD064C27D8E22900C67764 /* succeededVehicle.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BFD064B27D8E22900C67764 /* succeededVehicle.json */; };
@@ -433,7 +433,7 @@
 		9BD8880F27BD2FAA007F8816 /* VehicleShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleShareView.swift; sourceTree = "<group>"; };
 		9BD8881127BD2FBC007F8816 /* VehicleShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleShareViewModel.swift; sourceTree = "<group>"; };
 		9BFD064027D8C22300C67764 /* DefaultSharedVehiclesGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSharedVehiclesGetter.swift; sourceTree = "<group>"; };
-		9BFD064327D8C31A00C67764 /* DefaultVehicleGetter_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleGetter_Specs.swift; sourceTree = "<group>"; };
+		9BFD064327D8C31A00C67764 /* DefaultSharedVehicleGetter_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSharedVehicleGetter_Specs.swift; sourceTree = "<group>"; };
 		9BFD064527D8C32C00C67764 /* SucceedingSharedVehiclesGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SucceedingSharedVehiclesGetter.swift; sourceTree = "<group>"; };
 		9BFD064727D8C44F00C67764 /* FailingSharedVehicleGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailingSharedVehicleGetter.swift; sourceTree = "<group>"; };
 		9BFD064B27D8E22900C67764 /* succeededVehicle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = succeededVehicle.json; sourceTree = "<group>"; };
@@ -1314,7 +1314,7 @@
 		9BFD064227D8C2F100C67764 /* DefaultVehicleGetter_Specs */ = {
 			isa = PBXGroup;
 			children = (
-				9BFD064327D8C31A00C67764 /* DefaultVehicleGetter_Specs.swift */,
+				9BFD064327D8C31A00C67764 /* DefaultSharedVehicleGetter_Specs.swift */,
 				9BFD064527D8C32C00C67764 /* SucceedingSharedVehiclesGetter.swift */,
 				9BFD064727D8C44F00C67764 /* FailingSharedVehicleGetter.swift */,
 			);
@@ -1688,7 +1688,7 @@
 				87780BA827172F780035AB13 /* DefaultAPICaller_Specs.swift in Sources */,
 				39FC6E9E274D598A0067E97F /* DefaultVehicleDeletor_Specs.swift in Sources */,
 				035E860827188EB800684ED0 /* DefaultAccountCreator_Specs.swift in Sources */,
-				9BFD064427D8C31A00C67764 /* DefaultVehicleGetter_Specs.swift in Sources */,
+				9BFD064427D8C31A00C67764 /* DefaultSharedVehicleGetter_Specs.swift in Sources */,
 				0382E2A82717668300EB570E /* AccountCreationViewModel_Specs.swift in Sources */,
 				0317EE36275198A600A6AE0D /* ProfileScenario_Specs.swift in Sources */,
 				5CA58D202757F905000BF06C /* VehicleInvoiceViewModel_Specs.swift in Sources */,

@@ -10,10 +10,10 @@ import SwiftUI
 
 protocol VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
-    func navigatesToHomeView(withActivationId id: String?,
-                             onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
-                             onNavigatingToInvoices: @escaping (Vehicle) -> Void,
-                             onVehicleShareOpen: @escaping (Vehicle) -> Void)
+    func navigatesToVehicleView(withActivationId id: String?,
+                                onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+                                onNavigatingToInvoices: @escaping (Vehicle) -> Void,
+                                onVehicleShareOpen: @escaping (Vehicle) -> Void)
     func navigatesToInvoices(vehicle: Vehicle)
     func goingBackToHomeView()
     func navigatesToVehicleShare(vehicle: Vehicle)
@@ -28,10 +28,10 @@ class DefaultVehicleNavigator: VehicleNavigator {
         self.navigationController = navigationController
     }
 
-    func navigatesToHomeView(withActivationId id: String?,
-                             onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
-                             onNavigatingToInvoices: @escaping (Vehicle) -> Void,
-                             onVehicleShareOpen: @escaping (Vehicle) -> Void) {
+    func navigatesToVehicleView(withActivationId id: String?,
+                                onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+                                onNavigatingToInvoices: @escaping (Vehicle) -> Void,
+                                onVehicleShareOpen: @escaping (Vehicle) -> Void) {
 
         let vm = MyVehiclesViewModel(isOpeningVehicleUpdate: onVehicleUpdateOpen,
                                      isNavigatingToInvoices: onNavigatingToInvoices,

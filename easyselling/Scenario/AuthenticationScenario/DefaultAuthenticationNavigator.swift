@@ -66,5 +66,5 @@ class DefaultAuthenticationNavigator: AuthenticationNavigator {
         let scenario = HomeScenario(navigator: navigator)
 
         scenario.begin()
-	}
+    }
 }

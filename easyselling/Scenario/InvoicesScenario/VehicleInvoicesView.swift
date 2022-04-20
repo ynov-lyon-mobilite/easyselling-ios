@@ -12,7 +12,9 @@ struct VehicleInvoicesView: View {
     @ObservedObject var viewModel: VehicleInvoiceViewModel
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            TitleNavigationView(title: L10n.Invoice.title)
+
             if viewModel.isLoading {
                 ProgressView()
             } else {
@@ -62,6 +64,8 @@ struct VehicleInvoicesView: View {
                 }
             }
         }
+        .padding(.horizontal, 25)
+        .background(Color.red)
         .task { await viewModel.getInvoices() }
     }
 }

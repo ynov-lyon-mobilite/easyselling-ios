@@ -209,7 +209,7 @@ class FailingVehicleInformationsVerificator: VehicleInformationsVerificator {
         throw error
     }
 
-    func verifylicence(_ licence: String) throws {
+    func verifyLicence(_ licence: String) throws {
         throw error
     }
 }
@@ -220,7 +220,7 @@ class SucceedingVehicleInformationsVerificator: VehicleInformationsVerificator {
         return
     }
 
-    func verifylicence(_ licence: String) throws {
+    func verifyLicence(_ licence: String) throws {
         return
     }
 }
