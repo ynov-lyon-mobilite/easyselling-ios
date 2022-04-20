@@ -22,7 +22,9 @@ class InvoiceCreationViewModel: ObservableObject {
     @Published var alertError: Error?
     @Published var alertIsPresented = false
 
-    init(vehicle: Vehicle, fileUploader: FileUploader = DefaultFileUploader(), invoiceCreator: InvoiceCreator = DefaultInvoiceCreator(), onFinish: @escaping () async -> Void) {
+    init(vehicle: Vehicle, fileUploader: FileUploader = DefaultFileUploader(),
+         invoiceCreator: InvoiceCreator = DefaultInvoiceCreator(context: mainContext),
+         onFinish: @escaping () async -> Void) {
         self.vehicle = vehicle
         self.fileUploader = fileUploader
         self.invoiceCreator = invoiceCreator

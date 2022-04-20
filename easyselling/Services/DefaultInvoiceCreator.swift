@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol InvoiceCreator {
     func createInvoice(vehicleId: String, invoice: InvoiceDTO) async throws
@@ -14,16 +15,27 @@ protocol InvoiceCreator {
 class DefaultInvoiceCreator: InvoiceCreator {
     private var requestGenerator: AuthorizedRequestGenerator
     private var apiCaller: APICaller
+    private var context: NSManagedObjectContext
 
-    init(requestGenerator: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
+    init(requestGenerator: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator(),
+         apiCaller: APICaller = DefaultAPICaller(),
+         context: NSManagedObjectContext) {
         self.requestGenerator = requestGenerator
         self.apiCaller = apiCaller
+        self.context = context
     }
 
     func createInvoice(vehicleId: String, invoice: InvoiceDTO) async throws {
         let urlRequest = try await requestGenerator.generateRequest(
             endpoint: .invoices, method: .POST, body: invoice, headers: [:],
             pathKeysValues: ["vehicleId" : vehicleId], queryParameters: nil)
-        try await apiCaller.call(urlRequest)
+        let invoice = try await apiCaller.call(urlRequest, decodeType: Invoice.self)
+
+        try context.performAndWait {
+            _ = Invoice.toCoreDataObject(invoice: invoice, in: context)
+            if context.hasChanges {
+                try context.save()
+            }
+        }
     }
 }
