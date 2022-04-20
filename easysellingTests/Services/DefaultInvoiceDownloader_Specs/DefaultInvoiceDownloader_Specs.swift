@@ -20,13 +20,13 @@ class DefaultInvoiceDownloader_Specs: XCTestCase {
     }
 
     func test_Throws_error_when_download_failed() async {
-        let expected = UIImage(data: Data(count: 3))
+        let expected = UIImage()
 
         givenCoreDataObject()
         givenInvoiceDownloader(requestGenerator: FakeAuthorizedRequestGenerator(),
                                imageCaller: FailingImageCaller(withError: 404))
         await whenTryingToDownloadFile(id: "title")
-        thenFileDataIsNotEmpty(are: expected ?? UIImage())
+        thenFileDataIsNotEmpty(are: expected)
     }
 
     private func givenContext() {

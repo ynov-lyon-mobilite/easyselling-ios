@@ -30,7 +30,7 @@ class DefaultVehicleInvoicesGetter_Specs: XCTestCase {
         thenReturnedInvoices(are: expectedInvoices)
     }
     
-    func test_Throws_error_when_request_failed() async {
+    func test_Shows_invoices_from_coredata_when_api_request_failed() async {
         let expected = [
             Invoice(id: "test", fileData: nil, file: FileResponse(filename: "test")),
             Invoice(id: "test1", fileData: nil, file: FileResponse(filename: "test1")),

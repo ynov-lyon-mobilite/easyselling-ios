@@ -12,21 +12,28 @@ import CoreData
 class DefaultInvoiceDeletor_Specs: XCTestCase {
 
     func test_Deletes_succeeding() async {
-        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
+        let expected: [InvoiceCoreData] = []
+        givenCoreDataContext()
+        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller(), accordingInvoices: [InvoiceCoreData(id: "A1231", fileTitle: "", fileData: Data(), in: context)])
         await whenDeletingInvoice(withId: "A1231")
-        thenSuccess(with: "A1231")
+        thenInvoices(withId: "A1231", expected: expected)
     }
 
     func test_Deletes_failed_with_unknown_id_invoice() async {
-        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
-        await whenDeletingInvoice(withId: "A1231")
-        thenError(is: .notFound, with: "A1231")
+        givenCoreDataContext()
+        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(),
+                     apiCaller: FailingAPICaller(withError: 404),
+                     accordingInvoices: [InvoiceCoreData(id: "A1231", fileTitle: "", fileData: Data(), in: context)])
+        await whenDeletingInvoice(withId: "unknowId")
+        thenError(is: .notFound)
     }
 
-    private func givenDeletor(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
+    private func givenCoreDataContext() {
         context = TestCoreDataStack().persistentContainer.newBackgroundContext()
+    }
+
+    private func givenDeletor(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller, accordingInvoices: [InvoiceCoreData]) {
         deletor = DefaultInvoiceDeletor(requestGenerator: requestGenerator, apiCaller: apiCaller, context: context)
-        _ = InvoiceCoreData(id: "A1231", fileTitle: "", fileData: Data(), in: context)
     }
 
     private func whenDeletingInvoice(withId id: String) async {
@@ -38,17 +45,19 @@ class DefaultInvoiceDeletor_Specs: XCTestCase {
         }
     }
 
-    private func thenError(is expected: APICallerError, with id: String) {
+    private func thenError(is expected: APICallerError) {
         context.performAndWait {
-            XCTAssertTrue(InvoiceCoreData.fetchRequestById(id: id) != nil)
             XCTAssertEqual(expected, self.error)
         }
     }
 
-    private func thenSuccess(with id: String) {
+    private func thenInvoices(withId id: String, expected: [InvoiceCoreData]) {
         context.performAndWait {
+            let fetchRequest: NSFetchRequest<InvoiceCoreData> = InvoiceCoreData.fetchRequest()
+            let invoices = try? context.fetch(fetchRequest)
             XCTAssertTrue(InvoiceCoreData.fetchRequestById(id: id) == nil)
             XCTAssertTrue(self.success)
+            XCTAssertEqual(invoices?.count, expected.count)
         }
     }
 
