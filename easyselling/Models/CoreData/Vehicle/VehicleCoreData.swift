@@ -54,4 +54,9 @@ public class VehicleCoreData: NSManagedObject {
         self.type = data.type.rawValue
         self.year = data.year
     }
+
+    func toVehicle() -> Vehicle {
+        let type = Vehicle.Category(rawValue: self.type) ?? .car
+        return Vehicle(id: self.id, brand: self.brand, model: self.model, licence: self.licence, type: type, year: self.year)
+    }
 }

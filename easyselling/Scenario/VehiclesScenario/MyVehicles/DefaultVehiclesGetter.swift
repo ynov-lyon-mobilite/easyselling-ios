@@ -38,7 +38,7 @@ class DefaultVehiclesGetter : VehiclesGetter {
                let vehicleInCoreData = VehicleCoreData.fetchRequestById(id: vehicle.id)
 
                if vehicleInCoreData == nil {
-                   _ = Vehicle.toCoreDataObject(vehicle: vehicle, in: context)
+                   _ = vehicle.toCoreDataObject(in: context)
                    if context.hasChanges {
                        try? context.save()
                    }
@@ -52,7 +52,7 @@ class DefaultVehiclesGetter : VehiclesGetter {
            do {
                let vehiclesCoreData = try context.fetch(VehicleCoreData.fetchRequest())
                vehiclesCoreData.forEach { vehicle in
-                   vehicles.append(Vehicle.toVehicle(vehicle: vehicle))
+                   vehicles.append(vehicle.toVehicle())
                }
            } catch {
                throw APICallerError.unknownError

@@ -68,7 +68,8 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
 
     private func thenVehicleIsUpdating(vehicle: Vehicle) {
         context.performAndWait {
-            XCTAssertEqual(Vehicle.toVehicle(vehicle: VehicleCoreData.fetchRequestById(id: "1")!), vehicle)
+            let vehicleCoreData = VehicleCoreData.fetchRequestById(id: "1")
+            XCTAssertEqual(vehicleCoreData?.toVehicle(), vehicle)
             XCTAssertTrue(isRequestSucceed)
         }
     }

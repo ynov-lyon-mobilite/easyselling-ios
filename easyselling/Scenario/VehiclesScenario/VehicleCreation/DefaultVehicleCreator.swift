@@ -33,7 +33,7 @@ class DefaultVehicleCreator: VehicleCreator {
         let vehicle = try await apiCaller.call(urlRequest, decodeType: Vehicle.self)
 
         try context.performAndWait {
-            _ = Vehicle.toCoreDataObject(vehicle: vehicle, in: context)
+            _ = vehicle.toCoreDataObject(in: context)
             if context.hasChanges {
                 try context.save()
             }

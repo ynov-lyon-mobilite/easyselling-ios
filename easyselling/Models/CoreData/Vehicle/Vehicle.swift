@@ -26,26 +26,12 @@ struct Vehicle: Decodable, Equatable {
         case year
     }
 
-    init(id: String, brand: String, model: String, licence: String, type: Category, year: String) {
-        self.id = id
-        self.brand = brand
-        self.licence = licence
-        self.model = model
-        self.type = type
-        self.year = year
-    }
-
     func toDTO() -> VehicleDTO {
         return VehicleDTO(brand: self.brand, licence: self.licence, model: self.model, type: self.type, year: self.year)
     }
 
-    static func toVehicle(vehicle: VehicleCoreData) -> Vehicle {
-        let type = Vehicle.Category(rawValue: vehicle.type) ?? .car
-        return Vehicle(id: vehicle.id, brand: vehicle.brand, model: vehicle.model, licence: vehicle.licence, type: type, year: vehicle.year)
-    }
-
-    static func toCoreDataObject(vehicle: Vehicle, in context: NSManagedObjectContext) -> VehicleCoreData {
-        return VehicleCoreData(id: vehicle.id, brand: vehicle.brand, licence: vehicle.licence, model: vehicle.model, type: vehicle.type.rawValue, year: vehicle.year, in: context)
+    func toCoreDataObject(in context: NSManagedObjectContext) -> VehicleCoreData {
+        return VehicleCoreData(id: self.id, brand: self.brand, licence: self.licence, model: self.model, type: self.type.rawValue, year: self.year, in: context)
     }
 
     enum Category: String, Codable {
