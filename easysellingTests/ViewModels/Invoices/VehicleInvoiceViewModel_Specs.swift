@@ -37,6 +37,14 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         thenInvoiceFile(is: File(title: "title", image: UIImage()))
     }
 
+    func test_Downloads_invoices_file_at_init_to_preview_invoices() async {
+        givenViewModel(vehicleInvoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices),
+                       invoiceDownloader: SucceedingInvoiceDownloader())
+        await whenTryingToGetVehicleInvoices()
+        thenInvoicesFiles(are: [
+        ])
+    }
+
     func test_Shows_error_when_dowloading_invoice_fail() async {
         givenViewModel(vehicleInvoicesGetter: SucceedingVehicleInvoicesGetter(expectedVehicleInvoices),
                        invoiceDownloader: FailingInvoiceDownloader(withError: .unauthorized))
@@ -101,6 +109,10 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
 
     private func whenOpeningInvoiceCreationModal() {
         viewModel.openInvoiceCreation()
+    }
+
+    private func thenInvoicesFiles(are expected: [File]) {
+//        XCTAssertEqual(expected, downloadedInvoice)
     }
 
     private func thenViewModelIsLoading() {

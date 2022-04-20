@@ -14,6 +14,10 @@ struct InvoiceCreationView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            HStack {
+                Text("\(viewModel.vehicle.brand) \(viewModel.vehicle.model))
+                     Text("\(viewModel.vehicle.licence)")
+            }
             Text("\(viewModel.vehicle.brand) \(viewModel.vehicle.model) - \(viewModel.vehicle.licence)")
 
             if let file = viewModel.uploadedFile {
@@ -24,9 +28,19 @@ struct InvoiceCreationView: View {
                 }
             }
             Spacer()
-            Button(action: { Task { await viewModel.createInvoice() } }) {
-                Image(systemName: "plus")
-            }.frame(maxWidth: .infinity, alignment: .center)
+
+            Button(action: { Task {
+                await viewModel.createInvoice()
+            } }) {
+                Text(L10n.CreateVehicle.title)
+                    .font(.title2)
+                    .foregroundColor(Color.white)
+                    .padding(.vertical, 15)
+                    .frame(maxWidth: .infinity)
+                    .background(Asset.Colors.primary.swiftUIColor)
+                    .cornerRadius(22)
+            }
+            .padding(.bottom)
         }
         .padding()
         .fileImporter(isPresented: .constant(viewModel.fileSelectionType == .upload), allowedContentTypes: viewModel.allowedFileType) { result in
