@@ -39,6 +39,7 @@ struct HomeView: View {
             .padding()
             .background(Color.white)
         }
+        .navigationBarHidden(true)
     }
 }
 

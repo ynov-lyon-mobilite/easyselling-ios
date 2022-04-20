@@ -14,58 +14,62 @@ struct VehicleInvoicesView: View {
     var body: some View {
         VStack(alignment: .leading) {
             TitleNavigationView(title: L10n.Invoice.title)
-
-            if viewModel.isLoading {
-                ProgressView()
-            } else {
-                List(viewModel.invoices, id: \.id) { invoice in
+            List(viewModel.invoices) { invoice in
+                VStack {
+                    Image(uiImage: UIImage())
+                        .frame(height: 200)
                     VStack {
-                        if viewModel.isDownloading {
-                            HStack {
-                                ProgressView()
-                            }
-                        } else {
-                            HStack {
-                                Text("Invoice Id :")
-                                Spacer()
-                                Text(invoice.id)
-                            }
+                        HStack {
+                            Text("Vehicle Id :")
                             Spacer()
-                            HStack {
-                                Text("File Id :")
-                                Spacer()
-                                // Text(invoice.file.filename)
-                            }
+                            Text(invoice.vehicle)
+                        }
+                        Spacer()
+                        HStack {
+                            Text("File Id :")
+                            Spacer()
+                            Text(invoice.file.filename)
                         }
                     }
-                    .alert(isPresented: $viewModel.isError, content: {
-                        Alert(
-                            title: Text(viewModel.error?.errorDescription ?? ""),
-                            dismissButton: Alert.Button.default(Text(L10n.Button.ok)))
-                    })
-                    .onTapGesture {
-                        Task {
-                            guard let fileName = invoice.file?.filename else { return }
-                            await viewModel.downloadInvoiceContent(filename: fileName)
-                        }
-                    }
-                    swipeActions(edge: .trailing) {
-                        Button(L10n.Invoice.deleteButton) {
-                            Task {
-                                await viewModel.deleteInvoice(idInvoice: invoice.id)
-                            }
-                        }.tint(.red)
-                    }
+                    .padding()
+                    .background(Color.white)
                 }
                 Button(action: viewModel.openInvoiceCreation) {
                     Image(systemName: "plus")
                         .padding(.vertical, 15)
                         .frame(maxWidth: .infinity)
+                .cornerRadius(15)
+                .onTapGesture {
+                    Task {
+                        await viewModel.downloadInvoiceContent(filename: invoice.file.filename)
+                    }
                 }
+                .swipeActions(edge: .trailing) {
+                    Button(L10n.Invoice.deleteButton) {
+                        Task {
+                            await viewModel.deleteInvoice(idInvoice: invoice.id)
+                        }
+                    }.tint(.red)
+                }
+                .listRowSeparatorTint(.clear)
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             }
+            .listStyle(.plain)
+            Button(action: viewModel.openInvoiceCreation) {
+                Text(L10n.CreateVehicle.title)
+                    .font(.title2)
+                    .foregroundColor(Color.white)
+                    .padding(.vertical, 15)
+                    .frame(maxWidth: .infinity)
+                    .background(Asset.Colors.primary.swiftUIColor)
+                    .cornerRadius(22)
+            }
+            .padding(.bottom)
         }
         .padding(.horizontal, 25)
-        .background(Color.red)
+        .background(Asset.Colors.backgroundColor.swiftUIColor)
+
         .task { await viewModel.getInvoices() }
     }
 }
