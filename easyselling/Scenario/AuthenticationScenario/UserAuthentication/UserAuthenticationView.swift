@@ -77,10 +77,6 @@ struct UserAuthenticationView: View {
         .navigationBarHidden(true)
         .padding(25)
         .fillMaxHeight()
-        .alert(isPresented: $viewModel.showAlert) {
-            Alert(title: Text(viewModel.alert?.errorDescription ?? ""),
-                  dismissButton: .default(Text(L10n.Button.ok)))
-        }
     }
 }
 

@@ -14,13 +14,14 @@ protocol AuthenticationNavigator {
     func navigatesToAccountCreation(onFinish: @escaping Action)
     func navigatesToPasswordResetRequest()
     func navigatesToPasswordReset(withToken token: String, onPasswordReset: @escaping Action)
-    func goingBackToHomeView()
     func navigatesToVehicles()
+    func goingBackToHomeView()
 }
 
 class DefaultAuthenticationNavigator: AuthenticationNavigator {
 
-    init(navigationController: UINavigationController, window: UIWindow?) {
+    init(window: UIWindow?,
+         navigationController: UINavigationController) {
         self.window = window
         self.navigationController = navigationController
     }

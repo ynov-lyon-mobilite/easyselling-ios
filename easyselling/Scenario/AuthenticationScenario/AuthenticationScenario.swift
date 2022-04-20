@@ -12,6 +12,7 @@ class AuthenticationScenario {
     enum BeginType {
         case `default`
         case resetPassword(token: String)
+        case vehicleInfoShare(id: String)
     }
 
     private var navigator: AuthenticationNavigator
@@ -25,6 +26,9 @@ class AuthenticationScenario {
         case .`default`: navigator.navigatesToLoginPage(onAccountCreation: self.navigatesToAccountCreation,
                                     onPasswordReset: self.navigatesToPasswordResetRequest, onUserLogged: { self.navigatesToVehicles() })
         case let .resetPassword(token): navigatesToPasswordReset(withToken: token)
+        case .vehicleInfoShare: navigator.navigatesToLoginPage(onAccountCreation:
+                                                                        self.navigatesToAccountCreation,
+                                                                       onPasswordReset: self.navigatesToPasswordResetRequest, onUserLogged: { self.navigatesToVehicles() })
         }
 
     }

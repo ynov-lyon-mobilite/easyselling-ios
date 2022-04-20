@@ -18,6 +18,9 @@ enum HTTPEndpoint: String {
     case fileById = "/files/:fileId"
     case invoices = "/invoices/vehicle/:vehicleId"
     case invoiceId = "/invoices/:invoiceId"
+    case shareVehicle = "/vehicles/:vehicleId/share"
+    case sharedVehicles = "/vehicles/shared"
+    case activateVehicle = "/vehicles/authorization/:authorizationId/active"
 
     var url: URL? {
         URL(string: baseURL)?.appendingPathComponent(self.rawValue)

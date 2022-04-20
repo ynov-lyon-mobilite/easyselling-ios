@@ -46,6 +46,10 @@
 "vehicles.deleteButton" = "Delete";
 "vehicles.updateButton" =  "Update";
 "vehicles.searchBar.placeholder" = "Search for a name, model...";
+"vehicles.shareButton" =  "Share";
+"vehicles.chooseList" = "Choose your vehicle list";
+"vehicles.list.myVehicles" = "My vehicles";
+"vehicles.list.sharedVehicles" = "My shared vehicles";
 
 "createVehicle.title" = "Add a vehicle";
 "createVehicle.brand" = "Brand";
@@ -76,6 +80,7 @@
 "credentialsError.emptyPassword" = "Empty password";
 "credentialsError.emptyPasswordConfirmation" = "Empty password confirmation";
 
+"invoice.title" = "Invoices";
 "invoice.deleteButton" = "Delete invoice";
 
 "invoiceCreation.label.addFile" = "Add document";
@@ -90,3 +95,7 @@
 
 "settings.icons" = "Application icon";
 "settings.theme" = "Application theme";
+
+"shareVehicle.title" = "Shared Vehicle";
+"shareVehicle.hint" = "Who do you want to share this vehicle with?";
+"shareVehicle.send" = "Send";

@@ -18,7 +18,14 @@ class StartupScenario {
         self.firebaseAuthProvider = firebaseAuthProvider
     }
 
-    @MainActor func begin() async {
+    @MainActor func begin(from beginWay: BeginWay) async {
+        switch beginWay {
+        case .usual: await startFromUsualBeginType()
+        case let .vehicleInfoShare(id): await startFromSharedVehicleUniversalLink(withActivationId: id)
+        }
+    }
+
+    private func startFromUsualBeginType() async {
         switch await beginType() {
         case .onBoarding:
             navigator.navigatesToOnBoarding()
@@ -26,6 +33,14 @@ class StartupScenario {
             navigator.navigatesToLogin()
         case .home:
             navigator.navigatesToHomeView()
+        }
+    }
+
+    private func startFromSharedVehicleUniversalLink(withActivationId id: String) async {
+        switch await beginType() {
+        case .onBoarding: break
+        case .login: break
+        case .home: await navigator.navigatesToHomeView(withActivationId: id)
         }
     }
 
@@ -41,5 +56,10 @@ class StartupScenario {
 
     private enum BeginType {
         case onBoarding, login, home
+    }
+
+    enum BeginWay {
+        case usual
+        case vehicleInfoShare(id: String)
     }
 }

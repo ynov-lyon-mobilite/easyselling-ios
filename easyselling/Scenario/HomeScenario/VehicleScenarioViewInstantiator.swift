@@ -10,6 +10,12 @@ import SwiftUI
 
 struct VehicleScenarioViewInstantiator: UIViewControllerRepresentable {
 
+    init(window: UIWindow?) {
+        self.window = window
+    }
+
+    private var window: UIWindow?
+
     func makeUIViewController(context: Context) -> UINavigationController {
         return vehicleScenario()
     }
@@ -19,7 +25,8 @@ struct VehicleScenarioViewInstantiator: UIViewControllerRepresentable {
 
     private func vehicleScenario() -> UINavigationController {
         let navigationController = UINavigationController()
-        let vehicleNavigator = DefaultVehicleNavigator(navigationController: navigationController)
+        let vehicleNavigator = DefaultVehicleNavigator(window: window,
+                                                       navigationController: navigationController)
         let vehicleScenario = VehicleScenario(navigator: vehicleNavigator)
         vehicleScenario.begin()
 

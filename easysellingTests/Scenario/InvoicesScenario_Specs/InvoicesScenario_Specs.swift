@@ -63,7 +63,7 @@ class InvoicesScenario_Spec: XCTestCase {
         XCTAssertEqual(expected, navigator.history)
     }
 
-    private let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "Licence", type: .car, year: "year")
+    private let vehicle = Vehicle(id: "1", brand: "Brand", model: "Model", licence: "licence", type: .car, year: "year")
     private var scenario: InvoicesScenario!
     private var navigator: SpyInvoicesNavigator!
 

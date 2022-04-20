@@ -42,13 +42,14 @@ class DefaultHomeNavigator: HomeNavigator {
 
     func navigatesToVehicles(onLogout: @escaping Action) {
         window?.rootViewController = navigationController
-        navigationController.pushViewController(UIHostingController(rootView: HomeView(viewModel: HomeViewModel(onLogout: onLogout))), animated: true)
+        let view = HomeView(viewModel: HomeViewModel(onLogout: onLogout), window: window)
+        navigationController.pushViewController(UIHostingController(rootView: view), animated: true)
     }
 
     func goingBackToAuthenticationScenario() {
         let navigationController = UINavigationController()
         window?.rootViewController = navigationController
-        let navigator = DefaultAuthenticationNavigator(navigationController: navigationController, window: window)
+        let navigator = DefaultAuthenticationNavigator(window: window, navigationController: navigationController)
         let scenario = AuthenticationScenario(navigator: navigator)
         scenario.begin(from: .default)
     }

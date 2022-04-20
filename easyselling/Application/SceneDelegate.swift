@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private var navigationController: UINavigationController?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -18,28 +19,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
 
-        let navigator = DefaultStartupNavigator(window: window)
-        let scenario = StartupScenario(navigator: navigator)
-        Task {
-            await scenario.begin()
+        guard let userActivity = connectionOptions.userActivities.first,
+                      userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+                      let universalLinkUrl = userActivity.webpageURL else {
+
+            startStartupScenario()
+            return
         }
 
+        switch universalLinkUrl.path {
+        case "/admin/reset-password": resetPassword(according: universalLinkUrl)
+        case "vehicles/share": shareVehicleInfos(according: universalLinkUrl)
+        default: break
+        }
     }
 
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         guard let universalLinkUrl = userActivity.webpageURL else { return }
 
-        if universalLinkUrl.path == "/admin/reset-password" {
-            guard let url = URLComponents(string: universalLinkUrl.absoluteString),
-                  let token = url.queryItems?.first(where: { $0.name == "oobCode" })?.value else { return }
-
-            let navigationController = UINavigationController()
-            window?.makeKeyAndVisible()
-            window?.rootViewController = navigationController
-
-            let navigator = DefaultAuthenticationNavigator(navigationController: navigationController, window: window)
-            let scenario = AuthenticationScenario(navigator: navigator)
-            scenario.begin(from: .resetPassword(token: token))
+        switch universalLinkUrl.path {
+        case "/admin/reset-password": resetPassword(according: universalLinkUrl)
+        case "vehicles/share": shareVehicleInfos(according: universalLinkUrl)
+        default: break
         }
     }
 
@@ -69,5 +70,45 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+    }
+
+    private func resetPassword(according universalLinkUrl: URL) {
+        guard let url = URLComponents(string: universalLinkUrl.absoluteString),
+              let token = url.queryItems?.first(where: { $0.name == "oobCode" })?.value else { return }
+
+        setupNavigationController()
+        startAuthenticationScenario(withToken: token, according: .resetPassword(token: token))
+    }
+
+    private func shareVehicleInfos(according universalLinkUrl: URL) {
+        guard let url = URLComponents(string: universalLinkUrl.absoluteString),
+              let idQueryItem = url.queryItems?.first(where: { $0.name == "id" }),
+              let id = idQueryItem.value else { return }
+
+        setupNavigationController()
+        startStartupScenario(accordingBeginning: .vehicleInfoShare(id: id))
+    }
+
+    private func startStartupScenario(accordingBeginning beginWay: StartupScenario.BeginWay = .usual) {
+        let navigator = DefaultStartupNavigator(window: window)
+        let scenario = StartupScenario(navigator: navigator)
+        Task {
+            await scenario.begin(from: beginWay)
+        }
+    }
+
+    private func startAuthenticationScenario(withToken token: String, according beginType: AuthenticationScenario.BeginType) {
+        guard let navigationController = navigationController else {
+            return
+        }
+        let navigator = DefaultAuthenticationNavigator(window: window, navigationController: navigationController)
+        let scenario = AuthenticationScenario(navigator: navigator)
+        scenario.begin(from: beginType)
+    }
+
+    private func setupNavigationController() {
+        navigationController = UINavigationController()
+        window?.makeKeyAndVisible()
+        window?.rootViewController = navigationController
     }
 }

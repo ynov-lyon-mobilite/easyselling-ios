@@ -46,11 +46,15 @@
 "vehicles.deleteButton" = "Supprimer";
 "vehicles.updateButton" =  "Modifier";
 "vehicles.searchBar.placeholder" = "Cherchez un nom, modèle...";
+"vehicles.shareButton" =  "Partager";
+"vehicles.chooseList" = "Choisissez votre liste de véhicule";
+"vehicles.list.myVehicles" = "Mes véhicules";
+"vehicles.list.sharedVehicles" = "Mes véhicules partagés";
 
 "createVehicle.title" = "Ajouter un véhicule";
 "createVehicle.brand" = "Marque";
 "createVehicle.model" = "Modèle";
-"createVehicle.licence" = "Licence";
+"createVehicle.licence" = "Immatriculation";
 "createVehicle.year" = "Année";
 "createVehicle.submit" = "Ajouter";
 
@@ -75,6 +79,7 @@
 "credentialsError.emptyPassword" = "Le mot de passe est vide";
 "credentialsError.emptyPasswordConfirmation" = "La confirmation du mot de passe est vide";
 
+"invoice.title" = "Factures";
 "invoice.deleteButton" = "Supprimer la facture";
 
 "invoiceCreation.label.addFile" = "Ajouter un document";
@@ -89,3 +94,7 @@
 
 "settings.icons" = "Icône d'application";
 "settings.theme" = "Thème d'application";
+
+"shareVehicle.title" = "Véhicule partagé";
+"shareVehicle.hint" = "Avec qui voulez-vous partager ce véhicule ?";
+"shareVehicle.send" = "Envoyer";

@@ -12,16 +12,22 @@ protocol StartupNavigator {
     func navigatesToOnBoarding()
     func navigatesToLogin()
     func navigatesToHomeView()
+    func navigatesToHomeView(withActivationId id: String?) async
 }
 
-class DefaultStartupNavigator : StartupNavigator {
+class DefaultStartupNavigator: StartupNavigator {
+
     private var navigationController = UINavigationController()
     private var window: UIWindow?
 
-    init(window: UIWindow?) {
+    init(window: UIWindow?,
+         vehicleActivator: VehicleActivator = DefaultVehicleActivator()) {
         self.window = window
+        self.vehicleActivator = vehicleActivator
         self.window?.rootViewController = navigationController
     }
+
+    private var vehicleActivator: VehicleActivator
 
     func navigatesToOnBoarding() {
         let navigator = DefaultOnBoardingNavigator(navigationController: navigationController)
@@ -31,9 +37,16 @@ class DefaultStartupNavigator : StartupNavigator {
     }
 
     func navigatesToLogin() {
-        let navigator = DefaultAuthenticationNavigator(navigationController: navigationController, window: window)
+        let navigator = DefaultAuthenticationNavigator(window: window, navigationController: navigationController)
         let scenario = AuthenticationScenario(navigator: navigator)
         scenario.begin(from: .default)
+    }
+
+    func navigatesToHomeView(withActivationId id: String?) async {
+        let navigator = DefaultHomeNavigator(window: window)
+        let scenario = HomeScenario(navigator: navigator)
+        await activateSharingOfVehicle(id: id)
+        scenario.begin()
     }
 
     func navigatesToHomeView() {
@@ -41,5 +54,10 @@ class DefaultStartupNavigator : StartupNavigator {
         let scenario = HomeScenario(navigator: navigator)
 
         scenario.begin()
+    }
+
+    private func activateSharingOfVehicle(id: String?) async {
+        guard let id = id else { return }
+        try? await vehicleActivator.activateVehicle(id: id)
     }
 }

@@ -10,31 +10,32 @@ import SwiftUI
 
 protocol VehicleNavigator {
     func navigatesToVehicleUpdate(onFinish: @escaping () async -> Void, vehicle: Vehicle)
-    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
-                             onNavigatingToInvoices: @escaping (Vehicle) -> Void)
+    func navigatesToVehicleView(withActivationId id: String?,
+                                onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+                                onNavigatingToInvoices: @escaping (Vehicle) -> Void,
+                                onVehicleShareOpen: @escaping (Vehicle) -> Void)
     func navigatesToInvoices(vehicle: Vehicle)
     func goingBackToHomeView()
+    func navigatesToVehicleShare(vehicle: Vehicle)
 }
 
 class DefaultVehicleNavigator: VehicleNavigator {
+    private var navigationController: UINavigationController
+    private var window: UIWindow?
 
-    init(window: UIWindow?) {
+    init(window: UIWindow?, navigationController: UINavigationController) {
         self.window = window
-    }
-
-    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
-    private var navigationController: UINavigationController = UINavigationController()
-    private var window: UIWindow?
-
-    func navigatesToHomeView(onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
-                             onNavigatingToInvoices: @escaping (Vehicle) -> Void) {
-        window?.rootViewController = navigationController
+    func navigatesToVehicleView(withActivationId id: String?,
+                                onVehicleUpdateOpen: @escaping OnUpdatingVehicle,
+                                onNavigatingToInvoices: @escaping (Vehicle) -> Void,
+                                onVehicleShareOpen: @escaping (Vehicle) -> Void) {
 
         let vm = MyVehiclesViewModel(isOpeningVehicleUpdate: onVehicleUpdateOpen,
-                                     isNavigatingToInvoices: onNavigatingToInvoices)
+                                     isNavigatingToInvoices: onNavigatingToInvoices,
+                                     isOpeningVehicleShare: onVehicleShareOpen)
         let myVehiclesView = MyVehiclesView(viewModel: vm)
 
         navigationController.pushViewController(UIHostingController(rootView: myVehiclesView), animated: true)
@@ -56,6 +57,12 @@ class DefaultVehicleNavigator: VehicleNavigator {
         let navigator = DefaultSettingsNavigator(navigationController: navigationController)
         let scenario = SettingsScenario(navigator: navigator)
         scenario.begin()
+    }
+
+    func navigatesToVehicleShare(vehicle: Vehicle) {
+        let vm = VehicleShareViewModel(vehicle: vehicle)
+        let view = VehicleShareView(viewModel: vm)
+        navigationController.present(UIHostingController(rootView: view), animated: true)
     }
 
     func goingBackToHomeView() {

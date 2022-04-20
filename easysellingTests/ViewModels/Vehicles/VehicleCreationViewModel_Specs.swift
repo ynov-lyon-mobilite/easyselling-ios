@@ -34,7 +34,7 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
         whenSelectingVehicleType(.car)
         thenActualStep(is: .licence)
-        whenSelectingLicence("AA-222-AA")
+        whenSelectinglicence("AA-222-AA")
         XCTAssertEqual("AA-222-AA", viewModel.licence)
         XCTAssertEqual("AA-222-AA", viewModel.createdVehicle.licence)
         thenActualStep(is: .brandAndModel)
@@ -44,7 +44,7 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
         whenSelectingVehicleType(.car)
         XCTAssertEqual(.licence, viewModel.vehicleCreationStep)
-        whenSelectingLicence("AA-222-AA")
+        whenSelectinglicence("AA-222-AA")
         XCTAssertEqual(.brandAndModel, viewModel.vehicleCreationStep)
         whenSelectingBrandAndModel("Peugeot", "206")
         XCTAssertEqual("Peugeot", viewModel.brand)
@@ -66,7 +66,7 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         givenViewModel(vehicleInformationsVerificator: FailingVehicleInformationsVerificator(error: .incorrectlicenceFormat))
         whenSelectingVehicleType(.car)
         thenActualStep(is: .licence)
-        whenSelectingLicence("invalid")
+        whenSelectinglicence("invalid")
         thenError(is: .incorrectlicenceFormat)
     }
 
@@ -83,7 +83,7 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
         whenSelectingVehicleType(.car)
         XCTAssertEqual(.licence, viewModel.vehicleCreationStep)
-        whenSelectingLicence("AA-222-AA")
+        whenSelectinglicence("AA-222-AA")
         XCTAssertEqual(.brandAndModel, viewModel.vehicleCreationStep)
         whenSelectingBrandAndModel("Peugeot", "206")
         XCTAssertEqual("Peugeot", viewModel.brand)
@@ -99,7 +99,7 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         givenViewModel(vehicleCreator: FailingVehicleCreator(error: .forbidden), vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
         whenSelectingVehicleType(.car)
         XCTAssertEqual(.licence, viewModel.vehicleCreationStep)
-        whenSelectingLicence("AA-222-AA")
+        whenSelectinglicence("AA-222-AA")
         XCTAssertEqual(.brandAndModel, viewModel.vehicleCreationStep)
         whenSelectingBrandAndModel("Peugeot", "206")
         XCTAssertEqual("Peugeot", viewModel.brand)
@@ -120,7 +120,7 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         whenContinueVehicleCreation()
     }
 
-    private func whenSelectingLicence(_ licence: String) {
+    private func whenSelectinglicence(_ licence: String) {
         viewModel.licence = licence
         whenContinueVehicleCreation()
     }
