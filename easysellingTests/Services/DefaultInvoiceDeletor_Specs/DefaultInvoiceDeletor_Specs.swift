@@ -11,7 +11,9 @@ import XCTest
 class DefaultInvoiceDeletor_Specs: XCTestCase {
 
     func test_Deletes_succeeding() async {
-        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
+        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller() {
+            return ""
+        })
         await whenDeletingInvoice(withId: "A1231")
         thenSuccess()
     }

@@ -13,7 +13,9 @@ import XCTest
 class DefaultAccountCreator_Specs: XCTestCase {
     
     func test_Creates_account_successfully() async {
-        givenAccountCreator(requestGenerator: FakeRequestGenerator(), apiCaller: SucceedingAPICaller())
+        givenAccountCreator(requestGenerator: FakeRequestGenerator(), apiCaller: SucceedingAPICaller() {
+            return ""
+        })
         await whenCreatingAccount()
         thenAccountIsCreated()
     }

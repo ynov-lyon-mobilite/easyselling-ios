@@ -11,7 +11,7 @@ import SwiftUI
 class MyVehiclesViewModel: ObservableObject {
 
     init(vehiclesGetter: VehiclesGetter = DefaultVehiclesGetter(),
-         vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(),
+         vehicleDeletor: VehicleDeletor = DefaultVehicleDeletor(context: mainContext),
          isOpeningVehicleUpdate: @escaping OnUpdatingVehicle,
          isNavigatingToInvoices: @escaping (Vehicle) -> Void) {
 
@@ -61,9 +61,9 @@ class MyVehiclesViewModel: ObservableObject {
             vehicles = try await vehiclesGetter.getVehicles()
             setState(.listingVehicles)
         } catch (let error) {
-            setState(.error)
             if let error = error as? APICallerError {
-                self.error = error
+                setError(with: error)
+                setState(.error)
             }
         }
     }
@@ -73,9 +73,8 @@ class MyVehiclesViewModel: ObservableObject {
             try await vehicleDeletor.deleteVehicle(id: idVehicle)
             deleteVehicleOnTheView(idVehicle: idVehicle)
         } catch (let error) {
-            setState(.error)
             if let error = error as? APICallerError {
-                self.error = error
+                setError(with: error)
             }
         }
     }
@@ -86,6 +85,21 @@ class MyVehiclesViewModel: ObservableObject {
         }
     }
 
+    private func setError(with error: APICallerError) {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            self.error = error
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    self.error = nil
+                }
+            }
+        }
+    }
+
+    func navigatesToInvoices(vehicle: Vehicle) {
+        self.isNavigatingToInvoices(vehicle)
+    }
+
     private func setState(_ state: VehicleState) {
         self.state = state
     }
@@ -94,9 +108,5 @@ class MyVehiclesViewModel: ObservableObject {
         case loading
         case listingVehicles
         case error
-    }
-
-    func navigatesToInvoices(vehicle: Vehicle) {
-        self.isNavigatingToInvoices(vehicle)
     }
 }

@@ -18,7 +18,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     
     func test_Shows_vehicles_when_request_is_success() async {
         expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
-                                Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")]
+                            Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")]
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter(expectedVehicles))
         thenViewModelState(is: .loading)
         await whenTryingToGetVehicles()
@@ -26,7 +26,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
                                Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")])
         thenViewModelState(is: .listingVehicles)
     }
-    
+
     func test_Shows_error_when_request_is_failing() async {
         givenViewModel(vehiclesGetter: FailingVehiclesGetter(withError: APICallerError.notFound))
         thenViewModelState(is: .loading)
@@ -46,7 +46,9 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     }
 
     func test_Deletes_vehicle_when_request_is_failing() async {
-        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),Vehicle(id: "2", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1")]),
+        givenViewModelDeletor(vehiclesGetter: SucceedingVehiclesGetter([
+            Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
+            Vehicle(id: "2", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1")]),
                               vehicleDeletor: FailingVehicleDeletor(withError: APICallerError.notFound))
         await whenDeletingVehicle(withId: "2")
         thenError(is: APICallerError.notFound.errorDescription)
@@ -54,7 +56,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
 
     func test_Asserts_that_updated_vehicle_is_the_same_that_has_been_clicked() {
         expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
-                                Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")]
+                            Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")]
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter(expectedVehicles))
         whenOpeningVehicleUpdatingModal(vehicleId: "1")
         thenVehicleThatShouldBeUpdate(is: Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"))
@@ -62,7 +64,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
 
     func test_Asserts_that_update_vehicles_callback_contain_on_other_callback_parameter() {
         expectedVehicles = [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
-                                Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")]
+                            Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")]
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter(expectedVehicles))
         whenOpeningVehicleUpdatingModal(vehicleId: "1")
         XCTAssertNotNil(expectedCallback)

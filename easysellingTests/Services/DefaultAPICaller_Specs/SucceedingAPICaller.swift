@@ -13,9 +13,15 @@ import UIKit
 class SucceedingAPICaller: APICaller {
     
     private(set) var isCallSucceed: Bool = false
-    
+    typealias type<T: Any> = () -> T
+    let callback: type<Any>
+
+    init(callback: @escaping type<Any>) {
+        self.callback = callback
+    }
+
     func call<T: Decodable>(_ urlRequest: URLRequest, decodeType: T.Type) -> T {
-        return "" as! T
+        return callback() as! T
     }
     
     func call(_ urlRequest: URLRequest) {

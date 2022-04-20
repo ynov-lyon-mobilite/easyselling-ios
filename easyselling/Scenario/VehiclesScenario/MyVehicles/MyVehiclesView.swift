@@ -40,14 +40,12 @@ struct MyVehiclesView: View {
                     .listRowSeparatorTint(.clear)
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-
                 }
             }
             .listStyle(.plain)
             .refreshable {
                 await viewModel.getVehicles()
             }
-
                 Button(action: viewModel.openVehicleCreation) {
                     Text(L10n.CreateVehicle.title)
                         .font(.title2)
@@ -73,6 +71,8 @@ struct MyVehiclesView: View {
                 }
             }))
         }
+        .task { await viewModel.getVehicles() }
+        .ableToShowError(viewModel.error)
     }
 }
 

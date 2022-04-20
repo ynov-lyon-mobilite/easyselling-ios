@@ -21,6 +21,7 @@ class ProfileViewModel: ObservableObject {
 
     func logout() {
         try? firebaseAuthProvider.logout()
+        deleteAllEntities()
         onLogout()
     }
 
