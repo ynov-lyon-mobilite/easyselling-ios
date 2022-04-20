@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import CoreData
 
 class VehicleInvoiceViewModel: ObservableObject {
 
@@ -25,19 +26,19 @@ class VehicleInvoiceViewModel: ObservableObject {
     @Published var isError: Bool = false
 
     init(vehicle: Vehicle,
-         invoiceDeletor: InvoiceDeletor = DefaultInvoiceDeletor(),
+         invoiceDeletor: InvoiceDeletor = DefaultInvoiceDeletor(context: mainContext),
          vehicleInvoicesGetter: VehicleInvoicesGetter = DefaultVehicleInvoicesGetter(),
-         invoiceDownloader: InvoiceDownloader = DefaultInvoiceDownloader(),
+         invoiceDownloader: InvoiceDownloader = DefaultInvoiceDownloader(context: mainContext),
          onNavigatingToInvoiceView: @escaping (File) -> Void,
          isOpeningInvoiceCreation: @escaping (Vehicle, @escaping () async -> Void) -> Void) {
 
-        self.vehicle = vehicle
-        self.invoiceDeletor = invoiceDeletor
-        self.vehicleInvoicesGetter = vehicleInvoicesGetter
-        self.invoiceDownloader = invoiceDownloader
-        self.onNavigatingToInvoiceView = onNavigatingToInvoiceView
-        self.isOpeningInvoiceCreation = isOpeningInvoiceCreation
-    }
+           self.vehicle = vehicle
+           self.invoiceDeletor = invoiceDeletor
+           self.vehicleInvoicesGetter = vehicleInvoicesGetter
+           self.invoiceDownloader = invoiceDownloader
+           self.onNavigatingToInvoiceView = onNavigatingToInvoiceView
+           self.isOpeningInvoiceCreation = isOpeningInvoiceCreation
+       }
 
     func openInvoiceCreation() {
         self.isOpeningInvoiceCreation(vehicle) { [weak self] in
@@ -83,6 +84,7 @@ class VehicleInvoiceViewModel: ObservableObject {
         } catch (let error) {
             if let error = error as? APICallerError {
                 self.error = error
+                self.isError = true
             }
         }
     }

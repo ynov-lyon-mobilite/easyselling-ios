@@ -16,7 +16,7 @@ struct VehicleInvoicesView: View {
             if viewModel.isLoading {
                 ProgressView()
             } else {
-                List(viewModel.invoices) { invoice in
+                List(viewModel.invoices, id: \.id) { invoice in
                     VStack {
                         if viewModel.isDownloading {
                             HStack {
@@ -24,24 +24,30 @@ struct VehicleInvoicesView: View {
                             }
                         } else {
                             HStack {
-                                Text("Vehicle Id :")
+                                Text("Invoice Id :")
                                 Spacer()
-                                Text(invoice.vehicle)
+                                Text(invoice.id)
                             }
                             Spacer()
                             HStack {
                                 Text("File Id :")
                                 Spacer()
-                                Text(invoice.file.filename)
+                                // Text(invoice.file.filename)
                             }
                         }
                     }
+                    .alert(isPresented: $viewModel.isError, content: {
+                        Alert(
+                            title: Text(viewModel.error?.errorDescription ?? ""),
+                            dismissButton: Alert.Button.default(Text(L10n.Button.ok)))
+                    })
                     .onTapGesture {
                         Task {
-                            await viewModel.downloadInvoiceContent(filename: invoice.file.filename)
+                            guard let fileName = invoice.file?.filename else { return }
+                            await viewModel.downloadInvoiceContent(filename: fileName)
                         }
                     }
-                    .swipeActions(edge: .trailing) {
+                    swipeActions(edge: .trailing) {
                         Button(L10n.Invoice.deleteButton) {
                             Task {
                                 await viewModel.deleteInvoice(idInvoice: invoice.id)
@@ -62,9 +68,10 @@ struct VehicleInvoicesView: View {
 
 struct VehicleInvoicesView_Previews: PreviewProvider {
     static var previews: some View {
-        let vehicle = Vehicle(id: "1098HFD10°H", brand: "Yamaha", model: "XJ6", licence: "AA-123-BB", type: .moto, year: "2013")
-        let vm = VehicleInvoiceViewModel(vehicle: vehicle, onNavigatingToInvoiceView: { _ in }, isOpeningInvoiceCreation: { _,_  in })
-        vm.invoices = [Invoice(id: "123DAEA", vehicle: "1098HFD10°H", file: .preview)]
+        let vm = VehicleInvoiceViewModel(vehicle: Vehicle(id: "", brand: "", model: "", licence: "", type: .car, year: ""),
+                                         onNavigatingToInvoiceView: {_ in },
+                                         isOpeningInvoiceCreation: {_, _ in })
+        vm.invoices = [Invoice(id: "ID", fileData: Data(), file: FileResponse(filename: ""))]
         vm.isLoading = false
         vm.isDownloading = true
         return VehicleInvoicesView(viewModel: vm)

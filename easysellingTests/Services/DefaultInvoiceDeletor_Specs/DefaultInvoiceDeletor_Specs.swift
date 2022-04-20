@@ -7,25 +7,33 @@
 
 import XCTest
 @testable import easyselling
+import CoreData
 
 class DefaultInvoiceDeletor_Specs: XCTestCase {
 
     func test_Deletes_succeeding() async {
-        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller() {
-            return ""
-        })
+        let expected: [InvoiceCoreData] = []
+        givenCoreDataContext()
+        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller(), accordingInvoices: [InvoiceCoreData(id: "A1231", fileTitle: "", fileData: Data(), in: context)])
         await whenDeletingInvoice(withId: "A1231")
-        thenSuccess()
+        thenInvoices(withId: "A1231", expected: expected)
     }
 
     func test_Deletes_failed_with_unknown_id_invoice() async {
-        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: FailingAPICaller(withError: 404))
-        await whenDeletingInvoice(withId: "A1231")
+        givenCoreDataContext()
+        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(),
+                     apiCaller: FailingAPICaller(withError: 404),
+                     accordingInvoices: [InvoiceCoreData(id: "A1231", fileTitle: "", fileData: Data(), in: context)])
+        await whenDeletingInvoice(withId: "unknowId")
         thenError(is: .notFound)
     }
 
-    private func givenDeletor(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
-       deletor = DefaultInvoiceDeletor(requestGenerator: requestGenerator, apiCaller: apiCaller)
+    private func givenCoreDataContext() {
+        context = TestCoreDataStack().persistentContainer.newBackgroundContext()
+    }
+
+    private func givenDeletor(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller, accordingInvoices: [InvoiceCoreData]) {
+        deletor = DefaultInvoiceDeletor(requestGenerator: requestGenerator, apiCaller: apiCaller, context: context)
     }
 
     private func whenDeletingInvoice(withId id: String) async {
@@ -38,13 +46,22 @@ class DefaultInvoiceDeletor_Specs: XCTestCase {
     }
 
     private func thenError(is expected: APICallerError) {
-        XCTAssertEqual(expected, self.error)
+        context.performAndWait {
+            XCTAssertEqual(expected, self.error)
+        }
     }
 
-    private func thenSuccess() {
-        XCTAssertTrue(self.success)
+    private func thenInvoices(withId id: String, expected: [InvoiceCoreData]) {
+        context.performAndWait {
+            let fetchRequest: NSFetchRequest<InvoiceCoreData> = InvoiceCoreData.fetchRequest()
+            let invoices = try? context.fetch(fetchRequest)
+            XCTAssertTrue(InvoiceCoreData.fetchRequestById(id: id) == nil)
+            XCTAssertTrue(self.success)
+            XCTAssertEqual(invoices?.count, expected.count)
+        }
     }
 
+    private var context: NSManagedObjectContext!
     private var deletor: DefaultInvoiceDeletor!
     private var error: APICallerError!
     private var success: Bool!

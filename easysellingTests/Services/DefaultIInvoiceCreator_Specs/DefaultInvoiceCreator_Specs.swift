@@ -6,12 +6,13 @@
 //
 
 import XCTest
+import CoreData
 @testable import easyselling
 
 class DefaultInvoiceCreator_Specs: XCTestCase {
     func test_Creates_invoice_successful() async {
-        givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller(){
-            return ""
+        givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller() {
+            return Invoice(id: "", fileData: Data(), file: FileResponse(filename: ""))
         })
         await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
         thenInvoiceIsCreated()
@@ -39,7 +40,8 @@ class DefaultInvoiceCreator_Specs: XCTestCase {
     }
 
     private func givenInvoiceCreator(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
-        invoiceCreator = DefaultInvoiceCreator(requestGenerator: requestGenerator, apiCaller: apiCaller)
+        context = TestCoreDataStack().persistentContainer.newBackgroundContext()
+        invoiceCreator = DefaultInvoiceCreator(requestGenerator: requestGenerator, apiCaller: apiCaller, context: context)
         invoiceInformations = InvoiceDTO(file: UUID().uuidString)
     }
 
@@ -64,6 +66,7 @@ class DefaultInvoiceCreator_Specs: XCTestCase {
         XCTAssertEqual(expected, error.errorDescription)
     }
 
+    private var context: NSManagedObjectContext!
     private var invoiceCreator: InvoiceCreator!
     private var invoiceInformations: InvoiceDTO!
     private var isRequestSucceed: Bool!

@@ -46,7 +46,19 @@ class DefaultImageCaller: ImageCaller {
             if let image = UIImage(data: data) {
                 uiImage = image
             }
+        } else {
+            throw APICallerError.internalServerError
         }
+        return uiImage
+    }
+
+    func callImageWithNoNetwork(_ data: Data) -> UIImage {
+        var uiImage: UIImage = UIImage()
+
+        if let data = UIImage(data: data) {
+            uiImage = data
+        }
+
         return uiImage
     }
 }
