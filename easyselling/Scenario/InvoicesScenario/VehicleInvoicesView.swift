@@ -14,7 +14,7 @@ struct VehicleInvoicesView: View {
     var body: some View {
         VStack(alignment: .leading) {
             TitleNavigationView(title: L10n.Invoice.title)
-            List(viewModel.invoices) { invoice in
+            List(viewModel.invoices, id: \.id) { invoice in
                 VStack {
                     Image(uiImage: UIImage())
                         .frame(height: 200)
@@ -22,26 +22,22 @@ struct VehicleInvoicesView: View {
                         HStack {
                             Text("Vehicle Id :")
                             Spacer()
-                            Text(invoice.vehicle)
+                            Text(invoice.id)
                         }
                         Spacer()
                         HStack {
                             Text("File Id :")
                             Spacer()
-                            Text(invoice.file.filename)
+                            Text(invoice.file?.filename ?? "")
                         }
                     }
                     .padding()
                     .background(Color.white)
                 }
-                Button(action: viewModel.openInvoiceCreation) {
-                    Image(systemName: "plus")
-                        .padding(.vertical, 15)
-                        .frame(maxWidth: .infinity)
                 .cornerRadius(15)
                 .onTapGesture {
                     Task {
-                        await viewModel.downloadInvoiceContent(filename: invoice.file.filename)
+                        await viewModel.downloadInvoiceContent(filename: invoice.file?.filename ?? "")
                     }
                 }
                 .swipeActions(edge: .trailing) {
@@ -54,8 +50,10 @@ struct VehicleInvoicesView: View {
                 .listRowSeparatorTint(.clear)
                 .listRowBackground(Color.clear)
                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+
             }
             .listStyle(.plain)
+
             Button(action: viewModel.openInvoiceCreation) {
                 Text(L10n.CreateVehicle.title)
                     .font(.title2)
