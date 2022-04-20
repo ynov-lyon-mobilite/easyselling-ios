@@ -24,7 +24,9 @@ class DefaultFileUploader_Specs: XCTestCase {
         expectedData.append("\r\n".data(using: .utf8)!)
         expectedData.append("--\(boundaryConstant)--\r\n".data(using: .utf8)!)
         
-        givenFileUploader(apiCaller: SucceedingAPICaller())
+        givenFileUploader(apiCaller: SucceedingAPICaller() {
+            return ""
+        })
         whenGenerateBody(filename: filename, filetype: filetype, data: fileData, boundary: boundaryConstant)
         thenBody(is: expectedData, contentType: "multipart/form-data; boundary=\(boundaryConstant)")
     }

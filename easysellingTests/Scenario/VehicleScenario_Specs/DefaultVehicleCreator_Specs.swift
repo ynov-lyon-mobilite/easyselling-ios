@@ -17,7 +17,9 @@ class DefaultVehicleCreator_Specs: XCTestCase {
     private var context: NSManagedObjectContext!
     
     func test_Creates_vehicle_successful() async {
-        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
+        givenVehicleCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller() {
+            return Vehicle(id: "", brand: "", model: "", licence: "", type: .car, year: "")
+        })
         await whenCreatingVehicle(informations: VehicleDTO(brand: "Audi", licence: "123456789", model: "A1", type: .car, year: "2005"))
         thenVehicleIsCreated()
     }

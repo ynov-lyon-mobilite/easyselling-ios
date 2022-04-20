@@ -18,7 +18,9 @@ class DefaultVehicleUpdater_Specs: XCTestCase {
     private var context: NSManagedObjectContext!
 
     func test_Updates_vehicle_is_successful() async {
-        givenVehicleUpdater(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
+        givenVehicleUpdater(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller() {
+            return ""
+        })
         givenCoreData()
         let vehicle = Vehicle(id: "1", brand: "Audi", model: "A1", licence: "123456789", type: .car, year: "2005")
         await whenUpdatingVehicle(informations: vehicle)

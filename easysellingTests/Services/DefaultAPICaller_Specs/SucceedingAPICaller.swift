@@ -13,15 +13,15 @@ import UIKit
 class SucceedingAPICaller: APICaller {
     
     private(set) var isCallSucceed: Bool = false
-    
+    typealias type<T: Any> = () -> T
+    let callback: type<Any>
+
+    init(callback: @escaping type<Any>) {
+        self.callback = callback
+    }
+
     func call<T: Decodable>(_ urlRequest: URLRequest, decodeType: T.Type) -> T {
-        let response: T
-        if (decodeType == easyselling.Vehicle.self) {
-            response = Vehicle(id: "", brand: "", model: "", licence: "", type: .car, year: "") as! T
-        } else {
-            response = "" as! T
-        }
-        return response
+        return callback() as! T
     }
     
     func call(_ urlRequest: URLRequest) {

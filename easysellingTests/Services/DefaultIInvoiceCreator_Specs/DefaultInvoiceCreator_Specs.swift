@@ -10,7 +10,9 @@ import XCTest
 
 class DefaultInvoiceCreator_Specs: XCTestCase {
     func test_Creates_invoice_successful() async {
-        givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
+        givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller(){
+            return ""
+        })
         await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
         thenInvoiceIsCreated()
     }

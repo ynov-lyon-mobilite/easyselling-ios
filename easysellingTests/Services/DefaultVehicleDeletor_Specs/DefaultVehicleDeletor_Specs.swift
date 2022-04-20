@@ -12,7 +12,9 @@ import CoreData
 class DefaultVehicleDeletor_Specs: XCTestCase {
 
     func test_Deletes_vehicle_one() async {
-        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
+        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller() {
+            return ""
+        })
         givenCoreData(data: [
             VehicleCoreData(id: "1", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context),
             VehicleCoreData(id: "2", brand: "", licence: "", model: "", type: Vehicle.Category.car.rawValue, year: "", in: context),
@@ -35,7 +37,9 @@ class DefaultVehicleDeletor_Specs: XCTestCase {
     }
 
     func test_Deletes_vehicle_succeeding() async {
-        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
+        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller(){
+            return ""
+        })
         await whenDeletingVehicle(withId: "1")
         thenSuccess(withId: "1")
     }
