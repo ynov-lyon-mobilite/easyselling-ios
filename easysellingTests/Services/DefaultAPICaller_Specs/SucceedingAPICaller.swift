@@ -16,7 +16,7 @@ class SucceedingAPICaller: APICaller {
     typealias type<T: Any> = () -> T
     let callback: type<Any>
 
-    init(callback: @escaping type<Any>) {
+    init(callback: @escaping type<Any> = {return ""}) {
         self.callback = callback
     }
 

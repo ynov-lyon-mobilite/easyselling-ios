@@ -12,9 +12,7 @@ import CoreData
 class DefaultInvoiceDeletor_Specs: XCTestCase {
 
     func test_Deletes_succeeding() async {
-        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller() {
-            return Invoice(id: "", fileData: Data(), file: FileResponse(filename: ""))
-        })
+        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller())
         await whenDeletingInvoice(withId: "A1231")
         thenSuccess(with: "A1231")
     }
