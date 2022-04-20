@@ -44,6 +44,18 @@ public class InvoiceCoreData: NSManagedObject {
         return nil
     }
 
+    func toEncodableStruc (invoice: Invoice) -> InvoiceDTO {
+        return InvoiceDTO(file: String(invoice.id))
+    }
+
+    func toCoreDataObject (invoice: Invoice, in context: NSManagedObjectContext) -> InvoiceCoreData {
+        return InvoiceCoreData(id: invoice.id, fileTitle: invoice.file?.filename, fileData: invoice.fileData ?? Data(), in: context)
+    }
+
+    func fromCoreDataToObject () -> Invoice {
+        return Invoice(id: self.id, fileData: self.fileData, file: FileResponse(filename: self.fileTitle ?? ""))
+    }
+
     @NSManaged public var id: String
     @NSManaged public var fileId: String
     @NSManaged public var fileTitle: String?

@@ -32,7 +32,7 @@ class DefaultInvoiceCreator: InvoiceCreator {
         let invoice = try await apiCaller.call(urlRequest, decodeType: Invoice.self)
 
         try context.performAndWait {
-            _ = Invoice.toCoreDataObject(invoice: invoice, in: context)
+            _ = InvoiceCoreData().toCoreDataObject(invoice: invoice, in: context)
             if context.hasChanges {
                 try context.save()
             }
