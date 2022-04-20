@@ -89,7 +89,7 @@ class MyVehiclesViewModel: ObservableObject {
     private func getSharedVehicles() async {
         do {
             sharedVehicles = try await sharedVehiclesGetter.getSharedVehicles()
-            if sharedVehicles != [] {
+            if !sharedVehicles.isEmpty {
                 showSharedVehicles = true
             }
         } catch(let error) {

@@ -40,7 +40,7 @@ class StartupScenario {
         switch await beginType() {
         case .onBoarding: break
         case .login: break
-        case .home: navigator.navigatesToHomeView(withActivationId: id)
+        case .home: await navigator.navigatesToHomeView(withActivationId: id)
         }
     }
 

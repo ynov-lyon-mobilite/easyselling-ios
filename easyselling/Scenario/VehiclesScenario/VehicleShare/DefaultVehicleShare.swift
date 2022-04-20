@@ -11,7 +11,7 @@ protocol VehicleShare {
     func shareVehicle(id: String, email: String) async throws
 }
 
-class DefaultVehicleShare : VehicleShare {
+class DefaultVehicleShare: VehicleShare {
 
     init(requestGenerator: AuthorizedRequestGenerator = DefaultAuthorizedRequestGenerator(), apiCaller: APICaller = DefaultAPICaller()) {
         self.requestGenerator = requestGenerator

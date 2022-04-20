@@ -24,16 +24,20 @@ struct SwipeableVehicleListElement: View {
                 Image(systemName: "trash.fill")
                     .font(.title2)
             })
-            .tint(Color.red)
+            .tint(Color.red.opacity(0.5))
 
             Button(action: { updateAction() }, label: {
                 Image(systemName: "pencil")
                     .font(.title2)
             })
-            .tint(Asset.Colors.secondary.swiftUIColor)
-            Button(L10n.Vehicles.shareButton) {
-                shareAction()
-            }.tint(Color.green)
+            .tint(Asset.Colors.secondary.swiftUIColor.opacity(0.5))
+        }
+        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+            Button(action: { shareAction() }, label: {
+                Image(systemName: "square.and.arrow.up")
+                    .font(.title2)
+            })
+            .tint(Color.green.opacity(0.5))
         }
     }
 }

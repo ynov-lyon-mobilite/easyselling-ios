@@ -12,7 +12,7 @@ protocol StartupNavigator {
     func navigatesToOnBoarding()
     func navigatesToLogin()
     func navigatesToHomeView()
-    func navigatesToHomeView(withActivationId id: String?)
+    func navigatesToHomeView(withActivationId id: String?) async
 }
 
 class DefaultStartupNavigator: StartupNavigator {
@@ -42,15 +42,10 @@ class DefaultStartupNavigator: StartupNavigator {
         scenario.begin(from: .default)
     }
 
-    func navigatesToHomeView(withActivationId id: String?) {
+    func navigatesToHomeView(withActivationId id: String?) async {
         let navigator = DefaultHomeNavigator(window: window)
         let scenario = HomeScenario(navigator: navigator)
-        Task {
-            guard let id = id else {
-                return
-            }
-            try? await vehicleActivator.activateVehicle(id: id)
-        }
+        await activateSharingOfVehicle(id: id)
         scenario.begin()
     }
 
@@ -59,5 +54,10 @@ class DefaultStartupNavigator: StartupNavigator {
         let scenario = HomeScenario(navigator: navigator)
 
         scenario.begin()
+    }
+
+    private func activateSharingOfVehicle(id: String?) async {
+        guard let id = id else { return }
+        try? await vehicleActivator.activateVehicle(id: id)
     }
 }
