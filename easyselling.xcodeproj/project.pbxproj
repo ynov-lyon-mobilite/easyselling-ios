@@ -198,6 +198,7 @@
 		8F901D552769FE0900CF0F28 /* DefaultInvoiceDeletor_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F901D542769FE0900CF0F28 /* DefaultInvoiceDeletor_Specs.swift */; };
 		8FA938C82747092200B1FA96 /* VehicleUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA938C72747092200B1FA96 /* VehicleUpdateViewModel.swift */; };
 		8FA938CA2747093100B1FA96 /* VehicleUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA938C92747093100B1FA96 /* VehicleUpdateView.swift */; };
+		8FCA4272281453A700CB0890 /* LaunchScreenScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA4271281453A700CB0890 /* LaunchScreenScenario_Specs.swift */; };
 		8FE6243A2752765A000D0FC8 /* SucceedingEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624372752765A000D0FC8 /* SucceedingEmailVerificator.swift */; };
 		8FE6243B2752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624382752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift */; };
 		8FE6243C2752765A000D0FC8 /* FailingEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624392752765A000D0FC8 /* FailingEmailVerificator.swift */; };
@@ -421,6 +422,7 @@
 		8F901D542769FE0900CF0F28 /* DefaultInvoiceDeletor_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvoiceDeletor_Specs.swift; sourceTree = "<group>"; };
 		8FA938C72747092200B1FA96 /* VehicleUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleUpdateViewModel.swift; sourceTree = "<group>"; };
 		8FA938C92747093100B1FA96 /* VehicleUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleUpdateView.swift; sourceTree = "<group>"; };
+		8FCA4271281453A700CB0890 /* LaunchScreenScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenScenario_Specs.swift; sourceTree = "<group>"; };
 		8FE624372752765A000D0FC8 /* SucceedingEmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SucceedingEmailVerificator.swift; sourceTree = "<group>"; };
 		8FE624382752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultEmailVerificator_Specs.swift; sourceTree = "<group>"; };
 		8FE624392752765A000D0FC8 /* FailingEmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailingEmailVerificator.swift; sourceTree = "<group>"; };
@@ -968,6 +970,7 @@
 		87470E93276BF3B1004FCA6B /* Scenario */ = {
 			isa = PBXGroup;
 			children = (
+				8FCA42702814537D00CB0890 /* LaunchScreenScenario_Specs */,
 				032DE8D727D90623004B2337 /* HomeScenario_Specs */,
 				87184C882729DB65006586FD /* AuthenticationScenario_Specs */,
 				5CA58D13274E8E27000BF06C /* InvoicesScenario_Specs */,
@@ -1244,6 +1247,14 @@
 				8F4F9E612810179A00AAEB5D /* Vehicle.swift */,
 			);
 			path = Vehicle;
+			sourceTree = "<group>";
+		};
+		8FCA42702814537D00CB0890 /* LaunchScreenScenario_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				8FCA4271281453A700CB0890 /* LaunchScreenScenario_Specs.swift */,
+			);
+			path = LaunchScreenScenario_Specs;
 			sourceTree = "<group>";
 		};
 		8FF010242732EDCE0022314B /* OnBoardingScenario */ = {
@@ -1642,6 +1653,7 @@
 				03422F63275CEE140060D19E /* SucceedingInvoiceDownloader.swift in Sources */,
 				03004DDB273EAFFF00188983 /* SucceedingPassordVerificator.swift in Sources */,
 				0360A7F728101408001B67AB /* SucceedingVehiclesGetter_Specs.swift in Sources */,
+				8FCA4272281453A700CB0890 /* LaunchScreenScenario_Specs.swift in Sources */,
 				5CB4C5D7275D123E0055CB8B /* FailingVehicleInvoicesGetter.swift in Sources */,
 				034D04F02733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift in Sources */,
 				87BE3098273B0B4400D49D08 /* DefaultFileUploader_Specs.swift in Sources */,
