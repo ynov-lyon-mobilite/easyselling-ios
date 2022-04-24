@@ -24,9 +24,6 @@
 		</dict>
 	</dict>
 	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIImageName</key>
-		<string>logo</string>
-	</dict>
+	<dict/>
 </dict>
 </plist>

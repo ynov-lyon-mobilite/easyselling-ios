@@ -185,9 +185,10 @@
 		8F4B128327D8FF1800EA66F1 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4B128227D8FF1800EA66F1 /* Invoice.swift */; };
 		8F4F9E622810179A00AAEB5D /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4F9E612810179A00AAEB5D /* Vehicle.swift */; };
 		8F4F9E64281017A300AAEB5D /* VehicleCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4F9E63281017A300AAEB5D /* VehicleCoreData.swift */; };
+		8F4F9E6C28104DCC00AAEB5D /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4F9E6B28104DCC00AAEB5D /* LaunchScreenView.swift */; };
+		8F4F9E7028104E0E00AAEB5D /* LaunchScreenScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4F9E6F28104E0E00AAEB5D /* LaunchScreenScenario.swift */; };
 		8F665CD8274E3F38008DDA7B /* DefaultVehicleUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F665CD7274E3F38008DDA7B /* DefaultVehicleUpdater.swift */; };
 		8F665CDC274E6A9C008DDA7B /* DefaultVehicleUpdater_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F665CDB274E6A9C008DDA7B /* DefaultVehicleUpdater_Specs.swift */; };
-		8F8617D7276A4A7700F5E453 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F8617D6276A4A7700F5E453 /* Launch Screen.storyboard */; };
 		8F86D4222716E4A000D143D8 /* OnBoardingScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D4212716E4A000D143D8 /* OnBoardingScenario_Specs.swift */; };
 		8F86D42C27172BC900D143D8 /* OnBoardingViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D42B27172BC900D143D8 /* OnBoardingViewModel_Specs.swift */; };
 		8F86D42E27172F3B00D143D8 /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F86D42D27172F3B00D143D8 /* OnBoardingViewModel.swift */; };
@@ -197,6 +198,7 @@
 		8F901D552769FE0900CF0F28 /* DefaultInvoiceDeletor_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F901D542769FE0900CF0F28 /* DefaultInvoiceDeletor_Specs.swift */; };
 		8FA938C82747092200B1FA96 /* VehicleUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA938C72747092200B1FA96 /* VehicleUpdateViewModel.swift */; };
 		8FA938CA2747093100B1FA96 /* VehicleUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA938C92747093100B1FA96 /* VehicleUpdateView.swift */; };
+		8FCA4272281453A700CB0890 /* LaunchScreenScenario_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCA4271281453A700CB0890 /* LaunchScreenScenario_Specs.swift */; };
 		8FE6243A2752765A000D0FC8 /* SucceedingEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624372752765A000D0FC8 /* SucceedingEmailVerificator.swift */; };
 		8FE6243B2752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624382752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift */; };
 		8FE6243C2752765A000D0FC8 /* FailingEmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE624392752765A000D0FC8 /* FailingEmailVerificator.swift */; };
@@ -407,9 +409,10 @@
 		8F4B128227D8FF1800EA66F1 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
 		8F4F9E612810179A00AAEB5D /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		8F4F9E63281017A300AAEB5D /* VehicleCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleCoreData.swift; sourceTree = "<group>"; };
+		8F4F9E6B28104DCC00AAEB5D /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		8F4F9E6F28104E0E00AAEB5D /* LaunchScreenScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenScenario.swift; sourceTree = "<group>"; };
 		8F665CD7274E3F38008DDA7B /* DefaultVehicleUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleUpdater.swift; sourceTree = "<group>"; };
 		8F665CDB274E6A9C008DDA7B /* DefaultVehicleUpdater_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVehicleUpdater_Specs.swift; sourceTree = "<group>"; };
-		8F8617D6276A4A7700F5E453 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8F86D4212716E4A000D143D8 /* OnBoardingScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScenario_Specs.swift; sourceTree = "<group>"; };
 		8F86D42B27172BC900D143D8 /* OnBoardingViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel_Specs.swift; sourceTree = "<group>"; };
 		8F86D42D27172F3B00D143D8 /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
@@ -419,6 +422,7 @@
 		8F901D542769FE0900CF0F28 /* DefaultInvoiceDeletor_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvoiceDeletor_Specs.swift; sourceTree = "<group>"; };
 		8FA938C72747092200B1FA96 /* VehicleUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleUpdateViewModel.swift; sourceTree = "<group>"; };
 		8FA938C92747093100B1FA96 /* VehicleUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleUpdateView.swift; sourceTree = "<group>"; };
+		8FCA4271281453A700CB0890 /* LaunchScreenScenario_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenScenario_Specs.swift; sourceTree = "<group>"; };
 		8FE624372752765A000D0FC8 /* SucceedingEmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SucceedingEmailVerificator.swift; sourceTree = "<group>"; };
 		8FE624382752765A000D0FC8 /* DefaultEmailVerificator_Specs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultEmailVerificator_Specs.swift; sourceTree = "<group>"; };
 		8FE624392752765A000D0FC8 /* FailingEmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailingEmailVerificator.swift; sourceTree = "<group>"; };
@@ -617,6 +621,7 @@
 		0382E2A12717648000EB570E /* Scenario */ = {
 			isa = PBXGroup;
 			children = (
+				8F4F9E6A28104DB300AAEB5D /* LaunchScreenScenario */,
 				032DE8D127D8EC3A004B2337 /* HomeScenario */,
 				39D101DF2769E95600F101AB /* SettingsScenario */,
 				0317EE2F2751984300A6AE0D /* ProfileScenario */,
@@ -781,7 +786,6 @@
 		03F209772716E1C500E10F6C /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				8F8617D6276A4A7700F5E453 /* Launch Screen.storyboard */,
 				034D04E22732976E00576D64 /* GoogleService-Info.plist */,
 				03F209782716E21100E10F6C /* Supporting Files */,
 				035E860327184EDC00684ED0 /* AppDelegate.swift */,
@@ -966,6 +970,7 @@
 		87470E93276BF3B1004FCA6B /* Scenario */ = {
 			isa = PBXGroup;
 			children = (
+				8FCA42702814537D00CB0890 /* LaunchScreenScenario_Specs */,
 				032DE8D727D90623004B2337 /* HomeScenario_Specs */,
 				87184C882729DB65006586FD /* AuthenticationScenario_Specs */,
 				5CA58D13274E8E27000BF06C /* InvoicesScenario_Specs */,
@@ -1206,6 +1211,15 @@
 			path = Invoice;
 			sourceTree = "<group>";
 		};
+		8F4F9E6A28104DB300AAEB5D /* LaunchScreenScenario */ = {
+			isa = PBXGroup;
+			children = (
+				8F4F9E6B28104DCC00AAEB5D /* LaunchScreenView.swift */,
+				8F4F9E6F28104E0E00AAEB5D /* LaunchScreenScenario.swift */,
+			);
+			path = LaunchScreenScenario;
+			sourceTree = "<group>";
+		};
 		8F901D512769F43000CF0F28 /* DefaultInvoiceDeletor_Specs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1233,6 +1247,14 @@
 				8F4F9E612810179A00AAEB5D /* Vehicle.swift */,
 			);
 			path = Vehicle;
+			sourceTree = "<group>";
+		};
+		8FCA42702814537D00CB0890 /* LaunchScreenScenario_Specs */ = {
+			isa = PBXGroup;
+			children = (
+				8FCA4271281453A700CB0890 /* LaunchScreenScenario_Specs.swift */,
+			);
+			path = LaunchScreenScenario_Specs;
 			sourceTree = "<group>";
 		};
 		8FF010242732EDCE0022314B /* OnBoardingScenario */ = {
@@ -1428,7 +1450,6 @@
 				5CA58D1E27555A52000BF06C /* succeededInvoices.json in Resources */,
 				034D04E32732976E00576D64 /* GoogleService-Info.plist in Resources */,
 				03422F71275D2B220060D19E /* succeededFile.json in Resources */,
-				8F8617D7276A4A7700F5E453 /* Launch Screen.storyboard in Resources */,
 				873552BA270D847B00F2DDBD /* Preview Assets.xcassets in Resources */,
 				875E47B1273C6B320019FC83 /* FileUploaderResponse.json in Resources */,
 				2C86337D273FBA630049C186 /* succeededVehicles.json in Resources */,
@@ -1519,7 +1540,6 @@
 				03321C5A27F6F6890064F59F /* Notification+Extensions.swift in Sources */,
 				03422F7F275D3C9C0060D19E /* InvoiceView.swift in Sources */,
 				2CD4B8C2271C65EE002598A4 /* VehicleCreationViewModel.swift in Sources */,
-				87E896F3278880A100E4C74A /* InvoiceDTO.swift in Sources */,
 				9BFD064F27D9013300C67764 /* DefaultVehicleShare.swift in Sources */,
 				874975F9273A3AB1000A1289 /* DefaultFileUploader.swift in Sources */,
 				8F901D4E2769E16300CF0F28 /* DefaultInvoiceDeletor.swift in Sources */,
@@ -1558,6 +1578,7 @@
 				87533396275FFF7C005E4697 /* PrimaryButtonStyle.swift in Sources */,
 				03F209862716EECA00E10F6C /* Strings+Generated.swift in Sources */,
 				2C2DA388275280330085988B /* DefaultVehicleVerificator.swift in Sources */,
+				8F4F9E6C28104DCC00AAEB5D /* LaunchScreenView.swift in Sources */,
 				875E47C1274102400019FC83 /* DefaultInvoiceCreator.swift in Sources */,
 				03DAF9A2272730D500FFED55 /* MyVehiclesView.swift in Sources */,
 				39D701E927BD28E200F93287 /* ButtonList.swift in Sources */,
@@ -1602,6 +1623,7 @@
 				2C4486B4271DF7E10021122F /* VehicleScenario.swift in Sources */,
 				032CCB3727A9CF3300FC6275 /* ModalizedView.swift in Sources */,
 				03C759FC2765508F0032652F /* DefaultImageCaller.swift in Sources */,
+				8F4F9E7028104E0E00AAEB5D /* LaunchScreenScenario.swift in Sources */,
 				032D2610280EBFB000433EEE /* ShareVehicleDTO.swift in Sources */,
 				87CD2C0727F50811004511D3 /* DefaultFirebaseAuthProvider.swift in Sources */,
 				39D101E52769E9B600F101AB /* SettingsScenario.swift in Sources */,
@@ -1631,6 +1653,7 @@
 				03422F63275CEE140060D19E /* SucceedingInvoiceDownloader.swift in Sources */,
 				03004DDB273EAFFF00188983 /* SucceedingPassordVerificator.swift in Sources */,
 				0360A7F728101408001B67AB /* SucceedingVehiclesGetter_Specs.swift in Sources */,
+				8FCA4272281453A700CB0890 /* LaunchScreenScenario_Specs.swift in Sources */,
 				5CB4C5D7275D123E0055CB8B /* FailingVehicleInvoicesGetter.swift in Sources */,
 				034D04F02733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift in Sources */,
 				87BE3098273B0B4400D49D08 /* DefaultFileUploader_Specs.swift in Sources */,
@@ -1866,7 +1889,6 @@
 				INFOPLIST_FILE = easyselling/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Easyselling;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1901,7 +1923,6 @@
 				INFOPLIST_FILE = easyselling/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Easyselling;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
