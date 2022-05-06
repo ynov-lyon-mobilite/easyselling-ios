@@ -11,6 +11,7 @@ struct MyVehiclesView: View {
 
     @ObservedObject var viewModel: MyVehiclesViewModel
     @State private var vehicleShowed = 0
+    @State var showLoader = false
 
     var body: some View {
 
@@ -20,8 +21,8 @@ struct MyVehiclesView: View {
             Picker(L10n.Vehicles.chooseList, selection: $vehicleShowed) {
                 Text(L10n.Vehicles.List.myVehicles).tag(0)
                 Text(L10n.Vehicles.List.sharedVehicles).tag(1)
-                        }
-                        .pickerStyle(.segmented)
+            }
+            .pickerStyle(.segmented)
 
             if vehicleShowed == 0 {
                 SearchBar(searchText: $viewModel.searchFilteringVehicle)
@@ -39,12 +40,14 @@ struct MyVehiclesView: View {
                     } else {
                         ForEach(viewModel.filteredVehicle, id: \.id) { vehicle in
                             SwipeableVehicleListElement(vehicle: vehicle,
-                                               deleteAction: { Task {
+                                                        deleteAction: { Task {
+                                withAnimation(.spring()) {showLoader.toggle()}
                                 await viewModel.deleteVehicle(idVehicle: vehicle.id )
+                                withAnimation(.spring()) {showLoader.toggle()}
                             } },
-                                               updateAction: { viewModel.openVehicleUpdate(vehicle: vehicle) },
-                                               shareAction: { viewModel.openVehicleShare(vehicle: vehicle) },
-                                               showInvoices: { viewModel.navigatesToInvoices(vehicle: vehicle) })
+                                                        updateAction: { viewModel.openVehicleUpdate(vehicle: vehicle) },
+                                                        shareAction: { viewModel.openVehicleShare(vehicle: vehicle) },
+                                                        showInvoices: { viewModel.navigatesToInvoices(vehicle: vehicle) })
                                 .redacted(when: viewModel.state == .loading)
                         }
                         .listRowSeparatorTint(.clear)
@@ -55,18 +58,20 @@ struct MyVehiclesView: View {
                 }
                 .listStyle(.plain)
                 .refreshable {
+                    withAnimation(.spring()) {showLoader.toggle()}
                     await viewModel.getVehicles()
+                    withAnimation(.spring()) {showLoader.toggle()}
                 }
-                    Button(action: viewModel.openVehicleCreation) {
-                        Text(L10n.CreateVehicle.title)
-                            .font(.title2)
-                            .foregroundColor(Color.white)
-                            .padding(.vertical, 15)
-                            .frame(maxWidth: .infinity)
-                            .background(Asset.Colors.primary.swiftUIColor)
-                            .cornerRadius(22)
-                    }
-                    .padding(.bottom)
+                Button(action: viewModel.openVehicleCreation) {
+                    Text(L10n.CreateVehicle.title)
+                        .font(.title2)
+                        .foregroundColor(Color.white)
+                        .padding(.vertical, 15)
+                        .frame(maxWidth: .infinity)
+                        .background(Asset.Colors.primary.swiftUIColor)
+                        .cornerRadius(22)
+                }
+                .padding(.bottom)
             } else {
                 VStack {
                     List {
@@ -87,18 +92,36 @@ struct MyVehiclesView: View {
         .background(Asset.Colors.backgroundColor.swiftUIColor)
         .onAppear {
             UITableView.appearance().showsVerticalScrollIndicator = false
-            Task { await viewModel.getVehicles() }
+            Task {
+                withAnimation(.spring()) {showLoader.toggle()}
+                await viewModel.getVehicles()
+                withAnimation(.spring()) {showLoader.toggle()}
+            }
+            UIRefreshControl.appearance().isOpaque = false
         }
         .modal(isModalized: $viewModel.isOpenningVehicleCreation) {
             VehicleCreationView(viewModel: VehicleCreationViewModel(hasFinishedVehicleCreation: {
                 $viewModel.isOpenningVehicleCreation.wrappedValue.toggle()
                 Task {
+                    withAnimation(.spring()) {showLoader.toggle()}
                     await viewModel.getVehicles()
+                    withAnimation(.spring()) {showLoader.toggle()}
                 }
+                UIRefreshControl.appearance().isOpaque = false
             }))
         }
-        .task { await viewModel.getVehicles() }
         .ableToShowError(viewModel.error)
+        .overlay(
+            ZStack {
+                if showLoader {
+                    Color.primary.opacity(0.2)
+                        .ignoresSafeArea()
+                }
+
+                Loader()
+                    .offset(y: showLoader ? 0 : UIScreen.main.bounds.height)
+            }
+        )
     }
 }
 

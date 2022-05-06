@@ -8,8 +8,34 @@
 import SwiftUI
 
 struct Loader: View {
+
+    @State var animateBox = false
+    @State var animateRotation = false
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+
+        ZStack {
+            Color.white
+                .frame(width: 125, height: 125)
+                .cornerRadius(15)
+                .shadow(color: Color.primary.opacity(0.07), radius: 5, x: 5, y: 5)
+                .shadow(color: Color.primary.opacity(0.07), radius: 5, x: -5, y: -5)
+            Image(Asset.ThemeImages.Orange.logoOrange)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 65, height: 65)
+                .rotation3DEffect(.init(degrees: animateRotation ? 360 : 0), axis: (x: 1, y: 0.0, z: 0.0))
+        }
+        .onAppear(perform: {
+            doAnimation()
+        })
+
+    }
+
+    func doAnimation() {
+        withAnimation(Animation.easeInOut(duration: 0.8).repeatForever(autoreverses: false)) {
+            animateRotation.toggle()
+        }
     }
 }
 

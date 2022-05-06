@@ -10,6 +10,7 @@ import SwiftUI
 struct VehicleUpdateView: View {
 
     @ObservedObject var viewModel: VehicleUpdateViewModel
+    @State var showLoader = false
 
     var body: some View {
         VStack {
@@ -32,22 +33,38 @@ struct VehicleUpdateView: View {
                     .padding(.top)
                     .keyboardType(.numberPad)
             }
-                .padding()
-                .alert(isPresented: $viewModel.showAlert, content: {
-                    Alert(
-                        title: Text(viewModel.alert)
+            .padding()
+            .alert(isPresented: $viewModel.showAlert, content: {
+                Alert(
+                    title: Text(viewModel.alert)
                 )})
             Button("Update Vehicle") {
                 Task {
+                    withAnimation(.spring()) {showLoader.toggle()}
                     await viewModel.updateVehicle()
+                    withAnimation(.spring()) {showLoader.toggle()}
                 }
+                UIRefreshControl.appearance().isOpaque = false
             }
             Button("Delete") {
                 Task {
+                    withAnimation(.spring()) {showLoader.toggle()}
                     await viewModel.onFinish()
+                    withAnimation(.spring()) {showLoader.toggle()}
                 }
+                UIRefreshControl.appearance().isOpaque = false
             }
         }
+        .overlay(
+            ZStack {
+                if showLoader {
+                    Color.primary.opacity(0.2).ignoresSafeArea()
+                }
+
+                Loader()
+                    .offset(y: showLoader ? 0 : UIScreen.main.bounds.height)
+            }.frame(height: 2000)
+        )
     }
 }
 

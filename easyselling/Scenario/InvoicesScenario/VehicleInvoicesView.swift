@@ -10,6 +10,7 @@ import SwiftUI
 struct VehicleInvoicesView: View {
 
     @ObservedObject var viewModel: VehicleInvoiceViewModel
+    @State var showLoader = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -37,13 +38,17 @@ struct VehicleInvoicesView: View {
                 .cornerRadius(15)
                 .onTapGesture {
                     Task {
+                        withAnimation(.spring()) {showLoader.toggle()}
                         await viewModel.downloadInvoiceContent(filename: invoice.file?.filename ?? "")
+                        withAnimation(.spring()) {showLoader.toggle()}
                     }
                 }
                 .swipeActions(edge: .trailing) {
                     Button(L10n.Invoice.deleteButton) {
                         Task {
+                            withAnimation(.spring()) {showLoader.toggle()}
                             await viewModel.deleteInvoice(idInvoice: invoice.id)
+                            withAnimation(.spring()) {showLoader.toggle()}
                         }
                     }.tint(.red)
                 }
@@ -67,8 +72,30 @@ struct VehicleInvoicesView: View {
         }
         .padding(.horizontal, 25)
         .background(Asset.Colors.backgroundColor.swiftUIColor)
+        //        .task {
+        //            withAnimation(.spring()) {showLoader.toggle()}
+        //            await viewModel.getInvoices()
+        //            withAnimation(.spring()) {showLoader.toggle()} }
+        .onAppear {
+            UITableView.appearance().showsVerticalScrollIndicator = false
+            Task {
+                withAnimation(.spring()) {showLoader.toggle()}
+                await viewModel.getInvoices()
+                withAnimation(.spring()) {showLoader.toggle()}
+            }
+            UIRefreshControl.appearance().isOpaque = false
+        }
+        .overlay(
+            ZStack {
+                if showLoader {
+                    Color.primary.opacity(0.2)
+                        .ignoresSafeArea()
+                }
 
-        .task { await viewModel.getInvoices() }
+                Loader()
+                    .offset(y: showLoader ? 0 : UIScreen.main.bounds.height)
+            }
+        )
     }
 }
 
