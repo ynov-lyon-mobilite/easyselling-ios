@@ -20,7 +20,7 @@ class ModelSelectionViewModel: ObservableObject {
     private var brandSelected: Brand
     private var hasSelectedModel: (String) -> Void
 
-    @Published var alert: String = ""
+    @Published var error: LocalizedError?
     @Published var showAlert = false
 
     @Published var model: String = ""
@@ -48,5 +48,16 @@ class ModelSelectionViewModel: ObservableObject {
 
     func dismissSelector() {
         hasSelectedModel(model)
+    }
+
+    private func setError(with error: LocalizedError) {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            self.error = error
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    self.error = nil
+                }
+            }
+        }
     }
 }

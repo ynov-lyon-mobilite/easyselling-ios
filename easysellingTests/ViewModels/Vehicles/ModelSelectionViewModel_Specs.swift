@@ -29,14 +29,14 @@ class ModelSelectionViewModel_Specs: XCTestCase {
             Model(id: "2", brand: "23", model: "MEGANE RS", type: .car)
         ]
 
-        givenViewModel()
+        givenViewModel(withBrand: Brand(id: "23", name: "Renault"))
         whenGetVehicleModel(with: models)
         whenChossingModelName(with: "Meg")
         thenModelResultIsFiltered(is: modelsExpected)
     }
 
-    private func givenViewModel(vehicleModelGetter: VehicleModelGetter = DefaultVehicleModelGetter()) {
-        viewModel = ModelSelectionViewModel(vehicleModelGetter: vehicleModelGetter, brandSelected: Brand(id: "23", name: "Peugeot"), hasSelectedModel: { _ in
+    private func givenViewModel(vehicleModelGetter: VehicleModelGetter = DefaultVehicleModelGetter(),withBrand brandSelected: Brand = Brand(id: "", name: "")) {
+        viewModel = ModelSelectionViewModel(vehicleModelGetter: vehicleModelGetter, brandSelected: brandSelected, hasSelectedModel: { _ in
             self.hasSelectedModel = true
         })
     }

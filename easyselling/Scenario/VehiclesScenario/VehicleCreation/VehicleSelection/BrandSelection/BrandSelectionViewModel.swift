@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class BrandSelectionViewModel: ObservableObject {
 
@@ -17,7 +18,7 @@ class BrandSelectionViewModel: ObservableObject {
     private var vehicleBrandGetter: VehicleBrandGetter
     private var hasSelectedBrand: (Brand) -> Void
 
-    @Published var alert: String = ""
+    @Published var error: LocalizedError?
     @Published var showAlert = false
 
     @Published var searchBrand: String = ""
@@ -39,12 +40,24 @@ class BrandSelectionViewModel: ObservableObject {
             vehicleBrand = try await vehicleBrandGetter.getVehicleBrand()
             vehicleBrand = vehicleBrand.sorted { $0.name < $1.name }
         } catch (let error) {
-            showAlert = true
-            alert = error.localizedDescription
+            if let error = error as? APICallerError {
+                setError(with: error)
+            }
         }
     }
 
     func dismissSelector() {
         hasSelectedBrand(brandSelected)
+    }
+
+    private func setError(with error: LocalizedError) {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            self.error = error
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    self.error = nil
+                }
+            }
+        }
     }
 }

@@ -23,26 +23,26 @@ struct BrandSelectionView: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
-        }
-        SearchBar(searchText: $viewModel.searchBrand)
-        VStack(alignment: .leading) {
-            List {
-                ForEach(viewModel.searchBrandResults, id: \.self) { vehicleBrand in
-                    Text(vehicleBrand.name.uppercased())
-                        .onTapGesture(perform: {
-                            viewModel.brandSelected = vehicleBrand
-                            viewModel.dismissSelector()
-                        })
-                        .foregroundColor(.black)
+            SearchBar(searchText: $viewModel.searchBrand)
+                VStack(alignment: .leading) {
+                    List {
+                        ForEach(viewModel.searchBrandResults, id: \.self) { vehicleBrand in
+                            Text(vehicleBrand.name.uppercased())
+                                .onTapGesture(perform: {
+                                    viewModel.brandSelected = vehicleBrand
+                                    viewModel.dismissSelector()
+                                })
+                                .foregroundColor(.black)
+                        }
+                        Text(viewModel.searchBrand)
+                            .onTapGesture(perform: {
+                                viewModel.brandSelected = Brand(id: "", name: viewModel.searchBrand)
+                                viewModel.dismissSelector()
+                            })
+                            .foregroundColor(.black)
+                    }
+                    .listStyle(PlainListStyle())
                 }
-                Text(viewModel.searchBrand)
-                    .onTapGesture(perform: {
-                        viewModel.brandSelected = Brand(id: "", name: viewModel.searchBrand)
-                        viewModel.dismissSelector()
-                    })
-                    .foregroundColor(.black)
-            }
-            .listStyle(PlainListStyle())
         }
         .onAppear {
             Task {
@@ -52,6 +52,7 @@ struct BrandSelectionView: View {
         .padding([.leading, .trailing, .bottom], 25)
         .padding(.top, 16)
         .background(Asset.Colors.whiteBackground.swiftUIColor)
+        .ableToShowError(viewModel.error)
     }
 }
 

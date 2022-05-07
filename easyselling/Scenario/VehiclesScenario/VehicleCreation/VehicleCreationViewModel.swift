@@ -84,7 +84,7 @@ class VehicleCreationViewModel: ObservableObject {
 
     @MainActor
     func createVehicle() async {
-        let informations = VehicleDTO(brand: brand, licence: model, model: licence, type: type, year: year)
+        let informations = VehicleDTO(brand: brand, licence: licence, model: model, type: type, year: year)
         do {
             try vehicleInformationsVerificator.verifyInformations(vehicle: informations)
             try await vehicleCreator.createVehicle(informations: informations)

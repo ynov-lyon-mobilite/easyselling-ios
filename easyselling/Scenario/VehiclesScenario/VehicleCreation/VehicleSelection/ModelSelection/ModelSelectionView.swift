@@ -54,12 +54,7 @@ struct ModelSelectionView: View {
         .padding([.leading, .trailing, .bottom], 25)
         .padding(.top, 16)
         .background(Asset.Colors.whiteBackground.swiftUIColor)
-        /*.padding(.bottom, keyboardHeight)
-        .onReceive(Publishers.keyboardHeight) { padding in
-            withAnimation {
-                self.keyboardHeight = padding
-            }
-        }*/
+        .ableToShowError(viewModel.error)
     }
 }
 
