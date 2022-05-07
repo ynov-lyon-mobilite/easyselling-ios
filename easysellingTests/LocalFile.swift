@@ -15,6 +15,8 @@ enum LocalFile: String {
     case succeededFile = "succeededFile"
     case succeededImage = "succeededImage"
     case succeededVehicle = "succeededVehicle"
+    case succeededVehicleModel = "succeededVehicleModel"
+    case succeededVehicleBrand = "succeededVehicleBrand"
     
     var data: Data {
         //  If you have crash because path is nil. Don't forget to add the JSON file in both targets (easyselling & easysellingTests)

@@ -12,23 +12,47 @@ class VehicleCreationViewModel: ObservableObject {
 
     init(vehicleCreator: VehicleCreator = DefaultVehicleCreator(context: mainContext),
          vehicleVerificator: VehicleInformationsVerificator = DefaultVehicleInformationsVerificator(),
+         vehicleBrandGetter: VehicleBrandGetter = DefaultVehicleBrandGetter(),
+         vehicleModelGetter: VehicleModelGetter = DefaultVehicleModelGetter(),
          hasFinishedVehicleCreation: @escaping () -> Void) {
         self.vehicleCreator = vehicleCreator
         self.vehicleInformationsVerificator = vehicleVerificator
+        self.vehicleBrandGetter = vehicleBrandGetter
+        self.vehicleModelGetter = vehicleModelGetter
         self.hasFinishedVehicleCreation = hasFinishedVehicleCreation
     }
 
     private var vehicleCreator: VehicleCreator
     private var vehicleInformationsVerificator: VehicleInformationsVerificator
+    private var vehicleBrandGetter: VehicleBrandGetter
+    private var vehicleModelGetter: VehicleModelGetter
 
     private var hasFinishedVehicleCreation: () -> Void
+
     @Published var error: LocalizedError?
     @Published var showAlert = false
+
     @Published var brand: String = ""
     @Published var model: String = ""
     @Published var licence: String = ""
     @Published var year: String = ""
     @Published var vehicleCreationStep: VehicleCreationStep = .vehicleType
+
+    @Published var isShowingSelectionBrand: Bool = false
+    @Published var isShowingSelectionModel: Bool = false
+
+    @Published var searchBrand: String = ""
+    @Published var brandSelected: Brand = Brand(id: "", name: "")
+
+    @Published var searchModel: String = ""
+
+    func showSelectionBrand() {
+        isShowingSelectionBrand = true
+    }
+
+    func showSelectionModel() {
+        isShowingSelectionModel = true
+    }
 
     var rangeOfYears: [String] {
         let actualDate = Date()

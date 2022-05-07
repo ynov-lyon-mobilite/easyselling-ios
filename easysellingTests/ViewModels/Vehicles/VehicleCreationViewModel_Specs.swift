@@ -40,6 +40,28 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         thenActualStep(is: .brandAndModel)
     }
 
+    func test_Shows_brand_selection() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenSelectingLicence("AA-222-AA")
+        thenActualStep(is: .brandAndModel)
+        whenClickingOnBrandButton()
+        XCTAssertTrue(viewModel.isShowingSelectionBrand)
+    }
+
+    func test_Shows_model_selection() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenSelectingLicence("AA-222-AA")
+        thenActualStep(is: .brandAndModel)
+        whenClickingOnModelButton()
+        XCTAssertTrue(viewModel.isShowingSelectionModel)
+    }
+
     func test_Continues_vehicle_creation_when_brand_and_model_are_corrects() {
         givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
         whenSelectingVehicleType(.car)
@@ -123,6 +145,14 @@ class VehicleCreationViewModel_Specs: XCTestCase {
     private func whenSelectinglicence(_ licence: String) {
         viewModel.licence = licence
         whenContinueVehicleCreation()
+    }
+
+    private func whenClickingOnBrandButton() {
+        viewModel.showSelectionBrand()
+    }
+
+    private func whenClickingOnModelButton() {
+        viewModel.showSelectionModel()
     }
 
     private func whenSelectingBrandAndModel(_ brand: String, _ model: String) {

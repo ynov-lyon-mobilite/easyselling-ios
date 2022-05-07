@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "_id": "1",
+            "brand": "4",
+            "model": "2008",
+            "type": "car"
+        },
+        {
+            "_id": "56",
+            "brand": "65",
+            "model": "911",
+            "type": "car"
+        },
+        {
+            "_id": "89",
+            "brand": "78",
+            "model": "MT-07",
+            "type": "moto"
+        },
+    ]
+}
