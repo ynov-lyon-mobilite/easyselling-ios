@@ -124,9 +124,16 @@ class VehicleCreationViewModel: ObservableObject {
                     }
                 }
             case .brandAndModel:
-                self.createdVehicle.brand = self.brand
-                self.createdVehicle.model = self.model
-                self.vehicleCreationStep = .year
+                do {
+                    try verifyBrandAndModel()
+                    self.createdVehicle.brand = self.brand
+                    self.createdVehicle.model = self.model
+                    self.vehicleCreationStep = .year
+                } catch (let error) {
+                    if let error = error as? VehicleCreationError {
+                        setError(with: error)
+                    }
+                }
             case .year:
                 break
             }
@@ -166,6 +173,12 @@ class VehicleCreationViewModel: ObservableObject {
             throw VehicleCreationError.unchosenType
         }
         return
+    }
+
+    func verifyBrandAndModel() throws {
+        if brand.isEmpty || model.isEmpty {
+            throw VehicleCreationError.unchosenVehicleBrandAndModel
+        }
     }
 
     enum VehicleCreationStep: CaseIterable {

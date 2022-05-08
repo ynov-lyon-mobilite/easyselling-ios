@@ -37,6 +37,7 @@ enum VehicleCreationError: Equatable, LocalizedError {
     case incorrectlicenceFormat
     case incorrectlicenceSize
     case unchosenType
+    case unchosenVehicleBrandAndModel
 
     var errorDescription: String? {
         switch self {
@@ -45,6 +46,7 @@ enum VehicleCreationError: Equatable, LocalizedError {
             case .incorrectlicenceFormat: return L10n.CreateVehicle.Error.incorrectlicenceFormat
             case .incorrectlicenceSize: return L10n.CreateVehicle.Error.incorrectlicenceSize
             case .unchosenType: return L10n.CreateVehicle.Error.unchosenType
+            case .unchosenVehicleBrandAndModel: return L10n.CreateVehicle.Error.unchosenVehiculeBrandAndModel
         }
     }
 }

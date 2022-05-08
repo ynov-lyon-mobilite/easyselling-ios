@@ -92,6 +92,39 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         thenError(is: .incorrectlicenceFormat)
     }
 
+    func test_Shows_error_when_user_hasnt_choose_a_vehicle_brand_and_model() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenSelectinglicence("AA-222-AA")
+        thenActualStep(is: .brandAndModel)
+        whenSelectingBrandAndModel("","")
+        thenError(is: .unchosenVehicleBrandAndModel)
+    }
+
+    func test_Shows_error_when_user_hasnt_choose_a_vehicle_brand() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenSelectinglicence("AA-222-AA")
+        thenActualStep(is: .brandAndModel)
+        whenSelectingBrandAndModel("","3008")
+        thenError(is: .unchosenVehicleBrandAndModel)
+    }
+
+    func test_Shows_error_when_user_hasnt_choose_a_vehicle_model() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenSelectinglicence("AA-222-AA")
+        thenActualStep(is: .brandAndModel)
+        whenSelectingBrandAndModel("Peugeot","")
+        thenError(is: .unchosenVehicleBrandAndModel)
+    }
+
     func test_Returns_back_if_user_has_made_something_wrong() {
         givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
         thenActualStep(is: .vehicleType)
