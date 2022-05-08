@@ -45,7 +45,12 @@ public class InvoiceCoreData: NSManagedObject {
     }
 
     func toObject () -> Invoice {
-        return Invoice(id: self.id, file: FileResponse(filename: self.fileTitle ?? ""), label: self.fileLabel, mileage: self.fileMileage, date: self.fileDate, vehicle: self.fileVehicle)
+        return Invoice(id: self.id,
+                       file: FileResponse(filename: self.fileTitle ?? ""),
+                       label: self.fileLabel,
+                       mileage: self.fileMileage,
+                       date: self.fileDate,
+                       vehicle: self.fileVehicle)
     }
 
     @NSManaged public var id: String
@@ -57,7 +62,14 @@ public class InvoiceCoreData: NSManagedObject {
     @NSManaged public var fileDate: Date
     @NSManaged public var fileVehicle: String
 
-    convenience init(id: String, fileTitle: String?, fileData: Data?, fileLabel: String, fileMileage: Int, fileDate: Date, fileVehicle: String, in context: NSManagedObjectContext) {
+    convenience init(id: String,
+                     fileTitle: String?,
+                     fileData: Data?,
+                     fileLabel: String,
+                     fileMileage: Int,
+                     fileDate: Date,
+                     fileVehicle: String,
+                     in context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = id
         self.fileTitle = fileTitle

@@ -54,7 +54,7 @@ struct VehicleInvoicesView: View {
             .listStyle(.plain)
 
             Button(action: viewModel.openInvoiceCreation) {
-                Text(L10n.CreateVehicle.title)
+                Text(L10n.CreateInvoice.Button.title)
                     .font(.title2)
                     .foregroundColor(Color.white)
                     .padding(.vertical, 15)

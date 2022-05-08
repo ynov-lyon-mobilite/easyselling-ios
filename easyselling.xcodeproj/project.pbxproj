@@ -651,6 +651,7 @@
 		0382E2A12717648000EB570E /* Scenario */ = {
 			isa = PBXGroup;
 			children = (
+				03BDECCE282803550065FABC /* Helps */,
 				8F4F9E6A28104DB300AAEB5D /* LaunchScreenScenario */,
 				032DE8D127D8EC3A004B2337 /* HomeScenario */,
 				39D101DF2769E95600F101AB /* SettingsScenario */,
@@ -702,6 +703,13 @@
 				0360A7F2280F03B5001B67AB /* VehicleListElement.swift */,
 			);
 			path = VehicleComponent;
+			sourceTree = "<group>";
+		};
+		03BDECCE282803550065FABC /* Helps */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helps;
 			sourceTree = "<group>";
 		};
 		03C759FD276554380032652F /* DefaultImageCaller_Specs */ = {

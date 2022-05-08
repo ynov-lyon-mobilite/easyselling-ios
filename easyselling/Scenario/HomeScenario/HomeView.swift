@@ -19,7 +19,11 @@ struct HomeView: View {
                 switch viewModel.selectedTabItem {
                 case .vehicles: VehicleScenarioViewInstantiator(window: window)
                 case .profile: ProfileScenarioViewInstantiator(onLogout: viewModel.onLogout)
-                default: Text("test")
+                default: VStack {
+                    Spacer()
+                    Text("Ecran en cours de création")
+                    Spacer()
+                }
                 }
             }
             .edgesIgnoringSafeArea(.top)

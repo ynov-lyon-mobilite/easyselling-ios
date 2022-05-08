@@ -53,7 +53,14 @@ struct Invoice: Decodable, Equatable {
     }
 
     func toCoreDataObject (in context: NSManagedObjectContext) -> InvoiceCoreData {
-        return InvoiceCoreData(id: self.id, fileTitle: self.file?.filename, fileData: self.fileData ?? Data(), fileLabel: self.label, fileMileage: self.mileage, fileDate: self.date, fileVehicle: self.vehicle, in: context)
+        return InvoiceCoreData(id: self.id,
+                               fileTitle: self.file?.filename,
+                               fileData: self.fileData ?? Data(),
+                               fileLabel: self.label,
+                               fileMileage: self.mileage,
+                               fileDate: self.date,
+                               fileVehicle: self.vehicle,
+                               in: context)
     }
 }
 

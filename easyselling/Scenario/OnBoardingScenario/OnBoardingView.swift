@@ -33,7 +33,9 @@ struct OnBoardingView: View {
             .padding(.horizontal)
 
             TabView(selection: $viewModel.currentFeatureIndex) {
-                ForEach(viewModel.features) { feature in
+                ForEach(0..<viewModel.features.count) { index in
+                    let feature = viewModel.features[index]
+
                     VStack(spacing: 45) {
                         Image(feature.image)
                             .resizable()
@@ -54,7 +56,17 @@ struct OnBoardingView: View {
                 }
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 
-            DotControlView(totalElements: viewModel.features.count, contentIndex: viewModel.currentFeatureIndex)
+            HStack {
+                ForEach(0..<viewModel.features.count) { index in
+                    RoundedRectangle(cornerRadius: 25, style: .continuous)
+                        .fill(index == viewModel.currentFeatureIndex
+                              ? Color.primaryEasyselling
+                              : Color.onBackground.opacity(0.8))
+                        .frame(width: index == viewModel.currentFeatureIndex ?
+                               animationWidth : basicWidth, height: 10)
+                        .animation(.easeIn, value: index == viewModel.currentFeatureIndex ? animationWidth: basicWidth)
+                }
+            }
 
             Spacer()
 
@@ -68,6 +80,7 @@ struct OnBoardingView: View {
                 .disabled(!viewModel.isShowingPreviousButton)
                 .foregroundColor(Asset.Colors.secondary.swiftUIColor)
                 .font(.body.bold())
+                .padding(.horizontal, 20)
 
                 Spacer()
 

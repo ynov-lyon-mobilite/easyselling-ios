@@ -83,7 +83,8 @@
 "invoice.title" = "Invoices";
 "invoice.deleteButton" = "Delete invoice";
 
-"createInvoice.button.title" = "Create invoice";
+"createInvoice.Create.button.title" = "Add invoice";
+"createInvoice.button.title" = "Add invoice";
 
 "invoiceCreation.label.addFile" = "Add document";
 "invoiceCreation.button.scan" = "Scan file";

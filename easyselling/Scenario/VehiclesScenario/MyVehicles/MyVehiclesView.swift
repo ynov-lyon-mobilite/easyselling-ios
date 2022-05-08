@@ -20,8 +20,8 @@ struct MyVehiclesView: View {
             Picker(L10n.Vehicles.chooseList, selection: $vehicleShowed) {
                 Text(L10n.Vehicles.List.myVehicles).tag(0)
                 Text(L10n.Vehicles.List.sharedVehicles).tag(1)
-                        }
-                        .pickerStyle(.segmented)
+            }
+            .pickerStyle(.segmented)
 
             if vehicleShowed == 0 {
                 SearchBar(searchText: $viewModel.searchFilteringVehicle)
@@ -39,13 +39,13 @@ struct MyVehiclesView: View {
                     } else {
                         ForEach(viewModel.filteredVehicle, id: \.id) { vehicle in
                             SwipeableVehicleListElement(vehicle: vehicle,
-                                               deleteAction: { Task {
+                                                        deleteAction: { Task {
                                 await viewModel.deleteVehicle(idVehicle: vehicle.id )
                             } },
-                                               updateAction: { viewModel.openVehicleUpdate(vehicle: vehicle) },
-                                               shareAction: { viewModel.openVehicleShare(vehicle: vehicle) },
-                                               showInvoices: { viewModel.navigatesToInvoices(vehicle: vehicle) })
-                                .redacted(when: viewModel.state == .loading)
+                                                        updateAction: { viewModel.openVehicleUpdate(vehicle: vehicle) },
+                                                        shareAction: { viewModel.openVehicleShare(vehicle: vehicle) },
+                                                        showInvoices: { viewModel.navigatesToInvoices(vehicle: vehicle) })
+                            .redacted(when: viewModel.state == .loading)
                         }
                         .listRowSeparatorTint(.clear)
                         .listRowBackground(Color.clear)
@@ -57,20 +57,20 @@ struct MyVehiclesView: View {
                 .refreshable {
                     await viewModel.getVehicles()
                 }
-                    Button(action: viewModel.openVehicleCreation) {
-                        Text(L10n.CreateVehicle.title)
-                            .font(.title2)
-                            .foregroundColor(Color.white)
-                            .padding(.vertical, 15)
-                            .frame(maxWidth: .infinity)
-                            .background(Asset.Colors.primary.swiftUIColor)
-                            .cornerRadius(22)
-                    }
-                    .padding(.bottom)
+                Button(action: viewModel.openVehicleCreation) {
+                    Text(L10n.CreateVehicle.title)
+                        .font(.title2)
+                        .foregroundColor(Color.white)
+                        .padding(.vertical, 15)
+                        .frame(maxWidth: .infinity)
+                        .background(Asset.Colors.primary.swiftUIColor)
+                        .cornerRadius(22)
+                }
+                .padding(.bottom)
             } else {
                 VStack {
                     List {
-                        ForEach(viewModel.filteredVehicle, id: \.id) { sharedVehicle in
+                        ForEach(viewModel.sharedVehicles, id: \.id) { sharedVehicle in
                             VehicleListElement(vehicle: sharedVehicle, action: {})
                                 .listRowSeparatorTint(.clear)
                                 .listRowBackground(Color.clear)
