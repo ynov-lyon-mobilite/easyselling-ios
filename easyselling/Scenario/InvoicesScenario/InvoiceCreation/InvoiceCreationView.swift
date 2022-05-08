@@ -13,36 +13,66 @@ struct InvoiceCreationView: View {
     @ObservedObject var viewModel: InvoiceCreationViewModel
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text("\(viewModel.vehicle.brand) \(viewModel.vehicle.model))
-                     Text("\(viewModel.vehicle.licence)")
+        VStack(alignment: .center) {
+            VStack {
+                Text("\(viewModel.vehicle.brand) \(viewModel.vehicle.model)")
+                    .font(.largeTitle)
+                    .foregroundColor(Color.primaryEasyselling)
+                Text("\(viewModel.vehicle.licence)")
+                    .font(.title2)
             }
-            Text("\(viewModel.vehicle.brand) \(viewModel.vehicle.model) - \(viewModel.vehicle.licence)")
 
-            if let file = viewModel.uploadedFile {
-                Text(file.filename)
-            } else {
-                Button(action: { viewModel.openFileConfirmationDialog() }) {
-                    Text(L10n.InvoiceCreation.Label.addFile)
+            VStack(alignment: .center, spacing: 40) {
+
+                if let file = viewModel.uploadedFile {
+                    Text(file.filename)
+                } else {
+                    Button(action: { viewModel.openFileConfirmationDialog() }) {
+                        VStack {
+                            Image(systemName: "folder.badge.plus")
+                                .font(.largeTitle)
+                                .foregroundColor(Color.white)
+                                .padding()
+                        }
+                        .background(Color.primaryEasyselling)
+                        .cornerRadius(15)
+                    }
                 }
+
+                DatePicker(selection: $viewModel.invoiceDate, in: ...Date(), displayedComponents: .date) {
+                    Text("Date de la facture")
+                        .font(.title3)
+                }
+                .datePickerStyle(.compact)
+
+                TextField("Kilométrage à date de facture", value: $viewModel.invoiceMileage, format: .number)
+                    .textFieldStyle(VehicleFormTextFieldStyle())
+
+                TextField("Nom de la facture", text: $viewModel.invoiceLabel)
+                    .textFieldStyle(VehicleFormTextFieldStyle())
+
             }
+            .padding(.top, 25)
+
             Spacer()
 
-            Button(action: { Task {
-                await viewModel.createInvoice()
-            } }) {
-                Text(L10n.CreateVehicle.title)
-                    .font(.title2)
-                    .foregroundColor(Color.white)
-                    .padding(.vertical, 15)
-                    .frame(maxWidth: .infinity)
-                    .background(Asset.Colors.primary.swiftUIColor)
-                    .cornerRadius(22)
+            if viewModel.isReadyToAdd {
+                Button(action: { Task {
+                    await viewModel.createInvoice()
+                } }) {
+                    Text(L10n.CreateInvoice.Button.title)
+                        .font(.title2)
+                        .foregroundColor(Color.white)
+                        .padding(.vertical, 15)
+                        .frame(maxWidth: .infinity)
+                        .background(Asset.Colors.primary.swiftUIColor)
+                        .cornerRadius(22)
+                }
+                .padding(.bottom)
             }
-            .padding(.bottom)
         }
         .padding()
+        .background(Color.backgroundColor)
         .fileImporter(isPresented: .constant(viewModel.fileSelectionType == .upload), allowedContentTypes: viewModel.allowedFileType) { result in
             Task {
                 await viewModel.importFile(result: result)

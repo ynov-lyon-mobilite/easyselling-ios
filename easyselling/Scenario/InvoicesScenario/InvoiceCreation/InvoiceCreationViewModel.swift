@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import UniformTypeIdentifiers
+import SwiftUI
 
 class InvoiceCreationViewModel: ObservableObject {
     private var onFinish: () async -> Void
@@ -21,6 +22,12 @@ class InvoiceCreationViewModel: ObservableObject {
     @Published var uploadedFile: UploadedFile?
     @Published var alertError: Error?
     @Published var alertIsPresented = false
+    @Published var invoiceLabel: String = ""
+    @Published var invoiceDate: Date = Date()
+    @Published var invoiceMileage: Int?
+    var isReadyToAdd: Bool { withAnimation {
+        invoiceMileage != nil
+    } }
 
     init(vehicle: Vehicle, fileUploader: FileUploader = DefaultFileUploader(),
          invoiceCreator: InvoiceCreator = DefaultInvoiceCreator(context: mainContext),
@@ -71,7 +78,11 @@ class InvoiceCreationViewModel: ObservableObject {
             return
         }
 
-        let informations = InvoiceDTO(file: fileId)
+        guard let invoiceMileage = invoiceMileage else {
+            return
+        }
+
+        let informations = InvoiceDTO(file: fileId, label: invoiceLabel, mileage: invoiceMileage, date: invoiceDate)
 
         do {
             try await invoiceCreator.createInvoice(vehicleId: vehicle.id, invoice: informations)

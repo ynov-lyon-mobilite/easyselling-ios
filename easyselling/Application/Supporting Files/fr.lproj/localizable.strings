@@ -83,6 +83,8 @@
 "invoice.title" = "Factures";
 "invoice.deleteButton" = "Supprimer la facture";
 
+"createInvoice.button.title" = "Créer la facture";
+
 "invoiceCreation.label.addFile" = "Ajouter un document";
 "invoiceCreation.button.scan" = "Scanner un document";
 "invoiceCreation.button.upload" = "Importer un document";

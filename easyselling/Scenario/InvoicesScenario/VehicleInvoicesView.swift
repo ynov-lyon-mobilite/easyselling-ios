@@ -16,25 +16,24 @@ struct VehicleInvoicesView: View {
             TitleNavigationView(title: L10n.Invoice.title)
             List(viewModel.invoices, id: \.id) { invoice in
                 VStack {
-                    Image(uiImage: UIImage())
-                        .frame(height: 200)
                     VStack {
                         HStack {
-                            Text("Vehicle Id :")
+                            Text("Facture :")
                             Spacer()
-                            Text(invoice.id)
+                            Text(invoice.label)
                         }
                         Spacer()
                         HStack {
-                            Text("File Id :")
+                            Text("Kilometers :")
                             Spacer()
-                            Text(invoice.file?.filename ?? "")
+                            Text(String(invoice.mileage))
                         }
                     }
                     .padding()
                     .background(Color.white)
                 }
                 .cornerRadius(15)
+                .padding(.top, 10)
                 .onTapGesture {
                     Task {
                         await viewModel.downloadInvoiceContent(filename: invoice.file?.filename ?? "")
@@ -77,7 +76,7 @@ struct VehicleInvoicesView_Previews: PreviewProvider {
         let vm = VehicleInvoiceViewModel(vehicle: Vehicle(id: "", brand: "", model: "", licence: "", type: .car, year: ""),
                                          onNavigatingToInvoiceView: {_ in },
                                          isOpeningInvoiceCreation: {_, _ in })
-        vm.invoices = [Invoice(id: "ID", fileData: Data(), file: FileResponse(filename: ""))]
+        vm.invoices = [Invoice(id: "ID", file: FileResponse(filename: ""), label: "Label", mileage: 10, date: Date(), vehicle: "")]
         vm.isLoading = false
         vm.isDownloading = true
         return VehicleInvoicesView(viewModel: vm)
