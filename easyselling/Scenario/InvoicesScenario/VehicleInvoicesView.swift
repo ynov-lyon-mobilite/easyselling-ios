@@ -72,10 +72,6 @@ struct VehicleInvoicesView: View {
         }
         .padding(.horizontal, 25)
         .background(Asset.Colors.backgroundColor.swiftUIColor)
-        //        .task {
-        //            withAnimation(.spring()) {showLoader.toggle()}
-        //            await viewModel.getInvoices()
-        //            withAnimation(.spring()) {showLoader.toggle()} }
         .onAppear {
             UITableView.appearance().showsVerticalScrollIndicator = false
             Task {
