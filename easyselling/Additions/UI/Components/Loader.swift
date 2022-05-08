@@ -26,7 +26,7 @@ struct Loader: View {
                 .frame(width: 65, height: 65)
                 .rotation3DEffect(.init(degrees: animateRotation ? 360 : 0), axis: (x: 1, y: 0.0, z: 0.0))
         }
-        .onAppear{
+        .onAppear {
             doAnimation()
         }
 
