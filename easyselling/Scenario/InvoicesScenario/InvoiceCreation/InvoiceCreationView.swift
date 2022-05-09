@@ -11,6 +11,7 @@ import UniformTypeIdentifiers
 struct InvoiceCreationView: View {
 
     @ObservedObject var viewModel: InvoiceCreationViewModel
+    @State var showLoader = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -24,14 +25,19 @@ struct InvoiceCreationView: View {
                 }
             }
             Spacer()
-            Button(action: { Task { await viewModel.createInvoice() } }) {
-                Image(systemName: "plus")
-            }.frame(maxWidth: .infinity, alignment: .center)
+            Button(action: { Task {
+                withAnimation(.spring()) {showLoader.toggle()}
+                await viewModel.createInvoice() }
+                withAnimation(.spring()) {showLoader.toggle()} }) {
+                    Image(systemName: "plus")
+                }.frame(maxWidth: .infinity, alignment: .center)
         }
         .padding()
         .fileImporter(isPresented: .constant(viewModel.fileSelectionType == .upload), allowedContentTypes: viewModel.allowedFileType) { result in
             Task {
+                withAnimation(.spring()) {showLoader.toggle()}
                 await viewModel.importFile(result: result)
+                withAnimation(.spring()) {showLoader.toggle()}
             }
         }
         .confirmationDialog("", isPresented: $viewModel.fileConfirmationDialogIsPresented) {
@@ -44,6 +50,17 @@ struct InvoiceCreationView: View {
             presenting: viewModel.alertError,
             actions: { _ in EmptyView() }, message: { (item: Error) in
                 Text(item.localizedDescription)
+            }
+        )
+        .overlay(
+            ZStack {
+                if showLoader {
+                    Color.primary.opacity(0.2)
+                        .ignoresSafeArea()
+                }
+
+                Loader()
+                    .offset(y: showLoader ? 0 : UIScreen.main.bounds.height)
             }
         )
     }

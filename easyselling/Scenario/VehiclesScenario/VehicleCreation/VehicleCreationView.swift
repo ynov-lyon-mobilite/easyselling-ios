@@ -12,6 +12,7 @@ struct VehicleCreationView: View {
     @State private var keyboardHeight: CGFloat = 20
     @State private var isKeyboardOpen: Bool = false
     @ObservedObject var viewModel: VehicleCreationViewModel
+    @State var showLoader = false
 
     @FocusState private var focusedField: Bool
 
@@ -109,7 +110,9 @@ struct VehicleCreationView: View {
                         })
                     } else {
                         Button(action: { Task {
+                    withAnimation(.spring()) {showLoader.toggle()}
                             await viewModel.createVehicle()
+                    withAnimation(.spring()) {showLoader.toggle()}
                         }  }, label: {
                             Image(systemName: "checkmark")
                                 .font(.system(size: 30))
@@ -149,6 +152,17 @@ struct VehicleCreationView: View {
         }
         .background(Color.clear)
         .ableToShowError(viewModel.error)
+        .overlay(
+            ZStack {
+                if showLoader {
+                    Color.primary.opacity(0.2)
+                        .ignoresSafeArea()
+                }
+
+                Loader()
+                    .offset(y: showLoader ? 0 : UIScreen.main.bounds.height)
+            }
+        )
     }
 }
 
