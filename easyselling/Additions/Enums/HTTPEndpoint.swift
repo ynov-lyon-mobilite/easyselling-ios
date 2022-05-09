@@ -18,6 +18,8 @@ enum HTTPEndpoint: String {
     case fileById = "/files/:fileId"
     case invoices = "/invoices/vehicle/:vehicleId"
     case invoiceId = "/invoices/:invoiceId"
+    case vehicleBrands = "/vehicles/brands"
+    case vehicleModels = "/vehicles/models"
     case shareVehicle = "/vehicles/:vehicleId/share"
     case sharedVehicles = "/vehicles/shared"
     case activateVehicle = "/vehicles/authorization/:authorizationId/active"

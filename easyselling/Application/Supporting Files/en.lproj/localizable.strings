@@ -67,8 +67,8 @@
 "createVehicle.error.incorrectYear" = "The year format is incorrect";
 "createVehicle.error.incorrectlicenceFormat" = "The licence format is incorrect";
 "createVehicle.error.incorrectlicenceSize" = "The length of the licence is incorrect";
-"createVehicle.error.unchosenType" = "You must chose a vehicle type";
-
+"createVehicle.error.unchosenType" = "You must choose a vehicle type";
+"createVehicle.error.unchosenVehiculeBrandAndModel" = "You must choose a vehicle brand and model";
 
 "createVehicle.form.adviceForlicence" = "AA-123-AA or 123 ABC 12";
 

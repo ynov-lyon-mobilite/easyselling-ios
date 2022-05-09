@@ -68,6 +68,7 @@
 "createVehicle.error.incorrectlicenceFormat" = "Le numéro d'immatriculation est invalide";
 "createVehicle.error.incorrectlicenceSize" = "La longueur du numéro d'immatricution est invalide";
 "createVehicle.error.unchosenType" = "Vous devez choisir un type de véhicule";
+"createVehicle.error.unchosenVehiculeBrandAndModel" = "Vous devez choisir une marque et un modèle de véhicule";
 
 "createVehicle.form.adviceForlicence" = "AA-123-AA ou 123 ABC 12";
 

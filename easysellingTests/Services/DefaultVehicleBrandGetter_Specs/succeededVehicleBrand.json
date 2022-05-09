@@ -1,0 +1,16 @@
+{
+    "data": [
+        {
+            "_id": "1",
+            "name": "Peugeot"
+        },
+        {
+            "_id": "56",
+            "name": "Porsche"
+        },
+        {
+            "_id": "89",
+            "name": "Yamaha"
+        },
+    ]
+}

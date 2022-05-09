@@ -13,6 +13,8 @@ struct VehicleCreationView: View {
     @State private var isKeyboardOpen: Bool = false
     @ObservedObject var viewModel: VehicleCreationViewModel
 
+    @FocusState private var focusedField: Bool
+
     var body: some View {
         VStack {
             Spacer()
@@ -27,11 +29,13 @@ struct VehicleCreationView: View {
                     VStack(spacing: 20) {
                         Spacer()
                         if viewModel.vehicleCreationStep == .vehicleType {
+
                             Button(L10n.Vehicles.car) {
                                 viewModel.selectType(.car)
                             }
                             .buttonStyle(VehicleFormButtonStyle(isSelected: viewModel.type == .car))
                             .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+
                             Button(L10n.Vehicles.moto) {
                                 viewModel.selectType(.moto)
                             }
@@ -39,6 +43,7 @@ struct VehicleCreationView: View {
                             .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
 
                         } else if viewModel.vehicleCreationStep == .licence {
+
                             TextField(L10n.CreateVehicle.licence, text: $viewModel.licence)
                                 .textFieldStyle(VehicleFormTextFieldStyle())
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
@@ -47,15 +52,20 @@ struct VehicleCreationView: View {
                                 .font(.subheadline)
                                 .italic()
                                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+
                         } else if viewModel.vehicleCreationStep == .brandAndModel {
 
-                            TextField(L10n.CreateVehicle.brand, text: $viewModel.brand)
-                                .textFieldStyle(VehicleFormTextFieldStyle())
-                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                            Button(viewModel.brandSelected.name.isEmpty ? L10n.CreateVehicle.brand : viewModel.brandSelected.name) {
+                                viewModel.showSelectionBrand()
+                            }
+                            .buttonStyle(VehicleFormButtonStyle(isSelected: false))
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
 
-                            TextField(L10n.CreateVehicle.model, text: $viewModel.model)
-                                .textFieldStyle(VehicleFormTextFieldStyle())
-                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                            Button(viewModel.model.isEmpty ? L10n.CreateVehicle.model : viewModel.model) {
+                                viewModel.showSelectionModel()
+                            }
+                            .buttonStyle(VehicleFormButtonStyle(isSelected: false))
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
 
                         } else if viewModel.vehicleCreationStep == .year {
                             Picker("", selection: $viewModel.year) {
@@ -121,6 +131,20 @@ struct VehicleCreationView: View {
                         withAnimation {
                             self.keyboardHeight = padding
                         }
+                    }
+                    .sheet(isPresented: $viewModel.isShowingSelectionBrand) {
+                        BrandSelectionView(viewModel: BrandSelectionViewModel(hasSelectedBrand: { brand in
+                            viewModel.brandSelected = brand
+                            viewModel.brand = brand.name
+                            $viewModel.isShowingSelectionBrand.wrappedValue.toggle()
+                        }))
+                    }
+                    .sheet(isPresented: $viewModel.isShowingSelectionModel) {
+                        ModelSelectionView(viewModel: ModelSelectionViewModel(brandSelected: viewModel.brandSelected,
+                                                                              hasSelectedModel: { model in
+                            viewModel.model = model
+                            $viewModel.isShowingSelectionModel.wrappedValue.toggle()
+                        }))
                     }
         }
         .background(Color.clear)

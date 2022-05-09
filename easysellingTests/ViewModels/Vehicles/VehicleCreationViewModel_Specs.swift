@@ -40,6 +40,28 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         thenActualStep(is: .brandAndModel)
     }
 
+    func test_Shows_brand_selection() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenSelectinglicence("AA-222-AA")
+        thenActualStep(is: .brandAndModel)
+        whenClickingOnBrandButton()
+        XCTAssertTrue(viewModel.isShowingSelectionBrand)
+    }
+
+    func test_Shows_model_selection() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenSelectinglicence("AA-222-AA")
+        thenActualStep(is: .brandAndModel)
+        whenClickingOnModelButton()
+        XCTAssertTrue(viewModel.isShowingSelectionModel)
+    }
+
     func test_Continues_vehicle_creation_when_brand_and_model_are_corrects() {
         givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
         whenSelectingVehicleType(.car)
@@ -68,6 +90,39 @@ class VehicleCreationViewModel_Specs: XCTestCase {
         thenActualStep(is: .licence)
         whenSelectinglicence("invalid")
         thenError(is: .incorrectlicenceFormat)
+    }
+
+    func test_Shows_error_when_user_hasnt_choose_a_vehicle_brand_and_model() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenSelectinglicence("AA-222-AA")
+        thenActualStep(is: .brandAndModel)
+        whenSelectingBrandAndModel("","")
+        thenError(is: .unchosenVehicleBrandAndModel)
+    }
+
+    func test_Shows_error_when_user_hasnt_choose_a_vehicle_brand() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenSelectinglicence("AA-222-AA")
+        thenActualStep(is: .brandAndModel)
+        whenSelectingBrandAndModel("","3008")
+        thenError(is: .unchosenVehicleBrandAndModel)
+    }
+
+    func test_Shows_error_when_user_hasnt_choose_a_vehicle_model() {
+        givenViewModel(vehicleInformationsVerificator: SucceedingVehicleInformationsVerificator())
+        thenActualStep(is: .vehicleType)
+        whenSelectingVehicleType(.car)
+        thenActualStep(is: .licence)
+        whenSelectinglicence("AA-222-AA")
+        thenActualStep(is: .brandAndModel)
+        whenSelectingBrandAndModel("Peugeot","")
+        thenError(is: .unchosenVehicleBrandAndModel)
     }
 
     func test_Returns_back_if_user_has_made_something_wrong() {
@@ -123,6 +178,14 @@ class VehicleCreationViewModel_Specs: XCTestCase {
     private func whenSelectinglicence(_ licence: String) {
         viewModel.licence = licence
         whenContinueVehicleCreation()
+    }
+
+    private func whenClickingOnBrandButton() {
+        viewModel.showSelectionBrand()
+    }
+
+    private func whenClickingOnModelButton() {
+        viewModel.showSelectionModel()
     }
 
     private func whenSelectingBrandAndModel(_ brand: String, _ model: String) {
