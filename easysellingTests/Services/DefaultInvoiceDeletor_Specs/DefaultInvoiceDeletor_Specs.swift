@@ -14,7 +14,7 @@ class DefaultInvoiceDeletor_Specs: XCTestCase {
     func test_Deletes_succeeding() async {
         let expected: [InvoiceCoreData] = []
         givenCoreDataContext()
-        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller(), accordingInvoices: [InvoiceCoreData(id: "A1231", fileTitle: "", fileData: Data(), in: context)])
+        givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller(), accordingInvoices: [InvoiceCoreData(id: "A1231", fileTitle: "", fileData: Data(), fileLabel: "label", fileMileage: 0, fileDate: Date(), fileVehicle: "vehicle", in: context)])
         await whenDeletingInvoice(withId: "A1231")
         thenInvoices(withId: "A1231", expected: expected)
     }
@@ -23,7 +23,7 @@ class DefaultInvoiceDeletor_Specs: XCTestCase {
         givenCoreDataContext()
         givenDeletor(requestGenerator: FakeAuthorizedRequestGenerator(),
                      apiCaller: FailingAPICaller(withError: 404),
-                     accordingInvoices: [InvoiceCoreData(id: "A1231", fileTitle: "", fileData: Data(), in: context)])
+                     accordingInvoices: [InvoiceCoreData(id: "A1231", fileTitle: "", fileData: Data(), fileLabel: "label", fileMileage: 0, fileDate: Date(), fileVehicle: "vehicle", in: context)])
         await whenDeletingInvoice(withId: "unknowId")
         thenError(is: .notFound)
     }

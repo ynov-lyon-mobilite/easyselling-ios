@@ -15,9 +15,9 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         thenViewModelIsLoading()
         await whenTryingToGetVehicleInvoices()
         thenViewModelIsNotLoading()
-        XCTAssertEqual([Invoice(id: "0AJEAZ9", file: nil),
-                        Invoice(id: "0AJEAZ8", file: nil),
-                        Invoice(id: "0AJEAZ7", file: nil)], viewModel.invoices)
+        XCTAssertEqual([Invoice(id: "0AJEAZ9", file: nil, label: "label1", mileage: 10000, date: Date().zeroSeconds, vehicle: "vehicle1"),
+                        Invoice(id: "0AJEAZ8", file: nil, label: "label2", mileage: 10000, date: Date().zeroSeconds, vehicle: "vehicle2"),
+                        Invoice(id: "0AJEAZ7", file: nil, label: "label3", mileage: 10000, date: Date().zeroSeconds, vehicle: "vehicle3")], viewModel.invoices)
     }
 
     func test_Shows_error_when_request_is_failing() async {
@@ -58,8 +58,8 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
         await whenTryingToGetVehicleInvoices()
         await whenDeletingInvoice(withId: "0AJEAZ8")
         thenLoadInvoices(are: [
-            Invoice(id: "0AJEAZ9", file: nil),
-            Invoice(id: "0AJEAZ7", file: nil)])
+            Invoice(id: "0AJEAZ9", file: nil, label: "label1", mileage: 10000, date: Date().zeroSeconds, vehicle: "vehicle1"),
+            Invoice(id: "0AJEAZ7", file: nil, label: "label3", mileage: 10000, date: Date().zeroSeconds, vehicle: "vehicle3")])
     }
 
     func test_Shows_an_error_when_the_request_fails_when_deleting_an_invoice() async {
@@ -145,8 +145,8 @@ class VehicleInvoiceViewModel_Specs: XCTestCase {
     private var downloadedInvoice: File!
     private var onNavigatingToInvoiceView: Bool = false
     private let expectedVehicleInvoices = [
-        Invoice(id: "0AJEAZ9", file: nil),
-        Invoice(id: "0AJEAZ8", file: nil),
-        Invoice(id: "0AJEAZ7", file: nil)
+        Invoice(id: "0AJEAZ9", file: nil, label: "label1", mileage: 10000, date: Date().zeroSeconds, vehicle: "vehicle1"),
+        Invoice(id: "0AJEAZ8", file: nil, label: "label2", mileage: 10000, date: Date().zeroSeconds, vehicle: "vehicle2"),
+        Invoice(id: "0AJEAZ7", file: nil, label: "label3", mileage: 10000, date: Date().zeroSeconds, vehicle: "vehicle3")
     ]
 }

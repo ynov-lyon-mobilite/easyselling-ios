@@ -51,6 +51,7 @@
 		034D04E32732976E00576D64 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 034D04E22732976E00576D64 /* GoogleService-Info.plist */; };
 		034D04EB2733FE0800576D64 /* PasswordResetRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D04EA2733FE0800576D64 /* PasswordResetRequestViewModel.swift */; };
 		034D04F02733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D04EF2733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift */; };
+		0354BEF4282A4FD800A12057 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0354BEF3282A4FD800A12057 /* Date+.swift */; };
 		0354E83927737449004AEECB /* ImagedBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0354E83827737449004AEECB /* ImagedBackground.swift */; };
 		035E860427184EDC00684ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860327184EDC00684ED0 /* AppDelegate.swift */; };
 		035E860627188E9300684ED0 /* DefaultAccountCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035E860527188E9300684ED0 /* DefaultAccountCreator.swift */; };
@@ -294,6 +295,7 @@
 		034D04E22732976E00576D64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		034D04EA2733FE0800576D64 /* PasswordResetRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestViewModel.swift; sourceTree = "<group>"; };
 		034D04EF2733FEA900576D64 /* PasswordResetRequestViewModel_Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetRequestViewModel_Specs.swift; sourceTree = "<group>"; };
+		0354BEF3282A4FD800A12057 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		0354E83827737449004AEECB /* ImagedBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagedBackground.swift; sourceTree = "<group>"; };
 		035E860327184EDC00684ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		035E860527188E9300684ED0 /* DefaultAccountCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAccountCreator.swift; sourceTree = "<group>"; };
@@ -1049,6 +1051,7 @@
 				875E47B7273C6ECC0019FC83 /* FakeURLSession.swift */,
 				875E47AD273C6AD90019FC83 /* LocalFile.swift */,
 				2CA958EC27E2673E0012736F /* TestCoreDataStack.swift */,
+				0354BEF3282A4FD800A12057 /* Date+.swift */,
 			);
 			path = easysellingTests;
 			sourceTree = "<group>";
@@ -1753,6 +1756,7 @@
 				875E47B8273C6ECC0019FC83 /* FakeURLSession.swift in Sources */,
 				8F901D502769F40500CF0F28 /* SucceedingInvoiceDeletor.swift in Sources */,
 				03004DC9273E721100188983 /* PasswordResetViewModel_Specs.swift in Sources */,
+				0354BEF4282A4FD800A12057 /* Date+.swift in Sources */,
 				03F05441271B3F7700434706 /* SuccedingAccountCreator.swift in Sources */,
 				03422F63275CEE140060D19E /* SucceedingInvoiceDownloader.swift in Sources */,
 				03004DDB273EAFFF00188983 /* SucceedingPassordVerificator.swift in Sources */,
