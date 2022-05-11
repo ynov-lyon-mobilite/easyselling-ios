@@ -26,32 +26,19 @@ struct MyVehiclesView: View {
             if vehicleShowed == 0 {
                 SearchBar(searchText: $viewModel.searchFilteringVehicle)
                 List {
-                    if viewModel.state == .error {
-                        HStack {
-                            Spacer()
-                            Text(L10n.Error.occured)
-                            Spacer()
-                        }
-                        .padding()
-                        .listRowSeparatorTint(.clear)
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                    } else {
-                        ForEach(viewModel.filteredVehicle, id: \.id) { vehicle in
-                            SwipeableVehicleListElement(vehicle: vehicle,
-                                                        deleteAction: { Task {
-                                await viewModel.deleteVehicle(idVehicle: vehicle.id )
-                            } },
-                                                        updateAction: { viewModel.openVehicleUpdate(vehicle: vehicle) },
-                                                        shareAction: { viewModel.openVehicleShare(vehicle: vehicle) },
-                                                        showInvoices: { viewModel.navigatesToInvoices(vehicle: vehicle) })
-                            .redacted(when: viewModel.state == .loading)
-                        }
-                        .listRowSeparatorTint(.clear)
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-
+                    ForEach(viewModel.filteredVehicle, id: \.id) { vehicle in
+                        SwipeableVehicleListElement(vehicle: vehicle,
+                                                    deleteAction: { Task {
+                            await viewModel.deleteVehicle(idVehicle: vehicle.id )
+                        } },
+                                                    updateAction: { viewModel.openVehicleUpdate(vehicle: vehicle) },
+                                                    shareAction: { viewModel.openVehicleShare(vehicle: vehicle) },
+                                                    showInvoices: { viewModel.navigatesToInvoices(vehicle: vehicle) })
+                        .redacted(when: viewModel.state == .loading)
                     }
+                    .listRowSeparatorTint(.clear)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
                 .listStyle(.plain)
                 .refreshable {
@@ -81,6 +68,7 @@ struct MyVehiclesView: View {
                 }
                 .frame(maxWidth: .infinity,
                        maxHeight: .infinity)
+                .task { await viewModel.getSharedVehicles() }
             }
         }
         .padding(.horizontal, 25)

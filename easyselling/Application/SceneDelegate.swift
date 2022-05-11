@@ -44,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         switch universalLinkUrl.path {
         case "/admin/reset-password": resetPassword(according: universalLinkUrl)
-        case "vehicles/share": shareVehicleInfos(according: universalLinkUrl)
+        case "/vehicles/share": shareVehicleInfos(according: universalLinkUrl)
         default: break
         }
     }
