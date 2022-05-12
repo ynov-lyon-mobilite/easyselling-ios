@@ -70,7 +70,6 @@ class MyVehiclesViewModel: ObservableObject {
         do {
             vehicles = try await vehiclesGetter.getVehicles()
             setState(.listingVehicles)
-//            await getSharedVehicles()
         } catch (let error) {
             setError(error)
         }
@@ -91,6 +90,7 @@ class MyVehiclesViewModel: ObservableObject {
             sharedVehicles = try await sharedVehiclesGetter.getSharedVehicles()
             if !sharedVehicles.isEmpty {
                 showSharedVehicles = true
+                setState(.listingVehicles)
             }
         } catch(let error) {
             setError(error)

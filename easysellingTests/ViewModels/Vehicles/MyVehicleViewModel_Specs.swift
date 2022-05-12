@@ -34,7 +34,7 @@ class MyVehiclesViewModel_Specs: XCTestCase {
         givenViewModel(vehiclesGetter: SucceedingVehiclesGetter([]),
                        sharedVehicleGetter: SucceedingSharedVehiclesGetter(expectedVehicles))
         thenViewModelState(is: .loading)
-        await whenTryingToGetVehicles()
+        await whenTryingToGetSharedVehicles()
         thenSharedVehicles(are: [Vehicle(id: "1", brand: "Peugeot", model: "model1", licence: "licence1", type: .car, year: "year1"),
                                Vehicle(id: "2", brand: "Renault", model: "model2", licence: "licence2", type: .car, year: "year2")])
         thenViewModelState(is: .listingVehicles)
@@ -130,6 +130,10 @@ class MyVehiclesViewModel_Specs: XCTestCase {
     
     private func whenTryingToGetVehicles() async {
         await viewModel.getVehicles()
+    }
+
+    private func whenTryingToGetSharedVehicles() async {
+        await viewModel.getSharedVehicles()
     }
     
     private func whenDeletingVehicle(withId: String) async {
