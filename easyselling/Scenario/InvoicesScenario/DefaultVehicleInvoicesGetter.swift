@@ -46,8 +46,7 @@ class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
                 }
             }
             return invoices
-        } catch (let error) {
-            print(error)
+        } catch {
             let invoicesCoreData = try? context.fetch(InvoiceCoreData.fetchRequest())
             var invoices: [Invoice] = []
             invoicesCoreData?.forEach { invoice in

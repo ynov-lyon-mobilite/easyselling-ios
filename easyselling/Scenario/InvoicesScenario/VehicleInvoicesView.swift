@@ -18,13 +18,13 @@ struct VehicleInvoicesView: View {
                 VStack {
                     VStack {
                         HStack {
-                            Text("Facture :")
+                            Text(L10n.InvoiceCreation.Input.invoice)
                             Spacer()
                             Text(invoice.label)
                         }
                         Spacer()
                         HStack {
-                            Text("Kilometers :")
+                            Text(L10n.InvoiceCreation.Input.mileage)
                             Spacer()
                             Text(String(invoice.mileage))
                         }

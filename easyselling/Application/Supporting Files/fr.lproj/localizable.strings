@@ -89,6 +89,8 @@
 "invoiceCreation.label.addFile" = "Ajouter un document";
 "invoiceCreation.button.scan" = "Scanner un document";
 "invoiceCreation.button.upload" = "Importer un document";
+"invoiceCreation.Input.mileage" = "Kilomètres :";
+"invoiceCreation.Input.invoice" = "Facture :";
 
 "profile.title" = "Mon profil";
 "profile.explanations" = "Explications";
