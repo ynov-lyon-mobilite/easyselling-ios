@@ -70,7 +70,6 @@ class MyVehiclesViewModel: ObservableObject {
         do {
             vehicles = try await vehiclesGetter.getVehicles()
             setState(.listingVehicles)
-            await getSharedVehicles()
         } catch (let error) {
             setError(error)
         }
@@ -86,11 +85,12 @@ class MyVehiclesViewModel: ObservableObject {
     }
 
     @MainActor
-    private func getSharedVehicles() async {
+    func getSharedVehicles() async {
         do {
             sharedVehicles = try await sharedVehiclesGetter.getSharedVehicles()
             if !sharedVehicles.isEmpty {
                 showSharedVehicles = true
+                setState(.listingVehicles)
             }
         } catch(let error) {
             setError(error)

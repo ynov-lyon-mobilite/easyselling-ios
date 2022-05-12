@@ -12,7 +12,7 @@ import CoreData
 class DefaultInvoiceCreator_Specs: XCTestCase {
     func test_Creates_invoice_successful() async {
         givenInvoiceCreator(requestGenerator: FakeAuthorizedRequestGenerator(), apiCaller: SucceedingAPICaller() {
-            return Invoice(id: "", fileData: Data(), file: FileResponse(filename: ""))
+            return Invoice(id: "", file: FileResponse(filename: ""), label: "label1", mileage: 10000, date: Date(), vehicle: "vehicle1")
         })
         await whenCreatingInvoice(vehicleId: UUID().uuidString, informations: invoiceInformations)
         thenInvoiceIsCreated()
@@ -42,7 +42,7 @@ class DefaultInvoiceCreator_Specs: XCTestCase {
     private func givenInvoiceCreator(requestGenerator: AuthorizedRequestGenerator, apiCaller: APICaller) {
         context = TestCoreDataStack().persistentContainer.newBackgroundContext()
         invoiceCreator = DefaultInvoiceCreator(requestGenerator: requestGenerator, apiCaller: apiCaller, context: context)
-        invoiceInformations = InvoiceDTO(file: UUID().uuidString)
+        invoiceInformations = InvoiceDTO(file: UUID().uuidString, label: "label1", mileage: 10000, date: Date())
     }
 
     private func whenCreatingInvoice(vehicleId: String, informations: InvoiceDTO) async {

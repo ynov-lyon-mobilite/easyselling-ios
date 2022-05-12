@@ -35,7 +35,7 @@ class DefaultInvoiceDownloader_Specs: XCTestCase {
 
     func givenCoreDataObject() {
         givenContext()
-        _ = InvoiceCoreData(id: "test", fileTitle: "title", fileData: Data(count: 3), in: context)
+        _ = InvoiceCoreData(id: "test", fileTitle: "title", fileData: Data(count: 3), fileLabel: "label", fileMileage: 0, fileDate: Date(), fileVehicle: "vehicle", in: context)
 
         try? context.save()
     }

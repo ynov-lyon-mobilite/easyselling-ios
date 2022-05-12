@@ -13,10 +13,6 @@ class OnBoardingViewModel: ObservableObject {
     var features: [Feature]
     @Published var currentFeatureIndex: Int = 0
 
-    var currentFeature: Feature {
-        features[currentFeatureIndex]
-    }
-
     var feature: Feature { features[currentFeatureIndex] }
     var isShowingPreviousButton: Bool { currentFeatureIndex != 0 }
     var isLastFeature: Bool { currentFeatureIndex == (features.count - 1) }
@@ -42,9 +38,7 @@ class OnBoardingViewModel: ObservableObject {
     }
 }
 
-struct Feature: Equatable, Hashable, Identifiable {
-    var id: Int { hashValue }
-
+struct Feature: Equatable, Hashable {
     let title: String
     let image: String
     let text: String

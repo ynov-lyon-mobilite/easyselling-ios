@@ -29,6 +29,7 @@ class DefaultVehiclesGetter : VehiclesGetter {
     func getVehicles() async throws -> [Vehicle] {
     do {
         let urlRequest = try await requestGenerator.generateRequest(endpoint: .vehicles, method: .GET, headers: [:],
+
                                                                    pathKeysValues: [:], queryParameters: [:])
 
         let vehicles = try await apiCaller.call(urlRequest, decodeType: [Vehicle].self)

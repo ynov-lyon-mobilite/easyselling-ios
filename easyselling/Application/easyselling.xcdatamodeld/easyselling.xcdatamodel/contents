@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Invoice" representedClassName="Invoice" syncable="YES">
-        <attribute name="fileData" optional="YES" attributeType="Binary"/>
+        <attribute name="fileData" attributeType="Binary"/>
+        <attribute name="fileDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="fileId" optional="YES" attributeType="String"/>
+        <attribute name="fileLabel" attributeType="String"/>
+        <attribute name="fileMileage" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="fileTitle" optional="YES" attributeType="String"/>
+        <attribute name="fileVehicle" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
     </entity>
     <entity name="Vehicle" representedClassName="Vehicle" syncable="YES">
@@ -15,7 +19,7 @@
         <attribute name="year" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Invoice" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Invoice" positionX="-63" positionY="-18" width="128" height="149"/>
         <element name="Vehicle" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

@@ -46,11 +46,13 @@ class DefaultVehicleInvoicesGetter : VehicleInvoicesGetter {
                 }
             }
             return invoices
-        } catch (_) {
+        } catch {
             let invoicesCoreData = try? context.fetch(InvoiceCoreData.fetchRequest())
             var invoices: [Invoice] = []
             invoicesCoreData?.forEach { invoice in
-                invoices.append(invoice.toObject())
+                context.performAndWait {
+                    invoices.append(invoice.toObject())
+                }
             }
 
             return invoices

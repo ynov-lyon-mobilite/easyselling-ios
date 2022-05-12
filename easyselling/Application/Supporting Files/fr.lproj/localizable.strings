@@ -83,9 +83,14 @@
 "invoice.title" = "Factures";
 "invoice.deleteButton" = "Supprimer la facture";
 
+"createInvoice.Create.button.title" = "Ajouter la facture";
+"createInvoice.Button.title" = "Ajouter une facture";
+
 "invoiceCreation.label.addFile" = "Ajouter un document";
 "invoiceCreation.button.scan" = "Scanner un document";
 "invoiceCreation.button.upload" = "Importer un document";
+"invoiceCreation.Input.mileage" = "Kilomètres :";
+"invoiceCreation.Input.invoice" = "Facture :";
 
 "profile.title" = "Mon profil";
 "profile.explanations" = "Explications";

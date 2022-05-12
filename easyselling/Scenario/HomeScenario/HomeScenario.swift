@@ -41,9 +41,11 @@ class DefaultHomeNavigator: HomeNavigator {
     private var navigationController: UINavigationController = UINavigationController()
 
     func navigatesToVehicles(onLogout: @escaping Action) {
-        window?.rootViewController = navigationController
-        let view = HomeView(viewModel: HomeViewModel(onLogout: onLogout), window: window)
-        navigationController.pushViewController(UIHostingController(rootView: view), animated: true)
+        DispatchQueue.main.async {
+            self.window?.rootViewController = self.navigationController
+            let view = HomeView(viewModel: HomeViewModel(onLogout: onLogout), window: self.window)
+            self.navigationController.pushViewController(UIHostingController(rootView: view), animated: true)
+        }
     }
 
     func goingBackToAuthenticationScenario() {
